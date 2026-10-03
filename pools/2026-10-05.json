@@ -1,0 +1,147 @@
+{
+  "start": "2026-10-05",
+  "base": "2026-10-01",
+  "provider": "claude",
+  "model": "claude-sonnet-5",
+  "added": {
+    "roles": [
+      {
+        "text": "Taxidermist",
+        "credit": ""
+      },
+      {
+        "text": "Locksmith",
+        "credit": ""
+      },
+      {
+        "text": "Upholsterer",
+        "credit": ""
+      },
+      {
+        "text": "Glassblower",
+        "credit": ""
+      },
+      {
+        "text": "Calligrapher",
+        "credit": ""
+      },
+      {
+        "text": "Blacksmith",
+        "credit": ""
+      },
+      {
+        "text": "Tailor",
+        "credit": ""
+      },
+      {
+        "text": "Beekeeper",
+        "credit": ""
+      }
+    ],
+    "methods": [
+      {
+        "text": "Work in silence for the first ten minutes before any music or talk.",
+        "credit": ""
+      },
+      {
+        "text": "Swap your draft with someone else's and finish theirs.",
+        "credit": ""
+      },
+      {
+        "text": "List every material you cannot use, then start.",
+        "credit": ""
+      },
+      {
+        "text": "Design for the most frustrated possible user first.",
+        "credit": ""
+      },
+      {
+        "text": "Ask a child to explain what it is for.",
+        "credit": ""
+      },
+      {
+        "text": "Set a budget of zero and see what still works.",
+        "credit": ""
+      },
+      {
+        "text": "Translate the brief into a question, then answer only the question.",
+        "credit": ""
+      },
+      {
+        "text": "Choose the constraint you like least and keep it.",
+        "credit": ""
+      }
+    ],
+    "constraints": [
+      {
+        "text": "Works fully offline after the first load.",
+        "credit": ""
+      },
+      {
+        "text": "No more than two levels of heading.",
+        "credit": ""
+      }
+    ],
+    "tasks": [
+      {
+        "text": "Sunrise and sunset calculator: a date and coordinates entered give sunrise time, sunset time, and day length.",
+        "credit": ""
+      },
+      {
+        "text": "Color contrast checker: two colors entered give the contrast ratio and a pass or fail against a threshold the user sets.",
+        "credit": ""
+      },
+      {
+        "text": "QR code generator: text or a link entered draws a scannable code locally in the browser.",
+        "credit": ""
+      },
+      {
+        "text": "Random team generator: a list of names and a group size give randomly assigned teams.",
+        "credit": ""
+      },
+      {
+        "text": "Average calculator: a list of numbers gives the mean, median, mode, and range.",
+        "credit": ""
+      },
+      {
+        "text": "Dice and coin flip simulator: number of dice or coins and number of rolls give a results table and totals.",
+        "credit": ""
+      }
+    ]
+  },
+  "retired": {
+    "roles": [
+      "Typographer",
+      "Illustrator",
+      "Photographer",
+      "Film editor",
+      "Sound designer",
+      "Composer",
+      "Copywriter",
+      "Book editor"
+    ],
+    "methods": [
+      "Make ten rough versions before choosing one.",
+      "Start from the final result and work backwards.",
+      "Cut the first draft by half.",
+      "Test on paper before building anything.",
+      "Copy a structure from an unrelated field.",
+      "Work at actual size only.",
+      "Use one grid for every part.",
+      "Write the announcement before the work exists."
+    ],
+    "constraints": [
+      "One typeface, two weights.",
+      "Black and white only."
+    ],
+    "tasks": [
+      "Bill splitter: total, tip percent, and number of people give the amount per person, rounded to 0.05, with the formula shown.",
+      "Savings goal planner: target amount, target date, and current savings give the amount to save per week and per month.",
+      "Subscription tracker: subscriptions with price and billing cycle give monthly and yearly totals, sorted by cost.",
+      "Loan repayment calculator: amount, annual rate, and term give the monthly payment, total interest, and a year-by-year table, with the formula shown.",
+      "Unit price comparer: two to five products with price and size give the cost per 100 g or per item and mark the cheapest.",
+      "Monthly budget sheet: income and up to 15 expense lines give totals and the amount left, in a layout that prints on one page."
+    ]
+  },
+  "suggestions": []
+}
