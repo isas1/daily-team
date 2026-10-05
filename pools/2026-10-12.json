@@ -1,0 +1,189 @@
+{
+  "start": "2026-10-12",
+  "base": "2026-10-05",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "added": {
+    "roles": [
+      {
+        "text": "Luthier",
+        "credit": ""
+      },
+      {
+        "text": "Stonemason",
+        "credit": ""
+      },
+      {
+        "text": "Clockmaker",
+        "credit": ""
+      },
+      {
+        "text": "Weaver",
+        "credit": ""
+      },
+      {
+        "text": "Florist",
+        "credit": ""
+      },
+      {
+        "text": "Cobbler",
+        "credit": ""
+      },
+      {
+        "text": "Translator",
+        "credit": ""
+      },
+      {
+        "text": "Sculptor",
+        "credit": ""
+      }
+    ],
+    "methods": [
+      {
+        "text": "Write the instructions for a stranger, then follow them exactly yourself.",
+        "credit": ""
+      },
+      {
+        "text": "Find the most expensive possible mistake and design it out first.",
+        "credit": ""
+      },
+      {
+        "text": "Do the task by hand three times before automating any of it.",
+        "credit": ""
+      },
+      {
+        "text": "Ask what the user does just before and just after, and design for both.",
+        "credit": ""
+      },
+      {
+        "text": "Label every part with its purpose, then delete the parts with no label.",
+        "credit": ""
+      },
+      {
+        "text": "Finish one complete rough pass before polishing any single part.",
+        "credit": ""
+      },
+      {
+        "text": "Sort each decision into reversible and permanent, and slow down only on the permanent ones.",
+        "credit": ""
+      },
+      {
+        "text": "Write the help text, then change the design until the help text is not needed.",
+        "credit": ""
+      }
+    ],
+    "constraints": [
+      {
+        "text": "Uses no more than two font sizes.",
+        "credit": ""
+      },
+      {
+        "text": "Every result appears in a full sentence as well as a number.",
+        "credit": ""
+      }
+    ],
+    "tasks": [
+      {
+        "text": "Price in hours: take-home pay per hour and any price give its cost in working hours and 40-hour weeks, with a daily item also shown per year.",
+        "credit": ""
+      },
+      {
+        "text": "Estimate anything: a question split into steps, each with a low and high guess, gives a likely range for the answer, with every step shown.",
+        "credit": ""
+      },
+      {
+        "text": "Picture hanging helper: wall width, frame widths, and gap between frames give the nail position for each frame, measured from the left.",
+        "credit": ""
+      },
+      {
+        "text": "Garden bed soil calculator: bed length, width, and depth give the soil volume in litres and the number of bags of a size the user enters.",
+        "credit": ""
+      },
+      {
+        "text": "Seating plan: guests and table sizes give a printable plan, with pairs the user marks kept at different tables.",
+        "credit": ""
+      },
+      {
+        "text": "Roman numeral converter: numbers from 1 to 3,999 converted in both directions, with each step of the conversion shown.",
+        "credit": ""
+      }
+    ],
+    "guests": [
+      {
+        "text": "historical | Mary Anning | Search the same ground again after every storm. | died 1847",
+        "credit": ""
+      },
+      {
+        "text": "creature | Clockwork beetle | Wind it once and watch how far it runs without help. | invented",
+        "credit": ""
+      }
+    ]
+  },
+  "retired": {
+    "guests": [
+      "historical | Marcus Aurelius | Act only on what you control, and let the rest go. | died 180",
+      "historical | Socrates | Ask questions until the hidden assumption shows. | died 399 BC"
+    ],
+    "roles": [
+      "Interaction designer",
+      "Motion designer",
+      "Product designer",
+      "Service designer",
+      "Information designer",
+      "Cartographer",
+      "Architect",
+      "Landscape architect"
+    ],
+    "methods": [
+      "Watch three people use the current version first.",
+      "Build the smallest version that works end to end.",
+      "Remove one element per pass until it breaks, then restore the last one.",
+      "Sketch with a thick marker so small detail is impossible.",
+      "Give each idea 20 minutes, then move on.",
+      "Explain it aloud to someone outside the field.",
+      "Map every step the user takes, then remove steps.",
+      "Pick the one number that matters and design around it."
+    ],
+    "constraints": [
+      "Works on a 320 px wide screen.",
+      "No images or icons."
+    ],
+    "tasks": [
+      "Freelance rate calculator: target yearly income, working weeks, hours per week, and yearly costs give the minimum hourly rate.",
+      "Debt payoff comparison: up to five debts compared by smallest balance first and highest rate first, in months and total interest.",
+      "Shared house expenses: who paid what gives who owes whom, settled with the fewest transfers.",
+      "Travel money table: a rate the user types in gives a printable table of common amounts in both currencies.",
+      "Compound growth illustration: starting amount, monthly addition, rate, and years give a year-by-year table and chart, labelled as an illustration, not a forecast.",
+      "Receipt checker: item prices, quantities, discount, and tax rate give the total to compare with a receipt."
+    ]
+  },
+  "suggestions": [
+    {
+      "issue": 16,
+      "author": "isas1",
+      "votes": 1,
+      "credit": false,
+      "decision": "accept",
+      "reason": "Clear inputs, broad use, and the check works: 1,200 at 15 an hour is 80 hours, and 4.50 a day is 109.5 hours a year.",
+      "task": "Price in hours: take-home pay per hour and any price give its cost in working hours and 40-hour weeks, with a daily item also shown per year."
+    },
+    {
+      "issue": 14,
+      "author": "isas1",
+      "votes": 0,
+      "credit": false,
+      "decision": "decline",
+      "reason": "A coin flip simulator is already in the list, and the page cannot reliably know which option someone was hoping for.",
+      "task": null
+    },
+    {
+      "issue": 15,
+      "author": "isas1",
+      "votes": 0,
+      "credit": false,
+      "decision": "accept",
+      "reason": "Useful to a broad audience, and the check works: the piano tuner example gives about 17 to 50.",
+      "task": "Estimate anything: a question split into steps, each with a low and high guess, gives a likely range for the answer, with every step shown."
+    }
+  ]
+}

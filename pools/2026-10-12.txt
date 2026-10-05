@@ -1,0 +1,313 @@
+#@ roles
+Industrial designer
+Furniture maker
+Set designer
+Lighting designer
+Costume designer
+Game designer
+Puppeteer
+Choreographer
+Playwright
+Stand-up comedian
+Radio producer
+Documentary director
+Animator
+Comic artist
+Printmaker
+Ceramicist
+Textile designer
+Bookbinder
+Sign painter
+Exhibition designer
+Museum curator
+Front-end engineer
+Creative coder
+Data journalist
+Brand strategist
+Packaging designer
+Chef
+Perfumer
+Window dresser
+Urban planner
+Teacher
+Librarian
+Taxidermist
+Locksmith
+Upholsterer
+Glassblower
+Calligrapher
+Blacksmith
+Tailor
+Beekeeper
++ Luthier
++ Stonemason
++ Clockmaker
++ Weaver
++ Florist
++ Cobbler
++ Translator
++ Sculptor
+
+#@ methods
+Design the error and empty states first.
+List the assumptions in the brief and check each one.
+Make it work in black and white before adding color.
+Prototype in the final material.
+Take the conventions of a genre and break exactly one.
+Storyboard every change of state.
+Write the copy before the layout.
+Scope the work to what fits in one day.
+Use found material only.
+Show it to someone at 10 percent done.
+Repeat one motif with variation.
+Design for the slowest device and connection first.
+Count words, clicks, and seconds, then reduce each.
+Find what the audience already does and build on it.
+Interview someone who dislikes the category.
+Collect references, then put them away and work from memory.
+Make the ending first.
+Try it ten times larger and ten times smaller.
+Invert the default and see what still works.
+Write down what it must never do.
+Structure it in three acts.
+Reduce it to one sentence before making anything.
+Build a kit of parts, then assemble.
+Design for one sense alone.
+Use real content only, no placeholders.
+Test it in the place where it will be used.
+Set one rule, follow it strictly, and note where it fails.
+Rework only the weakest part.
+Time-box to one hour and keep the result.
+Replace every adjective in the brief with a measurable target.
+Name the audience as one specific person.
+Remove the feature everyone assumes is required.
+Work in silence for the first ten minutes before any music or talk.
+Swap your draft with someone else's and finish theirs.
+List every material you cannot use, then start.
+Design for the most frustrated possible user first.
+Ask a child to explain what it is for.
+Set a budget of zero and see what still works.
+Translate the brief into a question, then answer only the question.
+Choose the constraint you like least and keep it.
++ Write the instructions for a stranger, then follow them exactly yourself.
++ Find the most expensive possible mistake and design it out first.
++ Do the task by hand three times before automating any of it.
++ Ask what the user does just before and just after, and design for both.
++ Label every part with its purpose, then delete the parts with no label.
++ Finish one complete rough pass before polishing any single part.
++ Sort each decision into reversible and permanent, and slow down only on the permanent ones.
++ Write the help text, then change the design until the help text is not needed.
+
+#@ stances
+Cuts scope.
+Adds one bold element.
+Speaks for the user.
+Checks cost and time.
+Questions the brief.
+Pushes for a less expected result.
+Guards execution quality.
+Plans how it reaches people.
+
+#@ constraints
+Under 100 words of fixed text on the page.
+Three colors at most.
+Usable with one thumb on a phone.
+No animation.
+Readable from 2 metres on a laptop screen.
+Explainable in one sentence at the top of the page.
+Built for people over 70.
+Built for a 10-year-old.
+Meaning never depends on color alone.
+Everything fits on one screen without scrolling.
+Under 30 KB in total.
+Prints on one A4 page.
+Lowercase only.
+Three-column grid only.
+Prints clearly on a black-and-white printer.
+Results update as the user types, with no submit button.
+Usable with the keyboard alone.
+Learnable in 30 seconds.
+System fonts only.
+The user does exactly one thing on the page.
+Has a dark mode that follows the system setting.
+Still makes sense in 10 years: no trends.
+No buttons.
+Fits in a postcard-sized area.
+Every number shows its unit.
+Saves the input in the browser and restores it on reload.
+Shows a filled-in example before the user types.
+Every input has a visible label.
+Uses a single accent color.
+All text at 18 px or larger.
+One column only.
+Every result can be copied as plain text with one action.
+Monospace typeface only.
+No more than five inputs.
+Shows the formula or rule behind every result.
+Every change can be undone.
+Touch targets at least 48 px.
+Every empty state says what to do next.
+Works fully offline after the first load.
+No more than two levels of heading.
++ Uses no more than two font sizes.
++ Every result appears in a full sentence as well as a number.
+
+#@ tasks
+Cleaning rota: people and chores give a fair weekly rotation table that prints on one page.
+Paint calculator: wall sizes, doors, windows, and number of coats give the litres of paint needed.
+Moving checklist: tasks grouped by eight weeks, four weeks, one week, and moving day, with tick boxes saved in the browser.
+Home inventory sheet: room, item, value, and purchase date, with totals per room and a CSV export.
+Plant watering schedule: plants with watering intervals give a calendar for the next four weeks.
+Emergency contact sheet for the fridge: blank fields for doctors, utilities, neighbours, and a meeting point, printable.
+Appliance energy cost: wattage, hours per day, and price per kWh give daily, monthly, and yearly cost.
+Flooring calculator: room dimensions and tile or plank size give the number of pieces, with a waste allowance the user sets.
+Chore chart for children with points per chore and a weekly total, printable on A4.
+Guest information card: Wi-Fi name, house rules, checkout time, and local numbers, printable on A5.
+Bin collection calendar: collection days and bin types give a printable calendar for the month.
+Maintenance log for a home or car: date, task, cost, and next due date, sorted by next due.
+Recipe scaler: paste an ingredient list and change the number of servings.
+Cooking unit converter: cups, tablespoons, grams, and millilitres, with the density used for each ingredient shown.
+Meal-prep planner: five recipes give one combined shopping list grouped by aisle.
+Roast timing planner: dishes with cooking times and a serving time give a start-time schedule.
+Weekly meal plan grid with a shopping list column, printable.
+Pantry tracker: items with best-before dates, sorted by soonest, with past dates marked.
+Baking tin converter: scale a recipe between round, square, and rectangular tins by area.
+Oven temperature converter between Celsius, Fahrenheit, fan, and gas mark, with a printable chart.
+Coffee ratio calculator: brew method, ratio, and number of cups give grams of coffee and water.
+Dinner party planner: guests, dietary needs, and dishes, with a check that every guest has at least one main dish.
+Batch cooking calculator: portions needed per week and portions per batch give the number of batches and a cooking schedule.
+Spice substitution table, searchable, with the ratio for each substitute.
+Meeting cost calculator: attendees, average hourly cost, and duration, with a running timer.
+Meeting time finder: up to four cities, using the browser time zone data, showing overlapping working hours.
+Working days counter: days between two dates excluding weekends and a list of holidays the user enters.
+One-page project brief: goal, audience, scope, deadline, budget, and risks, printable.
+Standup notes form: yesterday, today, and blockers per person, copied as plain text.
+Focus timer with adjustable work and break lengths and a log of completed sessions.
+Decision matrix: options and weighted criteria give scores and a ranked list.
+Invoice template: line items, tax rate, and due date, printable on A4.
+Subject line checker: character and word count, with previews cut at 40 and 60 characters.
+Job application tracker: company, role, date, stage, and next step, with a CSV export.
+Shift rota builder: staff and shifts, with a warning when anyone goes over a set number of hours.
+Interview preparation sheet: the role, five likely questions, and space for answers in situation, task, action, result form, printable.
+Flashcard maker: paste term and definition pairs, then study them shuffled with a score.
+Exam revision planner: exams with dates and topics give a revision schedule up to each exam.
+Reading time estimator: paste text to see word count, reading time, and speaking time.
+Grade calculator: weighted assignments give the current grade and the score needed on the final to reach a target.
+Citation builder: fields for a book or web page give APA and MLA citations.
+Times tables practice for children, with a timer and a list of missed facts to retry.
+Essay outline builder: thesis, three points with evidence, and a conclusion, exported as plain text.
+Spaced review planner: topics and a start date give review dates after 1, 3, 7, 14, and 30 days.
+Study log: minutes per subject per day, with weekly totals.
+Vocabulary list for a new language with a self-test mode.
+Cornell note template for lectures, printable.
+Fraction calculator that shows each step of adding, subtracting, multiplying, and dividing.
+Packing list: trip length, weather, and activities give a checklist saved in the browser.
+Trip budget planner: transport, stays, food, and activities per day, with totals in two currencies at a rate the user enters.
+Itinerary builder: days with timed activities, printable as one page per day.
+Road trip fuel cost: distance, fuel economy, and fuel price give the cost in total and per passenger.
+Connection time checker: arrival and departure times in two time zones give the real time between flights.
+Travel document checklist: passport expiry checked against the return date, with a note to confirm each destination's entry rules.
+Phrase card: phrases and translations the user enters, printed as a wallet-size card.
+Group trip cost splitter with a different share per person.
+World clock for up to five cities using the browser time zone data.
+Luggage weight check: items and weights against an airline limit the user enters.
+Holiday countdown with days, working days, and weekends left.
+Camping checklist grouped by shelter, cooking, clothing, and safety, printable.
+Water tracker: a daily goal the user sets and a tap-to-add log that resets each day.
+Habit tracker: up to six habits on a 30-day grid saved in the browser, printable.
+Walking log: date, distance, and time, with weekly totals and average pace.
+Desk break timer: a reminder every set number of minutes and a log of breaks taken.
+Sleep log: bed time and wake time per night, with weekly averages of the user's own entries.
+Running pace calculator: distance and time give pace per km and per mile and projected times for 5 km, 10 km, half, and full marathon.
+Weekly workout planner: days, exercises, sets, and reps, printable.
+Screen time log: minutes per app category per day, with a weekly chart.
+Gratitude page: three lines per day for one week, printable.
+Stretch sequence timer: the user lists stretches and hold times, and the timer runs through them.
+Step goal tracker: daily steps entered by hand, with a four-week chart and streaks.
+Breathing timer with adjustable in, hold, and out counts and a visual guide.
+Password strength checker that runs locally, shows estimated guesses to crack, and never sends input anywhere.
+Passphrase generator using a built-in word list and the browser crypto random number generator.
+Phishing email checklist: 12 signs to check, with a score for a suspicious message.
+Account recovery sheet: accounts, recovery email, and two-step method, printable, with a note to store it offline and never write passwords on it.
+Two-step login tracker: accounts and whether two-step login is on, sorted by importance.
+Device update checklist for phone, laptop, router, and apps, printable.
+Backup planner: devices, what to back up, where, and how often, with the 3-2-1 rule explained.
+New phone privacy checklist grouped by location, contacts, ads, and tracking.
+Link inspector: shows the real domain of a pasted URL and highlights lookalike characters.
+Family device rules sheet: screen times, allowed apps, and contacts, printable.
+Online shop checklist: signs that a web shop is genuine, with a score.
+Digital estate checklist: accounts and what should happen to each, printable, with no passwords stored.
+Text counter with limits for common formats: SMS 160, social post 280, meta description 155.
+Readability checker: paste text to see average sentence length, long words, and a Flesch reading ease score with the formula shown.
+Cover letter template: fields fill a one-page letter, printable.
+Thank-you note templates: occasion, recipient, and one detail fill three short drafts.
+Case converter: sentence case, title case, upper case, and lower case.
+Repeated word finder: highlights words used more than a set number of times in pasted text.
+Complaint letter template: issue, dates, order number, and requested outcome, printable.
+Speech timer: paste a speech to see speaking time at three paces, then run a countdown.
+Text compare: paste two versions and see added and removed words highlighted.
+CV checklist: 15 checks with a score, printable.
+Plain words list: long words with shorter replacements, searchable.
+Repair request letter to a landlord: issue, dates, and list of photos, printable.
+Date calculator: days, weeks, and months between two dates, and the weekday of any date.
+Time-blocking planner for one day in 30-minute slots, printable.
+Event countdown with days, hours, and minutes, saved in the browser.
+Time sheet: start, end, and break times per day, with weekly totals and overtime.
+Weekly planner page with priorities, appointments, and notes, printable on A4.
+Priority matrix: tasks sorted into urgent and important boxes, saved in the browser.
+Birthday list: next birthday and age, sorted by soonest.
+Deadline calculator: a start date plus a number of working days, excluding weekends and holidays.
+Daily routine builder: morning and evening steps with times, printable.
+Goal tracker: one goal with milestones, dates, and percent done.
+Event planning timeline: an event date gives tasks due 8, 4, 2, and 1 weeks before.
+Focus log: what the user worked on in each hour of the day, with a weekly summary.
+Sunrise and sunset calculator: a date and coordinates entered give sunrise time, sunset time, and day length.
+Color contrast checker: two colors entered give the contrast ratio and a pass or fail against a threshold the user sets.
+QR code generator: text or a link entered draws a scannable code locally in the browser.
+Random team generator: a list of names and a group size give randomly assigned teams.
+Average calculator: a list of numbers gives the mean, median, mode, and range.
+Dice and coin flip simulator: number of dice or coins and number of rolls give a results table and totals.
++ Price in hours: take-home pay per hour and any price give its cost in working hours and 40-hour weeks, with a daily item also shown per year.
++ Estimate anything: a question split into steps, each with a low and high guess, gives a likely range for the answer, with every step shown.
++ Picture hanging helper: wall width, frame widths, and gap between frames give the nail position for each frame, measured from the left.
++ Garden bed soil calculator: bed length, width, and depth give the soil volume in litres and the number of bags of a size the user enters.
++ Seating plan: guests and table sizes give a printable plan, with pairs the user marks kept at different tables.
++ Roman numeral converter: numbers from 1 to 3,999 converted in both directions, with each step of the conversion shown.
+
+#@ guests
+historical | Euclid | State a few assumptions, then build everything from them. | died c. 270 BC
+historical | Ibn al-Haytham | Trust nothing until an experiment shows it. | died c. 1040
+historical | Leonardo da Vinci | Sketch the subject many times before deciding anything. | died 1519
+historical | Benjamin Franklin | List the pros and cons, weigh them, and cross out equals. | died 1790
+historical | Katsushika Hokusai | Show the same subject from many viewpoints. | died 1849
+historical | Ada Lovelace | Imagine what the machine could do beyond its first job. | died 1852
+historical | Charles Darwin | Write down the facts that disagree with you first. | died 1882
+historical | Florence Nightingale | Turn the numbers into a picture that forces a decision. | died 1910
+myth | Cassandra | Name the failure nobody wants to hear. | Greek myth
+myth | Daedalus | Design the way out of whatever you build. | Greek myth
+myth | Odysseus | Go around what you cannot beat head-on. | Greek myth
+myth | Penelope | Undo what is not ready and buy time to get it right. | Greek myth
+myth | Sisyphus | Make the task that will repeat lighter. | Greek myth
+myth | Janus | Look back and forward at every threshold. | Roman myth
+myth | Arachne | Make the craft so precise it challenges the masters. | Greek myth
+myth | Scheherazade | End each part with a reason to come back. | folk tale collection
+literary | Don Quixote | Attempt the impossible version first and keep what survives. | Cervantes, died 1616
+literary | Alice | Follow the strange path and ask why the rules are what they are. | Lewis Carroll, died 1898
+literary | Robinson Crusoe | Build only from what washed up. | Daniel Defoe, died 1731
+literary | Gulliver | Change the scale until something looks absurd. | Jonathan Swift, died 1745
+literary | Ebenezer Scrooge | Weigh what a choice costs in the past, present, and future. | Charles Dickens, died 1870
+literary | Captain Ahab | Chase one goal and count what it costs. | Herman Melville, died 1891
+archetype | The Fool | Ask the question everyone stopped asking. | archetype
+archetype | The Trickster | Break one rule to see if it was ever needed. | archetype
+archetype | The Outsider | Use it like someone who has never seen one. | archetype
+archetype | The Null | Assume the number means nothing until shown otherwise. | archetype
+archetype | Entropy | Find what breaks first as it wears down. | personified force
+archetype | Time | Show what this looks like in ten years. | personified force
+future | Repair technician from 2140 | Make every part fixable with one common tool. | invented
+future | Archivist from 2300 | Keep it readable after the software that made it is gone. | invented
+future | Settler on Mars in 2090 | Build for scarce supplies and long delays. | invented
+creature | Phoenix | Burn the old version and rebuild from what is left. | myth and folklore
+creature | Hydra | For every problem you cut, check what grows back. | Greek myth
+creature | Glass fox | Show everything it does and hide nothing. | invented
++ historical | Mary Anning | Search the same ground again after every storm. | died 1847
++ creature | Clockwork beetle | Wind it once and watch how far it runs without help. | invented
