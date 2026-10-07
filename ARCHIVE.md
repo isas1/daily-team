@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 4 days recorded.
+Every daily team and the asset it made, newest first. 5 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-10-07](days/2026-10-07/) | The Ear Card | Teacher · Urban planner · Upholsterer · Don Quixote | Fits in a postcard-sized area. | [asset](days/2026-10-07/artifact-1.html) |
 | [2026-10-06](days/2026-10-06/) | Three Panes | Window dresser · Calligrapher · Textile designer · Glass fox | Shows a filled-in example before the user types. | [asset](days/2026-10-06/artifact-1.html) |
 | [2026-10-05](days/2026-10-05/) | CV checklist | Bookbinder · Glassblower · Chef · Captain Ahab | Has a dark mode that follows the system setting. | [asset](days/2026-10-05/artifact-1.html) |
 | [2026-10-04](days/2026-10-04/) | Weekly planner page with priorities, appointments, and notes, printable on A4. | Comic artist · Packaging designer · Exhibition designer · Printmaker | One column only. | [asset](days/2026-10-04/artifact-1.html) |
