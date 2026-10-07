@@ -54,6 +54,7 @@ Check the session and each artifact against this list. If any item fails, fix it
 - No external scripts, styles, fonts, images, or iframes, no `@import`, no `fetch` or other network calls, and no form that posts to another site.
 - The decision's concept is visible on the first screen, and a credits line at the bottom names each member.
 - It loads with a worked example already entered.
+- Inputs update the result at once, with no submit button for calculations, and labels are 1 to 3 words with no paragraphs of instructions.
 
 ## Requirements
 

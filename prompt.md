@@ -17,7 +17,7 @@ Who they are:
 - Member 4 may be a guest. A guest from myth, an old book, an archetype, the future, or invented creatures speaks in character, in original words: never quote or paraphrase lines from a source text. A historical guest speaks in plain modern words about their method only: never write in their voice, imitate how they wrote, or put words in their mouth as if they said them.
 - Member 1 is the lead.
 
-The page will be one HTML file, so every idea is about what the page does, what the user enters, what they get, and how it looks and reads.
+The page will be one HTML file, so every idea is about what the page does, what the user does with it, what they see change, and how it looks and reads.
 
 Sections, in order, with these headings:
 
@@ -48,10 +48,17 @@ Return exactly these sections, with these headings:
 
 Build one artifact from the decision. Member {{LEAD}} leads: their method and stance shape the result.
 
-Make it the team's version, not a generic one:
-- The decision's concept is visible on the first screen: in the title, the layout, or the first thing the user does.
-- The look comes from the team's crafts and the decision: palette, type scale, spacing, and layout. System fonts only.
-- Labels and help text are plain and short, with the team's character in word choice, not in jokes.
+Make it the team's version, and make it a pleasure to use:
+- One idea on the first screen. A new user sees what the page does within 5 seconds and can act on it at once. The decision's concept is that first thing.
+- Direct manipulation over forms. At least one main input is changed by dragging, sliding, or tapping the result itself, not by a text field. Every input updates the output at once: no submit buttons for calculations.
+- The result is the main thing on the page. Show it large, as a picture, scale, or shape where that helps, and let it move when the input moves.
+- Minimal text. Labels of 1 to 3 words. No paragraphs of instructions: if it needs explaining, change the design. Help text appears only where a user would hesitate.
+- Typography does the design work: 3 or 4 sizes with clear hierarchy, comfortable line length, and generous spacing. System fonts only; use their weights and sizes boldly.
+- Motion explains change: a value counting to its new total, an item sliding to its new place. Short, never decorative.
+- One moment of delight that comes from the team's crafts, not from a library of effects.
+- Avoid the generic look: no purple-blue gradients, frosted-glass cards, emoji icons, centred hero text above a form, or "Welcome to" headings.
+- The look comes from the team's crafts and the decision: palette, type, spacing, and layout. Two teams given the same task make pages that look and behave differently.
+- Labels carry the team's character in word choice, not in jokes.
 - A small credits line at the bottom names each member by role and what they put in the page.
 
 It still has to work:
@@ -83,7 +90,7 @@ Each kind of item:
 - Roles: a generic occupation or craft, at most 40 characters. Example: "Bookbinder".
 - Methods: one working practice as an instruction in one sentence, at most 120 characters. Example: "Cut the first draft by half."
 - Constraints: one rule a single HTML tool can follow, at most 80 characters. Example: "No more than five inputs."
-- Tasks: one specific single-file web tool that helps a broad audience, written as "Name: what the user enters and what they get.", at most 220 characters, starting with a capital letter and continuing in lowercase. No medical, legal, or investment advice.
+- Tasks: one specific single-file web tool that helps a broad audience, written as "Name: what the user does and sees.", at most 220 characters, starting with a capital letter and continuing in lowercase. Describe the interaction, not a list of fields. Example: "Fuel splitter: drag the distance and watch each passenger's share change." No medical, legal, or investment advice.
 
 Temperaments, when the current season has them: how a person behaves in an argument, in one line of plain words, at most 60 characters, with no names and no judgement of character. Example: "Concedes small points to win the big one."
 

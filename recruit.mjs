@@ -76,7 +76,7 @@ export function itemProblems(kind, text) {
   if (/\p{Extended_Pictographic}/u.test(text)) problems.push(`${label}: contains an emoji`);
   for (const w of findBanned(text)) problems.push(`${label}: uses the word "${w}"`);
   if ((kind === 'tasks' || kind === 'constraints') && UNSAFE.test(text)) problems.push(`${label}: touches medical, legal, or financial advice`);
-  if (kind === 'tasks' && !/^[A-Z][^:]{2,60}: \S/.test(text)) problems.push(`${label}: must look like "Name: what the user enters and what they get."`);
+  if (kind === 'tasks' && !/^[A-Z][^:]{2,60}: \S/.test(text)) problems.push(`${label}: must look like "Name: what the user does and sees."`);
   const words = text.split(/\s+/);
   for (let i = 1; i < words.length; i++) {
     const w = words[i].replace(/^[("'“]+|[)"'”.,;:!?]+$/g, '');

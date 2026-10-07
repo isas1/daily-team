@@ -30,6 +30,7 @@
       "Writes team-builds/<date>/artifact-1.html led by member 1 and artifact-2.html led by member 2",
       "Each file has a title, a viewport meta tag, and no external scripts, styles, fonts, images, forms, or network calls",
       "Each file shows the decision's concept on the first screen and ends with a credits line",
+      "Each file updates its result as the user changes an input, without a submit button, and uses short labels instead of instruction paragraphs",
       "Reviews each file against the review list, fixes what fails, and only then gives the paths",
       "Does not run daily.sh or recruit.sh"
     ]
