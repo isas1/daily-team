@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Chalk-Hand Sheet: weekly workout planner</title>
+<style>
+:root{
+  --accent:#E4572E;
+  --ink:#161616;
+  --mid:#6b6965;
+  --line:#d3d0c9;
+  --rowh:9mm;
+  --donew:36mm;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#e8e6e1;color:var(--ink);font:17px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+button{font:inherit;color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:28px 16px 40px}
+
+header.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:37px;line-height:1.05;margin:0;font-weight:800;letter-spacing:-.02em}
+.tag{margin:8px 0 0;color:var(--mid);font-size:17px}
+.print{font-weight:700;background:var(--ink);color:#fff;border:0;border-radius:4px;padding:14px 24px;cursor:pointer;font-size:17px}
+.print:focus-visible,.ghostbtn:focus-visible,.dot:focus-visible,.repbtn:focus-visible,.rv:focus-visible,.del:focus-visible,.addrow button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.bar{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:0 0 16px;font-size:13px;color:var(--mid)}
+.total{display:flex;gap:6px;align-items:baseline}
+.total b{font-size:17px;color:var(--ink);font-variant-numeric:tabular-nums}
+.formula{font-size:13px;color:var(--mid)}
+.tools{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+.ghostbtn{font-size:13px;background:transparent;border:1px solid #b5b2ab;border-radius:4px;padding:7px 11px;cursor:pointer}
+.ghostbtn[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hint{width:100%;font-size:13px;color:var(--mid);margin:0}
+
+.sheet{position:relative;background:#fff;padding:30px 30px 18px;box-shadow:0 1px 2px rgba(0,0,0,.12),0 10px 28px rgba(0,0,0,.07);transition:filter .6s ease,transform .6s ease}
+.tape{position:absolute;top:-11px;right:44px;width:92px;height:26px;background:rgba(200,197,189,.75);transform:rotate(3deg);transform-origin:0 50%;transition:transform .6s ease}
+.caption{display:none;font-size:13px;color:var(--mid);margin:10px 0 0}
+body.aged .sheet{filter:grayscale(1) contrast(1.3) brightness(1.02);transform:rotate(-.5deg)}
+body.aged .tape{transform:rotate(-16deg) translateY(-6px)}
+body.aged .caption{display:block}
+
+.sheethead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:6px;font-size:13px}
+.sheethead strong{font-size:17px;font-weight:800}
+.weekline{display:inline-block;width:120px;border-bottom:1px solid var(--ink);margin-left:6px}
+
+.cols,.day{display:grid;grid-template-columns:104px 1fr}
+.cols{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);padding:8px 0 4px;border-bottom:1px solid var(--line)}
+.colgrid,.row{display:grid;grid-template-columns:1fr 44px 96px 232px 30px;align-items:center;gap:0 8px}
+.colgrid span:nth-child(2),.colgrid span:nth-child(3){text-align:center}
+
+.day{border-bottom:1px solid var(--line);padding:10px 0 8px}
+.margin{padding-right:10px}
+.dname{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding-bottom:3px}
+.day-rule{border-bottom:2px solid var(--accent)}
+.topn{font-size:28pt;font-weight:800;line-height:1;margin-top:8px;font-variant-numeric:tabular-nums;min-height:1em}
+.toplbl{font-size:11px;color:var(--mid);margin-top:2px}
+
+.row{min-height:44px}
+.ex{font:inherit;width:100%;height:36px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:0 2px;color:var(--ink);border-radius:0}
+.ex:focus{outline:none;border-bottom-color:var(--ink)}
+.setsn{text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.reps{display:flex;align-items:center;justify-content:center;gap:2px}
+.repbtn{width:26px;height:30px;border:0;background:transparent;cursor:pointer;color:var(--mid);font-size:17px;padding:0}
+.rv{min-width:34px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums;cursor:ns-resize;touch-action:none;user-select:none;-webkit-user-select:none;border-bottom:1px dotted #9a978f;padding:2px 0;transition:transform .12s}
+.rv.dragging{transform:scale(1.25)}
+.dots{display:flex}
+.dot{width:29px;height:32px;border:0;background:transparent;padding:0;display:grid;place-items:center;cursor:pointer}
+.dot::before{content:"";width:14px;height:14px;border-radius:50%;border:1px dashed #c6c3bc;transition:transform .18s ease,border-color .18s ease}
+.dot.on::before{border:2px solid var(--ink)}
+.dot:hover::before{border-color:var(--ink)}
+.dot.pop::before{animation:pop .24s ease}
+@keyframes pop{0%{transform:scale(.3)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+.del{width:30px;height:30px;border:0;background:transparent;color:#a3a09a;cursor:pointer;font-size:17px;padding:0}
+.del:hover{color:var(--ink)}
+
+.blank .exline{height:36px;border-bottom:1px solid var(--line);display:flex;align-items:flex-end;padding:0 2px 6px;color:#a3a09a;font-size:13px}
+.blank .exline::after{content:"rest"}
+.box{height:28px;border:1px solid var(--line);margin:0 6px}
+
+.addrow button{border:0;background:transparent;font-size:13px;color:var(--mid);padding:6px 2px;cursor:pointer}
+.addrow button:hover{color:var(--ink)}
+.notes{display:flex;align-items:center;gap:8px;margin-top:2px}
+.notes label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);flex:none}
+.notes input{font:inherit;font-size:13px;flex:1;min-width:0;height:34px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);border-radius:0}
+.notes input:focus{outline:none;border-bottom-color:var(--ink)}
+
+.rowin{animation:slidein .22s ease}
+@keyframes slidein{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+.credits{font-size:11px;color:var(--mid);margin-top:28px;line-height:1.6;max-width:70ch}
+.credits b{color:var(--ink);font-weight:700}
+
+@media (max-width:640px){
+  .wrap{padding:20px 10px 32px}
+  h1{font-size:30px}
+  .sheet{padding:22px 12px 14px}
+  .cols{display:none}
+  .day{grid-template-columns:1fr}
+  .margin{display:flex;align-items:baseline;gap:12px;padding:0 0 4px}
+  .topn{margin:0}
+  .row{grid-template-columns:1fr auto 30px;grid-template-areas:"ex ex del" "dots reps reps";gap:0 4px;padding-bottom:4px}
+  .ex{grid-area:ex}.del{grid-area:del}.dots{grid-area:dots}.reps{grid-area:reps}
+  .setsn{display:none}
+  .dot{width:25px}
+  .blank{grid-template-areas:"ex ex ex"}
+  .blank .box{display:none}
+  .blank .exline{grid-area:ex}
+  .tools{margin-left:0}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before{animation:none!important;transition:none!important}
+}
+
+@page{size:A4 portrait;margin:12mm}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff}
+  body{font-size:10pt}
+  .wrap{padding:0;max-width:none}
+  header.top,.bar,.credits,.del,.addrow,.repbtn,.dot:not(.on),.tape,.caption{display:none!important}
+  .sheet{box-shadow:none;padding:0;filter:none!important;transform:none!important}
+  .sheethead{padding-bottom:1.5mm}
+  .sheethead strong{font-size:12pt}
+  .weekline{width:40mm}
+  .cols{display:grid;grid-template-columns:24mm 1fr;padding:1.5mm 0 1mm;font-size:7pt}
+  .day{grid-template-columns:24mm 1fr;padding:1mm 0;break-inside:avoid;page-break-inside:avoid}
+  .margin{display:block;padding:0 2mm 0 0}
+  .dname{font-size:8pt}
+  .topn{font-size:28pt;margin-top:1mm}
+  .toplbl{font-size:6.5pt}
+  .colgrid,.row{grid-template-columns:1fr 12mm 14mm var(--donew);gap:0 2mm;grid-template-areas:none}
+  .row{height:var(--rowh);min-height:0}
+  .ex,.blank .exline{height:calc(var(--rowh) - .6mm);border-bottom:1px solid #9a9a9a;font-size:10pt}
+  .blank .exline::after{content:""}
+  .setsn,.reps,.box{display:flex!important;align-items:center;justify-content:center;border:1px solid #9a9a9a;height:calc(var(--rowh) - 1.6mm);margin:0}
+  .rv{border:0;cursor:default}
+  .dots{display:flex}
+  .dot{width:4.5mm;height:var(--rowh)}
+  .dot::before{width:14px;height:14px;border:1px solid #000!important;animation:none!important}
+  .notes{margin-top:0}
+  .notes label{font-size:6.5pt}
+  .notes input{height:var(--rowh);font-size:9pt;border-bottom:1px solid #9a9a9a}
+  ::placeholder{color:transparent}
+  .ex::placeholder{color:transparent}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>The Chalk-Hand Sheet</h1>
+      <p class="tag">Type the week here. Print it. Tick circles in pencil.</p>
+    </div>
+    <button class="print" id="printBtn" type="button">Print the sheet</button>
+  </header>
+
+  <div class="bar">
+    <div class="total"><b id="tsets">0</b> sets</div>
+    <div class="total"><b id="treps">0</b> reps</div>
+    <span class="formula">reps = Σ sets × reps</span>
+    <div class="tools">
+      <button class="ghostbtn" id="agedBtn" type="button" aria-pressed="false">Copy #40</button>
+      <button class="ghostbtn" id="blankBtn" type="button">Blank sheet</button>
+      <button class="ghostbtn" id="exampleBtn" type="button">Example week</button>
+    </div>
+    <p class="hint">Tap a circle to set the sets. Drag a rep number up or down.</p>
+  </div>
+
+  <main class="sheet" id="sheet" aria-label="Weekly workout sheet">
+    <div class="tape" aria-hidden="true"></div>
+    <div class="sheethead">
+      <strong>The Chalk-Hand Sheet</strong>
+      <span>Week of<span class="weekline"></span></span>
+    </div>
+    <div class="cols" aria-hidden="true">
+      <span>Day · top</span>
+      <div class="colgrid"><span>Lift</span><span>Sets</span><span>Reps</span><span>Ticks</span><span></span></div>
+    </div>
+    <div id="days"></div>
+  </main>
+  <p class="caption" id="caption">Copy 40. The orange rule prints grey. Every box still reads.</p>
+
+  <p class="credits">
+    <b>Packaging designer:</b> 9 mm boxes, one circle per set, circles you tap to set the count.
+    <b>Brand strategist:</b> the orange rule under each day and the 28 pt top number.
+    <b>Taxidermist:</b> four columns, one notes line a day, nothing else.
+    <b>Time:</b> black-only print and the Copy #40 view.
+  </p>
+</div>
+
+<script>
+(function(){
+  var KEY='chalkhand-sheet-v1';
+  var MAXSETS=8, MAXROWS=5, MINREP=1, MAXREP=60;
+  var reduce=false;
+  try{reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+
+  var EXAMPLE={days:[
+    {name:'Mon',notes:'',rows:[
+      {ex:'Back squat',sets:4,reps:6},
+      {ex:'Romanian deadlift',sets:3,reps:8},
+      {ex:'Walking lunge',sets:3,reps:10},
+      {ex:'Hanging knee raise',sets:3,reps:12}]},
+    {name:'Tue',notes:'Shoulder pinched on set 4 of press',rows:[
+      {ex:'Bench press',sets:4,reps:6},
+      {ex:'Bent-over row',sets:4,reps:8},
+      {ex:'Overhead press',sets:3,reps:8},
+      {ex:'Face pull',sets:3,reps:15}]},
+    {name:'Wed',notes:'',rows:[
+      {ex:'Mobility circuit',sets:2,reps:10}]},
+    {name:'Thu',notes:'',rows:[
+      {ex:'Deadlift',sets:3,reps:5},
+      {ex:'Pull-up',sets:4,reps:6},
+      {ex:'Goblet squat',sets:3,reps:10},
+      {ex:'Calf raise',sets:3,reps:15}]},
+    {name:'Fri',notes:'',rows:[
+      {ex:'Incline press',sets:3,reps:10},
+      {ex:'Chin-up',sets:3,reps:8},
+      {ex:'Dip',sets:3,reps:10}]},
+    {name:'Sat',notes:'',rows:[
+      {ex:'Kettlebell swing',sets:5,reps:15},
+      {ex:'Push-up',sets:3,reps:12}]},
+    {name:'Sun',notes:'',rows:[]}
+  ]};
+  var NAMES=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  function clone(o){return JSON.parse(JSON.stringify(o));}
+  function blank(){return {days:NAMES.map(function(n){return {name:n,notes:'',rows:[]};})};}
+  function valid(s){
+    return s&&s.days&&s.days.length===7&&s.days.every(function(d){return Array.isArray(d.rows);});
+  }
+  function load(){
+    try{var s=localStorage.getItem(KEY);if(!s)return null;var o=JSON.parse(s);return valid(o)?o:null;}catch(e){return null;}
+  }
+  function save(){
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+
+  var state=load()||clone(EXAMPLE);
+  var daysEl=document.getElementById('days');
+  var sheet=document.getElementById('sheet');
+  var tops=[];
+
+  function el(tag,cls,text){
+    var e=document.createElement(tag);
+    if(cls)e.className=cls;
+    if(text!=null)e.textContent=text;
+    return e;
+  }
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+
+  function countTo(node,to){
+    var from=parseInt(node.getAttribute('data-v'),10);
+    if(isNaN(from))from=0;
+    node.setAttribute('data-v',to);
+    if(node._raf)cancelAnimationFrame(node._raf);
+    if(reduce||from===to){node.textContent=to;return;}
+    var t0=null,dur=280;
+    function step(t){
+      if(t0===null)t0=t;
+      var p=Math.min(1,(t-t0)/dur);
+      var e=1-Math.pow(1-p,3);
+      node.textContent=Math.round(from+(to-from)*e);
+      if(p<1)node._raf=requestAnimationFrame(step);
+    }
+    node._raf=requestAnimationFrame(step);
+  }
+
+  function updateDay(di){
+    var d=state.days[di],node=tops[di];
+    if(!d.rows.length){node.textContent='';node.setAttribute('data-v','0');return;}
+    var m=0;d.rows.forEach(function(r){if(r.reps>m)m=r.reps;});
+    countTo(node,m);
+  }
+  function updateTotals(){
+    var s=0,r=0;
+    state.days.forEach(function(d){d.rows.forEach(function(x){s+=x.sets;r+=x.sets*x.reps;});});
+    countTo(document.getElementById('tsets'),s);
+    countTo(document.getElementById('treps'),r);
+  }
+
+  function fit(){
+    var units=0,maxSets=4;
+    state.days.forEach(function(d){
+      units+=Math.max(d.rows.length,1)+1;
+      d.rows.forEach(function(r){if(r.sets>maxSets)maxSets=r.sets;});
+    });
+    var avail=238;
+    var rowh=Math.min(9,Math.floor(avail/units*10)/10);
+    sheet.style.setProperty('--rowh',rowh+'mm');
+    sheet.style.setProperty('--donew',(maxSets*4.5)+'mm');
+  }
+
+  function paintDots(dots,n,animate){
+    var bs=dots.children;
+    for(var i=0;i<bs.length;i++){
+      var on=i<n,was=bs[i].classList.contains('on');
+      bs[i].classList.toggle('on',on);
+      bs[i].setAttribute('aria-pressed',on?'true':'false');
+      if(animate&&on&&!was){
+        bs[i].classList.remove('pop');void bs[i].offsetWidth;bs[i].classList.add('pop');
+      }
+    }
+  }
+
+  function rowEl(di,ri,fresh){
+    var d=state.days[di],r=d.rows[ri];
+    var row=el('div','row'+(fresh?' rowin':''));
+
+    var ex=el('input','ex');
+    ex.type='text';ex.value=r.ex;ex.placeholder='Lift';ex.maxLength=40;
+    ex.setAttribute('aria-label',d.name+' lift '+(ri+1));
+    ex.addEventListener('input',function(){r.ex=ex.value;save();});
+
+    var sn=el('div','setsn',r.sets);
+
+    var reps=el('div','reps');
+    var mi=el('button','repbtn','\u2212');mi.type='button';mi.setAttribute('aria-label','Fewer reps');
+    var rv=el('span','rv',r.reps);
+    rv.tabIndex=0;rv.setAttribute('role','spinbutton');
+    rv.setAttribute('aria-label','Reps');rv.setAttribute('aria-valuemin',MINREP);rv.setAttribute('aria-valuemax',MAXREP);
+    rv.setAttribute('aria-valuenow',r.reps);
+    var pl=el('button','repbtn','+');pl.type='button';pl.setAttribute('aria-label','More reps');
+    reps.appendChild(mi);reps.appendChild(rv);reps.appendChild(pl);
+
+    function setReps(v){
+      v=clamp(v,MINREP,MAXREP);
+      if(v===r.reps)return;
+      r.reps=v;rv.textContent=v;rv.setAttribute('aria-valuenow',v);
+      updateDay(di);updateTotals();save();
+    }
+    mi.addEventListener('click',function(){setReps(r.reps-1);});
+    pl.addEventListener('click',function(){setReps(r.reps+1);});
+    rv.addEventListener('keydown',function(e){
+      if(e.key==='ArrowUp'||e.key==='ArrowRight'){setReps(r.reps+1);e.preventDefault();}
+      else if(e.key==='ArrowDown'||e.key==='ArrowLeft'){setReps(r.reps-1);e.preventDefault();}
+    });
+    var drag=null;
+    rv.addEventListener('pointerdown',function(e){
+      drag={x:e.clientX,y:e.clientY,v:r.reps};
+      try{rv.setPointerCapture(e.pointerId);}catch(err){}
+      rv.classList.add('dragging');e.preventDefault();
+    });
+    rv.addEventListener('pointermove',function(e){
+      if(!drag)return;
+      var delta=Math.round(((drag.y-e.clientY)+(e.clientX-drag.x))/10);
+      setReps(drag.v+delta);
+    });
+    function end(){drag=null;rv.classList.remove('dragging');}
+    rv.addEventListener('pointerup',end);
+    rv.addEventListener('pointercancel',end);
+
+    var dots=el('div','dots');
+    dots.setAttribute('role','group');dots.setAttribute('aria-label','Sets');
+    for(var i=1;i<=MAXSETS;i++){
+      (function(i){
+        var b=el('button','dot');b.type='button';
+        b.setAttribute('aria-label',i+(i===1?' set':' sets'));
+        b.addEventListener('click',function(){
+          var n=(i===r.sets&&i>1)?i-1:i;
+          r.sets=n;sn.textContent=n;
+          paintDots(dots,n,true);
+          updateTotals();save();fit();
+        });
+        dots.appendChild(b);
+      })(i);
+    }
+    paintDots(dots,r.sets,false);
+
+    var del=el('button','del','\u00d7');del.type='button';
+    del.setAttribute('aria-label','Remove '+(r.ex||'lift'));
+    del.addEventListener('click',function(){
+      d.rows.splice(ri,1);save();render();
+    });
+
+    row.appendChild(ex);row.appendChild(sn);row.appendChild(reps);row.appendChild(dots);row.appendChild(del);
+    return row;
+  }
+
+  function blankRow(){
+    var row=el('div','row blank');
+    row.appendChild(el('div','exline'));
+    row.appendChild(el('div','box'));
+    row.appendChild(el('div','box'));
+    row.appendChild(el('div',''));
+    return row;
+  }
+
+  function render(focus){
+    daysEl.innerHTML='';tops=[];
+    state.days.forEach(function(d,di){
+      var sec=el('section','day');
+      var m=el('div','margin');
+      m.appendChild(el('span','dname day-rule',d.name));
+      var t=el('div','topn');t.setAttribute('data-v','0');
+      m.appendChild(t);tops.push(t);
+      m.appendChild(el('div','toplbl','top reps'));
+
+      var rows=el('div','rows');
+      if(!d.rows.length)rows.appendChild(blankRow());
+      d.rows.forEach(function(r,ri){
+        rows.appendChild(rowEl(di,ri,focus&&focus[0]===di&&focus[1]===ri));
+      });
+      if(d.rows.length<MAXROWS){
+        var ar=el('div','addrow');
+        var ab=el('button','','+ lift');ab.type='button';
+        ab.setAttribute('aria-label','Add a lift to '+d.name);
+        ab.addEventListener('click',function(){
+          d.rows.push({ex:'',sets:3,reps:10});save();
+          render([di,d.rows.length-1]);
+        });
+        ar.appendChild(ab);rows.appendChild(ar);
+      }
+      var nt=el('div','notes');
+      var id='n'+di;
+      var lb=el('label','','Notes');lb.htmlFor=id;
+      var ni=el('input','');ni.type='text';ni.id=id;ni.value=d.notes||'';ni.maxLength=90;
+      ni.placeholder='what hurt, what felt light';
+      ni.addEventListener('input',function(){d.notes=ni.value;save();});
+      nt.appendChild(lb);nt.appendChild(ni);rows.appendChild(nt);
+
+      sec.appendChild(m);sec.appendChild(rows);
+      daysEl.appendChild(sec);
+      updateDay(di);
+    });
+    updateTotals();fit();
+    if(focus){
+      var inputs=daysEl.querySelectorAll('.day')[focus[0]].querySelectorAll('.ex');
+      var f=inputs[focus[1]];if(f)f.focus();
+    }
+  }
+
+  document.getElementById('printBtn').addEventListener('click',function(){fit();window.print();});
+  window.addEventListener('beforeprint',fit);
+  var agedBtn=document.getElementById('agedBtn');
+  agedBtn.addEventListener('click',function(){
+    var on=!document.body.classList.contains('aged');
+    document.body.classList.toggle('aged',on);
+    agedBtn.setAttribute('aria-pressed',on?'true':'false');
+  });
+  document.getElementById('blankBtn').addEventListener('click',function(){
+    state=blank();save();render();
+  });
+  document.getElementById('exampleBtn').addEventListener('click',function(){
+    state=clone(EXAMPLE);save();render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
