@@ -7,17 +7,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-09: The Never List
+### 2026-10-10: Four Corners, Out and Back
 
-<a href="days/2026-10-09/"><img src="days/2026-10-09/team.png" alt="Team for 2026-10-09: Beekeeper · Sign painter · Librarian · Phoenix" width="100%"></a>
+<a href="days/2026-10-10/"><img src="days/2026-10-10/team.png" alt="Team for 2026-10-10: Game designer · Service designer · Comic artist · Sisyphus" width="100%"></a>
 
-**Task:** Goal tracker: one goal with milestones, dates, and percent done.
+**Task:** Camping checklist grouped by shelter, cooking, clothing, and safety, printable.
 
-**Decision:** The page tracks one goal through dated milestones, shows percent done as a plain count with its formula printed under the number, and keeps every earlier plan as a greyed, folded version whenever a date or milestone changes.
+**Decision:** The page is an editable camping checklist that prints on 1 A4 sheet as 4 drawn panels (shelter, cooking, clothing, safety), with Out and Back tick boxes on every line and each item's weight in grams summed per panel in kilograms.
 
-<a href="days/2026-10-09/"><img src="days/2026-10-09/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-10/"><img src="days/2026-10-10/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-09/) · [Use it](https://isas1.github.io/daily-team/2026-10-09/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-10/) · [Use it](https://isas1.github.io/daily-team/2026-10-10/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -37,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-10](days/2026-10-10/) | <a href="days/2026-10-10/"><img src="days/2026-10-10/artifact-1.png" alt="Four Corners, Out and Back" width="160"></a> | Four Corners, Out and Back | Game designer · Service designer · Comic artist · Sisyphus |
 | [2026-10-09](days/2026-10-09/) | <a href="days/2026-10-09/"><img src="days/2026-10-09/artifact-1.png" alt="The Never List" width="160"></a> | The Never List | Beekeeper · Sign painter · Librarian · Phoenix |
 | [2026-10-08](days/2026-10-08/) | <a href="days/2026-10-08/"><img src="days/2026-10-08/artifact-1.png" alt="The Chalk-Hand Sheet" width="160"></a> | The Chalk-Hand Sheet | Packaging designer · Brand strategist · Taxidermist · Time |
 | [2026-10-07](days/2026-10-07/) | <a href="days/2026-10-07/"><img src="days/2026-10-07/artifact-1.png" alt="The Ear Card" width="160"></a> | The Ear Card | Teacher · Urban planner · Upholsterer · Don Quixote |
 | [2026-10-06](days/2026-10-06/) | <a href="days/2026-10-06/"><img src="days/2026-10-06/artifact-1.png" alt="Three Panes" width="160"></a> | Three Panes | Window dresser · Calligrapher · Textile designer · Glass fox |
 | [2026-10-05](days/2026-10-05/) | <a href="days/2026-10-05/"><img src="days/2026-10-05/artifact-1.png" alt="CV checklist" width="160"></a> | CV checklist | Bookbinder · Glassblower · Chef · Captain Ahab |
 | [2026-10-04](days/2026-10-04/) | <a href="days/2026-10-04/"><img src="days/2026-10-04/artifact-1.png" alt="Weekly planner page with priorities, appointments, and notes, printable on A4." width="160"></a> | Weekly planner page with priorities, appointments, and notes, printable on A4. | Comic artist · Packaging designer · Exhibition designer · Printmaker |
-| [2026-10-03](days/2026-10-03/) | <a href="days/2026-10-03/"><img src="days/2026-10-03/artifact-1.png" alt="Running pace calculator" width="160"></a> | Running pace calculator | Service designer · Product designer · Interaction designer · Choreographer |
 
-[All 7 days](ARCHIVE.md)
+[All 8 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

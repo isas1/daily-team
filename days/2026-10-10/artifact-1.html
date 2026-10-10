@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Out and Back: Camping Checklist</title>
+<style>
+:root{
+  --paper:#efe8d8;
+  --sheet:#fffdf7;
+  --ink:#1b1a17;
+  --grey:#7a7266;
+  --rule:#d9d0bd;
+  --bad:#c4161c;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.4 var(--font)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 40px}
+
+/* top bar */
+.top{display:grid;grid-template-columns:1fr auto;gap:12px 24px;align-items:end;margin-bottom:18px}
+h1{font-size:34px;line-height:1;font-weight:900;letter-spacing:-.02em;margin:0}
+h1 .amp{color:var(--grey);font-weight:400}
+.sub{font-size:16px;margin:8px 0 0;color:var(--grey)}
+.sub b{color:var(--ink)}
+.pack{text-align:right}
+.pack small{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--grey);font-weight:700}
+.pack .big{font-size:34px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1}
+
+.load{display:flex;height:18px;border:2px solid var(--ink);background:var(--sheet);margin:0 0 6px;overflow:hidden}
+.seg{height:100%;transition:flex-basis .35s ease-out;border-right:2px solid var(--ink);min-width:0}
+.seg:last-child{border-right:0}
+.legend{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:12px;color:var(--grey);margin-bottom:6px}
+.legend i{display:inline-block;width:10px;height:10px;border:1.5px solid var(--ink);margin-right:5px;vertical-align:-1px}
+.legend b{color:var(--ink);font-variant-numeric:tabular-nums}
+.formula{font-size:12px;color:var(--grey);margin:0 0 16px}
+.formula code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink)}
+
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.btn{border:2px solid var(--ink);background:var(--sheet);padding:9px 16px;font-weight:700;cursor:pointer}
+.btn.main{background:var(--ink);color:var(--sheet)}
+.btn:focus-visible,.box:focus-visible,.add:focus-visible,.del:focus-visible{outline:3px solid #2a6fdb;outline-offset:2px}
+.key{font-size:12px;color:var(--grey);display:flex;gap:14px;align-items:center;margin-left:auto}
+.key span{display:inline-flex;gap:5px;align-items:center}
+.key svg{width:18px;height:12px}
+.lines{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* the sheet */
+.sheet{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;background:var(--sheet);padding:14px;border:1px solid var(--rule);box-shadow:0 2px 0 var(--rule)}
+.panel{border:8px solid var(--ink);border-width:8px;display:flex;flex-direction:column;min-width:0;background:var(--sheet)}
+.ph{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 12px;border-bottom:3px solid var(--ink);position:relative}
+.art svg{width:52px;height:52px;display:block}
+.ph h2{margin:0;font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.kg{font-size:28px;font-weight:900;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stamp-p{position:absolute;left:96px;top:36px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:var(--c);border:2px solid var(--c);padding:0 6px;transform:rotate(-6deg) scale(.6);opacity:0;transition:opacity .2s,transform .2s}
+.panel.packed .stamp-p{opacity:1;transform:rotate(-6deg) scale(1)}
+
+.ch,.row{display:grid;grid-template-columns:28px 28px minmax(0,1fr) auto 64px 22px;gap:8px;align-items:center;padding:0 12px}
+.ch{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--grey);font-weight:700;padding-top:8px;padding-bottom:4px}
+.ch svg{width:24px;height:14px;display:block}
+.ch .r,.row .g{text-align:right}
+.carh svg{transition:transform .9s cubic-bezier(.5,0,.8,.4),opacity .9s}
+.row{min-height:44px;border-bottom:1px dashed var(--rule)}
+.row:last-child{border-bottom:0}
+.row.enter{animation:slidein .25s ease-out}
+@keyframes slidein{from{opacity:0;transform:translateY(-8px)}}
+
+.box{width:26px;height:26px;border:2.5px solid var(--ink);background:#fff;padding:0;cursor:pointer;display:grid;place-items:center}
+.box.back{border-color:var(--c);width:26px}
+.box svg{width:20px;height:20px;opacity:0;transform:scale(.4);transition:opacity .12s,transform .15s}
+.box[aria-pressed="true"] svg{opacity:1;transform:scale(1)}
+.box svg path{fill:none;stroke:var(--ink);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.box.back svg path{stroke:var(--c)}
+
+[contenteditable]{outline:none;border-radius:2px;padding:1px 3px;margin:-1px -3px}
+[contenteditable]:focus{background:#fff3c9;box-shadow:0 0 0 1px var(--ink)}
+.name{font-size:16px;overflow-wrap:anywhere}
+.row.done .name{text-decoration:line-through;text-decoration-color:var(--grey);color:var(--grey)}
+.qty{white-space:nowrap;font-variant-numeric:tabular-nums}
+.num{font-weight:800;cursor:ew-resize;touch-action:pan-y;display:inline-block;min-width:1ch;text-align:right;border-bottom:2px dotted var(--grey)}
+.num.scrub{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.unit{color:var(--ink)}
+.g{font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bad{outline:1px solid var(--bad)!important;min-width:2ch;display:inline-block}
+.del{border:0;background:none;color:var(--grey);font-size:18px;line-height:1;cursor:pointer;padding:0;width:22px;height:22px;opacity:.45}
+.del:hover,.del:focus-visible{opacity:1;color:var(--bad)}
+.add{margin:auto 12px 10px;align-self:flex-start;border:2px dashed var(--grey);background:none;padding:6px 12px;font-weight:700;color:var(--grey);cursor:pointer}
+.add:hover{border-color:var(--ink);color:var(--ink)}
+.add:disabled{opacity:.35;cursor:not-allowed}
+
+/* the moment: car drives off, stamp lands */
+.stamp{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-8deg);border:6px solid var(--ink);background:var(--sheet);padding:14px 26px;text-align:center;pointer-events:none;opacity:0;visibility:hidden}
+.stamp strong{display:block;font-size:34px;font-weight:900;text-transform:uppercase;letter-spacing:.02em;line-height:1}
+.stamp span{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey);font-weight:700}
+body.home .stamp{visibility:visible;opacity:1;animation:stamp .35s .55s cubic-bezier(.2,1.6,.4,1) both}
+body.home .carh svg{transform:translateX(-46px);opacity:0}
+@keyframes stamp{from{opacity:0;transform:translate(-50%,-50%) rotate(-8deg) scale(1.8)}}
+
+footer{margin-top:24px;font-size:12px;color:var(--grey);line-height:1.6}
+footer b{color:var(--ink)}
+
+@media (max-width:760px){
+  .top{grid-template-columns:1fr}
+  .pack{text-align:left}
+  .sheet{grid-template-columns:1fr;padding:8px;gap:10px}
+  .key{margin-left:0;width:100%}
+  .ch,.row{grid-template-columns:28px 28px minmax(0,1fr) auto 52px 20px;gap:6px;padding:0 8px}
+  .stamp strong{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+@page{size:A4;margin:10mm}
+@media print{
+  body{background:#fff}
+  .noprint{display:none!important}
+  .wrap{max-width:none;padding:0;margin:0}
+  .sheet{width:190mm;height:277mm;padding:0;gap:3mm;border:0;box-shadow:none;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .panel{border:2mm solid #000;break-inside:avoid;overflow:hidden}
+  .ph{padding:2mm 3mm;gap:3mm;border-bottom:.6mm solid #000}
+  .art svg{width:13mm;height:13mm}
+  .ph h2{font-size:14pt}
+  .kg{font-size:16pt}
+  .stamp-p{display:none}
+  .ch,.row{grid-template-columns:6mm 6mm minmax(0,1fr) auto 12mm;gap:1.6mm;padding:0 3mm}
+  .ch{font-size:7pt;padding-top:1.5mm}
+  .ch>span:last-child,.del{display:none}
+  .row{min-height:8.4mm;border-bottom:.2mm dashed #999}
+  .box,.box.back{width:6mm;height:6mm;border-width:.5mm}
+  .box svg{width:5mm;height:5mm}
+  .name,.qty{font-size:12pt}
+  .g{font-size:9pt;color:#777}
+  .row.done .name{text-decoration:none;color:#000}
+  [contenteditable]{background:none!important;box-shadow:none!important}
+  .num{border-bottom:0}
+  .bad{outline:0!important}
+  .stamp{display:none}
+  body.home .carh svg{transform:none;opacity:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top noprint">
+    <div>
+      <h1>Out <span class="amp">&amp;</span> Back</h1>
+      <p class="sub"><b>1 A4 sheet, 4 corners.</b> Tick at home. Tick again at camp.</p>
+    </div>
+    <div class="pack">
+      <small>Pack weight</small>
+      <span class="big" id="total" data-v="0">0.0 kg</span>
+    </div>
+  </div>
+
+  <div class="noprint">
+    <div class="load" id="load" aria-hidden="true"></div>
+    <div class="legend" id="legend"></div>
+    <p class="formula">Panel weight: <code>Σ (count × g each) ÷ 1000 g/kg</code>. Seed weights are typical; edit them to match your kit.</p>
+  </div>
+
+  <div class="bar noprint">
+    <button class="btn main" type="button" id="print">Print sheet</button>
+    <button class="btn" type="button" id="clear">Clear ticks</button>
+    <button class="btn" type="button" id="reset">Reset list</button>
+    <div class="key">
+      <span><svg viewBox="0 0 24 14" aria-hidden="true"><path d="M3 7 L12 1 L21 7 V13 H3 Z" fill="none" stroke="#1b1a17" stroke-width="2"/></svg>at home</span>
+      <span><svg viewBox="0 0 24 14" aria-hidden="true"><use href="#car"/></svg>at camp</span>
+      <span>Drag a count sideways</span>
+      <span class="lines" id="lines">0 / 40 lines</span>
+    </div>
+  </div>
+
+  <main class="sheet" id="sheet" aria-label="Camping checklist"></main>
+
+  <footer class="noprint">
+    <b>Game designer</b>: 1 A4 sheet, 4 fixed corners, the 40 line cap, a unit on every count.
+    <b>Service designer</b>: the Back box on every line, for the last morning at camp.
+    <b>Comic artist</b>: 4 panel drawings, 2 mm borders, 12 pt print, 6 mm boxes, the car heading the Back column.
+    <b>Sisyphus</b>: edits saved in the browser, the print button, grams on every line, kilograms per panel.
+  </footer>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="car" viewBox="0 0 24 14">
+    <path d="M2 9 L4 4 H13 L17 7 H22 V11 H2 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M5 4 L4 7 H15" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <circle cx="6.5" cy="11.5" r="2" fill="#fff" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="17.5" cy="11.5" r="2" fill="#fff" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+<script>
+(function(){
+"use strict";
+var KEY="camp-list-v1", MAX=40, PANEL_MAX=10;
+var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+var G=[
+  {k:"shelter",n:"Shelter",c:"#3f6b3a"},
+  {k:"cooking",n:"Cooking",c:"#b5542b"},
+  {k:"clothing",n:"Clothing",c:"#c08d1c"},
+  {k:"safety",n:"Safety",c:"#b3262e"}
+];
+
+var S='stroke="#1b1a17" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"';
+var ART={
+  shelter:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M3 42 H45" '+S+' fill="none"/><path d="M6 41 L24 8 L42 41 Z" fill="#3f6b3a" '+S+'/><path d="M24 8 L24 4" '+S+'/><path d="M18 41 L24 24 L30 41 Z" fill="#fffdf7" '+S+'/><path d="M6 41 L2 44 M42 41 L46 44" '+S+'/></svg>',
+  cooking:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M17 6 q-3 4 0 8 M24 4 q-3 5 0 10 M31 6 q-3 4 0 8" fill="none" '+S+'/><rect x="9" y="20" width="30" height="20" rx="3" fill="#b5542b" '+S+'/><path d="M7 20 H41 M3 24 H9 M39 24 H45" '+S+'/><path d="M13 44 H35" '+S+'/></svg>',
+  clothing:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 5 H25 V25 L38 30 Q44 32 44 37 V41 H7 V30 Z" fill="#c08d1c" '+S+'/><path d="M7 41 H44 V44 H7 Z" fill="#1b1a17" '+S+'/><path d="M25 12 H19 M25 18 H19 M27 26 L24 31" fill="none" '+S+'/></svg>',
+  safety:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 11 V7 H30 V11" fill="none" '+S+'/><rect x="5" y="11" width="38" height="30" rx="4" fill="#b3262e" '+S+'/><path d="M21 17 H27 V23 H33 V29 H27 V35 H21 V29 H15 V23 H21 Z" fill="#fffdf7" '+S+'/></svg>'
+};
+var HOUSE='<svg viewBox="0 0 24 14" aria-hidden="true"><path d="M3 7 L12 1 L21 7 V13 H3 Z" fill="none" stroke="#1b1a17" stroke-width="2"/></svg>';
+var CAR='<svg viewBox="0 0 24 14" aria-hidden="true" style="color:var(--c)"><use href="#car"/></svg>';
+var TICK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13 L10 19 L20 5"/></svg>';
+
+var SEED={
+  shelter:[["Tent",1,"tent",2100],["Tent pegs",8,"pegs",12],["Guy lines",4,"lines",15],["Groundsheet",1,"sheet",300],["Sleeping bag",1,"bag",1200],["Sleeping mat",1,"mat",480],["Pillow",1,"pillow",90],["Mallet",1,"mallet",250]],
+  cooking:[["Stove",1,"stove",85],["Gas canister",1,"can",360],["Pot",1,"pot",340],["Lighter",2,"lighters",20],["Water",4,"L",1000],["Mug",2,"mugs",70],["Spork",2,"sporks",18],["Food",2,"days",650]],
+  clothing:[["Rain jacket",1,"jacket",380],["Fleece",1,"fleece",350],["Base layer",2,"tops",180],["Trousers",1,"pair",400],["Socks",3,"pairs",60],["Underwear",3,"pairs",50],["Warm hat",1,"hat",60],["Camp shoes",1,"pair",450]],
+  safety:[["First-aid kit",1,"kit",300],["Headlamp",1,"lamp",85],["Batteries",4,"AA",23],["Map",1,"map",90],["Whistle",1,"whistle",10],["Knife",1,"knife",80],["Sun cream",1,"tube",120],["Power bank",1,"pack",200]]
+};
+
+var uid=0;
+function mk(g,a){return {id:"i"+(++uid),group:g,name:a[0],count:a[1],unit:a[2],each:a[3],out:false,back:false};}
+function seed(){var r=[];G.forEach(function(g){SEED[g.k].forEach(function(a){r.push(mk(g.k,a));});});return r;}
+
+function load(){
+  var raw=null;
+  try{raw=localStorage.getItem(KEY);}catch(e){}
+  if(!raw)return seed();
+  try{
+    var d=JSON.parse(raw);
+    if(!Array.isArray(d))return seed();
+    var keys=G.map(function(g){return g.k;});
+    var r=d.filter(function(i){return i&&keys.indexOf(i.group)>-1;}).slice(0,MAX).map(function(i){
+      return {id:"i"+(++uid),group:i.group,name:String(i.name||""),count:+i.count||0,unit:String(i.unit||"pc"),each:+i.each||0,out:!!i.out,back:!!i.back};
+    });
+    return r;
+  }catch(e){return seed();}
+}
+var items=load();
+
+function save(){
+  if(items.some(function(i){return !String(i.unit).trim()||!isFinite(i.count);}))return;
+  try{localStorage.setItem(KEY,JSON.stringify(items.map(function(i){
+    return {group:i.group,name:i.name,count:i.count,unit:i.unit,each:i.each,out:i.out,back:i.back};
+  })));}catch(e){}
+}
+
+function byId(id){for(var i=0;i<items.length;i++)if(items[i].id===id)return items[i];return null;}
+function lineG(i){return Math.round((+i.count||0)*(+i.each||0));}
+function r1(n){return Math.round(n*10)/10;}
+function fmtCount(n){return String(r1(n));}
+function kg(v){return (v/1000).toFixed(1)+" kg";}
+
+function tween(el,to,fmt){
+  var from=parseFloat(el.dataset.v)||0;
+  el.dataset.v=to;
+  if(el._r)cancelAnimationFrame(el._r);
+  if(reduce||from===to){el.textContent=fmt(to);return;}
+  var t0=performance.now();
+  function step(t){
+    var p=Math.min(1,(t-t0)/420),e=1-Math.pow(1-p,3);
+    el.textContent=fmt(from+(to-from)*e);
+    if(p<1)el._r=requestAnimationFrame(step);
+  }
+  el._r=requestAnimationFrame(step);
+}
+
+var sheet=document.getElementById("sheet");
+
+function build(){
+  sheet.innerHTML="";
+  G.forEach(function(g){
+    var p=document.createElement("section");
+    p.className="panel";p.dataset.g=g.k;p.style.setProperty("--c",g.c);
+    p.setAttribute("aria-label",g.n);
+    p.innerHTML='<header class="ph"><span class="art">'+ART[g.k]+'</span><h2>'+g.n+'</h2><span class="stamp-p">Packed</span><span class="kg" data-v="0">0.0 kg</span></header>'+
+      '<div class="ch"><span title="Out: tick at home">'+HOUSE+'</span><span class="carh" title="Back: tick at camp, last morning">'+CAR+'</span><span>Item</span><span>Count</span><span class="r">g</span><span></span></div>'+
+      '<div class="rows"></div><button class="add noprint" type="button">+ Line</button>';
+    sheet.appendChild(p);
+    rows(g.k,null);
+  });
+  var st=document.createElement("div");
+  st.className="stamp";st.setAttribute("aria-live","polite");
+  st.innerHTML='<strong>Nothing left behind</strong><span id="stampn"></span>';
+  sheet.appendChild(st);
+}
+
+function rowEl(it){
+  var r=document.createElement("div");
+  r.className="row";r.dataset.id=it.id;
+  r.innerHTML='<button class="box out" type="button">'+TICK+'</button><button class="box back" type="button">'+TICK+'</button>'+
+    '<span class="name" contenteditable="true" spellcheck="false"></span>'+
+    '<span class="qty"><span class="num" contenteditable="true" inputmode="decimal" title="Drag sideways or tap to type"></span> <span class="unit" contenteditable="true" spellcheck="false" title="Unit"></span></span>'+
+    '<span class="g"><span class="gv" contenteditable="true" inputmode="numeric" title="Line weight"></span> g</span>'+
+    '<button class="del noprint" type="button" aria-label="Remove line">×</button>';
+  r.querySelector(".name").textContent=it.name;
+  r.querySelector(".num").textContent=fmtCount(it.count);
+  r.querySelector(".unit").textContent=it.unit;
+  r.querySelector(".gv").textContent=lineG(it);
+  var o=r.querySelector(".out"),b=r.querySelector(".back");
+  o.setAttribute("aria-pressed",it.out);o.setAttribute("aria-label","Out, packed at home: "+it.name);
+  b.setAttribute("aria-pressed",it.back);b.setAttribute("aria-label","Back, packed at camp: "+it.name);
+  r.classList.toggle("done",it.out);
+  if(!String(it.unit).trim())r.querySelector(".unit").classList.add("bad");
+  return r;
+}
+
+function rows(gk,newId){
+  var box=sheet.querySelector('.panel[data-g="'+gk+'"] .rows');
+  box.innerHTML="";
+  items.filter(function(i){return i.group===gk;}).forEach(function(it){
+    var r=rowEl(it);
+    if(it.id===newId&&!reduce)r.classList.add("enter");
+    box.appendChild(r);
+  });
+}
+
+var loadEl=document.getElementById("load"),legend=document.getElementById("legend");
+G.forEach(function(g){
+  var s=document.createElement("div");s.className="seg";s.style.background=g.c;s.dataset.g=g.k;s.style.flexBasis="25%";
+  loadEl.appendChild(s);
+  var l=document.createElement("span");
+  l.innerHTML='<i style="background:'+g.c+'"></i>'+g.n+' <b data-g="'+g.k+'" data-v="0">0.0 kg</b>';
+  legend.appendChild(l);
+});
+
+function totals(){
+  var all=0,sums={};
+  G.forEach(function(g){sums[g.k]=0;});
+  items.forEach(function(i){sums[i.group]+=lineG(i);});
+  G.forEach(function(g){all+=sums[g.k];});
+  G.forEach(function(g){
+    var p=sheet.querySelector('.panel[data-g="'+g.k+'"]');
+    tween(p.querySelector(".kg"),sums[g.k],kg);
+    tween(legend.querySelector('b[data-g="'+g.k+'"]'),sums[g.k],kg);
+    loadEl.querySelector('[data-g="'+g.k+'"]').style.flexBasis=(all?sums[g.k]/all*100:25)+"%";
+    var list=items.filter(function(i){return i.group===g.k;});
+    p.classList.toggle("packed",list.length>0&&list.every(function(i){return i.out;}));
+    p.querySelector(".add").disabled=items.length>=MAX||list.length>=PANEL_MAX;
+    p.querySelector(".add").title=items.length>=MAX?"Sheet full at 40 lines":(list.length>=PANEL_MAX?"Panel full at 10 lines":"");
+  });
+  tween(document.getElementById("total"),all,kg);
+  document.getElementById("lines").textContent=items.length+" / "+MAX+" lines";
+  var home=items.length>0&&items.every(function(i){return i.back;});
+  document.body.classList.toggle("home",home);
+  var sn=document.getElementById("stampn");
+  if(sn)sn.textContent=items.length+" of "+items.length+" items back";
+}
+
+function rowOf(el){return el.closest?el.closest(".row"):null;}
+function itemOf(el){var r=rowOf(el);return r?byId(r.dataset.id):null;}
+function parseNum(s){var v=parseFloat(String(s).replace(",",".").replace(/[^\d.\-]/g,""));return isFinite(v)?v:NaN;}
+function refreshG(r,it){var gv=r.querySelector(".gv");if(document.activeElement!==gv)gv.textContent=lineG(it);}
+
+/* taps */
+sheet.addEventListener("click",function(e){
+  var t=e.target;
+  var box=t.closest(".box");
+  if(box){
+    var it=itemOf(box),k=box.classList.contains("out")?"out":"back";
+    it[k]=!it[k];box.setAttribute("aria-pressed",it[k]);
+    rowOf(box).classList.toggle("done",it.out);
+    save();totals();return;
+  }
+  var del=t.closest(".del");
+  if(del){
+    var d=itemOf(del);items=items.filter(function(i){return i!==d;});
+    rows(d.group,null);save();totals();return;
+  }
+  var add=t.closest(".add");
+  if(add&&!add.disabled){
+    var gk=add.closest(".panel").dataset.g;
+    if(items.length>=MAX)return;
+    var n=mk(gk,["New item",1,"pc",0]);
+    var last=-1;items.forEach(function(i,ix){if(i.group===gk)last=ix;});
+    items.splice(last+1,0,n);
+    rows(gk,n.id);save();totals();
+    var nm=sheet.querySelector('.row[data-id="'+n.id+'"] .name');
+    nm.focus();selectAll(nm);
+  }
+});
+
+function selectAll(el){
+  try{var rg=document.createRange();rg.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(rg);}catch(e){}
+}
+
+/* typing */
+sheet.addEventListener("input",function(e){
+  var t=e.target,it=itemOf(t);if(!it)return;
+  var r=rowOf(t);
+  if(t.classList.contains("name")){
+    it.name=t.textContent.trim();
+    r.querySelector(".out").setAttribute("aria-label","Out, packed at home: "+it.name);
+    r.querySelector(".back").setAttribute("aria-label","Back, packed at camp: "+it.name);
+  }else if(t.classList.contains("unit")){
+    it.unit=t.textContent.trim();
+    t.classList.toggle("bad",!it.unit);
+  }else if(t.classList.contains("num")){
+    var v=parseNum(t.textContent);
+    t.classList.toggle("bad",!(v>=0));
+    if(v>=0){var ge=lineG(it);it.count=v;if(it.each===0&&ge>0)it.each=ge;refreshG(r,it);}
+  }else if(t.classList.contains("gv")){
+    var g=parseNum(t.textContent);
+    t.classList.toggle("bad",!(g>=0));
+    if(g>=0)it.each=it.count>0?g/it.count:g;
+  }
+  save();totals();
+});
+sheet.addEventListener("focusout",function(e){
+  var t=e.target,it=itemOf(t);if(!it)return;
+  if(t.classList.contains("num")){
+    if(!(parseNum(t.textContent)>=0)){t.classList.remove("bad");}
+    t.textContent=fmtCount(it.count);
+  }
+  if(t.classList.contains("gv")){t.classList.remove("bad");t.textContent=lineG(it);}
+  if(t.classList.contains("name")&&!it.name){it.name="Item";t.textContent=it.name;save();}
+});
+sheet.addEventListener("keydown",function(e){
+  if(e.key==="Enter"&&e.target.isContentEditable){e.preventDefault();e.target.blur();}
+  if(e.target.classList.contains("num")&&(e.key==="ArrowUp"||e.key==="ArrowDown")){
+    e.preventDefault();var it=itemOf(e.target);
+    it.count=Math.max(0,r1(it.count+(e.key==="ArrowUp"?1:-1)));
+    e.target.textContent=fmtCount(it.count);refreshG(rowOf(e.target),it);save();totals();
+  }
+});
+
+/* drag a count sideways */
+var drag=null;
+sheet.addEventListener("pointerdown",function(e){
+  var t=e.target;
+  if(!t.classList||!t.classList.contains("num")||document.activeElement===t)return;
+  if(e.button&&e.button!==0)return;
+  e.preventDefault();
+  drag={el:t,x:e.clientX,start:itemOf(t).count,moved:false,id:e.pointerId};
+  try{t.setPointerCapture(e.pointerId);}catch(err){}
+});
+sheet.addEventListener("pointermove",function(e){
+  if(!drag||e.pointerId!==drag.id)return;
+  var dx=e.clientX-drag.x;
+  if(!drag.moved&&Math.abs(dx)<6)return;
+  drag.moved=true;drag.el.classList.add("scrub");
+  var it=itemOf(drag.el);
+  var v=Math.max(0,r1(drag.start+Math.round(dx/14)));
+  if(v!==it.count){it.count=v;drag.el.textContent=fmtCount(v);refreshG(rowOf(drag.el),it);totals();}
+});
+function endDrag(e,cancel){
+  if(!drag||e.pointerId!==drag.id)return;
+  var d=drag;drag=null;d.el.classList.remove("scrub");
+  if(d.moved)save();
+  else if(!cancel){d.el.focus();selectAll(d.el);}
+}
+sheet.addEventListener("pointerup",function(e){endDrag(e,false);});
+sheet.addEventListener("pointercancel",function(e){endDrag(e,true);});
+
+/* toolbar */
+document.getElementById("print").addEventListener("click",function(){window.print();});
+document.getElementById("clear").addEventListener("click",function(){
+  items.forEach(function(i){i.out=false;i.back=false;});
+  G.forEach(function(g){rows(g.k,null);});save();totals();
+});
+document.getElementById("reset").addEventListener("click",function(){
+  if(!window.confirm("Replace your list with the 32 default items?"))return;
+  items=seed();G.forEach(function(g){rows(g.k,null);});
+  try{localStorage.removeItem(KEY);}catch(e){}
+  save();totals();
+});
+
+build();
+totals();
+})();
+</script>
+</body>
+</html>
