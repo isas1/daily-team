@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 8 days recorded.
+Every daily team and the asset it made, newest first. 9 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-10-11](days/2026-10-11/) | The Thread Out | Costume designer · Cartographer · Furniture maker · Daedalus | The user does exactly one thing on the page. | [asset](days/2026-10-11/artifact-1.html) |
 | [2026-10-10](days/2026-10-10/) | Four Corners, Out and Back | Game designer · Service designer · Comic artist · Sisyphus | Every number shows its unit. | [asset](days/2026-10-10/artifact-1.html) |
 | [2026-10-09](days/2026-10-09/) | The Never List | Beekeeper · Sign painter · Librarian · Phoenix | Shows the formula or rule behind every result. | [asset](days/2026-10-09/artifact-1.html) |
 | [2026-10-08](days/2026-10-08/) | The Chalk-Hand Sheet | Packaging designer · Brand strategist · Taxidermist · Time | Uses a single accent color. | [asset](days/2026-10-08/artifact-1.html) |

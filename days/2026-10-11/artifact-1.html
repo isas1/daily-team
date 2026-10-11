@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Thread Out: a daily routine, cut along the thread</title>
+<style>
+:root{--tissue:#e9d9b7;--ink:#2a2420;--chalk:#f6f1e4;--wall:#7b7974;--wall2:#5c5a56;--floor:#f3e8cf;--dead:#e6d9bc;--red:#a3221b;--wood:#b98a52;--faint:#7a6e5d}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--tissue);background-image:radial-gradient(circle at 1px 1px,rgba(120,90,40,.25) 1px,transparent 1.5px);background-size:24px 24px;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.sheet{max-width:1180px;margin:0 auto;padding:16px 16px 26px}
+.mark{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 20px;border-bottom:2px dashed rgba(42,36,32,.45);padding-bottom:8px}
+.mark h1{margin:0;font-size:clamp(30px,6.4vw,70px);font-weight:900;letter-spacing:-.03em;line-height:.88;text-transform:uppercase}
+.mark .cut{font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase}
+.mark .say{flex-basis:100%;font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-style:italic;font-size:clamp(15px,2vw,19px);margin-top:4px}
+.table{display:grid;grid-template-columns:minmax(0,1fr) 270px;grid-template-areas:"maze card" "maze ledger";grid-template-rows:auto 1fr;gap:14px 20px;margin-top:14px;align-items:start}
+.mazewrap{grid-area:maze}
+#maze{width:100%;height:auto;display:block;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair}
+.hint{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+.card{grid-area:card;background:var(--chalk);border:1px solid rgba(42,36,32,.25);box-shadow:3px 4px 0 rgba(42,36,32,.12);padding:12px 14px;display:grid;grid-template-columns:1fr;gap:6px;position:relative}
+.card:before{content:"";position:absolute;top:-7px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.fig svg{width:100%;max-height:300px;display:block}
+.tag{font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
+.big{font-size:clamp(46px,7vw,88px);font-weight:900;letter-spacing:-.04em;line-height:.9;font-variant-numeric:tabular-nums}
+.step{font-family:Georgia,"Iowan Old Style",serif;font-style:italic;font-size:18px;min-height:1.3em}
+.calc{font-size:12px;font-variant-numeric:tabular-nums;line-height:1.5;border-top:1px dashed rgba(42,36,32,.35);padding-top:6px;white-space:pre-line}
+.ledger{grid-area:ledger;font-size:13px}
+.ledger h3{margin:10px 0 4px;font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+.ledger ol{list-style:none;margin:0;padding:0}
+.ledger li{display:grid;grid-template-columns:52px 1fr auto;gap:8px;padding:3px 0;border-bottom:1px solid rgba(42,36,32,.12);color:#8d806c;font-variant-numeric:tabular-nums}
+.ledger li.done{color:var(--ink)}
+.ledger li.done b{color:var(--red)}
+.ledger li i{font-size:11px}
+.ledger .baste li{color:var(--red);grid-template-columns:1fr auto}
+.credits{margin-top:22px;border-top:2px dashed rgba(42,36,32,.45);padding-top:8px;font-size:11px;line-height:1.6;color:#5a5044}
+.credits b{letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+/* maze */
+.seam{fill:none;stroke:var(--red);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.baste{fill:none;stroke:var(--red);stroke-width:2.2;stroke-dasharray:7 6;stroke-linecap:round;opacity:.85;transition:opacity 1.2s,transform 1.2s}
+.nm{font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;fill:var(--faint);stroke:var(--floor);stroke-width:3;paint-order:stroke;text-anchor:middle;pointer-events:none}
+.dn{font-size:9px;font-style:italic;fill:#9b8f7c;text-anchor:middle;pointer-events:none;font-family:Georgia,serif}
+.tm{font-size:12px;font-weight:900;fill:var(--red);stroke:var(--floor);stroke-width:3;paint-order:stroke;text-anchor:middle;pointer-events:none;font-variant-numeric:tabular-nums}
+.tm.fresh{animation:pin .45s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes pin{from{opacity:0;transform:translateY(-10px)}}
+.tm,.notch{transform-box:fill-box;transform-origin:center}
+#gWalls{transition:opacity 1.4s}
+.out #gWalls{opacity:.22}
+.out .baste{opacity:.3;transform:translate(0,6px)}
+.notch{fill:var(--red);opacity:0}
+.out .notch{animation:notch .5s forwards}
+@keyframes notch{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+.door{transform-box:fill-box;transform-origin:top;transition:transform .9s cubic-bezier(.5,0,.2,1)}
+.door.open{transform:scaleY(0)}
+.doorlbl{font-size:9px;font-weight:800;letter-spacing:2px;fill:var(--faint);text-transform:uppercase}
+.bob{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translate(0,-3px)}}
+.loose{animation:sway 3s ease-in-out infinite;transform-origin:-30px 30px}
+@keyframes sway{50%{transform:rotate(14deg)}}
+.pull{font-size:10px;font-weight:900;letter-spacing:2px;fill:var(--red);text-anchor:middle}
+/* figure */
+#figBody{animation:breathe 4.2s ease-in-out infinite;transform-origin:100px 330px}
+@keyframes breathe{50%{transform:scaleY(1.008)}}
+.gar{opacity:0;transform:translateY(-26px);transition:opacity .35s,transform .5s cubic-bezier(.2,.8,.2,1)}
+.gar.on{opacity:1;transform:none}
+#paper{display:none}
+@media (max-width:760px){
+ .table{grid-template-columns:1fr;grid-template-areas:"card" "maze" "ledger"}
+ .card{grid-template-columns:96px 1fr;align-items:center;padding:10px}
+ .card .calc{grid-column:1/-1}
+ .fig svg{max-height:150px}
+ .big{font-size:48px}
+ .step{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}.out .notch{opacity:1}}
+@media print{
+ @page{size:A4 portrait;margin:14mm}
+ body{background:#fff}
+ .sheet{display:none}
+ #paper{display:block;color:#000;font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+ #paper h2{font-size:22pt;margin:0 0 2mm;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+ #paper .pm{font-size:8pt;letter-spacing:.25em;text-transform:uppercase;font-weight:700;margin-bottom:4mm}
+ #paper svg{width:180mm;height:auto;display:block;margin-bottom:4mm}
+ #paper table{border-collapse:collapse;font-size:10pt;width:180mm}
+ #paper td,#paper th{text-align:left;padding:1.2mm 2mm;border-bottom:.3pt solid #999}
+ #paper th{font-size:8pt;letter-spacing:.2em;text-transform:uppercase}
+ #paper p{font-size:9pt;margin:3mm 0 0}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+ <header class="mark">
+  <h1>The Thread Out</h1>
+  <span class="cut">Piece A · The Day · Cut 1</span>
+  <span class="say">Nobody builds a dress at a fitting. Pull the thread: morning goes on, evening comes off.</span>
+ </header>
+
+ <div class="table">
+  <div class="mazewrap">
+   <svg id="maze" viewBox="-60 -24 840 528" role="img" aria-label="A gray maze. Drag the red thread from the spool through the corridors to set morning and evening steps.">
+    <defs>
+     <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#e7dabd"/><line x1="0" y1="0" x2="0" y2="8" stroke="#cbb994" stroke-width="2"/>
+     </pattern>
+    </defs>
+    <g id="gWalls"></g>
+    <g id="gFloor"></g>
+    <g id="gLabels"></g>
+    <g id="gDoor"></g>
+    <path id="baste" class="baste" d=""/>
+    <path id="seam" class="seam" d=""/>
+    <g id="gNotch"></g>
+    <g id="gTimes"></g>
+    <g id="gSpool"></g>
+    <g id="needle"><g class="bob"><line x1="-13" y1="0" x2="13" y2="0" stroke="#4a4642" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="-9" cy="0" rx="2.6" ry="1.2" fill="var(--floor)"/></g></g>
+   </svg>
+   <div class="hint">1 cell = 10 min · dead ends cost minutes and print as basting · drag out the far wall to print</div>
+  </div>
+
+  <aside class="card" aria-live="polite">
+   <div class="fig">
+    <svg id="fig" viewBox="0 0 200 340" aria-hidden="true">
+     <line x1="100" y1="334" x2="100" y2="338" stroke="#2a2420"/>
+     <ellipse cx="100" cy="336" rx="44" ry="3" fill="rgba(42,36,32,.15)"/>
+     <g id="figBody">
+      <path d="M100 21a19 19 0 1 1 0 38a19 19 0 1 1 0-38zM93 56h14v18h-14zM66 76Q100 68 134 76L138 120Q130 150 132 186L68 186Q70 150 62 120ZM66 78L50 92L44 186L54 188L62 112ZM134 78L150 92L156 186L146 188L138 112ZM70 184L98 184L96 330L76 330ZM102 184L130 184L124 330L104 330Z" fill="#f4e9d1" stroke="#2a2420" stroke-width="1.2" stroke-dasharray="3 3"/>
+      <g id="g1" class="gar"><path d="M72 232L97 232L96 330L76 330ZM103 232L128 232L124 330L104 330Z" fill="#3a3634"/><ellipse cx="84" cy="331" rx="13" ry="4" fill="#3a3634"/><ellipse cx="116" cy="331" rx="13" ry="4" fill="#3a3634"/></g>
+      <g id="g0" class="gar"><path d="M68 80Q100 74 132 80L136 186L140 240L60 240L64 186Z" fill="#efe4d0" stroke="#2a2420" stroke-width="1"/><path d="M84 80L84 70M116 80L116 70" stroke="#2a2420"/></g>
+      <g id="g2" class="gar"><path d="M66 180L134 180L130 334L104 334L100 214L96 334L70 334Z" fill="#56604c" stroke="#2a2420" stroke-width="1"/></g>
+      <g id="g3" class="gar"><path d="M64 76Q100 70 136 76L152 90L156 184L144 186L138 116L136 190L64 190L62 116L56 186L44 184L48 90Z" fill="#fbf8f1" stroke="#2a2420" stroke-width="1"/><path d="M88 72L100 88L112 72" fill="none" stroke="#2a2420"/></g>
+      <g id="g4" class="gar"><path d="M72 80L100 124L128 80L132 188L100 198L68 188Z" fill="#8a5532" stroke="#2a2420" stroke-width="1"/><circle cx="100" cy="136" r="2" fill="#e9d9b7"/><circle cx="100" cy="154" r="2" fill="#e9d9b7"/><circle cx="100" cy="172" r="2" fill="#e9d9b7"/></g>
+      <g id="g5" class="gar"><path d="M60 74L100 128L140 74L158 90L164 204L148 206L142 124L142 226L104 226L100 140L96 226L58 226L58 124L52 206L36 204L42 90Z" fill="#2f3b4c" stroke="#1a1714" stroke-width="1"/></g>
+      <g id="g6" class="gar"><ellipse cx="100" cy="25" rx="36" ry="6" fill="#222"/><path d="M80 25L82 2L118 2L120 25Z" fill="#222"/><rect x="81" y="17" width="38" height="4" fill="var(--red)"/></g>
+     </g>
+    </svg>
+   </div>
+   <div class="read">
+    <div class="tag">Fitting · <span id="phase">bare</span></div>
+    <div id="bigT" class="big">06:30</div>
+    <div id="bigS" class="step">Bare. Pull the thread from the spool.</div>
+   </div>
+   <div id="calc" class="calc"></div>
+  </aside>
+
+  <div class="ledger" id="ledger"></div>
+ </div>
+
+ <footer class="credits">
+  <b>Costume designer</b> (lead): the figure that dresses one layer per morning step and undresses per evening step; the printout as a pattern piece.
+  <b>Cartographer</b>: one scale, 1 cell = 10 min from 06:30, time labels sized 10pt for A4 without collisions.
+  <b>Furniture maker</b>: one corridor module, cut 1, 2 or 3 cells long.
+  <b>Daedalus</b> (guest): the far wall that opens, and walls that never leave the screen.
+ </footer>
+</div>
+
+<section id="paper"></section>
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+const C=60;
+const key=(c,r)=>c+','+r;
+const MAIN=[
+ ['Wake','m',[[0,0]]],
+ ['Water','m',[[1,0]]],
+ ['Stretch','m',[[1,1],[1,2]]],
+ ['Wash','m',[[2,2],[3,2]]],
+ ['Dress','m',[[3,1],[3,0]]],
+ ['Coffee','m',[[4,0],[5,0]]],
+ ['Leave','m',[[5,1]]],
+ ['the day','d',[[5,2],[5,3],[6,3],[7,3],[7,4]]],
+ ['Dishes','e',[[8,4],[9,4],[10,4]]],
+ ['Lay out clothes','e',[[10,5]]],
+ ['Read','e',[[9,5],[9,6],[10,6]]],
+ ['Teeth','e',[[11,6]]],
+ ['Lights','e',[[11,7]]]
+];
+const DEAD=[
+ ['snooze','m',[0,0],[[0,1],[0,2],[0,3]]],
+ ['mirror','m',[3,1],[[2,1],[2,0]]],
+ ['scroll','m',[4,0],[[4,1],[4,2],[4,3]]],
+ ['second coffee','m',[5,0],[[6,0],[7,0],[8,0]]],
+ ['lost keys','m',[5,1],[[6,1],[7,1],[8,1],[8,2]]],
+ ['fridge','e',[8,4],[[8,5],[8,6]]],
+ ['one more episode','e',[9,6],[[9,7],[8,7],[7,7]]],
+ ['phone in bed','e',[11,6],[[11,5],[11,4],[11,3]]]
+];
+const GARM=['slip','stockings','trousers','shirt','waistcoat','jacket','hat'];
+const MSTART=390, ESTART=1230;
+const info={g:{kind:'gate'}}, adj={g:new Set()}, flat=[], edges=[];
+function link(a,b){(adj[a]=adj[a]||new Set()).add(b);(adj[b]=adj[b]||new Set()).add(a);edges.push([a,b]);}
+MAIN.forEach((m,ci)=>m[2].forEach((p,j)=>{const k=key(p[0],p[1]);flat.push(k);info[k]={kind:'main',idx:flat.length-1,cor:ci,region:m[1],first:j===0};}));
+for(let i=1;i<flat.length;i++)link(flat[i-1],flat[i]);
+link('g',flat[0]);
+DEAD.forEach((d,di)=>{let prev=key(d[2][0],d[2][1]);d[3].forEach((p,j)=>{const k=key(p[0],p[1]);info[k]={kind:'dead',dead:di,region:d[1],tip:j===d[3].length-1};link(prev,k);prev=k;});});
+const LAST=flat.length-1;
+const ctr=k=>{if(k==='g')return[-30,30];const[c,r]=k.split(',').map(Number);return[c*C+30,r*C+30];};
+const fmt=m=>{m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const svg=document.getElementById('maze');
+const gW=document.getElementById('gWalls'),gF=document.getElementById('gFloor'),gL=document.getElementById('gLabels'),gD=document.getElementById('gDoor'),gS=document.getElementById('gSpool');
+const seam=document.getElementById('seam'),baste=document.getElementById('baste'),gT=document.getElementById('gTimes'),gN=document.getElementById('gNotch'),needle=document.getElementById('needle');
+
+/* walls and floors: one module, repeated */
+el('rect',{x:-12,y:-12,width:744,height:504,fill:'var(--wall)'},gW);
+for(let r=0;r<8;r++)for(let c=0;c<12;c++)if(!info[key(c,r)])el('rect',{x:c*C+10,y:r*C+10,width:40,height:40,fill:'none',stroke:'var(--wall2)','stroke-width':1},gW);
+function fillOf(k){const f=info[k];if(f.region==='d')return'url(#hatch)';return f.kind==='dead'?'var(--dead)':'var(--floor)';}
+Object.keys(info).forEach(k=>{if(k==='g')return;const[x,y]=ctr(k);el('rect',{x:x-26,y:y-26,width:52,height:52,fill:fillOf(k)},gF);});
+edges.forEach(([a,b])=>{if(a==='g'||b==='g')return;const[x1,y1]=ctr(a),[x2,y2]=ctr(b);const f=info[info[a].kind==='dead'||info[b].kind==='dead'?(info[a].kind==='dead'?a:b):b];
+ const fill=fillOf(info[a].region==='d'||info[b].region==='d'?(info[a].region==='d'?a:b):(info[a].kind==='dead'?a:b));
+ if(y1===y2)el('rect',{x:Math.min(x1,x2)+20,y:y1-26,width:20,height:52,fill},gF);
+ else el('rect',{x:x1-26,y:Math.min(y1,y2)+20,width:52,height:20,fill},gF);
+ const ia=info[a],ib=info[b];
+ if(ia.kind==='main'&&ib.kind==='main'&&ia.cor!==ib.cor){const mx=(x1+x2)/2,my=(y1+y2)/2;
+  if(y1===y2)el('line',{x1:mx,y1:my-26,x2:mx,y2:my-18,stroke:'#b9a57e','stroke-width':2},gF),el('line',{x1:mx,y1:my+18,x2:mx,y2:my+26,stroke:'#b9a57e','stroke-width':2},gF);
+  else el('line',{x1:mx-26,y1:my,x2:mx-18,y2:my,stroke:'#b9a57e','stroke-width':2},gF),el('line',{x1:mx+18,y1:my,x2:mx+26,y2:my,stroke:'#b9a57e','stroke-width':2},gF);}
+});
+el('rect',{x:-14,y:4,width:20,height:52,fill:'var(--floor)'},gF);
+/* labels */
+function lines(t){if(t.length<=9||t.indexOf(' ')<0)return[t];const w=t.split(' ');if(w.length===2)return w;const h=Math.ceil(w.length/2);return[w.slice(0,h).join(' '),w.slice(h).join(' ')];}
+function label(cls,k,txt,dy){const[x,y]=ctr(k);const L=lines(txt);const t=el('text',{class:cls,x,y:y+dy},gL);L.forEach((s,i)=>{const ts=el('tspan',{x,dy:i?10:0},t);ts.textContent=s;});}
+MAIN.forEach(m=>{if(m[1]==='d')return;label('nm',key(m[2][0][0],m[2][0][1]),m[0],m[0].length>9?12:18);});
+label('dn','6,3','the day,',-4);label('dn','6,3','not to scale',8);
+DEAD.forEach(d=>{const t=d[3][d[3].length-1];label('dn',key(t[0],t[1]),d[0],d[0].length>9?10:16);});
+/* far wall */
+el('rect',{x:716,y:424,width:18,height:52,fill:'var(--floor)'},gD);
+const door=el('rect',{x:716,y:424,width:16,height:52,fill:'var(--wall2)',class:'door'},gD);
+const doorLbl=el('text',{class:'doorlbl',x:760,y:300,transform:'rotate(90 760 300)'},gD);doorLbl.textContent='the far wall';
+/* spool */
+el('rect',{x:-54,y:8,width:28,height:4,fill:'#8c6638'},gS);el('rect',{x:-54,y:48,width:28,height:4,fill:'#8c6638'},gS);
+el('rect',{x:-50,y:12,width:20,height:36,fill:'var(--wood)'},gS);el('rect',{x:-50,y:16,width:20,height:28,fill:'var(--red)'},gS);
+for(let i=0;i<6;i++)el('line',{x1:-50,y1:18+i*4.6,x2:-30,y2:20+i*4.6,stroke:'#7d1813','stroke-width':1},gS);
+const loose=el('path',{d:'M-30 30C-18 30 -22 46 -10 46S2 36 -4 30',fill:'none',stroke:'var(--red)','stroke-width':2.5,'stroke-linecap':'round',class:'loose'},gS);
+const pullT=el('text',{class:'pull',x:-40,y:70},gS);pullT.textContent='PULL';
+
+/* state */
+let trail=['g'],out=false,outX=null,drag=false,prevStep=[];
+const SK='threadout.trail';
+try{const s=localStorage.getItem(SK);if(s){const t=s.split('|');let ok=t[0]==='g';for(let i=1;ok&&i<t.length;i++)ok=!!(adj[t[i-1]]&&adj[t[i-1]].has(t[i]));if(ok)trail=t;}}catch(e){}
+function save(){try{localStorage.setItem(SK,trail.join('|'));}catch(e){}}
+
+function compute(){
+ let mN=0,eN=0,maxMain=-1,mW=0,eW=0,headT=null;const step=MAIN.map(()=>null),waste={},tipWaste={},segs=[];
+ for(let i=1;i<trail.length;i++){const k=trail[i],f=info[k];let t=null;
+  if(f.region==='m'){t=MSTART+mN*10;mN++;}else if(f.region==='e'){t=ESTART+eN*10;eN++;}
+  let wasted=false;
+  if(f.kind==='main'){if(f.idx===maxMain+1){maxMain=f.idx;if(f.first&&step[f.cor]===null)step[f.cor]=t;}else wasted=true;}else wasted=true;
+  if(wasted&&f.region!=='d'){const nm=f.kind==='dead'?DEAD[f.dead][0]:'doubling back';waste[nm]=(waste[nm]||0)+10;if(f.region==='m')mW++;else eW++;if(f.kind==='dead')tipWaste[f.dead]=(tipWaste[f.dead]||0)+10;}
+  segs.push({a:trail[i-1],b:k,wasted});headT=t;}
+ return{mN,eN,maxMain,mW,eW,headT,step,waste,tipWaste,segs};
+}
+function segPaths(R,off){let sd='',bd='';R.segs.forEach(s=>{const[x1,y1]=ctr(s.a),[x2,y2]=ctr(s.b);if(s.wasted){const dx=x2-x1,dy=y2-y1,l=Math.hypot(dx,dy)||1,nx=-dy/l*off,ny=dx/l*off;bd+=`M${x1+nx} ${y1+ny}L${x2+nx} ${y2+ny}`;}else sd+=`M${x1} ${y1}L${x2} ${y2}`;});return[sd,bd];}
+
+function render(){
+ const R=compute();
+ let[sd,bd]=segPaths(R,6);
+ const[lx,ly]=ctr(flat[LAST]);
+ if(outX!=null)sd+=`M${lx} ${ly}L${outX} ${ly}`;
+ seam.setAttribute('d',sd||'M-30 30');baste.setAttribute('d',bd||'M-30 30');
+ const head=trail[trail.length-1];let[hx,hy]=ctr(head),ang=0;
+ if(outX!=null){hx=outX;hy=ly;}
+ else if(trail.length>1){const[px,py]=ctr(trail[trail.length-2]);ang=Math.atan2(hy-py,hx-px)*180/Math.PI;}
+ needle.setAttribute('transform',`translate(${hx} ${hy}) rotate(${ang})`);
+ loose.style.display=trail.length===1?'':'none';
+ /* times and notches */
+ gT.textContent='';gN.textContent='';let n=0;
+ MAIN.forEach((m,ci)=>{if(m[1]==='d'||R.step[ci]===null)return;const[x,y]=ctr(key(m[2][0][0],m[2][0][1]));
+  const t=el('text',{class:'tm'+(prevStep[ci]==null?' fresh':''),x,y:y-11},gT);t.textContent=fmt(R.step[ci]);
+  const p=el('polygon',{class:'notch',points:`${x-6},${y+14} ${x+6},${y+14} ${x},${y+5}`},gN);p.style.animationDelay=(n++*90)+'ms';});
+ prevStep=R.step.slice();
+ const open=R.maxMain===LAST;door.classList.toggle('open',open);doorLbl.textContent=open?'out through here':'the far wall';
+ svg.classList.toggle('out',out);
+ /* figure */
+ let on=0,off=0;for(let i=0;i<7;i++)if(R.step[i]!==null)on++;for(let i=8;i<13;i++)if(R.step[i]!==null)off++;
+ for(let i=0;i<7;i++)document.getElementById('g'+i).classList.toggle('on',i<on&&i<7-off);
+ /* card */
+ const f=info[head],phase=document.getElementById('phase'),bT=document.getElementById('bigT'),bS=document.getElementById('bigS'),calc=document.getElementById('calc');
+ const wl=(w)=>w?`\n${w} of those cells are basting: +${w*10} min`:'';
+ if(out){phase.textContent='out';bT.textContent=fmt(ESTART+R.eN*10);bS.textContent='Out. Only the thread goes to paper.';
+  calc.textContent=`morning: 06:30 + ${R.mN} × 10 min = ${fmt(MSTART+R.mN*10)}${wl(R.mW)}\nevening: 20:30 + ${R.eN} × 10 min = ${fmt(ESTART+R.eN*10)}${wl(R.eW)}`;}
+ else if(head==='g'){phase.textContent='bare';bT.textContent='06:30';bS.textContent='Bare. Pull the thread from the spool.';calc.textContent='1 cell = 10 min.\nMorning starts 06:30. Evening starts 20:30.';}
+ else if(f.region==='d'){phase.textContent='the day';bT.textContent=fmt(MSTART+R.mN*10);bS.textContent='Out the door. The day is not to scale.';calc.textContent=`morning ended: 06:30 + ${R.mN} × 10 min = ${fmt(MSTART+R.mN*10)}${wl(R.mW)}\nevening is pinned at 20:30`;}
+ else{const isM=f.region==='m',N=isM?R.mN:R.eN,base=isM?'06:30':'20:30';phase.textContent=isM?'morning':'evening';bT.textContent=fmt(R.headT);
+  let s;if(f.kind==='dead')s=DEAD[f.dead][0]+'. Basting, it costs.';else{const ci=f.cor;s=MAIN[ci][0];if(ci<7&&ci<on)s+=' · on: '+GARM[ci];if(ci>=8)s+=' · off: '+GARM[6-(ci-8)];}
+  bS.textContent=s;calc.textContent=`${base} + ${N-1} × 10 min = ${fmt(R.headT)}${wl(isM?R.mW:R.eW)}`;}
+ /* ledger */
+ const row=(ci)=>{const m=MAIN[ci],t=R.step[ci];return`<li class="${t!==null?'done':''}"><b>${t!==null?fmt(t):'··:··'}</b><span>${m[0]}</span><i>${m[2].length*10} min</i></li>`;};
+ let h='<h3>Morning · from 06:30</h3><ol>';for(let i=0;i<7;i++)h+=row(i);h+='</ol><h3>Evening · from 20:30</h3><ol>';for(let i=8;i<13;i++)h+=row(i);h+='</ol>';
+ const wk=Object.keys(R.waste);if(wk.length){h+='<h3>Basting</h3><ol class="baste">';wk.forEach(k=>h+=`<li><span>${k}</span><i>+${R.waste[k]} min</i></li>`);h+='</ol>';}
+ document.getElementById('ledger').innerHTML=h;
+ buildPaper(R);
+ save();
+}
+
+function buildPaper(R){
+ const[sd,bd]=segPaths(R,6);let s=`<svg viewBox="-40 -20 800 520" xmlns="${NS}"><text x="-30" y="0" font-size="11" font-weight="800" letter-spacing="2">START</text>`;
+ s+=`<path d="${bd}" fill="none" stroke="#000" stroke-width="1.6" stroke-dasharray="8 6"/><path d="${sd}" fill="none" stroke="#000" stroke-width="2.3" stroke-linecap="round"/>`;
+ MAIN.forEach((m,ci)=>{if(m[1]==='d'||R.step[ci]===null)return;const[x,y]=ctr(key(m[2][0][0],m[2][0][1]));
+  s+=`<polygon points="${x-6},${y+15} ${x+6},${y+15} ${x},${y+5}" fill="#000"/><text x="${x}" y="${y-12}" font-size="15" font-weight="800" text-anchor="middle" stroke="#fff" stroke-width="4" paint-order="stroke">${fmt(R.step[ci])}</text>`;});
+ Object.keys(R.tipWaste).forEach(di=>{const d=DEAD[di],t=d[3][d[3].length-1];const[x,y]=ctr(key(t[0],t[1]));s+=`<text x="${x}" y="${y+24}" font-size="12" font-style="italic" text-anchor="middle">+${R.tipWaste[di]} min</text>`;});
+ if(R.maxMain===LAST){const[x,y]=ctr(flat[LAST]);s+=`<text x="${x}" y="${y+28}" font-size="11" font-weight="800" text-anchor="middle" letter-spacing="2">END</text>`;}
+ s+='</svg>';
+ let tb='<table><tr><th>Time</th><th>Step</th><th>Length</th></tr>';
+ MAIN.forEach((m,ci)=>{if(m[1]==='d'){tb+=`<tr><td colspan="3"><i>the day, not to scale</i></td></tr>`;return;}const t=R.step[ci];tb+=`<tr><td><b>${t!==null?fmt(t)+'–'+fmt(t+m[2].length*10):'—'}</b></td><td>${m[0]}</td><td>${m[2].length*10} min</td></tr>`;});
+ tb+='</table>';
+ const wk=Object.keys(R.waste);
+ const bp=wk.length?'Basting (pull it out; the minutes stay): '+wk.map(k=>`${k} +${R.waste[k]} min`).join(', ')+'.':'No basting. A clean seam.';
+ document.getElementById('paper').innerHTML=`<h2>Cut along the thread</h2><div class="pm">Piece A · The Day · Cut 1 · 1 cell = 10 min · morning from 06:30 · evening from 20:30 · the walls stay on the screen</div>${s}${tb}<p>${bp}</p><p>Morning: 06:30 + ${R.mN} cells × 10 min = ${fmt(MSTART+R.mN*10)}. Evening: 20:30 + ${R.eN} cells × 10 min = ${fmt(ESTART+R.eN*10)}.</p>`;
+}
+
+function bfs(from,to,max){const prev={};prev[from]=null;const q=[from];while(q.length){const u=q.shift();if(u===to)break;for(const v of adj[u]){if(v==='g'||v in prev)continue;prev[v]=u;q.push(v);}}
+ if(!(to in prev))return null;const p=[];for(let v=to;v!==from;v=prev[v])p.unshift(v);return p.length<=max?p:null;}
+function pt(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
+let printTimer=null;
+function goOut(){if(out)return;out=true;outX=790;render();clearTimeout(printTimer);printTimer=setTimeout(()=>{try{window.print();}catch(e){}},reduce?150:1500);}
+function move(p){
+ const head=trail[trail.length-1],R=compute();
+ if(R.maxMain===LAST&&head===flat[LAST]&&p.x>712&&p.y>400&&p.y<500){outX=Math.max(690,Math.min(p.x,790));if(p.x>=768)goOut();else render();return;}
+ if(p.x<0||p.y<0||p.x>=720||p.y>=480)return;
+ const k=key(Math.floor(p.x/C),Math.floor(p.y/C));if(!info[k]||k===head)return;
+ const path=bfs(head,k,6);if(!path)return;
+ trail.push(...path);out=false;outX=null;clearTimeout(printTimer);render();
+}
+svg.addEventListener('pointerdown',e=>{const p=pt(e);const[hx,hy]=ctr(trail[trail.length-1]);
+ if(p.x<-4&&p.y<84&&trail.length>1){trail=['g'];out=false;outX=null;prevStep=[];render();}
+ else if(!(Math.hypot(p.x-hx,p.y-hy)<52||trail.length===1||(out&&p.x>680)))return;
+ drag=true;e.preventDefault();try{svg.setPointerCapture(e.pointerId);}catch(_){}move(p);});
+svg.addEventListener('pointermove',e=>{if(drag)move(pt(e));});
+function up(){drag=false;if(!out&&outX!=null){outX=null;render();}}
+svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);
+prevStep=compute().step;
+render();
+})();
+</script>
+</body>
+</html>
