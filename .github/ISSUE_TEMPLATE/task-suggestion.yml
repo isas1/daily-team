@@ -1,5 +1,5 @@
 name: Suggest a task
-description: Suggest a small web tool for the daily team to build.
+description: Suggest a spark for the daily team to make something from.
 title: "Task: "
 labels: [task-suggestion]
 body:
@@ -11,22 +11,22 @@ body:
     id: task
     attributes:
       label: Task
-      description: One sentence. What the user enters and what they get back.
-      placeholder: "Tip splitter: total, tip percent, and number of people give the amount each, rounded to 0.05."
+      description: One line. An image, a force, a place, or a moment the team can make something from.
+      placeholder: "Tide: something that arrives, stays a while, and leaves."
     validations:
       required: true
   - type: input
     id: helps
     attributes:
-      label: Who it helps
-      placeholder: Anyone splitting a restaurant bill.
+      label: Who it is for
+      placeholder: Anyone who likes watching things change slowly.
     validations:
       required: true
   - type: input
     id: check
     attributes:
-      label: How you would know it works
-      placeholder: "100 with 10 percent for 3 people gives 36.65 each."
+      label: What you hope to see
+      placeholder: "Something that moves in and out on its own."
   - type: checkboxes
     id: credit
     attributes:

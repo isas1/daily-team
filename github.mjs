@@ -48,7 +48,9 @@ export function parseForm(body) {
   };
   const ticked = (name) => /- \[x\]/i.test(field(name));
   return {
-    task: plain(field('task')), helps: plain(field('who it helps')), check: plain(field('how you would know it works')),
+    // Older issues use the first label; the spark form from season 3 uses the second.
+    task: plain(field('task')), helps: plain(field('who it helps') || field('who it is for')),
+    check: plain(field('how you would know it works') || field('what you hope to see')),
     credit: ticked('credit'), license: ticked('license'),
   };
 }

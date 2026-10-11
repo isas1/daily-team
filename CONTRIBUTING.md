@@ -8,13 +8,13 @@ Every Monday the open suggestions with the most votes are screened, up to 20. Ac
 
 The README lists the top open suggestions. Only suggestions with the license box ticked and no links, handles, or banned words are listed. The maintainer can hide any suggestion with the `hidden` label.
 
-A task is accepted when it is:
+From season 3, tasks are sparks: open starting points the team makes something from. A suggested tool is rewritten as a spark that keeps its idea. A suggestion is accepted when it:
 
-- one specific tool that fits in a single HTML file and works offline;
-- useful to a broad audience, with a concrete output;
-- free of medical, legal, and investment advice;
-- free of names of real people, companies, brands, and products;
-- not already in the pool.
+- gives the team an image, a force, a place, or a moment to work from;
+- can become one HTML page that works offline;
+- is free of medical, legal, and investment advice;
+- is free of names of real people, companies, brands, and products;
+- is not already in the pool.
 
 ## How the team changes
 

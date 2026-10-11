@@ -835,6 +835,8 @@ test('parseForm reads the issue form fields', () => {
   });
   assert.equal(parseForm(FORM.replace('- [X] Credit', '- [ ] Credit')).credit, false);
   assert.equal(parseForm('free text').license, false);
+  const spark = parseForm(FORM.replace('### Who it helps', '### Who it is for').replace('### How you would know it works\n\n_No response_', '### What you hope to see\n\nIt moves.'));
+  assert.deepEqual([spark.helps, spark.check], ['Anyone splitting a bill.', 'It moves.']);
 });
 
 async function fakeGitHub(handler, fn) {
