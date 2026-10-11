@@ -59,6 +59,7 @@ Make it the team's piece:
 - Typography: system fonts only, used boldly in size, weight, and spacing.
 - Motion carries meaning: growth, decay, breath, weather, wear. Short, never filler.
 - One moment of surprise that comes from the team's natures, not from a library of effects.
+- If the spark names a Claude Code mod (a hook, skill, command, status line, output style, subagent, or plugin), the page shows that mod alive, often in a pretend terminal, shaped by the lead's nature. It may also give the visitor the mod's real file to copy.
 - Avoid the generic look: no purple-blue gradients, frosted-glass cards, emoji icons, centred hero text above a form, or "Welcome to" headings.
 - Palette, type, spacing, and layout come from the members' natures and the decision. Two teams given the same spark make pages that look and behave nothing alike.
 - A small credits line at the bottom names each member by role and what they put in the page.
@@ -74,6 +75,7 @@ It still has to work:
 - Sound starts only after the visitor acts, and can be turned off.
 - If it calculates anything, it shows how.
 - No medical, legal, or investment advice.
+- A mod file to copy is short and correct for Claude Code. It makes no network calls, deletes or overwrites no files, holds no secrets, and never skips permission prompts.
 - It respects prefers-reduced-motion.
 - Wrap every use of localStorage in try/catch. The page must still work when storage is blocked.
 - Return only the file, in one html code block.

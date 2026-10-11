@@ -18,7 +18,7 @@ export const ROTATE = { roles: 8, methods: 8, constraints: 2, tasks: 6 };
 const MAX_LEN = { roles: 40, methods: 120, constraints: 80, tasks: 220, temperaments: 60 };
 const MAX_SUGGESTIONS = 20;
 // Capitalised words allowed after the first word: units, formats, and scales.
-const ALLOWED_CAPS = new Set(['Celsius', 'Fahrenheit', 'I']);
+const ALLOWED_CAPS = new Set(['Celsius', 'Fahrenheit', 'I', 'Claude', 'Code']);
 export const GUEST_KINDS = ['historical', 'myth', 'literary', 'archetype', 'future', 'creature'];
 export const GUESTS_PER_SEASON = 2;
 export const TEMPERAMENTS_PER_SEASON = 4;

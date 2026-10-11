@@ -153,46 +153,46 @@ No more than two levels of heading.
 + Changes with the time of day.
 
 #@ tasks
-Tide: something that arrives, stays a while, and leaves.
-Night shift: what happens while everyone else sleeps.
-Lost property: a thing someone left behind and the story it carries.
-Weather inside: a mood that behaves like the sky.
-Small world: a place too little to notice until you look closely.
-Echo: a sound that comes back changed.
-Map of nowhere: a place that does not exist but can be explored.
-Hand-me-down: something passed between generations that wears as it goes.
-Threshold: the moment between outside and inside.
-Slow time: something that takes a hundred years, watched in a minute.
-Swarm: many small things that decide together.
-Shadow: what an object becomes when the light moves.
-Recipe for a feeling: ingredients, steps, and what comes out of the oven.
-Cabinet: things that belong together for a reason only the keeper knows.
-Ruin: what is left after something grand falls, and what grows there.
-Signal: a message sent to someone who may never receive it.
-Hunger: something that eats, grows, and must be fed.
-Seasons: one thing seen through a whole year.
-Knot: something tangled that can be undone, or made worse.
-Beacon: a light that guides someone home.
-Mask: a face to wear and what it changes.
-Underground: what lives below the floor of the visible world.
-First word: the moment something learns to speak.
-Crossing: a long migration made by many at once.
-Garden: something planted today that only shows itself later.
-Fortune: a reading of what might come next.
-Wrong mirror: something that shows the visitor back to themselves, but changed.
-Bestiary: a creature that has never been recorded.
-Ritual: a small act repeated until it means something.
-Erosion: something worn away a little each time it is touched.
-Constellation: points joined into a picture someone can name.
-Pulse: a rhythm that keeps something alive.
-Fog: something only half seen until the visitor moves closer.
-Time capsule: words sealed now and opened later.
-Nest: a home built from scraps.
-Fire: something that warms, spreads, and leaves ash.
-Instrument: something that makes a sound only the visitor can play.
-Rumour: a story that changes each time it is passed on.
-Wake: the trail left by something that has already gone.
-Hidden room: a space that opens only to someone who looks closely.
+Statusline: a Claude Code status line that lives like a creature at the bottom of the terminal.
+Spinner: what Claude Code shows while it thinks, made into a tiny performance.
+Gatekeeper: a Claude Code hook that stands at the door before a tool acts and asks its own question.
+Aftermath: a Claude Code hook that wakes after every edit and leaves a mark.
+Last word: a Claude Code hook that speaks when a session ends.
+Morning ritual: what a Claude Code session does the moment it starts.
+Output style: a Claude Code voice that changes how every answer sounds.
+Slash command: one word typed after a slash in Claude Code that sets something strange in motion.
+Skill: a Claude Code skill that teaches one craft nobody thought to teach.
+Subagent: a small helper Claude Code sends off alone, and what it brings back.
+Swarm: many Claude Code helpers working at once on one problem.
+Memory file: what Claude Code remembers about a person between sessions.
+Forgetting: what Claude Code loses, and what it keeps, when a long conversation is compacted.
+Permission: the moment Claude Code asks before it acts, and what that asking feels like.
+Plan mode: Claude Code thinking out loud before it touches anything.
+Plugin: a bundle of Claude Code mods that arrives like a traveller with a full pack.
+Marketplace: a place where Claude Code plugins are shown, traded, and chosen.
+MCP server: a bridge that lets Claude Code reach into another world of tools.
+Notification: how Claude Code calls someone back when it needs them.
+Worktree: Claude Code working in a parallel copy of the same project.
+Diff: the visible trace of every change Claude Code makes.
+Checkpoint: a Claude Code rewind that lets someone step back in time.
+Theme: the Claude Code terminal dressed for a season, a mood, or a creature.
+Keybinding: one key press in Claude Code that does something no one expects.
+Prompt line: the blank line where a person speaks to Claude Code, made into something more.
+Context window: everything Claude Code can hold in mind at once, and the edge where it ends.
+Long task: a Claude Code job that runs for hours while no one watches.
+Loop: Claude Code waking on a schedule to check on something again and again.
+Handoff: one Claude Code session passing its work to the next.
+Review: a Claude Code mod that reads someone's work and answers in its own voice.
+Guardrail: a Claude Code rule that stops one thing from ever happening.
+Tool call: the instant Claude Code reaches for a tool, slowed down and shown.
+Session log: the trail a Claude Code session leaves behind it.
+Companion: a Claude Code mod that keeps someone company while they work.
+Greeting: the first thing Claude Code says, made worth waiting for.
+Ghost in the terminal: a Claude Code mod that leaves small surprises for the curious.
+Crew: hooks, skills, and commands in Claude Code that work together like a ship's crew.
+Celebration: what Claude Code does when the tests finally pass.
+Error: a Claude Code failure turned into something kind, funny, or useful.
+Mod workshop: a place to build a Claude Code mod from parts.
 
 #@ guests
 historical | Euclid | State a few assumptions, then build everything from them. | died c. 270 BC
