@@ -99,14 +99,14 @@ Choose the constraint you like least and keep it.
 + Write the help text, then change the design until the help text is not needed.
 
 #@ stances
-Cuts scope.
-Adds one bold element.
-Speaks for the user.
-Checks cost and time.
-Questions the brief.
-Pushes for a less expected result.
-Guards execution quality.
-Plans how it reaches people.
+Pushes toward the strange.
+Defends the material.
+Guards the feeling it leaves behind.
+Cuts until only the core is left.
+Speaks for the one who finds it.
+Wants it to last.
+Breaks the frame.
+Insists it must be beautiful.
 
 #@ constraints
 Under 100 words of fixed text on the page.
@@ -124,7 +124,7 @@ Prints on one A4 page.
 Lowercase only.
 Three-column grid only.
 Prints clearly on a black-and-white printer.
-Results update as the user types, with no submit button.
+Uses sound as well as sight.
 Usable with the keyboard alone.
 Learnable in 30 seconds.
 System fonts only.
@@ -133,146 +133,66 @@ Has a dark mode that follows the system setting.
 Still makes sense in 10 years: no trends.
 No buttons.
 Fits in a postcard-sized area.
-Every number shows its unit.
+Made only of lines.
 Saves the input in the browser and restores it on reload.
-Shows a filled-in example before the user types.
-Every input has a visible label.
+Something is already happening when the page opens.
+No words until the visitor acts.
 Uses a single accent color.
 All text at 18 px or larger.
 One column only.
-Every result can be copied as plain text with one action.
+Every visit ends differently.
 Monospace typeface only.
-No more than five inputs.
-Shows the formula or rule behind every result.
+Has a beginning, a middle, and an end.
+Built from one shape repeated.
 Every change can be undone.
 Touch targets at least 48 px.
-Every empty state says what to do next.
+Hides one thing for the curious to find.
 Works fully offline after the first load.
 No more than two levels of heading.
 + Uses no more than two font sizes.
-+ Every result appears in a full sentence as well as a number.
++ Changes with the time of day.
 
 #@ tasks
-Cleaning rota: people and chores give a fair weekly rotation table that prints on one page.
-Paint calculator: wall sizes, doors, windows, and number of coats give the litres of paint needed.
-Moving checklist: tasks grouped by eight weeks, four weeks, one week, and moving day, with tick boxes saved in the browser.
-Home inventory sheet: room, item, value, and purchase date, with totals per room and a CSV export.
-Plant watering schedule: plants with watering intervals give a calendar for the next four weeks.
-Emergency contact sheet for the fridge: blank fields for doctors, utilities, neighbours, and a meeting point, printable.
-Appliance energy cost: wattage, hours per day, and price per kWh give daily, monthly, and yearly cost.
-Flooring calculator: room dimensions and tile or plank size give the number of pieces, with a waste allowance the user sets.
-Chore chart for children with points per chore and a weekly total, printable on A4.
-Guest information card: Wi-Fi name, house rules, checkout time, and local numbers, printable on A5.
-Bin collection calendar: collection days and bin types give a printable calendar for the month.
-Maintenance log for a home or car: date, task, cost, and next due date, sorted by next due.
-Recipe scaler: paste an ingredient list and change the number of servings.
-Cooking unit converter: cups, tablespoons, grams, and millilitres, with the density used for each ingredient shown.
-Meal-prep planner: five recipes give one combined shopping list grouped by aisle.
-Roast timing planner: dishes with cooking times and a serving time give a start-time schedule.
-Weekly meal plan grid with a shopping list column, printable.
-Pantry tracker: items with best-before dates, sorted by soonest, with past dates marked.
-Baking tin converter: scale a recipe between round, square, and rectangular tins by area.
-Oven temperature converter between Celsius, Fahrenheit, fan, and gas mark, with a printable chart.
-Coffee ratio calculator: brew method, ratio, and number of cups give grams of coffee and water.
-Dinner party planner: guests, dietary needs, and dishes, with a check that every guest has at least one main dish.
-Batch cooking calculator: portions needed per week and portions per batch give the number of batches and a cooking schedule.
-Spice substitution table, searchable, with the ratio for each substitute.
-Meeting cost calculator: attendees, average hourly cost, and duration, with a running timer.
-Meeting time finder: up to four cities, using the browser time zone data, showing overlapping working hours.
-Working days counter: days between two dates excluding weekends and a list of holidays the user enters.
-One-page project brief: goal, audience, scope, deadline, budget, and risks, printable.
-Standup notes form: yesterday, today, and blockers per person, copied as plain text.
-Focus timer with adjustable work and break lengths and a log of completed sessions.
-Decision matrix: options and weighted criteria give scores and a ranked list.
-Invoice template: line items, tax rate, and due date, printable on A4.
-Subject line checker: character and word count, with previews cut at 40 and 60 characters.
-Job application tracker: company, role, date, stage, and next step, with a CSV export.
-Shift rota builder: staff and shifts, with a warning when anyone goes over a set number of hours.
-Interview preparation sheet: the role, five likely questions, and space for answers in situation, task, action, result form, printable.
-Flashcard maker: paste term and definition pairs, then study them shuffled with a score.
-Exam revision planner: exams with dates and topics give a revision schedule up to each exam.
-Reading time estimator: paste text to see word count, reading time, and speaking time.
-Grade calculator: weighted assignments give the current grade and the score needed on the final to reach a target.
-Citation builder: fields for a book or web page give APA and MLA citations.
-Times tables practice for children, with a timer and a list of missed facts to retry.
-Essay outline builder: thesis, three points with evidence, and a conclusion, exported as plain text.
-Spaced review planner: topics and a start date give review dates after 1, 3, 7, 14, and 30 days.
-Study log: minutes per subject per day, with weekly totals.
-Vocabulary list for a new language with a self-test mode.
-Cornell note template for lectures, printable.
-Fraction calculator that shows each step of adding, subtracting, multiplying, and dividing.
-Packing list: trip length, weather, and activities give a checklist saved in the browser.
-Trip budget planner: transport, stays, food, and activities per day, with totals in two currencies at a rate the user enters.
-Itinerary builder: days with timed activities, printable as one page per day.
-Road trip fuel cost: distance, fuel economy, and fuel price give the cost in total and per passenger.
-Connection time checker: arrival and departure times in two time zones give the real time between flights.
-Travel document checklist: passport expiry checked against the return date, with a note to confirm each destination's entry rules.
-Phrase card: phrases and translations the user enters, printed as a wallet-size card.
-Group trip cost splitter with a different share per person.
-World clock for up to five cities using the browser time zone data.
-Luggage weight check: items and weights against an airline limit the user enters.
-Holiday countdown with days, working days, and weekends left.
-Camping checklist grouped by shelter, cooking, clothing, and safety, printable.
-Water tracker: a daily goal the user sets and a tap-to-add log that resets each day.
-Habit tracker: up to six habits on a 30-day grid saved in the browser, printable.
-Walking log: date, distance, and time, with weekly totals and average pace.
-Desk break timer: a reminder every set number of minutes and a log of breaks taken.
-Sleep log: bed time and wake time per night, with weekly averages of the user's own entries.
-Running pace calculator: distance and time give pace per km and per mile and projected times for 5 km, 10 km, half, and full marathon.
-Weekly workout planner: days, exercises, sets, and reps, printable.
-Screen time log: minutes per app category per day, with a weekly chart.
-Gratitude page: three lines per day for one week, printable.
-Stretch sequence timer: the user lists stretches and hold times, and the timer runs through them.
-Step goal tracker: daily steps entered by hand, with a four-week chart and streaks.
-Breathing timer with adjustable in, hold, and out counts and a visual guide.
-Password strength checker that runs locally, shows estimated guesses to crack, and never sends input anywhere.
-Passphrase generator using a built-in word list and the browser crypto random number generator.
-Phishing email checklist: 12 signs to check, with a score for a suspicious message.
-Account recovery sheet: accounts, recovery email, and two-step method, printable, with a note to store it offline and never write passwords on it.
-Two-step login tracker: accounts and whether two-step login is on, sorted by importance.
-Device update checklist for phone, laptop, router, and apps, printable.
-Backup planner: devices, what to back up, where, and how often, with the 3-2-1 rule explained.
-New phone privacy checklist grouped by location, contacts, ads, and tracking.
-Link inspector: shows the real domain of a pasted URL and highlights lookalike characters.
-Family device rules sheet: screen times, allowed apps, and contacts, printable.
-Online shop checklist: signs that a web shop is genuine, with a score.
-Digital estate checklist: accounts and what should happen to each, printable, with no passwords stored.
-Text counter with limits for common formats: SMS 160, social post 280, meta description 155.
-Readability checker: paste text to see average sentence length, long words, and a Flesch reading ease score with the formula shown.
-Cover letter template: fields fill a one-page letter, printable.
-Thank-you note templates: occasion, recipient, and one detail fill three short drafts.
-Case converter: sentence case, title case, upper case, and lower case.
-Repeated word finder: highlights words used more than a set number of times in pasted text.
-Complaint letter template: issue, dates, order number, and requested outcome, printable.
-Speech timer: paste a speech to see speaking time at three paces, then run a countdown.
-Text compare: paste two versions and see added and removed words highlighted.
-CV checklist: 15 checks with a score, printable.
-Plain words list: long words with shorter replacements, searchable.
-Repair request letter to a landlord: issue, dates, and list of photos, printable.
-Date calculator: days, weeks, and months between two dates, and the weekday of any date.
-Time-blocking planner for one day in 30-minute slots, printable.
-Event countdown with days, hours, and minutes, saved in the browser.
-Time sheet: start, end, and break times per day, with weekly totals and overtime.
-Weekly planner page with priorities, appointments, and notes, printable on A4.
-Priority matrix: tasks sorted into urgent and important boxes, saved in the browser.
-Birthday list: next birthday and age, sorted by soonest.
-Deadline calculator: a start date plus a number of working days, excluding weekends and holidays.
-Daily routine builder: morning and evening steps with times, printable.
-Goal tracker: one goal with milestones, dates, and percent done.
-Event planning timeline: an event date gives tasks due 8, 4, 2, and 1 weeks before.
-Focus log: what the user worked on in each hour of the day, with a weekly summary.
-Sunrise and sunset calculator: a date and coordinates entered give sunrise time, sunset time, and day length.
-Color contrast checker: two colors entered give the contrast ratio and a pass or fail against a threshold the user sets.
-QR code generator: text or a link entered draws a scannable code locally in the browser.
-Random team generator: a list of names and a group size give randomly assigned teams.
-Average calculator: a list of numbers gives the mean, median, mode, and range.
-Dice and coin flip simulator: number of dice or coins and number of rolls give a results table and totals.
-+ Price in hours: take-home pay per hour and any price give its cost in working hours and 40-hour weeks, with a daily item also shown per year.
-+ Estimate anything: a question split into steps, each with a low and high guess, gives a likely range for the answer, with every step shown.
-+ Picture hanging helper: wall width, frame widths, and gap between frames give the nail position for each frame, measured from the left.
-+ Garden bed soil calculator: bed length, width, and depth give the soil volume in litres and the number of bags of a size the user enters.
-+ Seating plan: guests and table sizes give a printable plan, with pairs the user marks kept at different tables.
-+ Roman numeral converter: numbers from 1 to 3,999 converted in both directions, with each step of the conversion shown.
+Tide: something that arrives, stays a while, and leaves.
+Night shift: what happens while everyone else sleeps.
+Lost property: a thing someone left behind and the story it carries.
+Weather inside: a mood that behaves like the sky.
+Small world: a place too little to notice until you look closely.
+Echo: a sound that comes back changed.
+Map of nowhere: a place that does not exist but can be explored.
+Hand-me-down: something passed between generations that wears as it goes.
+Threshold: the moment between outside and inside.
+Slow time: something that takes a hundred years, watched in a minute.
+Swarm: many small things that decide together.
+Shadow: what an object becomes when the light moves.
+Recipe for a feeling: ingredients, steps, and what comes out of the oven.
+Cabinet: things that belong together for a reason only the keeper knows.
+Ruin: what is left after something grand falls, and what grows there.
+Signal: a message sent to someone who may never receive it.
+Hunger: something that eats, grows, and must be fed.
+Seasons: one thing seen through a whole year.
+Knot: something tangled that can be undone, or made worse.
+Beacon: a light that guides someone home.
+Mask: a face to wear and what it changes.
+Underground: what lives below the floor of the visible world.
+First word: the moment something learns to speak.
+Crossing: a long migration made by many at once.
+Garden: something planted today that only shows itself later.
+Fortune: a reading of what might come next.
+Wrong mirror: something that shows the visitor back to themselves, but changed.
+Bestiary: a creature that has never been recorded.
+Ritual: a small act repeated until it means something.
+Erosion: something worn away a little each time it is touched.
+Constellation: points joined into a picture someone can name.
+Pulse: a rhythm that keeps something alive.
+Fog: something only half seen until the visitor moves closer.
+Time capsule: words sealed now and opened later.
+Nest: a home built from scraps.
+Fire: something that warms, spreads, and leaves ash.
+Instrument: something that makes a sound only the visitor can play.
+Rumour: a story that changes each time it is passed on.
+Wake: the trail left by something that has already gone.
+Hidden room: a space that opens only to someone who looks closely.
 
 #@ guests
 historical | Euclid | State a few assumptions, then build everything from them. | died c. 270 BC
