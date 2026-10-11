@@ -21,7 +21,7 @@ Pick exactly one mode from the request. Do no more than that mode asks.
 |---|---|
 | Empty | Print the team and task above as written. Stop. Do not read prompt.md. |
 | A brief | Write the session for the brief. Stop. Do not build. |
-| `build`, optional count 1 to 4, optional brief | Write the session for the brief, or for today's task if there is none. Then build that many artifacts (default 1). |
+| `build`, optional count 1 to 4, optional brief | Write the session for the brief, or for today's spark if there is none. Then build that many artifacts (default 1). |
 | `publish` | Ask the user and wait for a yes. Run exactly `sh daily.sh` from this skill's folder, with no flags. It records today's team and artifact with the user's Claude subscription, then commits and pushes. Report its output. |
 | `recruit` | Ask the user and wait for a yes. Run exactly `sh recruit.sh` from this skill's folder, with no flags. It drafts next week's season, runs the tests, pushes a branch, and opens a pull request. Give the user the link. |
 
@@ -53,8 +53,9 @@ Check the session and each artifact against this list. If any item fails, fix it
 - The artifact has a title element and a viewport meta tag, and is under 100 KB.
 - No external scripts, styles, fonts, images, or iframes, no `@import`, no `fetch` or other network calls, and no form that posts to another site.
 - The decision's concept is visible on the first screen, and a credits line at the bottom names each member.
-- It loads with a worked example already entered.
-- Inputs update the result at once, with no submit button for calculations, and labels are 1 to 3 words with no paragraphs of instructions.
+- It opens already alive: something is visible before the visitor acts.
+- The visitor acts on the piece itself and it answers at once, with no submit button and no paragraphs of instructions.
+- The structure comes from the lead's nature, not from a header, a panel of controls, and a result box.
 
 ## Requirements
 
