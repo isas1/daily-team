@@ -1,0 +1,620 @@
+{
+  "facts": {
+    "week": {
+      "start": "2026-10-05",
+      "end": "2026-10-11"
+    },
+    "repository": "isas1/daily-team",
+    "changes": {
+      "commits": [
+        {
+          "sha": "ac66445",
+          "date": "2026-10-05",
+          "subject": "Pin the week block test to a fixed day",
+          "area": "Tests"
+        },
+        {
+          "sha": "f2fd27a",
+          "date": "2026-10-05",
+          "subject": "Give the team voices, a bounded clash, and a referee for deadlocks",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "ecd7586",
+          "date": "2026-10-05",
+          "subject": "Season 2026-10-12: new members and tasks (#19)",
+          "area": "Seasons and suggestions"
+        },
+        {
+          "sha": "f679de0",
+          "date": "2026-10-05",
+          "subject": "Show the team's session as a transcript and headline the concept",
+          "area": "Pages and images"
+        },
+        {
+          "sha": "8a758e7",
+          "date": "2026-10-05",
+          "subject": "Give each member a temperament from season 3",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "538e93b",
+          "date": "2026-10-05",
+          "subject": "Count an all-new guest or temperament pool instead of naming each",
+          "area": "Pages and images"
+        },
+        {
+          "sha": "a71e64d",
+          "date": "2026-10-06",
+          "subject": "Add three evals for the daily-team skill",
+          "area": "Skill"
+        },
+        {
+          "sha": "c8b1944",
+          "date": "2026-10-06",
+          "subject": "Bring the skill text in line with Anthropic's skill best practices",
+          "area": "Skill"
+        },
+        {
+          "sha": "c4622bc",
+          "date": "2026-10-06",
+          "subject": "Explain the seed constants in team.sh",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "9007346",
+          "date": "2026-10-06",
+          "subject": "Add a GitHub activity command for the weekly report",
+          "area": "Seasons and suggestions"
+        },
+        {
+          "sha": "50f47d6",
+          "date": "2026-10-06",
+          "subject": "Write a weekly report from checked facts with a short model summary",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "4996148",
+          "date": "2026-10-06",
+          "subject": "Run the weekly report each Sunday and describe it in the docs",
+          "area": "Automation"
+        },
+        {
+          "sha": "0670373",
+          "date": "2026-10-06",
+          "subject": "Give season counts to the weekly summary and check counts as digits",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "a48fdc9",
+          "date": "2026-10-07",
+          "subject": "Ask builds for direct, visual, low-text pages",
+          "area": "Skill"
+        },
+        {
+          "sha": "fc23c77",
+          "date": "2026-10-11",
+          "subject": "Give season 3 open sparks and creative stances instead of utility tasks",
+          "area": "Seasons and suggestions"
+        },
+        {
+          "sha": "8e75e98",
+          "date": "2026-10-11",
+          "subject": "Let each member's nature shape what the team makes",
+          "area": "Skill"
+        },
+        {
+          "sha": "302eabc",
+          "date": "2026-10-11",
+          "subject": "Ask visitors for sparks and read both suggestion forms",
+          "area": "Automation"
+        },
+        {
+          "sha": "0551a5f",
+          "date": "2026-10-11",
+          "subject": "Make the 2026-10-12 season about Claude Code mods",
+          "area": "Seasons and suggestions"
+        }
+      ],
+      "testsAtStart": 43,
+      "testsAtEnd": 67
+    },
+    "days": [
+      {
+        "date": "2026-10-05",
+        "status": "ok",
+        "task": "CV checklist",
+        "concept": "",
+        "decision": "The page lists 15 measurable CV checks, scores the ticked ones out of 30 by weight, shows each failed check's effect on a reader, follows the system light or dark setting, and prints on one page.",
+        "constraint": "Has a dark mode that follows the system setting.",
+        "roles": [
+          "Bookbinder",
+          "Glassblower",
+          "Chef"
+        ],
+        "guest": {
+          "name": "Captain Ahab",
+          "kind": "literary"
+        },
+        "format": "old",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": null,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 13705
+          }
+        ]
+      },
+      {
+        "date": "2026-10-06",
+        "status": "ok",
+        "task": "Water tracker",
+        "concept": "Three Panes",
+        "decision": "The page loads with a grey example of 5 stripes under a red goal line at 8, then lets the user set a goal and tap to add one blue stripe per glass, and clears the stripes when the device date changes.",
+        "constraint": "Shows a filled-in example before the user types.",
+        "roles": [
+          "Window dresser",
+          "Calligrapher",
+          "Textile designer"
+        ],
+        "guest": {
+          "name": "Glass fox",
+          "kind": "creature"
+        },
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8803
+          }
+        ]
+      },
+      {
+        "date": "2026-10-07",
+        "status": "ok",
+        "task": "Stretch sequence timer",
+        "concept": "The Ear Card",
+        "decision": "The page is a 560×400 px card where the user lists stretches, hold times, and a \"both sides\" mark, then runs the sequence by ear through three tone patterns and vibration, with a shareable link carrying the list.",
+        "constraint": "Fits in a postcard-sized area.",
+        "roles": [
+          "Teacher",
+          "Urban planner",
+          "Upholsterer"
+        ],
+        "guest": {
+          "name": "Don Quixote",
+          "kind": "literary"
+        },
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 22844
+          }
+        ]
+      },
+      {
+        "date": "2026-10-08",
+        "status": "ok",
+        "task": "Weekly workout planner",
+        "concept": "The Chalk-Hand Sheet",
+        "decision": "The page is a one-sheet weekly planner: the user types days, exercises, sets, and reps on screen, then prints a black-and-white A4 grid with one empty circle per set and one thin orange rule under each day name.",
+        "constraint": "Uses a single accent color.",
+        "roles": [
+          "Packaging designer",
+          "Brand strategist",
+          "Taxidermist"
+        ],
+        "guest": {
+          "name": "Time",
+          "kind": "archetype"
+        },
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 19970
+          }
+        ]
+      },
+      {
+        "date": "2026-10-09",
+        "status": "ok",
+        "task": "Goal tracker",
+        "concept": "The Never List",
+        "decision": "The page tracks one goal through dated milestones, shows percent done as a plain count with its formula printed under the number, and keeps every earlier plan as a greyed, folded version whenever a date or milestone changes.",
+        "constraint": "Shows the formula or rule behind every result.",
+        "roles": [
+          "Beekeeper",
+          "Sign painter",
+          "Librarian"
+        ],
+        "guest": {
+          "name": "Phoenix",
+          "kind": "creature"
+        },
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 28444
+          }
+        ]
+      },
+      {
+        "date": "2026-10-10",
+        "status": "ok",
+        "task": "Camping checklist grouped by shelter, cooking, clothing, and safety, printable.",
+        "concept": "Four Corners, Out and Back",
+        "decision": "The page is an editable camping checklist that prints on 1 A4 sheet as 4 drawn panels (shelter, cooking, clothing, safety), with Out and Back tick boxes on every line and each item's weight in grams summed per panel in kilograms.",
+        "constraint": "Every number shows its unit.",
+        "roles": [
+          "Game designer",
+          "Service designer",
+          "Comic artist"
+        ],
+        "guest": {
+          "name": "Sisyphus",
+          "kind": "myth"
+        },
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [
+          "Sisyphus speaks 4 times in the Clash, more than 3"
+        ],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 24604
+          }
+        ]
+      },
+      {
+        "date": "2026-10-11",
+        "status": "ok",
+        "task": "Daily routine builder",
+        "concept": "The Thread Out",
+        "decision": "The page is a gray maze with a bare paper figure at its morning gate, and the visitor does one thing: drag a single thread from the gate to the evening wall, and the corridors it passes through become their timed morning and evening steps.",
+        "constraint": "The user does exactly one thing on the page.",
+        "roles": [
+          "Costume designer",
+          "Cartographer",
+          "Furniture maker"
+        ],
+        "guest": {
+          "name": "Daedalus",
+          "kind": "myth"
+        },
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 25247
+          }
+        ]
+      }
+    ],
+    "seasons": [
+      {
+        "start": "2026-10-05",
+        "when": "started this week",
+        "addedCounts": {
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 6
+        },
+        "retiredCounts": {
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 6
+        },
+        "added": {
+          "roles": [
+            "Taxidermist",
+            "Locksmith",
+            "Upholsterer",
+            "Glassblower",
+            "Calligrapher",
+            "Blacksmith",
+            "Tailor",
+            "Beekeeper"
+          ],
+          "methods": [
+            "Work in silence for the first ten minutes before any music or talk.",
+            "Swap your draft with someone else's and finish theirs.",
+            "List every material you cannot use, then start.",
+            "Design for the most frustrated possible user first.",
+            "Ask a child to explain what it is for.",
+            "Set a budget of zero and see what still works.",
+            "Translate the brief into a question, then answer only the question.",
+            "Choose the constraint you like least and keep it."
+          ],
+          "constraints": [
+            "Works fully offline after the first load.",
+            "No more than two levels of heading."
+          ],
+          "tasks": [
+            "Sunrise and sunset calculator: a date and coordinates entered give sunrise time, sunset time, and day length.",
+            "Color contrast checker: two colors entered give the contrast ratio and a pass or fail against a threshold the user sets.",
+            "QR code generator: text or a link entered draws a scannable code locally in the browser.",
+            "Random team generator: a list of names and a group size give randomly assigned teams.",
+            "Average calculator: a list of numbers gives the mean, median, mode, and range.",
+            "Dice and coin flip simulator: number of dice or coins and number of rolls give a results table and totals."
+          ]
+        },
+        "retired": {
+          "roles": [
+            "Typographer",
+            "Illustrator",
+            "Photographer",
+            "Film editor",
+            "Sound designer",
+            "Composer",
+            "Copywriter",
+            "Book editor"
+          ],
+          "methods": [
+            "Make ten rough versions before choosing one.",
+            "Start from the final result and work backwards.",
+            "Cut the first draft by half.",
+            "Test on paper before building anything.",
+            "Copy a structure from an unrelated field.",
+            "Work at actual size only.",
+            "Use one grid for every part.",
+            "Write the announcement before the work exists."
+          ],
+          "constraints": [
+            "One typeface, two weights.",
+            "Black and white only."
+          ],
+          "tasks": [
+            "Bill splitter: total, tip percent, and number of people give the amount per person, rounded to 0.05, with the formula shown.",
+            "Savings goal planner: target amount, target date, and current savings give the amount to save per week and per month.",
+            "Subscription tracker: subscriptions with price and billing cycle give monthly and yearly totals, sorted by cost.",
+            "Loan repayment calculator: amount, annual rate, and term give the monthly payment, total interest, and a year-by-year table, with the formula shown.",
+            "Unit price comparer: two to five products with price and size give the cost per 100 g or per item and mark the cheapest.",
+            "Monthly budget sheet: income and up to 15 expense lines give totals and the amount left, in a layout that prints on one page."
+          ]
+        },
+        "accepted": []
+      },
+      {
+        "start": "2026-10-12",
+        "when": "starts next Monday",
+        "addedCounts": {
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 6,
+          "guests": 2
+        },
+        "retiredCounts": {
+          "guests": 2,
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 6
+        },
+        "added": {
+          "roles": [
+            "Luthier",
+            "Stonemason",
+            "Clockmaker",
+            "Weaver",
+            "Florist",
+            "Cobbler",
+            "Translator",
+            "Sculptor"
+          ],
+          "methods": [
+            "Write the instructions for a stranger, then follow them exactly yourself.",
+            "Find the most expensive possible mistake and design it out first.",
+            "Do the task by hand three times before automating any of it.",
+            "Ask what the user does just before and just after, and design for both.",
+            "Label every part with its purpose, then delete the parts with no label.",
+            "Finish one complete rough pass before polishing any single part.",
+            "Sort each decision into reversible and permanent, and slow down only on the permanent ones.",
+            "Write the help text, then change the design until the help text is not needed."
+          ],
+          "constraints": [
+            "Uses no more than two font sizes.",
+            "Every result appears in a full sentence as well as a number."
+          ],
+          "tasks": [
+            "Price in hours: take-home pay per hour and any price give its cost in working hours and 40-hour weeks, with a daily item also shown per year.",
+            "Estimate anything: a question split into steps, each with a low and high guess, gives a likely range for the answer, with every step shown.",
+            "Picture hanging helper: wall width, frame widths, and gap between frames give the nail position for each frame, measured from the left.",
+            "Garden bed soil calculator: bed length, width, and depth give the soil volume in litres and the number of bags of a size the user enters.",
+            "Seating plan: guests and table sizes give a printable plan, with pairs the user marks kept at different tables.",
+            "Roman numeral converter: numbers from 1 to 3,999 converted in both directions, with each step of the conversion shown."
+          ],
+          "guests": [
+            "historical | Mary Anning | Search the same ground again after every storm. | died 1847",
+            "creature | Clockwork beetle | Wind it once and watch how far it runs without help. | invented"
+          ]
+        },
+        "retired": {
+          "guests": [
+            "historical | Marcus Aurelius | Act only on what you control, and let the rest go. | died 180",
+            "historical | Socrates | Ask questions until the hidden assumption shows. | died 399 BC"
+          ],
+          "roles": [
+            "Interaction designer",
+            "Motion designer",
+            "Product designer",
+            "Service designer",
+            "Information designer",
+            "Cartographer",
+            "Architect",
+            "Landscape architect"
+          ],
+          "methods": [
+            "Watch three people use the current version first.",
+            "Build the smallest version that works end to end.",
+            "Remove one element per pass until it breaks, then restore the last one.",
+            "Sketch with a thick marker so small detail is impossible.",
+            "Give each idea 20 minutes, then move on.",
+            "Explain it aloud to someone outside the field.",
+            "Map every step the user takes, then remove steps.",
+            "Pick the one number that matters and design around it."
+          ],
+          "constraints": [
+            "Works on a 320 px wide screen.",
+            "No images or icons."
+          ],
+          "tasks": [
+            "Freelance rate calculator: target yearly income, working weeks, hours per week, and yearly costs give the minimum hourly rate.",
+            "Debt payoff comparison: up to five debts compared by smallest balance first and highest rate first, in months and total interest.",
+            "Shared house expenses: who paid what gives who owes whom, settled with the fewest transfers.",
+            "Travel money table: a rate the user types in gives a printable table of common amounts in both currencies.",
+            "Compound growth illustration: starting amount, monthly addition, rate, and years give a year-by-year table and chart, labelled as an illustration, not a forecast.",
+            "Receipt checker: item prices, quantities, discount, and tax rate give the total to compare with a receipt."
+          ]
+        },
+        "accepted": [
+          {
+            "task": "Price in hours: take-home pay per hour and any price give its cost in working hours and 40-hour weeks, with a daily item also shown per year.",
+            "credit": ""
+          },
+          {
+            "task": "Estimate anything: a question split into steps, each with a low and high guess, gives a likely range for the answer, with every step shown.",
+            "credit": ""
+          }
+        ]
+      }
+    ],
+    "github": {
+      "suggestionsOpenedThisWeekCount": 0,
+      "issuesOpenedCount": 2,
+      "issuesClosedCount": 5,
+      "issuesOpenedAndClosedCount": 2,
+      "issuesOpened": [
+        {
+          "number": 18,
+          "title": "Add a temperament pool so each member has a fixed manner"
+        },
+        {
+          "number": 17,
+          "title": "Show the team's debate as a transcript and use the concept name as the headline"
+        }
+      ],
+      "issuesClosed": [
+        {
+          "number": 18,
+          "title": "Add a temperament pool so each member has a fixed manner"
+        },
+        {
+          "number": 17,
+          "title": "Show the team's debate as a transcript and use the concept name as the headline"
+        },
+        {
+          "number": 16,
+          "title": "Task: Price in hours"
+        },
+        {
+          "number": 15,
+          "title": "Task: Estimate anything"
+        },
+        {
+          "number": 14,
+          "title": "Task: Gut check coin"
+        }
+      ],
+      "prsMerged": [
+        {
+          "number": 19,
+          "title": "Season 2026-10-12"
+        }
+      ],
+      "openSuggestionsNow": []
+    },
+    "metrics": {
+      "days": 7,
+      "failed": 0,
+      "flagged": 1,
+      "deadlocks": 0,
+      "refereed": 0,
+      "meanClashLines": 10,
+      "artifacts": 7,
+      "meanArtifactKB": 20.1,
+      "guestKinds": {
+        "literary": 2,
+        "creature": 2,
+        "archetype": 1,
+        "myth": 2
+      },
+      "commits": 18,
+      "commitsByArea": {
+        "Tests": 1,
+        "Team and sessions": 5,
+        "Seasons and suggestions": 4,
+        "Pages and images": 2,
+        "Skill": 4,
+        "Automation": 2
+      },
+      "testsAtEnd": 67
+    },
+    "trend": {
+      "days": 5,
+      "failed": 0,
+      "flagged": 1,
+      "deadlocks": 0,
+      "refereed": 0,
+      "artifacts": 5,
+      "meanArtifactKB": 8.6,
+      "commits": -16,
+      "testsAtEnd": 24
+    }
+  },
+  "model": "claude-sonnet-5-5",
+  "status": "ok",
+  "problems": []
+}
