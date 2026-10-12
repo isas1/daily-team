@@ -7,23 +7,23 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-11: The Thread Out
+### 2026-10-12: Found Voice
 
-<a href="days/2026-10-11/"><img src="days/2026-10-11/team.png" alt="Team for 2026-10-11: Costume designer · Cartographer · Furniture maker · Daedalus" width="100%"></a>
+<a href="days/2026-10-12/"><img src="days/2026-10-12/team.png" alt="Team for 2026-10-12: Set designer · Bookbinder · Data journalist · Euclid" width="100%"></a>
 
-**Task:** Daily routine builder: morning and evening steps with times, printable.
+**Task:** Output style: a Claude Code voice that changes how every answer sounds.
 
-**Decision:** The page is a gray maze with a bare paper figure at its morning gate, and the visitor does one thing: drag a single thread from the gate to the evening wall, and the corridors it passes through become their timed morning and evening steps.
+**Decision:** The page is a fake Claude Code terminal whose assistant can answer only with words the visitor has already typed, one sentence at a time, at a pace the visitor drags into shape, until the house lights come up on the whole stock of words ...
 
-<a href="days/2026-10-11/"><img src="days/2026-10-11/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-12/"><img src="days/2026-10-12/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-11/) · [Use it](https://isas1.github.io/daily-team/2026-10-11/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-12/) · [Use it](https://isas1.github.io/daily-team/2026-10-12/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
 
 <!-- WEEK:START -->
-**Season 2**, since 2026-10-05. New this season: Taxidermist, Locksmith, Upholsterer, Glassblower, Calligrapher, Blacksmith, Tailor, Beekeeper, and the first 36 guests. A new season with 8 new roles and 8 new methods is drafted every Monday.
+**Season 3**, since 2026-10-12. New this season: Luthier, Stonemason, Clockmaker, Weaver, Florist, Cobbler, Translator, Sculptor, Mary Anning, Clockwork beetle, and 24 temperaments. A new season with 8 new roles and 8 new methods is drafted every Monday.
 
 ### Vote on what gets built next
 
@@ -37,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-12](days/2026-10-12/) | <a href="days/2026-10-12/"><img src="days/2026-10-12/artifact-1.png" alt="Found Voice" width="160"></a> | Found Voice | Set designer · Bookbinder · Data journalist · Euclid |
 | [2026-10-11](days/2026-10-11/) | <a href="days/2026-10-11/"><img src="days/2026-10-11/artifact-1.png" alt="The Thread Out" width="160"></a> | The Thread Out | Costume designer · Cartographer · Furniture maker · Daedalus |
 | [2026-10-10](days/2026-10-10/) | <a href="days/2026-10-10/"><img src="days/2026-10-10/artifact-1.png" alt="Four Corners, Out and Back" width="160"></a> | Four Corners, Out and Back | Game designer · Service designer · Comic artist · Sisyphus |
 | [2026-10-09](days/2026-10-09/) | <a href="days/2026-10-09/"><img src="days/2026-10-09/artifact-1.png" alt="The Never List" width="160"></a> | The Never List | Beekeeper · Sign painter · Librarian · Phoenix |
 | [2026-10-08](days/2026-10-08/) | <a href="days/2026-10-08/"><img src="days/2026-10-08/artifact-1.png" alt="The Chalk-Hand Sheet" width="160"></a> | The Chalk-Hand Sheet | Packaging designer · Brand strategist · Taxidermist · Time |
 | [2026-10-07](days/2026-10-07/) | <a href="days/2026-10-07/"><img src="days/2026-10-07/artifact-1.png" alt="The Ear Card" width="160"></a> | The Ear Card | Teacher · Urban planner · Upholsterer · Don Quixote |
 | [2026-10-06](days/2026-10-06/) | <a href="days/2026-10-06/"><img src="days/2026-10-06/artifact-1.png" alt="Three Panes" width="160"></a> | Three Panes | Window dresser · Calligrapher · Textile designer · Glass fox |
-| [2026-10-05](days/2026-10-05/) | <a href="days/2026-10-05/"><img src="days/2026-10-05/artifact-1.png" alt="CV checklist" width="160"></a> | CV checklist | Bookbinder · Glassblower · Chef · Captain Ahab |
 
-[All 9 days](ARCHIVE.md)
+[All 10 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works
