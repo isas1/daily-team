@@ -1,0 +1,185 @@
+{
+  "start": "2026-10-19",
+  "base": "2026-10-12",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "added": {
+    "roles": [
+      {
+        "text": "Wheelwright",
+        "credit": ""
+      },
+      {
+        "text": "Gilder",
+        "credit": ""
+      },
+      {
+        "text": "Thatcher",
+        "credit": ""
+      },
+      {
+        "text": "Lacemaker",
+        "credit": ""
+      },
+      {
+        "text": "Rope maker",
+        "credit": ""
+      },
+      {
+        "text": "Bell founder",
+        "credit": ""
+      },
+      {
+        "text": "Organ builder",
+        "credit": ""
+      },
+      {
+        "text": "Stage manager",
+        "credit": ""
+      }
+    ],
+    "methods": [
+      {
+        "text": "Name every part before arranging any of them.",
+        "credit": ""
+      },
+      {
+        "text": "Find the slowest step, make it visible, and speed up only that step.",
+        "credit": ""
+      },
+      {
+        "text": "Build two versions that disagree and keep what both share.",
+        "credit": ""
+      },
+      {
+        "text": "Stop each session mid-sentence so the next one starts easily.",
+        "credit": ""
+      },
+      {
+        "text": "Trace one piece of input from entry to exit and note every stop.",
+        "credit": ""
+      },
+      {
+        "text": "Decide what gets thrown away before deciding what stays.",
+        "credit": ""
+      },
+      {
+        "text": "Make the worst version on purpose, then list what makes it bad.",
+        "credit": ""
+      },
+      {
+        "text": "Write the rule for when to stop before you start.",
+        "credit": ""
+      }
+    ],
+    "constraints": [
+      {
+        "text": "Text still reads clearly at 200 percent zoom.",
+        "credit": ""
+      },
+      {
+        "text": "No more than seven elements visible at once.",
+        "credit": ""
+      }
+    ],
+    "tasks": [
+      {
+        "text": "Lantern: a small light carried ahead into a dark and unfamiliar project.",
+        "credit": ""
+      },
+      {
+        "text": "Echo: what comes back changed after a voice is sent into a deep place.",
+        "credit": ""
+      },
+      {
+        "text": "Apprentice: someone who watches first, copies second, and one day surprises the master.",
+        "credit": ""
+      },
+      {
+        "text": "Fog: the moment the work stops making sense, and what helps it lift.",
+        "credit": ""
+      },
+      {
+        "text": "Knot: a tangle that only loosens when pulled the right way.",
+        "credit": ""
+      },
+      {
+        "text": "Seed: something small planted in a project that grows on its own while no one looks.",
+        "credit": ""
+      }
+    ],
+    "guests": [
+      {
+        "text": "myth | Ariadne | Leave a thread so you can always find the way back. | Greek myth",
+        "credit": ""
+      },
+      {
+        "text": "literary | Phileas Fogg | Set a fixed deadline and plan every stop against it. | Jules Verne, died 1905",
+        "credit": ""
+      }
+    ],
+    "temperaments": [
+      {
+        "text": "Repeats the other side's point before answering it.",
+        "credit": ""
+      },
+      {
+        "text": "Goes quiet, then returns with a written list.",
+        "credit": ""
+      },
+      {
+        "text": "Asks what would change their mind, then waits.",
+        "credit": ""
+      },
+      {
+        "text": "Brings up the budget whenever the talk gets abstract.",
+        "credit": ""
+      }
+    ]
+  },
+  "retired": {
+    "guests": [
+      "historical | Euclid | State a few assumptions, then build everything from them. | died c. 270 BC",
+      "historical | Ibn al-Haytham | Trust nothing until an experiment shows it. | died c. 1040"
+    ],
+    "temperaments": [
+      "Impatient; cuts people off mid-sentence.",
+      "Hoards evidence before saying anything.",
+      "Agrees fast, then quietly does it their own way.",
+      "Argues the opposite side to test an idea."
+    ],
+    "roles": [
+      "Industrial designer",
+      "Furniture maker",
+      "Set designer",
+      "Lighting designer",
+      "Costume designer",
+      "Game designer",
+      "Puppeteer",
+      "Choreographer"
+    ],
+    "methods": [
+      "Design the error and empty states first.",
+      "List the assumptions in the brief and check each one.",
+      "Make it work in black and white before adding color.",
+      "Prototype in the final material.",
+      "Take the conventions of a genre and break exactly one.",
+      "Storyboard every change of state.",
+      "Write the copy before the layout.",
+      "Scope the work to what fits in one day."
+    ],
+    "constraints": [
+      "Under 100 words of fixed text on the page.",
+      "Three colors at most."
+    ],
+    "tasks": [
+      "Statusline: a Claude Code status line that lives like a creature at the bottom of the terminal.",
+      "Spinner: what Claude Code shows while it thinks, made into a tiny performance.",
+      "Gatekeeper: a Claude Code hook that stands at the door before a tool acts and asks its own question.",
+      "Aftermath: a Claude Code hook that wakes after every edit and leaves a mark.",
+      "Last word: a Claude Code hook that speaks when a session ends.",
+      "Morning ritual: what a Claude Code session does the moment it starts."
+    ]
+  },
+  "suggestions": []
+}
