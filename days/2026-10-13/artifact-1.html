@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Inn That Answers · rough cut</title>
+<style>
+:root{
+  --ink:#120e0a;--bar:#050403;--paper:#e6c98f;--hi:#f8e2b0;--dim:#54442f;
+  --lamp:#ffb347;--red:#d2603f;--room:#b7d2c3;--pack:#a87b48;--strap:#d7a463;
+  --ground:#3d3124;--sky:#6d5c44;--barText:#b9a37a
+}
+body.dawn{
+  --ink:#ddd0b6;--bar:#2b2219;--paper:#3b2c1b;--hi:#1d140b;--dim:#a8967a;
+  --lamp:#b4601b;--red:#9c2e19;--room:#29513f;--pack:#7a5228;--strap:#8f5d26;
+  --ground:#b9a585;--sky:#b9a585;--barText:#e5d6b8
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink);color:var(--paper);
+  font-family:"Courier New",ui-monospace,Menlo,Consolas,monospace;
+  transition:background-color 4s,color 4s}
+body{padding:2vh 0 4vh}
+main{--fs:min(2.05vw,2.85vh);font-size:var(--fs);width:80ch;max-width:100vw;margin:0 auto;position:relative}
+.bar{background:var(--bar);color:var(--barText);display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:.4em 2ch;padding:.55em 1ch;font-size:max(11px,.78em);
+  letter-spacing:.08em;transition:background-color 4s,color 4s}
+.bar b{color:var(--lamp);letter-spacing:.22em;font-weight:700}
+.bar button{font:inherit;background:none;border:0;color:inherit;padding:.15em .4ch;cursor:pointer;letter-spacing:inherit}
+.bar button[aria-pressed="true"]{color:var(--lamp);text-decoration:underline;text-underline-offset:.25em}
+.bar button:focus-visible,#cp:focus-visible{outline:1px dashed var(--lamp)}
+#g{margin:0;font:inherit;line-height:1.2;white-space:pre;user-select:none;-webkit-user-select:none;
+  touch-action:pan-y;cursor:default;overflow:hidden}
+.gate #g{animation:gate .24s steps(2) infinite}
+@keyframes gate{0%{opacity:1}50%{opacity:.965}}
+.bot{justify-content:flex-start}
+.bot label{color:var(--room);font-weight:700}
+#in{flex:1;min-width:12ch;font:inherit;font-size:max(16px,1.05em);background:transparent;border:0;
+  border-bottom:1px solid var(--dim);color:var(--room);padding:.2em 0;outline:none;letter-spacing:.02em}
+#in::placeholder{color:var(--dim)}
+#g span{transition:color 4s}
+.d{color:var(--dim)} .a{color:var(--paper)} .hi,.t{color:var(--hi);font-weight:700}
+.k{color:var(--hi);font-weight:700}
+.r{color:var(--room)} .g{color:var(--ground)} .sk{color:var(--sky)}
+.l{color:var(--lamp);text-shadow:0 0 .7em var(--lamp)} .l0{color:var(--lamp);opacity:.45}
+.p{color:var(--pack)} .s{color:var(--strap);font-weight:700} .b{color:var(--lamp);font-weight:700}
+.inn{color:var(--paper)}
+.st{color:var(--red);text-decoration:line-through;text-decoration-thickness:.12em}
+.cap{color:var(--paper);font-style:italic}
+#wall{max-width:80ch;margin:.5em auto 0;padding:0 1ch;font-size:clamp(20px,3.6vw,46px);font-weight:700;
+  line-height:1.12;color:var(--lamp);min-height:0;transition:opacity 2s}
+#wall.past{opacity:.38}
+#wall:not(:empty)::before{content:"\201C";opacity:.6}
+.below{max-width:80ch;margin:2.5em auto 0;padding:0 1ch;font-size:13px;color:var(--dim);line-height:1.5}
+.below h2{font-size:13px;letter-spacing:.2em;color:var(--paper);margin:0 0 .4em;font-weight:700}
+#f{color:var(--paper);background:transparent;border-left:2px solid var(--dim);padding:.4em 1.5ch;margin:.4em 0;
+  white-space:pre-wrap;font:inherit;font-size:13px}
+#cp{font:inherit;background:none;color:var(--lamp);border:1px solid var(--dim);padding:.3em 1.2ch;cursor:pointer}
+footer{max-width:80ch;margin:2.5em auto 0;padding:0 1ch;font-size:12px;color:var(--dim);line-height:1.55}
+footer b{color:var(--paper);font-weight:700}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion: reduce){
+  html,body,#g span,.bar,#wall{transition:none}
+  .gate #g{animation:none}
+}
+</style>
+</head>
+<body class="gate">
+<main>
+  <div class="bar top">
+    <span><b>THE INN THAT ANSWERS</b> <span id="slate">SC.1  TK.1  ROUGH CUT 10%  00:00:00:00</span></span>
+    <span>lens
+      <button data-v="0" aria-pressed="true">.1</button>
+      <button data-v="1" aria-pressed="false">1</button>
+      <button data-v="2" aria-pressed="false">10</button>
+      &nbsp;<button id="snd" aria-pressed="true">sound on</button>
+    </span>
+  </div>
+  <pre id="g" aria-hidden="true"></pre>
+  <div class="bar bot">
+    <label for="in">room &gt;</label>
+    <input id="in" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send" aria-label="what the room says">
+  </div>
+  <div id="live" class="sr" aria-live="polite"></div>
+</main>
+<div id="wall"></div>
+
+<section class="below">
+  <h2>FROM THE PACK, KEPT: commands/look.md</h2>
+  A slash command for a Claude Code plugin. Place it at <b>&lt;plugin&gt;/commands/look.md</b> and run <b>/look</b>. It reads files and changes none.
+  <pre id="f"></pre>
+  <button id="cp">copy look.md</button>
+</section>
+
+<footer>
+  <b>Documentary director</b> (lead): each mod shown at ten percent, drawn in full only after it has a word; the slate, the scene cards, the rough-cut count.
+  <b>Playwright</b>: the visitor is the room; one line spoken past the frame.
+  <b>Puppeteer</b>: three lenses at .1, 1 and 10; straps you drag open.
+  <b>Benjamin Franklin</b> (guest, d. 1790): the two-column ledger, "equal" as same job at the same moment, and the sheet kept in this browser.
+  Set in monospace only.
+</footer>
+
+<script>
+(()=>{
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(RM)document.body.classList.remove('gate');
+const W=80,H=24;
+const g=document.getElementById('g'),inp=document.getElementById('in'),slate=document.getElementById('slate'),
+      wall=document.getElementById('wall'),live=document.getElementById('live'),sndB=document.getElementById('snd');
+const lensB=[...document.querySelectorAll('[data-v]')];
+
+/* ---------- grid ---------- */
+let G=[];
+function clr(){G=[];for(let y=0;y<H;y++){const r=[];for(let x=0;x<W;x++)r.push([' ','']);G.push(r)}}
+function put(x,y,s,c){if(y<0||y>=H)return;s=String(s);for(let i=0;i<s.length;i++){const xx=x+i;if(xx<0||xx>=W)continue;G[y][xx]=[s[i],c||'']}}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function seg(c,b){return c?'<span class="'+c+'">'+esc(b)+'</span>':esc(b)}
+function render(){let h='';for(let y=0;y<H;y++){let cur=null,buf='';for(const [ch,c] of G[y]){if(c!==cur){if(buf)h+=seg(cur,buf);cur=c;buf=''}buf+=ch}if(buf)h+=seg(cur,buf);if(y<H-1)h+='\n'}g.innerHTML=h}
+const pad=(s,n)=>(String(s)+' '.repeat(n)).slice(0,n);
+const trunc=(s,n)=>s.length>n?s.slice(0,n-1)+'~':s;
+const tail=(s,n)=>s.length>n?'~'+s.slice(-(n-1)):s;
+const words=s=>s.trim().split(/\s+/).filter(Boolean).length;
+function wrap(s,w){const out=[];let line='';for(const wd of s.split(/\s+/)){if(!wd)continue;const t=(line?line+' ':'')+wd;if(t.length>w){if(line)out.push(line);line=wd.slice(0,w)}else line=t}if(line)out.push(line);return out.length?out:['']}
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function hh(a,b,c){let x=Math.imul(a+7,374761393)+Math.imul(b+3,668265263)+Math.imul(c+11,2246822519);x=Math.imul(x^(x>>>13),1274126177);return((x^(x>>>16))>>>0)/4294967296}
+
+/* ---------- the pack ---------- */
+const MODS=[
+{id:0,kind:'command',name:'/fmt',path:'commands/fmt.md',job:'format changed code',moment:'on demand',gives:'formats changes',costs:'1 dep',
+ file:['---','description: Format the files I changed','---','Run the project formatter on files','changed since the last commit.','Show the diff. Do not commit.']},
+{id:1,kind:'command',name:'/tidy',path:'commands/tidy.md',job:'format changed code',moment:'on demand',gives:'formats changes',costs:'1 dep',
+ file:['---','description: Tidy code formatting','---','Format every changed file with','the project formatter. Show the','diff. Do not commit.']},
+{id:2,kind:'command',name:'/look',path:'commands/look.md',job:'describe the repo',moment:'on demand',gives:'repo as a room',costs:'few reads',
+ file:['---','description: Describe this repository as a room','---','Read the top-level files and folders.','Describe the repository as a room.','What hangs on the walls, what is on','the floor. Edit nothing.']},
+{id:3,kind:'hook',name:'lint-pre',path:'hooks/hooks.json',job:'lint',moment:'before commit',gives:'lint pre-commit',costs:'2s/commit',
+ file:['"PreToolUse": [{','  "matcher": "Bash",','  "hooks": [{ "type": "command",','    "command":','      "${CLAUDE_PLUGIN_ROOT}/lint.sh" }]','}]','# lint.sh: on git commit, run lint']},
+{id:4,kind:'hook',name:'lint-gate',path:'hooks/hooks.json',job:'lint',moment:'before commit',gives:'lint pre-commit',costs:'2s/commit',
+ file:['"PreToolUse": [{','  "matcher": "Bash",','  "hooks": [{ "type": "command",','    "command":','      "${CLAUDE_PLUGIN_ROOT}/gate.sh" }]','}]','# gate.sh: on git commit, run lint']},
+{id:5,kind:'agent',name:'cartographer',path:'agents/cartographer.md',job:'map folders',moment:'on demand',gives:'map of folders',costs:'reads only',
+ file:['---','name: cartographer','description: Maps where things live','tools: Read, Glob, Grep','---','Walk the tree. Draw a short map','of what lives where. Change nothing.']},
+{id:6,kind:'agent',name:'proofreader',path:'agents/proofreader.md',job:'check prose',moment:'on demand',gives:'checks prose',costs:'reads only',
+ file:['---','name: proofreader','description: Reads docs for plain errors','tools: Read, Grep','---','Read README and docs/. List typos','and unclear lines. Change nothing.']},
+{id:7,kind:'mcp server',name:'ledger',path:'.mcp.json',job:'serve local notes',moment:'whole session',gives:'notes in chat',costs:'1 process',
+ file:['{ "mcpServers": { "ledger": {','    "command": "node",','    "args": [','      "${CLAUDE_PLUGIN_ROOT}/ledger.js"]','} } }','# reads notes/ on this disk.','# no network.']},
+{id:8,kind:'skill',name:'changelog',path:'skills/changelog/SKILL.md',job:'write changelog',moment:'on release',gives:'dated changelog',costs:'1 file',
+ file:['---','name: changelog','description: Writes one dated changelog','  entry from recent commits','---','Read commits since the last tag.','Write one dated entry. Plain words.']}
+];
+const STRAP_MODS=[[0,3,5],[7,1,8],[4,2,6]];
+const STRAP_ROWS=[8,13,18];
+const KB={command:['.','.',"'","'",'-','-','|','|'],hook:['{','}','{','}','~','~','{','}'],agent:['(',')','(',')','-','-','(',')'],
+ 'mcp server':['[',']','[',']','=','=','[',']'],skill:['/','\\','\\','/','_','_','|','|']};
+
+const R=rng(1790);
+const DOTS=[];for(let y=7;y<22;y++)for(let x=0;x<80;x++){const v=R();if(v<.065)DOTS.push([x,y,v<.048?'.':v<.058?',':"'"])}
+const STARS=[];for(let i=0;i<28;i++)STARS.push([Math.floor(R()*80),Math.floor(R()*6),R()*6.28]);
+const INN=['    __/\\__','   /      \\','  /________\\','  | [*]  _ |','  |     | ||','__|_____|_||__'];
+const IX=56,IY=9,DOOR=65;
+
+const FIG={
+ pack:['   _   ','  (_)  ',' /|\\[#]','  | [#]',' / \\   '],
+ bare:['   _  ','  (_) ',' /|\\  ','  |   ',' / \\  '],
+ out: ['  .-. ',' (o o)',' /|\\  ','  |   ',' / \\  '],
+ sleep:['','','','   z z',' (_)====~']
+};
+
+const CAP={
+ returned:'from the last night. press enter, or tap, and he comes up the road again.',
+ arrive:'rough cut. ten percent. a man on a road. the lamp in the window is you.',
+ look:'he asked you to look. you are the walls. answer him.',
+ setdown:'say where he can put it. the floor is yours.',
+ straps:'ten times closer. drag a strap sideways, or tap it.',
+ name:'no word, no frame. three words and it is drawn.',
+ sleep:'let him sleep. or say goodnight.',
+ dawn:'dawn. he goes. the sheet stays.',
+ kept:'kept. the struck lines stay on the record. enter for another night.'
+};
+const PH={returned:'enter: he comes back',arrive:'say something to the road',look:'what does he see',setdown:'where does he put it',
+ straps:'enter pulls the next strap',name:'name it, three words or more',sleep:'goodnight, or wait',dawn:'',kept:'enter: another night',wait:''};
+const SC={returned:0,arrive:1,look:2,setdown:2,straps:3,name:3,sleep:4,dawn:5,kept:6};
+
+const S={phase:'arrive',view:0,t0:performance.now(),travX:1,hurry:false,log:[],straps:[],queue:[],cur:-1,modOn:false,
+ ledger:[],struck:0,turned:false,packDown:false,leaving:false,done:false,card:null,cap:CAP.arrive,sc:1,
+ sheet:null,stored:false,printN:0,smoke:'',sleepT:0,autoT:0,asleep:false};
+
+function setPhase(p){S.phase=p;if(CAP[p])S.cap=CAP[p];if(SC[p]!==undefined)S.sc=SC[p];inp.placeholder=PH[p]||'';}
+function say(who,text){S.log.push({who,text});if(S.log.length>40)S.log.shift();if(who==='t')live.textContent=text}
+function later(ms,fn){return setTimeout(fn,ms)}
+function card(txt,ms){S.card={txt,until:performance.now()+(RM?600:ms)}}
+function setView(v){S.view=v;lensB.forEach(b=>{const bv=+b.dataset.v;b.setAttribute('aria-pressed',String(bv===v||(v==='sheet'&&bv===1)))})}
+
+/* ---------- sound ---------- */
+let AC=null,soundOn=true;
+function act(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){AC=null}}if(AC&&AC.state==='suspended'){try{AC.resume()}catch(e){}}}
+function tone(f,d,type,v,f2){if(!AC||!soundOn)return;const t=AC.currentTime,o=AC.createOscillator(),gn=AC.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);gn.gain.setValueAtTime(v||.06,t);gn.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(gn);gn.connect(AC.destination);o.start(t);o.stop(t+d+.02)}
+function noise(d,v,fq){if(!AC||!soundOn)return;const n=Math.floor(AC.sampleRate*d),b=AC.createBuffer(1,n,AC.sampleRate),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=(Math.random()*2-1)*(1-i/n);const s=AC.createBufferSource(),f=AC.createBiquadFilter(),gn=AC.createGain();s.buffer=b;f.type='bandpass';f.frequency.value=fq;gn.gain.value=v;s.connect(f);f.connect(gn);gn.connect(AC.destination);s.start()}
+const tick=()=>noise(.02,.18,3200), thud=()=>tone(72,.4,'sine',.2,48), scratch=()=>noise(.45,.22,1400),
+      creak=()=>tone(190,.5,'sawtooth',.025,110), chime=()=>{tone(523,1.8,'sine',.05);setTimeout(()=>tone(784,2.2,'sine',.04),220)};
+sndB.addEventListener('click',()=>{act();soundOn=!soundOn;sndB.textContent=soundOn?'sound on':'sound off';sndB.setAttribute('aria-pressed',String(soundOn))});
+
+/* ---------- story ---------- */
+function startNight(){
+ clearTimeout(S.autoT);clearTimeout(S.sleepT);
+ document.body.classList.remove('dawn');
+ wall.textContent='';wall.classList.remove('past');
+ Object.assign(S,{travX:1,hurry:false,log:[],queue:[],cur:-1,modOn:false,ledger:[],struck:0,turned:false,packDown:false,leaving:false,done:false,smoke:'',asleep:false});
+ S.straps=STRAP_MODS.map(m=>({mods:m,open:false,pull:0}));
+ setPhase('arrive');setView(0);
+}
+function arrived(){
+ setPhase('wait');creak();
+ card('SC.2   THE ROOM IS ASKED TO LOOK',1500);
+ later(1500,()=>{setView(1);say('t','> look');setPhase('look')});
+}
+function openStrap(i){
+ if(i<0||!S.straps[i]||S.straps[i].open)return;
+ const s=S.straps[i];s.open=true;s.pull=1;S.queue.push(...s.mods);scratch();
+ say('t','The strap gives.');nextMod();
+}
+function nextMod(){
+ if(!S.queue.length){
+  S.modOn=false;
+  if(S.straps.every(s=>s.open))return finish();
+  setView(2);setPhase('straps');say('t','Another strap.');return;
+ }
+ S.cur=S.queue.shift();S.modOn=true;setView(2);setPhase('name');
+ say('t','> set down ?');later(700,()=>{if(S.phase==='name')say('t','It has no name yet. I will not set it down without one.')});
+}
+function define(v){
+ const m=MODS[S.cur];
+ const prior=S.ledger.find(e=>!e.struck&&MODS[e.m].job===m.job&&MODS[e.m].moment===m.moment);
+ const e={m:m.id,words:v,struck:!!prior,eqOf:prior?prior.m:-1,sp:0,go:false};
+ S.ledger.push(e);inp.value='';setPhase('wait');thud();
+ say('r',v);say('t','> set down '+m.name);
+ later(1900,()=>{if(e.struck)strikeScene(e);else nextMod()});
+}
+function strikeScene(e){
+ const m=MODS[e.m],p=MODS[e.eqOf];
+ setView(1);say('t',m.name+' does the job of '+p.name+', at the same moment. Strike it.');
+ later(500,()=>{e.go=true;scratch()});
+ const first=S.struck===0;S.struck++;
+ if(first){
+  later(2200,()=>{S.turned=true;creak();fourthWall('You. Past the lamp. Leave the line struck. I want to see what we argued about.')});
+  later(8200,()=>{S.turned=false;wall.classList.add('past');nextMod()});
+ }else later(3200,()=>{say('t','Leave it showing.');nextMod()});
+}
+function fourthWall(t){
+ live.textContent=t;
+ if(RM){wall.textContent=t;return}
+ wall.textContent='';let i=0;const iv=setInterval(()=>{wall.textContent=t.slice(0,++i);if(i%3===0)tick();if(i>=t.length)clearInterval(iv)},48);
+}
+function finish(){
+ setPhase('wait');say('t','All nine named. Now I can sleep.');
+ later(1600,()=>{card('SC.4   SLEEP',1300);later(1300,()=>{setView(1);S.asleep=true;say('t','> sleep');setPhase('sleep');S.sleepT=later(15000,dawn)})});
+}
+function dawn(){
+ if(S.phase!=='sleep')return;clearTimeout(S.sleepT);
+ setPhase('dawn');card('SC.5   DAWN',1400);document.body.classList.add('dawn');chime();
+ later(1400,()=>{S.asleep=false;say('t','Light. I go. Keep the sheet.')});
+ later(3600,()=>{setView(0);S.travX=DOOR;S.leaving=true});
+}
+function kept(){
+ S.leaving=false;
+ const rows=S.ledger.map(e=>{const m=MODS[e.m];return{kind:m.kind,name:m.name,gives:m.gives,costs:m.costs,words:e.words,struck:e.struck,eq:e.eqOf>=0?MODS[e.eqOf].name:'',job:m.job,moment:m.moment}});
+ const data={date:new Date().toISOString().slice(0,10),packed:MODS.length,rows};
+ S.stored=false;
+ try{localStorage.setItem('inn-sheet',JSON.stringify(data));S.stored=true}catch(err){S.stored=false}
+ S.sheet=data;S.printN=0;setPhase('kept');setView('sheet');
+}
+
+/* ---------- input ---------- */
+function onEnter(){
+ act();
+ const v=inp.value.trim(),n=words(v);
+ switch(S.phase){
+  case 'returned':inp.value='';startNight();break;
+  case 'arrive':if(v){S.smoke=v;tick()}inp.value='';S.hurry=true;break;
+  case 'look':
+   if(!n){say('t','> look');return}
+   say('r',v);inp.value='';setPhase('wait');creak();
+   later(900,()=>say('t','A room that answers. I walked a long way for one.'));
+   later(2500,()=>{say('t','> set down pack');setPhase('setdown')});break;
+  case 'setdown':
+   if(!n)return;
+   say('r',v);inp.value='';setPhase('wait');S.packDown=true;thud();
+   later(1000,()=>{card('SC.3   THE PACK, TEN TIMES CLOSER',1400);later(1400,()=>{setView(2);setPhase('straps');say('t','Three straps. Pull one.')})});break;
+  case 'straps':inp.value='';openStrap(S.straps.findIndex(s=>!s.open));break;
+  case 'name':
+   if(n<3){say('t',n?'More words. I do not set down a thing half named.':'It has no word yet.');noise(.06,.12,500);return}
+   define(v);break;
+  case 'sleep':if(v)say('r',v);inp.value='';dawn();break;
+  case 'kept':inp.value='';startNight();break;
+ }
+}
+inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();onEnter()}});
+inp.addEventListener('input',()=>{act();tick()});
+
+let drag=null;
+function cell(e){const r=g.getBoundingClientRect();return{x:Math.floor((e.clientX-r.left)/r.width*W),y:Math.floor((e.clientY-r.top)/r.height*H)}}
+g.addEventListener('pointerdown',e=>{
+ act();const c=cell(e);
+ if(S.view===2&&S.phase==='straps'){
+  const i=STRAP_ROWS.findIndex((ry,k)=>Math.abs(c.y-ry)<=1&&!S.straps[k].open);
+  if(i>=0){drag={i,x0:c.x,t:performance.now(),dx:0};try{g.setPointerCapture(e.pointerId)}catch(err){}e.preventDefault();noise(.05,.1,900);return}
+ }
+ if(S.phase==='arrive')S.hurry=true;
+ else if(S.phase==='returned'||S.phase==='kept')startNight();
+ else if(S.phase==='sleep')dawn();
+ if(S.phase!=='straps')inp.focus({preventScroll:true});
+});
+g.addEventListener('pointermove',e=>{
+ if(!drag)return;const c=cell(e);drag.dx=c.x-drag.x0;
+ const s=S.straps[drag.i];s.pull=Math.max(0,Math.min(1,drag.dx/16));
+ if(Math.abs(drag.dx)>0&&Math.abs(drag.dx)%3===0)tick();
+ if(s.pull>=1){const i=drag.i;drag=null;openStrap(i)}
+});
+function endDrag(){
+ if(!drag)return;const s=S.straps[drag.i],quick=performance.now()-drag.t<350&&Math.abs(drag.dx)<2;
+ if(quick)openStrap(drag.i);else s.pull=0;drag=null;
+}
+g.addEventListener('pointerup',endDrag);g.addEventListener('pointercancel',endDrag);
+lensB.forEach(b=>b.addEventListener('click',()=>{act();let v=+b.dataset.v;if(v===1&&(S.phase==='kept'||S.phase==='returned'))v='sheet';setView(v);tick()}));
+
+/* ---------- drawing ---------- */
+function frame(x0,y0,x1,y1,k,c){
+ const [tl,tr,bl,br,t,b,l,r]=k;
+ put(x0,y0,tl+t.repeat(x1-x0-1)+tr,c);put(x0,y1,bl+b.repeat(x1-x0-1)+br,c);
+ for(let y=y0+1;y<y1;y++){put(x0,y,l,c);put(x1,y,r,c)}
+}
+function blank(x0,y0,x1,y1){for(let y=y0;y<=y1;y++)put(x0,y,' '.repeat(x1-x0+1),'')}
+
+function drawField(now){
+ const dawnOn=document.body.classList.contains('dawn');
+ if(!dawnOn)for(const [x,y,p] of STARS){const on=RM||Math.sin(now/650+p*3)>-.2;put(x,y,on?'+':'.','sk')}
+ else{put(6,1,'\\  |  /','l');put(5,2,'--  O  --','l');put(6,3,'/  |  \\','l')}
+ for(const [x,y,ch] of DOTS)put(x,y,ch,'d');
+ for(let x=0;x<IX;x+=2)put(x,14,'_','g');
+ for(let x=IX+14;x<80;x+=2)put(x,14,'_','g');
+ INN.forEach((l,i)=>{for(let j=0;j<l.length;j++)if(l[j]!==' ')put(IX+j,IY+i,l[j],'inn')});
+ const inside=!['arrive','returned'].includes(S.phase)&&!S.leaving;
+ const fl=RM||(Math.sin(now/90)+Math.sin(now/37))>-1.1;
+ put(IX+5,IY+3,'*',inside||fl?'l':'l0');
+ if(!RM&&!dawnOn){const k=Math.floor(now/600)%3;put(IX+7,IY-1-k,'~','d')}
+ if(S.phase==='arrive'||S.leaving){
+  const tx=Math.round(S.travX);put(tx,13,'@','t');
+  if(S.phase==='arrive')for(let i=3;i<9;i+=3)put(tx-i,13,'.','sk');
+ }
+ if(S.phase==='arrive'){
+  const v=inp.value.trim();
+  if(v)put(48,6,'~ '+tail(v,30),'r');
+  if(S.smoke)put(50,4,'~ '+tail(S.smoke,28),'d');
+ }
+ if(inside||S.leaving){
+  const marks=MODS.map((m,i)=>{const e=S.ledger[i];return e?(e.struck?'x':'+'):'.'}).join('');
+  put(IX-2,16,'pack '+marks,'a');
+  put(IX-2,17,'+ kept  x struck  . unnamed','d');
+ }
+ put(2,20,'scale 0.1  -  one @ is one man','d');
+}
+
+function drawRoom(now){
+ frame(0,0,39,21,['+','+','+','+','-','-','|','|'],'p');
+ put(32,1,'|','p');
+ const fl=RM||(Math.sin(now/110)+Math.sin(now/43))>-1.1;
+ put(31,2,'(*)',fl?'l':'l0');
+ if(fl&&!RM){put(29,3,'.   .','l0')}
+ // log
+ const lines=[];
+ for(const it of S.log){
+  const pre=it.who==='r'?'room: ':'';
+  wrap(pre+it.text,35).forEach((l,i)=>lines.push({l:(i&&it.who==='r'?'      ':'')+l,c:it.who==='r'?'r':'t'}));
+ }
+ const show=lines.slice(-9);
+ show.forEach((o,i)=>put(2,4+i,o.l,o.c));
+ if(['look','setdown','sleep','arrive','name'].includes(S.phase)){
+  const v=inp.value;const blink=RM||Math.floor(now/500)%2;
+  put(2,13,'room: '+tail(v,28)+(blink?'_':' '),'r');
+ }
+ // figure
+ const pose=S.asleep?FIG.sleep:S.turned?FIG.out:S.packDown?FIG.bare:FIG.pack;
+ pose.forEach((l,i)=>put(4,15+i,l,'t'));
+ if(S.packDown&&!S.asleep){put(14,18,' __ ','p');put(14,19,'[##]','p')}
+ if(S.asleep){put(18,19,'[##]','p')}
+ let fl2='';for(let x=1;x<39;x++)fl2+=(x%7===0?"'":'_');put(1,20,fl2,'g');
+ if(fl)put(26,20,'~~~~~~~~~~','l0');
+ drawLedger(now);
+}
+
+function drawLedger(now){
+ const X=42;
+ put(X,0,'THE LEDGER','k');put(X+12,0,'what it gives | costs','d');
+ put(X,2,pad('NAME',11)+pad('+ GIVES',17)+'- COSTS','d');
+ put(X,3,'-'.repeat(38),'d');
+ for(let i=0;i<9;i++){
+  const e=S.ledger[i],y=4+i;
+  if(!e){put(X,y,pad('?',11)+'.  .  .','d');continue}
+  const m=MODS[e.m],row=pad(m.name,11)+pad(m.gives,17)+pad(m.costs,10);
+  if(e.struck){const n=Math.floor(e.sp*38);put(X,y,row.slice(0,n),'st');put(X+n,y,row.slice(n),'a')}
+  else put(X,y,row,'a');
+ }
+ const n=S.ledger.length,s=S.ledger.filter(e=>e.struck).length;
+ put(X,14,'equal = same job, same moment','d');
+ put(X,15,n+' named - '+s+' struck = '+(n-s)+' kept','hi');
+ const last=[...S.ledger].reverse()[0];
+ if(last){put(X,17,'last word from the room:','d');wrap('"'+last.words+'"',37).slice(0,3).forEach((l,i)=>put(X,18+i,l,'r'))}
+}
+
+function drawPack(now){
+ const x0=5,x1=74;
+ put(x0+1,1,'/'+'_'.repeat(x1-x0-3)+'\\','p');
+ for(let y=2;y<=21;y++){put(x0,y,'|','p');put(x1,y,'|','p');if(y%2)put(x0+2,y,':','d'),put(x1-2,y,':','d')}
+ put(x0,22,'\\'+'_'.repeat(x1-x0-1)+'/','p');
+ put(x0+1,5,'\\'+'_'.repeat(x1-x0-3)+'/','p');
+ put(37,4,'(o)','b');
+ const firstClosed=S.straps.findIndex(s=>!s.open);
+ S.straps.forEach((s,k)=>{
+  const ry=STRAP_ROWS[k];
+  if(s.open){
+   let l='';for(let x=0;x<16;x++)l+=x%2?' ':'=';put(1,ry,l,'d');put(17,ry+1,"'.",'d');
+   put(x1+1,ry,'=  =','d');
+  }else{
+   put(0,ry,'='.repeat(80),'s');
+   const bx=37+Math.round(s.pull*18);put(bx,ry,'[#]','b');
+   if(s.pull>0)put(37,ry,'.'.repeat(Math.max(0,bx-37)),'d');
+   if(k===firstClosed&&S.phase==='straps'&&!S.modOn){const w=RM?0:Math.round(Math.sin(now/300)*1);put(bx+4+w,ry-1,'-> pull','d')}
+  }
+ });
+ const open=S.straps.filter(s=>s.open).length;
+ put(x0+4,20,'straps open '+open+' of 3     named '+S.ledger.length+' of 9     scale 10','d');
+ if(S.modOn&&S.cur>=0)drawMod(MODS[S.cur],now);
+ const lt=[...S.log].reverse().find(o=>o.who==='t');
+ if(lt)put(1,23-1,trunc(lt.text,78),'t');
+}
+
+function drawMod(m,now){
+ const x0=9,y0=3,x1=70,y1=19;
+ blank(x0,y0,x1,y1);
+ const def=S.ledger.find(e=>e.m===m.id);
+ frame(x0,y0,x1,y1,KB[m.kind],def?'hi':'a');
+ const typed=inp.value,n=words(typed);
+ const frac=def?1:Math.min(1,.1+.3*Math.min(n,3)+Math.min(.08,typed.length*.004));
+ put(12,4,m.kind.toUpperCase(),'k');
+ put(42,4,'name: '+(def?m.name:'????'),def?'hi':'d');
+ put(12,5,'-'.repeat(56),'d');
+ m.file.forEach((line,i)=>{for(let j=0;j<line.length;j++){const ch=line[j];if(ch===' ')continue;
+  put(13+j,6+i,hh(i,j,m.id)<frac?ch:'.',hh(i,j,m.id)<frac?(def?'hi':'a'):'d')}});
+ if(def){
+  put(12,15,'named: "'+trunc(def.words,46)+'"','r');
+  put(12,17,'+ '+m.gives,'a');put(36,17,'- '+m.costs,'a');put(52,17,m.path.length>16?'':m.path,'d');
+  put(12,18,m.path,'d');
+ }else{
+  const blink=RM||Math.floor(now/500)%2;
+  put(12,15,'the room names it:','d');
+  put(12,16,'"'+tail(typed,50)+(blink?'_':' ')+'"','r');
+  put(12,18,'words '+[0,1,2].map(i=>i<n?'[#]':'[ ]').join(' '),n>=3?'hi':'d');
+  put(48,18,'frame '+Math.round(frac*100)+'% drawn',n>=3?'hi':'d');
+ }
+}
+
+function drawSheet(){
+ const d=S.sheet;if(!d)return;
+ put(0,0,'THE SHEET','k');put(11,0,'kept '+d.date,'a');
+ put(36,0,S.stored?'held in this browser as inn-sheet':'storage blocked: on screen only','d');
+ put(0,2,pad('KIND',9)+pad('NAME',13)+pad('+ GIVES',17)+pad('- COSTS',11)+'THE ROOM CALLED IT','d');
+ put(0,3,'-'.repeat(80),'d');
+ const rows=d.rows.slice(0,9);
+ rows.forEach((r,i)=>{if(i>=S.printN)return;
+  const s=pad(r.kind,9)+pad(r.name,13)+pad(r.gives,17)+pad(r.costs,11)+'"'+trunc(String(r.words||''),27)+'"';
+  put(0,4+i,s.slice(0,80),r.struck?'st':'a')});
+ if(S.printN>rows.length){
+  const st=rows.filter(r=>r.struck),packed=d.packed||rows.length;
+  put(0,14,packed+' packed - '+st.length+' equal, struck = '+(packed-st.length)+' kept','hi');
+  put(0,15,'equal = the same job at the same moment. struck lines stay on the sheet.','d');
+  st.slice(0,4).forEach((r,i)=>put(0,17+i,'x '+pad(r.name,12)+'same job as '+r.eq+': '+r.job+', '+r.moment,'st'));
+ }
+}
+
+function drawCard(){
+ put(34,8,'TK.1','d');
+ const t=S.card.txt;put(Math.max(0,Math.floor((80-t.length)/2)),11,t,'k');
+ put(26,13,'-   -   -   -   -   -   -   -','d');
+}
+
+function draw(now){
+ clr();
+ if(S.card&&now<S.card.until)drawCard();
+ else{
+  S.card=null;
+  if(S.view===0)drawField(now);else if(S.view===1)drawRoom(now);else if(S.view===2)drawPack(now);else drawSheet();
+ }
+ put(0,23,pad(S.cap,80),'cap');
+ render();
+}
+
+function progress(){
+ const p=S.phase;
+ if(p==='arrive')return 0;if(p==='look')return .04;if(p==='setdown')return .08;
+ if(p==='sleep')return .88;if(p==='dawn')return .94;if(p==='kept'||p==='returned')return 1;
+ return S.packDown?.12+.72*S.ledger.length/9:.04;
+}
+function tc(now){const f=Math.floor((now-S.t0)/1000*24),z=n=>String(n).padStart(2,'0');return z(Math.floor(f/86400))+':'+z(Math.floor(f/1440)%60)+':'+z(Math.floor(f/24)%60)+':'+z(f%24)}
+
+function update(dt){
+ if(S.phase==='arrive'){S.travX+=dt*(S.hurry?34:RM?20:8.5);if(S.travX>=DOOR){S.travX=DOOR;arrived()}}
+ if(S.leaving){S.travX+=dt*(RM?40:9);if(S.travX>=82&&!S.done){S.done=true;kept()}}
+ for(const e of S.ledger)if(e.struck&&e.go&&e.sp<1)e.sp=Math.min(1,e.sp+dt*(RM?99:.85));
+ if(S.view==='sheet')S.printN+=dt*(RM?99:5);
+}
+
+let last=performance.now(),acc=1;
+function loop(now){
+ const dt=Math.min(.12,(now-last)/1000);last=now;update(dt);
+ acc+=dt;if(acc>=(RM?.2:1/12)){acc=0;draw(now)}
+ const cut=Math.round(10+90*progress());
+ slate.textContent='SC.'+S.sc+'  TK.1  '+(cut>=100?'PRINT':'ROUGH CUT '+cut+'%')+'  '+tc(now);
+ requestAnimationFrame(loop);
+}
+
+/* ---------- copy file ---------- */
+const LOOK=`---
+description: Describe this repository as a room
+---
+Read the top-level files and folders. Do not edit, create, or delete anything.
+
+Describe the repository as a room the user has just walked into:
+- what hangs on the walls (docs, config)
+- what is on the floor (source code)
+- what is still packed (unfinished or untracked work)
+
+Keep it under 12 lines.
+`;
+document.getElementById('f').textContent=LOOK;
+document.getElementById('cp').addEventListener('click',e=>{
+ const b=e.currentTarget;
+ const done=()=>{b.textContent='copied';setTimeout(()=>b.textContent='copy look.md',1600)};
+ try{navigator.clipboard.writeText(LOOK).then(done,()=>sel())}catch(err){sel()}
+ function sel(){const r=document.createRange();r.selectNodeContents(document.getElementById('f'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='selected'}
+});
+
+/* ---------- open ---------- */
+S.straps=STRAP_MODS.map(m=>({mods:m,open:false,pull:0}));
+let saved=null;
+try{const raw=localStorage.getItem('inn-sheet');if(raw){const d=JSON.parse(raw);if(d&&Array.isArray(d.rows)&&d.rows.length)saved=d}}catch(err){saved=null}
+if(saved){S.sheet=saved;S.stored=true;S.printN=0;setPhase('returned');setView('sheet');S.autoT=setTimeout(()=>{if(S.phase==='returned')startNight()},14000)}
+else startNight();
+if(matchMedia('(pointer: fine)').matches){try{inp.focus({preventScroll:true})}catch(err){}}
+draw(performance.now());
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
