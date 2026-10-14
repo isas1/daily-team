@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graveyard Shift</title>
+<style>
+:root{--bg:#15120f;--ink:#e9dfc8;--dim:#8a7f6c;--face:#e6dcc4;--red:#c8321e;--amber:#f2a33a;--rope:#b98a52;--paper:#efe6d0;--dark:#1b1712}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:14px 18px 40px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.bar .clock{color:var(--ink);font-size:15px;letter-spacing:.12em}
+.lamp{display:inline-flex;align-items:center;gap:8px}
+.lamp i{width:12px;height:12px;border-radius:50%;background:#3a2a1a;transition:background .4s,box-shadow .4s}
+.lamp.on i{background:var(--red);box-shadow:0 0 14px var(--red)}
+.lamp.warm i{background:var(--amber);box-shadow:0 0 14px var(--amber)}
+.lamp.watch i{background:var(--red);animation:bl 1.6s steps(2) infinite}
+@keyframes bl{50%{background:#3a2a1a}}
+#snd{background:none;border:1px solid #3a3229;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;padding:8px 10px;cursor:pointer}
+h1{font-family:"Arial Narrow","Helvetica Neue Condensed","Helvetica Neue",Arial,sans-serif;font-stretch:condensed;font-weight:900;font-size:clamp(52px,13vw,164px);line-height:.8;letter-spacing:-.035em;margin:20px 0 14px;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--red)}
+.dial{position:relative;margin:0 -4px}
+.dial svg{display:block;width:100%;height:auto;touch-action:none;cursor:ew-resize;user-select:none;-webkit-user-select:none}
+.dial canvas{position:absolute;left:2%;top:8.3%;width:96%;height:83%;mix-blend-mode:multiply;opacity:.22;pointer-events:none;image-rendering:pixelated;border-radius:8px}
+#rope{cursor:pointer}
+#ropeBase,#ropeTwist,#ropeHit{transition:d .5s cubic-bezier(.3,1.6,.5,1)}
+#ropeHit:focus{outline:none}
+#ropeHit:focus-visible+#ropeBase{stroke:var(--amber)}
+#now{font:500 13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--amber);min-height:1.4em;margin:10px 0 0;letter-spacing:.04em}
+#say{font-size:clamp(19px,2.8vw,30px);line-height:1.22;font-weight:300;max-width:32ch;margin:18px 0 28px}
+#say b{font-weight:800}
+.desk{display:grid;grid-template-columns:240px 1fr 280px;gap:26px;align-items:start}
+@media(max-width:860px){.desk{grid-template-columns:1fr}}
+.card{background:var(--paper);color:var(--dark);padding:18px 16px 26px;transform:rotate(-2deg);font:14px/1.45 ui-monospace,Menlo,Consolas,monospace;position:relative;max-width:300px}
+.card::after{content:"";position:absolute;right:-14px;bottom:-18px;width:74px;height:74px;border-radius:50%;border:7px solid rgba(110,70,30,.22);border-left-color:rgba(110,70,30,.1)}
+.card small{display:block;font:700 10px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;color:#7a6a52}
+h2{font:800 11px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin:0 0 10px}
+.tape{position:relative;background:var(--paper);color:var(--dark);font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace;max-height:58vh;overflow:auto;padding:10px 0;border-left:6px dotted var(--bg);border-right:6px dotted var(--bg)}
+.tape.glass{cursor:pointer;outline:2px solid #5a5045;outline-offset:8px;box-shadow:0 0 0 12px #1e1a16}
+.tape.glass::before{content:"";position:sticky;display:block;top:0;height:0;box-shadow:0 0 40px 18px rgba(255,255,255,.18);transform:rotate(-8deg)}
+.row{display:grid;grid-template-columns:3.6em 4em 1fr;gap:8px;padding:3px 12px;transition:background .2s}
+.row .k{font:700 9.5px/1.9 "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;color:#7a6a52}
+.row.d{font-weight:700}
+.row.dead,.row.end,.row.empty{display:block;text-align:center;color:#8a7d66;padding:18px 12px;letter-spacing:.1em}
+.row.end{color:var(--red)}
+.row.lit{background:var(--amber)}
+.lbl{background:#f6f1e4;color:var(--dark);padding:16px;font-size:13px;line-height:1.5}
+.lbl b{display:block;font-size:20px;font-weight:900;letter-spacing:-.01em;text-transform:uppercase}
+.lbl dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:12px 0}
+.lbl dt{color:#7a6a52}.lbl dd{margin:0;font-weight:700}
+.how{font-size:12px;color:#5a4e3e;margin:8px 0 0}
+.songs{margin-top:22px}
+.song{border-top:1px solid #3a3229;padding:8px 0;font-size:13px;line-height:1.4}
+.song q{font-weight:800;font-size:16px;display:block;quotes:none}
+.song.lie q{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+.song span{color:var(--dim);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px}
+.credits{margin-top:44px;font-size:11.5px;color:var(--dim);line-height:1.6;border-top:1px solid #2a241e;padding-top:12px}
+[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){.lamp.watch i{animation:none}#ropeBase,#ropeTwist,#ropeHit,.row{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <span>WGYS 97.3 · overnight</span>
+    <span class="clock" id="clock">--:--</span>
+    <span class="lamp" id="lamp"><i></i><span id="lampTxt">standing by</span></span>
+    <button id="snd" type="button">sound on</button>
+  </div>
+
+  <h1>Graveyard<br><em>Shift</em></h1>
+
+  <div class="dial">
+    <svg id="dial" viewBox="0 0 1000 240" aria-label="Tuning dial with a rope across it">
+      <rect x="20" y="20" width="960" height="200" rx="10" fill="#e6dcc4"/>
+      <g id="ticks"></g>
+      <g id="needle"><line x1="0" y1="26" x2="0" y2="214" stroke="#c8321e" stroke-width="3"/><circle cx="0" cy="26" r="6" fill="#c8321e"/></g>
+      <g id="rope" role="button" aria-label="Rope">
+        <path id="ropeHit" d="" stroke="transparent" stroke-width="54" fill="none" pointer-events="stroke" tabindex="0"/>
+        <path id="ropeBase" d="" stroke="#b98a52" stroke-width="11" fill="none" stroke-linecap="round" pointer-events="none"/>
+        <path id="ropeTwist" d="" stroke="#6b4a26" stroke-width="11" fill="none" stroke-dasharray="3 9" pointer-events="none"/>
+        <path id="fray" d="" stroke="#8a6438" stroke-width="2" fill="none" stroke-linecap="round" pointer-events="none"/>
+        <g id="knots" pointer-events="none"><circle cx="14" cy="118" r="12" fill="#8a6438"/><circle cx="986" cy="118" r="12" fill="#8a6438"/></g>
+      </g>
+    </svg>
+    <canvas id="grain" width="200" height="40"></canvas>
+  </div>
+  <div id="now"></div>
+
+  <p id="say"></p>
+
+  <div class="desk">
+    <div class="card">
+      <small>The brief · left on the desk</small>
+      Fix the billing module. Run the tests. Don't stop until they're green. Write notes for whoever wakes up.
+    </div>
+    <div>
+      <h2 id="tapeHead">The tape</h2>
+      <div class="tape" id="tape" tabindex="0" aria-label="Tape of the night"></div>
+    </div>
+    <div>
+      <div class="lbl" id="lbl" hidden></div>
+      <div class="songs" id="songs" hidden></div>
+    </div>
+  </div>
+
+  <p class="credits">Radio producer (lead): the station, the dial, tool calls as clicks and carts, the hiss, the night played back at 8×. Industrial designer: it only airs while the tab is hidden; text first, one line at a time, no files to load. Museum curator: dusk, shift, morning; the tape under glass and its label. Odysseus: the rope across the dial and the tab title that sings while you are gone.</p>
+</div>
+
+<script>
+(function(){
+var SCALE=30, DEAD=90, SONG_EVERY=20, ST=88, EN=108, HOME=97.3;
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var L=[
+[3,'s',"Reading the brief. Billing module, legacy, no tests worth the name."],
+[6,'t',"Read src/billing/invoice.js"],
+[5,'t',"Read src/billing/tax.js"],
+[7,'t',"Grep 'roundCents', 14 hits"],
+[8,'s',"Rounding is done three different ways. Picking one."],
+[9,'t',"Bash npm test: 188 pass, 26 fail"],
+[6,'s',"Twenty-six red. Starting with tax."],
+[8,'t',"Edit src/billing/tax.js"],
+[9,'t',"Bash npm test -- tax: 31 pass, 2 fail"],
+[7,'s',"Two left. A timezone thing. Running the slow suite."],
+[110,'t',"Bash npm run test:integration: 9m 12s, pass"],
+[6,'d',"Tax module green."],
+[5,'s',"Moving to invoices."],
+[7,'t',"Read src/billing/invoice.test.js"],
+[8,'t',"Edit src/billing/invoice.js: extract roundCents()"],
+[9,'t',"Bash npm test: 201 pass, 13 fail"],
+[7,'s',"Credit notes assume positive totals. They are not."],
+[6,'t',"Edit src/billing/credit.js"],
+[8,'t',"Bash npm test: 207 pass, 7 fail"],
+[9,'d',"Invoices green."],
+[7,'s',"Seven left, all in currency. Digging."],
+[130,'s',"Back. That one was a fixture with yen in it. No decimals."],
+[6,'t',"Edit test/fixtures/currencies.json"],
+[8,'t',"Bash npm test: 212 pass, 2 fail"],
+[9,'s',"Two flaky. Running them ten times."],
+[7,'t',"Bash npm test -- refunds, 10 runs"],
+[10,'s',"Fails 3 in 10. Race on the ledger write."],
+[8,'t',"Edit src/billing/ledger.js: await the write"],
+[9,'t',"Bash npm test -- refunds, 10 runs: 10 of 10 pass"],
+[6,'d',"Refunds green."],
+[8,'t',"Bash npm test: 214 pass, 0 fail"],
+[7,'s',"All green. Not trusting it yet. Full suite again."],
+[100,'t',"Bash npm run test:integration: pass"],
+[9,'t',"Bash npm run lint: 3 warnings"],
+[7,'t',"Edit src/billing/invoice.js: unused import"],
+[6,'t',"Bash git diff --stat: 9 files, +312 -188"],
+[8,'s',"Writing the notes for whoever wakes up."],
+[7,'t',"Write NOTES.md"],
+[9,'d',"Summary written."],
+[8,'s',"Signing off. Coffee's yours."]
+];
+var OFF=[],acc=0;for(var i=0;i<L.length;i++){acc+=L[i][0];OFF.push(acc);}
+var TOTAL=acc;
+var KN={s:'VOICE',t:'TOOL',d:'CART'};
+var SONGS=["It stalled. Come see.","One question for you.","Tests failing. Help?","(1) Needs your input","Something broke.","Are you there?"];
+
+var $=function(id){return document.getElementById(id)};
+var S={phase:'dusk',shiftStart:0,endOff:0,aired:[],songs:[]};
+var soundOn=true;
+try{var raw=localStorage.getItem('gys-night');if(raw){var p=JSON.parse(raw);if(p&&p.phase)S=p;}soundOn=localStorage.getItem('gys-sound')!=='off';}catch(e){}
+function save(){try{localStorage.setItem('gys-night',JSON.stringify(S));}catch(e){}}
+
+function pad(n){return(n<10?'0':'')+n}
+function fmt(off){var s=Math.round(3600+off*SCALE);return pad(Math.floor(s/3600)%24)+':'+pad(Math.floor(s/60)%60)}
+function dur(sec){sec=Math.round(sec);var h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;return h?h+' h '+m+' min':(m?m+' min '+s+' s':s+' s')}
+
+/* ---------- dial ---------- */
+var ticks='';
+for(var f=88;f<=108.001;f+=.5){var x=fx(f),maj=Math.abs(f-Math.round(f))<.01&&Math.round(f)%2===0;
+ ticks+='<line x1="'+x+'" x2="'+x+'" y1="'+(maj?150:166)+'" y2="196" stroke="#1b1712" stroke-width="'+(maj?2:1)+'"/>';
+ if(maj)ticks+='<text x="'+x+'" y="140" font-family="Arial Narrow,Arial,sans-serif" font-weight="700" font-size="22" text-anchor="middle" fill="#1b1712">'+Math.round(f)+'</text>';}
+ticks+='<rect x="'+(fx(HOME)-3)+'" y="40" width="6" height="40" fill="#c8321e"/><text x="'+(fx(HOME)+10)+'" y="58" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#1b1712">WGYS</text><text x="'+(fx(HOME)+10)+'" y="76" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#7a6a52">97.3 · 2 a.m.</text>';
+ticks+='<text x="40" y="60" font-family="Arial Narrow,Arial,sans-serif" font-weight="900" font-size="15" letter-spacing="3" fill="#7a6a52">FM · MHz</text>';
+$('ticks').innerHTML=ticks;
+function fx(f){return 60+(f-ST)/(EN-ST)*880}
+var needleF=91.4,userTuned=false,drag=false;
+function setNeedle(){$('needle').setAttribute('transform','translate('+fx(needleF).toFixed(1)+',0)');}
+setNeedle();
+
+/* ---------- rope ---------- */
+function ropeD(ph,t){
+ if(ph==='dusk'){var s=150+(RM?0:10*Math.sin(t)),w=RM?0:7*Math.sin(t*1.3);return'M8 70 C 300 '+(70+s)+' 700 '+(70+s+w)+' 992 70';}
+ if(ph==='bound'||ph==='shift')return'M14 118 C 300 117 700 119 986 118';
+ if(ph==='cut')return'M14 118 C 160 130 250 190 300 234 M986 118 C 840 130 740 176 690 232';
+ return'M60 232 C 300 222 500 238 760 228 C 860 224 900 208 860 202 C 820 196 812 222 884 226';}
+function setRope(d){['ropeHit','ropeBase','ropeTwist'].forEach(function(id){$(id).setAttribute('d',d)});}
+function drawRope(ph){
+ setRope(ropeD(ph,0));
+ $('knots').style.display=(ph==='bound'||ph==='shift'||ph==='cut')?'':'none';
+ $('fray').setAttribute('d',ph==='cut'?'M300 234 l-9 3 M300 234 l3 6 M300 234 l7 1 M690 232 l-7 4 M690 232 l6 5 M690 232 l2 -7':'');
+ $('ropeHit').setAttribute('aria-label',ph==='dusk'?'Tie the rope across the dial':(ph==='cut'||ph==='morning')?'Tie a new rope for another night':'The rope is tied');}
+
+/* ---------- grain ---------- */
+var g=$('grain').getContext('2d'),gImg=g.createImageData(200,40);
+function drawGrain(){var d=gImg.data;for(var i=0;i<d.length;i+=4){var v=Math.random()*255|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255;}g.putImageData(gImg,0,0);}
+drawGrain();
+
+/* ---------- audio ---------- */
+var AC=null,master,hissG,lp,noiseBuf;
+function ensureAudio(){
+ if(AC){if(AC.state==='suspended')AC.resume();return true;}
+ try{AC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){AC=null;return false;}
+ try{
+ master=AC.createGain();master.gain.value=soundOn?1:0;master.connect(AC.destination);
+ var len=AC.sampleRate*2,b=AC.createBuffer(1,len,AC.sampleRate),d=b.getChannelData(0),b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+ for(var i=0;i<len;i++){var w=Math.random()*2-1;b0=.99886*b0+w*.0555179;b1=.99332*b1+w*.0750759;b2=.969*b2+w*.153852;b3=.8665*b3+w*.3104856;b4=.55*b4+w*.5329522;b5=-.7616*b5-w*.016898;d[i]=(b0+b1+b2+b3+b4+b5+b6+w*.5362)*.11;b6=w*.115926;}
+ var src=AC.createBufferSource();src.buffer=b;src.loop=true;
+ lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3000;
+ hissG=AC.createGain();hissG.gain.value=0;src.connect(lp);lp.connect(hissG);hissG.connect(master);src.start();
+ noiseBuf=AC.createBuffer(1,Math.floor(AC.sampleRate*.04),AC.sampleRate);var n=noiseBuf.getChannelData(0);for(var j=0;j<n.length;j++)n[j]=(Math.random()*2-1)*Math.pow(1-j/n.length,3);
+ }catch(e){AC=null;return false;}
+ return true;}
+function hiss(v,tc){if(!AC)return;hissG.gain.setTargetAtTime(v,AC.currentTime,tc||.3);}
+function click(){if(!AC)return;var s=AC.createBufferSource(),gg=AC.createGain();s.buffer=noiseBuf;gg.gain.value=.55;s.connect(gg);gg.connect(master);s.start();}
+function cart(){if(!AC)return;[[660,0],[990,.13]].forEach(function(p){var o=AC.createOscillator(),gg=AC.createGain(),t=AC.currentTime+p[1];o.type='sine';o.frequency.value=p[0];gg.gain.setValueAtTime(0,t);gg.gain.linearRampToValueAtTime(.18,t+.01);gg.gain.exponentialRampToValueAtTime(.001,t+.24);o.connect(gg);gg.connect(master);o.start(t);o.stop(t+.26);});}
+function creak(){if(!AC)return;var s=AC.createBufferSource(),bp=AC.createBiquadFilter(),gg=AC.createGain(),t=AC.currentTime;s.buffer=noiseBuf;s.playbackRate.value=.25;bp.type='bandpass';bp.Q.value=8;bp.frequency.setValueAtTime(300,t);bp.frequency.exponentialRampToValueAtTime(1400,t+.16);gg.gain.value=1.4;s.connect(bp);bp.connect(gg);gg.connect(master);s.start();}
+function tuneHiss(){if(!AC)return;var dist=Math.min(1,Math.abs(needleF-HOME)/3);lp.frequency.setTargetAtTime(700+dist*2300,AC.currentTime,.05);hiss(.04+dist*.1,.05);}
+function speak(txt){if(!soundOn||!window.speechSynthesis)return;try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(txt);u.rate=1.25;u.volume=.85;speechSynthesis.speak(u);}catch(e){}}
+
+$('snd').textContent=soundOn?'sound on':'sound off';
+$('snd').addEventListener('click',function(){soundOn=!soundOn;this.textContent=soundOn?'sound on':'sound off';
+ if(master)master.gain.setTargetAtTime(soundOn?1:0,AC.currentTime,.05);if(!soundOn&&window.speechSynthesis)speechSynthesis.cancel();
+ try{localStorage.setItem('gys-sound',soundOn?'on':'off');}catch(e){}});
+
+/* ---------- interaction on the dial ---------- */
+var svg=$('dial');
+function svgX(e){var pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse()).x;}
+svg.addEventListener('pointerdown',function(e){
+ ensureAudio();
+ if(e.target.id==='ropeHit'){e.preventDefault();ropeTap();return;}
+ if(playing)return;
+ drag=true;userTuned=true;svg.setPointerCapture&&svg.setPointerCapture(e.pointerId);tuneTo(svgX(e));});
+svg.addEventListener('pointermove',function(e){if(drag)tuneTo(svgX(e));});
+function endDrag(){if(!drag)return;drag=false;hiss(.03,.6);}
+svg.addEventListener('pointerup',endDrag);svg.addEventListener('pointercancel',endDrag);
+$('ropeHit').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();ensureAudio();ropeTap();}});
+var found=false;
+function tuneTo(x){needleF=Math.max(ST,Math.min(EN,ST+(x-60)/880*(EN-ST)));setNeedle();tuneHiss();
+ var near=Math.abs(needleF-HOME)<.2;
+ if(near&&!found){found=true;cart();}
+ if(!near)found=false;
+ if(S.phase==='dusk'||S.phase==='bound'){$('now').textContent=near?'97.3 · WGYS · that\u2019s us. Nobody else is up.':needleF.toFixed(1)+' MHz · static';
+  $('lamp').classList.toggle('warm',near);}}
+
+function ropeTap(){
+ if(playing)stop();
+ if(S.phase==='dusk'||S.phase==='cut'||S.phase==='morning'){
+  S={phase:'bound',shiftStart:0,endOff:0,aired:[],songs:[]};save();creak();render();}}
+
+/* ---------- the shift ---------- */
+var tick=null;
+document.addEventListener('visibilitychange',function(){
+ if(document.hidden){
+  if(playing)stop();hiss(0,.05);if(window.speechSynthesis)speechSynthesis.cancel();
+  if(S.phase==='bound'){S.phase='shift';S.shiftStart=Date.now();save();startTick();}
+ }else{
+  if(S.phase==='shift')settle(Date.now());
+ }});
+function startTick(){clearInterval(tick);tick=setInterval(function(){
+ if(S.phase!=='shift'){clearInterval(tick);return;}
+ var el=(Date.now()-S.shiftStart)/1000;
+ document.title=el>=TOTAL?'Morning. The tape is ready.':el<SONG_EVERY?'On air · Graveyard Shift':SONGS[(Math.floor(el/SONG_EVERY)-1)%SONGS.length];
+},1000);}
+function settle(now){
+ clearInterval(tick);
+ var el=Math.max(0,(now-S.shiftStart)/1000),aired=[];
+ for(var i=0;i<L.length;i++)if(OFF[i]<=el)aired.push({i:i,t:OFF[i]});
+ var full=aired.length===L.length;
+ S.aired=aired;S.endOff=full?TOTAL:el;S.away=el;S.phase=full?'morning':'cut';
+ S.songs=[];for(var k=1;SONG_EVERY*k<=Math.min(el,TOTAL);k++)S.songs.push({t:SONG_EVERY*k,s:(k-1)%SONGS.length});
+ save();
+ if(!full){drawRope('bound');setTimeout(render,RM?0:350);}else render();}
+
+/* ---------- tape ---------- */
+function deadRow(gap){return'<div class="row dead">· · · dead air · '+Math.round(gap*SCALE/60)+' min · · ·</div>';}
+function tapeHTML(){
+ var a=S.aired,h='',prev=0;
+ if(!a.length&&S.phase!=='cut')return'<div class="row empty">Nothing on tape yet.<br>Blank reel, threaded.</div>';
+ a.forEach(function(x,n){if(x.t-prev>DEAD)h+=deadRow(x.t-prev);var l=L[x.i];
+  h+='<div class="row '+l[1]+'" data-n="'+n+'"><span>'+fmt(x.t)+'</span><span class="k">'+KN[l[1]]+'</span><span>'+l[2]+'</span></div>';prev=x.t;});
+ if(S.phase==='cut'){if(S.endOff-prev>DEAD)h+=deadRow(S.endOff-prev);h+='<div class="row end">— rope cut · you came back at '+fmt(S.endOff)+' —</div>';}
+ return h;}
+function silences(){var c=0,prev=0;S.aired.forEach(function(x){if(x.t-prev>DEAD)c++;prev=x.t;});if(S.phase==='cut'&&S.endOff-prev>DEAD)c++;return c;}
+function inDead(t){var prev=0;for(var i=0;i<L.length;i++){if(OFF[i]-prev>DEAD&&t>prev&&t<OFF[i])return true;prev=OFF[i];}return false;}
+function onAirAt(t){var last=null;for(var i=0;i<L.length;i++)if(OFF[i]<=t)last=i;return last;}
+
+/* ---------- playback ---------- */
+var playing=false,timers=[];
+function rowEl(n){return $('tape').querySelector('[data-n="'+n+'"]');}
+function lit(el){var o=$('tape').querySelector('.lit');if(o)o.classList.remove('lit');if(!el)return;el.classList.add('lit');
+ var tp=$('tape'),y=el.offsetTop-tp.clientHeight/2;if(tp.scrollTo)tp.scrollTo({top:y,behavior:RM?'auto':'smooth'});else tp.scrollTop=y;}
+function play(){
+ if(S.phase!=='cut'&&S.phase!=='morning')return;
+ if(playing){stop();return;}
+ var a=S.aired;if(!a.length){$('now').textContent='Nothing aired. Only hiss on this reel.';ensureAudio();hiss(.12);setTimeout(function(){hiss(.03)},2500);return;}
+ playing=true;var ok=ensureAudio();if(ok)hiss(.13,.2);
+ $('lamp').className='lamp on';$('lampTxt').textContent='playback 8×';
+ if(!ok)$('now').textContent='No sound on this device. Paper tape only.';
+ var t0=a[0].t;
+ a.forEach(function(x,n){
+  timers.push(setTimeout(function(){air(x,n)},(x.t-t0)/8*1000));
+  if(n>0&&x.t-a[n-1].t>DEAD)timers.push(setTimeout(function(){deadNow(a[n-1].t,x.t)},(a[n-1].t-t0)/8*1000+1200));});
+ timers.push(setTimeout(stop,(S.endOff-t0)/8*1000+1600));}
+function air(x,n){var l=L[x.i];hiss(.13,.1);lit(rowEl(n));$('clock').textContent=fmt(x.t);
+ $('now').textContent=fmt(x.t)+' · '+KN[l[1]]+' · '+l[2];
+ needleF=HOME+(Math.random()-.5)*(RM?0:.25);setNeedle();
+ if(l[1]==='t')click();else if(l[1]==='d')cart();
+ if(n%5===4)speak(l[2].replace(/:/g,','));}
+function deadNow(a,b){lit(null);hiss(.24,.4);$('now').textContent=fmt(a)+' to '+fmt(b)+' · dead air · waiting on tests';}
+function stop(){timers.forEach(clearTimeout);timers=[];if(!playing)return;playing=false;hiss(.03,.6);if(window.speechSynthesis)speechSynthesis.cancel();
+ lit(null);$('lamp').className='lamp warm';$('lampTxt').textContent='tape out';$('clock').textContent=fmt(S.endOff);
+ $('now').textContent='Tape out. Tap the glass to run it again.';needleF=HOME;setNeedle();}
+$('tape').addEventListener('click',function(){ensureAudio();play();});
+$('tape').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();ensureAudio();play();}});
+
+/* ---------- render ---------- */
+function render(){
+ var ph=S.phase;document.body.setAttribute('data-phase',ph);drawRope(ph);
+ var lamp=$('lamp'),lt=$('lampTxt'),say=$('say'),tape=$('tape');
+ tape.innerHTML=tapeHTML();tape.classList.toggle('glass',ph==='cut'||ph==='morning');
+ $('lbl').hidden=$('songs').hidden=!(ph==='cut'||ph==='morning');
+ if(ph==='dusk'){
+  lamp.className='lamp';lt.textContent='standing by';$('clock').textContent='--:--';document.title='Graveyard Shift';
+  say.innerHTML='Two a.m. on a station nobody hears. The job is the host. <b>Tap the rope</b> to tie it across the dial.';
+  $('tapeHead').textContent='The tape';
+ }else if(ph==='bound'){
+  lamp.className='lamp watch';lt.textContent='off air · you\u2019re watching';$('clock').textContent='01:00';document.title='Graveyard Shift · goes on air when you leave';
+  say.innerHTML='Tied. Now go. <b>Switch tabs or lock the phone.</b> We only broadcast when nobody is looking. Come back in '+dur(TOTAL)+' for the whole night: '+L.length+' lines, '+dur(TOTAL)+' real time \u00d7 '+SCALE+' = '+dur(TOTAL*SCALE)+' on air.';
+  $('now').textContent='The tab will sing to you. Mostly lies.';
+ }else{
+  lamp.className='lamp warm';lt.textContent=ph==='morning'?'morning':'off air';$('clock').textContent=fmt(S.endOff);document.title='Graveyard Shift';
+  var sil=silences();
+  if(ph==='morning'){
+   say.innerHTML='Lovely night. <b>'+sil+' silences</b>, which I\u2019d normally sack someone for. Each one was a test suite running. Tap the glass. Eight times speed, hiss and all.';
+  }else{
+   say.innerHTML='Good instinct, checking in. Wrong hour. The shift ended at <b>'+fmt(S.endOff)+'</b> when you looked. '+S.aired.length+' lines made it to tape. Tap the glass to hear them.';
+  }
+  $('tapeHead').textContent='The tape, under glass';
+  $('now').textContent='Tap the glass to play. Tap the rope to tie another night.';
+  var day=S.shiftStart?new Date(S.shiftStart).toLocaleDateString():'tonight';
+  $('lbl').innerHTML='<b>Graveyard Shift</b>Night of '+day+'. Claude Code, unattended.<dl>'+
+   '<dt>On air</dt><dd>01:00 to '+fmt(S.endOff)+' ('+dur(S.endOff*SCALE)+')</dd>'+
+   '<dt>Lines aired</dt><dd>'+S.aired.length+' of '+L.length+'</dd>'+
+   '<dt>Silences</dt><dd>'+sil+'</dd>'+
+   '<dt>You were away</dt><dd>'+dur(S.away||S.endOff)+'</dd>'+
+   '<dt>Ended by</dt><dd>'+(ph==='morning'?'the job':'your return')+'</dd></dl>'+
+   '<p class="how">How: station time = 01:00 + real seconds \u00d7 '+SCALE+'. A gap over '+DEAD+' real seconds ('+(DEAD*SCALE/60)+' station minutes) counts as a silence.</p>';
+  var sg=S.songs,hS='<h2>What the tab sang</h2>';
+  if(!sg.length)hS+='<div class="song">You came back before the tab got a word out.</div>';
+  else{
+   var tru=sg.filter(function(x){return inDead(x.t)}).length;
+   hS+='<div class="song">It sang '+sg.length+' times while you were gone. Half true '+tru+' times. Never true.</div>';
+   var pick=[];if(sg.length<=5)pick=sg;else for(var j=0;j<5;j++)pick.push(sg[Math.round(j*(sg.length-1)/4)]);
+   pick.forEach(function(x){var half=inDead(x.t),oi=onAirAt(x.t);
+    hS+='<div class="song'+(half?'':' lie')+'"><q>'+SONGS[x.s]+'</q><span>'+fmt(x.t)+' · '+(half?'half true: waiting on tests, not stuck':'on air: '+(oi===null?'warming up':L[oi][2]))+'</span></div>';});
+  }
+  $('songs').innerHTML=hS;
+ }}
+
+/* ---------- loop: it is alive before anyone acts ---------- */
+var lastG=0;
+function loop(ts){
+ var t=ts/1000;
+ if(S.phase==='dusk'&&!RM){setRope(ropeD('dusk',t));if(!userTuned){needleF=93.6+Math.sin(t*.23)*3.6+Math.sin(t*.71)*.5;setNeedle();}}
+ if(!RM&&ts-lastG>125){drawGrain();lastG=ts;}
+ requestAnimationFrame(loop);}
+
+if(S.phase==='shift'){if(S.shiftStart)settle(Date.now());else{S.phase='bound';render();}}
+else render();
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
