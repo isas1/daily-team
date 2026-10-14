@@ -1,0 +1,355 @@
+{
+  "start": "2026-10-19",
+  "base": "2026-10-12",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "added": {
+    "roles": [
+      {
+        "text": "Wheelwright",
+        "credit": ""
+      },
+      {
+        "text": "Gilder",
+        "credit": ""
+      },
+      {
+        "text": "Thatcher",
+        "credit": ""
+      },
+      {
+        "text": "Lacemaker",
+        "credit": ""
+      },
+      {
+        "text": "Rope maker",
+        "credit": ""
+      },
+      {
+        "text": "Bell founder",
+        "credit": ""
+      },
+      {
+        "text": "Organ builder",
+        "credit": ""
+      },
+      {
+        "text": "Stage manager",
+        "credit": ""
+      }
+    ],
+    "methods": [
+      {
+        "text": "Name every part before arranging any of them.",
+        "credit": ""
+      },
+      {
+        "text": "Find the slowest step, make it visible, and speed up only that step.",
+        "credit": ""
+      },
+      {
+        "text": "Build two versions that disagree and keep what both share.",
+        "credit": ""
+      },
+      {
+        "text": "Stop each session mid-sentence so the next one starts easily.",
+        "credit": ""
+      },
+      {
+        "text": "Trace one piece of input from entry to exit and note every stop.",
+        "credit": ""
+      },
+      {
+        "text": "Decide what gets thrown away before deciding what stays.",
+        "credit": ""
+      },
+      {
+        "text": "Make the worst version on purpose, then list what makes it bad.",
+        "credit": ""
+      },
+      {
+        "text": "Write the rule for when to stop before you start.",
+        "credit": ""
+      }
+    ],
+    "constraints": [
+      {
+        "text": "Text still reads clearly at 200 percent zoom.",
+        "credit": ""
+      },
+      {
+        "text": "No more than seven elements visible at once.",
+        "credit": ""
+      }
+    ],
+    "tasks": [
+      {
+        "text": "Toggle: a switch with two states that shows how far it travelled to get there.",
+        "credit": ""
+      },
+      {
+        "text": "Slider: a range control that feels the weight of the value it holds.",
+        "credit": ""
+      },
+      {
+        "text": "Button: one press that confirms itself without a second screen.",
+        "credit": ""
+      },
+      {
+        "text": "Loader: a wait that shows honest progress instead of a spin.",
+        "credit": ""
+      },
+      {
+        "text": "Tooltip: a hint that appears only when the hand hesitates.",
+        "credit": ""
+      },
+      {
+        "text": "Tabs: a few panels that trade places without losing the reader's place.",
+        "credit": ""
+      },
+      {
+        "text": "Accordion: sections that open one at a time and remember which was last.",
+        "credit": ""
+      },
+      {
+        "text": "Dialog: a small window that asks one question and then steps aside.",
+        "credit": ""
+      },
+      {
+        "text": "Toast: a short notice that arrives, is read, and leaves on its own.",
+        "credit": ""
+      },
+      {
+        "text": "Stepper: a number control that counts up and down with a steady hand.",
+        "credit": ""
+      },
+      {
+        "text": "Rating: a score from one to five given with a single gesture.",
+        "credit": ""
+      },
+      {
+        "text": "Search field: a box that narrows a short list as each letter lands.",
+        "credit": ""
+      },
+      {
+        "text": "Date picker: choosing one day without a full calendar in the way.",
+        "credit": ""
+      },
+      {
+        "text": "Progress ring: a circle that fills as one task moves toward done.",
+        "credit": ""
+      },
+      {
+        "text": "Pagination: moving through many pages while always knowing where you are.",
+        "credit": ""
+      },
+      {
+        "text": "Breadcrumb: the trail back up from a deep page.",
+        "credit": ""
+      },
+      {
+        "text": "Copy button: one tap that copies a line of text and proves it worked.",
+        "credit": ""
+      },
+      {
+        "text": "Password field: a hidden word that shows its strength as it is typed.",
+        "credit": ""
+      },
+      {
+        "text": "Tag input: words typed, kept as small pieces, and removed one by one.",
+        "credit": ""
+      },
+      {
+        "text": "Colour swatch: picking one colour from a small, honest palette.",
+        "credit": ""
+      },
+      {
+        "text": "Skeleton: the shape of content before the content arrives.",
+        "credit": ""
+      },
+      {
+        "text": "Empty state: what a list shows when there is nothing in it yet.",
+        "credit": ""
+      },
+      {
+        "text": "Countdown: a timer that runs down to one moment and marks it.",
+        "credit": ""
+      },
+      {
+        "text": "Segmented control: three choices side by side, one always chosen.",
+        "credit": ""
+      },
+      {
+        "text": "Checkbox: a mark that can be set, cleared, or left half done.",
+        "credit": ""
+      },
+      {
+        "text": "Reorder list: items picked up, carried, and set down in a new order.",
+        "credit": ""
+      },
+      {
+        "text": "Initials stack: a few people in a row, with a count for the rest.",
+        "credit": ""
+      },
+      {
+        "text": "Badge: a small count that changes without shouting.",
+        "credit": ""
+      },
+      {
+        "text": "Sparkline: a tiny line of numbers that fits inside a sentence.",
+        "credit": ""
+      },
+      {
+        "text": "Undo: a mistake taken back within a few seconds.",
+        "credit": ""
+      },
+      {
+        "text": "Key hint: a key shown on screen that lights when it is pressed.",
+        "credit": ""
+      },
+      {
+        "text": "Character counter: a text box that shows how much room is left.",
+        "credit": ""
+      },
+      {
+        "text": "Theme switch: light and dark traded in one motion.",
+        "credit": ""
+      },
+      {
+        "text": "Dial: a value set by turning a knob around its edge.",
+        "credit": ""
+      },
+      {
+        "text": "File drop: a place to drop a file and see that it was received.",
+        "credit": ""
+      },
+      {
+        "text": "Scroll progress: a thin line that shows how much of a page is read.",
+        "credit": ""
+      },
+      {
+        "text": "Split view: two panes divided by an edge the hand can move.",
+        "credit": ""
+      },
+      {
+        "text": "Carousel: a few cards that move one at a time, by swipe or key.",
+        "credit": ""
+      },
+      {
+        "text": "Status dot: a single light that says online, busy, or away.",
+        "credit": ""
+      },
+      {
+        "text": "Command menu: a short list of actions found by typing a few letters.",
+        "credit": ""
+      }
+    ],
+    "guests": [
+      {
+        "text": "myth | Ariadne | Leave a thread so you can always find the way back. | Greek myth",
+        "credit": ""
+      },
+      {
+        "text": "literary | Phileas Fogg | Set a fixed deadline and plan every stop against it. | Jules Verne, died 1905",
+        "credit": ""
+      }
+    ],
+    "temperaments": [
+      {
+        "text": "Repeats the other side's point before answering it.",
+        "credit": ""
+      },
+      {
+        "text": "Goes quiet, then returns with a written list.",
+        "credit": ""
+      },
+      {
+        "text": "Asks what would change their mind, then waits.",
+        "credit": ""
+      },
+      {
+        "text": "Brings up the budget whenever the talk gets abstract.",
+        "credit": ""
+      }
+    ]
+  },
+  "retired": {
+    "guests": [
+      "historical | Euclid | State a few assumptions, then build everything from them. | died c. 270 BC",
+      "historical | Ibn al-Haytham | Trust nothing until an experiment shows it. | died c. 1040"
+    ],
+    "temperaments": [
+      "Impatient; cuts people off mid-sentence.",
+      "Hoards evidence before saying anything.",
+      "Agrees fast, then quietly does it their own way.",
+      "Argues the opposite side to test an idea."
+    ],
+    "roles": [
+      "Industrial designer",
+      "Furniture maker",
+      "Set designer",
+      "Lighting designer",
+      "Costume designer",
+      "Game designer",
+      "Puppeteer",
+      "Choreographer"
+    ],
+    "methods": [
+      "Design the error and empty states first.",
+      "List the assumptions in the brief and check each one.",
+      "Make it work in black and white before adding color.",
+      "Prototype in the final material.",
+      "Take the conventions of a genre and break exactly one.",
+      "Storyboard every change of state.",
+      "Write the copy before the layout.",
+      "Scope the work to what fits in one day."
+    ],
+    "constraints": [
+      "Under 100 words of fixed text on the page.",
+      "Three colors at most."
+    ],
+    "tasks": [
+      "Statusline: a Claude Code status line that lives like a creature at the bottom of the terminal.",
+      "Spinner: what Claude Code shows while it thinks, made into a tiny performance.",
+      "Gatekeeper: a Claude Code hook that stands at the door before a tool acts and asks its own question.",
+      "Aftermath: a Claude Code hook that wakes after every edit and leaves a mark.",
+      "Last word: a Claude Code hook that speaks when a session ends.",
+      "Morning ritual: what a Claude Code session does the moment it starts.",
+      "Output style: a Claude Code voice that changes how every answer sounds.",
+      "Slash command: one word typed after a slash in Claude Code that sets something strange in motion.",
+      "Skill: a Claude Code skill that teaches one craft nobody thought to teach.",
+      "Subagent: a small helper Claude Code sends off alone, and what it brings back.",
+      "Swarm: many Claude Code helpers working at once on one problem.",
+      "Memory file: what Claude Code remembers about a person between sessions.",
+      "Forgetting: what Claude Code loses, and what it keeps, when a long conversation is compacted.",
+      "Permission: the moment Claude Code asks before it acts, and what that asking feels like.",
+      "Plan mode: Claude Code thinking out loud before it touches anything.",
+      "Plugin: a bundle of Claude Code mods that arrives like a traveller with a full pack.",
+      "Marketplace: a place where Claude Code plugins are shown, traded, and chosen.",
+      "MCP server: a bridge that lets Claude Code reach into another world of tools.",
+      "Notification: how Claude Code calls someone back when it needs them.",
+      "Worktree: Claude Code working in a parallel copy of the same project.",
+      "Diff: the visible trace of every change Claude Code makes.",
+      "Checkpoint: a Claude Code rewind that lets someone step back in time.",
+      "Theme: the Claude Code terminal dressed for a season, a mood, or a creature.",
+      "Keybinding: one key press in Claude Code that does something no one expects.",
+      "Prompt line: the blank line where a person speaks to Claude Code, made into something more.",
+      "Context window: everything Claude Code can hold in mind at once, and the edge where it ends.",
+      "Long task: a Claude Code job that runs for hours while no one watches.",
+      "Loop: Claude Code waking on a schedule to check on something again and again.",
+      "Handoff: one Claude Code session passing its work to the next.",
+      "Review: a Claude Code mod that reads someone's work and answers in its own voice.",
+      "Guardrail: a Claude Code rule that stops one thing from ever happening.",
+      "Tool call: the instant Claude Code reaches for a tool, slowed down and shown.",
+      "Session log: the trail a Claude Code session leaves behind it.",
+      "Companion: a Claude Code mod that keeps someone company while they work.",
+      "Greeting: the first thing Claude Code says, made worth waiting for.",
+      "Ghost in the terminal: a Claude Code mod that leaves small surprises for the curious.",
+      "Crew: hooks, skills, and commands in Claude Code that work together like a ship's crew.",
+      "Celebration: what Claude Code does when the tests finally pass.",
+      "Error: a Claude Code failure turned into something kind, funny, or useful.",
+      "Mod workshop: a place to build a Claude Code mod from parts."
+    ]
+  },
+  "suggestions": []
+}
