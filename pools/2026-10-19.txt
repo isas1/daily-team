@@ -153,46 +153,46 @@ Changes with the time of day.
 + No more than seven elements visible at once.
 
 #@ tasks
-Output style: a Claude Code voice that changes how every answer sounds.
-Slash command: one word typed after a slash in Claude Code that sets something strange in motion.
-Skill: a Claude Code skill that teaches one craft nobody thought to teach.
-Subagent: a small helper Claude Code sends off alone, and what it brings back.
-Swarm: many Claude Code helpers working at once on one problem.
-Memory file: what Claude Code remembers about a person between sessions.
-Forgetting: what Claude Code loses, and what it keeps, when a long conversation is compacted.
-Permission: the moment Claude Code asks before it acts, and what that asking feels like.
-Plan mode: Claude Code thinking out loud before it touches anything.
-Plugin: a bundle of Claude Code mods that arrives like a traveller with a full pack.
-Marketplace: a place where Claude Code plugins are shown, traded, and chosen.
-MCP server: a bridge that lets Claude Code reach into another world of tools.
-Notification: how Claude Code calls someone back when it needs them.
-Worktree: Claude Code working in a parallel copy of the same project.
-Diff: the visible trace of every change Claude Code makes.
-Checkpoint: a Claude Code rewind that lets someone step back in time.
-Theme: the Claude Code terminal dressed for a season, a mood, or a creature.
-Keybinding: one key press in Claude Code that does something no one expects.
-Prompt line: the blank line where a person speaks to Claude Code, made into something more.
-Context window: everything Claude Code can hold in mind at once, and the edge where it ends.
-Long task: a Claude Code job that runs for hours while no one watches.
-Loop: Claude Code waking on a schedule to check on something again and again.
-Handoff: one Claude Code session passing its work to the next.
-Review: a Claude Code mod that reads someone's work and answers in its own voice.
-Guardrail: a Claude Code rule that stops one thing from ever happening.
-Tool call: the instant Claude Code reaches for a tool, slowed down and shown.
-Session log: the trail a Claude Code session leaves behind it.
-Companion: a Claude Code mod that keeps someone company while they work.
-Greeting: the first thing Claude Code says, made worth waiting for.
-Ghost in the terminal: a Claude Code mod that leaves small surprises for the curious.
-Crew: hooks, skills, and commands in Claude Code that work together like a ship's crew.
-Celebration: what Claude Code does when the tests finally pass.
-Error: a Claude Code failure turned into something kind, funny, or useful.
-Mod workshop: a place to build a Claude Code mod from parts.
-+ Lantern: a small light carried ahead into a dark and unfamiliar project.
-+ Echo: what comes back changed after a voice is sent into a deep place.
-+ Apprentice: someone who watches first, copies second, and one day surprises the master.
-+ Fog: the moment the work stops making sense, and what helps it lift.
-+ Knot: a tangle that only loosens when pulled the right way.
-+ Seed: something small planted in a project that grows on its own while no one looks.
++ Toggle: a switch with two states that shows how far it travelled to get there.
++ Slider: a range control that feels the weight of the value it holds.
++ Button: one press that confirms itself without a second screen.
++ Loader: a wait that shows honest progress instead of a spin.
++ Tooltip: a hint that appears only when the hand hesitates.
++ Tabs: a few panels that trade places without losing the reader's place.
++ Accordion: sections that open one at a time and remember which was last.
++ Dialog: a small window that asks one question and then steps aside.
++ Toast: a short notice that arrives, is read, and leaves on its own.
++ Stepper: a number control that counts up and down with a steady hand.
++ Rating: a score from one to five given with a single gesture.
++ Search field: a box that narrows a short list as each letter lands.
++ Date picker: choosing one day without a full calendar in the way.
++ Progress ring: a circle that fills as one task moves toward done.
++ Pagination: moving through many pages while always knowing where you are.
++ Breadcrumb: the trail back up from a deep page.
++ Copy button: one tap that copies a line of text and proves it worked.
++ Password field: a hidden word that shows its strength as it is typed.
++ Tag input: words typed, kept as small pieces, and removed one by one.
++ Colour swatch: picking one colour from a small, honest palette.
++ Skeleton: the shape of content before the content arrives.
++ Empty state: what a list shows when there is nothing in it yet.
++ Countdown: a timer that runs down to one moment and marks it.
++ Segmented control: three choices side by side, one always chosen.
++ Checkbox: a mark that can be set, cleared, or left half done.
++ Reorder list: items picked up, carried, and set down in a new order.
++ Initials stack: a few people in a row, with a count for the rest.
++ Badge: a small count that changes without shouting.
++ Sparkline: a tiny line of numbers that fits inside a sentence.
++ Undo: a mistake taken back within a few seconds.
++ Key hint: a key shown on screen that lights when it is pressed.
++ Character counter: a text box that shows how much room is left.
++ Theme switch: light and dark traded in one motion.
++ Dial: a value set by turning a knob around its edge.
++ File drop: a place to drop a file and see that it was received.
++ Scroll progress: a thin line that shows how much of a page is read.
++ Split view: two panes divided by an edge the hand can move.
++ Carousel: a few cards that move one at a time, by swipe or key.
++ Status dot: a single light that says online, busy, or away.
++ Command menu: a short list of actions found by typing a few letters.
 
 #@ guests
 historical | Leonardo da Vinci | Sketch the subject many times before deciding anything. | died 1519
