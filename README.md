@@ -7,17 +7,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-14: Graveyard Shift
+### 2026-10-15: Spyhole
 
-<a href="days/2026-10-14/"><img src="days/2026-10-14/team.png" alt="Team for 2026-10-14: Radio producer · Industrial designer · Museum curator · Odysseus" width="100%"></a>
+<a href="days/2026-10-15/"><img src="days/2026-10-15/team.png" alt="Team for 2026-10-15: Ceramicist · Textile designer · Costume designer · Ada Lovelace" width="100%"></a>
 
-**Task:** Long task: a Claude Code job that runs for hours while no one watches.
+**Task:** Loop: Claude Code waking on a schedule to check on something again and again.
 
-**Decision:** The page is an overnight radio station that only broadcasts while the visitor's tab is hidden, calls them back through the tab title like a singer, and gives them the night's tape when they return.
+**Decision:** The page is a kiln that the loop checks through a spyhole every 30 seconds for twelve minutes, while the visitor waits, peeks early at the cost of cracks, and keeps the finished bowl, glazed with its own record of checks, on an offline s...
 
-<a href="days/2026-10-14/"><img src="days/2026-10-14/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-14/) · [Use it](https://isas1.github.io/daily-team/2026-10-14/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-15/) · [Use it](https://isas1.github.io/daily-team/2026-10-15/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -37,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-15](days/2026-10-15/) | <a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Spyhole" width="160"></a> | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace |
 | [2026-10-14](days/2026-10-14/) | <a href="days/2026-10-14/"><img src="days/2026-10-14/artifact-1.png" alt="Graveyard Shift" width="160"></a> | Graveyard Shift | Radio producer · Industrial designer · Museum curator · Odysseus |
 | [2026-10-13](days/2026-10-13/) | <a href="days/2026-10-13/"><img src="days/2026-10-13/artifact-1.png" alt="The Inn That Answers" width="160"></a> | The Inn That Answers | Documentary director · Playwright · Puppeteer · Benjamin Franklin |
 | [2026-10-12](days/2026-10-12/) | <a href="days/2026-10-12/"><img src="days/2026-10-12/artifact-1.png" alt="Found Voice" width="160"></a> | Found Voice | Set designer · Bookbinder · Data journalist · Euclid |
 | [2026-10-11](days/2026-10-11/) | <a href="days/2026-10-11/"><img src="days/2026-10-11/artifact-1.png" alt="The Thread Out" width="160"></a> | The Thread Out | Costume designer · Cartographer · Furniture maker · Daedalus |
 | [2026-10-10](days/2026-10-10/) | <a href="days/2026-10-10/"><img src="days/2026-10-10/artifact-1.png" alt="Four Corners, Out and Back" width="160"></a> | Four Corners, Out and Back | Game designer · Service designer · Comic artist · Sisyphus |
 | [2026-10-09](days/2026-10-09/) | <a href="days/2026-10-09/"><img src="days/2026-10-09/artifact-1.png" alt="The Never List" width="160"></a> | The Never List | Beekeeper · Sign painter · Librarian · Phoenix |
-| [2026-10-08](days/2026-10-08/) | <a href="days/2026-10-08/"><img src="days/2026-10-08/artifact-1.png" alt="The Chalk-Hand Sheet" width="160"></a> | The Chalk-Hand Sheet | Packaging designer · Brand strategist · Taxidermist · Time |
 
-[All 12 days](ARCHIVE.md)
+[All 13 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

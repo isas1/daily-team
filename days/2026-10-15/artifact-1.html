@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spyhole · a kiln the loop checks</title>
+<link id="fav" rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#140f0b;color:#ecdfcc;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #f0c27a;outline-offset:4px}
+main{display:grid;grid-template-columns:1fr}
+@media(min-width:860px){main{grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr);min-height:94vh}}
+.end{padding:clamp(14px,4vw,48px);display:flex;flex-direction:column;gap:10px;background:radial-gradient(circle at 50% 58%,#2b1f17 0,#140f0b 72%)}
+.kick{font:800 11px/1.3 system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#bba890;margin:0}
+.first{font:italic 400 clamp(30px,5.4vw,64px)/.95 Georgia,"Times New Roman",serif;margin:0;letter-spacing:-.01em}
+.bowlwrap{width:min(100%,560px,54vh);aspect-ratio:1;align-self:center;margin:6px 0}
+@media(min-width:860px){.bowlwrap{width:min(100%,560px,70vh)}}
+#bowl{width:100%;height:100%;display:block}
+.cap{margin:0;font:600 13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:#c9b7a0;align-self:center;text-align:center;min-height:2.8em}
+.wall{position:relative;padding:clamp(16px,3.5vw,40px);display:flex;flex-direction:column;gap:18px;
+ background:linear-gradient(#0e0a07 3px,transparent 3px) 0 0/100% 34px,radial-gradient(circle at 40% 30%,#3d2519,#24150e 80%);
+ border-left:6px solid #0e0a07}
+.row{display:flex;align-items:center;gap:clamp(18px,4vw,34px);flex-wrap:wrap}
+.pw{--p:clamp(128px,24vw,196px);position:relative;width:calc(var(--p)*1.32);height:calc(var(--p)*1.32);display:grid;place-items:center;flex:none}
+.pw svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.pw circle{fill:none;stroke-width:3}
+#ringbg{stroke:rgba(236,223,204,.12)}
+#ring{stroke:#d9b98c;stroke-linecap:round}
+.port{position:relative;width:var(--p);height:var(--p);border-radius:50%;border:0;padding:0;background:#080504;overflow:hidden;cursor:pointer;
+ box-shadow:0 0 0 11px #4e2f20,0 0 0 14px #120b07,inset 0 8px 22px #000}
+.port:focus-visible{outline-offset:20px}
+#eye{width:100%;height:100%;display:block}
+.plug{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 30%,#93644a,#5a3727 55%,#3b2318);
+ box-shadow:inset 0 0 0 6px rgba(0,0,0,.25),inset -8px -10px 18px rgba(0,0,0,.4);transition:transform .7s cubic-bezier(.6,0,.2,1)}
+.plug::after{content:"";position:absolute;left:50%;top:50%;width:22%;height:22%;margin:-11% 0 0 -11%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b7967a,#5d3d2c);box-shadow:0 3px 6px rgba(0,0,0,.6)}
+.port.open .plug{transform:translateX(104%)}
+.readout{display:flex;flex-direction:column;gap:6px;min-width:0}
+#temp{font:900 clamp(56px,11vw,132px)/.82 system-ui,sans-serif;letter-spacing:-.05em;color:#ecdfcc;font-variant-numeric:tabular-nums}
+.deg{font:800 13px/1 system-ui,sans-serif;letter-spacing:.3em;color:#bba890}
+#cones{font:700 12px/1.5 system-ui,sans-serif;letter-spacing:.08em;color:#d8c7b0;max-width:22em}
+#formula{font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;color:#c9b7a0;margin:0}
+#say{font:italic 400 clamp(18px,2.2vw,23px)/1.3 Georgia,"Times New Roman",serif;margin:0;max-width:24em;min-height:2.6em;transition:opacity .4s}
+.board{list-style:none;margin:auto 0 0;padding:14px 0 0;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;border-top:3px solid #0e0a07}
+.board li{display:flex;flex-direction:column;align-items:center;gap:7px;font:800 9.5px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#ad9a83}
+.board i{width:26px;height:26px;border-radius:50%;display:block;box-shadow:inset 0 -3px 6px rgba(0,0,0,.45)}
+.board li.on{color:#f6eadb}
+.board li.on i{outline:2px solid #f6eadb;outline-offset:3px}
+.below{padding:clamp(14px,4vw,48px);display:grid;gap:28px;grid-template-columns:1fr}
+@media(min-width:860px){.below{grid-template-columns:1.1fr .9fr}}
+.term{background:#0b0806;border-left:4px solid #5a3a28;padding:14px 16px;font:12.5px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#dacbb6;white-space:pre-wrap;word-break:break-word;margin:0;min-height:15em}
+.term b{color:#e3a75c;font-weight:700}
+.term em{color:#8f8070;font-style:normal}
+h2{font:800 11px/1 system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#bba890;margin:0 0 12px}
+#shelf{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;padding-bottom:10px;border-bottom:6px solid #3a2519}
+.sb{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;font:600 10px/1.2 ui-monospace,Menlo,monospace;color:#bba890}
+.sb canvas{width:64px;height:64px;display:block}
+details{margin-top:18px;font-size:13px;color:#d0bfa8}
+summary{cursor:pointer;font:700 12px/1.4 ui-monospace,Menlo,monospace;color:#e3a75c}
+#md{background:#0b0806;padding:12px;font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;color:#dacbb6;margin:10px 0}
+.cbtn,#snd{background:#2a1a12;border:1px solid #6b4a36;border-radius:3px;padding:6px 10px;cursor:pointer;font:700 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em}
+#snd{position:fixed;top:10px;right:10px;z-index:3}
+footer{padding:18px clamp(14px,4vw,48px) 28px;font:12px/1.6 system-ui,sans-serif;color:#b3a08a;border-top:1px solid #2c1f17}
+footer b{color:#e2d3bd}
+@media(prefers-reduced-motion:reduce){.plug{transition:none}#say{transition:none}}
+</style>
+</head>
+<body>
+<button id="snd" aria-pressed="true">sound on</button>
+<main>
+ <section class="end" aria-label="The bowl">
+  <p class="kick">Spyhole · a kiln the loop checks every 30 s</p>
+  <p class="first">The ending, first.</p>
+  <div class="bowlwrap"><canvas id="bowl" role="img" aria-label="The bowl seen from above. Grey bands fill with glaze, one per wake."></canvas></div>
+  <p id="cap" class="cap" aria-live="polite">Grey until the fire earns it.</p>
+ </section>
+ <section class="wall" aria-label="The kiln wall">
+  <div class="row">
+   <div class="pw">
+    <svg viewBox="0 0 220 220" aria-hidden="true"><circle id="ringbg" cx="110" cy="110" r="104"/><circle id="ring" cx="110" cy="110" r="104" stroke-dasharray="653.45" stroke-dashoffset="653.45"/></svg>
+    <button id="port" class="port" aria-label="Spyhole. The loop opens it every 30 seconds. Open it yourself between wakes and the bowl cracks.">
+     <canvas id="eye" aria-hidden="true"></canvas><span class="plug" aria-hidden="true"></span>
+    </button>
+   </div>
+   <div class="readout">
+    <span id="temp" aria-live="off">20</span>
+    <span class="deg">°C inside</span>
+    <div id="cones">cone 06 standing · cone 4 standing · cone 8 standing</div>
+   </div>
+  </div>
+  <p id="formula">temp = 600 + 680 × min(1, wake ÷ 20)</p>
+  <p id="say" aria-live="polite">Every thirty seconds the loop gets up to look. Lift the plug yourself and the cold gets in.</p>
+  <ol class="board" id="board" aria-label="Six states of the bowl">
+   <li><i style="background:#6f6a64"></i>ghost</li>
+   <li><i style="background:#8c1e0c"></i>red</li>
+   <li><i style="background:#e06a1c"></i>orange</li>
+   <li><i style="background:#f5b955"></i>yellow</li>
+   <li><i style="background:#fbeedd"></i>white</li>
+   <li><i style="background:radial-gradient(circle at 40% 35%,#d8a83f,#7a4a2a)"></i>bowl</li>
+  </ol>
+ </section>
+</main>
+<section class="below">
+ <div>
+  <h2>The loop, waking</h2>
+  <pre class="term" id="term" aria-live="off"></pre>
+  <details>
+   <summary>kiln.md · the command the loop wakes</summary>
+   <pre id="md">---
+description: Peek through the spyhole once. Report one line. Change nothing.
+---
+You are the hand at the spyhole. Look, do not touch.
+
+1. Run `git status --short` and `git log -1 --oneline`.
+2. Report one line: how many files are hot (changed), and the
+   last cone that fell (the latest commit).
+3. If nothing moved since your last peek, say "still firing" and stop.
+
+Do not edit, create, delete, or commit anything.</pre>
+   <p>Save as <code>.claude/commands/kiln.md</code>. In Claude Code, run <code>/loop 1m /kiln</code>. The page fires at 30 s per wake. Claude Code schedules in minutes. The command reads git state and writes nothing.</p>
+   <button class="cbtn" id="copy">copy kiln.md</button>
+  </details>
+ </div>
+ <div>
+  <h2>The shelf</h2>
+  <div id="shelf" aria-label="Finished bowls. Tap one to hold it up."></div>
+  <p class="cap" style="text-align:left;align-self:start;margin-top:10px">Dark band: a wake while you watched. Pale band: a wake while you were away. Gold line: a peek between wakes.</p>
+ </div>
+</section>
+<footer>
+ <b>Ceramicist</b> (lead): the ending drawn first as a grey ghost, the spyhole, slumping cones, cracks from early peeks, gold at the end.
+ <b>Textile designer</b>: dark bands for watched wakes, pale for away. Her call to label each crack with time and cause is still open.
+ <b>Costume designer</b>: the kiln's heat in the tab title and favicon, and the six-state storyboard on the kiln floor.
+ <b>Ada Lovelace</b>: each wake written as one band of glaze, and the shelf that keeps the bowls offline.
+ One file. No network after it loads.
+</footer>
+<script>
+(function(){
+"use strict";
+var $=function(i){return document.getElementById(i)};
+var N=24,STEP=30000,LEAD=1500,T0=600,T1=1280,REST=14000,TAU=Math.PI*2,CIRC=653.45;
+var reduce=false;try{reduce=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
+var COOL=reduce?2000:9000;
+var CONES=[{n:"06",t:1000},{n:"4",t:1160},{n:"8",t:1260}];
+function store(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function load(k){try{var s=localStorage.getItem(k);return s?JSON.parse(s):null}catch(e){return null}}
+function drop(k){try{localStorage.removeItem(k)}catch(e){}}
+function clamp(x,a,b){a=a==null?0:a;b=b==null?1:b;return x<a?a:x>b?b:x}
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function tempAt(i){return Math.round(T0+(T1-T0)*Math.min(1,i/20))}
+function hms(t){var d=new Date(t);return[d.getHours(),d.getMinutes(),d.getSeconds()].map(function(x){return(x<10?"0":"")+x}).join(":")}
+function pad(i){return(i<10?"0":"")+i}
+
+/* ---------- glow ---------- */
+var STOPS=[[20,[45,36,30]],[550,[62,24,14]],[650,[112,20,7]],[800,[190,46,12]],[1000,[255,112,26]],[1150,[255,192,92]],[1280,[255,238,202]]];
+function glow(T){if(T<=STOPS[0][0])return STOPS[0][1];for(var i=1;i<STOPS.length;i++){if(T<=STOPS[i][0]){var a=STOPS[i-1],b=STOPS[i],f=(T-a[0])/(b[0]-a[0]);return[0,1,2].map(function(k){return a[1][k]+(b[1][k]-a[1][k])*f})}}return STOPS[STOPS.length-1][1]}
+function rgb(c,m){m=m==null?1:m;return"rgb("+Math.min(255,c[0]*m|0)+","+Math.min(255,c[1]*m|0)+","+Math.min(255,c[2]*m|0)+")"}
+function slump(T,ct){return clamp((T-(ct-50))/90)}
+
+/* ---------- bowl drawing ---------- */
+function bandCol(bd){var f=(bd.temp-T0)/(T1-T0),h=8+37*f;return bd.v?"hsl("+h.toFixed(1)+",52%,"+(23+f*7).toFixed(1)+"%)":"hsl("+h.toFixed(1)+",34%,72%)"}
+function ring(x,c,r1,r2,a0,a1){x.beginPath();x.arc(c,c,r2,a0,a1);x.arc(c,c,r1,a1,a0,true);x.closePath()}
+function poly(x,p,c,R){x.beginPath();x.moveTo(c+p[0][0]*R,c+p[0][1]*R);for(var i=1;i<p.length;i++)x.lineTo(c+p[i][0]*R,c+p[i][1]*R)}
+var crazeCache={};
+function craze(seed){if(crazeCache[seed])return crazeCache[seed];var r=rng(seed^0x5bd1),L=[];for(var i=0;i<38;i++){var a=r()*TAU,rr=.22+r()*.74,x=Math.cos(a)*rr,y=Math.sin(a)*rr,p=[[x,y]],d=r()*TAU,m=3+(r()*4|0);for(var k=0;k<m;k++){d+=(r()-.5)*1.5;x+=Math.cos(d)*.06;y+=Math.sin(d)*.06;if(x*x+y*y>.95)break;p.push([x,y])}if(p.length>1)L.push(p)}crazeCache[seed]=L;return L}
+function makeCrack(r){var a=r()*TAU,len=.35+r()*.45,steps=7+(r()*5|0),p=[];for(var k=0;k<=steps;k++){var rr=1-len*k/steps;a+=(r()-.5)*.2;p.push([+(Math.cos(a)*rr).toFixed(3),+(Math.sin(a)*rr).toFixed(3)])}return p}
+function drawBowl(x,S,b,o){
+ o=o||{};var c=S/2,R=S*.46,r0=S*.075,w=(R-r0)/N,u=S/480,n=b.bands.length,A=-Math.PI/2,k,i;
+ x.clearRect(0,0,S,S);
+ x.save();x.shadowColor="rgba(0,0,0,.65)";x.shadowBlur=22*u;x.shadowOffsetY=8*u;x.beginPath();x.arc(c,c,R+7*u,0,TAU);x.fillStyle=n?"#5b4838":"#3d3935";x.fill();x.restore();
+ for(k=0;k<N;k++){
+  var r1=r0+w*k,r2=r1+w+.8*u,bd=b.bands[k],e=1;
+  if(bd&&k===n-1&&o.sweep!=null&&o.sweep<1)e=o.sweep;
+  if(!bd||e<1){x.fillStyle="hsl(30,5%,"+((o.dim?31:39)+(k%3)*3)+"%)";ring(x,c,r1,r2,0,TAU);x.fill()}
+  if(bd){x.fillStyle=bandCol(bd);ring(x,c,r1,r2,A,A+TAU*e);x.fill();
+   if(o.speckle&&e===1){var r=rng(b.seed+k*7919),m=Math.round(TAU*(r1+w/2)/(8*u));for(i=0;i<m;i++){var a=r()*TAU,rr=r1+r()*w,s=(.6+r()*1.4)*u;x.fillStyle=r()<.75?"rgba(40,18,8,.45)":"rgba(255,240,220,.35)";x.fillRect(c+Math.cos(a)*rr,c+Math.sin(a)*rr,s,s)}}}
+ }
+ x.strokeStyle="rgba(0,0,0,.13)";x.lineWidth=u;for(k=1;k<N;k+=3){x.beginPath();x.arc(c,c,r0+w*k,0,TAU);x.stroke()}
+ x.beginPath();x.arc(c,c,r0,0,TAU);x.fillStyle=n?"#b0957a":"#6d665f";x.fill();x.lineWidth=2*u;x.strokeStyle="rgba(0,0,0,.25)";x.stroke();
+ var g=x.createRadialGradient(c-R*.4,c-R*.45,R*.05,c,c,R);g.addColorStop(0,"rgba(255,246,230,.22)");g.addColorStop(.55,"rgba(255,246,230,0)");g.addColorStop(1,"rgba(0,0,0,.3)");
+ x.beginPath();x.arc(c,c,R,0,TAU);x.fillStyle=g;x.fill();
+ x.lineWidth=7*u;x.strokeStyle=n?"#cdb89c":"#76706a";x.beginPath();x.arc(c,c,R+2*u,0,TAU);x.stroke();
+ if(o.craze>0){var L=craze(b.seed),mm=Math.floor(L.length*o.craze);x.strokeStyle="rgba(30,16,8,.32)";x.lineWidth=.9*u;for(i=0;i<mm;i++){poly(x,L[i],c,R);x.stroke()}}
+ x.lineCap="round";x.lineJoin="round";
+ var gd=o.gold||0;
+ b.cracks.forEach(function(cr){poly(x,cr,c,R);
+  if(gd<1){x.strokeStyle="rgba(16,8,3,.9)";x.lineWidth=2.3*u;x.stroke()}
+  if(gd>0){x.save();x.globalAlpha=gd;x.shadowColor="rgba(255,200,90,.7)";x.shadowBlur=6*u;x.strokeStyle="#d8a83f";x.lineWidth=3.4*u;x.stroke();x.restore()}});
+}
+
+/* ---------- eye: the view through the spyhole ---------- */
+function drawCone(x,bx,by,w,h,s,fill){var th=-Math.PI/2+s*1.5,hh=h*(1-s*.2),tx=bx+Math.cos(th)*hh,ty=Math.min(by-2,by+Math.sin(th)*hh),cx=bx+s*h*.2,cy=by-h*.55*(1-s*.5);
+ x.beginPath();x.moveTo(bx-w/2,by);x.quadraticCurveTo(cx-w*.35,cy,tx,ty);x.quadraticCurveTo(cx+w*.35,cy,bx+w/2,by);x.closePath();x.fillStyle=fill;x.fill()}
+function drawEye(T,peak,t){var S=ES,x=ex,col=glow(T),f=reduce?1:.93+.07*Math.sin(t/90)*Math.sin(t/233);
+ var g=x.createRadialGradient(S*.5,S*.42,0,S*.5,S*.5,S*.72);g.addColorStop(0,rgb(col,1.08*f));g.addColorStop(1,rgb(col,.42*f));x.fillStyle=g;x.fillRect(0,0,S,S);
+ x.fillStyle=rgb(col,.55*f);x.fillRect(0,S*.72,S,S*.08);
+ CONES.forEach(function(cn,i){drawCone(x,S*(.3+i*.2),S*.72,S*.075,S*.3,slump(peak,cn.t),rgb(col,.8*f))});}
+
+/* ---------- setup ---------- */
+var DPR=Math.min(2,window.devicePixelRatio||1);
+var bc=$("bowl"),bx=bc.getContext("2d"),BS=Math.round(480*DPR);bc.width=bc.height=BS;
+var ec=$("eye"),ex=ec.getContext("2d"),ES=Math.round(200*DPR);ec.width=ec.height=ES;
+var fav=document.createElement("canvas");fav.width=fav.height=32;var fx=fav.getContext("2d");
+var port=$("port"),ringEl=$("ring"),term=$("term"),board=$("board").children;
+
+function newFiring(){return{seed:(Math.random()*1e9)|0,start:Date.now(),bands:[],cracks:[],peeks:0}}
+var F=load("spyhole.firing");
+if(!F||typeof F.start!=="number"||!Array.isArray(F.bands)||!Array.isArray(F.cracks))F=newFiring();
+var shelf=load("shelf");if(!Array.isArray(shelf))shelf=[];
+shelf=shelf.filter(function(b){return b&&Array.isArray(b.bands)&&Array.isArray(b.cracks)});
+
+var TEST=(function(){var r=rng(1012),bands=[],base=new Date(2026,9,12,9,0,0).getTime();for(var i=1;i<=N;i++)bands.push({t:base+i*STEP,temp:tempAt(i),v:(i<6||i>16)?1:(r()<.3?1:0)});return{seed:1012,bands:bands,cracks:[makeCrack(rng(77)),makeCrack(rng(91))],peeks:2,date:base+N*STEP,test:true}})();
+
+var phase="firing",openUntil=0,sweepStart=0,coolStart=0,restUntil=0,view=null,dirty=true,lastCraze=0,belled=false,lastFavT=-99,lastTempTxt="";
+
+function wakeTime(i){return F.start+LEAD+(i-1)*STEP}
+function peak(){var m=20;F.bands.forEach(function(b){if(b.temp>m)m=b.temp});return m}
+function curTemp(){
+ if(phase==="firing")return F.bands.length?F.bands[F.bands.length-1].temp:20;
+ if(phase==="cooling"){var p=clamp((performance.now()-coolStart)/COOL),e=1-Math.pow(1-p,2);return Math.round(peak()+(60-peak())*e)}
+ return 40}
+function isOpen(){return Date.now()<openUntil||phase==="rest"}
+
+/* ---------- log ---------- */
+var LOG=[];
+function log(s){LOG.push(s);if(LOG.length>8)LOG.shift();renderTerm()}
+function renderTerm(){
+ var head="<b>&gt; /loop 30s /kiln</b>\n<em>  24 wakes, one every 30 s, then the kiln cools</em>\n";
+ var tail="";
+ if(phase==="firing"&&F.bands.length<N){var s=Math.max(0,Math.ceil((wakeTime(F.bands.length+1)-Date.now())/1000));tail="\n<em>· waiting · next wake in "+s+" s</em>"}
+ else if(phase==="cooling")tail="\n<em>· cooling · door shut</em>";
+ else if(phase==="rest")tail="\n<em>· door open · next ghost in "+Math.max(0,Math.ceil((restUntil-Date.now())/1000))+" s</em>";
+ term.innerHTML=head+LOG.join("\n")+tail}
+
+/* ---------- sound ---------- */
+var AC=null,soundOn=true;
+function ensureAudio(){if(AC||!soundOn)return;try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){AC=null}}
+function ok(){if(!AC||!soundOn)return false;if(AC.state==="suspended")AC.resume();return true}
+function noiseBuf(d){var b=AC.createBuffer(1,Math.round(AC.sampleRate*d),AC.sampleRate),c=b.getChannelData(0);for(var i=0;i<c.length;i++)c[i]=Math.random()*2-1;return b}
+function roar(d){if(!ok())return;var t=AC.currentTime,s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf(d);f.type="bandpass";f.frequency.value=170;f.Q.value=.7;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.22,t+.25);g.gain.linearRampToValueAtTime(0,t+d);s.connect(f);f.connect(g);g.connect(AC.destination);s.start(t)}
+function crackSnd(){if(!ok())return;var t=AC.currentTime,s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf(.15);f.type="highpass";f.frequency.value=1800;g.gain.setValueAtTime(.4,t);g.gain.exponentialRampToValueAtTime(.001,t+.14);s.connect(f);f.connect(g);g.connect(AC.destination);s.start(t);
+ var o=AC.createOscillator(),og=AC.createGain();o.frequency.setValueAtTime(140,t);o.frequency.exponentialRampToValueAtTime(60,t+.2);og.gain.setValueAtTime(.25,t);og.gain.exponentialRampToValueAtTime(.001,t+.22);o.connect(og);og.connect(AC.destination);o.start(t);o.stop(t+.25)}
+function ping(){if(!ok())return;var t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type="sine";o.frequency.value=2300+Math.random()*2800;g.gain.setValueAtTime(.05,t);g.gain.exponentialRampToValueAtTime(.0005,t+.45);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.5)}
+function bell(){if(!ok())return;var t=AC.currentTime;[392,588,784].forEach(function(f,i){var o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;g.gain.setValueAtTime(0,t+i*.06);g.gain.linearRampToValueAtTime(.07,t+i*.06+.02);g.gain.exponentialRampToValueAtTime(.0005,t+2.6);o.connect(g);g.connect(AC.destination);o.start(t+i*.06);o.stop(t+2.8)})}
+document.addEventListener("pointerdown",ensureAudio,{passive:true});
+$("snd").addEventListener("click",function(){soundOn=!soundOn;this.textContent=soundOn?"sound on":"sound off";this.setAttribute("aria-pressed",soundOn);if(soundOn)ensureAudio();else if(AC&&AC.state==="running")AC.suspend()});
+
+/* ---------- words ---------- */
+function say(t){var el=$("say");el.textContent=t}
+function caption(){
+ if(view){var b=view.b,d=new Date(b.date);$("cap").textContent=(b.test?"Test firing, 12 Oct. ":"From the shelf. Fired "+hms(b.date).slice(0,5)+", "+d.getDate()+"/"+(d.getMonth()+1)+". ")+b.peeks+" peek"+(b.peeks===1?"":"s")+".";return}
+ var n=F.bands.length;if(!n){$("cap").textContent="Grey until the fire earns it.";return}
+ var dk=F.bands.filter(function(b){return b.v}).length;
+ $("cap").textContent=n+" of 24 bands · "+dk+" watched · "+(n-dk)+" away · "+F.cracks.length+" crack"+(F.cracks.length===1?"":"s")}
+var PEEKS=["Ha. Cold air. That's a crack.","Again. The clay felt that one.","Ha. You and every potter at 3 a.m.","Each peek costs a line. Worth it, maybe."];
+
+/* ---------- the loop ---------- */
+function tick(){
+ var now=Date.now();
+ if(phase==="rest"&&now>=restUntil){F=newFiring();store("spyhole.firing",F);phase="firing";belled=false;lastCraze=0;dirty=true;say("Next one. The ending, first.");log("<b>&gt;</b> new ghost on the kiln shelf · seed "+F.seed);caption()}
+ if(phase!=="firing"){renderTerm();return}
+ var changed=false,seen=false,away=0;
+ while(F.bands.length<N&&now>=wakeTime(F.bands.length+1)){
+  var i=F.bands.length+1,due=wakeTime(i),vis=document.visibilityState==="visible"&&now-due<4000,T=tempAt(i);
+  F.bands.push({t:due,temp:T,v:vis?1:0});changed=true;if(vis)seen=true;else away++;
+  log("wake "+pad(i)+"  "+hms(due)+"  temp = 600 + 680 × min(1, "+i+"/20) = "+T+" °C · tab "+(vis?"watched → dark band":"away → pale band"));
+  $("formula").textContent="wake "+i+": 600 + 680 × min(1, "+i+"/20) = "+T+" °C";
+ }
+ if(changed){store("spyhole.firing",F);sweepStart=performance.now();dirty=true;caption();
+  if(seen){openUntil=now+3000;roar(2.8)}
+  if(away>1&&document.visibilityState==="visible")say("Ha. You left. The loop didn't. "+away+" pale bands for the wakes you missed.")}
+ if(F.bands.length>=N&&now>=wakeTime(N)+3200){phase="cooling";coolStart=performance.now();say("Ha. The fire's done. Now the slow part: hands off while it cools.");log("cool  "+hms(now)+"  burners off · door shut");dirty=true}
+ renderTerm()}
+
+function finish(){
+ var b={seed:F.seed,bands:F.bands,cracks:F.cracks,peeks:F.peeks,date:Date.now()};
+ shelf.unshift(b);if(shelf.length>12)shelf.length=12;store("shelf",shelf);drop("spyhole.firing");renderShelf();
+ var dk=b.bands.filter(function(x){return x.v}).length;
+ log("done  "+hms(b.date)+"  bowl to the shelf · "+dk+" dark, "+(N-dk)+" pale, "+b.cracks.length+" cracks run gold");
+ say("There it is. The bowl you watched become itself. Cracks run gold.");
+ phase="rest";restUntil=Date.now()+REST;dirty=true}
+
+port.addEventListener("click",function(){
+ ensureAudio();
+ if(phase==="rest"){say("Nothing left to crack. It's on the shelf.");return}
+ if(phase==="cooling"){say("Hands off. It's cooling. A draft now would split it in two.");return}
+ if(isOpen()){say("It's open already. The loop is looking. Look with it.");return}
+ if(F.cracks.length<16)F.cracks.push(makeCrack(Math.random));
+ F.peeks++;openUntil=Date.now()+1400;store("spyhole.firing",F);
+ crackSnd();roar(1.2);dirty=true;caption();
+ say(PEEKS[(F.peeks-1)%PEEKS.length]);
+ log("peek  "+hms(Date.now())+"  by hand, between wakes · cold air → crack "+F.cracks.length)});
+
+/* ---------- shelf ---------- */
+function renderShelf(){var el=$("shelf");el.innerHTML="";var list=shelf.length?shelf:[TEST];
+ list.forEach(function(b,i){var bt=document.createElement("button");bt.className="sb";
+  var d=new Date(b.date),lab=b.test?"test 12/10":hms(b.date).slice(0,5);
+  bt.setAttribute("aria-label",(b.test?"Test bowl":"Bowl "+(list.length-i))+", "+b.cracks.length+" cracks. Tap to hold it up.");
+  var cv=document.createElement("canvas");cv.width=cv.height=128;drawBowl(cv.getContext("2d"),128,b,{gold:1,craze:1});
+  var s=document.createElement("span");s.textContent=lab;bt.appendChild(cv);bt.appendChild(s);
+  bt.addEventListener("click",function(){view={b:b,until:Date.now()+6000};dirty=true;caption()});el.appendChild(bt)})}
+
+/* ---------- frame ---------- */
+function setFav(T){if(Math.abs(T-lastFavT)<8)return;lastFavT=T;var c=glow(T);fx.clearRect(0,0,32,32);fx.beginPath();fx.arc(16,16,15,0,TAU);fx.fillStyle="#4e2f20";fx.fill();fx.beginPath();fx.arc(16,16,10,0,TAU);fx.fillStyle=rgb(c,1.05);fx.fill();try{$("fav").href=fav.toDataURL()}catch(e){}}
+function coneText(pk){return CONES.map(function(c){var s=slump(pk,c.t);return"cone "+c.n+" "+(s>=1?"down":s>0?"bending":"standing")}).join(" · ")}
+function frame(t){
+ var now=Date.now();
+ if(phase==="firing"&&F.bands.length<N){var nx=wakeTime(F.bands.length+1),pv=F.bands.length?wakeTime(F.bands.length):F.start;ringEl.style.strokeDashoffset=CIRC*(1-clamp((now-pv)/(nx-pv)))}else ringEl.style.strokeDashoffset=CIRC;
+ var sweep=1;if(sweepStart){sweep=reduce?1:clamp((t-sweepStart)/1400);if(sweep>=1)sweepStart=0;dirty=true}
+ var cp=0;
+ if(phase==="cooling"){cp=clamp((t-coolStart)/COOL);var L=craze(F.seed).length,m=Math.floor(L*cp);if(m>lastCraze){lastCraze=m;ping()}if(cp>.45&&!belled){belled=true;bell()}dirty=true;if(cp>=1)finish()}
+ if(view&&now>view.until){view=null;dirty=true;caption()}
+ if(dirty){dirty=false;
+  if(view)drawBowl(bx,BS,view.b,{gold:1,craze:1,speckle:true});
+  else if(phase==="firing")drawBowl(bx,BS,F,{sweep:sweep,speckle:true,dim:!F.bands.length});
+  else if(phase==="cooling")drawBowl(bx,BS,F,{speckle:true,craze:cp,gold:clamp((cp-.45)/.5)});
+  else drawBowl(bx,BS,F,{speckle:true,craze:1,gold:1})}
+ var T=curTemp(),pk=Math.max(peak(),T);
+ var op=isOpen();port.classList.toggle("open",op);
+ if(op||!ec.dataset.done){drawEye(T,pk,t);ec.dataset.done="1"}
+ var tt=String(T);if(tt!==lastTempTxt){lastTempTxt=tt;$("temp").textContent=tt;$("temp").style.color=T>=700?rgb(glow(T),1.05):"#ecdfcc";
+  var ct=coneText(pk);$("cones").textContent=ct;document.title=T+" °C · "+(phase==="rest"?"bowl out":ct.split(" · ").filter(function(s){return!/standing/.test(s)}).pop()||"cones standing")+" · Spyhole";setFav(T);
+  var st=phase!=="firing"?5:!F.bands.length?0:T<800?1:T<1000?2:T<1150?3:4;for(var i=0;i<6;i++)board[i].classList.toggle("on",i===st)}
+ requestAnimationFrame(frame)}
+
+$("copy").addEventListener("click",function(){var b=this,t=$("md").textContent;function done(m){b.textContent=m;setTimeout(function(){b.textContent="copy kiln.md"},1800)}
+ function sel(){try{var r=document.createRange();r.selectNodeContents($("md"));var s=getSelection();s.removeAllRanges();s.addRange(r);done("selected")}catch(e){}}
+ try{navigator.clipboard.writeText(t).then(function(){done("copied")},sel)}catch(e){sel()}});
+
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"){tick();dirty=true}});
+renderShelf();caption();
+if(F.bands.length){log("<em>resumed a firing begun at "+hms(F.start)+"</em>")}
+tick();setInterval(tick,1000);requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

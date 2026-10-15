@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 12 days recorded.
+Every daily team and the asset it made, newest first. 13 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-10-15](days/2026-10-15/) | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace | Works fully offline after the first load. | [asset](days/2026-10-15/artifact-1.html) |
 | [2026-10-14](days/2026-10-14/) | Graveyard Shift | Radio producer · Industrial designer · Museum curator · Odysseus | No more than two levels of heading. | [asset](days/2026-10-14/artifact-1.html) |
 | [2026-10-13](days/2026-10-13/) | The Inn That Answers | Documentary director · Playwright · Puppeteer · Benjamin Franklin | Monospace typeface only. | [asset](days/2026-10-13/artifact-1.html) |
 | [2026-10-12](days/2026-10-12/) | Found Voice | Set designer · Bookbinder · Data journalist · Euclid | All text at 18 px or larger. | [asset](days/2026-10-12/artifact-1.html) |
