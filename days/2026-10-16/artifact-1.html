@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reverse Pick: a session log in glass</title>
+<style>
+:root{--ink:#100e0b;--paper:#e8dcc4;--dim:#b8a888;--brass:#c9a050;--brassd:#8a6a2a;--steel:#9aa3a6;--rust:#a8553a}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink);color:var(--paper)}
+body{min-height:100vh;display:flex;flex-direction:column;align-items:center;font-family:Georgia,"Iowan Old Style","Times New Roman",serif}
+main{width:100%;max-width:1000px;padding:10px 14px 0;display:flex;flex-direction:column;align-items:center}
+svg#rp-art{width:100%;max-height:66vh;display:block;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.rp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#rp-tale{width:100%;max-width:820px;min-height:9.5em;padding:4px 4px 0}
+#rp-meta{font:600 12px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 8px}
+#rp-line{font-size:clamp(19px,3.2vw,32px);line-height:1.22;margin:0;font-style:italic;letter-spacing:-.01em}
+#rp-after{font:800 clamp(15px,2.2vw,21px)/1.3 "Helvetica Neue",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);margin:12px 0 0;opacity:0;transition:opacity 1.2s .6s}
+.open-page #rp-after{opacity:1}
+#rp-ctl{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin:10px 0 6px}
+#rp-ctl button{background:none;border:0;border-bottom:1px solid var(--brassd);color:var(--paper);font:600 12px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;padding:8px 2px;cursor:pointer}
+#rp-ctl button:focus-visible{outline:2px solid #e8c877;outline-offset:3px}
+footer{max-width:820px;padding:14px 14px 22px;font:11px/1.6 ui-monospace,Menlo,Consolas,monospace;color:#a89a80}
+footer b{color:var(--paper);font-weight:700}
+/* scene */
+.rp-obj{transition:transform .4s cubic-bezier(.3,.7,.3,1);transform-box:fill-box;transform-origin:50% 100%}
+#rp-beam{animation:rp-flick 5s ease-in-out infinite;transition:opacity 1.2s}
+@keyframes rp-flick{0%,100%{opacity:.85}50%{opacity:.65}}
+#rp-morning{opacity:0;transition:opacity 1.4s}
+.open #rp-morning{opacity:1}
+.open #rp-beam{opacity:0;animation:none}
+.rp-scuff{fill:#d9c8a6;opacity:.3;animation:rp-in .4s}
+@keyframes rp-in{from{opacity:0}}
+#rp-scuffs{transition:opacity 1.2s}
+.open #rp-scuffs{opacity:0}
+#rp-letters{transition:fill 1.4s}
+.open #rp-letters{fill:#5a4320}
+/* cylinder */
+.rp-pin{cursor:pointer;outline:none}
+.rp-stack{transition:transform .22s cubic-bezier(.4,1.6,.5,1)}
+.rp-down .rp-stack{transform:translateY(22px)}
+.rp-spring{transform-box:fill-box;transform-origin:50% 0;transition:transform .22s}
+.rp-down .rp-spring{transform:scaleY(1.65)}
+.rp-focus{opacity:0}
+.rp-pin:focus .rp-focus{opacity:1}
+.rp-halo{opacity:0}
+.rp-next .rp-halo{animation:rp-breath 2.4s ease-in-out infinite}
+@keyframes rp-breath{0%,100%{opacity:.08}50%{opacity:.5}}
+.rp-down.rp-bind .rp-stack{animation:rp-bindD .6s}
+.rp-up.rp-bind .rp-stack{animation:rp-bindU .6s}
+.rp-bind .rp-drv{fill:var(--rust)}
+@keyframes rp-bindD{0%{transform:translate(0,22px)}20%{transform:translate(0,10px)}30%{transform:translate(-2px,10px)}40%{transform:translate(2px,11px)}50%{transform:translate(-2px,10px)}70%{transform:translate(0,12px)}100%{transform:translate(0,22px)}}
+@keyframes rp-bindU{0%{transform:translate(0,0)}20%{transform:translate(0,9px)}35%{transform:translate(-2px,9px)}50%{transform:translate(2px,9px)}100%{transform:translate(0,0)}}
+#rp-keyface{transition:transform .9s cubic-bezier(.5,0,.2,1);transform-origin:50px 433px}
+.open #rp-keyface{transform:rotate(90deg)}
+#rp-plug{transition:fill 1s}
+.open #rp-plug{fill:rgba(201,160,80,.22)}
+.rp-shear{transition:stroke .8s}
+.open .rp-shear{stroke:#e8c877}
+.rp-glyph{opacity:0;transition:opacity .5s}
+.open .rp-glyph{opacity:1}
+#rp-start{transition:opacity .3s}
+.hid *{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rp-next .rp-halo{opacity:.4}}
+</style>
+</head>
+<body>
+<main>
+<svg id="rp-art" viewBox="0 0 720 540" preserveAspectRatio="xMidYMid meet" aria-labelledby="rp-t">
+<title id="rp-t">A shop window at night behind a clear glass lock cylinder with fourteen pins, one for each step of a Claude Code session.</title>
+<defs>
+<linearGradient id="rp-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1915"/><stop offset="1" stop-color="#2a221a"/></linearGradient>
+<linearGradient id="rp-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe3c8"/><stop offset="1" stop-color="#d6c29a"/></linearGradient>
+<linearGradient id="rp-beamg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1d58e" stop-opacity=".5"/><stop offset="1" stop-color="#f1d58e" stop-opacity="0"/></linearGradient>
+<radialGradient id="rp-haloG"><stop offset="0" stop-color="#e8c877" stop-opacity=".9"/><stop offset="1" stop-color="#e8c877" stop-opacity="0"/></radialGradient>
+</defs>
+<!-- the window -->
+<g id="rp-window">
+<rect x="20" y="20" width="680" height="310" fill="url(#rp-night)"/>
+<rect id="rp-morning" x="20" y="20" width="680" height="310" fill="url(#rp-day)"/>
+<g stroke="#000" stroke-opacity=".18" stroke-width="2"><path d="M60 24V300M96 24V300M640 24V300M672 24V300"/></g>
+<text id="rp-letters" x="360" y="62" text-anchor="middle" fill="#c9a050" font-family="Georgia,serif" font-size="20" font-weight="700" letter-spacing="7">SESSION LOG · 14 PINS</text>
+<rect x="20" y="300" width="680" height="30" fill="#3b2a1b"/>
+<g stroke="#c9b79a" stroke-opacity=".55" stroke-width="2">
+<path d="M104 306l12 8M116 306l-12 8M234 306l12 8M246 306l-12 8M355 306l12 8M367 306l-12 8M514 306l12 8M526 306l-12 8M629 306l12 8M641 306l-12 8"/>
+</g>
+<g id="rp-scuffs"></g>
+<g id="rp-o-lamp" class="rp-obj">
+<polygon id="rp-beam" points="94,140 126,140 176,300 44,300" fill="url(#rp-beamg)"/>
+<ellipse cx="110" cy="298" rx="22" ry="5" fill="#1a140e"/>
+<rect x="108" y="140" width="4" height="158" fill="#6d5a3e"/>
+<path d="M82 140H138L125 98H95Z" fill="#d9b46a" stroke="#8a6a2a"/>
+</g>
+<g id="rp-o-dummy" class="rp-obj">
+<ellipse cx="240" cy="298" rx="18" ry="4" fill="#1a140e"/>
+<rect x="238" y="248" width="4" height="50" fill="#6d5a3e"/>
+<path d="M216 172Q240 160 264 172L256 250H224Z" fill="#c9b79a"/>
+<rect x="236" y="150" width="8" height="16" fill="#b5a385"/>
+<ellipse cx="240" cy="136" rx="13" ry="16" fill="#c9b79a"/>
+</g>
+<g id="rp-o-card" class="rp-obj">
+<path d="M346 298L358 282M376 298L364 282" stroke="#6d5a3e" stroke-width="3"/>
+<rect x="330" y="236" width="62" height="46" fill="#efe3c8" stroke="#8a6a2a"/>
+<text id="rp-cardtxt" x="361" y="266" text-anchor="middle" font-family="Georgia,serif" font-size="18" font-weight="700" fill="#2a1e12">4.90</text>
+</g>
+<g id="rp-o-shelf" class="rp-obj">
+<path d="M472 300V200M568 300V200" stroke="#6d5a3e" stroke-width="5"/>
+<rect x="462" y="196" width="116" height="8" fill="#8a6a2a"/>
+<rect x="476" y="172" width="22" height="24" fill="#b5a385"/><rect x="502" y="160" width="28" height="36" fill="#c9a050"/><rect x="536" y="178" width="30" height="18" fill="#9aa3a6"/>
+</g>
+<g id="rp-o-crate" class="rp-obj">
+<rect x="600" y="244" width="70" height="56" fill="#7a5a36" stroke="#3b2a1b" stroke-width="2"/>
+<path d="M600 262H670M600 282H670M606 244L664 300" stroke="#3b2a1b" stroke-width="2"/>
+</g>
+<rect x="20" y="20" width="680" height="310" fill="none" stroke="#8a6a2a" stroke-width="6"/>
+</g>
+<g id="rp-trail"></g>
+<text id="rp-start" x="653" y="354" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="2" fill="#e8c877">START</text>
+<!-- the cylinder -->
+<g id="rp-cyl">
+<rect x="90" y="360" width="600" height="146" rx="14" fill="rgba(230,236,228,.05)" stroke="rgba(230,236,228,.45)" stroke-width="1.5"/>
+<rect id="rp-plug" x="96" y="432" width="588" height="70" rx="10" fill="rgba(201,160,80,.08)" stroke="rgba(201,160,80,.6)"/>
+<line class="rp-shear" x1="96" y1="431" x2="684" y2="431" stroke="rgba(230,236,228,.5)" stroke-dasharray="4 4"/>
+<text x="682" y="426" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="9" letter-spacing="2" fill="#a89a80">SHEAR</text>
+<path d="M100 366H680M100 499H680" stroke="#fff" stroke-opacity=".14"/>
+<circle cx="50" cy="433" r="36" fill="rgba(230,236,228,.05)" stroke="rgba(230,236,228,.45)" stroke-width="1.5"/>
+<g id="rp-keyface"><circle cx="50" cy="433" r="25" fill="rgba(201,160,80,.12)" stroke="rgba(201,160,80,.7)"/>
+<path d="M47 413h6v12l4 4-4 4v17h-6v-14l-4-4 4-4z" fill="#100e0b" stroke="#c9a050"/></g>
+<g id="rp-pins"></g>
+</g>
+</svg>
+<section id="rp-tale">
+<p id="rp-meta"></p>
+<p id="rp-line"></p>
+<p id="rp-after">The plug turns. The folder is as it was. The trail stays in the glass.</p>
+</section>
+<div id="rp-ctl">
+<button id="rp-all" type="button">press all pins</button>
+<button id="rp-back" type="button">take back (z)</button>
+<button id="rp-snd" type="button" aria-pressed="true">sound: on</button>
+</div>
+<p id="rp-live" class="rp-sr" aria-live="polite"></p>
+</main>
+<footer>
+<b>Locksmith</b> (lead): the glass cylinder, strict reverse order, the 600 ms bind, the plug that turns at zero. Not used: scrollbar, timestamp column, search box, status dots.<br>
+<b>Packaging designer</b>: pin cuts by tool (Edit V-cut, Bash peaked, Read flat-scored), pressing a pin to redo, the scuffs, the trail in the glass.<br>
+<b>Window dresser</b>: the night window, five objects for five places the session touched, the floor swept at morning.<br>
+<b>Scheherazade</b> (guest): one line per pin, each ending on the step before it.
+</footer>
+<script type="application/json" id="rp-session">
+{"steps":[
+{"tool":"Read","path":"src/price.js","obj":"card","d":[0,0,-6],"tale":"It opened src/price.js and found the price kept as a bare number. Before this, the folder sat closed in the dark, and nobody had asked it anything."},
+{"tool":"Read","path":"test/price.test.js","obj":"shelf","d":[0,0,2],"tale":"It read the tests, six of them, each one sure of itself. Before this, it opened the price file."},
+{"tool":"Bash","path":"npm test","obj":"crate","d":[14,0,0],"tale":"It ran the tests. Two failed: 4.9 where 4.90 should stand. Before this, it read what the tests expected."},
+{"tool":"Edit","path":"src/price.js","obj":"card","d":[46,-10,-4],"tale":"It changed one line so every price carries two places. Before this, two tests failed."},
+{"tool":"Bash","path":"npm test","obj":"crate","d":[12,0,3],"tale":"It ran the tests again. One still failed, down in the cart. Before this, it changed that one line."},
+{"tool":"Read","path":"src/cart.js","obj":"dummy","d":[0,0,-6],"tale":"It opened the cart and saw each item rounded before the sum. Before this, the one test that still refused."},
+{"tool":"Edit","path":"src/cart.js","obj":"dummy","d":[30,0,-10],"tale":"It moved the rounding to the end of the sum. Before this, it found where the cart did its adding."},
+{"tool":"Edit","path":"test/price.test.js","obj":"shelf","d":[0,-16,0],"tale":"It wrote a seventh test: three items at 0.10 must make 0.30. Before this, it moved the rounding."},
+{"tool":"Bash","path":"npm test","obj":"crate","d":[14,0,-2],"tale":"Seven passed. Before this, it wrote the seventh."},
+{"tool":"Read","path":"styles/window.css","obj":"lamp","d":[0,0,6],"tale":"It looked at how the price card is drawn in the window. Before this, all seven passed."},
+{"tool":"Edit","path":"styles/window.css","obj":"lamp","d":[-48,0,4],"tale":"It gave the figures a fixed width so 4.90 stops jumping. Before this, it read the window styles."},
+{"tool":"Edit","path":"src/price.js","obj":"card","d":[10,6,12],"tale":"It left a comment in the price file: round once, at the end. Before this, it steadied the card."},
+{"tool":"Bash","path":"npm run build","obj":"crate","d":[22,0,2],"tale":"It built the shop. Three files out, no warnings. Before this, it left that comment."},
+{"tool":"Bash","path":"git diff --stat","obj":"crate","d":[10,0,0],"tale":"It counted its own work: 4 files changed, 19 lines in, 6 out. Before this, it built the shop."}
+]}
+</script>
+<script>
+(function(){
+var S=JSON.parse(document.getElementById('rp-session').textContent).steps,N=S.length;
+var NS='http://www.w3.org/2000/svg',svg=document.getElementById('rp-art');
+var home={lamp:110,dummy:240,card:361,shelf:520,crate:635};
+var objName={lamp:'the lamp',dummy:'the dummy',card:'the price card',shelf:'the shelf',crate:'the crate'};
+var LEN=[26,40,22,44,32,42,28,36,40,24,44,30,38,34];
+var cur=N,hist=[],focusIdx=N,timer=null,wasOpen=false;
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+function cx(i){return 120+(i-1)*41}
+function cut(tool,c,T,B,w){var a=c-w/2,b=c+w/2,n=w*.4;
+ if(tool==='Edit')return 'M'+a+' '+T+'H'+b+'V'+B+'L'+c+' '+(B-n)+'L'+a+' '+B+'Z';
+ if(tool==='Bash')return 'M'+a+' '+T+'H'+b+'V'+(B-n)+'L'+c+' '+B+'L'+a+' '+(B-n)+'Z';
+ return 'M'+a+' '+T+'H'+b+'V'+B+'H'+a+'Z';}
+var pinsG=document.getElementById('rp-pins'),trail=document.getElementById('rp-trail'),pins=[];
+for(var i=1;i<=N;i++){
+ var s=S[i-1],c=cx(i);
+ var g=el('g',{'class':'rp-pin rp-down',role:'button',tabindex:i===N?'0':'-1','data-i':i},pinsG);
+ el('ellipse',{'class':'rp-halo',cx:c,cy:431,rx:20,ry:30,fill:'url(#rp-haloG)'},g);
+ el('rect',{x:c-20,y:356,width:40,height:178,fill:'transparent'},g);
+ el('rect',{'class':'rp-focus',x:c-19,y:362,width:38,height:170,rx:6,fill:'none',stroke:'#e8c877','stroke-width':2},g);
+ var z='M'+c+' 362';for(var k=1;k<=6;k++)z+='L'+(c+(k%2?6:-6))+' '+(362+k*5.3);
+ el('path',{'class':'rp-spring',d:z,fill:'none',stroke:'#9aa3a6','stroke-width':1.4},g);
+ var st=el('g',{'class':'rp-stack'},g);
+ el('rect',{'class':'rp-drv',x:c-8,y:396,width:16,height:34,rx:2,fill:'#9aa3a6'},st);
+ var B=432+LEN[i-1];
+ el('path',{d:cut(s.tool,c,432,B,16),fill:'#c9a050',stroke:'#8a6a2a'},st);
+ if(s.tool==='Read')el('path',{d:'M'+(c-8)+' '+(B-5)+'H'+(c+8),stroke:'#5a4320','stroke-width':1.5},st);
+ el('text',{x:c,y:526,'text-anchor':'middle','font-family':'ui-monospace,Menlo,monospace','font-size':11,fill:'#a89a80'},g).textContent=i;
+ var gl=el('path',{'class':'rp-glyph',d:cut(s.tool,c,336,350,10),fill:'#c9a050'},trail);
+ gl.style.transitionDelay=(i*70)+'ms';
+ pins.push(g);
+}
+function offset(obj,n){var d=[0,0,0];for(var j=0;j<n;j++)if(S[j].obj===obj){d[0]+=S[j].d[0];d[1]+=S[j].d[1];d[2]+=S[j].d[2]}return d}
+var scuffs=document.getElementById('rp-scuffs');
+function render(){
+ for(var o in home){var d=offset(o,cur);document.getElementById('rp-o-'+o).style.transform='translate('+d[0]+'px,'+d[1]+'px) rotate('+d[2]+'deg)'}
+ document.getElementById('rp-cardtxt').textContent=cur>=4?'4.90':'4.9';
+ pins.forEach(function(p,k){var i=k+1,down=i<=cur;
+  p.classList.toggle('rp-down',down);p.classList.toggle('rp-up',!down);p.classList.toggle('rp-next',i===cur);
+  var s=S[k];p.setAttribute('aria-label','Pin '+i+': '+s.tool+' '+s.path+'. '+(down?'Down, change standing.':'Lifted, change undone. Press to redo.'))});
+ document.getElementById('rp-start').style.opacity=cur===N?1:0;
+ var open=cur===0;svg.classList.toggle('open',open);document.body.classList.toggle('open-page',open);
+ var meta=document.getElementById('rp-meta'),line=document.getElementById('rp-line');
+ if(cur===N){meta.textContent='14 pins down · standing: 14 changes';line.textContent='Fourteen pins. The session pushed every one down. Pick from the right, or the cylinder binds.'}
+ else{var s=S[cur];meta.textContent='pin '+(cur+1)+' up · '+s.tool+' '+s.path+' · '+objName[s.obj]+' · standing: 14 − '+(N-cur)+' lifted = '+cur;line.textContent=s.tale}
+ if(open&&!wasOpen){say('The plug turns.');snd('turn')}
+ wasOpen=open;
+}
+function say(t){var l=document.getElementById('rp-live');l.textContent='';setTimeout(function(){l.textContent=t},30)}
+function bind(i){var p=pins[i-1];p.classList.remove('rp-bind');void p.getBBox();p.classList.add('rp-bind');setTimeout(function(){p.classList.remove('rp-bind')},600);say('binds');snd('bind')}
+function lift(i,rec){
+ if(i!==cur){bind(i);return false}
+ var s=S[i-1],d=offset(s.obj,cur);
+ el('ellipse',{'class':'rp-scuff',cx:home[s.obj]+d[0],cy:308,rx:20,ry:3.5,'data-s':i},scuffs);
+ cur--;if(rec)hist.push('lift');render();say('Pin '+i+' lifted. '+s.tool+' '+s.path+' undone.');snd('lift');return true}
+function press(i,rec){
+ if(i!==cur+1){bind(i);return false}
+ var sc=scuffs.querySelector('[data-s="'+i+'"]');if(sc)sc.remove();
+ cur++;if(rec)hist.push('press');render();say('Pin '+i+' pressed. '+S[i-1].tool+' '+S[i-1].path+' redone.');snd('press');return true}
+function stopReplay(){if(timer){clearInterval(timer);timer=null}}
+function act(i){stopReplay();if(i<=cur)lift(i,true);else press(i,true)}
+function setFocus(i){focusIdx=Math.max(1,Math.min(N,i));pins.forEach(function(p,k){p.setAttribute('tabindex',k+1===focusIdx?'0':'-1')});pins[focusIdx-1].focus()}
+pins.forEach(function(p,k){
+ p.addEventListener('click',function(){focusIdx=k+1;pins.forEach(function(q,j){q.setAttribute('tabindex',j===k?'0':'-1')});act(k+1)});
+ p.addEventListener('keydown',function(e){
+  if(e.key==='ArrowLeft'){e.preventDefault();setFocus(focusIdx-1)}
+  else if(e.key==='ArrowRight'){e.preventDefault();setFocus(focusIdx+1)}
+  else if(e.key===' '||e.key==='Enter'){e.preventDefault();act(k+1)}});
+});
+function takeBack(){stopReplay();var h=hist.pop();if(!h){say('Nothing to take back.');return}
+ if(h==='lift')press(cur+1,false);else lift(cur,false)}
+document.getElementById('rp-back').addEventListener('click',takeBack);
+document.addEventListener('keydown',function(e){if((e.key==='z'||e.key==='Z')&&!e.altKey){e.preventDefault();takeBack()}});
+document.getElementById('rp-all').addEventListener('click',function(){stopReplay();if(cur>=N){say('All pins already down.');return}
+ timer=setInterval(function(){if(cur<N)press(cur+1,true);else stopReplay()},300)});
+/* sound */
+var ac=null,soundOn=true;
+try{soundOn=localStorage.getItem('rp-sound')!=='off'}catch(e){}
+var sb=document.getElementById('rp-snd');
+function showSnd(){sb.textContent='sound: '+(soundOn?'on':'off');sb.setAttribute('aria-pressed',soundOn?'true':'false')}
+showSnd();
+sb.addEventListener('click',function(){soundOn=!soundOn;showSnd();try{localStorage.setItem('rp-sound',soundOn?'on':'off')}catch(e){}});
+function tone(f,dur,type,vol,to,at){
+ var t=ac.currentTime+(at||0),o=ac.createOscillator(),g=ac.createGain();
+ o.type=type;o.frequency.setValueAtTime(f,t);if(to)o.frequency.exponentialRampToValueAtTime(to,t+dur);
+ g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+ o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+dur+.02)}
+function snd(k){if(!soundOn)return;
+ try{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume()}catch(e){return}
+ if(k==='lift'){tone(2400,.03,'square',.03);tone(880,.12,'triangle',.06)}
+ else if(k==='press'){tone(1600,.03,'square',.03);tone(330,.14,'triangle',.07)}
+ else if(k==='bind'){tone(180,.06,'square',.05);tone(150,.08,'square',.05,0,.09)}
+ else if(k==='turn'){tone(220,.5,'triangle',.08,110);tone(660,.9,'sine',.05,0,.45);tone(990,.9,'sine',.03,0,.55)}}
+document.addEventListener('visibilitychange',function(){document.body.classList.toggle('hid',document.hidden)});
+render();
+})();
+</script>
+</body>
+</html>
