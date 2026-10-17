@@ -11,8 +11,10 @@
 //        CLAUDE_MODEL        model for the claude provider (default: claude-opus-5-5)
 //        CLAUDE_BIN          path to the claude CLI (default: claude)
 //        ARTIFACTS           default for --artifacts (default: 1)
+//        STUDIO              1 turns on the studio tier for any date (see STUDIO_DAYS)
 // A brief from --brief or a brief.md file replaces today's task.
 import { execFileSync, spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
@@ -23,6 +25,14 @@ const API_URL = process.env.API_URL || 'https://openrouter.ai/api/v1/chat/comple
 const MODELS = (process.env.MODEL || 'openrouter/free,qwen/qwen3.8-27b:free,google/gemma-4-31b-it:free')
   .split(',').map((m) => m.trim()).filter(Boolean);
 const MAX_BYTES = 100 * 1024;
+// Studio tier: a trial of richer pages. The model may ask for vendored libraries and fonts by
+// name; run.mjs inlines them after the checks, so the page stays one offline file under the
+// same CSP. It runs only on these dates (or with STUDIO=1), so the next season is unchanged.
+export const STUDIO_DAYS = ['2026-10-17', '2026-10-18'];
+const STUDIO_MAX_BYTES = 300 * 1024;
+const STUDIO_MAX_TOTAL = 1536 * 1024;
+const LIB_TAG = /<script\b[^>]*\bdata-lib\s*=\s*["']?([\w-]+)["']?[^>]*>\s*<\/script>/gi;
+const FONT_TAG = /<style\b[^>]*\bdata-font\s*=\s*["']?([\w-]+)["']?[^>]*>\s*<\/style>/gi;
 export const DEFAULT_CLAUDE_MODEL = 'claude-opus-5-5';
 // Limits on the team's session. Breaking one flags the day for review; it never triggers a retry.
 export const CLASH_LINES = [6, 10];
@@ -118,9 +128,22 @@ export function extractHtml(text) {
 }
 
 // Problems that block an artifact from being marked ready.
-export function checkArtifact(html) {
+export function isStudio(date) {
+  return STUDIO_DAYS.includes(date) || process.env.STUDIO === '1';
+}
+
+export function vendorManifest() {
+  return JSON.parse(readFileSync(join(HERE, 'vendor', 'manifest.json'), 'utf8'));
+}
+
+export function checkArtifact(html, studio = false) {
   const problems = [];
-  if (Buffer.byteLength(html) > MAX_BYTES) problems.push('larger than 100 KB');
+  if (studio) {
+    if (Buffer.byteLength(html) > STUDIO_MAX_BYTES) problems.push('larger than 300 KB before libraries are added');
+    const { libs, fonts } = vendorManifest();
+    for (const [, name] of html.matchAll(LIB_TAG)) if (!libs[name]) problems.push(`asks for unknown library "${name}"`);
+    for (const [, name] of html.matchAll(FONT_TAG)) if (!fonts[name]) problems.push(`asks for unknown font "${name}"`);
+  } else if (Buffer.byteLength(html) > MAX_BYTES) problems.push('larger than 100 KB');
   if (!/<title>[^<]*\S[^<]*<\/title>/i.test(html)) problems.push('no title element');
   if (!/<meta[^>]+name=["']?viewport/i.test(html)) problems.push('no viewport meta tag');
   if (/<(script|img|iframe|link|source|video|audio|embed|object)\b[^>]*\b(src|href)\s*=\s*["']?(https?:)?\/\//i.test(html)
@@ -130,6 +153,34 @@ export function checkArtifact(html) {
   const text = html.replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ');
   for (const w of findBanned(text)) problems.push(`uses the word "${w}"`);
   return problems;
+}
+
+// Replaces each library and font tag with the vendored file, after checking its hash.
+// Runs after checkArtifact, so library code is never scanned as if the model wrote it.
+export function inlineVendor(html) {
+  const { libs, fonts } = vendorManifest();
+  const read = (o) => {
+    const buf = readFileSync(join(HERE, 'vendor', o.file));
+    if (createHash('sha256').update(buf).digest('hex') !== o.sha256) throw new Error(`vendor/${o.file} does not match its hash`);
+    return buf;
+  };
+  const used = new Set();
+  const out = html
+    .replace(LIB_TAG, (m, name) => {
+      const lib = libs[name];
+      if (!lib || used.has(`lib:${name}`)) return '';
+      used.add(`lib:${name}`);
+      return `<script>/* ${lib.version}, ${lib.license} */\n${read(lib).toString('utf8')}\n</script>`;
+    })
+    .replace(FONT_TAG, (m, name) => {
+      const f = fonts[name];
+      if (!f || used.has(`font:${name}`)) return '';
+      used.add(`font:${name}`);
+      return `<style>/* ${f.version}, ${f.license} */ @font-face{font-family:"${f.family}";font-weight:${f.weight};`
+        + `font-display:block;src:url(data:font/woff2;base64,${read(f).toString('base64')}) format("woff2")}</style>`;
+    });
+  if (Buffer.byteLength(out) > STUDIO_MAX_TOTAL) throw new Error('larger than 1.5 MB with libraries added');
+  return out;
 }
 
 // Blocks all network requests from the artifact.
@@ -343,9 +394,11 @@ async function main() {
   const system = { role: 'system', content: `Writing rules:\n\n${s['Writing rules']}` };
   const context = `<team>\n${team}\n</team>${custom ? `\n\n<brief>\n${custom}\n</brief>` : ''}`;
   const planMessages = [system, { role: 'user', content: `${context}\n\n${s['Work the brief']}` }];
+  const studio = isStudio(date);
+  const build = studio ? `${s['Build an artifact']}\n\n${s['Studio tier']}` : s['Build an artifact'];
   const buildMessages = (plan, lead) => [system, {
     role: 'user',
-    content: `${context}\n\n<plan>\n${plan}\n</plan>\n\n${s['Build an artifact'].replaceAll('{{LEAD}}', String(lead))}`,
+    content: `${context}\n\n<plan>\n${plan}\n</plan>\n\n${build.replaceAll('{{LEAD}}', String(lead))}`,
   }];
 
   if (opts.dryRun) {
@@ -357,7 +410,7 @@ async function main() {
   const complete = prepareProvider(opts.provider);
 
   const day = {
-    date, task, brief: custom || null, team, provider: opts.provider, model: null,
+    date, task, brief: custom || null, team, provider: opts.provider, model: null, studio,
     status: 'ok', error: null, decision: '', concept: '', plan: '', planProblems: [], referee: false, artifacts: [],
   };
   // A forced run replaces the day, so old assets and screenshots must not linger.
@@ -399,11 +452,11 @@ async function main() {
     try {
       const out = await completeChecked(complete, buildMessages(planText, n), 16000, (t) => {
         const html = extractHtml(t);
-        return html ? checkArtifact(html) : ['no HTML code block'];
+        return html ? checkArtifact(html, studio) : ['no HTML code block'];
       });
       const html = extractHtml(out.text);
       if (!html) throw new Error(`${out.model} returned no HTML`);
-      writeFileSync(join(dir, file), `${addCsp(html)}\n`);
+      writeFileSync(join(dir, file), `${addCsp(studio ? inlineVendor(html) : html)}\n`);
       day.artifacts.push({ file, lead: n, model: out.model, status: out.problems.length ? 'needs review' : 'ok', problems: out.problems });
       console.log(`${file}: ${out.model}${out.problems.length ? `, needs review: ${out.problems.join('; ')}` : ''}`);
     } catch (e) {

@@ -13,9 +13,10 @@ for f in "$dir"/*/artifact-*.html; do
   png=${f%.html}.png
   [ -e "$png" ] && continue
   abs=$(cd "$(dirname "$f")" && pwd)/$(basename "$f")
-  # Keep Chrome's sandbox on locally; Linux CI runners need it off.
-  "$chrome" --headless=new ${CI:+--no-sandbox} --disable-gpu --hide-scrollbars --window-size=1200,800 \
-    --virtual-time-budget=3000 --blink-settings=preferredColorScheme=1 --screenshot="$png" "file://$abs" >/dev/null 2>&1 \
+  # Keep Chrome's sandbox on locally; Linux CI runners need it off. WebGL asks for the
+  # SwiftShader software renderer; studio pages draw a 2D fallback where WebGL is missing.
+  "$chrome" --headless=new ${CI:+--no-sandbox} --use-angle=swiftshader --hide-scrollbars \
+    --window-size=1200,800 --virtual-time-budget=6000 --blink-settings=preferredColorScheme=1 --screenshot="$png" "file://$abs" >/dev/null 2>&1 \
     || echo "shot.sh: failed for $f" >&2
   if [ -e "$png" ]; then echo "$png"; fi
 done
