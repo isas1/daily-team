@@ -1,0 +1,70 @@
+{
+  "libs": {
+    "three": {
+      "file": "three.js",
+      "global": "THREE",
+      "version": "three 0.186.1 + addons (esbuild 0.25.10 IIFE)",
+      "license": "MIT",
+      "source": "npm three@0.186.1, bundled from vendor/three-entry.js",
+      "sha256": "e7d8e1f338aaae5a841768dd434d733ebef94d62d4a32a1bfcb2db3324d8119e"
+    },
+    "anime": {
+      "file": "anime.js",
+      "global": "anime",
+      "version": "animejs 4.5.0",
+      "license": "MIT",
+      "source": "cdnjs animejs/4.5.0/anime.umd.min.js",
+      "sha256": "8d5b3a58a1f64023a04a4cedeef135a2263b18da04b35177ac13438a0bad033b"
+    },
+    "regl": {
+      "file": "regl.js",
+      "global": "createREGL",
+      "version": "regl 2.1.1",
+      "license": "MIT",
+      "source": "cdnjs regl/2.1.1/regl.min.js",
+      "sha256": "6d14aa47e560de0d0f0d37ec7b4868274245125a6de4022010e9c0fdcc5a4b62"
+    },
+    "tone": {
+      "file": "tone.js",
+      "global": "Tone",
+      "version": "tone 15.1.22",
+      "license": "MIT",
+      "source": "cdnjs tone/15.1.22/Tone.min.js",
+      "sha256": "4913bc76279967d16143ac5b92bcecd7d3b3d56ac246db7aaa6880b6d1d63ceb"
+    },
+    "matter": {
+      "file": "matter.js",
+      "global": "Matter",
+      "version": "matter-js 0.20.0",
+      "license": "MIT",
+      "source": "cdnjs matter-js/0.20.0/matter.min.js",
+      "sha256": "72d30be0f579eb02ce1e0b6f9d359a4f392e6837e5a26ba8be5dbee7f88e24ae"
+    }
+  },
+  "fonts": {
+    "fraunces": {
+      "file": "fraunces.woff2",
+      "family": "Fraunces",
+      "weight": 700,
+      "version": "@fontsource/fraunces 5.3.0 latin 700",
+      "license": "OFL-1.1",
+      "sha256": "c38570d224b830056e69484bb9e768e1d3fa7ba4755c8891a3c6d366194d2ff3"
+    },
+    "bricolage": {
+      "file": "bricolage.woff2",
+      "family": "Bricolage Grotesque",
+      "weight": 400,
+      "version": "@fontsource/bricolage-grotesque 5.3.0 latin 400",
+      "license": "OFL-1.1",
+      "sha256": "826772cb1251f09b4c9d76fc6266993d67b03507bee337ea2eac0fb3e0879de3"
+    },
+    "plex-mono": {
+      "file": "plex-mono.woff2",
+      "family": "IBM Plex Mono",
+      "weight": 400,
+      "version": "@fontsource/ibm-plex-mono 5.3.0 latin 400",
+      "license": "OFL-1.1",
+      "sha256": "08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7"
+    }
+  }
+}

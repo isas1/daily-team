@@ -8,8 +8,8 @@ import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rm
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { addCsp, checkArtifact, claudeArgs, conceptName, dayTitle, DEFAULT_CLAUDE_MODEL, decisionLine, extractHtml, findBanned, parseTeam,
-  planSections, sections, sessionProblems, settle, teamFor as recordedTeam } from './run.mjs';
+import { addCsp, checkArtifact, claudeArgs, conceptName, dayTitle, DEFAULT_CLAUDE_MODEL, decisionLine, extractHtml, findBanned, inlineVendor, isStudio, parseTeam,
+  planSections, sections, sessionProblems, settle, STUDIO_DAYS, teamFor as recordedTeam, vendorManifest } from './run.mjs';
 import { formatSeason, guestProblems, itemProblems, listSeasons, nextMonday, nextSeason, parseGuest, readSeason, screenSuggestions, summary, validate } from './recruit.mjs';
 import { activity, announce, closeLoop, commentFor, fetchSuggestions, parseForm } from './github.mjs';
 import { addDays, checkWeek, commitArea, indexMarkdown, mondayOf, renderTemplate, reportMarkdown, reportProblems, summarize, trend, weekFacts, writeReport } from './report.mjs';
@@ -187,6 +187,36 @@ test('checkArtifact passes a clean file and names each problem', () => {
   assert.match(p(GOOD.replace('ok', 'A seamless tool')), /"seamless"/);
   assert.match(p(GOOD.replace('ok', 'x'.repeat(110_000))), /100 KB/);
   assert.deepEqual(checkArtifact(GOOD.replace('ok', '<a href="https://example.com">source</a>')), []);
+});
+
+test('studio tier runs only on its trial dates', () => {
+  assert.deepEqual(STUDIO_DAYS, ['2026-10-17', '2026-10-18']);
+  assert.equal(isStudio('2026-10-17'), true);
+  if (process.env.STUDIO !== '1') assert.equal(isStudio('2026-10-19'), false);
+  assert.ok(sections()['Studio tier'].includes('data-lib'));
+});
+
+test('studio checkArtifact allows 300 KB and only vendored libraries and fonts', () => {
+  const p = (html) => checkArtifact(html, true).join('; ');
+  assert.deepEqual(checkArtifact(GOOD.replace('</head>', '<script data-lib="three"></script><style data-font="fraunces"></style></head>'), true), []);
+  assert.deepEqual(checkArtifact(GOOD.replace('ok', 'x'.repeat(110_000)), true), []);
+  assert.match(p(GOOD.replace('ok', 'x'.repeat(310_000))), /300 KB/);
+  assert.match(p(GOOD.replace('</head>', '<script data-lib="gsap"></script></head>')), /unknown library "gsap"/);
+  assert.match(p(GOOD.replace('</head>', '<style data-font="inter"></style></head>')), /unknown font "inter"/);
+  assert.match(p(GOOD.replace('</head>', '<script src="https://cdn.example/x.js"></script></head>')), /external resource/);
+});
+
+test('inlineVendor inlines each vendored file once, matching its hash', () => {
+  const { libs, fonts } = vendorManifest();
+  for (const o of [...Object.values(libs), ...Object.values(fonts)]) {
+    const sum = createHash('sha256').update(readFileSync(join(HERE, 'vendor', o.file))).digest('hex');
+    assert.equal(sum, o.sha256, o.file);
+  }
+  const out = inlineVendor(GOOD.replace('</head>', '<script data-lib="anime"></script><script data-lib="anime"></script><style data-font="plex-mono"></style></head>'));
+  assert.equal(out.match(/animejs 4\.5\.0, MIT/g).length, 1);
+  assert.match(out, /@font-face\{font-family:"IBM Plex Mono";font-weight:400;font-display:block;src:url\(data:font\/woff2;base64,/);
+  assert.doesNotMatch(out, /data-lib|data-font/);
+  assert.deepEqual(checkArtifact(GOOD), []);
 });
 
 test('addCsp blocks network requests and form submissions', () => {

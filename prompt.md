@@ -90,6 +90,45 @@ It still has to work:
 - Wrap every use of localStorage in try/catch. The page must still work when storage is blocked.
 - Return only the file, in one html code block.
 
+## Studio tier
+
+Today is a studio day. Aim for a piece people would stop scrolling for: depth, light, texture, and motion with weight. These rules replace the size, font, and library rules above. Every other rule still holds.
+
+Tools you may use:
+- Draw with canvas 2D, WebGL, or GLSL shaders written by hand, as well as SVG and CSS.
+- Ask for a library with an empty tag in the head, before your own script: `<script data-lib="name"></script>`. The build replaces it with the library, inline. Only these exist:
+  - `three`: three.js 0.186 as the global `THREE`, with `OrbitControls`, `EffectComposer`, `RenderPass`, `UnrealBloomPass`, `OutputPass`, and `RoomEnvironment` on it. For real 3D: light, shadow, fog, bloom.
+  - `regl`: `createREGL`, for full-screen shaders and particle fields.
+  - `anime`: anime.js 4.5 as the global `anime` (`anime.animate`, `anime.createTimeline`, `anime.stagger`, `anime.svg`). For timelines, staggers, and line drawing.
+  - `tone`: Tone.js 15 as `Tone`. Start it only after the visitor acts, with `await Tone.start()`.
+  - `matter`: Matter.js as `Matter`, for 2D physics.
+- Ask for a font the same way: `<style data-font="name"></style>`. Only these exist: `fraunces` (Fraunces 700, a display serif), `bricolage` (Bricolage Grotesque 400), `plex-mono` (IBM Plex Mono 400). System fonts are still fine.
+- Use at most two libraries. Use a library only when the piece needs it; a shader or canvas you write yourself is often stronger.
+- Your own file stays under 300 KB. Still no network calls, remote files, or CDN links.
+
+Art direction:
+- Pick one named tradition or medium for the whole piece, from the lead's nature: woodcut, risograph, cyanotype, ink wash, fresco, ukiyo-e, Bauhaus poster, blueprint, stained glass, claymation, tilt-shift model, museum diorama, exploded technical drawing, and so on. Take its colour, mark-making, and composition, not its subjects.
+- One palette of about six colours: background, surface, ink, muted ink, accent, second accent. Flat colour. Get depth from light, grain, and layering, not gradients.
+- Give the surface a material: paper grain, plaster, silk, film grain, halftone, or brush texture, generated in code. Finish with a light vignette, a soft bloom, or grain where it suits the medium.
+- Light carries mood. Use one key light, a fill, haze or fog for distance, and real shadows where the scene is 3D.
+- The picture fills the frame at every size, from a phone to a wide screen. Nothing important hides off screen.
+
+Motion:
+- One main action, plus two smaller loops that keep the scene alive. The background is never dead.
+- Motion has weight: ease in and out, overshoot, settle. Use springs or easing curves, not linear tweens.
+- The camera is punctuation. Hold it still while something moves or while the visitor reads. Use a slow push or drift between moments, and a fast move only for one accent.
+- Vary the motion from moment to moment. The same move repeated reads as slides.
+- Pause rendering when the page is hidden. Under prefers-reduced-motion, show a still, composed frame that still answers input.
+- Draw the first frame at once and keep it light. A phone must hold 30 frames a second: cap the device pixel ratio at 2, and keep particle counts sensible.
+
+Before you return the file, check it against these failures and fix any you find:
+- It looks like a slide deck or a web form.
+- It copies a demo or a library example.
+- It has no concrete object or place; it is only shapes.
+- The background is empty or still.
+- It has the generic look: purple-blue gradients, neon glow, frosted glass, centred hero text.
+- It shows a blank or black screen before WebGL starts, or when WebGL is not available. Draw a canvas 2D or SVG fallback in that case.
+
 ## Recruit
 
 You draft next week's season for the daily team: new roles, methods, constraints, and tasks. Return only one json code block.
