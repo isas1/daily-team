@@ -1,4 +1,4 @@
-# 2026-10-17: Put It in the Room
+# 2026-10-17: The Cold Room
 
 [Today](../../README.md) · [Archive](../../ARCHIVE.md)
 
@@ -10,7 +10,7 @@
 
 **Season:** 2026-10-12
 
-**Decision:** The page is a florist's bench where the visitor stands mod parts as stems in a vase that is a working terminal window, sets it on a desk to watch a scripted Claude Code session run through it, and must give every stem a way out before th...
+**Decision:** The page is a florist's cold room where the visitor pulls part-stems from buckets and arranges them in a vase that is a live mock Claude Code session, watching each part bloom or droop as the session runs.
 
 ## Asset
 
@@ -22,75 +22,73 @@
 
 ### Pitch
 
-**1 · Florist: Put It in the Room**\
-A bench, a bucket of cut parts. Hooks, slash commands, subagents, an MCP server, a status line.\
-You pick stems and stand them in a vase. The vase is the terminal window.\
-Then you set it on the desk and watch a real session run through it.\
-A stem that clashes with its neighbour browns at the tip while the session plays.\
-I don't trust a bouquet in the shop light. Show me it on the table it's going to.\
-Hidden: one stem in the bucket has no label. It only opens in water.
+**1 · Florist: The Cold Room**\
+Buckets along the wall. Each bucket holds one kind of stem: hooks, slash commands, a statusline, a subagent.\
+You pull a stem and put it in the vase. The vase is a running terminal.\
+The statusline blooms at the bottom edge. The hook fires on the next prompt.\
+Wrong pairing, the stem droops. You see it fail in the room where it lives.\
+Nothing gets judged on the bench. Only in water.
 
-**2 · Teacher: A Primer for Ines**\
-One reader. Ines, who reviews pull requests alone at six in the morning before her kid wakes.\
-A hand-bound picture book, twelve pages, each page one part of a mod, painted.\
-Turn a page and the part is added to her setup, drawn into the margin of her desk.\
-It has to be lovely or she won't open it at that hour.\
-The last page is blank for her own part.\
-Hidden: the endpaper has her coffee ring. Press it and it shows the whole file.
+**2 · Teacher: A Primer for Mira**\
+Mira. Second year. Installed Claude Code last week. Scared to touch settings.json.\
+A picture book, one part per spread, cream paper, a single ink colour.\
+She turns a page and a line of her mod writes itself in the margin.\
+Last page, the whole mod, set like a poem.\
+If it isn't lovely she closes the book. I won't let her.
 
-**3 · Calligrapher: The Unfinished Scroll**\
-You never start a mod. You inherit one.\
-The page opens on a scroll left by the last visitor, half-inked: two parts, a gap, a stroke stopped mid-line.\
-You finish their line. You leave your own half-line for whoever comes after.\
-The scroll is kept. It grows down the page for as long as the page exists.\
-I'd want to see forty hands on it before I'd call it good.\
-Hidden: the first stroke on the scroll is mine, under all the others.
+**3 · Calligrapher: The Relay Scroll**\
+You open the page and find a mod someone else left half-written.\
+You finish it. One brush, no eraser, every line stays.\
+Then you leave yours half-done for whoever comes next to this screen.\
+The scroll gets longer and never shorter.\
+Settings files outlive the people who wrote them. The page should know that.
 
-**4 · Daedalus: The Workshop Has a Door**\
-Every part you set down is a wall. A hook is a wall. A server is a wall that hums.\
-Build, and the plan of your labyrinth rises around a small figure: the one who will run your mod someday.\
-You are not done when it is full. You are done when that figure can walk out.\
-Each wall needs its own gap: the off-switch, the uninstall, the line that undoes it.\
-I wager you build a prison on the first try. Most do. I did.\
-Hidden: a thread on the floor. Pull it and the maze comes apart into plain text.
+**4 · Daedalus: The Labyrinth with a Thread**\
+Every part you place raises a wall. Hooks, rules, agents: corridors.\
+Build as deep as you like. The maze is yours.\
+Before any wall stands, you must draw the passage back out: the line that undoes it.\
+No exit, no wall. That is the bargain.\
+Somewhere a thread lies on the floor for the one who looks down.
 
 ### Clash
 
-**1 · Florist:** Daedalus, show me a wall. A maze drawn on a screen is a picture of a maze. Where does the visitor stand when it runs?
+**1 · Florist:** Calligrapher, show me the swap working. Hand me a half-built mod now and I'll tell you if I'd finish it or bin it.
 
-**4 · Daedalus:** In your vase, Florist, and they will never leave it. A feather says so. Pretty things keep people. Give every stem a door or I take the feather back.
+**3 · Calligrapher:** I have three of my own drafts a second hand improved and two it ruined. I'm keeping the count. Your vase is dead by Thursday. I won't build a thing made to rot.
 
-**2 · Teacher:** Florist, let me take the other side. Ines never sees a vase. Her screen is grey text. Why dress the terminal up at all? Make it as ugly as the place it lives.
+**1 · Florist:** It rots so you look at it today. A mod that sits perfect in a drawer has never met a terminal.
 
-**1 · Florist:** Because that is where it lives. I'll paint nothing that isn't there. The window stays a window. The stems stand in it. If it can't survive the real desk it goes in the compost.
+**2 · Teacher:** Then I'll argue against you both. Mira wants neither a vase nor a scroll. She wants one part per page and someone telling her it's safe.
 
-**3 · Calligrapher:** Daedalus. I have kept three cases. A hook that fired twice on every save. A server that never closed its port. A command nobody remembered was installed. None had a way out. You are right, and I say it only because I have three.
+**4 · Daedalus:** Safe is a door, Teacher. I wager a feather Mira tries the walls before she reads a single caption. Give each part its way back and she'll go anywhere.
 
-**3 · Calligrapher:** Teacher, your book is for one reader, once. Ink for one person fades with her. Leave the finished arrangement on the bench for the next visitor.
+**2 · Teacher:** Taken. If she reads first, the captions must be good enough to deserve her. I'll write them to her by name.
 
-**2 · Teacher:** Then the next visitor inherits a stranger's ugly thing and has to finish it. Who decides it's beautiful? I'll argue it straight: keeping things is how bad things survive.
+**3 · Calligrapher:** Daedalus, an exit on every stem tells her nothing lasts. That's a lie about settings files. People keep them for years.
 
-**4 · Daedalus:** Teacher, a wager. The next one finds it, finishes it, pulls the thread, and walks out. If they get stuck in it, your Ines wins and the bench gets swept every night.
+**4 · Daedalus:** They keep them because they can't find the door. Hide one door well and whoever finds it trusts the rest.
 
-**1 · Florist:** Calligrapher, leave one on the bench tonight. I'll come back in the morning and see if it wilted.
+**1 · Florist:** Prove it in the vase. Put the cut ends where she'll see them the moment she lifts a stem.
+
+**2 · Teacher:** Wilting will frighten her. You're showing her the one thing she fears, a mod that breaks.
 
 ### Decision
 
-The page is a florist's bench where the visitor stands mod parts as stems in a vase that is a working terminal window, sets it on a desk to watch a scripted Claude Code session run through it, and must give every stem a way out before the arrangement holds.
+The page is a florist's cold room where the visitor pulls part-stems from buckets and arranges them in a vase that is a live mock Claude Code session, watching each part bloom or droop as the session runs.
 
-Concept: Put It in the Room
+Concept: The Cold Room
 
-- Florist: the bench, the bucket of six stems, the terminal-as-vase, and the session that plays on the desk with wilting at the point of clash.
-- Teacher: the desk belongs to Ines. Her mug, her 6:04 clock, her one open PR. The session is hers, and the stems are drawn with care.
-- Calligrapher: the last visitor's arrangement waits on the bench, half-pressed, and the new visitor finishes it before starting their own.
-- Daedalus: each stem needs a cut at its base, its off-switch, or it browns after the run. The thread in the water is the hidden way out: pull it and the arrangement unravels into the plain config text the visitor built.
-- Teacher lost the picture book. A book is read in a chair. A mod is used at the desk, and the Florist wanted it tested there. The question of whether keeping strangers' arrangements keeps ugly ones stays open between Teacher and Calligrapher. Daedalus lost the maze as the whole page, because the Florist asked where the visitor stands and the maze had no desk.
+- Florist: the buckets, the vase-as-terminal, and drooping as the only verdict. A stem is never judged on the bench, only in the running session.
+- Teacher: every bucket tag is a two-line note addressed to Mira. The palette is cream, slate, and one green.
+- Calligrapher: when the visitor clicks "press", the arrangement flattens into a card showing the finished settings.json in a single brush-weight font. The card is stored in localStorage and stays in the corner on the next visit.
+- Daedalus: each stem's cut end, seen when it is lifted, shows the line that removes it. The hidden thing is a seventh bucket at the bottom of the scroll that looks empty. It holds one stem tagged "for the one who looked down". Placed in the vase, it prints the full uninstall for the arrangement as a thread unwinding across the terminal.
+- Calligrapher lost the no-undo scroll. The Florist held that a part has to be tried alive, and a living arrangement must let stems come back out. Teacher lost the book structure because one page at a time keeps Mira from seeing parts collide, and collisions are what she needs to see. Teacher's objection to wilting stands. Drooping stays in.
 
 ### Build notes
 
-1. Build `index.html` with six SVG stems in a bucket: hook, slash command, subagent, MCP server, output style, status line. Dragging a stem into the 640×360 terminal vase adds its line to an in-memory config. Each stem has a small cut marker at the base. Clicking it attaches that part's off-switch, which removes it cleanly.
-2. "Put it on the desk" plays a 14-second scripted session in the vase, with Ines's mug and 6:04 clock behind it. Two hooks on the same event make both stems brown at the tip mid-run. Any stem without a cut wilts at the end. The visitor can still press the arrangement with wilted stems, so the Teacher's wager stays live.
-3. Save the pressed arrangement to `localStorage` under `bench.left`, minus its last stem, so the next load opens on a half-finished vase. The hidden thread appears after 6 seconds of hovering over the water line. Dragging it 200px down unspools the vase into the raw config text, one line per stem, with a note on the stem that has no label.
+1. Build six buckets: hook, slash command, statusline, output style, subagent, permission rule, with three stems each, plus the hidden seventh. Each stem object holds `{name, tag, effect, cutEnd, conflictsWith}`.
+2. Render the vase as a 60x18 monospace pane that replays a scripted session every 8 seconds. Each placed stem changes the replay: the statusline line appears, the hook echoes, a denied tool shows a rule. A stem in `conflictsWith` tilts 30 degrees over 2 seconds and greys out.
+3. On lift, flip the stem to show `cutEnd` in the bottom 20px. The "press" button serializes the vase to JSON, draws the card, and writes it to `localStorage['coldroom.pressed']`.
 
 **Guest:** Daedalus (myth; Greek myth). The method is drawn from public-domain history, myth, or literature, or invented. The guest speaks in character in original words, never quoting the source, and nothing here is endorsed by anyone.
 

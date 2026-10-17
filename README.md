@@ -7,13 +7,13 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-17: Put It in the Room
+### 2026-10-17: The Cold Room
 
 <a href="days/2026-10-17/"><img src="days/2026-10-17/team.png" alt="Team for 2026-10-17: Florist · Teacher · Calligrapher · Daedalus" width="100%"></a>
 
 **Task:** Mod workshop: a place to build a Claude Code mod from parts.
 
-**Decision:** The page is a florist's bench where the visitor stands mod parts as stems in a vase that is a working terminal window, sets it on a desk to watch a scripted Claude Code session run through it, and must give every stem a way out before th...
+**Decision:** The page is a florist's cold room where the visitor pulls part-stems from buckets and arranges them in a vase that is a live mock Claude Code session, watching each part bloom or droop as the session runs.
 
 <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
 
@@ -37,7 +37,7 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
-| [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="Put It in the Room" width="160"></a> | Put It in the Room | Florist · Teacher · Calligrapher · Daedalus |
+| [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="The Cold Room" width="160"></a> | The Cold Room | Florist · Teacher · Calligrapher · Daedalus |
 | [2026-10-16](days/2026-10-16/) | <a href="days/2026-10-16/"><img src="days/2026-10-16/artifact-1.png" alt="Glass Cylinder" width="160"></a> | Glass Cylinder | Locksmith · Packaging designer · Window dresser · Scheherazade |
 | [2026-10-15](days/2026-10-15/) | <a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Spyhole" width="160"></a> | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace |
 | [2026-10-14](days/2026-10-14/) | <a href="days/2026-10-14/"><img src="days/2026-10-14/artifact-1.png" alt="Graveyard Shift" width="160"></a> | Graveyard Shift | Radio producer · Industrial designer · Museum curator · Odysseus |
