@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 14 days recorded.
+Every daily team and the asset it made, newest first. 15 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-10-17](days/2026-10-17/) | Put It in the Room | Florist · Teacher · Calligrapher · Daedalus | Hides one thing for the curious to find. | [asset](days/2026-10-17/artifact-1.html) |
 | [2026-10-16](days/2026-10-16/) | Glass Cylinder | Locksmith · Packaging designer · Window dresser · Scheherazade | Every change can be undone. | [asset](days/2026-10-16/artifact-1.html) |
 | [2026-10-15](days/2026-10-15/) | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace | Works fully offline after the first load. | [asset](days/2026-10-15/artifact-1.html) |
 | [2026-10-14](days/2026-10-14/) | Graveyard Shift | Radio producer · Industrial designer · Museum curator · Odysseus | No more than two levels of heading. | [asset](days/2026-10-14/artifact-1.html) |

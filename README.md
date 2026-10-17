@@ -7,17 +7,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-16: Glass Cylinder
+### 2026-10-17: Put It in the Room
 
-<a href="days/2026-10-16/"><img src="days/2026-10-16/team.png" alt="Team for 2026-10-16: Locksmith · Packaging designer · Window dresser · Scheherazade" width="100%"></a>
+<a href="days/2026-10-17/"><img src="days/2026-10-17/team.png" alt="Team for 2026-10-17: Florist · Teacher · Calligrapher · Daedalus" width="100%"></a>
 
-**Task:** Session log: the trail a Claude Code session leaves behind it.
+**Task:** Mod workshop: a place to build a Claude Code mod from parts.
 
-**Decision:** The page is a clear glass lock cylinder with one pin for each step of a recorded Claude Code session; the visitor lifts the pins in reverse order, each lifted pin slides one object in a small shop-window scene back to its starting mark, ...
+**Decision:** The page is a florist's bench where the visitor stands mod parts as stems in a vase that is a working terminal window, sets it on a desk to watch a scripted Claude Code session run through it, and must give every stem a way out before th...
 
-<a href="days/2026-10-16/"><img src="days/2026-10-16/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-16/) · [Use it](https://isas1.github.io/daily-team/2026-10-16/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-17/) · [Use it](https://isas1.github.io/daily-team/2026-10-17/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -37,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="Put It in the Room" width="160"></a> | Put It in the Room | Florist · Teacher · Calligrapher · Daedalus |
 | [2026-10-16](days/2026-10-16/) | <a href="days/2026-10-16/"><img src="days/2026-10-16/artifact-1.png" alt="Glass Cylinder" width="160"></a> | Glass Cylinder | Locksmith · Packaging designer · Window dresser · Scheherazade |
 | [2026-10-15](days/2026-10-15/) | <a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Spyhole" width="160"></a> | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace |
 | [2026-10-14](days/2026-10-14/) | <a href="days/2026-10-14/"><img src="days/2026-10-14/artifact-1.png" alt="Graveyard Shift" width="160"></a> | Graveyard Shift | Radio producer · Industrial designer · Museum curator · Odysseus |
 | [2026-10-13](days/2026-10-13/) | <a href="days/2026-10-13/"><img src="days/2026-10-13/artifact-1.png" alt="The Inn That Answers" width="160"></a> | The Inn That Answers | Documentary director · Playwright · Puppeteer · Benjamin Franklin |
 | [2026-10-12](days/2026-10-12/) | <a href="days/2026-10-12/"><img src="days/2026-10-12/artifact-1.png" alt="Found Voice" width="160"></a> | Found Voice | Set designer · Bookbinder · Data journalist · Euclid |
 | [2026-10-11](days/2026-10-11/) | <a href="days/2026-10-11/"><img src="days/2026-10-11/artifact-1.png" alt="The Thread Out" width="160"></a> | The Thread Out | Costume designer · Cartographer · Furniture maker · Daedalus |
-| [2026-10-10](days/2026-10-10/) | <a href="days/2026-10-10/"><img src="days/2026-10-10/artifact-1.png" alt="Four Corners, Out and Back" width="160"></a> | Four Corners, Out and Back | Game designer · Service designer · Comic artist · Sisyphus |
 
-[All 14 days](ARCHIVE.md)
+[All 15 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Put It in the Room · a bench for Claude Code mods</title>
+<style>
+:root{--kraft:#dcc7a1;--ink:#23291c;--zinc:#8d918a;--term:#1b2016;--brown:#7b5a36;--rust:#a83e33;--leaf:#5f7342;--cream:#efe3cc}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100vh;background:var(--kraft) repeating-linear-gradient(97deg,rgba(80,50,20,.04) 0 2px,transparent 2px 7px);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;transition:background-color 1.2s,color 1.2s;overflow-x:hidden}
+body.desk{background-color:#3b2a1d;color:var(--cream)}
+header{padding:18px 4vw 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+h1{margin:0;font-size:clamp(44px,10vw,132px);font-weight:900;letter-spacing:-.045em;line-height:.86}
+.sub{margin:12px 0 0;font-size:clamp(14px,1.6vw,18px);font-style:italic;max-width:36ch}
+#snd{font:600 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;background:none;border:1.5px solid currentColor;color:inherit;padding:7px 10px;border-radius:2px;cursor:pointer;white-space:nowrap}
+main{display:grid;grid-template-columns:minmax(200px,290px) 1fr;gap:2vw;padding:6px 4vw 24px;align-items:end}
+@media (max-width:760px){main{grid-template-columns:1fr}.bench{order:2;max-width:330px;margin:0 auto}}
+.bench{transition:opacity 1s}
+body.desk .bench{opacity:.25;pointer-events:none}
+#bucket{width:100%;height:auto;display:block;touch-action:none;overflow:visible}
+.bk{cursor:grab;transform-box:view-box;animation:sway 5.5s ease-in-out infinite}
+.bk:focus{outline:none}.bk:focus-visible .hit{stroke:var(--rust);stroke-width:2.5}
+@keyframes sway{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.6deg)}}
+.hint{font-size:14px;line-height:1.4;margin:6px 0 0;max-width:30ch}
+.hint b{font-weight:800}
+.stage{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:20px}
+.stage::before{content:"";position:absolute;inset:-10% -20%;background:radial-gradient(closest-side,rgba(255,200,120,.22),transparent);opacity:0;transition:opacity 1.4s;pointer-events:none}
+body.desk .stage::before{opacity:1}
+.props{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.4s}
+body.desk .props{opacity:1}
+.clock{position:absolute;right:0;top:-4px;font-size:clamp(70px,14vw,200px);font-weight:800;letter-spacing:-.05em;color:#5e4430;line-height:1}
+.pr{position:absolute;left:0;top:8px;font:600 13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:#d9c3a0;letter-spacing:.02em}
+.mug{position:absolute;right:2%;bottom:70px;width:clamp(56px,9vw,110px);height:auto}
+.steam{animation:breath 4s ease-in-out infinite}
+@keyframes breath{0%,100%{opacity:.15;transform:translateY(4px)}50%{opacity:.6;transform:translateY(-4px)}}
+.vase{position:relative;width:min(640px,100%);z-index:2;transition:transform .4s}
+.vase.over{transform:scale(1.015)}
+#bouquet{display:block;width:100%;height:auto;margin-bottom:-6.25%;position:relative;z-index:2;overflow:visible;transition:filter 1.6s,transform 1.6s;transform-origin:50% 100%}
+#bouquet.pressed{filter:sepia(.7) saturate(.6);transform:scaleY(.93)}
+.st{transform-box:view-box;transition:transform 2.4s cubic-bezier(.5,0,.3,1)}
+.sp{fill:none;stroke:var(--leaf);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0;transition:stroke 2s,stroke-dashoffset 1.8s}
+.hd *{transition:fill 1.8s}
+.hd{cursor:pointer}
+.hd:focus,.base:focus,.wl:focus{outline:none}
+.hd:focus-visible .hring,.base:focus-visible .bring{stroke:var(--rust);stroke-width:2.5}
+.brown .hd *,.wilt .hd *{fill:var(--brown)}
+.wilt .sp{stroke:#8a7a4a}
+.prev .sp{stroke:#6e7b52}
+.nm{font:700 12px system-ui,sans-serif;letter-spacing:.06em;fill:var(--ink);pointer-events:none;transition:opacity .8s,fill 1.2s}
+body.desk .nm{fill:var(--cream)}
+.base{cursor:pointer}
+.unwind .hd,.unwind .nm,.unwind .lf,.unwind .base{opacity:0;transition:opacity .9s}
+.unwind .sp{stroke-dashoffset:1}
+.term{position:relative;z-index:1;aspect-ratio:640/360;background:var(--term);border-radius:6px 6px 16px 16px;box-shadow:inset 0 0 0 2px #0e110b,0 22px 34px -14px rgba(40,25,10,.55);padding:9% 4% 8%;font:min(14px,2.3vw)/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#cfd8c0;overflow:hidden}
+.term.raw{overflow:auto;padding-bottom:4%}
+.ln{white-space:pre;overflow:hidden;text-overflow:ellipsis}
+.dim{color:#8f9a80}.g{color:#a9c47f}.p{color:#efe3cc;font-weight:700}.w{color:#e0a15a}.cur::after{content:"";display:inline-block;width:.55em;height:1.05em;vertical-align:-.15em;background:#cfd8c0;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.sbar{position:absolute;left:0;right:0;bottom:0;padding:.35em 4%;background:#2b3322;color:#e3c46a;font-size:.9em;opacity:0;transition:opacity .6s}
+.sbar.on{opacity:1}
+pre.cfg{margin:0;white-space:pre-wrap;word-break:break-word;font:inherit;color:#d9e2cf}
+.thread{position:absolute;left:74%;width:30px;margin-left:-15px;z-index:4;display:none}
+.thread.on{display:block;animation:drop 1.4s ease-out}
+@keyframes drop{from{opacity:0;transform:translateY(-10px)}}
+.thread i{display:block;margin:0 auto;width:1.5px;height:24px;background:#e8dcc4}
+.thread b{display:block;width:26px;height:26px;margin:-4px auto 0;border-radius:50%;background:radial-gradient(circle,#e8dcc4 0 5px,transparent 6px);cursor:grab;touch-action:none}
+.thread b:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+.tags{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:18px;position:relative;z-index:3}
+.tag{font:800 15px/1 system-ui,sans-serif;letter-spacing:.02em;color:var(--ink);background:#efe0c2;border:0;padding:11px 16px 11px 28px;position:relative;cursor:pointer;clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%);box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)}
+.tag::before{content:"";position:absolute;left:12px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--ink);opacity:.6}
+.tag:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+#say{min-height:3em;margin:14px auto 0;max-width:46ch;text-align:center;font-size:clamp(15px,1.8vw,19px);font-weight:600;line-height:1.35;position:relative;z-index:3}
+footer{padding:10px 4vw 22px;font-size:12px;line-height:1.5;opacity:.85;max-width:90ch}
+.ghost{position:fixed;left:0;top:0;pointer-events:none;z-index:50;width:60px;height:90px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Put it<br>in the room.</h1>
+    <p class="sub">I don't trust a bouquet in the shop light. Show me it on the table it's going to.</p>
+  </div>
+  <button id="snd" type="button" aria-pressed="true">sound on</button>
+</header>
+<main>
+  <section class="bench" aria-label="the bucket of parts">
+    <svg id="bucket" viewBox="0 0 300 360" role="group" aria-label="six cut stems in a zinc bucket"></svg>
+    <p class="hint"><b>Drag a stem into the water.</b> Snip its base under the water line: that is its way out.</p>
+  </section>
+  <section class="stage" aria-label="the vase">
+    <div class="props" aria-hidden="true">
+      <div class="pr">ines · ~/reader-app<br>PR #212 · fix/session-expiry<br>1 reviewer</div>
+      <div class="clock">6:04</div>
+      <svg class="mug" viewBox="0 0 120 130"><path class="steam" d="M45 30Q35 15 48 2M65 30Q55 15 68 2" stroke="#d9c3a0" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M20 40H90V110Q90 124 76 124H34Q20 124 20 110Z" fill="#9b4a3a"/><path d="M90 55Q112 55 112 75Q112 95 90 95" stroke="#9b4a3a" stroke-width="9" fill="none"/><ellipse cx="55" cy="40" rx="35" ry="6" fill="#3a2215"/></svg>
+    </div>
+    <div class="vase" id="vase">
+      <svg id="bouquet" viewBox="0 0 640 340" aria-label="stems standing in the vase"></svg>
+      <div class="term" id="term" aria-live="off"><div id="lines"></div><div class="sbar" id="sbar"></div></div>
+      <div class="thread" id="thread"><i id="tline"></i><b id="knot" tabindex="0" role="button" aria-label="a thread in the water. pull it down."></b></div>
+    </div>
+    <div class="tags">
+      <button class="tag" id="go" type="button">Set it on her desk</button>
+      <button class="tag" id="press" type="button" hidden>Press it</button>
+      <button class="tag" id="back" type="button" hidden>Back to the bench</button>
+      <button class="tag" id="copy" type="button" hidden>Copy the text</button>
+      <button class="tag" id="wind" type="button" hidden>Wind it back</button>
+    </div>
+    <p id="say" aria-live="polite"></p>
+  </section>
+</main>
+<footer>Florist, lead: the bench, the bucket, the vase that is a terminal, the run on the desk, the wilt. Teacher: Ines, her mug, her 6:04, her one open PR, the care in each stem. Calligrapher: the half-finished vase the last visitor left on the bench. Daedalus: the cut at every base, and a way out somewhere under the water.</footer>
+<script>
+(function(){
+var T={
+ hook:{name:'hook',col:'#a83e33',cut:'off: /hooks, remove it, or set "disableAllHooks": true'},
+ command:{name:'slash command',col:'#c9962c',cut:'off: remove .claude/commands/review.md'},
+ agent:{name:'subagent',col:'#8a7aa0',cut:'off: remove .claude/agents/reader.md'},
+ mcp:{name:'MCP server',col:'#4d6f78',cut:'off: claude mcp remove notes'},
+ style:{name:'output style',col:'#c97f95',cut:'off: set "outputStyle": "default"'},
+ status:{name:'status line',col:'#d9b24f',cut:'off: delete the "statusLine" key'}
+};
+var ORDER=['hook','command','agent','mcp','style','status'];
+var $=function(id){return document.getElementById(id)};
+var bsvg=$('bucket'),bq=$('bouquet'),vase=$('vase'),term=$('term'),lines=$('lines'),sbar=$('sbar'),sayEl=$('say');
+var arr=[],mode='bench',timers=[],snd=true,ac=null,uid=0;
+
+function head(t,open){var c=T[t].col;
+ switch(t){
+ case 'hook':return '<path d="M-13 2Q-14-22 0-25Q14-22 13 2L18 8H-18Z" fill="'+c+'"/><circle cy="13" r="3.5" fill="'+c+'"/>';
+ case 'command':return '<path d="M-12-2Q-14-24-7-30L0-19L7-30Q14-24 12-2Q0 10-12-2Z" fill="'+c+'"/>';
+ case 'agent':return [[0,-14],[-9,-8],[9,-8],[-5,2],[6,2],[0,-4],[-12,-18],[11,-19],[0,-24]].map(function(p){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="5" fill="'+c+'"/>'}).join('');
+ case 'mcp':return '<circle cy="-12" r="16" fill="'+c+'"/><path d="M-16-12H16M0-28V4M-8-26Q-2-12-8 2M8-26Q2-12 8 2" stroke="#d9e2cf" stroke-width="1.2" fill="none" opacity=".75"/>';
+ case 'style':return open?'<circle cy="-12" r="16" fill="'+c+'"/><path d="M-10-12Q0-28 10-12Q0 0-10-12M-4-12Q0-19 4-12Q0-7-4-12" fill="none" stroke="#7e3448" stroke-width="1.6"/>':'<path d="M0 0Q-8-12 0-28Q8-12 0 0Z" fill="#6b7f4e"/><path d="M0-6Q-3-14 0-24Q3-14 0-6Z" fill="'+c+'"/>';
+ case 'status':return [0,1,2,3,4].map(function(k){var x=k%2?6:-6,y=-k*8;return '<ellipse cx="'+x+'" cy="'+y+'" rx="6.5" ry="3.5" transform="rotate('+(k%2?-30:30)+' '+x+' '+y+')" fill="'+c+'"/>'}).join('');
+ }}
+
+/* bucket */
+(function(){
+ var s='<ellipse cx="150" cy="222" rx="122" ry="16" fill="#5c605a"/>';
+ var BX=[56,94,132,170,208,246];
+ ORDER.forEach(function(t,i){
+  var bx=BX[i],hx=bx+(i-2.5)*8,hy=46+((i*29)%72),ty=Math.min(210,hy+120);
+  var tag=t==='style'?'':'<line x1="'+bx+'" y1="'+(ty-60)+'" x2="'+(bx+6)+'" y2="'+(ty-56)+'" stroke="#8a6d45" stroke-width="1"/><g transform="translate('+(bx+6)+' '+ty+') rotate(-90)"><rect width="'+(T[t].name.length*6.4+12)+'" height="14" fill="#f2e6cc"/><text x="6" y="10.5" font-size="10" font-weight="700" font-family="system-ui,sans-serif" fill="#23291c">'+T[t].name+'</text></g>';
+  s+='<g class="bk" data-t="'+t+'" tabindex="0" role="button" aria-label="'+(t==='style'?'a stem with no label':T[t].name)+', put it in the vase" style="transform-origin:'+bx+'px 250px;animation-delay:'+(-i*.9)+'s">'+
+   '<path d="M'+bx+' 300Q'+bx+' '+((hy+300)/2)+' '+hx+' '+hy+'" stroke="#5f7342" stroke-width="3" fill="none"/>'+
+   '<g transform="translate('+hx+' '+hy+')">'+head(t,false)+'</g>'+tag+
+   '<rect class="hit" x="'+(hx-19)+'" y="'+(hy-36)+'" width="38" height="'+(260-hy)+'" rx="6" fill="transparent" stroke="none"/></g>';
+ });
+ s+='<path d="M28 222H272L252 352H48Z" fill="#8d918a"/><path d="M36 262H264M42 304H258" stroke="#767a73" stroke-width="2"/><path d="M28 222Q150 244 272 222" stroke="#a5a9a2" stroke-width="5" fill="none"/>'+
+  '<text x="150" y="292" text-anchor="middle" font-size="22" font-weight="900" letter-spacing="5" font-family="system-ui,sans-serif" fill="#3f433d">CUT PARTS</text>'+
+  '<text x="150" y="335" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="3" font-family="system-ui,sans-serif" fill="#3f433d">CLAUDE CODE · NO. 6</text>';
+ bsvg.innerHTML=s;
+})();
+
+/* sound */
+function aud(){if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)()}catch(e){ac=null}}if(ac&&ac.state==='suspended')ac.resume();return ac}
+function tone(f,d,type,vol){if(!snd)return;var a=aud();if(!a)return;var o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(vol||.05,a.currentTime);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+d);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+d+.02)}
+function snip(){if(!snd)return;var a=aud();if(!a)return;var n=a.sampleRate*.06,b=a.createBuffer(1,n,a.sampleRate),d=b.getChannelData(0);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);var s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();f.type='highpass';f.frequency.value=2500;g.gain.value=.25;s.buffer=b;s.connect(f);f.connect(g);g.connect(a.destination);s.start()}
+$('snd').onclick=function(){snd=!snd;this.textContent=snd?'sound on':'sound off';this.setAttribute('aria-pressed',snd)};
+
+function say(t){sayEl.textContent=t}
+
+/* storage: the last visitor */
+var saved=null;try{saved=JSON.parse(localStorage.getItem('bench.left'))}catch(e){saved=null}
+if(Array.isArray(saved)&&saved.length){arr=saved.filter(function(s){return s&&T[s.t]}).slice(0,9)}
+else arr=[{t:'hook',cut:true},{t:'mcp',cut:false}];
+arr=arr.map(function(s){return {t:s.t,cut:!!s.cut,prev:1,id:uid++}});
+say(arr.length?'Someone left this on the bench, one stem short. Finish their line before you start yours.':'The bench is clear. Start a vase.');
+
+/* the vase */
+function render(){
+ var n=arr.length,s='',bases='';
+ arr.forEach(function(st,i){
+  var bx=n===1?320:170+300*i/(n-1),lean=(bx-320)*.42+(i%2?14:-10),hx=bx+lean,hy=58+((i*41)%64);
+  var w=lean>=0?24:-24, nm=T[st.t].name+(st.prev?' · left':'');
+  var cls='st'+(st.cut?' cut':'')+(st.prev?' prev':'')+(st.brown?' brown':'')+(st.wilt?' wilt':'');
+  var lx=bx+lean*.35,ly=(hy+334)/2+20;
+  s+='<g class="'+cls+'" style="transform-origin:'+bx+'px 334px;'+(st.wilt?'transform:rotate('+w+'deg)':'')+'">'+
+   '<path class="sp" pathLength="1" d="M'+bx+' 334Q'+(bx+lean*.1)+' '+((hy+334)/2)+' '+hx+' '+hy+'"/>'+
+   '<ellipse class="lf" cx="'+(lx+8)+'" cy="'+ly+'" rx="12" ry="4" transform="rotate('+(lean>0?-35:-145)+' '+lx+' '+ly+')" fill="#6b7f4e"/>'+
+   '<g class="hd" data-i="'+i+'" tabindex="0" role="button" aria-label="'+nm+'. Take it out." transform="translate('+hx+' '+hy+') rotate('+(lean*.12)+')">'+head(st.t,true)+'<circle class="hring" cy="-10" r="24" fill="transparent" stroke="none"/></g>'+
+   '<text class="nm" x="'+(hx+(lean>=0?22:-22))+'" y="'+(hy-4)+'" text-anchor="'+(lean>=0?'start':'end')+'">'+nm+'</text></g>';
+  bases+='<g class="base" data-i="'+i+'" tabindex="0" role="button" aria-label="'+(st.cut?'cut base of '+T[st.t].name+'. Its way out is attached. Press to remove the cut.':'base of '+T[st.t].name+'. Snip it to give it a way out.')+'" transform="translate('+bx+' 328)">'+
+   '<circle class="bring" r="14" fill="transparent" stroke="none"/>'+
+   (st.cut?'<path d="M-7 4L7-4" stroke="#e3c46a" stroke-width="2.4" stroke-linecap="round"/><text y="16" text-anchor="middle" font-size="8" font-weight="800" letter-spacing="1" font-family="system-ui,sans-serif" fill="#e3c46a">OFF</text>':'<circle r="6" fill="none" stroke="#cfd8c0" stroke-width="1.4" stroke-dasharray="2 2.5"/>')+'</g>';
+ });
+ bq.innerHTML=s+'<rect x="0" y="300" width="640" height="40" fill="#1b2016" opacity=".72" pointer-events="none"/>'+
+  '<path class="wlp" d="M8 303Q48 299 88 303T168 303T248 303T328 303T408 303T488 303T568 303T632 303" stroke="#6d8a76" stroke-width="1.4" fill="none" pointer-events="none"/>'+
+  '<rect class="wl" id="wl" x="0" y="296" width="640" height="16" fill="transparent" tabindex="0" aria-label="the water line"/>'+bases;
+ bindWater();
+}
+
+function add(t){
+ if(mode!=='bench')return;
+ if(arr.length>=9){say('The vase is full. Take one out first.');return}
+ arr.push({t:t,cut:false,id:uid++});tone(520+arr.length*40,.35,'sine',.05);render();
+ var hooks=arr.filter(function(s){return s.t==='hook'}).length;
+ if(t==='style')say('That one had no label. In water it opens: an output style.');
+ else if(t==='hook'&&hooks>1)say('Two hooks on one event. Watch them on her desk.');
+ else say(T[t].name.charAt(0).toUpperCase()+T[t].name.slice(1)+' in the water. Snip its base, or it stays in for good.');
+}
+
+bq.addEventListener('click',function(e){
+ if(mode!=='bench')return;
+ var b=e.target.closest('.base'),h=e.target.closest('.hd');
+ if(b){var st=arr[+b.dataset.i];st.cut=!st.cut;snip();render();say(st.cut?'Cut. The '+T[st.t].name+' has a way out now.':'Uncut. No way out for the '+T[st.t].name+'.');return}
+ if(h){var r=arr.splice(+h.dataset.i,1)[0];tone(300,.2,'triangle',.04);render();say('Took out the '+T[r.t].name+'.')}
+});
+bq.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&(e.target.closest('.base')||e.target.closest('.hd'))){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}))}});
+
+/* drag from bucket */
+var drag=null;
+function inVase(e){var r=vase.getBoundingClientRect();return e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top-40&&e.clientY<r.bottom}
+function ghost(t){var d=document.createElement('div');d.className='ghost';d.innerHTML='<svg viewBox="-30 -40 60 90" width="60" height="90"><path d="M0 50V0" stroke="#5f7342" stroke-width="3"/>'+head(t,false)+'</svg>';document.body.appendChild(d);return d}
+bsvg.addEventListener('pointerdown',function(e){var g=e.target.closest('.bk');if(!g)return;if(mode!=='bench'){say('Bring it back to the bench first.');return}e.preventDefault();aud();drag={t:g.dataset.t,x:e.clientX,y:e.clientY,m:false,el:null}});
+addEventListener('pointermove',function(e){if(!drag)return;if(!drag.m&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>6){drag.m=true;drag.el=ghost(drag.t)}if(drag.el){drag.el.style.transform='translate('+(e.clientX-30)+'px,'+(e.clientY-40)+'px)';vase.classList.toggle('over',inVase(e))}});
+addEventListener('pointerup',function(e){if(!drag)return;var d=drag;drag=null;if(d.el){d.el.remove();vase.classList.remove('over');if(inVase(e))add(d.t);else say('It fell back in the bucket.')}else add(d.t)});
+addEventListener('pointercancel',function(){if(drag&&drag.el)drag.el.remove();drag=null;vase.classList.remove('over')});
+bsvg.addEventListener('keydown',function(e){var g=e.target.closest('.bk');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();aud();add(g.dataset.t)}});
+
+/* terminal */
+function line(txt,cls){var d=document.createElement('div');d.className='ln '+(cls||'');d.textContent=txt;lines.appendChild(d);while(lines.children.length>10)lines.removeChild(lines.firstChild)}
+function idle(){lines.innerHTML='';sbar.className='sbar';line('ines@desk ~/reader-app','dim');line('$ ','cur')}
+function clearT(){timers.forEach(clearTimeout);timers=[]}
+function at(s,f){timers.push(setTimeout(f,s*1000))}
+function show(ids){['go','press','back','copy','wind'].forEach(function(id){$(id).hidden=ids.indexOf(id)<0})}
+
+function run(){
+ if(mode!=='bench')return;aud();
+ mode='desk';document.body.classList.add('desk');bq.classList.remove('pressed');show([]);
+ arr.forEach(function(s){s.brown=s.wilt=false});render();
+ lines.innerHTML='';clearT();
+ var has=function(t){return arr.some(function(s){return s.t===t})};
+ var hooks=arr.filter(function(s){return s.t==='hook'});
+ say('On her desk. 6:04. The kid is still asleep.');tone(392,.6,'sine',.04);
+ at(.2,function(){line('$ claude','p')});
+ at(.9,function(){line('Claude Code · ~/reader-app','dim')});
+ if(has('status'))at(1.1,function(){sbar.textContent='6:04 · fix/session-expiry · '+arr.length+' parts';sbar.className='sbar on'});
+ if(has('mcp'))at(1.6,function(){line('  mcp     notes · connected','g')});
+ if(has('style'))at(2.2,function(){line('  style   morning','g')});
+ at(2.9,function(){line(has('command')?'> /review 212':'> what changed in PR 212?','p')});
+ at(3.8,function(){line('● Read src/auth/session.ts')});
+ if(has('agent'))at(4.7,function(){line('● reader  3 files read · nothing changed','g')});
+ at(5.7,function(){line('● Edit src/auth/session.ts  +2 −1')});
+ hooks.forEach(function(h,i){at(6.5+i*.45,function(){line('  ⎿ PostToolUse  git diff --stat'+(i?'   again':''),i?'w':'dim');tone(660-i*90,.15,'square',.02)})});
+ if(hooks.length>1)at(7.6,function(){line('  ⎿ one event, '+hooks.length+' hooks, '+hooks.length+' runs','w');hooks.forEach(function(h){h.brown=true});render();tone(140,.8,'triangle',.06);say('Both hooks fired on the same save. Look at the tips.')});
+ if(has('style')){at(9,function(){line('Expiry is checked on her clock, not the server\'s.')});at(9.8,function(){line('One line fixed. Ready to merge.')})}
+ else{['I looked at the session module and found that the expiry','check compares against the local wall clock rather than','the server timestamp, which can drift. I changed one line','and the diff above shows the result. Let me know if you'].forEach(function(t,i){at(9+i*.7,function(){line(t)})})}
+ at(12.6,function(){line('> ','cur')});
+ at(14,function(){
+  var u=0,b=0;arr.forEach(function(s){if(!s.cut){s.wilt=true;u++}if(s.brown)b++});render();
+  if(u)tone(180,1.2,'sine',.05);
+  var m;if(!arr.length)m='An empty vase on her desk at 6:04. Bring her something.';
+  else{m=(b?b+' browned at the tip. ':'')+(u?u+' wilted: no cut at the base, no way out. ':'')+(!b&&!u?'It held on her desk. Every stem has a way out. ':'');m+='Press it, or carry it back to the bench.'}
+  say(m);show(['press','back']);
+ });
+}
+function press(){
+ var keep=arr.slice(0,-1).map(function(s){return {t:s.t,cut:s.cut}});
+ try{localStorage.setItem('bench.left',JSON.stringify(keep))}catch(e){}
+ bq.classList.add('pressed');snip();tone(220,.9,'sine',.04);show(['back']);
+ say('Pressed. Left on the bench, one stem short, for whoever comes next.');
+}
+function back(){
+ clearT();mode='bench';document.body.classList.remove('desk');bq.classList.remove('pressed','unwind');
+ term.classList.remove('raw');arr.forEach(function(s){s.brown=s.wilt=false});render();idle();show(['go']);say('Back on the bench. Change what wilted.');
+}
+$('go').onclick=run;$('press').onclick=press;$('back').onclick=back;
+
+/* the thread: hidden in the water */
+var hov=0,hovI=null,thread=$('thread'),tline=$('tline'),knot=$('knot'),shown=false;
+function hovStart(){if(shown||hovI)return;var last=Date.now();hovI=setInterval(function(){var n=Date.now();hov+=n-last;last=n;if(hov>=6000)reveal()},200)}
+function hovStop(){clearInterval(hovI);hovI=null;hov=0}
+function bindWater(){var w=$('wl');if(!w)return;w.addEventListener('pointerenter',hovStart);w.addEventListener('pointerdown',hovStart);w.addEventListener('pointerleave',hovStop);w.addEventListener('focus',hovStart);w.addEventListener('blur',hovStop)}
+function placeThread(){thread.style.top=(bq.getBoundingClientRect().height*303/340)+'px'}
+function reveal(){hovStop();if(shown)return;shown=true;placeThread();thread.classList.add('on');tone(880,.9,'sine',.03);tone(1320,1.2,'sine',.015)}
+addEventListener('resize',function(){if(shown)placeThread()});
+var pull=null;
+function setPull(dy){tline.style.height=(24+dy)+'px';if(dy>=200)unspool()}
+knot.addEventListener('pointerdown',function(e){e.preventDefault();pull={y:e.clientY};try{knot.setPointerCapture(e.pointerId)}catch(x){}});
+knot.addEventListener('pointermove',function(e){if(!pull)return;setPull(Math.max(0,e.clientY-pull.y))});
+knot.addEventListener('pointerup',function(){pull=null;if(mode!=='raw')tline.style.height='24px'});
+knot.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='Enter'){e.preventDefault();var h=parseFloat(tline.style.height||24)-24+50;setPull(h)}});
+
+function cfg(){
+ var o=[],has=function(t){return arr.some(function(s){return s.t===t})};
+ o.push('# what you stood in the water, as plain text.','# one line per stem:','');
+ var seenHook=0;
+ arr.forEach(function(s){
+  var nm=s.t==='style'?'(no label)':T[s.t].name,pad=(nm+'              ').slice(0,15);
+  var note=s.t==='style'?'an output style. it only opens in water. ':'';
+  if(s.t==='hook'&&seenHook++)note+='a second hook on PostToolUse. both fire on every edit. ';
+  o.push(pad+(s.cut?'cut  ':'---  ')+note+(s.cut?T[s.t].cut:'no cut. nothing says how to take it out.'));
+ });
+ if(!arr.length)o.push('(nothing)');
+ var hooks=arr.filter(function(s){return s.t==='hook'});
+ if(hooks.length||has('status')||has('style')){
+  var j={};
+  if(hooks.length)j.hooks={PostToolUse:hooks.map(function(){return {matcher:'Edit|Write',hooks:[{type:'command',command:'git diff --stat'}]}})};
+  if(has('status'))j.statusLine={type:'command',command:'echo "6:04 · $(git branch --show-current)"'};
+  if(has('style'))j.outputStyle='morning';
+  o.push('','── .claude/settings.json',JSON.stringify(j,null,2));
+ }
+ if(has('command'))o.push('','── .claude/commands/review.md','---','description: Read the open PR before coffee','argument-hint: [pr-number]','---','Review PR $ARGUMENTS. Three notes, shortest first.');
+ if(has('agent'))o.push('','── .claude/agents/reader.md','---','name: reader','description: Reads diffs and changes nothing','tools: Read, Grep, Glob','---','Read the diff. Report what a tired reviewer would miss.');
+ if(has('mcp'))o.push('','── .mcp.json',JSON.stringify({mcpServers:{notes:{command:'node',args:['notes-server.js']}}},null,2),'# notes-server.js is yours to write. it runs locally over stdio.');
+ if(has('style'))o.push('','── .claude/output-styles/morning.md','---','name: morning','description: Short and plain. She is half awake.','---','Answer in three lines or fewer. No preamble.');
+ return o.join('\n');
+}
+function unspool(){
+ if(mode==='raw')return;clearT();mode='raw';pull=null;
+ document.body.classList.remove('desk');bq.classList.remove('pressed');bq.classList.add('unwind');
+ thread.classList.remove('on');tline.style.height='24px';
+ tone(440,.4,'triangle',.04);setTimeout(function(){tone(330,.6,'triangle',.04)},250);
+ setTimeout(function(){term.classList.add('raw');lines.innerHTML='';sbar.className='sbar';var p=document.createElement('pre');p.className='cfg';p.textContent=cfg();lines.appendChild(p);term.scrollTop=0},900);
+ show(['copy','wind']);say('The thread came loose. The vase is only text now: every stem, and how each one leaves.');
+}
+$('copy').onclick=function(){var t=cfg(),done=function(){say('Copied. Take it to your own desk.')};
+ try{navigator.clipboard.writeText(t).then(done,function(){sel()})}catch(e){sel()}
+ function sel(){var p=lines.querySelector('pre');if(!p)return;var r=document.createRange();r.selectNodeContents(p);var s=getSelection();s.removeAllRanges();s.addRange(r);say('Selected. Copy it by hand.')}};
+$('wind').onclick=function(){shown=false;back();say('Wound back into stems.')};
+
+document.addEventListener('visibilitychange',function(){if(document.hidden)hovStop()});
+
+render();idle();show(['go']);
+})();
+</script>
+</body>
+</html>
