@@ -1,0 +1,625 @@
+{
+  "facts": {
+    "week": {
+      "start": "2026-10-12",
+      "end": "2026-10-18"
+    },
+    "repository": "isas1/daily-team",
+    "changes": {
+      "commits": [
+        {
+          "sha": "007de6b",
+          "date": "2026-10-14",
+          "subject": "Season 2026-10-19 (#22)",
+          "area": "Seasons and suggestions"
+        },
+        {
+          "sha": "fb09088",
+          "date": "2026-10-17",
+          "subject": "Studio tier trial for 2026-10-17 and 10-18 (#25)",
+          "area": "Team and sessions"
+        }
+      ],
+      "testsAtStart": 67,
+      "testsAtEnd": 70
+    },
+    "days": [
+      {
+        "date": "2026-10-12",
+        "status": "ok",
+        "task": "Output style",
+        "concept": "Found Voice",
+        "decision": "The page is a fake Claude Code terminal whose assistant can answer only with words the visitor has already typed, one sentence at a time, at a pace the visitor drags into shape, until the house lights come up on the whole stock of words ...",
+        "constraint": "All text at 18 px or larger.",
+        "roles": [
+          "Set designer",
+          "Bookbinder",
+          "Data journalist"
+        ],
+        "guest": {
+          "name": "Euclid",
+          "kind": "historical"
+        },
+        "temperaments": [
+          "Gets louder the more sure they are.",
+          "Impatient; cuts people off mid-sentence.",
+          "Asks for a demonstration before any opinion.",
+          "Speaks rarely, and only in short verdicts."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 24371
+          }
+        ]
+      },
+      {
+        "date": "2026-10-13",
+        "status": "ok",
+        "task": "Plugin",
+        "concept": "The Inn That Answers",
+        "decision": "The page is a monospace inn on an 80 by 24 grid where a traveller arrives with a pack of Claude Code mods and the visitor, playing the room, answers his commands, pulls the pack open strap by strap, names each item before he may set it d...",
+        "constraint": "Monospace typeface only.",
+        "roles": [
+          "Documentary director",
+          "Playwright",
+          "Puppeteer"
+        ],
+        "guest": {
+          "name": "Benjamin Franklin",
+          "kind": "historical"
+        },
+        "temperaments": [
+          "Will not go on until a word is defined.",
+          "Tells a story from the workshop instead of arguing.",
+          "Measures twice and says so.",
+          "Wants everything decided before lunch."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 30122
+          }
+        ]
+      },
+      {
+        "date": "2026-10-14",
+        "status": "ok",
+        "task": "Long task",
+        "concept": "Graveyard Shift",
+        "decision": "The page is an overnight radio station that only broadcasts while the visitor's tab is hidden, calls them back through the tab title like a singer, and gives them the night's tape when they return.",
+        "constraint": "No more than two levels of heading.",
+        "roles": [
+          "Radio producer",
+          "Industrial designer",
+          "Museum curator"
+        ],
+        "guest": {
+          "name": "Odysseus",
+          "kind": "myth"
+        },
+        "temperaments": [
+          "Praises an idea, then takes it apart.",
+          "Sides with whoever is losing.",
+          "Will not accept a plan they cannot draw.",
+          "Insists on hearing from the quietest person."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 25703
+          }
+        ]
+      },
+      {
+        "date": "2026-10-15",
+        "status": "ok",
+        "task": "Loop",
+        "concept": "Spyhole",
+        "decision": "The page is a kiln that the loop checks through a spyhole every 30 seconds for twelve minutes, while the visitor waits, peeks early at the cost of cracks, and keeps the finished bowl, glazed with its own record of checks, on an offline s...",
+        "constraint": "Works fully offline after the first load.",
+        "roles": [
+          "Ceramicist",
+          "Textile designer",
+          "Costume designer"
+        ],
+        "guest": {
+          "name": "Ada Lovelace",
+          "kind": "historical"
+        },
+        "temperaments": [
+          "Laughs at the problem first, then takes it apart.",
+          "Keeps score of every point won and lost.",
+          "Treats every rule as a challenge.",
+          "Changes their mind out loud, mid-argument."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 26627
+          }
+        ]
+      },
+      {
+        "date": "2026-10-16",
+        "status": "ok",
+        "task": "Session log",
+        "concept": "Glass Cylinder",
+        "decision": "The page is a clear glass lock cylinder with one pin for each step of a recorded Claude Code session; the visitor lifts the pins in reverse order, each lifted pin slides one object in a small shop-window scene back to its starting mark, ...",
+        "constraint": "Every change can be undone.",
+        "roles": [
+          "Locksmith",
+          "Packaging designer",
+          "Window dresser"
+        ],
+        "guest": {
+          "name": "Scheherazade",
+          "kind": "myth"
+        },
+        "temperaments": [
+          "Distrusts anything that came too easily.",
+          "Gets louder the more sure they are.",
+          "Defends the first idea in the room.",
+          "Agrees fast, then quietly does it their own way."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 19629
+          }
+        ]
+      },
+      {
+        "date": "2026-10-17",
+        "status": "ok",
+        "task": "Mod workshop",
+        "concept": "The Cold Room",
+        "decision": "The page is a florist's cold room where the visitor pulls part-stems from buckets and arranges them in a vase that is a live mock Claude Code session, watching each part bloom or droop as the session runs.",
+        "constraint": "Hides one thing for the curious to find.",
+        "roles": [
+          "Florist",
+          "Teacher",
+          "Calligrapher"
+        ],
+        "guest": {
+          "name": "Daedalus",
+          "kind": "myth"
+        },
+        "temperaments": [
+          "Asks for a demonstration before any opinion.",
+          "Argues the opposite side to test an idea.",
+          "Hoards evidence before saying anything.",
+          "Turns every disagreement into a wager."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 92158
+          }
+        ]
+      },
+      {
+        "date": "2026-10-18",
+        "status": "ok",
+        "task": "Companion",
+        "concept": "Weft",
+        "decision": "The page is a narrow terminal-side loom where every line the visitor types is woven as one row of cloth in the colour of that hour's outdoor light, a long pause ties a knot, and the visitor cuts the strip to end the session and keep it.",
+        "constraint": "Changes with the time of day.",
+        "roles": [
+          "Blacksmith",
+          "Urban planner",
+          "Weaver"
+        ],
+        "guest": {
+          "name": "Charles Darwin",
+          "kind": "historical"
+        },
+        "temperaments": [
+          "Speaks rarely, and only in short verdicts.",
+          "Answers questions with sketches and numbers.",
+          "Concedes small points to win the big one.",
+          "Impatient; cuts people off mid-sentence."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 79426
+          }
+        ]
+      }
+    ],
+    "seasons": [
+      {
+        "start": "2026-10-12",
+        "when": "started this week",
+        "addedCounts": {
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 6,
+          "guests": 2
+        },
+        "retiredCounts": {
+          "guests": 2,
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 6
+        },
+        "added": {
+          "roles": [
+            "Luthier",
+            "Stonemason",
+            "Clockmaker",
+            "Weaver",
+            "Florist",
+            "Cobbler",
+            "Translator",
+            "Sculptor"
+          ],
+          "methods": [
+            "Write the instructions for a stranger, then follow them exactly yourself.",
+            "Find the most expensive possible mistake and design it out first.",
+            "Do the task by hand three times before automating any of it.",
+            "Ask what the user does just before and just after, and design for both.",
+            "Label every part with its purpose, then delete the parts with no label.",
+            "Finish one complete rough pass before polishing any single part.",
+            "Sort each decision into reversible and permanent, and slow down only on the permanent ones.",
+            "Write the help text, then change the design until the help text is not needed."
+          ],
+          "constraints": [
+            "Uses no more than two font sizes.",
+            "Every result appears in a full sentence as well as a number."
+          ],
+          "tasks": [
+            "Price in hours: take-home pay per hour and any price give its cost in working hours and 40-hour weeks, with a daily item also shown per year.",
+            "Estimate anything: a question split into steps, each with a low and high guess, gives a likely range for the answer, with every step shown.",
+            "Picture hanging helper: wall width, frame widths, and gap between frames give the nail position for each frame, measured from the left.",
+            "Garden bed soil calculator: bed length, width, and depth give the soil volume in litres and the number of bags of a size the user enters.",
+            "Seating plan: guests and table sizes give a printable plan, with pairs the user marks kept at different tables.",
+            "Roman numeral converter: numbers from 1 to 3,999 converted in both directions, with each step of the conversion shown."
+          ],
+          "guests": [
+            "historical | Mary Anning | Search the same ground again after every storm. | died 1847",
+            "creature | Clockwork beetle | Wind it once and watch how far it runs without help. | invented"
+          ]
+        },
+        "retired": {
+          "guests": [
+            "historical | Marcus Aurelius | Act only on what you control, and let the rest go. | died 180",
+            "historical | Socrates | Ask questions until the hidden assumption shows. | died 399 BC"
+          ],
+          "roles": [
+            "Interaction designer",
+            "Motion designer",
+            "Product designer",
+            "Service designer",
+            "Information designer",
+            "Cartographer",
+            "Architect",
+            "Landscape architect"
+          ],
+          "methods": [
+            "Watch three people use the current version first.",
+            "Build the smallest version that works end to end.",
+            "Remove one element per pass until it breaks, then restore the last one.",
+            "Sketch with a thick marker so small detail is impossible.",
+            "Give each idea 20 minutes, then move on.",
+            "Explain it aloud to someone outside the field.",
+            "Map every step the user takes, then remove steps.",
+            "Pick the one number that matters and design around it."
+          ],
+          "constraints": [
+            "Works on a 320 px wide screen.",
+            "No images or icons."
+          ],
+          "tasks": [
+            "Freelance rate calculator: target yearly income, working weeks, hours per week, and yearly costs give the minimum hourly rate.",
+            "Debt payoff comparison: up to five debts compared by smallest balance first and highest rate first, in months and total interest.",
+            "Shared house expenses: who paid what gives who owes whom, settled with the fewest transfers.",
+            "Travel money table: a rate the user types in gives a printable table of common amounts in both currencies.",
+            "Compound growth illustration: starting amount, monthly addition, rate, and years give a year-by-year table and chart, labelled as an illustration, not a forecast.",
+            "Receipt checker: item prices, quantities, discount, and tax rate give the total to compare with a receipt."
+          ]
+        },
+        "accepted": [
+          {
+            "task": "Price in hours: take-home pay per hour and any price give its cost in working hours and 40-hour weeks, with a daily item also shown per year.",
+            "credit": ""
+          },
+          {
+            "task": "Estimate anything: a question split into steps, each with a low and high guess, gives a likely range for the answer, with every step shown.",
+            "credit": ""
+          }
+        ]
+      },
+      {
+        "start": "2026-10-19",
+        "when": "starts next Monday",
+        "addedCounts": {
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 40,
+          "guests": 2,
+          "temperaments": 4
+        },
+        "retiredCounts": {
+          "guests": 2,
+          "temperaments": 4,
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 40
+        },
+        "added": {
+          "roles": [
+            "Wheelwright",
+            "Gilder",
+            "Thatcher",
+            "Lacemaker",
+            "Rope maker",
+            "Bell founder",
+            "Organ builder",
+            "Stage manager"
+          ],
+          "methods": [
+            "Name every part before arranging any of them.",
+            "Find the slowest step, make it visible, and speed up only that step.",
+            "Build two versions that disagree and keep what both share.",
+            "Stop each session mid-sentence so the next one starts easily.",
+            "Trace one piece of input from entry to exit and note every stop.",
+            "Decide what gets thrown away before deciding what stays.",
+            "Make the worst version on purpose, then list what makes it bad.",
+            "Write the rule for when to stop before you start."
+          ],
+          "constraints": [
+            "Text still reads clearly at 200 percent zoom.",
+            "No more than seven elements visible at once."
+          ],
+          "tasks": [
+            "Toggle: a switch with two states that shows how far it travelled to get there.",
+            "Slider: a range control that feels the weight of the value it holds.",
+            "Button: one press that confirms itself without a second screen.",
+            "Loader: a wait that shows honest progress instead of a spin.",
+            "Tooltip: a hint that appears only when the hand hesitates.",
+            "Tabs: a few panels that trade places without losing the reader's place.",
+            "Accordion: sections that open one at a time and remember which was last.",
+            "Dialog: a small window that asks one question and then steps aside.",
+            "Toast: a short notice that arrives, is read, and leaves on its own.",
+            "Stepper: a number control that counts up and down with a steady hand.",
+            "Rating: a score from one to five given with a single gesture.",
+            "Search field: a box that narrows a short list as each letter lands.",
+            "Date picker: choosing one day without a full calendar in the way.",
+            "Progress ring: a circle that fills as one task moves toward done.",
+            "Pagination: moving through many pages while always knowing where you are.",
+            "Breadcrumb: the trail back up from a deep page.",
+            "Copy button: one tap that copies a line of text and proves it worked.",
+            "Password field: a hidden word that shows its strength as it is typed.",
+            "Tag input: words typed, kept as small pieces, and removed one by one.",
+            "Colour swatch: picking one colour from a small, honest palette.",
+            "Skeleton: the shape of content before the content arrives.",
+            "Empty state: what a list shows when there is nothing in it yet.",
+            "Countdown: a timer that runs down to one moment and marks it.",
+            "Segmented control: three choices side by side, one always chosen.",
+            "Checkbox: a mark that can be set, cleared, or left half done.",
+            "Reorder list: items picked up, carried, and set down in a new order.",
+            "Initials stack: a few people in a row, with a count for the rest.",
+            "Badge: a small count that changes without shouting.",
+            "Sparkline: a tiny line of numbers that fits inside a sentence.",
+            "Undo: a mistake taken back within a few seconds.",
+            "Key hint: a key shown on screen that lights when it is pressed.",
+            "Character counter: a text box that shows how much room is left.",
+            "Theme switch: light and dark traded in one motion.",
+            "Dial: a value set by turning a knob around its edge.",
+            "File drop: a place to drop a file and see that it was received.",
+            "Scroll progress: a thin line that shows how much of a page is read.",
+            "Split view: two panes divided by an edge the hand can move.",
+            "Carousel: a few cards that move one at a time, by swipe or key.",
+            "Status dot: a single light that says online, busy, or away.",
+            "Command menu: a short list of actions found by typing a few letters."
+          ],
+          "guests": [
+            "myth | Ariadne | Leave a thread so you can always find the way back. | Greek myth",
+            "literary | Phileas Fogg | Set a fixed deadline and plan every stop against it. | Jules Verne, died 1905"
+          ],
+          "temperaments": [
+            "Repeats the other side's point before answering it.",
+            "Goes quiet, then returns with a written list.",
+            "Asks what would change their mind, then waits.",
+            "Brings up the budget whenever the talk gets abstract."
+          ]
+        },
+        "retired": {
+          "guests": [
+            "historical | Euclid | State a few assumptions, then build everything from them. | died c. 270 BC",
+            "historical | Ibn al-Haytham | Trust nothing until an experiment shows it. | died c. 1040"
+          ],
+          "temperaments": [
+            "Impatient; cuts people off mid-sentence.",
+            "Hoards evidence before saying anything.",
+            "Agrees fast, then quietly does it their own way.",
+            "Argues the opposite side to test an idea."
+          ],
+          "roles": [
+            "Industrial designer",
+            "Furniture maker",
+            "Set designer",
+            "Lighting designer",
+            "Costume designer",
+            "Game designer",
+            "Puppeteer",
+            "Choreographer"
+          ],
+          "methods": [
+            "Design the error and empty states first.",
+            "List the assumptions in the brief and check each one.",
+            "Make it work in black and white before adding color.",
+            "Prototype in the final material.",
+            "Take the conventions of a genre and break exactly one.",
+            "Storyboard every change of state.",
+            "Write the copy before the layout.",
+            "Scope the work to what fits in one day."
+          ],
+          "constraints": [
+            "Under 100 words of fixed text on the page.",
+            "Three colors at most."
+          ],
+          "tasks": [
+            "Statusline: a Claude Code status line that lives like a creature at the bottom of the terminal.",
+            "Spinner: what Claude Code shows while it thinks, made into a tiny performance.",
+            "Gatekeeper: a Claude Code hook that stands at the door before a tool acts and asks its own question.",
+            "Aftermath: a Claude Code hook that wakes after every edit and leaves a mark.",
+            "Last word: a Claude Code hook that speaks when a session ends.",
+            "Morning ritual: what a Claude Code session does the moment it starts.",
+            "Output style: a Claude Code voice that changes how every answer sounds.",
+            "Slash command: one word typed after a slash in Claude Code that sets something strange in motion.",
+            "Skill: a Claude Code skill that teaches one craft nobody thought to teach.",
+            "Subagent: a small helper Claude Code sends off alone, and what it brings back.",
+            "Swarm: many Claude Code helpers working at once on one problem.",
+            "Memory file: what Claude Code remembers about a person between sessions.",
+            "Forgetting: what Claude Code loses, and what it keeps, when a long conversation is compacted.",
+            "Permission: the moment Claude Code asks before it acts, and what that asking feels like.",
+            "Plan mode: Claude Code thinking out loud before it touches anything.",
+            "Plugin: a bundle of Claude Code mods that arrives like a traveller with a full pack.",
+            "Marketplace: a place where Claude Code plugins are shown, traded, and chosen.",
+            "MCP server: a bridge that lets Claude Code reach into another world of tools.",
+            "Notification: how Claude Code calls someone back when it needs them.",
+            "Worktree: Claude Code working in a parallel copy of the same project.",
+            "Diff: the visible trace of every change Claude Code makes.",
+            "Checkpoint: a Claude Code rewind that lets someone step back in time.",
+            "Theme: the Claude Code terminal dressed for a season, a mood, or a creature.",
+            "Keybinding: one key press in Claude Code that does something no one expects.",
+            "Prompt line: the blank line where a person speaks to Claude Code, made into something more.",
+            "Context window: everything Claude Code can hold in mind at once, and the edge where it ends.",
+            "Long task: a Claude Code job that runs for hours while no one watches.",
+            "Loop: Claude Code waking on a schedule to check on something again and again.",
+            "Handoff: one Claude Code session passing its work to the next.",
+            "Review: a Claude Code mod that reads someone's work and answers in its own voice.",
+            "Guardrail: a Claude Code rule that stops one thing from ever happening.",
+            "Tool call: the instant Claude Code reaches for a tool, slowed down and shown.",
+            "Session log: the trail a Claude Code session leaves behind it.",
+            "Companion: a Claude Code mod that keeps someone company while they work.",
+            "Greeting: the first thing Claude Code says, made worth waiting for.",
+            "Ghost in the terminal: a Claude Code mod that leaves small surprises for the curious.",
+            "Crew: hooks, skills, and commands in Claude Code that work together like a ship's crew.",
+            "Celebration: what Claude Code does when the tests finally pass.",
+            "Error: a Claude Code failure turned into something kind, funny, or useful.",
+            "Mod workshop: a place to build a Claude Code mod from parts."
+          ]
+        },
+        "accepted": []
+      }
+    ],
+    "github": {
+      "suggestionsOpenedThisWeekCount": 0,
+      "issuesOpenedCount": 0,
+      "issuesClosedCount": 0,
+      "issuesOpenedAndClosedCount": 0,
+      "issuesOpened": [],
+      "issuesClosed": [],
+      "prsMerged": [
+        {
+          "number": 25,
+          "title": "Studio tier trial for 2026-10-17 and 10-18"
+        },
+        {
+          "number": 22,
+          "title": "Season 2026-10-19"
+        }
+      ],
+      "openSuggestionsNow": []
+    },
+    "metrics": {
+      "days": 7,
+      "failed": 0,
+      "flagged": 0,
+      "deadlocks": 0,
+      "refereed": 0,
+      "meanClashLines": 10,
+      "artifacts": 7,
+      "meanArtifactKB": 41.6,
+      "guestKinds": {
+        "historical": 4,
+        "myth": 3
+      },
+      "commits": 2,
+      "commitsByArea": {
+        "Seasons and suggestions": 1,
+        "Team and sessions": 1
+      },
+      "testsAtEnd": 70
+    },
+    "trend": {
+      "days": 0,
+      "failed": 0,
+      "flagged": -1,
+      "deadlocks": 0,
+      "refereed": 0,
+      "meanClashLines": 0,
+      "artifacts": 0,
+      "meanArtifactKB": 21.5,
+      "commits": -16,
+      "testsAtEnd": 3
+    }
+  },
+  "model": "claude-sonnet-5-5",
+  "status": "ok",
+  "problems": []
+}
