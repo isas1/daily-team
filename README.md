@@ -7,23 +7,23 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-18: Weft
+### 2026-10-19: Clew Rim
 
-<a href="days/2026-10-18/"><img src="days/2026-10-18/team.png" alt="Team for 2026-10-18: Blacksmith · Urban planner · Weaver · Charles Darwin" width="100%"></a>
+<a href="days/2026-10-19/"><img src="days/2026-10-19/team.png" alt="Team for 2026-10-19: Taxidermist · Wheelwright · Glassblower · Daedalus" width="100%"></a>
 
-**Task:** Companion: a Claude Code mod that keeps someone company while they work.
+**Task:** Scroll progress: a thin line that shows how much of a page is read.
 
-**Decision:** The page is a narrow terminal-side loom where every line the visitor types is woven as one row of cloth in the colour of that hour's outdoor light, a long pause ties a knot, and the visitor cuts the strip to end the session and keep it.
+**Decision:** The page is a 2 px line that runs around all four edges of the window, cooling behind its hot head as you read, leaving persistent knots where you paused, and pressing any knot or point on it takes you back there.
 
-<a href="days/2026-10-18/"><img src="days/2026-10-18/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-18/) · [Use it](https://isas1.github.io/daily-team/2026-10-18/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-19/) · [Use it](https://isas1.github.io/daily-team/2026-10-19/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
 
 <!-- WEEK:START -->
-**Season 3**, since 2026-10-12. New this season: Luthier, Stonemason, Clockmaker, Weaver, Florist, Cobbler, Translator, Sculptor, Mary Anning, Clockwork beetle, and 24 temperaments. A new season with 8 new roles and 8 new methods is drafted every Monday.
+**Season 4**, since 2026-10-19. New this season: Wheelwright, Gilder, Thatcher, Lacemaker, Rope maker, Bell founder, Organ builder, Stage manager, Ariadne, Phileas Fogg, and 4 new temperaments. A new season with 8 new roles and 8 new methods is drafted every Monday.
 
 ### Vote on what gets built next
 
@@ -37,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-19](days/2026-10-19/) | <a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Clew Rim" width="160"></a> | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus |
 | [2026-10-18](days/2026-10-18/) | <a href="days/2026-10-18/"><img src="days/2026-10-18/artifact-1.png" alt="Weft" width="160"></a> | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin |
 | [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="The Cold Room" width="160"></a> | The Cold Room | Florist · Teacher · Calligrapher · Daedalus |
 | [2026-10-16](days/2026-10-16/) | <a href="days/2026-10-16/"><img src="days/2026-10-16/artifact-1.png" alt="Glass Cylinder" width="160"></a> | Glass Cylinder | Locksmith · Packaging designer · Window dresser · Scheherazade |
 | [2026-10-15](days/2026-10-15/) | <a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Spyhole" width="160"></a> | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace |
 | [2026-10-14](days/2026-10-14/) | <a href="days/2026-10-14/"><img src="days/2026-10-14/artifact-1.png" alt="Graveyard Shift" width="160"></a> | Graveyard Shift | Radio producer · Industrial designer · Museum curator · Odysseus |
 | [2026-10-13](days/2026-10-13/) | <a href="days/2026-10-13/"><img src="days/2026-10-13/artifact-1.png" alt="The Inn That Answers" width="160"></a> | The Inn That Answers | Documentary director · Playwright · Puppeteer · Benjamin Franklin |
-| [2026-10-12](days/2026-10-12/) | <a href="days/2026-10-12/"><img src="days/2026-10-12/artifact-1.png" alt="Found Voice" width="160"></a> | Found Voice | Set designer · Bookbinder · Data journalist · Euclid |
 
-[All 16 days](ARCHIVE.md)
+[All 17 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

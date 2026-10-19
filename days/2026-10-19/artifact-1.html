@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clew Rim: scroll progress</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#1f1813;color:#ece3d0}
+  body{font:21px/1.6 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;-webkit-text-size-adjust:100%}
+  .cr-page{position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none}
+  .cr-page::-webkit-scrollbar{display:none}
+  .cr-page:focus{outline:none}
+  .cr-page:focus-visible{outline:2px dashed #b9ab92;outline-offset:-22px}
+  .cr-art{max-width:31em;padding:76px 30px 140px;margin:0 0 0 clamp(0px,9vw,140px);overflow-wrap:anywhere}
+  .cr-kick{font:700 18px/1.3 "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#d9a441;margin:0 0 14px}
+  .cr-h1{font:800 clamp(44px,13vw,108px)/.92 "Helvetica Neue",Arial,sans-serif;letter-spacing:-.025em;margin:0 0 28px;color:#ece3d0}
+  .cr-h1 span{display:block;color:#e8a33c}
+  .cr-hint{font:400 20px/1.45 "Helvetica Neue",Arial,sans-serif;color:#d6c9b0;max-width:22em;margin:0 0 70vh}
+  .cr-hint b{color:#fff4d6;font-weight:700}
+  .cr-sec{margin:0 0 72px}
+  .cr-num{font:800 clamp(56px,16vw,120px)/1 "Helvetica Neue",Arial,sans-serif;color:#3d3128;letter-spacing:-.04em;margin:0 0 -8px}
+  .cr-h2{font:italic 700 clamp(28px,6vw,40px)/1.15 "Iowan Old Style",Palatino,Georgia,serif;margin:0 0 14px;color:#ece3d0}
+  .cr-sec p{margin:0 0 16px}
+  .cr-tag{border:1px solid #6b5d4f;padding:18px 20px 16px;margin:0 0 72px;background:#241b15}
+  .cr-tag .cr-kick{color:#b9ab92}
+  .cr-tag p{margin:0 0 10px;font-size:20px}
+  .cr-math{font:400 18px/1.7 ui-monospace,Menlo,Consolas,monospace;color:#d6c9b0;background:#271e17;border-left:2px solid #e8a33c;padding:14px 16px;margin:0 0 16px}
+  .cr-math b{color:#fff4d6;font-weight:700}
+  .cr-sw{display:inline-block;width:14px;height:14px;vertical-align:-1px;margin-right:4px;border:1px solid #1f1813}
+  .cr-credits{font:400 18px/1.55 "Helvetica Neue",Arial,sans-serif;color:#c9bca3;border-top:1px solid #4a3e33;padding-top:18px;margin-top:40px}
+  .cr-credits b{color:#ece3d0}
+  .cr-svg{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible}
+  .cr-band{pointer-events:stroke;cursor:pointer;touch-action:none}
+  .cr-rim{position:fixed;inset:0;pointer-events:none;z-index:7}
+  .cr-btn,.cr-knot{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;padding:0;border:0;border-radius:50%;background:transparent;pointer-events:auto;cursor:pointer}
+  .cr-btn:focus{outline:none}
+  .cr-btn:focus-visible,.cr-knot:focus-visible{outline:2px solid #ece3d0;outline-offset:2px}
+  .cr-knot::before{content:"";position:absolute;left:6px;top:6px;width:8px;height:8px;border-radius:50%;background:#e8a33c;border:2px solid #1f1813;box-shadow:0 0 0 1px #e8a33c}
+  .cr-knot.cr-old::before{background:#9aa7b4;box-shadow:0 0 0 1px #9aa7b4}
+  .cr-knot:hover::before{transform:scale(1.25)}
+  .cr-pend{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#e8a33c;border:2px solid #1f1813;box-sizing:border-box;opacity:0;pointer-events:none;display:none}
+  .cr-tip{position:fixed;z-index:9;display:none;pointer-events:none;font:600 18px/1.3 "Helvetica Neue",Arial,sans-serif;color:#ece3d0;background:#2b221b;border:1px solid #9aa7b4;padding:6px 10px;max-width:min(260px,calc(100vw - 40px))}
+  .cr-cap{position:fixed;top:16px;left:18px;z-index:6;font:700 18px/1.2 "Helvetica Neue",Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#d6c9b0;background:#1f1813;padding:3px 8px;display:flex;flex-wrap:wrap;gap:0 10px;max-width:calc(100vw - 56px)}
+  .cr-cap b{color:#fff4d6;font-variant-numeric:tabular-nums}
+  .cr-door{position:fixed;right:22px;bottom:24px;z-index:8;font:700 18px/1.2 "Helvetica Neue",Arial,sans-serif;color:#1f1813;background:#ece3d0;border:0;padding:10px 14px;cursor:pointer;max-width:calc(100vw - 52px);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .4s,transform .4s,visibility 0s .4s}
+  .cr-door.cr-on{opacity:1;visibility:visible;transform:none;transition:opacity .4s,transform .4s,visibility 0s}
+  .cr-door:focus-visible{outline:2px solid #e8a33c;outline-offset:3px}
+  .cr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (prefers-reduced-motion: reduce){.cr-door,.cr-door.cr-on{transition:none}}
+</style>
+</head>
+<body>
+
+<main id="cr-page" class="cr-page" tabindex="0" aria-label="Field notes, scrollable">
+  <article class="cr-art">
+    <p class="cr-kick">Field notes, bench 4</p>
+    <h1 class="cr-h1">Read.<span>The line keeps it.</span></h1>
+    <p class="cr-hint">Scroll. The rim around the window fills. <b>Stop for three seconds</b> and a pin goes in. Press the rim anywhere to go there.</p>
+
+    <div class="cr-tag" role="note">
+      <p class="cr-kick">Before</p>
+      <p>You came from somewhere. A link, a search, a name someone said. You arrived carrying it. The line starts at the top left, where you came in.</p>
+    </div>
+
+    <section class="cr-sec">
+      <div class="cr-num" aria-hidden="true">I</div>
+      <h2 class="cr-h2">The form</h2>
+      <p>A mount starts with a form. Wood, wire, wrapped tow. The skin goes over it later.</p>
+      <p>Reading works the same way. The page is the form. What you take from it is the skin.</p>
+    </section>
+
+    <section class="cr-sec">
+      <div class="cr-num" aria-hidden="true">II</div>
+      <h2 class="cr-h2">Setting</h2>
+      <p>Hide dries hard in about a week. After that it holds its shape for a century.</p>
+      <p>The line behind your reading head cools the same way. Near white where you are. Amber two seconds later. Grey after twenty. Read slowly and it stays warm longer.</p>
+    </section>
+
+    <section class="cr-sec">
+      <div class="cr-num" aria-hidden="true">III</div>
+      <h2 class="cr-h2">Pins</h2>
+      <p>When the skin is wet you pin it to hold an expression. One pin at the eye. One at the lip.</p>
+      <p>Stop reading for three seconds and the rim takes a pin. It lands exactly where you stopped, even in the middle of a sentence like this one, so the next visit starts mid-thought.</p>
+    </section>
+
+    <section class="cr-sec">
+      <div class="cr-num" aria-hidden="true">IV</div>
+      <h2 class="cr-h2">Labels</h2>
+      <p>A specimen without a label is a curiosity. Hover or focus a pin and it says where and when. Press it and you are back there.</p>
+    </section>
+
+    <section class="cr-sec">
+      <div class="cr-num" aria-hidden="true">V</div>
+      <h2 class="cr-h2">Keeping</h2>
+      <p>Close the tab. Come back next week. The pins are still there, gone grey. The part you read is still marked, faint, under the new line.</p>
+      <p>Nothing here asks a server. It lives in this browser, up to twelve pins per page.</p>
+    </section>
+
+    <section class="cr-sec">
+      <div class="cr-num" aria-hidden="true">VI</div>
+      <h2 class="cr-h2">Hands</h2>
+      <p>Tab to the rim. Left and Right step between pins. Enter on a pin goes there. Enter on the head sets a pin by hand. Home and End go to the start and the finish. Delete pulls a pin.</p>
+    </section>
+
+    <section class="cr-sec">
+      <div class="cr-num" aria-hidden="true">VII</div>
+      <h2 class="cr-h2">How it is measured</h2>
+      <div class="cr-math" aria-live="off">
+        rim L = <b id="cr-mL">0</b> px<br>
+        r = <b id="cr-mT">0</b> ÷ <b id="cr-mM">0</b> = <b id="cr-mR">0.000</b><br>
+        drawn = L × r = <b id="cr-mD">0</b> px<br>
+        <span class="cr-sw" style="background:#fff4d6"></span>0 s
+        <span class="cr-sw" style="background:#e8a33c"></span>2 s
+        <span class="cr-sw" style="background:#9aa7b4"></span>20 s
+      </div>
+      <p>r is scrollTop over the scrollable height. Each 1% of the rim keeps the moment the head passed it, and its colour comes from the seconds since. Cost: one SVG, two hundred short paths, one timer. That fits the budget.</p>
+    </section>
+
+    <div class="cr-tag" role="note">
+      <p class="cr-kick">After</p>
+      <p>You leave with something, half read or read through. When the rim is full it parts at the lower right. That gap is the way out.</p>
+      <p id="cr-spec">Specimen: this page. Read through 0 times.</p>
+    </div>
+
+    <p class="cr-credits">
+      <b>Taxidermist</b>, lead: pins that last across visits, the faint mark of what you read, the before and after labels.
+      <b>Wheelwright</b>: the line runs the whole rim, and pins land mid-sentence.
+      <b>Glassblower</b>: the hot head, cooling by time, 12 px corners, the 24 px band.
+      <b>Daedalus</b>: every point answers a press, and the door at the end.
+    </p>
+  </article>
+</main>
+
+<svg id="cr-svg" class="cr-svg" aria-hidden="true" focusable="false">
+  <defs>
+    <mask id="cr-mask" maskUnits="userSpaceOnUse">
+      <rect id="cr-mrect" x="0" y="0" width="100" height="100" fill="#fff"/>
+      <circle id="cr-gap" cx="0" cy="0" r="0" fill="#000"/>
+    </mask>
+  </defs>
+  <g mask="url(#cr-mask)" fill="none" stroke-width="2">
+    <path id="cr-track" stroke="#3a2f26"/>
+    <g id="cr-ghost" stroke="#6b5d4f"></g>
+    <g id="cr-live"></g>
+  </g>
+  <circle id="cr-glow" r="6" fill="#e8a33c" opacity=".3"/>
+  <circle id="cr-head" r="3" fill="#fff4d6"/>
+  <path id="cr-band" class="cr-band" fill="none" stroke="#000" stroke-opacity="0" stroke-width="24"/>
+</svg>
+
+<div id="cr-rim" class="cr-rim" role="toolbar" aria-label="Reading rim">
+  <button id="cr-headbtn" class="cr-btn" type="button" aria-label="Reading rim, 0% read. Enter sets a pin here. Arrow keys step between pins."></button>
+  <div id="cr-pend" class="cr-pend" aria-hidden="true"></div>
+</div>
+
+<div class="cr-cap"><span>Scroll progress</span><b id="cr-pct">0%</b></div>
+<button id="cr-door" class="cr-door" type="button">Done. Back to top</button>
+<div id="cr-tip" class="cr-tip" aria-hidden="true"></div>
+<div id="cr-say" class="cr-sr" aria-live="polite"></div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var NS='http://www.w3.org/2000/svg';
+  var sc=$('cr-page'), track=$('cr-track'), band=$('cr-band'), live=$('cr-live'), ghost=$('cr-ghost');
+  var headDot=$('cr-head'), glow=$('cr-glow'), gapC=$('cr-gap'), mrect=$('cr-mrect');
+  var rim=$('cr-rim'), headBtn=$('cr-headbtn'), pend=$('cr-pend'), tip=$('cr-tip'), door=$('cr-door'), say=$('cr-say');
+  var RM=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var N=100, W=0, H=0, L=1, seg=0.01, samples=[];
+  var segs=[], ghosts=[], ts=new Array(N).fill(-1e9);
+  var KEY='cr-rim:'+location.pathname;
+  var storeOK=true, data={knots:[],read:'',count:0};
+
+  try{var raw=localStorage.getItem(KEY); if(raw){var d=JSON.parse(raw); if(d&&typeof d==='object')data=d;}}catch(e){storeOK=false}
+  var prevRead=[], read=[];
+  for(var i=0;i<N;i++){var v=(data.read||'').charAt(i)==='1'?1:0; prevRead.push(v); read.push(v);}
+  var count=+data.count||0;
+  var knots=(Array.isArray(data.knots)?data.knots:[]).filter(function(k){return k&&typeof k.p==='number'&&k.p>=0&&k.p<=1}).map(function(k){return {id:String(k.id),p:k.p,t:+k.t||Date.now(),old:true}});
+  var active='head', dirty=false, lastSave=0;
+
+  function save(){
+    try{
+      localStorage.setItem(KEY,JSON.stringify({knots:knots.map(function(k){return {id:k.id,p:k.p,t:k.t}}),read:read.join(''),count:count}));
+      storeOK=true;
+    }catch(e){storeOK=false}
+    dirty=false; lastSave=performance.now(); updateSpec();
+  }
+  function updateSpec(){
+    var t='Specimen: this page. Read through '+count+(count===1?' time':' times')+'. Pins kept: '+knots.length+' of 12.';
+    if(!storeOK)t+=' Storage is blocked here, so pins last until the tab closes.';
+    $('cr-spec').textContent=t;
+  }
+
+  for(i=0;i<N;i++){
+    var g=document.createElementNS(NS,'path'); g.style.display=prevRead[i]?'':'none'; ghost.appendChild(g); ghosts.push(g);
+    var s=document.createElementNS(NS,'path'); s.style.display='none'; s._v=0; s._c=''; s._a=''; live.appendChild(s); segs.push(s);
+  }
+
+  var C0=[255,244,214],C1=[232,163,60],C2=[154,167,180];
+  function mix(a,b,t){return 'rgb('+Math.round(a[0]+(b[0]-a[0])*t)+','+Math.round(a[1]+(b[1]-a[1])*t)+','+Math.round(a[2]+(b[2]-a[2])*t)+')'}
+  var COOL=mix(C2,C2,0);
+  function col(age){
+    if(age<=0)return mix(C0,C0,0);
+    if(age<2)return mix(C0,C1,age/2);
+    if(age<20)return mix(C1,C2,(age-2)/18);
+    return COOL;
+  }
+
+  var gapX=0,gapY=0;
+  function geom(){
+    W=document.documentElement.clientWidth||innerWidth; H=innerHeight;
+    var a=4,r=12,x1=W-4,y1=H-4;
+    var d='M'+(a+r)+' '+a+' H'+(x1-r)+' A'+r+' '+r+' 0 0 1 '+x1+' '+(a+r)+' V'+(y1-r)+' A'+r+' '+r+' 0 0 1 '+(x1-r)+' '+y1+' H'+(a+r)+' A'+r+' '+r+' 0 0 1 '+a+' '+(y1-r)+' V'+(a+r)+' A'+r+' '+r+' 0 0 1 '+(a+r)+' '+a+' Z';
+    track.setAttribute('d',d); band.setAttribute('d',d);
+    L=track.getTotalLength(); seg=L/N;
+    for(var i=0;i<N;i++){
+      ghosts[i].setAttribute('d',d); segs[i].setAttribute('d',d);
+      ghosts[i].setAttribute('stroke-dasharray',(seg+0.5)+' '+L); ghosts[i].setAttribute('stroke-dashoffset',-i*seg);
+      segs[i].setAttribute('stroke-dashoffset',-i*seg); segs[i]._a='';
+    }
+    samples=[];
+    for(var k=0;k<=600;k++){var pt=track.getPointAtLength(k/600*L); samples.push([pt.x,pt.y]);}
+    var gl=(x1-r-(a+r))+Math.PI*r/2+(y1-r-(a+r))+Math.PI*r/4;
+    var gp=track.getPointAtLength(gl); gapX=gp.x; gapY=gp.y;
+    gapC.setAttribute('cx',gapX); gapC.setAttribute('cy',gapY);
+    mrect.setAttribute('width',W); mrect.setAttribute('height',H);
+    $('cr-mL').textContent=Math.round(L);
+    renderKnots();
+  }
+  function pointAt(f){return track.getPointAtLength(Math.max(0,Math.min(L-0.01,f*L)))}
+
+  function maxScroll(){return Math.max(0,sc.scrollHeight-sc.clientHeight)}
+  function jump(f,instant){sc.scrollTo({top:f*maxScroll(),behavior:(instant||RM.matches)?'auto':'smooth'})}
+
+  function ago(t){
+    var s=(Date.now()-t)/1000;
+    if(s<45)return 'just now';
+    if(s<3600){var m=Math.round(s/60);return m+(m===1?' minute':' minutes')+' ago'}
+    if(s<86400){var h=Math.round(s/3600);return h+(h===1?' hour':' hours')+' ago'}
+    var d=Math.round(s/86400);return d+(d===1?' day':' days')+' ago';
+  }
+  function knotLabel(k){return 'Return to '+Math.round(k.p*100)+'%, paused '+ago(k.t)}
+
+  function showTip(text,x,y){
+    tip.textContent=text; tip.style.display='block';
+    var w=tip.offsetWidth,h=tip.offsetHeight;
+    var l=x>W/2?x-w-18:x+18, t=y>H/2?y-h-18:y+18;
+    l=Math.max(8,Math.min(W-w-8,l)); t=Math.max(8,Math.min(H-h-8,t));
+    tip.style.left=l+'px'; tip.style.top=t+'px';
+  }
+  function hideTip(){tip.style.display='none'}
+
+  function setTabs(){
+    if(active!=='head'&&!knots.some(function(k){return k.id===active}))active='head';
+    headBtn.tabIndex=active==='head'?0:-1;
+    var bs=rim.querySelectorAll('.cr-knot');
+    for(var i=0;i<bs.length;i++)bs[i].tabIndex=bs[i].dataset.id===active?0:-1;
+  }
+  function renderKnots(){
+    var old=rim.querySelectorAll('.cr-knot');
+    for(var i=0;i<old.length;i++)old[i].remove();
+    knots.slice().sort(function(a,b){return a.p-b.p}).forEach(function(k){
+      var b=document.createElement('button'); b.type='button';
+      b.className='cr-knot'+(k.old?' cr-old':''); b.dataset.id=k.id;
+      var pt=pointAt(k.p); b.style.left=pt.x+'px'; b.style.top=pt.y+'px';
+      b.setAttribute('aria-label',knotLabel(k));
+      function tipOn(){b.setAttribute('aria-label',knotLabel(k)); showTip(knotLabel(k),pt.x,pt.y)}
+      b.addEventListener('click',function(){jump(k.p)});
+      b.addEventListener('mouseenter',tipOn); b.addEventListener('mouseleave',hideTip);
+      b.addEventListener('focus',function(){active=k.id; setTabs(); tipOn()});
+      b.addEventListener('blur',hideTip);
+      rim.appendChild(b);
+    });
+    setTabs(); updateSpec();
+  }
+
+  function commit(p){
+    var near=null;
+    knots.forEach(function(k){if(Math.abs(k.p-p)<0.02)near=k});
+    if(near){near.t=Date.now(); near.old=false; near.p=p}
+    else{
+      knots.push({id:String(Date.now()),p:p,t:Date.now(),old:false});
+      if(knots.length>12){knots.sort(function(a,b){return a.t-b.t}); knots.shift()}
+    }
+    save(); renderKnots();
+    say.textContent='Pin set at '+Math.round(p*100)+'%.';
+  }
+
+  /* scroll and idle */
+  var lastScroll=performance.now(), userScrolled=false, committed=false;
+  sc.addEventListener('scroll',function(){lastScroll=performance.now(); userScrolled=true; committed=false; if(document.activeElement===headBtn)hideTip()},{passive:true});
+
+  /* band: press or drag anywhere on the rim */
+  var dragging=false;
+  function nearest(x,y){
+    var best=0,bd=1e12;
+    for(var k=0;k<samples.length;k++){var dx=samples[k][0]-x,dy=samples[k][1]-y,dd=dx*dx+dy*dy;if(dd<bd){bd=dd;best=k}}
+    return best/600;
+  }
+  band.addEventListener('pointerdown',function(e){
+    dragging=true; try{band.setPointerCapture(e.pointerId)}catch(_){}
+    jump(nearest(e.clientX,e.clientY)); e.preventDefault();
+  });
+  band.addEventListener('pointermove',function(e){
+    if(dragging)jump(nearest(e.clientX,e.clientY),true);
+    else showTip('Go to '+Math.round(nearest(e.clientX,e.clientY)*100)+'%',e.clientX,e.clientY);
+  });
+  band.addEventListener('pointerleave',function(){if(!dragging)hideTip()});
+  function endDrag(){dragging=false}
+  band.addEventListener('pointerup',endDrag); band.addEventListener('pointercancel',endDrag);
+
+  /* head and keyboard */
+  headBtn.addEventListener('click',function(){var p=lastP; if(p>0&&p<1)commit(p); else say.textContent='Pins go between the start and the finish.'});
+  headBtn.addEventListener('focus',function(){active='head'; setTabs(); var r=headBtn.getBoundingClientRect(); showTip(Math.round(lastP*100)+'% read. Enter sets a pin.',r.left+12,r.top+12)});
+  headBtn.addEventListener('blur',hideTip);
+  headBtn.addEventListener('mouseenter',function(){var r=headBtn.getBoundingClientRect(); showTip(Math.round(lastP*100)+'% read',r.left+12,r.top+12)});
+  headBtn.addEventListener('mouseleave',function(){if(document.activeElement!==headBtn)hideTip()});
+
+  function focusId(id){
+    active=id; setTabs();
+    var el=id==='head'?headBtn:rim.querySelector('.cr-knot[data-id="'+id+'"]');
+    if(el)el.focus();
+  }
+  rim.addEventListener('keydown',function(e){
+    var items=knots.map(function(k){return {id:k.id,p:k.p}}).concat([{id:'head',p:lastP+1e-6}]).sort(function(a,b){return a.p-b.p});
+    var idx=items.findIndex(function(x){return x.id===active}); if(idx<0)idx=0;
+    var k=e.key;
+    if(k==='ArrowRight'||k==='ArrowDown'){e.preventDefault(); focusId(items[Math.min(items.length-1,idx+1)].id)}
+    else if(k==='ArrowLeft'||k==='ArrowUp'){e.preventDefault(); focusId(items[Math.max(0,idx-1)].id)}
+    else if(k==='Home'){e.preventDefault(); jump(0)}
+    else if(k==='End'){e.preventDefault(); jump(1)}
+    else if((k==='Delete'||k==='Backspace')&&active!=='head'){
+      e.preventDefault();
+      var gone=knots.find(function(x){return x.id===active});
+      knots=knots.filter(function(x){return x.id!==active});
+      var next=items[idx+1]&&items[idx+1].id!==active?items[idx+1]:items[idx-1];
+      save(); renderKnots(); hideTip();
+      if(gone)say.textContent='Pin at '+Math.round(gone.p*100)+'% removed.';
+      focusId(next&&knots.some(function(x){return x.id===next.id})?next.id:'head');
+    }
+  });
+
+  door.addEventListener('click',function(){jump(0); focusId('head')});
+
+  /* frame loop */
+  var raf=0, lastT=performance.now(), lastP=0, lastHi=-1, vel=0, gp=0, doneSession=false, lastPct=-1, lastMath=-1;
+  function frame(now){
+    raf=requestAnimationFrame(frame);
+    var max=maxScroll();
+    var p=max>0?sc.scrollTop/max:0; p=Math.max(0,Math.min(1,p)); if(p>0.998)p=1;
+    var dt=Math.max(1,now-lastT)/1000; lastT=now;
+    vel=vel*0.85+(Math.abs(p-lastP)/dt)*0.15; lastP=p;
+    var h=p*N, hi=Math.min(N-1,Math.floor(h)), frac=p>=1?1:h-hi;
+    if(hi>lastHi){for(var j=Math.max(0,lastHi);j<=hi;j++)ts[j]=now}
+    lastHi=hi;
+    var rm=RM.matches;
+    for(var i=0;i<N;i++){
+      var s=segs[i], vis=i<hi||(i===hi&&frac>0);
+      if(!vis){if(s._v){s.style.display='none';s._v=0}continue}
+      if(!s._v){s.style.display='';s._v=1}
+      if((i<hi||p>=1)&&!read[i]){read[i]=1;dirty=true}
+      var a=i===hi?(frac*seg).toFixed(1)+' '+L:(seg+0.5)+' '+L;
+      if(a!==s._a){s.setAttribute('stroke-dasharray',a);s._a=a}
+      var c=rm?COOL:col((now-ts[i])/1000);
+      if(c!==s._c){s.setAttribute('stroke',c);s._c=c}
+    }
+    /* head */
+    var pt=pointAt(p), heat=Math.min(1,vel*2.5);
+    var breathe=rm?0:Math.sin(now/650);
+    headDot.setAttribute('cx',pt.x); headDot.setAttribute('cy',pt.y);
+    headDot.setAttribute('fill',heat>0.5?'#ffffff':'#fff4d6');
+    glow.setAttribute('cx',pt.x); glow.setAttribute('cy',pt.y);
+    glow.setAttribute('r',(5+10*heat+1.5*breathe).toFixed(2));
+    glow.setAttribute('opacity',(0.22+0.5*heat+0.1*breathe).toFixed(3));
+    headBtn.style.left=pt.x+'px'; headBtn.style.top=pt.y+'px';
+    /* pending pin */
+    var idle=now-lastScroll;
+    if(userScrolled&&!committed&&!dragging&&p>0.01&&p<0.99&&idle>200){
+      pend.style.display='block'; pend.style.left=pt.x+'px'; pend.style.top=pt.y+'px';
+      pend.style.opacity=rm?(idle>=3000?1:0):Math.min(1,(idle-200)/2800);
+      if(idle>=3000){committed=true; pend.style.display='none'; commit(p)}
+    } else pend.style.display='none';
+    /* complete and door */
+    var complete=p>=1&&max>0;
+    if(complete&&!doneSession){doneSession=true; count++; dirty=true; save(); say.textContent='Page read through. The rim has opened at the lower right.'}
+    door.classList.toggle('cr-on',complete);
+    var target=complete?1:0;
+    gp=rm?target:Math.max(0,Math.min(1,gp+(target?1:-1)*dt/0.4));
+    gapC.setAttribute('r',(20*gp).toFixed(2));
+    /* readouts */
+    var pct=Math.round(p*100);
+    if(pct!==lastPct){
+      lastPct=pct; $('cr-pct').textContent=pct+'%';
+      headBtn.setAttribute('aria-label','Reading rim, '+pct+'% read. Enter sets a pin here. Arrow keys step between pins.');
+    }
+    if(Math.abs(p-lastMath)>0.0005||lastMath<0){
+      lastMath=p;
+      $('cr-mT').textContent=Math.round(sc.scrollTop); $('cr-mM').textContent=Math.round(max);
+      $('cr-mR').textContent=p.toFixed(3); $('cr-mD').textContent=Math.round(L*p);
+    }
+    if(dirty&&now-lastSave>5000)save();
+  }
+  function start(){if(!raf){lastT=performance.now(); raf=requestAnimationFrame(frame)}}
+  function stop(){if(raf){cancelAnimationFrame(raf); raf=0}}
+  document.addEventListener('visibilitychange',function(){if(document.hidden){stop(); if(dirty)save()}else start()});
+  window.addEventListener('pagehide',function(){if(dirty)save()});
+
+  var rt=0;
+  window.addEventListener('resize',function(){clearTimeout(rt); rt=setTimeout(geom,80)});
+
+  geom(); updateSpec();
+  if(knots.length)say.textContent=knots.length+(knots.length===1?' pin':' pins')+' kept from an earlier visit. Tab to the rim to step through them.';
+  start();
+})();
+</script>
+</body>
+</html>
