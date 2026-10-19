@@ -84,163 +84,163 @@
     ],
     "tasks": [
       {
-        "text": "Toggle: a switch with two states that shows how far it travelled to get there.",
+        "text": "Toggle in risograph: two ink layers slip out of register as it flips, then lock back into one clean print.",
         "credit": ""
       },
       {
-        "text": "Slider: a range control that feels the weight of the value it holds.",
+        "text": "Slider in sediment: each step lays down a stratum, and dragging back scrapes the layers away.",
         "credit": ""
       },
       {
-        "text": "Button: one press that confirms itself without a second screen.",
+        "text": "Button in letterpress: the press bites into paper, and the deboss stays as proof it was pressed.",
         "credit": ""
       },
       {
-        "text": "Loader: a wait that shows honest progress instead of a spin.",
+        "text": "Loader in phosphor: a trace writes the wait across a dark screen, and the glow fades behind the beam.",
         "credit": ""
       },
       {
-        "text": "Tooltip: a hint that appears only when the hand hesitates.",
+        "text": "Progress ring in phyllotaxis: seeds spiral out from the center until the head is full.",
         "credit": ""
       },
       {
-        "text": "Tabs: a few panels that trade places without losing the reader's place.",
+        "text": "Dial in cymatics: turning changes the tone, and sand gathers on the nodal lines when it locks.",
         "credit": ""
       },
       {
-        "text": "Accordion: sections that open one at a time and remember which was last.",
+        "text": "Stepper in split flap: each count clatters through the flaps and settles on the new number.",
         "credit": ""
       },
       {
-        "text": "Dialog: a small window that asks one question and then steps aside.",
+        "text": "Rating in thermal: a press leaves a warm print that cools to the score that was given.",
         "credit": ""
       },
       {
-        "text": "Toast: a short notice that arrives, is read, and leaves on its own.",
+        "text": "Countdown in marbled ink: rings of ink spread on water and close in as the moment nears.",
         "credit": ""
       },
       {
-        "text": "Stepper: a number control that counts up and down with a steady hand.",
+        "text": "Tooltip in frost: a hint crystallizes where the hand pauses and melts when it moves on.",
         "credit": ""
       },
       {
-        "text": "Rating: a score from one to five given with a single gesture.",
+        "text": "Tabs in folded paper: panels crease and refold so the one in front always lies flat.",
         "credit": ""
       },
       {
-        "text": "Search field: a box that narrows a short list as each letter lands.",
+        "text": "Accordion in bellows: a section draws breath as it opens, and the last one breathes out.",
         "credit": ""
       },
       {
-        "text": "Date picker: choosing one day without a full calendar in the way.",
+        "text": "Toast in smoke: a notice rises, holds its shape long enough to read, and drifts apart.",
         "credit": ""
       },
       {
-        "text": "Progress ring: a circle that fills as one task moves toward done.",
+        "text": "Segmented control in iron filings: a magnet slides between three choices and the filings follow.",
         "credit": ""
       },
       {
-        "text": "Pagination: moving through many pages while always knowing where you are.",
+        "text": "Checkbox in embroidery: a stitch crosses the box, can be unpicked, or stops halfway as a half state.",
         "credit": ""
       },
       {
-        "text": "Breadcrumb: the trail back up from a deep page.",
+        "text": "Search field in a sieve: letters shake a mesh, and only the matching words stay on top.",
         "credit": ""
       },
       {
-        "text": "Copy button: one tap that copies a line of text and proves it worked.",
+        "text": "Date picker in tide: drag the tide line along a shore of days, and it leaves one day wet.",
         "credit": ""
       },
       {
-        "text": "Password field: a hidden word that shows its strength as it is typed.",
+        "text": "Copy button in carbon paper: one tap presses a copy through, and the second sheet shows it worked.",
         "credit": ""
       },
       {
-        "text": "Tag input: words typed, kept as small pieces, and removed one by one.",
+        "text": "Password field in crystal growth: each character feeds a crystal that grows larger and more ordered.",
         "credit": ""
       },
       {
-        "text": "Colour swatch: picking one colour from a small, honest palette.",
+        "text": "Tag input in beads: each word becomes a bead on a thread, and a tap slips one off the end.",
         "credit": ""
       },
       {
-        "text": "Skeleton: the shape of content before the content arrives.",
+        "text": "Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
         "credit": ""
       },
       {
-        "text": "Empty state: what a list shows when there is nothing in it yet.",
+        "text": "Skeleton in graphite rubbing: the shape of the content appears as if rubbed over a hidden relief.",
         "credit": ""
       },
       {
-        "text": "Countdown: a timer that runs down to one moment and marks it.",
+        "text": "Empty state in tide pool: an empty list is a still pool with one small creature waiting.",
         "credit": ""
       },
       {
-        "text": "Segmented control: three choices side by side, one always chosen.",
+        "text": "Reorder list in rope: items hang on a rope, and lifting one moves the slack along the line.",
         "credit": ""
       },
       {
-        "text": "Checkbox: a mark that can be set, cleared, or left half done.",
+        "text": "Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.",
         "credit": ""
       },
       {
-        "text": "Reorder list: items picked up, carried, and set down in a new order.",
+        "text": "Key hint in ripples: each key on screen sends one ring across still water when it is pressed.",
         "credit": ""
       },
       {
-        "text": "Initials stack: a few people in a row, with a count for the rest.",
+        "text": "Character counter in sand: grains drain as text is typed, showing how much room is left.",
         "credit": ""
       },
       {
-        "text": "Badge: a small count that changes without shouting.",
+        "text": "Theme switch in eclipse: light and dark trade places as one disc slides across another.",
         "credit": ""
       },
       {
-        "text": "Sparkline: a tiny line of numbers that fits inside a sentence.",
+        "text": "File drop in a well: a dropped file falls, rings spread, and the echo confirms it arrived.",
         "credit": ""
       },
       {
-        "text": "Undo: a mistake taken back within a few seconds.",
+        "text": "Scroll progress in a wick: a thin flame burns along the edge as the page is read.",
         "credit": ""
       },
       {
-        "text": "Key hint: a key shown on screen that lights when it is pressed.",
+        "text": "Split view in surface tension: two pools share one edge that the hand can drag.",
         "credit": ""
       },
       {
-        "text": "Character counter: a text box that shows how much room is left.",
+        "text": "Carousel in a zoetrope: cards spin past a slit and stop one at a time, by swipe or key.",
         "credit": ""
       },
       {
-        "text": "Theme switch: light and dark traded in one motion.",
+        "text": "Status dot in fireflies: one light pulses slowly when away, steadily when online, and fast when busy.",
         "credit": ""
       },
       {
-        "text": "Dial: a value set by turning a knob around its edge.",
+        "text": "Command menu in magnetism: typing pulls the matching actions up out of a scattered field.",
         "credit": ""
       },
       {
-        "text": "File drop: a place to drop a file and see that it was received.",
+        "text": "Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.",
         "credit": ""
       },
       {
-        "text": "Scroll progress: a thin line that shows how much of a page is read.",
+        "text": "Sparkline in seismograph: a needle draws the numbers inside a sentence and settles at rest.",
         "credit": ""
       },
       {
-        "text": "Split view: two panes divided by an edge the hand can move.",
+        "text": "Initials stack in shadow play: a few figures overlap behind a screen, and the rest are a count.",
         "credit": ""
       },
       {
-        "text": "Carousel: a few cards that move one at a time, by swipe or key.",
+        "text": "Pagination in flipbook: pages riffle under the thumb and stop with the number in view.",
         "credit": ""
       },
       {
-        "text": "Status dot: a single light that says online, busy, or away.",
+        "text": "Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.",
         "credit": ""
       },
       {
-        "text": "Command menu: a short list of actions found by typing a few letters.",
+        "text": "Slider in pendulum: a weighted bob swings to the value and slowly comes to rest.",
         "credit": ""
       }
     ],
