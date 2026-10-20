@@ -153,46 +153,46 @@ No more than seven elements visible at once.
 + Every interactive element shows a visible focus outline.
 
 #@ tasks
-Accordion: sections that open one at a time and remember which was last.
-Dialog: a small window that asks one question and then steps aside.
-Toast: a short notice that arrives, is read, and leaves on its own.
-Stepper: a number control that counts up and down with a steady hand.
-Rating: a score from one to five given with a single gesture.
-Search field: a box that narrows a short list as each letter lands.
-Date picker: choosing one day without a full calendar in the way.
-Progress ring: a circle that fills as one task moves toward done.
-Pagination: moving through many pages while always knowing where you are.
-Breadcrumb: the trail back up from a deep page.
-Copy button: one tap that copies a line of text and proves it worked.
-Password field: a hidden word that shows its strength as it is typed.
-Tag input: words typed, kept as small pieces, and removed one by one.
-Colour swatch: picking one colour from a small, honest palette.
-Skeleton: the shape of content before the content arrives.
-Empty state: what a list shows when there is nothing in it yet.
-Countdown: a timer that runs down to one moment and marks it.
-Segmented control: three choices side by side, one always chosen.
-Checkbox: a mark that can be set, cleared, or left half done.
-Reorder list: items picked up, carried, and set down in a new order.
-Initials stack: a few people in a row, with a count for the rest.
-Badge: a small count that changes without shouting.
-Sparkline: a tiny line of numbers that fits inside a sentence.
-Undo: a mistake taken back within a few seconds.
-Key hint: a key shown on screen that lights when it is pressed.
-Character counter: a text box that shows how much room is left.
-Theme switch: light and dark traded in one motion.
-Dial: a value set by turning a knob around its edge.
-File drop: a place to drop a file and see that it was received.
-Scroll progress: a thin line that shows how much of a page is read.
-Split view: two panes divided by an edge the hand can move.
-Carousel: a few cards that move one at a time, by swipe or key.
-Status dot: a single light that says online, busy, or away.
-Command menu: a short list of actions found by typing a few letters.
-+ Inline edit: a line of text that becomes a field when clicked and saves when left.
-+ Code input: a row of boxes that take one digit each and move ahead on their own.
-+ Signature pad: a small area where a mark is drawn by hand and can be cleared.
-+ Timeline: a few dated moments in a row with today marked among them.
-+ Time picker: choosing an hour and a minute without typing either one.
-+ Level meter: a bar that shows how loud the room is right now.
+Accordion in bellows: a section draws breath as it opens, and the last one breathes out.
+Slider in pendulum: a weighted bob swings to the value and slowly comes to rest.
+Toast in smoke: a notice rises, holds its shape long enough to read, and drifts apart.
+Stepper in split flap: each count clatters through the flaps and settles on the new number.
+Rating in thermal: a press leaves a warm print that cools to the score that was given.
+Search field in a sieve: letters shake a mesh, and only the matching words stay on top.
+Date picker in tide: drag the tide line along a shore of days, and it leaves one day wet.
+Progress ring in phyllotaxis: seeds spiral out from the center until the head is full.
+Pagination in flipbook: pages riffle under the thumb and stop with the number in view.
+Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.
+Copy button in carbon paper: one tap presses a copy through, and the second sheet shows it worked.
+Password field in crystal growth: each character feeds a crystal that grows larger and more ordered.
+Tag input in beads: each word becomes a bead on a thread, and a tap slips one off the end.
+Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.
+Skeleton in graphite rubbing: the shape of the content appears as if rubbed over a hidden relief.
+Empty state in tide pool: an empty list is a still pool with one small creature waiting.
+Countdown in marbled ink: rings of ink spread on water and close in as the moment nears.
+Segmented control in iron filings: a magnet slides between three choices and the filings follow.
+Checkbox in embroidery: a stitch crosses the box, can be unpicked, or stops halfway as a half state.
+Reorder list in rope: items hang on a rope, and lifting one moves the slack along the line.
+Initials stack in shadow play: a few figures overlap behind a screen, and the rest are a count.
+Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.
+Sparkline in seismograph: a needle draws the numbers inside a sentence and settles at rest.
+Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.
+Key hint in ripples: each key on screen sends one ring across still water when it is pressed.
+Character counter in sand: grains drain as text is typed, showing how much room is left.
+Theme switch in eclipse: light and dark trade places as one disc slides across another.
+Dial in cymatics: turning changes the tone, and sand gathers on the nodal lines when it locks.
+File drop in a well: a dropped file falls, rings spread, and the echo confirms it arrived.
+Scroll progress in a wick: a thin flame burns along the edge as the page is read.
+Split view in surface tension: two pools share one edge that the hand can drag.
+Carousel in a zoetrope: cards spin past a slit and stop one at a time, by swipe or key.
+Status dot in fireflies: one light pulses slowly when away, steadily when online, and fast when busy.
+Command menu in magnetism: typing pulls the matching actions up out of a scattered field.
++ Inline edit in hot wax: a line of text softens into a field when clicked and sets hard again when left.
++ Code input in dominoes: each digit drops into its box and tips the next box ready for the one after.
++ Signature pad in wet ink: a mark drawn by hand bleeds and dries, and one wipe lifts it away to start again.
++ Timeline in tree rings: a few dated moments grow outward as rings, and today is the newest, softest edge.
++ Time picker in shadow: an hour and a minute are set by moving the light until the shadow falls on them.
++ Level meter in boiling water: bubbles rise faster as the sound gets louder and settle as it fades.
 
 #@ guests
 historical | Katsushika Hokusai | Show the same subject from many viewpoints. | died 1849

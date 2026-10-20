@@ -84,27 +84,27 @@
     ],
     "tasks": [
       {
-        "text": "Inline edit: a line of text that becomes a field when clicked and saves when left.",
+        "text": "Inline edit in hot wax: a line of text softens into a field when clicked and sets hard again when left.",
         "credit": ""
       },
       {
-        "text": "Code input: a row of boxes that take one digit each and move ahead on their own.",
+        "text": "Code input in dominoes: each digit drops into its box and tips the next box ready for the one after.",
         "credit": ""
       },
       {
-        "text": "Signature pad: a small area where a mark is drawn by hand and can be cleared.",
+        "text": "Signature pad in wet ink: a mark drawn by hand bleeds and dries, and one wipe lifts it away to start again.",
         "credit": ""
       },
       {
-        "text": "Timeline: a few dated moments in a row with today marked among them.",
+        "text": "Timeline in tree rings: a few dated moments grow outward as rings, and today is the newest, softest edge.",
         "credit": ""
       },
       {
-        "text": "Time picker: choosing an hour and a minute without typing either one.",
+        "text": "Time picker in shadow: an hour and a minute are set by moving the light until the shadow falls on them.",
         "credit": ""
       },
       {
-        "text": "Level meter: a bar that shows how loud the room is right now.",
+        "text": "Level meter in boiling water: bubbles rise faster as the sound gets louder and settle as it fades.",
         "credit": ""
       }
     ],
@@ -173,12 +173,12 @@
       "No animation."
     ],
     "tasks": [
-      "Toggle: a switch with two states that shows how far it travelled to get there.",
-      "Slider: a range control that feels the weight of the value it holds.",
-      "Button: one press that confirms itself without a second screen.",
-      "Loader: a wait that shows honest progress instead of a spin.",
-      "Tooltip: a hint that appears only when the hand hesitates.",
-      "Tabs: a few panels that trade places without losing the reader's place."
+      "Toggle in risograph: two ink layers slip out of register as it flips, then lock back into one clean print.",
+      "Slider in sediment: each step lays down a stratum, and dragging back scrapes the layers away.",
+      "Button in letterpress: the press bites into paper, and the deboss stays as proof it was pressed.",
+      "Loader in phosphor: a trace writes the wait across a dark screen, and the glow fades behind the beam.",
+      "Tooltip in frost: a hint crystallizes where the hand pauses and melts when it moves on.",
+      "Tabs in folded paper: panels crease and refold so the one in front always lies flat."
     ]
   },
   "suggestions": []
