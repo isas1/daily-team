@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
     inputs:
       artifacts:
-        description: Number of HTML artifacts (0 to 4)
-        default: '1'
+        description: Number of HTML artifacts, 0 to 4 (empty is 4 on component days, else 1)
+        default: ''
       force:
         description: Replace today's results
         type: boolean
@@ -28,7 +28,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     permissions:
       contents: write
       issues: read
@@ -68,7 +68,7 @@ jobs:
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           MODEL: ${{ vars.MODEL }}
           API_URL: ${{ vars.API_URL }}
-          ARTIFACTS: ${{ inputs.artifacts || vars.ARTIFACTS || '1' }}
+          ARTIFACTS: ${{ inputs.artifacts || vars.ARTIFACTS || '' }}
           FORCE: ${{ inputs.force && '--force' || '' }}
         run: node run.mjs $FORCE
       - name: Screenshot new artifacts

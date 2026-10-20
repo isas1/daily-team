@@ -8,7 +8,7 @@ import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rm
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { addCsp, checkArtifact, claudeArgs, conceptName, dayTitle, DEFAULT_CLAUDE_MODEL, decisionLine, extractHtml, findBanned, inlineVendor, isStudio, parseTeam,
+import { addCsp, checkArtifact, claudeArgs, componentProblems, COMPONENTS_FROM, conceptName, dayTitle, DEFAULT_CLAUDE_MODEL, decisionLine, extractHtml, findBanned, inlineVendor, isComponentDay, isStudio, parseTeam,
   planSections, sections, sessionProblems, settle, STUDIO_DAYS, teamFor as recordedTeam, vendorManifest } from './run.mjs';
 import { formatSeason, guestProblems, itemProblems, listSeasons, nextMonday, nextSeason, parseGuest, readSeason, screenSuggestions, summary, validate } from './recruit.mjs';
 import { activity, announce, closeLoop, commentFor, fetchSuggestions, parseForm } from './github.mjs';
@@ -197,9 +197,9 @@ test('studio tier runs only on its trial dates', () => {
 });
 
 test('studio checkArtifact allows 300 KB and only vendored libraries and fonts', () => {
-  const p = (html) => checkArtifact(html, true).join('; ');
-  assert.deepEqual(checkArtifact(GOOD.replace('</head>', '<script data-lib="three"></script><style data-font="fraunces"></style></head>'), true), []);
-  assert.deepEqual(checkArtifact(GOOD.replace('ok', 'x'.repeat(110_000)), true), []);
+  const p = (html) => checkArtifact(html, 'studio').join('; ');
+  assert.deepEqual(checkArtifact(GOOD.replace('</head>', '<script data-lib="three"></script><style data-font="fraunces"></style></head>'), 'studio'), []);
+  assert.deepEqual(checkArtifact(GOOD.replace('ok', 'x'.repeat(110_000)), 'studio'), []);
   assert.match(p(GOOD.replace('ok', 'x'.repeat(310_000))), /300 KB/);
   assert.match(p(GOOD.replace('</head>', '<script data-lib="gsap"></script></head>')), /unknown library "gsap"/);
   assert.match(p(GOOD.replace('</head>', '<style data-font="inter"></style></head>')), /unknown font "inter"/);
@@ -217,6 +217,42 @@ test('inlineVendor inlines each vendored file once, matching its hash', () => {
   assert.match(out, /@font-face\{font-family:"IBM Plex Mono";font-weight:400;font-display:block;src:url\(data:font\/woff2;base64,/);
   assert.doesNotMatch(out, /data-lib|data-font/);
   assert.deepEqual(checkArtifact(GOOD), []);
+});
+
+const TILE = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Toggle in risograph</title><style>.rg1-root{width:clamp(180px,92vmin,640px)}.rg1-root:focus-visible{outline:2px solid red}</style></head>
+<body><div class="rg1-root" id="rg1-main" role="switch" aria-checked="false" tabindex="0" aria-label="Forever mode, press Space to flip"><span class="rg1-num">On</span></div>
+<script>var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+document.addEventListener('visibilitychange',function(){});
+addEventListener('message',function(e){if(e.data&&e.data.type==='forever:theme'){}});</script></body></html>`;
+
+test('component days start with the 2026-10-19 season and give way to a brief', () => {
+  assert.equal(COMPONENTS_FROM, '2026-10-19');
+  assert.equal(isComponentDay('2026-10-18'), false);
+  assert.equal(isComponentDay('2026-10-19'), true);
+  assert.equal(isComponentDay('2026-11-02'), true);
+  assert.equal(isComponentDay('2026-10-20', 'A custom brief'), false);
+  const s = sections();
+  assert.match(s['Component plan'], /\| # \| Member \| Concept \| Composition \| Input \| Motion \| Visible text \|/);
+  assert.match(s['Build a component'], /Build variation \{\{LEAD\}\}/);
+  assert.match(s['Build a component'], /forever:theme/);
+});
+
+test('componentProblems passes a clean tile and names each craft failure', () => {
+  assert.deepEqual(componentProblems(TILE), []);
+  assert.deepEqual(checkArtifact(TILE, 'component'), []);
+  const p = (html) => componentProblems(html).join('; ');
+  assert.match(p(TILE.replace('</body>', `<!--${'x'.repeat(17_000)}--></body>`)), /larger than 16 KB/);
+  assert.match(p(TILE.replace(' lang="en"', '')), /lang="en"/);
+  assert.match(p(TILE.replace(' aria-label="Forever mode, press Space to flip"', '')), /role and an aria-label/);
+  assert.match(p(TILE.replace('matchMedia', 'window.x')), /prefers-reduced-motion/);
+  assert.match(p(TILE.replace('visibilitychange', 'blur')), /tab is hidden/);
+  assert.match(p(TILE.replace(':focus-visible', ':focus')), /focus-visible/);
+  assert.match(p(TILE.replace('forever:theme', 'theme')), /forever:theme/);
+  assert.match(p(TILE.replace('</script>', 'document.body.innerHTML = "x";</script>')), /innerHTML/);
+  assert.match(p(TILE.replace('class="rg1-num"', 'class="num"')), /share one short prefix/);
+  assert.match(p(TILE.replace('>On<', '>Flip this switch to turn the Forever mode on for every single note you write today<')), /words in the markup/);
 });
 
 test('addCsp blocks network requests and form submissions', () => {

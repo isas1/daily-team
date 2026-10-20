@@ -10,7 +10,7 @@
 //        API_URL             chat completions endpoint (default: OpenRouter)
 //        CLAUDE_MODEL        model for the claude provider (default: claude-opus-5-5)
 //        CLAUDE_BIN          path to the claude CLI (default: claude)
-//        ARTIFACTS           default for --artifacts (default: 1)
+//        ARTIFACTS           default for --artifacts (default: 4 on component days, else 1)
 //        STUDIO              1 turns on the studio tier for any date (see STUDIO_DAYS)
 // A brief from --brief or a brief.md file replaces today's task.
 import { execFileSync, spawn } from 'node:child_process';
@@ -30,6 +30,12 @@ const MAX_BYTES = 100 * 1024;
 // same CSP. It runs only on these dates (or with STUDIO=1), so the next season is unchanged.
 export const STUDIO_DAYS = ['2026-10-17', '2026-10-18'];
 const STUDIO_MAX_BYTES = 300 * 1024;
+// Component days: from this season on, each task is "Control in process" for the Forever
+// Components library. The team plans four variations and each member builds one, under the
+// owner's component rules (prompt.md "Build a component") and the checks in componentProblems.
+export const COMPONENTS_FROM = '2026-10-19';
+const COMPONENT_MAX_BYTES = 16 * 1024;
+const COMPONENT_MAX_WORDS = 12;
 const STUDIO_MAX_TOTAL = 1536 * 1024;
 const LIB_TAG = /<script\b[^>]*\bdata-lib\s*=\s*["']?([\w-]+)["']?[^>]*>\s*<\/script>/gi;
 const FONT_TAG = /<style\b[^>]*\bdata-font\s*=\s*["']?([\w-]+)["']?[^>]*>\s*<\/style>/gi;
@@ -48,7 +54,7 @@ export function die(msg, code = 2) {
 
 function parseArgs(argv) {
   const opts = {
-    provider: process.env.PROVIDER || 'openrouter', artifacts: process.env.ARTIFACTS || '1',
+    provider: process.env.PROVIDER || 'openrouter', artifacts: process.env.ARTIFACTS || '',
     out: join(HERE, 'days'), force: false, dryRun: false,
   };
   for (let i = 0; i < argv.length; i++) {
@@ -64,8 +70,10 @@ function parseArgs(argv) {
     else die(`unknown argument ${a}`);
   }
   if (!['openrouter', 'claude'].includes(opts.provider)) die('--provider must be openrouter or claude');
-  opts.artifacts = Number(opts.artifacts);
-  if (!Number.isInteger(opts.artifacts) || opts.artifacts < 0 || opts.artifacts > 4) die('--artifacts must be 0 to 4');
+  if (opts.artifacts !== '') {
+    opts.artifacts = Number(opts.artifacts);
+    if (!Number.isInteger(opts.artifacts) || opts.artifacts < 0 || opts.artifacts > 4) die('--artifacts must be 0 to 4');
+  }
   return opts;
 }
 
@@ -128,6 +136,34 @@ export function extractHtml(text) {
 }
 
 // Problems that block an artifact from being marked ready.
+export function isComponentDay(date, brief = '') {
+  return !brief && date >= COMPONENTS_FROM;
+}
+
+// The owner's craft floor for a component tile. Each line names one fix.
+export function componentProblems(html) {
+  const problems = [];
+  const bytes = Buffer.byteLength(html);
+  if (bytes > COMPONENT_MAX_BYTES) problems.push(`larger than 16 KB (${Math.ceil(bytes / 1024)} KB)`);
+  if (!/<html\b[^>]*\blang\s*=\s*["']?en/i.test(html)) problems.push('no lang="en" on the html element');
+  if (!/<[a-z]+\b(?=[^>]*\brole\s*=)(?=[^>]*\baria-label\s*=)[^>]*>/i.test(html)) problems.push('no element with both a role and an aria-label');
+  if (!/matchMedia\(\s*['"]\(prefers-reduced-motion/.test(html)) problems.push('does not read prefers-reduced-motion with matchMedia');
+  if (!/visibilitychange/.test(html)) problems.push('does not stop when the tab is hidden');
+  if (!/:focus-visible/.test(html)) problems.push('no :focus-visible outline');
+  if (!/forever:theme/.test(html)) problems.push('does not answer the forever:theme message');
+  if (/\.innerHTML\s*\+?=/.test(html)) problems.push('assigns innerHTML');
+  const names = [];
+  for (const [, v] of html.matchAll(/\bclass\s*=\s*["']([^"']+)["']/gi)) names.push(...v.split(/\s+/).filter(Boolean));
+  for (const [, v] of html.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)) names.push(v);
+  let stem = names[0] || '';
+  for (const n of names) while (!n.startsWith(stem)) stem = stem.slice(0, -1);
+  if (names.length > 1 && stem.length < 2) problems.push('class and id names do not share one short prefix such as "ab1-"');
+  const words = html.replace(/<(script|style|title)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z#0-9]+;/gi, ' ').split(/\s+/).filter((w) => /[a-z]{2}/i.test(w));
+  if (words.length > COMPONENT_MAX_WORDS) problems.push(`shows ${words.length} words in the markup; keep visible text to what is needed to use it`);
+  return problems;
+}
+
 export function isStudio(date) {
   return STUDIO_DAYS.includes(date) || process.env.STUDIO === '1';
 }
@@ -136,9 +172,10 @@ export function vendorManifest() {
   return JSON.parse(readFileSync(join(HERE, 'vendor', 'manifest.json'), 'utf8'));
 }
 
-export function checkArtifact(html, studio = false) {
+export function checkArtifact(html, mode = 'page') {
   const problems = [];
-  if (studio) {
+  if (mode === 'component') problems.push(...componentProblems(html));
+  else if (mode === 'studio') {
     if (Buffer.byteLength(html) > STUDIO_MAX_BYTES) problems.push('larger than 300 KB before libraries are added');
     const { libs, fonts } = vendorManifest();
     for (const [, name] of html.matchAll(LIB_TAG)) if (!libs[name]) problems.push(`asks for unknown library "${name}"`);
@@ -391,11 +428,16 @@ async function main() {
   }
 
   const s = sections();
+  const component = isComponentDay(date, custom);
+  if (opts.artifacts === '') opts.artifacts = component ? 4 : 1;
   const system = { role: 'system', content: `Writing rules:\n\n${s['Writing rules']}` };
   const context = `<team>\n${team}\n</team>${custom ? `\n\n<brief>\n${custom}\n</brief>` : ''}`;
-  const planMessages = [system, { role: 'user', content: `${context}\n\n${s['Work the brief']}` }];
-  const studio = isStudio(date);
-  const build = studio ? `${s['Build an artifact']}\n\n${s['Studio tier']}` : s['Build an artifact'];
+  const work = component ? `${s['Work the brief']}\n\n${s['Component plan']}` : s['Work the brief'];
+  const planMessages = [system, { role: 'user', content: `${context}\n\n${work}` }];
+  const studio = !component && isStudio(date);
+  const mode = component ? 'component' : studio ? 'studio' : 'page';
+  const build = component ? s['Build a component']
+    : studio ? `${s['Build an artifact']}\n\n${s['Studio tier']}` : s['Build an artifact'];
   const buildMessages = (plan, lead) => [system, {
     role: 'user',
     content: `${context}\n\n<plan>\n${plan}\n</plan>\n\n${build.replaceAll('{{LEAD}}', String(lead))}`,
@@ -410,7 +452,7 @@ async function main() {
   const complete = prepareProvider(opts.provider);
 
   const day = {
-    date, task, brief: custom || null, team, provider: opts.provider, model: null, studio,
+    date, task, brief: custom || null, team, provider: opts.provider, model: null, studio, component,
     status: 'ok', error: null, decision: '', concept: '', plan: '', planProblems: [], referee: false, artifacts: [],
   };
   // A forced run replaces the day, so old assets and screenshots must not linger.
@@ -452,7 +494,7 @@ async function main() {
     try {
       const out = await completeChecked(complete, buildMessages(planText, n), 16000, (t) => {
         const html = extractHtml(t);
-        return html ? checkArtifact(html, studio) : ['no HTML code block'];
+        return html ? checkArtifact(html, mode) : ['no HTML code block'];
       });
       const html = extractHtml(out.text);
       if (!html) throw new Error(`${out.model} returned no HTML`);

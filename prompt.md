@@ -36,6 +36,24 @@ Sections, in order, with these headings:
    - Deadlock. Use this only when the members split two against two, or when the main objection is to the lead's own pitch. Write `**Option A:**` (the option the lead backs) and `**Option B:**`, each one sentence, then each side's case in at most two lines. Write nothing after the Deadlock section. A referee decides.
 4. Build notes. Three concrete actions. Leave this out after a Deadlock.
 
+## Component plan
+
+Today the spark names one control and one process, in the form "Control in process". The process is a phenomenon: how ink, sand, heat, light, water, or a mechanism behaves over time. It is the shared influence for the day: its motion, texture, and colour. It is not a picture to decorate the control with.
+
+This changes the Decision. The team does not pick one idea. It keeps four variations of the same control, one per member, each led by the member who pitched it. Every pitch must be a working version of the control, not a different thing.
+
+In the Decision, after the `Concept:` line (a name for the set), write this table, one row per member in order:
+
+| # | Member | Concept | Composition | Input | Motion | Visible text |
+
+- Composition is one of: radial, horizontal line, vertical stack, single object, field of many.
+- Input is one of: drag, hover nearness, tap, scrub or wheel, fling, press and hold.
+- Motion is one of: spring overshoot, inertia and friction, morph, particles, fold.
+- Visible text is the only words on screen: a number, a short label, or nothing.
+- No two rows may share all three of composition, input, and motion. Check this before you finish the Decision.
+
+Then keep the per-member lines and the line about who lost which argument.
+
 ## Referee
 
 You are the referee for a creative team that could not agree. You have no craft and no stance. You read the task, the team, the constraint, and the deadlock. Nothing else matters.
@@ -89,6 +107,86 @@ It still has to work:
 - It respects prefers-reduced-motion.
 - Wrap every use of localStorage in try/catch. The page must still work when storage is blocked.
 - Return only the file, in one html code block.
+
+## Build a component
+
+Build variation {{LEAD}} from the table in the Decision. Member {{LEAD}} leads it. Build only that row: its composition, input, motion, and visible text.
+
+Taste:
+- Radical simplicity. One focal element fills the frame. At most two controls. Lots of empty space.
+- Motion and interaction come first. Spend your effort on how it moves and answers, not on features. Springs overshoot and settle; flung things carry inertia and slow with friction; shapes fold and morph; small bursts of particles mark a moment. Every input gets an immediate, satisfying answer.
+- Almost no text. Show only what someone must read to use it. No titles, subtitles, captions, descriptions, status sentences, telemetry, or labels. Put the context in `aria-label`.
+- The process is an influence, not a template. Take its colours, line quality, texture, and the way it moves, then invent your own form.
+- Avoid what the owner rejected: busy screens with headers and readouts; physical objects drawn as decoration, such as fake knobs, brass, or glass; chips and badges; effects that sit behind the control without showing what it does.
+- Colour: one named palette from the process's real material, with one accent. No bright purple, electric blue, neon cyan, spring green, or purple-to-blue gradients.
+
+Audience: Americans on iPhones.
+- US units and spelling: feet, ounces, pounds, Fahrenheit, "color".
+- Every name, label, and sample value is one of: a nod to the Forever brand ("Forever", "Forever plan"), a joke about the task (a file called "cat-pics-2", "Emotional baggage" as the heaviest item), or a plain label ("Monday", "Delete", "Cancel"). Mix all three. No place names. Never write an artist's name.
+- Touch first: touch-drag works, tap targets are at least 44 pixels, nothing depends on hover alone.
+
+Craft floor:
+- One self-contained HTML file with inline CSS and JavaScript. No external resources, web fonts, CDNs, or network calls. System fonts only.
+- `<html lang="en">`, a `<title>` of the control and the process, a viewport meta tag, and a root element with a `role` and an `aria-label`.
+- Prefix every class and id with the same short prefix, such as `ab1-`.
+- Never assign `innerHTML`. Build the DOM with `createElement` and `textContent`.
+- Fill a square frame and stay usable from 180 to 640 pixels: `width:clamp(180px,92vmin,640px)`. Size a canvas from its element with ResizeObserver, and cap devicePixelRatio at 2.
+- Keyboard: every action works with arrows, Enter or Space, and Escape. Give a visible `:focus-visible` outline in the accent colour.
+- Read `prefers-reduced-motion` live with `matchMedia` each frame, never cached. Under reduced motion, jump to the end state, which must still make sense and still answer input.
+- Store the animation frame handle. Stop the loop when the tab is hidden, and let it sleep when nothing moves.
+- Answer theme requests: read `?theme=light|dark` on load, and listen for `postMessage({type:'forever:theme', theme})`. Both themes must look designed.
+- Sound is optional, only after an action, made with Web Audio, and short.
+- Size: 9 KB is the target, 16 KB the limit.
+
+Start from this skeleton and keep every part of it:
+
+```html
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Control in process</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#15130F;--ink:#E9E2D0;--acc:#C8402F}
+:root[data-theme="light"]{--bg:#EFE8D8;--ink:#1E1B16;--acc:#7A2E22}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.ab1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none}
+.ab1-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style></head><body>
+<div class="ab1-root" role="slider" tabindex="0" aria-label="What it is and how to use it"></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  function step(dt){ /* advance springs; return true while still moving */ return false }
+  function draw(){ /* render state */ }
+  function snapToTarget(){ /* jump to the final state */ }
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>
+```
+
+Tune the motion until it feels physical: spring stiffness about 0.1 to 0.25 and damping about 0.75 to 0.88, so it overshoots a little and settles in under a second.
+
+Before you return the file, check it and fix what fails:
+- Is every word on screen needed to use it? Delete the rest.
+- Two controls or fewer, and one focal element?
+- Does it work with touch-drag, mouse, and keyboard?
+- With reduced motion on, is the still state sensible and still usable?
+- Does it stop when the tab is hidden and sleep when settled?
+- Is it readable at 180 pixels, in both themes?
+- Is it different from a stock control, and true to its row in the table?
+
+Return only the file, in one html code block.
 
 ## Studio tier
 
@@ -144,7 +242,7 @@ Each kind of item:
 - Roles: a generic occupation or craft, at most 40 characters. Example: "Bookbinder".
 - Methods: one working practice as an instruction in one sentence, at most 120 characters. Example: "Cut the first draft by half."
 - Constraints: one rule a single HTML page can follow, at most 80 characters. Example: "No more than five inputs."
-- Tasks: one spark for a single interface component, written as "Name: the component and the one thing it must do.", at most 220 characters, starting with a capital letter and continuing in lowercase. The name is the component. The rest says its job in plain words and leaves its look and behaviour open. Example: "Toggle: a switch with two states that shows how far it travelled to get there." One component per task, small enough for one HTML file. No medical, legal, or investment advice.
+- Tasks: one spark for a single interface component, written as "Name: the component and the one thing it must do.", at most 220 characters, starting with a capital letter and continuing in lowercase. The name is the component. The rest says its job in plain words and leaves its look and behaviour open. From the season of 2026-10-19, name the control and one process it borrows from, as "Control in process: what it does and how the process shows it." Example: "Toggle in risograph: two ink layers slip out of register as it flips, then lock back into one clean print." The process is a phenomenon of material, light, water, heat, or mechanism, not an artist or a style name. One component per task, small enough for one HTML file. No medical, legal, or investment advice.
 
 Temperaments, when the current season has them: how a person behaves in an argument, in one line of plain words, at most 60 characters, with no names and no judgement of character. Example: "Concedes small points to win the big one."
 
