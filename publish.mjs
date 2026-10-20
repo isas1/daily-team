@@ -29,7 +29,9 @@ const cell = (s) => String(s).replace(/\|/g, '\\|').replace(/\n/g, ' ');
 
 export const title = dayTitle;
 const roles = (day) => parseTeam(day.team).members.map((m) => m.role).join(' · ');
-const firstAsset = (day) => day.artifacts.find((a) => a.status !== 'failed');
+// A component day's piece is its headline asset; otherwise the first that worked.
+const firstAsset = (day) => day.artifacts.find((a) => a.kind === 'piece' && a.status !== 'failed')
+  ?? day.artifacts.find((a) => a.status !== 'failed');
 const png = (a) => a.file.replace(/\.html$/, '.png');
 
 export function loadDays(daysDir) {
@@ -321,7 +323,9 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
   const frames = day.artifacts.filter((a) => a.status !== 'failed' && existsSync(join(daysDir, day.date, a.file))).map((a) => {
     const html = readFileSync(join(daysDir, day.date, a.file), 'utf8');
     const note = a.status === 'ok' ? '' : ` <span class="muted">(${esc(a.status)}: ${esc(a.problems.join('; '))})</span>`;
-    return `<h2>The tool${note}</h2>\n<iframe sandbox="${SANDBOX}" title="${esc(a.file)}" srcdoc="${esc(html)}"></iframe>`;
+    const lead = parseTeam(day.team).members[a.lead - 1]?.role ?? '';
+    const heading = a.kind === 'piece' ? 'The piece' : a.row ? `Component ${a.row}${lead ? ` · ${lead}` : ''}` : 'The tool';
+    return `<h2>${esc(heading)}${note}</h2>\n<iframe sandbox="${SANDBOX}" title="${esc(a.file)}" srcdoc="${esc(html)}"></iframe>`;
   });
   const s = session(day);
   const plan = repo ? `<p><a href="https://github.com/${esc(repo)}/tree/main/days/${day.date}">${s ? 'Source' : 'Team plan and source'}</a></p>` : '';

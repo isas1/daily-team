@@ -40,9 +40,9 @@ Sections, in order, with these headings:
 
 Today the spark names one control and one process, in the form "Control in process". The process is a phenomenon: how ink, sand, heat, light, water, or a mechanism behaves over time. It is the shared influence for the day: its motion, texture, and colour. It is not a picture to decorate the control with.
 
-This changes the Decision. The team does not pick one idea. It keeps four variations of the same control, one per member, each led by the member who pitched it. Every pitch must be a working version of the control, not a different thing.
+This changes the Decision. The team does not pick one idea. It plans ten variations of the same control, and then one finished piece made from them. Every pitch must be a working version of the control, not a different thing. Each member's pitch becomes their first row; the Clash breeds the rest.
 
-In the Decision, after the `Concept:` line (a name for the set), write this table, one row per member in order:
+In the Decision, after the `Concept:` line (a name for the set), write this table with ten rows. Members take turns to lead: rows 1 to 4 are members 1 to 4, rows 5 to 8 are members 1 to 4 again, row 9 is member 1, and row 10 is member 2.
 
 | # | Member | Concept | Composition | Input | Motion | Visible text |
 
@@ -50,7 +50,9 @@ In the Decision, after the `Concept:` line (a name for the set), write this tabl
 - Input is one of: drag, hover nearness, tap, scrub or wheel, fling, press and hold.
 - Motion is one of: spring overshoot, inertia and friction, morph, particles, fold.
 - Visible text is the only words on screen: a number, a short label, or nothing.
-- No two rows may share all three of composition, input, and motion. Check this before you finish the Decision.
+- No two rows may share all three of composition, input, and motion. Use every composition at least once. Check this before you finish the Decision.
+
+After the table, on its own line, write `Piece:` and one sentence: the finished creative tool or piece of digital art that the components become when they work together, and which rows it uses. Use at least six rows. It is one thing with one purpose, such as an instrument, a game, a working tool, a living picture, or a machine, not a gallery of the components side by side.
 
 Then keep the per-member lines and the line about who lost which argument.
 
@@ -110,7 +112,7 @@ It still has to work:
 
 ## Build a component
 
-Build variation {{LEAD}} from the table in the Decision. Member {{LEAD}} leads it. Build only that row: its composition, input, motion, and visible text.
+Build variation {{ROW}} from the table in the Decision. Member {{LEAD}} leads it. Build only that row: its composition, input, motion, and visible text.
 
 Taste:
 - Radical simplicity. One focal element fills the frame. At most two controls. Lots of empty space.
@@ -189,6 +191,31 @@ Before you return the file, check it and fix what fails:
 - Is it different from a stock control, and true to its row in the table?
 - Did you replace every skeleton colour with this variation's own palette?
 - Does the first frame, before any input, already show the process?
+
+Return only the file, in one html code block.
+
+## Build the piece
+
+Build the Piece named in the Decision. The day's components are below, each in a `<component>` block with its row number. They are your parts: reuse their code, motion, and sound, and change them so they work together. Member {{LEAD}} leads the assembly.
+
+What it is:
+- One finished creative tool or piece of digital art with one purpose. The components are its working parts, each still doing its job: a slider still sets a value, a toggle still flips. What they set changes something else in the piece, so the parts talk to each other.
+- Use at least six of the components named in the Piece line. Leave out a part rather than force it in.
+- One composition for the whole screen, not a grid of tiles. One palette and one light or dark base for the whole piece, chosen from the process. Recolour the parts to fit.
+- It opens already alive. Within five seconds a visitor sees what it is and can touch it.
+- Almost no text: a title in the corner is allowed, plus the few words each part needs. No instructions, captions, or credits.
+
+It still has to work:
+- One self-contained HTML file with inline CSS and JavaScript, under 120 KB. No external resources, web fonts, or network calls. System fonts only.
+- `<html lang="en">`, a `<title>` with the piece's name, a viewport meta tag.
+- It fills the window, from a phone held upright to a wide screen, with no page scroll.
+- Every part works with touch, mouse, and keyboard. Each part keeps its role and aria-label. A visible focus ring.
+- Read `prefers-reduced-motion` live. Stop all loops when the tab is hidden, and let them sleep when nothing moves.
+- Sound only after an action, made with Web Audio, and easy to turn off.
+- Never assign `innerHTML`. Prefix every class and id with one short prefix.
+- US units and spelling. Names and sample values are Forever nods, jokes about the task, or plain labels.
+
+Before you return the file, check: Is it one thing, not a gallery? Do at least six parts work and affect each other? Does it look finished on a phone and on a wide screen?
 
 Return only the file, in one html code block.
 

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       artifacts:
-        description: Number of HTML artifacts, 0 to 4 (empty is 4 on component days, else 1)
+        description: Number of HTML artifacts, 0 to 10 (empty is 10 plus a piece on component days, else 1)
         default: ''
       force:
         description: Replace today's results
@@ -28,7 +28,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 110
     permissions:
       contents: write
       issues: read
