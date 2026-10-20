@@ -36,6 +36,8 @@ const STUDIO_MAX_BYTES = 300 * 1024;
 export const COMPONENTS_FROM = '2026-10-19';
 const COMPONENT_MAX_BYTES = 16 * 1024;
 const COMPONENT_MAX_WORDS = 12;
+// The placeholder colours in prompt.md's component skeleton.
+const SKELETON_COLOURS = ['#15130F', '#E9E2D0', '#C8402F', '#EFE8D8', '#1E1B16', '#7A2E22'];
 const STUDIO_MAX_TOTAL = 1536 * 1024;
 const LIB_TAG = /<script\b[^>]*\bdata-lib\s*=\s*["']?([\w-]+)["']?[^>]*>\s*<\/script>/gi;
 const FONT_TAG = /<style\b[^>]*\bdata-font\s*=\s*["']?([\w-]+)["']?[^>]*>\s*<\/style>/gi;
@@ -152,6 +154,8 @@ export function componentProblems(html) {
   if (!/:focus-visible/.test(html)) problems.push('no :focus-visible outline');
   if (!/forever:theme/.test(html)) problems.push('does not answer the forever:theme message');
   if (/\.innerHTML\s*\+?=/.test(html)) problems.push('assigns innerHTML');
+  const kept = SKELETON_COLOURS.filter((c) => new RegExp(c, 'i').test(html));
+  if (kept.length) problems.push(`keeps the skeleton's placeholder colours (${kept.join(', ')}); give this variation its own palette`);
   const names = [];
   for (const [, v] of html.matchAll(/\bclass\s*=\s*["']([^"']+)["']/gi)) names.push(...v.split(/\s+/).filter(Boolean));
   for (const [, v] of html.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)) names.push(v);

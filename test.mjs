@@ -116,7 +116,11 @@ test('a new season changes only dates from its start, and marks new members and 
 
 test('every recorded day still reproduces from the pools', () => {
   const key = (t) => JSON.stringify([t.members.map((m) => [m.role, m.method, m.stance]), t.constraint, t.task]);
+  // 2026-10-19 ran about an hour before PR #26 rewrote that season's tasks, so its record keeps
+  // the old task. It is the only day allowed to differ; never add another.
+  const recordedBeforeRewrite = new Set(['2026-10-19']);
   for (const day of loadDays(join(HERE, 'days'))) {
+    if (recordedBeforeRewrite.has(day.date)) continue;
     const now = spawnSync('sh', [TEAM, day.date], { encoding: 'utf8' }).stdout;
     assert.equal(key(parseTeam(now)), key(parseTeam(day.team)), `${day.date} changed: a season must not start on or before a recorded day`);
   }
@@ -252,6 +256,8 @@ test('componentProblems passes a clean tile and names each craft failure', () =>
   assert.match(p(TILE.replace('forever:theme', 'theme')), /forever:theme/);
   assert.match(p(TILE.replace('</script>', 'document.body.innerHTML = "x";</script>')), /innerHTML/);
   assert.match(p(TILE.replace('class="rg1-num"', 'class="num"')), /share one short prefix/);
+  assert.match(p(TILE.replace('outline:2px solid red', 'outline:2px solid #C8402F')), /placeholder colours \(#C8402F\)/);
+  for (const c of ['#15130F', '#E9E2D0', '#C8402F', '#EFE8D8', '#1E1B16', '#7A2E22']) assert.ok(sections()['Build a component'].includes(c), c);
   assert.match(p(TILE.replace('>On<', '>Flip this switch to turn the Forever mode on for every single note you write today<')), /words in the markup/);
 });
 

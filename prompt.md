@@ -119,6 +119,8 @@ Taste:
 - The process is an influence, not a template. Take its colours, line quality, texture, and the way it moves, then invent your own form.
 - Avoid what the owner rejected: busy screens with headers and readouts; physical objects drawn as decoration, such as fake knobs, brass, or glass; chips and badges; effects that sit behind the control without showing what it does.
 - Colour: one named palette from the process's real material, with one accent. No bright purple, electric blue, neon cyan, spring green, or purple-to-blue gradients.
+- Each variation has its own palette, background, and light or dark base, chosen from its row and its member's nature. Four tiles from the same day must not look alike. The colours in the skeleton below are placeholders: replace all six.
+- The first frame shows the process at rest, before anyone touches it: the material, the trace, or the mechanism is already visible and gently alive. Never open on an empty field with only a number or a single line.
 
 Audience: Americans on iPhones.
 - US units and spelling: feet, ounces, pounds, Fahrenheit, "color".
@@ -138,7 +140,7 @@ Craft floor:
 - Sound is optional, only after an action, made with Web Audio, and short.
 - Size: 9 KB is the target, 16 KB the limit.
 
-Start from this skeleton and keep every part of it:
+Start from this skeleton and keep every part of it, except its placeholder colours:
 
 ```html
 <!doctype html>
@@ -185,6 +187,8 @@ Before you return the file, check it and fix what fails:
 - Does it stop when the tab is hidden and sleep when settled?
 - Is it readable at 180 pixels, in both themes?
 - Is it different from a stock control, and true to its row in the table?
+- Did you replace every skeleton colour with this variation's own palette?
+- Does the first frame, before any input, already show the process?
 
 Return only the file, in one html code block.
 
