@@ -1,0 +1,185 @@
+{
+  "start": "2026-10-26",
+  "base": "2026-10-19",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "added": {
+    "roles": [
+      {
+        "text": "Cooper",
+        "credit": ""
+      },
+      {
+        "text": "Basket maker",
+        "credit": ""
+      },
+      {
+        "text": "Farrier",
+        "credit": ""
+      },
+      {
+        "text": "Paper maker",
+        "credit": ""
+      },
+      {
+        "text": "Mosaic artist",
+        "credit": ""
+      },
+      {
+        "text": "Jeweller",
+        "credit": ""
+      },
+      {
+        "text": "Saddler",
+        "credit": ""
+      },
+      {
+        "text": "Boat builder",
+        "credit": ""
+      }
+    ],
+    "methods": [
+      {
+        "text": "Write three titles for the work before starting it.",
+        "credit": ""
+      },
+      {
+        "text": "Start with the part you understand least.",
+        "credit": ""
+      },
+      {
+        "text": "Hand the work over in silence and note where the eyes go first.",
+        "credit": ""
+      },
+      {
+        "text": "Log every choice in one line with its reason.",
+        "credit": ""
+      },
+      {
+        "text": "Measure the current version before changing anything.",
+        "credit": ""
+      },
+      {
+        "text": "Finish a working version in half the time, then spend the rest fixing it.",
+        "credit": ""
+      },
+      {
+        "text": "Turn the work upside down and mark whatever now looks wrong.",
+        "credit": ""
+      },
+      {
+        "text": "Remove the surroundings and check the work still holds up alone.",
+        "credit": ""
+      }
+    ],
+    "constraints": [
+      {
+        "text": "Works fully with scripts turned off.",
+        "credit": ""
+      },
+      {
+        "text": "Every interactive element shows a visible focus outline.",
+        "credit": ""
+      }
+    ],
+    "tasks": [
+      {
+        "text": "Inline edit in hot wax: a line of text softens into a field when clicked and sets hard again when left.",
+        "credit": ""
+      },
+      {
+        "text": "Code input in dominoes: each digit drops into its box and tips the next box ready for the one after.",
+        "credit": ""
+      },
+      {
+        "text": "Signature pad in wet ink: a mark drawn by hand bleeds and dries, and one wipe lifts it away to start again.",
+        "credit": ""
+      },
+      {
+        "text": "Timeline in tree rings: a few dated moments grow outward as rings, and today is the newest, softest edge.",
+        "credit": ""
+      },
+      {
+        "text": "Time picker in shadow: an hour and a minute are set by moving the light until the shadow falls on them.",
+        "credit": ""
+      },
+      {
+        "text": "Level meter in boiling water: bubbles rise faster as the sound gets louder and settle as it fades.",
+        "credit": ""
+      }
+    ],
+    "guests": [
+      {
+        "text": "historical | Gregor Mendel | Count the results of many small trials before naming a pattern. | died 1884",
+        "credit": ""
+      },
+      {
+        "text": "creature | Sphinx | Set a riddle at the entrance and let only clear answers through. | Greek myth",
+        "credit": ""
+      }
+    ],
+    "temperaments": [
+      {
+        "text": "Splits every question into smaller ones first.",
+        "credit": ""
+      },
+      {
+        "text": "Asks who will have to live with the result.",
+        "credit": ""
+      },
+      {
+        "text": "Agrees with the goal, argues only about the steps.",
+        "credit": ""
+      },
+      {
+        "text": "Reads back the notes before anyone leaves.",
+        "credit": ""
+      }
+    ]
+  },
+  "retired": {
+    "guests": [
+      "historical | Leonardo da Vinci | Sketch the subject many times before deciding anything. | died 1519",
+      "historical | Benjamin Franklin | List the pros and cons, weigh them, and cross out equals. | died 1790"
+    ],
+    "temperaments": [
+      "Speaks rarely, and only in short verdicts.",
+      "Gets louder the more sure they are.",
+      "Concedes small points to win the big one.",
+      "Asks for a demonstration before any opinion."
+    ],
+    "roles": [
+      "Playwright",
+      "Stand-up comedian",
+      "Radio producer",
+      "Documentary director",
+      "Animator",
+      "Comic artist",
+      "Printmaker",
+      "Ceramicist"
+    ],
+    "methods": [
+      "Use found material only.",
+      "Show it to someone at 10 percent done.",
+      "Repeat one motif with variation.",
+      "Design for the slowest device and connection first.",
+      "Count words, clicks, and seconds, then reduce each.",
+      "Find what the audience already does and build on it.",
+      "Interview someone who dislikes the category.",
+      "Collect references, then put them away and work from memory."
+    ],
+    "constraints": [
+      "Usable with one thumb on a phone.",
+      "No animation."
+    ],
+    "tasks": [
+      "Toggle in risograph: two ink layers slip out of register as it flips, then lock back into one clean print.",
+      "Slider in sediment: each step lays down a stratum, and dragging back scrapes the layers away.",
+      "Button in letterpress: the press bites into paper, and the deboss stays as proof it was pressed.",
+      "Loader in phosphor: a trace writes the wait across a dark screen, and the glow fades behind the beam.",
+      "Tooltip in frost: a hint crystallizes where the hand pauses and melts when it moves on.",
+      "Tabs in folded paper: panels crease and refold so the one in front always lies flat."
+    ]
+  },
+  "suggestions": []
+}
