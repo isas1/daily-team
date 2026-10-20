@@ -10,7 +10,7 @@
 //        API_URL             chat completions endpoint (default: OpenRouter)
 //        CLAUDE_MODEL        model for the claude provider (default: claude-opus-5-5)
 //        CLAUDE_BIN          path to the claude CLI (default: claude)
-//        ARTIFACTS           default for --artifacts (default: 4 on component days, else 1)
+//        ARTIFACTS           default for --artifacts (default: 10 on component days, else 1)
 //        STUDIO              1 turns on the studio tier for any date (see STUDIO_DAYS)
 // A brief from --brief or a brief.md file replaces today's task.
 import { execFileSync, spawn } from 'node:child_process';
@@ -36,6 +36,13 @@ const STUDIO_MAX_BYTES = 300 * 1024;
 export const COMPONENTS_FROM = '2026-10-19';
 const COMPONENT_MAX_BYTES = 16 * 1024;
 const COMPONENT_MAX_WORDS = 12;
+// A component day builds up to ten tiles, then one piece made from the ones that worked.
+export const MAX_ARTIFACTS = 10;
+const PIECE_MIN_PARTS = 6;
+const PIECE_MAX_BYTES = 120 * 1024;
+export const PIECE_FILE = 'piece.html';
+// Members take turns to lead the rows: 1-4, 1-4, 1, 2.
+export const rowLead = (n) => ((n - 1) % 4) + 1;
 // The placeholder colours in prompt.md's component skeleton.
 const SKELETON_COLOURS = ['#15130F', '#E9E2D0', '#C8402F', '#EFE8D8', '#1E1B16', '#7A2E22'];
 const STUDIO_MAX_TOTAL = 1536 * 1024;
@@ -74,7 +81,7 @@ function parseArgs(argv) {
   if (!['openrouter', 'claude'].includes(opts.provider)) die('--provider must be openrouter or claude');
   if (opts.artifacts !== '') {
     opts.artifacts = Number(opts.artifacts);
-    if (!Number.isInteger(opts.artifacts) || opts.artifacts < 0 || opts.artifacts > 4) die('--artifacts must be 0 to 4');
+    if (!Number.isInteger(opts.artifacts) || opts.artifacts < 0 || opts.artifacts > MAX_ARTIFACTS) die(`--artifacts must be 0 to ${MAX_ARTIFACTS}`);
   }
   return opts;
 }
@@ -179,6 +186,12 @@ export function vendorManifest() {
 export function checkArtifact(html, mode = 'page') {
   const problems = [];
   if (mode === 'component') problems.push(...componentProblems(html));
+  else if (mode === 'piece') {
+    if (Buffer.byteLength(html) > PIECE_MAX_BYTES) problems.push('larger than 120 KB');
+    if (!/matchMedia\(\s*['"]\(prefers-reduced-motion/.test(html)) problems.push('does not read prefers-reduced-motion with matchMedia');
+    if (!/visibilitychange/.test(html)) problems.push('does not stop when the tab is hidden');
+    if (/\.innerHTML\s*\+?=/.test(html)) problems.push('assigns innerHTML');
+  }
   else if (mode === 'studio') {
     if (Buffer.byteLength(html) > STUDIO_MAX_BYTES) problems.push('larger than 300 KB before libraries are added');
     const { libs, fonts } = vendorManifest();
@@ -278,7 +291,8 @@ export function sessionProblems(text) {
   const turns = {};
   for (const s of speakers) turns[s] = (turns[s] ?? 0) + 1;
   for (const [s, n] of Object.entries(turns)) if (n > CLASH_TURNS) problems.push(`${s} speaks ${n} times in the Clash, more than ${CLASH_TURNS}`);
-  const words = text.split(/\s+/).filter(Boolean).length;
+  // Tables (the component plan's variation table) are not prose, so they do not count.
+  const words = text.split('\n').filter((l) => !/^\s*\|/.test(l)).join(' ').split(/\s+/).filter(Boolean).length;
   if (words > PLAN_WORDS) problems.push(`session is ${words} words, more than ${PLAN_WORDS}`);
   return problems;
 }
@@ -433,7 +447,7 @@ async function main() {
 
   const s = sections();
   const component = isComponentDay(date, custom);
-  if (opts.artifacts === '') opts.artifacts = component ? 4 : 1;
+  if (opts.artifacts === '') opts.artifacts = component ? MAX_ARTIFACTS : 1;
   const system = { role: 'system', content: `Writing rules:\n\n${s['Writing rules']}` };
   const context = `<team>\n${team}\n</team>${custom ? `\n\n<brief>\n${custom}\n</brief>` : ''}`;
   const work = component ? `${s['Work the brief']}\n\n${s['Component plan']}` : s['Work the brief'];
@@ -442,9 +456,15 @@ async function main() {
   const mode = component ? 'component' : studio ? 'studio' : 'page';
   const build = component ? s['Build a component']
     : studio ? `${s['Build an artifact']}\n\n${s['Studio tier']}` : s['Build an artifact'];
-  const buildMessages = (plan, lead) => [system, {
+  const buildMessages = (plan, n) => [system, {
     role: 'user',
-    content: `${context}\n\n<plan>\n${plan}\n</plan>\n\n${build.replaceAll('{{LEAD}}', String(lead))}`,
+    content: `${context}\n\n<plan>\n${plan}\n</plan>\n\n${build.replaceAll('{{ROW}}', String(n))
+      .replaceAll('{{LEAD}}', String(component ? rowLead(n) : n))}`,
+  }];
+  const pieceMessages = (plan, parts) => [system, {
+    role: 'user',
+    content: `${context}\n\n<plan>\n${plan}\n</plan>\n\n${parts.map((p) => `<component row="${p.row}">\n${p.html}\n</component>`).join('\n\n')}`
+      + `\n\n${s['Build the piece'].replaceAll('{{LEAD}}', '1')}`,
   }];
 
   if (opts.dryRun) {
@@ -461,7 +481,7 @@ async function main() {
   };
   // A forced run replaces the day, so old assets and screenshots must not linger.
   if (existsSync(dir)) {
-    for (const f of readdirSync(dir)) if (/^artifact-\d+\.(html|png)$/.test(f)) rmSync(join(dir, f));
+    for (const f of readdirSync(dir)) if (/^(artifact-\d+|piece)\.(html|png)$/.test(f)) rmSync(join(dir, f));
   }
   const save = () => {
     mkdirSync(dir, { recursive: true });
@@ -471,7 +491,7 @@ async function main() {
   // A failed day is still recorded, so the archive has no silent gaps.
   let plan;
   try {
-    plan = await completeChecked(complete, planMessages, 3000, (t) => findBanned(t).map((w) => `uses the word "${w}"`));
+    plan = await completeChecked(complete, planMessages, component ? 5000 : 3000, (t) => findBanned(t).map((w) => `uses the word "${w}"`));
   } catch (e) {
     Object.assign(day, { status: 'failed', error: e.message });
     save();
@@ -503,11 +523,35 @@ async function main() {
       const html = extractHtml(out.text);
       if (!html) throw new Error(`${out.model} returned no HTML`);
       writeFileSync(join(dir, file), `${addCsp(studio ? inlineVendor(html) : html)}\n`);
-      day.artifacts.push({ file, lead: n, model: out.model, status: out.problems.length ? 'needs review' : 'ok', problems: out.problems });
+      day.artifacts.push({ file, lead: component ? rowLead(n) : n, ...(component ? { row: n } : {}), model: out.model, status: out.problems.length ? 'needs review' : 'ok', problems: out.problems });
       console.log(`${file}: ${out.model}${out.problems.length ? `, needs review: ${out.problems.join('; ')}` : ''}`);
     } catch (e) {
-      day.artifacts.push({ file, lead: n, model: null, status: 'failed', problems: [e.message] });
+      day.artifacts.push({ file, lead: component ? rowLead(n) : n, ...(component ? { row: n } : {}), model: null, status: 'failed', problems: [e.message] });
       console.error(`${file}: ${e.message}`);
+    }
+  }
+  // The piece: one finished work built from the tiles that worked. It comes first in the record.
+  const pieceParts = day.artifacts.filter((a) => a.row && a.status !== 'failed')
+    .map((a) => ({ row: a.row, html: readFileSync(join(dir, a.file), 'utf8') }));
+  if (component && opts.artifacts === MAX_ARTIFACTS) {
+    const entry = { file: PIECE_FILE, kind: 'piece', lead: 1, rows: pieceParts.map((p) => p.row) };
+    if (pieceParts.length < PIECE_MIN_PARTS) {
+      day.artifacts.unshift({ ...entry, model: null, status: 'failed', problems: [`only ${pieceParts.length} components worked; the piece needs ${PIECE_MIN_PARTS}`] });
+    } else {
+      try {
+        const out = await completeChecked(complete, pieceMessages(planText, pieceParts), 32000, (t) => {
+          const html = extractHtml(t);
+          return html ? checkArtifact(html, 'piece') : ['no HTML code block'];
+        });
+        const html = extractHtml(out.text);
+        if (!html) throw new Error(`${out.model} returned no HTML`);
+        writeFileSync(join(dir, PIECE_FILE), `${addCsp(html)}\n`);
+        day.artifacts.unshift({ ...entry, model: out.model, status: out.problems.length ? 'needs review' : 'ok', problems: out.problems });
+        console.log(`${PIECE_FILE}: ${out.model}${out.problems.length ? `, needs review: ${out.problems.join('; ')}` : ''}`);
+      } catch (e) {
+        day.artifacts.unshift({ ...entry, model: null, status: 'failed', problems: [e.message] });
+        console.error(`${PIECE_FILE}: ${e.message}`);
+      }
     }
   }
   if (day.artifacts.length && day.artifacts.every((a) => a.status === 'failed')) day.status = 'failed';

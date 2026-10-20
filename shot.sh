@@ -8,7 +8,7 @@ for c in "${CHROME:-}" google-chrome chromium chromium-browser \
   [ -n "$c" ] && command -v "$c" >/dev/null 2>&1 && chrome=$c && break
 done
 [ -n "${chrome:-}" ] || { echo "shot.sh: Chrome not found; set CHROME" >&2; exit 2; }
-for f in "$dir"/*/artifact-*.html; do
+for f in "$dir"/*/artifact-*.html "$dir"/*/piece.html; do
   [ -e "$f" ] || continue
   png=${f%.html}.png
   [ -e "$png" ] && continue

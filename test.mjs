@@ -8,7 +8,7 @@ import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rm
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { addCsp, checkArtifact, claudeArgs, componentProblems, COMPONENTS_FROM, conceptName, dayTitle, DEFAULT_CLAUDE_MODEL, decisionLine, extractHtml, findBanned, inlineVendor, isComponentDay, isStudio, parseTeam,
+import { addCsp, checkArtifact, claudeArgs, componentProblems, COMPONENTS_FROM, MAX_ARTIFACTS, PIECE_FILE, rowLead, conceptName, dayTitle, DEFAULT_CLAUDE_MODEL, decisionLine, extractHtml, findBanned, inlineVendor, isComponentDay, isStudio, parseTeam,
   planSections, sections, sessionProblems, settle, STUDIO_DAYS, teamFor as recordedTeam, vendorManifest } from './run.mjs';
 import { formatSeason, guestProblems, itemProblems, listSeasons, nextMonday, nextSeason, parseGuest, readSeason, screenSuggestions, summary, validate } from './recruit.mjs';
 import { activity, announce, closeLoop, commentFor, fetchSuggestions, parseForm } from './github.mjs';
@@ -239,7 +239,10 @@ test('component days start with the 2026-10-19 season and give way to a brief', 
   assert.equal(isComponentDay('2026-10-20', 'A custom brief'), false);
   const s = sections();
   assert.match(s['Component plan'], /\| # \| Member \| Concept \| Composition \| Input \| Motion \| Visible text \|/);
-  assert.match(s['Build a component'], /Build variation \{\{LEAD\}\}/);
+  assert.match(s['Build a component'], /Build variation \{\{ROW\}\} from the table in the Decision\. Member \{\{LEAD\}\} leads it/);
+  assert.match(s['Component plan'], /ten rows/);
+  assert.match(s['Component plan'], /`Piece:`/);
+  assert.match(s['Build the piece'], /at least six of the components/);
   assert.match(s['Build a component'], /forever:theme/);
 });
 
@@ -327,7 +330,7 @@ test('run.mjs refuses to run without a key, with an empty brief, or with bad opt
   const out = tmp();
   assert.equal((await run(['--out', out], { OPENROUTER_API_KEY: '' })).status, 2);
   assert.equal((await run(['--out', out, '--brief', ' '], { OPENROUTER_API_KEY: 'k' })).status, 2);
-  assert.equal((await run(['--artifacts', '9'], { OPENROUTER_API_KEY: 'k' })).status, 2);
+  assert.equal((await run(['--artifacts', '11'], { OPENROUTER_API_KEY: 'k' })).status, 2);
   assert.equal((await run(['--provider', 'other'], { OPENROUTER_API_KEY: 'k' })).status, 2);
   const wrong = await run(['--out', out], { OPENROUTER_API_KEY: ' not-a-key-1234', API_URL: '' });
   assert.equal(wrong.status, 2);
@@ -373,6 +376,49 @@ test('run.mjs falls back, retries failed checks, records status, and skips a rec
     }
   });
   rmSync(out, { recursive: true });
+});
+
+test('a component day builds ten tiles with turns at the lead, then a piece from them', async () => {
+  assert.equal(MAX_ARTIFACTS, 10);
+  assert.deepEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(rowLead), [1, 2, 3, 4, 1, 2, 3, 4, 1, 2]);
+  const plan = '**Pitch**\nx\n\n## Decision\nTen undo controls that become one tape machine.\nConcept: Reel\n\n| # | Member | Concept |\n|---|---|---|\n| 1 | a | b |\n\nPiece: a tape deck, rows 1 to 10.';
+  const PIECE = GOOD.replace('ok', '<script>matchMedia("(prefers-reduced-motion: reduce)");addEventListener("visibilitychange",()=>{})</script>');
+  const out = tmp();
+  const replies = [[200, plan], ...Array.from({ length: 10 }, () => [200, `\`\`\`html\n${TILE}\n\`\`\``]), [200, `\`\`\`html\n${PIECE}\n\`\`\``]];
+  await withServer(replies, async (url, calls) => {
+    const r = await run(['--date', '2026-10-21', '--out', out], { OPENROUTER_API_KEY: 'k', API_URL: url, MODEL: 'a' });
+    assert.equal(r.status, 0, r.stderr);
+    assert.equal(calls.length, 12);
+    assert.match(calls[0].messages[1].content, /## |Component plan|ten rows/);
+    assert.match(calls[5].messages[1].content, /Build variation 5 from the table in the Decision\. Member 1 leads it/);
+    const pieceCall = calls[11].messages[1].content;
+    assert.match(pieceCall, /<component row="1">[\s\S]*<component row="10">/);
+    assert.match(pieceCall, /Build the Piece named in the Decision/);
+    const day = readDay(out, '2026-10-21');
+    assert.equal(day.component, true);
+    assert.equal(day.artifacts.length, 11);
+    assert.deepEqual({ ...day.artifacts[0], model: undefined }, { file: PIECE_FILE, kind: 'piece', lead: 1, rows: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], model: undefined, status: 'ok', problems: [] });
+    assert.deepEqual(day.artifacts.slice(1).map((a) => [a.row, a.lead, a.status]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => [n, rowLead(n), 'ok']));
+    assert.ok(existsSync(join(out, '2026-10-21', PIECE_FILE)));
+  });
+  rmSync(out, { recursive: true });
+});
+
+test('the piece is skipped when fewer than six tiles work, and table rows do not count as session words', async () => {
+  const out = tmp();
+  const replies = [[200, '## Decision\nA set.'], ...Array.from({ length: 5 }, () => [200, `\`\`\`html\n${TILE}\n\`\`\``])];
+  await withServer(replies, async (url, calls) => {
+    const r = await run(['--date', '2026-10-21', '--out', out], { OPENROUTER_API_KEY: 'k', API_URL: url, MODEL: 'a' });
+    assert.equal(r.status, 3);
+    const day = readDay(out, '2026-10-21');
+    assert.equal(day.artifacts[0].kind, 'piece');
+    assert.equal(day.artifacts[0].status, 'failed');
+    assert.match(day.artifacts[0].problems[0], /only 5 components worked; the piece needs 6/);
+    assert.equal(day.status, 'needs review');
+  });
+  rmSync(out, { recursive: true });
+  const table = Array.from({ length: 400 }, () => '| 1 | a | b | c | d |').join('\n');
+  assert.doesNotMatch(sessionProblems(`**Pitch**\nx\n**Clash**\n${table}\n## Decision\ny`).join(';'), /more than/);
 });
 
 test('run.mjs records a failed day and runs it again next time', async () => {
