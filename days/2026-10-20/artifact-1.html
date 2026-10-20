@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuft · checkbox</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+  body {
+    background-color: #efe7d8;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(59,53,48,.035) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(59,53,48,.03) 0 1px, transparent 1px 3px);
+    color: #3b3530;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .tf-frame {
+    position: fixed; inset: 0;
+    display: grid; grid-template-rows: auto 1fr auto;
+    padding: .75rem .9rem .6rem;
+    box-sizing: border-box;
+  }
+  .tf-seam {
+    position: absolute; inset: 5px;
+    border: 2px dashed rgba(138,47,42,.32);
+    border-radius: 14px; pointer-events: none;
+  }
+  .tf-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+  .tf-cap {
+    font: 700 .68rem/1.2 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    letter-spacing: .12em; text-transform: uppercase; color: #5e554c; margin: 0;
+  }
+  .tf-snd {
+    font: 600 .68rem/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: #5e554c; background: transparent;
+    border: 1px dashed #8a7d6c; border-radius: 999px;
+    padding: .35em .7em; cursor: pointer;
+  }
+  .tf-snd:focus-visible { outline: 3px solid #8a2f2a; outline-offset: 2px; }
+  .tf-mid { display: flex; align-items: center; justify-content: center; min-height: 0; }
+  .tf-lab {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: .3em .45em;
+    font-size: clamp(1rem, 7vw, 2.4rem);
+    cursor: pointer; user-select: none; -webkit-user-select: none;
+    touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    max-width: 100%; position: relative;
+  }
+  .tf-in {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+    border: 0; white-space: nowrap; opacity: 0;
+  }
+  .tf-cush { width: 3.2em; height: 3.2em; flex: none; display: block; border-radius: .7em; }
+  .tf-in:focus-visible + .tf-cush { outline: 3px solid #8a2f2a; outline-offset: .12em; }
+  .tf-txt { display: flex; flex-direction: column; min-width: 0; }
+  .tf-word { font-weight: 800; letter-spacing: -.025em; line-height: 1; }
+  .tf-stat {
+    font-family: ui-serif, Georgia, "Times New Roman", serif; font-style: italic;
+    font-size: max(.8rem, .4em); line-height: 1.25; margin-top: .4em;
+    color: #5e554c; min-height: 1.25em;
+  }
+  .tf-cred {
+    margin: 0; font-size: .62rem; line-height: 1.35; text-align: center; color: #5e554c;
+  }
+  .tf-cred b { font-weight: 700; color: #3b3530; }
+  @media (max-width: 300px) { .tf-txt { align-items: center; text-align: center; } }
+</style>
+</head>
+<body>
+<div class="tf-frame">
+  <div class="tf-seam" aria-hidden="true"></div>
+  <div class="tf-top">
+    <p class="tf-cap">Checkbox · tuft</p>
+    <button class="tf-snd" id="tf-snd" type="button" aria-pressed="true">sound on</button>
+  </div>
+  <div class="tf-mid">
+    <label class="tf-lab" id="tf-lab">
+      <input class="tf-in" id="tf-in" type="checkbox" aria-checked="false">
+      <svg class="tf-cush" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="tf-g" cx="42%" cy="38%" r="75%">
+            <stop offset="0" stop-color="#f5efe3"/>
+            <stop offset=".55" stop-color="#e8dfcf"/>
+            <stop offset="1" stop-color="#c7b99f"/>
+          </radialGradient>
+          <radialGradient id="tf-dg" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#8f8169" stop-opacity=".75"/>
+            <stop offset=".45" stop-color="#b9ab92" stop-opacity=".45"/>
+            <stop offset="1" stop-color="#b9ab92" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect x="11" y="14" width="100" height="100" rx="22" fill="#b9ab92" opacity=".55"/>
+        <g id="tf-body">
+          <rect x="10" y="10" width="100" height="100" rx="22" fill="url(#tf-g)" stroke="#b9ab92" stroke-width="1"/>
+          <rect x="16.5" y="16.5" width="87" height="87" rx="17" fill="none" stroke="#a8987c" stroke-width=".9" stroke-dasharray="2.4 2.6" opacity=".7"/>
+          <g id="tf-crease" opacity="0"></g>
+          <circle id="tf-dimple" cx="60" cy="60" r="28" fill="url(#tf-dg)" opacity="0"/>
+          <g id="tf-pleats"></g>
+          <g id="tf-holes" opacity="0">
+            <circle cx="46" cy="47" r="1.4" fill="#cdc1aa"/>
+            <circle cx="74" cy="73" r="1.4" fill="#cdc1aa"/>
+          </g>
+          <path id="tf-loop" d="M57 61 C49 74 52 94 65 92 C78 90 76 74 63 62" fill="none" stroke="#8a2f2a" stroke-width="1.9" stroke-linecap="round" opacity="0"/>
+          <g id="tf-btn">
+            <circle cx="60" cy="60" r="9.2" fill="#3b3530"/>
+            <circle cx="60" cy="60" r="8.4" fill="none" stroke="#5a514a" stroke-width="1.1"/>
+            <circle cx="56" cy="60" r="1.5" fill="#1f1b18"/>
+            <circle cx="64" cy="60" r="1.5" fill="#1f1b18"/>
+            <path id="tf-stitch" d="M55.6 60 L64.4 60" stroke="#8a2f2a" stroke-width="2.4" stroke-linecap="round" opacity="0"/>
+          </g>
+        </g>
+      </svg>
+      <span class="tf-txt">
+        <span class="tf-word">Tuft the seat</span>
+        <span class="tf-stat" id="tf-stat" aria-hidden="true">Loose cloth. Press the button.</span>
+      </span>
+    </label>
+  </div>
+  <p class="tf-cred">
+    <b>Upholsterer</b> cloth, button, pleats, the taut thread ·
+    <b>Clockmaker</b> press holds, release commits, slide off or Esc to cancel ·
+    <b>Translator</b> plain label in em, no tick ·
+    <b>Scheherazade</b> the waiting loop, the healed holes
+  </p>
+</div>
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var inp = document.getElementById("tf-in");
+  var lab = document.getElementById("tf-lab");
+  var stat = document.getElementById("tf-stat");
+  var body = document.getElementById("tf-body");
+  var dimple = document.getElementById("tf-dimple");
+  var pleatG = document.getElementById("tf-pleats");
+  var creaseG = document.getElementById("tf-crease");
+  var holesG = document.getElementById("tf-holes");
+  var loop = document.getElementById("tf-loop");
+  var btn = document.getElementById("tf-btn");
+  var stitch = document.getElementById("tf-stitch");
+  var sndBtn = document.getElementById("tf-snd");
+
+  var PATHS = [
+    "M60 60 Q44 47 24 24", "M60 60 Q73 44 96 24",
+    "M60 60 Q76 73 96 96", "M60 60 Q47 76 24 96"
+  ];
+  var pleats = [];
+  PATHS.forEach(function (d) {
+    var c = document.createElementNS(NS, "path");
+    c.setAttribute("d", d); c.setAttribute("fill", "none");
+    c.setAttribute("stroke", "#c2b499"); c.setAttribute("stroke-width", ".8");
+    c.setAttribute("stroke-linecap", "round");
+    creaseG.appendChild(c);
+    [["#a08f72", 3.2, 0], ["#fbf7ef", 1, 1.1]].forEach(function (s) {
+      var p = document.createElementNS(NS, "path");
+      p.setAttribute("d", d); p.setAttribute("fill", "none");
+      p.setAttribute("stroke", s[0]); p.setAttribute("stroke-width", s[1]);
+      p.setAttribute("stroke-linecap", "round");
+      p.setAttribute("pathLength", "1"); p.setAttribute("stroke-dasharray", "1 1");
+      if (s[2]) p.setAttribute("transform", "translate(" + s[2] + " " + (-s[2] * .4) + ")");
+      pleatG.appendChild(p); pleats.push(p);
+    });
+  });
+
+  var KEY = "tf-tuft-v1";
+  var mem = { holes: false, sets: 0 };
+  try { var raw = localStorage.getItem(KEY); if (raw) { var m = JSON.parse(raw); mem.holes = !!m.holes; mem.sets = +m.sets || 0; } } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(mem)); } catch (e) {} }
+
+  var rmq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  var rm = !!(rmq && rmq.matches);
+  if (rmq && rmq.addEventListener) rmq.addEventListener("change", function (e) { rm = e.matches; kick(); });
+
+  var PULL = [0, 1, 0.5];
+  var SPRING = [[480, 16], [950, 42], [650, 34]];
+  var state = 0, touched = false;
+  var x = rm ? 0 : 0.22, v = 0, target = 0, spring = SPRING[0];
+  var loopVis = 0, holeVis = mem.holes ? 1 : 0;
+  var pressing = false, spaceDown = false, cancelled = false;
+
+  var TEXT = {
+    fresh: "Loose cloth. Press the button.",
+    sprung: "Sprung back. Two holes stay.",
+    set: "Pulled tight. Four pleats.",
+    half: "Half drawn. The loop waits.",
+    hold: "Holding. Let go to pull, slide off to leave it."
+  };
+  function restText() {
+    if (state === 1) return TEXT.set;
+    if (state === 2) return TEXT.half;
+    return mem.holes ? (touched ? TEXT.sprung : TEXT.sprung) : TEXT.fresh;
+  }
+
+  function apply() {
+    inp.checked = state === 1;
+    inp.indeterminate = state === 2;
+    inp.setAttribute("aria-checked", state === 2 ? "mixed" : String(state === 1));
+    stat.textContent = restText();
+  }
+
+  inp.addEventListener("change", function () {
+    var prev = state;
+    state = prev === 0 ? 1 : prev === 1 ? 2 : 0;
+    touched = true;
+    apply();
+    target = PULL[state]; spring = SPRING[state];
+    if (state === 1) { mem.sets += 1; if (!mem.holes) mem.holes = true; save(); }
+    sound(state);
+    kick();
+  });
+
+  function preview() {
+    target = Math.min(1.12, PULL[state] + 0.16); spring = SPRING[1];
+    stat.textContent = TEXT.hold; kick();
+  }
+  function cancel() {
+    cancelled = true; pressing = false; spaceDown = false;
+    target = PULL[state]; spring = SPRING[state === 0 ? 2 : state];
+    stat.textContent = restText(); kick();
+  }
+  function lateReset() { setTimeout(function () { cancelled = false; }, 0); }
+
+  lab.addEventListener("pointerdown", function (e) {
+    if (e.button > 0) return;
+    if (e.target && e.target.releasePointerCapture) { try { e.target.releasePointerCapture(e.pointerId); } catch (er) {} }
+    pressing = true; cancelled = false; preview();
+  });
+  lab.addEventListener("pointerup", function () { pressing = false; });
+  lab.addEventListener("pointerleave", function () { if (pressing) cancel(); });
+  lab.addEventListener("pointercancel", function () { if (pressing) cancel(); });
+  window.addEventListener("pointerup", function () {
+    if (pressing) { pressing = false; }
+    lateReset();
+    if (!cancelled) return;
+  });
+  lab.addEventListener("click", function (e) {
+    if (cancelled) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  inp.addEventListener("keydown", function (e) {
+    if ((e.key === " " || e.key === "Spacebar") && !spaceDown) { spaceDown = true; cancelled = false; preview(); }
+  });
+  inp.addEventListener("keyup", function (e) {
+    if (e.key === " " || e.key === "Spacebar") { spaceDown = false; lateReset(); }
+  });
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && (pressing || spaceDown)) cancel();
+  });
+
+  /* sound, made in the browser, only after a press */
+  var soundOn = true, ac = null;
+  sndBtn.addEventListener("click", function () {
+    soundOn = !soundOn;
+    sndBtn.setAttribute("aria-pressed", String(soundOn));
+    sndBtn.textContent = soundOn ? "sound on" : "sound off";
+  });
+  function sound(s) {
+    if (!soundOn) return;
+    try {
+      if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
+      if (ac.state === "suspended") ac.resume();
+      var t = ac.currentTime;
+      if (s === 0) {
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.type = "sine"; o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(62, t + .18);
+        g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.22, t + .012); g.gain.exponentialRampToValueAtTime(.0001, t + .22);
+        o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + .25);
+        return;
+      }
+      var dur = s === 1 ? .14 : .1;
+      var len = Math.floor(ac.sampleRate * dur), buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+      for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+      var src = ac.createBufferSource(); src.buffer = buf;
+      var f = ac.createBiquadFilter(); f.type = "bandpass"; f.Q.value = 6;
+      f.frequency.setValueAtTime(s === 1 ? 900 : 600, t);
+      f.frequency.exponentialRampToValueAtTime(s === 1 ? 2600 : 1200, t + dur);
+      var gn = ac.createGain(); gn.gain.setValueAtTime(s === 1 ? .5 : .32, t); gn.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      src.connect(f); f.connect(gn); gn.connect(ac.destination); src.start(t);
+    } catch (e) {}
+  }
+
+  /* render */
+  function clamp(n) { return n < 0 ? 0 : n > 1 ? 1 : n; }
+  function render(t) {
+    var pc = clamp(x);
+    var breath = rm ? 0 : Math.sin(t / 2600 * 6.2832) * 0.006 * (1 - pc);
+    var sc = 1 - x * 0.035 + breath;
+    body.setAttribute("transform", "translate(60 60) scale(" + sc.toFixed(4) + ") translate(-60 -60)");
+    var off = (1 - pc * 0.94).toFixed(3), op = Math.min(1, pc * 1.8).toFixed(3);
+    for (var i = 0; i < pleats.length; i++) { pleats[i].style.strokeDashoffset = off; pleats[i].style.opacity = op; }
+    dimple.setAttribute("opacity", pc.toFixed(3));
+    var bs = 1 - x * 0.12;
+    btn.setAttribute("transform", "translate(60 60) scale(" + bs.toFixed(4) + ") translate(-60 -60)");
+    stitch.setAttribute("opacity", clamp((x - 0.62) / 0.3).toFixed(3));
+    var sway = rm ? 0 : Math.sin(t / 1800 * 6.2832) * 5;
+    loop.setAttribute("transform", "rotate(" + sway.toFixed(2) + " 60 60)");
+    loop.setAttribute("opacity", (loopVis * clamp(1 - Math.max(0, x - 0.55) * 3)).toFixed(3));
+    holesG.setAttribute("opacity", (holeVis * clamp(1 - pc * 3)).toFixed(3));
+    creaseG.setAttribute("opacity", (Math.min(0.32, mem.sets * 0.03) * (1 - pc)).toFixed(3));
+  }
+
+  var raf = 0, last = 0;
+  function frame(t) {
+    raf = 0;
+    var dt = last ? Math.min(0.032, (t - last) / 1000) : 0.016;
+    last = t;
+    if (rm) { x = target; v = 0; } else {
+      var a = spring[0] * (target - x) - spring[1] * v;
+      v += a * dt; x += v * dt;
+    }
+    var lk = Math.min(1, dt * 12);
+    loopVis += ((state === 2 ? 1 : 0) - loopVis) * (rm ? 1 : lk);
+    holeVis += ((mem.holes ? 1 : 0) - holeVis) * (rm ? 1 : Math.min(1, dt * 3));
+    render(t);
+    var settled = Math.abs(target - x) < 0.0005 && Math.abs(v) < 0.0005 &&
+      Math.abs(loopVis - (state === 2 ? 1 : 0)) < 0.002 && Math.abs(holeVis - (mem.holes ? 1 : 0)) < 0.002;
+    if (document.hidden) { last = 0; return; }
+    if (!rm || !settled) raf = requestAnimationFrame(frame);
+    else last = 0;
+  }
+  function kick() { if (!raf && !document.hidden) raf = requestAnimationFrame(frame); }
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) { if (raf) cancelAnimationFrame(raf); raf = 0; last = 0; }
+    else kick();
+  });
+
+  apply();
+  render(0);
+  kick();
+})();
+</script>
+</body>
+</html>

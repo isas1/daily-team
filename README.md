@@ -7,17 +7,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-19: Clew Rim
+### 2026-10-20: Tuft
 
-<a href="days/2026-10-19/"><img src="days/2026-10-19/team.png" alt="Team for 2026-10-19: Taxidermist · Wheelwright · Glassblower · Daedalus" width="100%"></a>
+<a href="days/2026-10-20/"><img src="days/2026-10-20/team.png" alt="Team for 2026-10-20: Upholsterer · Clockmaker · Translator · Scheherazade" width="100%"></a>
 
-**Task:** Scroll progress: a thin line that shows how much of a page is read.
+**Task:** Checkbox: a mark that can be set, cleared, or left half done.
 
-**Decision:** The page is a 2 px line that runs around all four edges of the window, cooling behind its hot head as you read, leaving persistent knots where you paused, and pressing any knot or point on it takes you back there.
+**Decision:** The page is one checkbox drawn as a padded linen square with a sewn button: the visitor presses it to pull the thread tight (set), presses again to leave the thread half drawn with a slack loop showing (half done), and presses again to l...
 
-<a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-19/) · [Use it](https://isas1.github.io/daily-team/2026-10-19/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-20/) · [Use it](https://isas1.github.io/daily-team/2026-10-20/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -37,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-20](days/2026-10-20/) | <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Tuft" width="160"></a> | Tuft | Upholsterer · Clockmaker · Translator · Scheherazade |
 | [2026-10-19](days/2026-10-19/) | <a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Clew Rim" width="160"></a> | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus |
 | [2026-10-18](days/2026-10-18/) | <a href="days/2026-10-18/"><img src="days/2026-10-18/artifact-1.png" alt="Weft" width="160"></a> | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin |
 | [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="The Cold Room" width="160"></a> | The Cold Room | Florist · Teacher · Calligrapher · Daedalus |
 | [2026-10-16](days/2026-10-16/) | <a href="days/2026-10-16/"><img src="days/2026-10-16/artifact-1.png" alt="Glass Cylinder" width="160"></a> | Glass Cylinder | Locksmith · Packaging designer · Window dresser · Scheherazade |
 | [2026-10-15](days/2026-10-15/) | <a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Spyhole" width="160"></a> | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace |
 | [2026-10-14](days/2026-10-14/) | <a href="days/2026-10-14/"><img src="days/2026-10-14/artifact-1.png" alt="Graveyard Shift" width="160"></a> | Graveyard Shift | Radio producer · Industrial designer · Museum curator · Odysseus |
-| [2026-10-13](days/2026-10-13/) | <a href="days/2026-10-13/"><img src="days/2026-10-13/artifact-1.png" alt="The Inn That Answers" width="160"></a> | The Inn That Answers | Documentary director · Playwright · Puppeteer · Benjamin Franklin |
 
-[All 17 days](ARCHIVE.md)
+[All 18 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works
