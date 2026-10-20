@@ -6,7 +6,7 @@ Every daily team and the asset it made, newest first. 18 days recorded.
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
-| [2026-10-20](days/2026-10-20/) | Tuft | Upholsterer · Clockmaker · Translator · Scheherazade | Text still reads clearly at 200 percent zoom. | [asset](days/2026-10-20/artifact-1.html) |
+| [2026-10-20](days/2026-10-20/) | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade | Text still reads clearly at 200 percent zoom. | [asset](days/2026-10-20/artifact-1.html) |
 | [2026-10-19](days/2026-10-19/) | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus | All text at 18 px or larger. | [asset](days/2026-10-19/artifact-1.html) |
 | [2026-10-18](days/2026-10-18/) | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin | Changes with the time of day. | [asset](days/2026-10-18/artifact-1.html) |
 | [2026-10-17](days/2026-10-17/) | The Cold Room | Florist · Teacher · Calligrapher · Daedalus | Hides one thing for the curious to find. | [asset](days/2026-10-17/artifact-1.html) |

@@ -1,16 +1,16 @@
-# 2026-10-20: Tuft
+# 2026-10-20: Wrong-Way Reel
 
 [Today](../../README.md) · [Archive](../../ARCHIVE.md)
 
 <img src="team.png" alt="Team for 2026-10-20: Upholsterer · Clockmaker · Translator · Scheherazade" width="100%">
 
-**Task:** Checkbox: a mark that can be set, cleared, or left half done.
+**Task:** Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.
 
 **Constraint:** Text still reads clearly at 200 percent zoom.
 
 **Season:** 2026-10-19
 
-**Decision:** The page is one checkbox drawn as a padded linen square with a sewn button: the visitor presses it to pull the thread tight (set), presses again to leave the thread half drawn with a slack loop showing (half done), and presses again to l...
+**Decision:** The page is a set of four undo controls, each running the visitor's own actions backward the way tape reverses, and the visitor makes marks, then takes them back by dragging a seam ripper, spinning a crown, holding a word, or flinging a ...
 
 ## Asset
 
@@ -18,74 +18,98 @@
 
 [Use it](https://isas1.github.io/daily-team/2026-10-20/) · [artifact-1.html](artifact-1.html), led by Upholsterer. Model: claude-opus-5-5.
 
+<a href="artifact-2.html"><img src="artifact-2.png" alt="Screenshot of artifact-2.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-20/) · [artifact-2.html](artifact-2.html), led by Clockmaker. Model: claude-opus-5-5.
+
+<a href="artifact-3.html"><img src="artifact-3.png" alt="Screenshot of artifact-3.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-20/) · [artifact-3.html](artifact-3.html), led by Translator. Model: claude-opus-5-5.
+
+<a href="artifact-4.html"><img src="artifact-4.png" alt="Screenshot of artifact-4.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-20/) · [artifact-4.html](artifact-4.html), led by Scheherazade. Model: claude-opus-5-5.
+
 ## The session
 
 ### Pitch
 
-**1 · Upholsterer: Tuft**\
-A padded square with one button sewn into its middle.\
-Press it and the thread pulls tight. The cloth sinks and folds into four pleats around the button. That is set.\
-Half done is the thread drawn halfway. The button sits shallow and a slack loop of red thread shows.\
-Cleared, the cloth springs back up.\
-The worst version is a flat grey box with no give in it. Everything I make is the opposite of that box.
+**1 · Upholsterer: Unpicking**\
+A seam runs across the page. Every mark the visitor makes pulls one stitch through the cloth.\
+Undo is the seam ripper. Drag it left and the thread draws back out through its own holes.\
+I built the worst one first. The thread vanished and the cloth went smooth. It lied.\
+So the holes stay. Two pinpricks for every stitch you took back.\
+The thread drags because cloth grips. Pull hard and it gives, slows, stops.
 
-**2 · Clockmaker: Pawl**\
-Picture the person who has misclicked three times and is about to throw the mouse.\
-For them I give a ratchet. A wheel with three teeth and a pawl that drops into each one with a hard stop.\
-You always know which tooth you're on. Back one tooth and you've undone exactly one thing.\
-The box turns like a small gear. Let it be odd. Odd is easier to remember.
+**2 · Clockmaker: Backlash**\
+Picture the person who just lost an hour. They hit undo forty times in a row.\
+Give them a crown to spin. Spin it backward and the hands sweep back over every tick.\
+The ticks sound reversed. Tock, then tick. The tape is wrong-way round and you can hear it.\
+They spin too far, and the hands overshoot, then spring forward to the step they meant.\
+One number in the dial: how many steps back.
 
-**3 · Translator: Gloss**\
-First I decide what goes. The square goes. The tick goes.\
-What stays is the label, because the label is the meaning.\
-Set: a rule runs under the whole label. Half: under the first word only. Cleared: nothing.\
-The words stay the size the reader chose.
+**3 · Translator: Unsaid**\
+First, what goes. The history list. The arrow icon. The menu. The redo.\
+What is left: one word, the verb for the last thing you did.\
+Hold it. The letters run back out, right to left, like tape leaving the head.\
+When the word is empty, the previous verb writes itself in. Keep holding, it keeps going.\
+Nothing else on the page.
 
-**4 · Scheherazade: The Lamp at Dawn**\
-Every night I stop before the end, and that stopping is what keeps the listener alive and listening.\
-So my mark is a lamp. Lit is done. Dark is not begun.\
-And the half state is the wick turned low at dawn, still glowing, waiting for the next night.\
-Do not let anyone treat that middle as a mistake. It is the part people come back for.
+**4 · Scheherazade: The Thousandth Fold**\
+Each thing you do is a night, and the nights lie in a stack.\
+Fling the top one upward and it folds back over itself and slides beneath, the way tape spools onto the reel behind.\
+But I do not tear the night out. Its corner stays turned down.\
+A turned corner is a promise. You may come back for it.\
+Only the night number shows. And when you stop flinging, the last fold hangs open a little, waiting.
 
 ### Clash
 
-**1 · Upholsterer:** Translator, you've said nothing since your pitch. Before Clockmaker and I argue about gears, I want to hear from you.
+**2 · Clockmaker:** Upholsterer, you say the thread should drag because cloth grips. My frustrated person hears that and feels punished. They want it to fly.
 
-**2 · Clockmaker:** Upholsterer, you say the cushion is honest because it's soft. Soft is exactly my worry. My frustrated user can't tell from soft whether they pressed or only brushed it. A pawl clicks. Your button has no stop.
+**1 · Upholsterer:** Thread that flies tears the holes wider. The drag is the cloth telling them the truth. Translator, you have said nothing. Say it.
 
-**1 · Upholsterer:** The stop is the thread. It goes taut and you see it go taut. Cloth has a limit, same as your tooth.
+**3 · Translator:** A list. Thrown away from the set, in order: the redo, the holes, the reversed tick, the turned corners.
 
-**4 · Scheherazade:** Clockmaker, your wheel has a middle tooth that the hand slips past on the way to done. That middle is the state I care for. Who here is defending it? Then I am.
+**4 · Scheherazade:** Then I stand with the holes, since you came for them first. A page with no scars has no story of how it got there.
 
-**3 · Translator:** I wrote it down. Throw away: the square outline, the tick glyph, the gear. Keep: the label at full size, and one mark with three depths. A cushion changes depth. A gear changes angle. At 200 percent, anything that rotates drags the text with it or crowds it.
+**1 · Upholsterer:** The holes are the material. Take them out and the seam pretends no one ever sewed it.
 
-**2 · Clockmaker:** Translator says the gear tilts the text. True, if the label rides on the wheel. So drop the wheel and keep the pawl: press down and it holds, drag off and it lets go without committing. My user gets to take it back.
+**2 · Clockmaker:** Translator, you are saying the core is the last action and nothing more. Then my furious person goes back one step at a time, and they are already shouting.
 
-**1 · Upholsterer:** That one I'll sew in. A press you can pull your thumb off of.
+**3 · Translator:** One step, repeated. Hold longer and it runs further. Tape has no menu and nobody asks for one.
 
-**4 · Scheherazade:** And when it's cleared, the needle holes stay in the cloth. Faint. It should show that it was once tufted. That's the reason to touch it again.
+**4 · Scheherazade:** Clockmaker, your hands overshoot the place they wanted to land. That is a small cruelty to someone already hurt.
 
-**3 · Translator:** The holes are noise. A tired eye reads a cleared square with marks on it as half done.
+**2 · Clockmaker:** You call the overshoot cruel. I call it the hands checking they went far enough, and the spring brings them home.
 
-**4 · Scheherazade:** Then the eye learns the difference between a healed place and an open one. The loop of thread is open. The holes are healed.
+**3 · Translator:** Scheherazade, the corners stay out of mine. Unsaid stays unsaid.
 
 ### Decision
 
-The page is one checkbox drawn as a padded linen square with a sewn button: the visitor presses it to pull the thread tight (set), presses again to leave the thread half drawn with a slack loop showing (half done), and presses again to let the cloth spring back (cleared). A cleared square keeps two faint needle holes.
+The page is a set of four undo controls, each running the visitor's own actions backward the way tape reverses, and the visitor makes marks, then takes them back by dragging a seam ripper, spinning a crown, holding a word, or flinging a night.
 
-Concept: Tuft
+Concept: Wrong-Way Reel
 
-- Upholsterer: the cushion, the button, the four pleats, and the thread that goes taut as the stop.
-- Clockmaker: the press that holds on pointer-down and commits only on release; dragging off or pressing Escape cancels without changing state.
-- Translator: no tick glyph and no rotation. The label is native text beside the cushion, sized in em, and the cushion grows with it.
-- Scheherazade: the half state is set by hand in the normal cycle, never skipped, and its loop of thread is the clearest shape on the page.
-- Lost: Clockmaker lost the gear, because rotation fails at 200 percent zoom. Translator lost removing the square, because the cloth is the material and the hit target. Translator also lost the needle holes. The holes stay at 15 percent contrast with no thread through them, so they can't be read as the loop.
+| # | Member | Concept | Composition | Input | Motion | Visible text |
+|---|---|---|---|---|---|---|
+| 1 | Upholsterer | Unpicking | horizontal line | drag | inertia and friction | a number: stitches left |
+| 2 | Clockmaker | Backlash | radial | scrub or wheel | spring overshoot | a number: steps back |
+| 3 | Translator | Unsaid | single object | press and hold | morph | a short label: the last verb |
+| 4 | Scheherazade | The Thousandth Fold | vertical stack | fling | fold | a number: the night |
+
+No two rows share composition, input, and motion. Each row differs on all three.
+
+- Upholsterer: the seam, the thread that drags through its own holes, and the pinprick holes left after every undo.
+- Clockmaker: the crown wheel, the reversed tock-tick, and the overshoot that springs back to the intended step.
+- Translator: one word on the page, letters leaving right to left, and continuous rewind while held. No redo in this variation.
+- Scheherazade: the stack of nights, the backward fold onto the reel, the turned-down corner that acts as redo, and the last fold left slightly open.
+- Clockmaker lost the argument over friction in the seam. The holes are the only honest record that cloth keeps, and thread with no drag would remove them. Translator lost the argument over cutting holes and corners from the whole set. That cut holds only inside Unsaid. The question of whether an undone action should be recoverable stays open between Translator and Scheherazade, and the set shows both answers side by side.
 
 ### Build notes
 
-1. Use a real `<input type="checkbox">`, visually hidden, inside a `<label>`. Set `.indeterminate` for the half state and mirror it with `aria-checked="mixed"`. Cycle the states cleared → set → half → cleared on click, Space, and tap. Show a 3px thread-red focus ring around the cushion on `:focus-visible`.
-2. Draw the cushion as inline SVG sized 1.5em square so it scales with text zoom. Use 4 pleat paths whose depth comes from one CSS variable `--pull`: 0 for cleared, 0.5 for half, 1 for set. Transition it over 180ms. Draw the slack loop as a separate path that is visible only when `--pull` is 0.5. Colours: linen `#e8dfcf`, shadow `#b9ab92`, button `#3b3530`, thread `#8a2f2a`.
-3. On `pointerdown`, set `--pull` to a 0.2 preview and capture the pointer. On `pointerup` inside the cushion, commit the next state. On `pointerleave`, `pointercancel`, or Escape, return to the current state. Add the two needle holes after the first time the box is set and keep them. Test the label and the loop at 200 percent browser zoom and at 320px width.
+1. Size all visible text in `rem`, with a minimum of 1.25rem. Lay out the four controls in a single `flex-wrap` container so they stack into one column at 200 percent zoom. Check each number and the verb at 200 percent zoom in Chrome and Firefox.
+2. Share one action log across the page. Clicking empty space adds one action, using a verb from a list of 12. Each control reads that log and rewinds it in its own motion. Upholsterer uses friction 0.92 per frame. Clockmaker uses a spring with stiffness 180 and damping 12. Translator removes one letter every 70 ms. Scheherazade folds with a 420 ms `rotateX`.
+3. Give every control a keyboard path, using arrow keys for the seam and the crown, holding Space for the word, and Page Up for the nights. Generate the reversed tick with Web Audio as a 40 ms decaying envelope played backward. Draw the tape-oxide brown `#5a3a22` on cream `#f2ead8`, with contrast at 7:1 or higher for text.
 
 **Guest:** Scheherazade (myth; folk tale collection). The method is drawn from public-domain history, myth, or literature, or invented. The guest speaks in character in original words, never quoting the source, and nothing here is endorsed by anyone.
 
@@ -113,7 +137,7 @@ Season: 2026-10-19
    Temperament: Sides with whoever is losing.
 
 Constraint: Text still reads clearly at 200 percent zoom.
-Task: Checkbox: a mark that can be set, cleared, or left half done.
+Task: Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.
 ```
 
 Provider: claude. Model: claude-opus-5-5.

@@ -7,15 +7,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-20: Tuft
+### 2026-10-20: Wrong-Way Reel
 
 <a href="days/2026-10-20/"><img src="days/2026-10-20/team.png" alt="Team for 2026-10-20: Upholsterer · Clockmaker · Translator · Scheherazade" width="100%"></a>
 
-**Task:** Checkbox: a mark that can be set, cleared, or left half done.
+**Task:** Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.
 
-**Decision:** The page is one checkbox drawn as a padded linen square with a sewn button: the visitor presses it to pull the thread tight (set), presses again to leave the thread half drawn with a slack loop showing (half done), and presses again to l...
+**Decision:** The page is a set of four undo controls, each running the visitor's own actions backward the way tape reverses, and the visitor makes marks, then takes them back by dragging a seam ripper, spinning a crown, holding a word, or flinging a ...
 
 <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
+
+The screenshot may be blank. Open the day to check.
 
 [Open the day](days/2026-10-20/) · [Use it](https://isas1.github.io/daily-team/2026-10-20/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
@@ -37,7 +39,7 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
-| [2026-10-20](days/2026-10-20/) | <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Tuft" width="160"></a> | Tuft | Upholsterer · Clockmaker · Translator · Scheherazade |
+| [2026-10-20](days/2026-10-20/) | <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Wrong-Way Reel" width="160"></a> | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade |
 | [2026-10-19](days/2026-10-19/) | <a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Clew Rim" width="160"></a> | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus |
 | [2026-10-18](days/2026-10-18/) | <a href="days/2026-10-18/"><img src="days/2026-10-18/artifact-1.png" alt="Weft" width="160"></a> | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin |
 | [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="The Cold Room" width="160"></a> | The Cold Room | Florist · Teacher · Calligrapher · Daedalus |
