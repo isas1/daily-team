@@ -104,7 +104,7 @@ It still has to work:
 - No medical, legal, or investment advice.
 - A component page follows the Forever Components tile rules: html and body fill the frame with no scroll, every class and id has one short prefix, a small corner caption names the component, animation pauses when the page is hidden, and it works from 180 to 640 pixels wide.
 - A component is accessible: a native element or the right role, a visible focus ring, labels for screen readers, and text contrast of at least 4.5 to 1.
-- A component avoids generic interface colour: no bright purple, electric blue, spring green, or purple-to-blue gradient. Take a named palette from a material, a craft, or an art movement.
+- A component follows the owner's clean modern style: crisp off-black or off-white ground, neutral greys, one interesting accent. No beige, cream, parchment or sepia; no neon, glow, or colour gradients; no bright purple, electric blue, or spring green.
 - A mod file to copy is short and correct for Claude Code. It makes no network calls, deletes or overwrites no files, holds no secrets, and never skips permission prompts.
 - It respects prefers-reduced-motion.
 - Wrap every use of localStorage in try/catch. The page must still work when storage is blocked.
@@ -120,8 +120,8 @@ Taste:
 - Almost no text. Show only what someone must read to use it. No titles, subtitles, captions, descriptions, status sentences, telemetry, or labels. Put the context in `aria-label`.
 - The process is an influence, not a template. Take its colours, line quality, texture, and the way it moves, then invent your own form.
 - Avoid what the owner rejected: busy screens with headers and readouts; physical objects drawn as decoration, such as fake knobs, brass, or glass; chips and badges; effects that sit behind the control without showing what it does.
-- Colour: one named palette from the process's real material, with one accent. No bright purple, electric blue, neon cyan, spring green, or purple-to-blue gradients.
-- Each variation has its own palette, background, and light or dark base, chosen from its row and its member's nature. Four tiles from the same day must not look alike. The colours in the skeleton below are placeholders: replace all six.
+- Colour (owner's clean modern style): sleek, modern, clean. Off-black ground #0e0f11 with ink #f2f2f0, or off-white ground #f7f7f5 with ink #121316; neutral greys; 1 px hairlines; system sans with tabular numbers. One interesting accent, used sparingly on the part that matters: persimmon #ff6b3d / #c43d12, saffron #f2b705 / #8a6400, verdigris #3cc4a8 / #0b7a66, carmine #ff4d5e / #c8102e, pistachio #a6d36b / #4b6e12, flamingo #ff7aa8 / #c2185b, or a new one with 4.5:1 contrast. No beige, cream, parchment or sepia; no neon, glow, or colour gradients; no bright purple, electric blue, neon cyan, or spring green. The process shapes motion, line, and texture, not the colours.
+- Each variation has its own accent, its own light or dark base, and its own form: Swiss grid, instrument, editorial type, monoline, soft depth, data ink, geometric kinetic, or paper-cut. Tiles from the same day must not look alike. The colours in the skeleton below are placeholders: replace all six with the clean neutrals and this variation's accent.
 - The first frame shows the process at rest, before anyone touches it: the material, the trace, or the mechanism is already visible and gently alive. Never open on an empty field with only a number or a single line.
 
 Audience: Americans on iPhones.
@@ -189,7 +189,7 @@ Before you return the file, check it and fix what fails:
 - Does it stop when the tab is hidden and sleep when settled?
 - Is it readable at 180 pixels, in both themes?
 - Is it different from a stock control, and true to its row in the table?
-- Did you replace every skeleton colour with this variation's own palette?
+- Did you replace every skeleton colour with the clean neutrals and this variation's own accent, with no beige, neon or gradient?
 - Does the first frame, before any input, already show the process?
 
 Return only the file, in one html code block.
@@ -237,7 +237,7 @@ Tools you may use:
 
 Art direction:
 - Pick one named tradition or medium for the whole piece, from the lead's nature: woodcut, risograph, cyanotype, ink wash, fresco, ukiyo-e, Bauhaus poster, blueprint, stained glass, claymation, tilt-shift model, museum diorama, exploded technical drawing, and so on. Take its colour, mark-making, and composition, not its subjects.
-- One palette of about six colours: background, surface, ink, muted ink, accent, second accent. Flat colour. Get depth from light, grain, and layering, not gradients.
+- One palette of about six colours in the owner's clean modern style: off-black or off-white background, surface, ink, muted ink, and one or two interesting accents. No beige, cream, parchment, neon, or colour gradients. Take mark-making and composition from the tradition, not its old-paper colours. Get depth from light and layering.
 - Give the surface a material: paper grain, plaster, silk, film grain, halftone, or brush texture, generated in code. Finish with a light vignette, a soft bloom, or grain where it suits the medium.
 - Light carries mood. Use one key light, a fill, haze or fog for distance, and real shadows where the scene is 3D.
 - The picture fills the frame at every size, from a phone to a wide screen. Nothing important hides off screen.
