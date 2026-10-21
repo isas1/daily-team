@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-21",
+  "task": "Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
+  "brief": null,
+  "team": "Team for 2026-10-21\nSeason: 2026-10-19\n\n1. Beekeeper\n   Method: Write the instructions for a stranger, then follow them exactly yourself.\n   Stance: Wants it to last.\n   Temperament: Will not accept a plan they cannot draw.\n2. Luthier\n   Method: Write the help text, then change the design until the help text is not needed.\n   Stance: Insists it must be beautiful.\n   Temperament: Tells a story from the workshop instead of arguing.\n3. Weaver\n   Method: Label every part with its purpose, then delete the parts with no label.\n   Stance: Breaks the frame.\n   Temperament: Laughs at the problem first, then takes it apart.\n4. Robinson Crusoe (literary; Daniel Defoe, died 1731) [guest]\n   Method: Build only from what washed up.\n   Stance: Speaks for the one who finds it.\n   Temperament: Asks what would change their mind, then waits.\n\nConstraint: Saves the input in the browser and restores it on reload.\nTask: Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": true,
+  "status": "ok",
+  "error": null,
+  "decision": "The page is a dye house where the visitor dips one strip of cloth through a rack of vats that the tide fills by one pot per visit, and the colour the cloth takes is the swatch they pick, kept in the browser until they return.",
+  "concept": "Fast Colour",
+  "plan": "## Pitch\n\n**Beekeeper: Mordant Rack**\nFive vats in a row, left to right, in the order I'd write on a card for a stranger.\nCard says: hold over a vat and the cloth sinks; let go and it lifts. That's the whole card.\nI followed it myself. Four seconds held, pale. Twelve, deep. The colour climbs slowly, the way comb fills.\nArrow keys walk the rack, space holds. A finger held on glass does the same.\nClose the tab, come back next morning, and the cloth hangs where you left it, same shade.\nIf it fades on reload, it was never dyed.\n\n**Luthier: Varnish Coats**\nOne swatch, centred. My first help text read: \"Scroll to add a coat. Scroll back to sand one off.\"\nThen each coat showed at the edge as a thin ring, like growth lines in a cut neck block. The text went.\nWheel, or scrub with a thumb, lays coats. Each one lands with a small bounce, then goes still.\nThe vat is whatever colour sits under the cloth's lower edge.\nIt saves coat by coat. Reload, and it's the same depth under your thumb.\n\n**Weaver: Warp Threads**\nHa. A swatch is a square pretending it isn't made of thread.\nSo, forty threads. Each one has a tag naming the vat it went into. A thread with no tag gets cut.\nDrag across the field and only the threads you cross get dipped. Dye wicks up them as specks.\nThe colour you've picked is what the cloth averages to when you stand back.\nAnd it hangs off the bottom of the page. The frame is a loom bar, nothing more.\n\n**Robinson Crusoe: Wreck Pots**\nI had no vats. I had what the morning tide left on the sand, and I kept all of it.\nSo the pots stand in a column, one for each landing. First visit, one pot. Each return, the tide brings one more.\nFling the cloth down the column. It slides past the pots, slows where it will, and takes that colour.\nI cut a notch for every day ashore. The notch count is the only mark on the page.\nWhoever comes after finds the cloth where I left it. That is the saving.\n\n## Clash\n\n**Weaver:** Beekeeper, five vats fixed from the first second. What's the fifth one's label if nobody ever dips it? No label, it goes.\n\n**Beekeeper:** Weaver, draw me the rack without it, then. A stranger has to see the whole row before they hold anything, or the card lies to them.\n\n**Robinson Crusoe:** Beekeeper, you would hand a stranger five pots on the first morning. What would make you hand them one?\n\n**Beekeeper:** Crusoe, a drawing where the second pot arrives in the same place every time. Show me that, and I'll take your tide.\n\n**Luthier:** Weaver, a player once brought me a cello with the paper label torn out. We found the maker's name in pencil under the top, on a strip nobody would have tagged. Your untagged threads are where the name hides. Leave them in.\n\n**Weaver:** Luthier, ha, fine. The undyed threads stay, and their tag says \"undyed\". That still doesn't move the cloth back inside the page.\n\n**Luthier:** Weaver, I once let a binding run past the heel to see what it would do. The client sent the guitar back in a week. A finished edge is the only promise a piece can keep.\n\n**Weaver:** It's cloth, Luthier. Cloth hangs. A guitar that hangs over a table edge falls; a swatch that hangs over a page edge is just drying.\n\n**Robinson Crusoe:** Luthier, your coats never stop. I never had more varnish than one shell could hold. What would make you cap them?\n\n**Luthier:** Crusoe, nothing I can name yet. Let me hold it and see.\n\n## Decision\n\nThe page is a dye house where the visitor dips one strip of cloth through a rack of vats that the tide fills by one pot per visit, and the colour the cloth takes is the swatch they pick, kept in the browser until they return.\n\nConcept: Fast Colour\n\n| # | Member | Concept | Composition | Input | Motion | Visible text |\n|---|---|---|---|---|---|---|\n| 1 | Beekeeper | Mordant Rack | horizontal line | press and hold | morph | seconds held |\n| 2 | Luthier | Varnish Coats | single object | scrub or wheel | spring overshoot | nothing |\n| 3 | Weaver | Warp Threads | field of many | drag | particles | \"undyed\" |\n| 4 | Robinson Crusoe | Wreck Pots | vertical stack | fling | inertia and friction | notch count |\n| 5 | Beekeeper | Comb Cells | radial | tap | fold | nothing |\n| 6 | Luthier | Sound Hole Tub | radial | hover nearness | morph | nothing |\n| 7 | Weaver | Selvage Pull | horizontal line | drag | fold | vat name |\n| 8 | Robinson Crusoe | Tide Line | field of many | hover nearness | particles | pot count |\n| 9 | Beekeeper | Fastness Column | vertical stack | press and hold | inertia and friction | percent fixed |\n| 10 | Luthier | Last Coat | single object | tap | morph | colour name |\n\nCheck: radial (5, 6), horizontal line (1, 7), vertical stack (4, 9), single object (2, 10), and field of many (3, 8) are all used. The ten composition, input, and motion triples are all different.\n\nPiece: The Fast House is a palette tool. The visitor pulls one strip of cloth through the rack (rows 1, 7). Dye wicks up its threads (row 3). The vats are only the pots the tide has brought (rows 4, 8). Each finished swatch folds into a comb (row 5), and its fastness shows on the column (row 9). The comb is the saved palette, stored in localStorage and restored on reload.\n\n- Beekeeper: the hold-to-dip rack, the one-line instruction card, and the rule that a dyed colour never fades on reload.\n- Luthier: coats capped at seven per swatch, each shown as a ring at the edge, and the bounce when a coat lands. The help text is removed.\n- Weaver: the threaded field, the \"undyed\" tag on threads that took no colour, and the strip that hangs past the bottom edge of the page.\n- Robinson Crusoe: one pot on the first visit and one more per return, up to five, each in a fixed slot. The notch count is the only number on the rack.\n- Luthier lost the finished edge to Weaver, because cloth hangs to dry and the overhang is where finished swatches leave the rack. Weaver lost the cutting of untagged threads to Luthier, because the undyed threads show which threads the dye skipped. Beekeeper lost the five-vat rack to Crusoe and accepted it once each pot's slot could be drawn in advance. Luthier never named a cap for the coats. The lead set it at seven.\n\n## Build notes\n\n1. Dye model: each vat holds one sRGB colour. Depth after t seconds held is `1 - exp(-t / 6)`. Mix in linear RGB by multiplying toward the vat colour from undyed linen `#efe6d4`. Each coat adds 0.14 depth, up to 7 coats. Wicking particles rise 2 px per frame and stop at the thread's current depth.\n2. Persistence: store one localStorage key, `fasthouse.v1`, holding `{visits, pots[], strip:{threads[40], coats}, comb[]}`. On load, increment `visits`. When `visits` is below 6, append the next pot from a fixed list of 5 into its fixed slot. Restore the strip and the comb before the first paint so no colour flashes.\n3. Input and states: the rack is a `role=\"radiogroup\"` and the strip is a `role=\"slider\"` with `aria-valuenow` set to depth. Left and right arrows choose a vat. Holding Space dips, Enter folds the swatch into the comb, and Delete unpicks a comb cell. Pointer events cover both mouse and touch. Draw these states: one pot only, hovering over a vat, dipping, lifted, fixed, comb cell selected, focus ring, and comb full at 12 cells.",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "piece.html",
+      "kind": "piece",
+      "lead": 1,
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-1.html",
+      "lead": 1,
+      "row": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-2.html",
+      "lead": 2,
+      "row": 2,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-3.html",
+      "lead": 3,
+      "row": 3,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-4.html",
+      "lead": 4,
+      "row": 4,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-5.html",
+      "lead": 1,
+      "row": 5,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-6.html",
+      "lead": 2,
+      "row": 6,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-7.html",
+      "lead": 3,
+      "row": 7,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-8.html",
+      "lead": 4,
+      "row": 8,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-9.html",
+      "lead": 1,
+      "row": 9,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-10.html",
+      "lead": 2,
+      "row": 10,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ]
+}

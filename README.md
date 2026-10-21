@@ -7,19 +7,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-20: Wrong-Way Reel
+### 2026-10-21: Fast Colour
 
-<a href="days/2026-10-20/"><img src="days/2026-10-20/team.png" alt="Team for 2026-10-20: Upholsterer · Clockmaker · Translator · Scheherazade" width="100%"></a>
+<a href="days/2026-10-21/"><img src="days/2026-10-21/team.png" alt="Team for 2026-10-21: Beekeeper · Luthier · Weaver · Robinson Crusoe" width="100%"></a>
 
-**Task:** Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.
+**Task:** Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.
 
-**Decision:** The page is a set of four undo controls, each running the visitor's own actions backward the way tape reverses, and the visitor makes marks, then takes them back by dragging a seam ripper, spinning a crown, holding a word, or flinging a ...
+**Decision:** The page is a dye house where the visitor dips one strip of cloth through a rack of vats that the tide fills by one pot per visit, and the colour the cloth takes is the swatch they pick, kept in the browser until they return.
 
-<a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-21/"><img src="days/2026-10-21/piece.png" alt="Screenshot of today's asset" width="100%"></a>
 
-The screenshot may be blank. Open the day to check.
-
-[Open the day](days/2026-10-20/) · [Use it](https://isas1.github.io/daily-team/2026-10-20/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-21/) · [Use it](https://isas1.github.io/daily-team/2026-10-21/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -39,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-21](days/2026-10-21/) | <a href="days/2026-10-21/"><img src="days/2026-10-21/piece.png" alt="Fast Colour" width="160"></a> | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe |
 | [2026-10-20](days/2026-10-20/) | <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Wrong-Way Reel" width="160"></a> | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade |
 | [2026-10-19](days/2026-10-19/) | <a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Clew Rim" width="160"></a> | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus |
 | [2026-10-18](days/2026-10-18/) | <a href="days/2026-10-18/"><img src="days/2026-10-18/artifact-1.png" alt="Weft" width="160"></a> | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin |
 | [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="The Cold Room" width="160"></a> | The Cold Room | Florist · Teacher · Calligrapher · Daedalus |
 | [2026-10-16](days/2026-10-16/) | <a href="days/2026-10-16/"><img src="days/2026-10-16/artifact-1.png" alt="Glass Cylinder" width="160"></a> | Glass Cylinder | Locksmith · Packaging designer · Window dresser · Scheherazade |
 | [2026-10-15](days/2026-10-15/) | <a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Spyhole" width="160"></a> | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace |
-| [2026-10-14](days/2026-10-14/) | <a href="days/2026-10-14/"><img src="days/2026-10-14/artifact-1.png" alt="Graveyard Shift" width="160"></a> | Graveyard Shift | Radio producer · Industrial designer · Museum curator · Odysseus |
 
-[All 18 days](ARCHIVE.md)
+[All 19 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works
