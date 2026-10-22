@@ -7,17 +7,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-21: Fast Colour
+### 2026-10-22: Wet Tally
 
-<a href="days/2026-10-21/"><img src="days/2026-10-21/team.png" alt="Team for 2026-10-21: Beekeeper · Luthier · Weaver · Robinson Crusoe" width="100%"></a>
+<a href="days/2026-10-22/"><img src="days/2026-10-22/team.png" alt="Team for 2026-10-22: Animator · Chef · Librarian · Gulliver" width="100%"></a>
 
-**Task:** Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.
+**Task:** Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.
 
-**Decision:** The page is a dye house where the visitor dips one strip of cloth through a rack of vats that the tide fills by one pot per visit, and the colour the cloth takes is the swatch they pick, kept in the browser until they return.
+**Decision:** The set is ten droplet badges that add by merging and subtract by shedding a drop that is kept, and the visitor taps, holds, flings, and rescales them to count.
 
-<a href="days/2026-10-21/"><img src="days/2026-10-21/piece.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-22/"><img src="days/2026-10-22/piece.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-21/) · [Use it](https://isas1.github.io/daily-team/2026-10-21/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-22/) · [Use it](https://isas1.github.io/daily-team/2026-10-22/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -37,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-22](days/2026-10-22/) | <a href="days/2026-10-22/"><img src="days/2026-10-22/piece.png" alt="Wet Tally" width="160"></a> | Wet Tally | Animator · Chef · Librarian · Gulliver |
 | [2026-10-21](days/2026-10-21/) | <a href="days/2026-10-21/"><img src="days/2026-10-21/piece.png" alt="Fast Colour" width="160"></a> | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe |
 | [2026-10-20](days/2026-10-20/) | <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Wrong-Way Reel" width="160"></a> | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade |
 | [2026-10-19](days/2026-10-19/) | <a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Clew Rim" width="160"></a> | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus |
 | [2026-10-18](days/2026-10-18/) | <a href="days/2026-10-18/"><img src="days/2026-10-18/artifact-1.png" alt="Weft" width="160"></a> | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin |
 | [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="The Cold Room" width="160"></a> | The Cold Room | Florist · Teacher · Calligrapher · Daedalus |
 | [2026-10-16](days/2026-10-16/) | <a href="days/2026-10-16/"><img src="days/2026-10-16/artifact-1.png" alt="Glass Cylinder" width="160"></a> | Glass Cylinder | Locksmith · Packaging designer · Window dresser · Scheherazade |
-| [2026-10-15](days/2026-10-15/) | <a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Spyhole" width="160"></a> | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace |
 
-[All 19 days](ARCHIVE.md)
+[All 20 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works
