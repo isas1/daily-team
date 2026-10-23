@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>File well in strata</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#f7f7f5;--ink:#121316;--acc:#c8102e}
+:root[data-theme="dark"]{--bg:#0e0f11;--ink:#f2f2f0;--acc:#ff4d5e}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.st4-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;cursor:ns-resize;-webkit-tap-highlight-color:transparent}
+.st4-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.st4-cv{display:block;width:100%;height:100%}
+.st4-in{display:none}
+</style></head><body>
+<div class="st4-root" id="st4-root" role="slider" tabindex="0" aria-valuemin="1" aria-label="Strata well. Every file dropped in settles as a layer and keeps its record. Drag up or down, use the wheel, or the arrow keys to dig through the layers. Tap the open mouth of the well or press Enter to drop a file. Escape returns to the newest layer."></div>
+<input class="st4-in" id="st4-in" type="file" multiple aria-hidden="true" tabindex="-1">
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.getElementById('st4-root'),inp=document.getElementById('st4-in');
+  var cv=document.createElement('canvas');cv.className='st4-cv';root.appendChild(cv);
+  var cx=cv.getContext('2d'),W=300,dpr=1,KEY='st4-strata',sel=0,ac=null,ring=null;
+  var seed=[
+    ['Monday.txt',3100,[]],
+    ['Forever plan.pdf',2400000,[]],
+    ['cat-pics-2.zip',38000000,['size mismatch, 38 MB sent, 37.9 MB arrived']],
+    ['Delete.doc',41000,['failed hash','missing chunks, 3 of 7']],
+    ['cat-pics-2 (final).zip',12000000,[]],
+    ['Emotional baggage.tar',1200000000,['too heavy to hash']]];
+  var L=[];
+  function rng(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}
+    return function(){h+=0x6D2B79F5;var t=h;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+  function mk(r,fall){var n=Math.min(260,Math.round(60+22*Math.log10(r.bytes+1))),R=rng(r.name+r.bytes);
+    var P={n:n,u:new Float32Array(n),v:new Float32Array(n),r:new Float32Array(n),f:new Float32Array(n),fv:new Float32Array(n)};
+    for(var i=0;i<n;i++){P.u[i]=R();P.v[i]=Math.sqrt(R());P.r[i]=R();if(fall)P.f[i]=W*(0.4+R()*0.9)}
+    return{name:r.name,bytes:r.bytes,hash:r.hash||'',against:r.against||[],P:P,y:0,yv:0,h:0,hv:0,ty:0,th:0,o:0,ov:0,ding:fall===2}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(L.map(function(l){return{name:l.name,bytes:l.bytes,hash:l.hash,against:l.against}})))}catch(e){}}
+  var stored=null;try{stored=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+  if(!stored||!stored.length)stored=seed.map(function(s){return{name:s[0],bytes:s[1],against:s[2]}});
+  L=stored.slice(-64).map(function(r,i,a){return mk(r,i===a.length-1?1:0)});
+  sel=L.length-1;
+  function full(b){return W*(0.03+0.011*Math.log10(b+1))}
+  function layout(snap){var avail=W*0.64,th=L.map(function(l){return full(l.bytes)}),sum=th.reduce(function(a,b){return a+b},0);
+    for(var i=0;i<L.length&&sum>avail;i++){if(i===sel)continue;sum-=th[i]-3;th[i]=3}
+    var yb=W*0.94;for(i=0;i<L.length;i++){var l=L[i];l.th=th[i];l.ty=yb-th[i];yb=l.ty;if(snap){l.y=l.ty;l.h=l.th}}}
+  function size(b){return b<1e3?b+' bytes':b<1e6?(b/1e3).toFixed(1)+' KB':b<1e9?(b/1e6).toFixed(1)+' MB':(b/1e9).toFixed(2)+' GB'}
+  function aria(){var l=L[sel];if(!l)return;root.setAttribute('aria-valuemax',L.length);root.setAttribute('aria-valuenow',sel+1);
+    root.setAttribute('aria-valuetext','Layer '+(sel+1)+' of '+L.length+', '+l.name+', '+size(l.bytes)+(l.against.length?', '+l.against.length+' against: '+l.against.join('; '):', nothing against'))}
+  function spr(o,k,vk,t,dt){var v=o[vk]+(t-o[k])*0.16*dt;v*=Math.pow(0.8,dt);o[vk]=v;o[k]+=v*dt;return Math.abs(t-o[k])>0.05||Math.abs(v)>0.05}
+  function tone(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();var t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();
+    o.frequency.setValueAtTime(196,t);o.frequency.exponentialRampToValueAtTime(130,t+0.5);g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.12,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+0.6);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+0.65)}catch(e){}}
+  function step(dt){var m=false;
+    for(var i=0;i<L.length;i++){var l=L[i],P=l.P;
+      if(spr(l,'y','yv',l.ty,dt))m=true;if(spr(l,'h','hv',l.th,dt))m=true;
+      l.ov+=((i===sel?1:0)-l.o)*0.16*dt;l.ov*=Math.pow(0.8,dt);l.o+=l.ov*dt;if(Math.abs(l.ov)>0.002||Math.abs((i===sel?1:0)-l.o)>0.002)m=true;
+      for(var j=0;j<P.n;j++){if(P.f[j]>0||P.fv[j]!==0){m=true;P.fv[j]+=0.55*dt;P.f[j]-=P.fv[j]*dt;
+        if(P.f[j]<=0){P.f[j]=0;if(P.fv[j]>1.5){P.fv[j]=-P.fv[j]*0.28;if(l.ding){l.ding=false;tone()}}else P.fv[j]=0}}}}
+    return m}
+  function snapToTarget(){for(var i=0;i<L.length;i++){var l=L[i],P=l.P;l.y=l.ty;l.h=l.th;l.yv=l.hv=l.ov=0;l.o=i===sel?1:0;P.f.fill(0);P.fv.fill(0)}}
+  function draw(){var cs=getComputedStyle(document.documentElement),bg=cs.getPropertyValue('--bg').trim(),ink=cs.getPropertyValue('--ink').trim(),acc=cs.getPropertyValue('--acc').trim();
+    cx.setTransform(dpr,0,0,dpr,0,0);cx.fillStyle=bg;cx.fillRect(0,0,W,W);
+    var x0=W*0.06,x1=W*0.94,wd=x1-x0-6,lw=1/dpr*Math.max(1,dpr/2);
+    cx.globalAlpha=0.3;cx.fillStyle=ink;cx.fillRect(x0,W*0.16,1,W*0.78);cx.fillRect(x1-1,W*0.16,1,W*0.78);cx.fillRect(x0,W*0.94,x1-x0,1);
+    var sc=W/640;
+    for(var i=0;i<L.length;i++){var l=L[i],P=l.P,s=i===sel;
+      if(l.h<4.5&&!s){cx.globalAlpha=0.35;cx.fillStyle=l.against.length?acc:ink;cx.fillRect(x0+3,l.y+l.h-1.5,wd,lw);continue}
+      cx.globalAlpha=0.14;cx.fillStyle=ink;cx.fillRect(x0+3,l.y+l.h,wd,lw);
+      for(var pass=0;pass<2;pass++){if(pass&&!l.against.length)break;
+        cx.beginPath();cx.globalAlpha=pass?(0.6+0.4*l.o):(s?0.25+0.75*l.o:(i%2?0.36:0.5));cx.fillStyle=pass?acc:ink;
+        for(var j=0;j<P.n;j++){if((j%9===0)!==!!pass&&l.against.length)continue;
+          var r=P.r[j],px=x0+3+P.u[j]*wd+l.o*(r-0.5)*8*sc,py=l.y+P.v[j]*l.h-P.f[j]-l.o*(4+r*22)*sc*(1-P.v[j]*0.5),rad=(0.7+r*0.9)*Math.max(0.7,sc*1.3);
+          if(py<-4)continue;cx.moveTo(px+rad,py);cx.arc(px,py,rad,0,6.283)}
+        cx.fill()}}
+    cx.globalAlpha=1}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function pick(i){i=Math.max(0,Math.min(L.length-1,i));if(i===sel)return;sel=i;layout(false);aria();kick()}
+  new ResizeObserver(function(){var r=root.getBoundingClientRect();if(!r.width)return;var k=W;W=r.width;dpr=Math.min(window.devicePixelRatio||1,2);
+    cv.width=Math.round(W*dpr);cv.height=Math.round(W*dpr);
+    L.forEach(function(l){for(var j=0;j<l.P.n;j++)l.P.f[j]*=W/k});layout(true);draw();kick()}).observe(root);
+  function hex(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return(x<16?'0':'')+x.toString(16)}).join('')}
+  function add(file){var ag=[],done=function(h){
+      if(!file.size)ag.push('empty');
+      L.forEach(function(l){if(h&&l.hash===h)ag.push('already here as '+l.name);else if(l.name===file.name)ag.push('name taken, different contents')});
+      if(!h&&file.size&&file.size<=5e8)ag.push('hash unavailable');if(file.size>5e8)ag.push('too heavy to hash');
+      var n=mk({name:file.name,bytes:file.size,hash:h,against:ag},2);L.push(n);if(L.length>64)L.shift();
+      sel=L.length-1;layout(false);n.y=n.ty;n.h=n.th;save();aria();kick()};
+    if(file.size&&file.size<=5e8&&window.crypto&&crypto.subtle){file.arrayBuffer().then(function(b){return crypto.subtle.digest('SHA-256',b)}).then(function(d){done(hex(d))},function(){done('')})}
+    else done('')}
+  function addAll(fs){for(var i=0;i<fs.length;i++)add(fs[i])}
+  inp.addEventListener('change',function(){addAll(inp.files);inp.value=''});
+  root.addEventListener('dragover',function(e){e.preventDefault()});
+  root.addEventListener('drop',function(e){e.preventDefault();if(e.dataTransfer&&e.dataTransfer.files)addAll(e.dataTransfer.files)});
+  var drag=null;
+  function yIn(e){var r=root.getBoundingClientRect();return(e.clientY-r.top)*W/r.height}
+  root.addEventListener('pointerdown',function(e){root.focus();try{root.setPointerCapture(e.pointerId)}catch(_){}drag={y0:e.clientY,s0:sel,t:Date.now(),mv:false}});
+  root.addEventListener('pointermove',function(e){if(!drag)return;var dy=e.clientY-drag.y0;if(Math.abs(dy)>6)drag.mv=true;
+    if(drag.mv)pick(drag.s0-Math.round(dy/Math.max(14,W*0.05)))});
+  function up(e){if(!drag)return;var d=drag;drag=null;if(d.mv||Date.now()-d.t>500)return;var y=yIn(e),top=L.length?L[L.length-1].y:W*0.94;
+    if(y<top-6){inp.click();return}
+    for(var i=0;i<L.length;i++)if(y>=L[i].y-4&&y<=L[i].y+L[i].h+2){pick(i);break}}
+  root.addEventListener('pointerup',up);root.addEventListener('pointercancel',function(){drag=null});
+  var acc=0;root.addEventListener('wheel',function(e){e.preventDefault();acc+=e.deltaY;while(Math.abs(acc)>=60){pick(sel-(acc>0?1:-1));acc-=acc>0?60:-60}},{passive:false});
+  root.addEventListener('keydown',function(e){var k=e.key;
+    if(k==='ArrowUp'||k==='ArrowRight')pick(sel+1);else if(k==='ArrowDown'||k==='ArrowLeft')pick(sel-1);
+    else if(k==='Home')pick(0);else if(k==='End'||k==='Escape')pick(L.length-1);
+    else if(k==='Enter'||k===' ')inp.click();else return;e.preventDefault()});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  layout(true);aria();draw();kick();
+})();</script>
+</body></html>

@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 20 days recorded.
+Every daily team and the asset it made, newest first. 21 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-10-23](days/2026-10-23/) | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin | No buttons. | [asset](days/2026-10-23/piece.html) |
 | [2026-10-22](days/2026-10-22/) | Wet Tally | Animator · Chef · Librarian · Gulliver | Under 30 KB in total. | [asset](days/2026-10-22/piece.html) |
 | [2026-10-21](days/2026-10-21/) | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe | Saves the input in the browser and restores it on reload. | [asset](days/2026-10-21/piece.html) |
 | [2026-10-20](days/2026-10-20/) | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade | Text still reads clearly at 200 percent zoom. | [asset](days/2026-10-20/artifact-1.html) |
