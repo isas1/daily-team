@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anemone empty state in tide pool</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#ff7aa8;--grey:#2c2e33;--dot:#5a5d63}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#c2185b;--grey:#d4d4d0;--dot:#9a9ca0}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.ag3-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;cursor:crosshair;border-radius:2px}
+.ag3-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ag3-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+@media print{:root{--bg:#fff;--ink:#000;--acc:#000;--grey:#999;--dot:#666}}
+</style></head><body>
+<div class="ag3-root" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Closed. The list is empty."
+ aria-label="Empty list. A closed anemone waits in the gutter between panels. Move or drag your finger near it and its tentacles unfold one ring at a time; move away and they fold back. Arrow keys open and close it, Enter or Space toggles, Escape folds it shut."></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.querySelector('.ag3-root');
+  var cv=document.createElement('canvas');cv.className='ag3-cv';root.appendChild(cv);
+  var ctx=cv.getContext('2d');
+  var near=0,t=0,K=0.17,D=0.8;
+  var rings=[{x:0,v:0},{x:0,v:0},{x:0,v:0}];
+  var dots=[];for(var i=0;i<46;i++){dots.push([Math.random()*6.283,1.25+Math.random()*0.5,0.5+Math.random()*0.6])}
+  function cl(v,a,b){return v<a?a:v>b?b:v}
+  function tgt(i){return cl((near-i*0.22)/0.56,0,1)}
+  function step(dt){t+=dt;var m=false;
+    for(var i=0;i<3;i++){var r=rings[i],g=tgt(i);
+      r.v=(r.v+(g-r.x)*K*dt)*Math.pow(D,dt);r.x+=r.v*dt;
+      if(Math.abs(r.v)>0.0008||Math.abs(g-r.x)>0.0008)m=true;else{r.x=g;r.v=0}}
+    return m}
+  function snapToTarget(){for(var i=0;i<3;i++){rings[i].x=tgt(i);rings[i].v=0}}
+  function col(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+  function draw(){
+    var s=cv.width;if(!s)return;var c=s/2,dp=s/(root.clientWidth||1);
+    var bg=col('--bg'),ink=col('--ink'),acc=col('--acc'),gr=col('--grey'),dt=col('--dot');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,s,s);
+    var G=s*0.17,m=s*0.05,a=c-G/2,b=c+G/2;
+    ctx.strokeStyle=gr;ctx.lineWidth=Math.max(1,dp);
+    [[m,m],[b,m],[m,b],[b,b]].forEach(function(p){ctx.strokeRect(p[0]+0.5,p[1]+0.5,a-m,a-m)});
+    var rb=s*0.065,lw=Math.max(1,s/420*1.5),sw=reduce()?0:1;
+    ctx.fillStyle=dt;
+    dots.forEach(function(d){ctx.beginPath();ctx.arc(c+Math.cos(d[0])*rb*d[1],c+Math.sin(d[0])*rb*d[1],lw*0.45*d[2],0,6.283);ctx.fill()});
+    ctx.strokeStyle=ink;ctx.lineWidth=lw;ctx.lineCap='round';ctx.lineJoin='round';
+    var cnt=[9,13,17],LL=[0.13,0.19,0.27];
+    for(var i=2;i>=0;i--){var o=rings[i].x,n=cnt[i],r0=rb*(0.5+0.22*i),L=s*LL[i],sg=i%2?-1:1;
+      var len=L*(0.2+0.8*cl(o,-0.15,1.2))/10,curl=sg*(1-cl(o,-0.3,1.2))*4.6;
+      for(var j=0;j<n;j++){var an=i*0.37+6.283*j/n,sy=sw*0.14*Math.sin(t*0.05+j*1.3+i*2)*(0.3+o);
+        var x=c+Math.cos(an)*r0,y=c+Math.sin(an)*r0,h=an;
+        ctx.beginPath();ctx.moveTo(x,y);
+        for(var k=1;k<=10;k++){h+=(curl+sy)/10*(k/5);x+=Math.cos(h)*len;y+=Math.sin(h)*len;ctx.lineTo(x,y)}
+        ctx.stroke();
+        if(i===2){ctx.fillStyle=ink;ctx.beginPath();ctx.arc(x,y,lw*0.9,0,6.283);ctx.fill()}}}
+    ctx.fillStyle=bg;ctx.beginPath();ctx.arc(c,c,rb,0,6.283);ctx.fill();ctx.stroke();
+    var mo=cl(rings[0].x,0,1.2);
+    ctx.strokeStyle=acc;ctx.beginPath();ctx.ellipse(c,c,rb*(0.18+0.32*mo),rb*(0.08+0.3*mo),0,0,6.283);ctx.stroke();
+    ctx.fillStyle=acc;ctx.beginPath();ctx.arc(c,c,lw*0.9,0,6.283);ctx.fill();
+  }
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function setNear(v){v=cl(v,0,1);if(v===near)return;near=v;
+    root.setAttribute('aria-valuenow',Math.round(v*100));
+    root.setAttribute('aria-valuetext',v<0.05?'Closed. The list is empty.':v>0.95?'Fully open. The list is empty.':'Unfolding');kick()}
+  function fromPt(e){var r=root.getBoundingClientRect(),dx=e.clientX-r.left-r.width/2,dy=e.clientY-r.top-r.height/2;
+    var d=Math.sqrt(dx*dx+dy*dy)/(r.width/2);setNear(1-(d-0.14)/0.7)}
+  root.addEventListener('pointerdown',function(e){try{root.setPointerCapture(e.pointerId)}catch(_){}fromPt(e)});
+  root.addEventListener('pointermove',function(e){if(e.pointerType==='mouse'||e.buttons)fromPt(e)});
+  root.addEventListener('pointerup',function(e){if(e.pointerType!=='mouse')setNear(0)});
+  root.addEventListener('pointercancel',function(){setNear(0)});
+  root.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse')setNear(0)});
+  root.addEventListener('keydown',function(e){var k=e.key;
+    if(k==='ArrowUp'||k==='ArrowRight')setNear(near+0.1);
+    else if(k==='ArrowDown'||k==='ArrowLeft')setNear(near-0.1);
+    else if(k==='Enter'||k===' ')setNear(near>0.5?0:1);
+    else if(k==='Escape'||k==='Home')setNear(0);
+    else if(k==='End')setNear(1);
+    else return;e.preventDefault()});
+  setInterval(function(){if(near===0&&!reduce()&&!document.hidden){
+    rings[0].v+=0.05;rings[1].v+=0.035;rings[2].v+=0.025;kick()}},4200);
+  new ResizeObserver(function(){var w=Math.round(root.clientWidth*Math.min(devicePixelRatio||1,2));
+    if(w&&cv.width!==w){cv.width=w;cv.height=w}draw()}).observe(root);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>

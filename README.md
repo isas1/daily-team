@@ -7,17 +7,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-23: Sounding Well
+### 2026-10-24: Low Water Set
 
-<a href="days/2026-10-23/"><img src="days/2026-10-23/team.png" alt="Team for 2026-10-23: Printmaker · Packaging designer · Bookbinder · Charles Darwin" width="100%"></a>
+<a href="days/2026-10-24/"><img src="days/2026-10-24/team.png" alt="Team for 2026-10-24: Museum curator · Urban planner · Comic artist · Arachne" width="100%"></a>
 
-**Task:** File drop in a well: a dropped file falls, rings spread, and the echo confirms it arrived.
+**Task:** Empty state in tide pool: an empty list is a still pool with one small creature waiting.
 
-**Decision:** The page is a well that takes a dropped file, drops it down a measured shaft, stitches it in chunk by chunk, holds back the echo until the receiver's hash agrees, and keeps every file and its record in layers for whoever finds it later.
+**Decision:** The set is ten working empty states for a list, each a still tide pool with one small creature waiting, all drawn in pure black line so they print cleanly, and each one lets the visitor add, remove, and return to empty.
 
-<a href="days/2026-10-23/"><img src="days/2026-10-23/piece.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-24/"><img src="days/2026-10-24/piece.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-23/) · [Use it](https://isas1.github.io/daily-team/2026-10-23/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-24/) · [Use it](https://isas1.github.io/daily-team/2026-10-24/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -37,15 +37,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-24](days/2026-10-24/) | <a href="days/2026-10-24/"><img src="days/2026-10-24/piece.png" alt="Low Water Set" width="160"></a> | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne |
 | [2026-10-23](days/2026-10-23/) | <a href="days/2026-10-23/"><img src="days/2026-10-23/piece.png" alt="Sounding Well" width="160"></a> | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin |
 | [2026-10-22](days/2026-10-22/) | <a href="days/2026-10-22/"><img src="days/2026-10-22/piece.png" alt="Wet Tally" width="160"></a> | Wet Tally | Animator · Chef · Librarian · Gulliver |
 | [2026-10-21](days/2026-10-21/) | <a href="days/2026-10-21/"><img src="days/2026-10-21/piece.png" alt="Fast Colour" width="160"></a> | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe |
 | [2026-10-20](days/2026-10-20/) | <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Wrong-Way Reel" width="160"></a> | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade |
 | [2026-10-19](days/2026-10-19/) | <a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Clew Rim" width="160"></a> | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus |
 | [2026-10-18](days/2026-10-18/) | <a href="days/2026-10-18/"><img src="days/2026-10-18/artifact-1.png" alt="Weft" width="160"></a> | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin |
-| [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="The Cold Room" width="160"></a> | The Cold Room | Florist · Teacher · Calligrapher · Daedalus |
 
-[All 21 days](ARCHIVE.md)
+[All 22 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

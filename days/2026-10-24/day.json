@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-24",
+  "task": "Empty state in tide pool: an empty list is a still pool with one small creature waiting.",
+  "brief": null,
+  "team": "Team for 2026-10-24\nSeason: 2026-10-19\n\n1. Museum curator\n   Method: Test it in the place where it will be used.\n   Stance: Defends the material.\n   Temperament: Concedes small points to win the big one.\n2. Urban planner\n   Method: Name the audience as one specific person.\n   Stance: Cuts until only the core is left.\n   Temperament: Speaks rarely, and only in short verdicts.\n3. Comic artist\n   Method: Count words, clicks, and seconds, then reduce each.\n   Stance: Pushes toward the strange.\n   Temperament: Defends the first idea in the room.\n4. Arachne (myth; Greek myth) [guest]\n   Method: Make the craft so precise it challenges the masters.\n   Stance: Guards the feeling it leaves behind.\n   Temperament: Keeps score of every point won and lost.\n\nConstraint: Prints clearly on a black-and-white printer.\nTask: Empty state in tide pool: an empty list is a still pool with one small creature waiting.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": true,
+  "status": "ok",
+  "error": null,
+  "decision": "The set is ten working empty states for a list, each a still tide pool with one small creature waiting, all drawn in pure black line so they print cleanly, and each one lets the visitor add, remove, and return to empty.",
+  "concept": "Low Water Set",
+  "plan": "# Pitch\n\n**Museum curator: Specimen Tray**\nAn empty list is a drawer with nothing catalogued yet.\nOne hermit crab sits in the corner of the tray, drawn in black ink, shell hatched, legs out.\nPress and hold the crab and it pulls into its shell. A new accession label slides in under the glass.\nDelete the last label and the crab comes back out, slowly, the way they do once the shadow has passed.\nI printed the sketch at 600 dpi and it held. Every line is a line. No grey wash, because grey wash goes to mud.\n\n**Urban planner: Waterline for Ines**\nInes. Night nurse. 6 a.m., phone in one hand, coat half on.\nHer list is empty. She needs to see that in one glance.\nOne horizontal line. One periwinkle sitting on it.\nTap the line and an item drops in, and the water springs back.\nNothing else.\n\n**Comic artist: Anemone Gutter**\nZero words. I counted.\nThe empty state is a closed anemone in the white gutter between panels.\nBring the cursor near and the tentacles unfold, one ring at a time. Move away and they fold back.\nWhen you delete an item, fling it at the anemone and it swallows it.\nThe list is empty because the animal ate everything. That is the first idea and I am keeping it.\n\n**Arachne: Still Weft**\nThe pool's surface is a warp of fine threads, stretched taut, with no weft.\nIn the empty state a small crab rests at the selvedge and waits for the shuttle.\nDrag across the surface and you throw a weft thread. That is one item, woven in for good.\nThe ripple must travel the threads and die at the frame, the way still water truly settles.\nLet the masters of any loom compare their cloth to this pool.\nWhen the cloth is bare it must feel at rest. It must not feel abandoned.\n\n# Clash\n\n**Comic artist:** Curator, your tray is a museum label. I count four words and one hold before anything happens. My anemone needs zero.\n\n**Museum curator:** Comic, take the words. The label becomes a single numeral. The crab stays in hatched ink, because I printed a toned version and the shell vanished into the grey.\n\n**Arachne:** Curator, hatching is weaving by another name. I mark that point to me. Comic, when your list is empty the visitor must feel a resting pool. Your version shows a fed stomach.\n\n**Comic artist:** Arachne, it ate everything. That is the honest feeling of done. I am keeping the swallow.\n\n**Urban planner:** Ines deletes by accident at 6 a.m. Undo. Five seconds.\n\n**Museum curator:** Planner is right, and I tested it on the rocks with wet fingers. Half my taps missed. Comic keeps the swallow, and the item stays visible inside the anemone's body for five seconds. Tap it there and it comes back.\n\n**Arachne:** So the Comic wins the swallow and loses the clock. That leaves one each. I still say the empty pool must not look like a stomach.\n\n**Comic artist:** Arachne, a calm animal is a full one. Nobody waits beside a hungry anemone.\n\n**Urban planner:** Unsettled. Print both. Ask Ines.\n\n# Decision\n\nThe set is ten working empty states for a list, each a still tide pool with one small creature waiting, all drawn in pure black line so they print cleanly, and each one lets the visitor add, remove, and return to empty.\n\nConcept: Low Water Set\n\n| # | Member | Concept | Composition | Input | Motion | Visible text |\n|---|---|---|---|---|---|---|\n| 1 | Museum curator | Specimen Tray | single object | press and hold | morph | 0 |\n| 2 | Urban planner | Waterline for Ines | horizontal line | tap | spring overshoot | Add |\n| 3 | Comic artist | Anemone Gutter | radial | hover nearness | fold | nothing |\n| 4 | Arachne | Still Weft | field of many | drag | inertia and friction | nothing |\n| 5 | Museum curator | Accession Stack | vertical stack | scrub or wheel | fold | No. 0 |\n| 6 | Urban planner | Last Snail | single object | tap | particles | Empty |\n| 7 | Comic artist | Swallowed Item | vertical stack | fling | particles | 5 |\n| 8 | Arachne | Ripple Ring | radial | press and hold | spring overshoot | nothing |\n| 9 | Museum curator | Tide Chart | horizontal line | scrub or wheel | inertia and friction | 0 items |\n| 10 | Urban planner | Plankton Field | field of many | hover nearness | particles | nothing |\n\nCheck: all ten composition, input, and motion triples are distinct. Radial appears in rows 3 and 8, horizontal line in 2 and 9, vertical stack in 5 and 7, single object in 1 and 6, and field of many in 4 and 10.\n\nPiece: Low Water Log is a working list for one person, built from rows 1, 2, 4, 5, 7, 9, and 10. Tapping the waterline adds an entry (2), each entry is woven in as a weft thread (4) and stacks as an accession label (5), deleted entries are flung to the anemone and held for five seconds (7), scrubbing the tide chart scrolls the list (9), plankton stir near the cursor (10), and the empty state is the crab in the tray (1). The Print button produces a line-art sheet that can be carried to the shore.\n\n- Museum curator: the hatched crab, the print-first ink rule, and the five-second undo tested with wet hands.\n- Urban planner: Ines as the user, the one-tap waterline, and the cut to a single numeral of text.\n- Comic artist: the zero-word anemone and the swallow as the delete gesture.\n- Arachne: the warp-and-weft surface, the ripple that dies at the frame, and the rule that empty must read as rest.\n- Who lost: the Comic artist lost the two-second clock, because missed taps on wet rock showed that five seconds was needed. The Curator lost the label words to the Comic's count. Arachne and the Comic remain split on whether the empty pool reads as rest or as a full stomach. The Planner's proposal to print both versions and ask Ines stands as the test.\n\n# Build notes\n\n1. Draw every creature and thread as SVG strokes at 1.5 px, black on white, with shading done only by hatching and stipple patterns. Add an `@media print` stylesheet that removes motion, fixes the crab in its waiting pose, and prints at A5. Proof the print on a 600 dpi mono laser printer before any colour decision is made.\n2. Wire the keyboard. Enter adds an entry at the waterline. Delete flings the focused entry to the anemone. U restores it within 5 seconds. Arrow keys scrub the tide chart. Announce the count through `aria-live=\"polite\"` (\"0 items\" when empty). Hit areas are at least 44 px for wet-finger touch.\n3. Build the empty state twice, once with the crab resting at the selvedge and once with the anemone closed and full. Print both, hand them to one night-shift nurse at the end of a shift, and record which one she reads as \"nothing left to do\" within 2 seconds.",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "piece.html",
+      "kind": "piece",
+      "lead": 1,
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-1.html",
+      "lead": 1,
+      "row": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-2.html",
+      "lead": 2,
+      "row": 2,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-3.html",
+      "lead": 3,
+      "row": 3,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-4.html",
+      "lead": 4,
+      "row": 4,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-5.html",
+      "lead": 1,
+      "row": 5,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-6.html",
+      "lead": 2,
+      "row": 6,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-7.html",
+      "lead": 3,
+      "row": 7,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-8.html",
+      "lead": 4,
+      "row": 8,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-9.html",
+      "lead": 1,
+      "row": 9,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-10.html",
+      "lead": 2,
+      "row": 10,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ]
+}
