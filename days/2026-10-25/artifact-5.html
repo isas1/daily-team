@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>thrown home: a breadcrumb trail of footprints</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#3cc4a8}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#0b7a66}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.th5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;cursor:grab;-webkit-tap-highlight-color:transparent}
+.th5-root:active{cursor:grabbing}
+.th5-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.th5-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style></head><body>
+<div class="th5-root" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-valuetext="monday" aria-label="breadcrumb trail of footprints in snow. you are at monday, the shallowest print at the bottom. home, forever, is the deepest print at the top. drag or fling up the slope to throw yourself back toward home. every print you reach sinks deeper and never fills in. arrow keys step one crumb, enter throws you home, escape throws you back down."></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.querySelector('.th5-root');
+  var cv=document.createElement('canvas');cv.className='th5-cv';root.appendChild(cv);
+  var cx=cv.getContext('2d'),S=1,dpr=1;
+  var names=['monday','cat-pics-2','emotional baggage','forever plan','forever'];
+  var P=29,ST=7,i;
+  var C=[[.16,.93],[.5,.87],[.84,.76],[.5,.64],[.16,.53],[.5,.42],[.84,.31],[.5,.19],[.32,.09]];
+  function cr(a,b,c,d,t){var t2=t*t,t3=t2*t;return .5*(2*b+(c-a)*t+(2*a-5*b+4*c-d)*t2+(3*b-a-3*c+d)*t3)}
+  var dense=[];
+  for(i=0;i<C.length-1;i++){var a=C[Math.max(i-1,0)],b=C[i],c=C[i+1],d=C[Math.min(i+2,C.length-1)];
+    for(var k=0;k<40;k++){var t=k/40;dense.push([cr(a[0],b[0],c[0],d[0],t),cr(a[1],b[1],c[1],d[1],t)])}}
+  dense.push(C[C.length-1]);
+  var cum=[0];for(i=1;i<dense.length;i++){cum.push(cum[i-1]+Math.hypot(dense[i][0]-dense[i-1][0],dense[i][1]-dense[i-1][1]))}
+  var L=cum[cum.length-1],pts=[],j=0;
+  for(i=0;i<P;i++){var s=L*i/(P-1);while(j<dense.length-2&&cum[j+1]<s)j++;
+    var f=(s-cum[j])/((cum[j+1]-cum[j])||1);
+    pts.push([dense[j][0]+(dense[j+1][0]-dense[j][0])*f,dense[j][1]+(dense[j+1][1]-dense[j][1])*f])}
+  var ang=[];for(i=0;i<P;i++){var p0=pts[Math.max(i-1,0)],p1=pts[Math.min(i+1,P-1)];ang.push(Math.atan2(p1[1]-p0[1],p1[0]-p0[0]))}
+  var D=[],dd=[],dv=[];
+  for(i=0;i<P;i++){D.push(1+Math.floor(i/ST));dd.push(D[i]*.35);dv.push(0)}
+  var p=0,v=0,mode=0,cur=0,drag=false,lx=0,ly=0,lt=0,vel=0;
+  var ac=null;
+  function tick(n){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    var o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;
+    o.type='sine';o.frequency.value=140+n*14;g.gain.setValueAtTime(.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+.08);
+    o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.09)}catch(e){}}
+  function reach(n){if(n<0||n>=P)return;if(D[n]<9)D[n]+=1;dv[n]+=.3;if(!reduce())tick(D[n])}
+  function track(){var r=Math.round(p);while(cur!==r){cur+=r>cur?1:-1;reach(cur)}
+    var st=Math.round(p/ST);root.setAttribute('aria-valuenow',st);root.setAttribute('aria-valuetext',names[st])}
+  function step(dt){var mv=false;
+    if(!drag){
+      if(mode===1){v*=Math.pow(.92,dt);if(Math.abs(v)<.06)mode=2}
+      if(mode===2){var tg=Math.round(p/ST)*ST;v+=(tg-p)*.14*dt;v*=Math.pow(.8,dt);
+        if(Math.abs(v)<.002&&Math.abs(tg-p)<.003){p=tg;v=0;mode=0}}
+      if(mode){p+=v*dt;mv=true;
+        if(p<0){p=0;v=-v*.3}else if(p>P-1){p=P-1;v=-v*.3}}
+      track();
+    }else mv=true;
+    for(var n=0;n<P;n++){dv[n]+=(D[n]-dd[n])*.18*dt;dv[n]*=Math.pow(.8,dt);dd[n]+=dv[n]*dt;
+      if(Math.abs(dv[n])>.002||Math.abs(D[n]-dd[n])>.002)mv=true;else{dd[n]=D[n];dv[n]=0}}
+    return mv}
+  function snapToTarget(){for(var n=0;n<2000&&step(1);n++);}
+  function col(){var cs=getComputedStyle(document.documentElement);
+    return{bg:cs.getPropertyValue('--bg').trim(),ink:cs.getPropertyValue('--ink').trim(),acc:cs.getPropertyValue('--acc').trim()}}
+  function at(q){var a=Math.max(0,Math.min(P-1,q)),n=Math.min(Math.floor(a),P-2),f=a-n;
+    return[pts[n][0]+(pts[n+1][0]-pts[n][0])*f,pts[n][1]+(pts[n+1][1]-pts[n][1])*f]}
+  function draw(){var c=col();cx.setTransform(dpr,0,0,dpr,0,0);
+    cx.fillStyle=c.bg;cx.fillRect(0,0,S,S);
+    var len=S*.03,wid=S*.013,side=S*.016,lw=Math.max(1,S/640);
+    for(var n=0;n<P;n++){var d=Math.max(0,dd[n]),q=pts[n],a=ang[n]+Math.PI,sd=n%2?1:-1;
+      cx.save();cx.translate(q[0]*S-Math.sin(ang[n])*side*sd,q[1]*S+Math.cos(ang[n])*side*sd);cx.rotate(a-Math.PI/2);
+      var sc=.9+Math.min(d,9)*.025;
+      cx.globalAlpha=Math.min(.75,.06+d*.08);cx.fillStyle=c.ink;
+      cx.beginPath();cx.ellipse(0,len*.25*sc,wid*sc,len*.62*sc,0,0,7);cx.fill();
+      cx.beginPath();cx.ellipse(0,-len*.62*sc,wid*.8*sc,len*.34*sc,0,0,7);cx.fill();
+      cx.globalAlpha=.55;cx.strokeStyle=c.ink;cx.lineWidth=lw;
+      var rings=Math.min(4,Math.floor(d/2)+1);
+      for(var r=0;r<rings;r++){var k=1+r*.38;
+        cx.beginPath();cx.ellipse(0,len*.05,wid*1.25*k*sc,len*1.05*k*sc,0,0,7);cx.globalAlpha=.5/(r+1);cx.stroke()}
+      cx.restore()}
+    cx.globalAlpha=1;
+    var w=at(p),R=S*.026;
+    cx.strokeStyle=c.acc;cx.lineWidth=lw;
+    var tl=at(p-Math.max(-3,Math.min(3,v*4)));
+    if(Math.abs(v)>.05){cx.beginPath();cx.moveTo(tl[0]*S,tl[1]*S);cx.lineTo(w[0]*S,w[1]*S);cx.stroke()}
+    cx.fillStyle=c.acc;cx.beginPath();cx.arc(w[0]*S,w[1]*S,R*.55,0,7);cx.fill();
+    cx.beginPath();cx.arc(w[0]*S,w[1]*S,R,0,7);cx.stroke()}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function fling(x){v=x;mode=1;kick()}
+  new ResizeObserver(function(){var b=cv.getBoundingClientRect();S=b.width||1;dpr=Math.min(2,window.devicePixelRatio||1);
+    cv.width=Math.round(S*dpr);cv.height=Math.round(S*dpr);draw()}).observe(root);
+  root.addEventListener('pointerdown',function(e){drag=true;mode=0;v=0;vel=0;lx=e.clientX;ly=e.clientY;lt=performance.now();
+    root.setPointerCapture(e.pointerId);root.focus();kick()});
+  root.addEventListener('pointermove',function(e){if(!drag)return;
+    var n=Math.max(0,Math.min(P-2,Math.floor(p))),tx=pts[n+1][0]-pts[n][0],ty=pts[n+1][1]-pts[n][1],tl=Math.hypot(tx,ty);
+    var dx=(e.clientX-lx)/S,dy=(e.clientY-ly)/S,dp=(dx*tx+dy*ty)/(tl*tl);
+    var now=performance.now(),fr=Math.max(.5,(now-lt)/16.667);
+    p=Math.max(0,Math.min(P-1,p+dp));vel=vel*.5+(dp/fr)*.5;lx=e.clientX;ly=e.clientY;lt=now;track();kick()});
+  function up(){if(!drag)return;drag=false;if(performance.now()-lt>90)vel=0;fling(Math.max(-4,Math.min(4,vel*1.4)))}
+  root.addEventListener('pointerup',up);root.addEventListener('pointercancel',up);
+  root.addEventListener('keydown',function(e){var k=e.key;
+    if(k==='ArrowUp'||k==='ArrowRight')fling(.6);
+    else if(k==='ArrowDown'||k==='ArrowLeft')fling(-.6);
+    else if(k==='Enter'||k===' ')fling(3);
+    else if(k==='Escape')fling(-3);
+    else return;e.preventDefault()});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();kick();
+})();</script>
+</body></html>

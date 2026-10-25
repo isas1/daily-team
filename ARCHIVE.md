@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 22 days recorded.
+Every daily team and the asset it made, newest first. 23 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-10-25](days/2026-10-25/) | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai | Lowercase only. | [asset](days/2026-10-25/piece.html) |
 | [2026-10-24](days/2026-10-24/) | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne | Prints clearly on a black-and-white printer. | [asset](days/2026-10-24/piece.html) |
 | [2026-10-23](days/2026-10-23/) | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin | No buttons. | [asset](days/2026-10-23/piece.html) |
 | [2026-10-22](days/2026-10-22/) | Wet Tally | Animator · Chef · Librarian · Gulliver | Under 30 KB in total. | [asset](days/2026-10-22/piece.html) |

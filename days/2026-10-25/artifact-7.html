@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>breadcrumb in sand loom</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#3cc4a8}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#0b7a66}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.sl7-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;cursor:crosshair;-webkit-user-select:none;user-select:none}
+.sl7-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.sl7-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sl7-name{position:absolute;left:0;top:0;transform:translate(-50%,-100%);font:500 clamp(11px,2.4vmin,15px)/1 -apple-system,system-ui,sans-serif;color:var(--ink);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .18s;padding-bottom:4px;border-bottom:1px solid var(--acc)}
+.sl7-name.sl7-on{opacity:1}
+</style></head><body>
+<div class="sl7-root" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="5" aria-valuenow="5" aria-valuetext="sample 14" aria-label="trail back up, pressed in sand. drag along the footprints to reach a folder; each print deepens as you reach it. release on a print to go there. arrow keys step along the trail, enter goes, escape returns to sample 14."></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.querySelector('.sl7-root');
+  var cv=document.createElement('canvas');cv.className='sl7-cv';root.appendChild(cv);
+  var lab=document.createElement('div');lab.className='sl7-name';lab.setAttribute('aria-hidden','true');root.appendChild(lab);
+  var ctx=cv.getContext('2d'),W=1,dpr=1;
+  var names=['forever plan','archive','monday','cat-pics-2','emotional baggage','sample 14'];
+  var P=names.map(function(n,i){var t=i/5;return{x:.5+(i%2?.065:-.065)+Math.sin(t*3)*.05,y:.12+t*.74,d:i===5?0:.32,v:0,t:i===5?.62:.32}});
+  var sel=5,foc=5,hov=-1,drag=false,px=-1,py=-1,hideT=0;
+  // grains
+  var G=62,n=G*G,hx=new Float32Array(n),hy=new Float32Array(n),x=new Float32Array(n),y=new Float32Array(n),
+      vx=new Float32Array(n),vy=new Float32Array(n),pi=new Int8Array(n),ss=new Float32Array(n),
+      ox=new Float32Array(n),oy=new Float32Array(n),al=new Uint8Array(n);
+  function shape(p,gx,gy){ // returns [s,dx,dy] vs footprint: forefoot + heel
+    var lx=gx-p.x,ly=gy-p.y;
+    var e1x=lx/.03,e1y=(ly+.024)/.042,e2x=lx/.022,e2y=(ly-.036)/.024;
+    var s1=Math.sqrt(e1x*e1x+e1y*e1y),s2=Math.sqrt(e2x*e2x+e2y*e2y);
+    return s1<s2?[s1,lx,ly+.024]:[s2,lx,ly-.036];}
+  for(var i=0;i<n;i++){
+    var gx=((i%G)+.5+(Math.random()-.5)*.9)/G,gy=((i/G|0)+.5+(Math.random()-.5)*.9)/G;
+    hx[i]=x[i]=gx;hy[i]=y[i]=gy;al[i]=Math.random()*3|0;pi[i]=-1;var best=1.7;
+    for(var k=0;k<6;k++){var r=shape(P[k],gx,gy);if(r[0]<best){best=r[0];pi[i]=k;var l=Math.hypot(r[1],r[2])||1e-4;ox[i]=r[1];oy[i]=r[2];ss[i]=r[0];}}
+  }
+  function tgt(i){var k=pi[i];if(k<0)return 0;var d=P[k].d,s=Math.max(ss[i],.12);
+    if(s<1)return(1/s-1)*d*.96; return d*.35*(1.7-s)/.7;}
+  function hit(ux,uy){var b=-1,bs=1.35;for(var k=0;k<6;k++){var s=shape(P[k],ux,uy)[0];if(s<bs){bs=s;b=k}}return b}
+  var actx=null;
+  function tick(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    var len=actx.sampleRate*.06|0,b=actx.createBuffer(1,len,actx.sampleRate),c=b.getChannelData(0);
+    for(var j=0;j<len;j++)c[j]=(Math.random()*2-1)*Math.pow(1-j/len,3)*.25;
+    var s=actx.createBufferSource(),f=actx.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;
+    s.buffer=b;s.connect(f);f.connect(actx.destination);s.start();}catch(e){}}
+  function reach(k){if(k<0)return;var p=P[k];
+    if(p.t<1){p.t=1;p.v+=.12;tick();
+      for(var i=0;i<n;i++)if(pi[i]===k&&ss[i]<1.2){var l=Math.hypot(ox[i],oy[i])||1;var f=(.004+Math.random()*.006);vx[i]+=ox[i]/l*f;vy[i]+=oy[i]/l*f-.002*Math.random();}}
+    kick();}
+  function choose(k){if(k<0)return;sel=k;foc=k;reach(k);
+    root.setAttribute('aria-valuenow',k);root.setAttribute('aria-valuetext',names[k]);kick();}
+  function showLabel(k,ux,uy){if(k<0){lab.classList.remove('sl7-on');return}
+    lab.textContent=names[k];var X=Math.min(Math.max(ux*W,40),W-40),Y=Math.max(uy*W-30,22);
+    lab.style.left=X+'px';lab.style.top=Y+'px';lab.classList.add('sl7-on');}
+  function step(dt){var moving=false;
+    for(var k=0;k<6;k++){var p=P[k];p.v+=(p.t-p.d)*.16*dt;p.v*=Math.pow(.8,dt);p.d+=p.v*dt;
+      if(Math.abs(p.v)>1e-4||Math.abs(p.t-p.d)>1e-3)moving=true;else p.d=p.t;}
+    var push=drag&&px>=0,r=.055;
+    for(var i=0;i<n;i++){var o=tgt(i),l=Math.hypot(ox[i],oy[i])||1,tx=hx[i]+ox[i]/l*o,ty=hy[i]+oy[i]/l*o;
+      if(push){var dx=x[i]-px,dy=y[i]-py,dd=Math.hypot(dx,dy);if(dd<r&&dd>1e-5){var f=(r-dd)*.05*dt;vx[i]+=dx/dd*f;vy[i]+=dy/dd*f;moving=true;}}
+      vx[i]+=(tx-x[i])*.18*dt;vy[i]+=(ty-y[i])*.18*dt;var dm=Math.pow(.78,dt);vx[i]*=dm;vy[i]*=dm;x[i]+=vx[i]*dt;y[i]+=vy[i]*dt;
+      if(!moving&&(Math.abs(vx[i])>2e-5||Math.abs(vy[i])>2e-5||Math.abs(tx-x[i])>2e-4))moving=true;}
+    return moving||push;}
+  function snapToTarget(){for(var k=0;k<6;k++){P[k].d=P[k].t;P[k].v=0}
+    for(var i=0;i<n;i++){var o=tgt(i),l=Math.hypot(ox[i],oy[i])||1;x[i]=hx[i]+ox[i]/l*o;y[i]=hy[i]+oy[i]/l*o;vx[i]=vy[i]=0}}
+  function draw(){var cs=getComputedStyle(document.documentElement),ink=cs.getPropertyValue('--ink').trim(),acc=cs.getPropertyValue('--acc').trim();
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,W);var g=Math.max(1.1,W/330);
+    var A=[.28,.5,.78];
+    for(var b=0;b<3;b++){ctx.globalAlpha=A[b];ctx.fillStyle=ink;ctx.beginPath();
+      for(var i=0;i<n;i++)if(al[i]===b&&!(pi[i]===sel&&ss[i]<1.25))ctx.rect(x[i]*W-g/2,y[i]*W-g/2,g,g);ctx.fill();}
+    ctx.globalAlpha=1;ctx.fillStyle=acc;ctx.beginPath();
+    for(i=0;i<n;i++)if(pi[i]===sel&&ss[i]<1.25)ctx.rect(x[i]*W-g/2,y[i]*W-g/2,g*1.15,g*1.15);ctx.fill();}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  new ResizeObserver(function(){var r=root.getBoundingClientRect();W=r.width||1;dpr=Math.min(devicePixelRatio||1,2);
+    cv.width=Math.round(W*dpr);cv.height=Math.round(W*dpr);draw();}).observe(root);
+  function uv(e){var r=root.getBoundingClientRect();return[(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]}
+  function track(e){var u=uv(e);px=u[0];py=u[1];hov=hit(px,py);if(drag)reach(hov);showLabel(hov,px,py);if(hov>=0)foc=hov;kick();}
+  root.addEventListener('pointerdown',function(e){drag=true;clearTimeout(hideT);try{root.setPointerCapture(e.pointerId)}catch(_){}track(e);});
+  root.addEventListener('pointermove',track);
+  function up(e){if(!drag)return;drag=false;var u=uv(e),k=hit(u[0],u[1]);if(k>=0)choose(k);
+    if(e.pointerType!=='mouse')hideT=setTimeout(function(){showLabel(-1)},900);kick();}
+  root.addEventListener('pointerup',up);root.addEventListener('pointercancel',function(){drag=false;showLabel(-1)});
+  root.addEventListener('pointerleave',function(){if(!drag){px=-1;showLabel(-1)}});
+  root.addEventListener('keydown',function(e){var k=e.key;
+    if(k==='ArrowUp'||k==='ArrowLeft'){foc=Math.max(0,foc-1);reach(foc)}
+    else if(k==='ArrowDown'||k==='ArrowRight'){foc=Math.min(5,foc+1);reach(foc)}
+    else if(k==='Enter'||k===' '){choose(foc)}
+    else if(k==='Escape'){choose(5);showLabel(-1);e.preventDefault();return}
+    else return;
+    e.preventDefault();showLabel(foc,P[foc].x,P[foc].y-.06);});
+  root.addEventListener('blur',function(){showLabel(-1)});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();kick();
+})();</script>
+</body></html>
