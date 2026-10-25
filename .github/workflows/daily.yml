@@ -65,6 +65,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.COMPONENT_REQUESTS_TOKEN || github.token }}
         run: node github.mjs requests > "$RUNNER_TEMP/component-requests.json"
+      - name: Read reviewed component bases from 00-components
+        if: steps.key.outputs.ok == 'true' && env.PROVIDER == 'claude'
+        env:
+          GITHUB_TOKEN: ${{ secrets.COMPONENT_REQUESTS_TOKEN || github.token }}
+        run: node github.mjs component-sources > "$RUNNER_TEMP/component-sources.json"
       - name: Run today's team
         if: steps.key.outputs.ok == 'true'
         env:
@@ -76,6 +81,7 @@ jobs:
           ARTIFACTS: ${{ inputs.artifacts || vars.ARTIFACTS || '' }}
           FORCE: ${{ inputs.force && '--force' || '' }}
           COMPONENT_REQUESTS_FILE: ${{ runner.temp }}/component-requests.json
+          COMPONENT_SOURCES_FILE: ${{ env.PROVIDER == 'claude' && format('{0}/component-sources.json', runner.temp) || '' }}
         run: node run.mjs $FORCE
       - name: Screenshot new artifacts
         if: always() && steps.key.outputs.ok == 'true'

@@ -6,9 +6,13 @@
 //        node github.mjs announce <season.json>   post the season in Discussions, if enabled
 //        node github.mjs activity <monday>        the week's issues, merged pull requests, and suggestions
 //        node github.mjs requests                 read-only component requests from both repos
-// Env:   GITHUB_TOKEN, GITHUB_REPOSITORY (owner/repo), GITHUB_API_URL, GITHUB_GRAPHQL_URL
+//        node github.mjs component-sources        reviewed HTML bases from 00-components
+//        node github.mjs access-check             source/issue access report, no raw code or model calls
+// Env:   GITHUB_TOKEN, COMPONENTS_DIR (optional local 00-components folder), GITHUB_REPOSITORY (owner/repo), GITHUB_API_URL, GITHUB_GRAPHQL_URL
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { focusGuide } from './component-focus.mjs';
+import { localSources, MAX_SOURCE_BYTES } from './component-source.mjs';
 
 const API = () => process.env.GITHUB_API_URL || 'https://api.github.com';
 const GRAPHQL = () => process.env.GITHUB_GRAPHQL_URL || `${API()}/graphql`;
@@ -102,6 +106,31 @@ export async function fetchComponentRequests(repos = [REPO(), 'isas1/web-compone
   return { requests: requests.sort((a, b) => b.votes - a.votes || a.url.localeCompare(b.url)), warnings };
 }
 
+// Read only reviewed HTML files, all pinned to one immutable vault revision.
+export async function fetchComponentSources(directory = process.env.COMPONENTS_DIR) {
+  if (directory) return localSources(directory);
+  const guide = focusGuide();
+  const sources = [], warnings = [];
+  let commit;
+  try {
+    ({ sha: commit } = await gh(`/repos/${guide.repository}/commits/HEAD`));
+    if (!/^[a-f0-9]{40,64}$/.test(commit || '')) throw new Error('invalid source revision');
+  } catch (e) { return { sources, warnings: [`${guide.repository}: ${e.message}`] }; }
+  for (const { path } of guide.references) {
+    try {
+      const encoded = `${guide.directory}/${path}`.split('/').map(encodeURIComponent).join('/');
+      const file = await gh(`/repos/${guide.repository}/contents/${encoded}?ref=${commit}`);
+      if (file.type !== 'file' || file.encoding !== 'base64' || file.size > MAX_SOURCE_BYTES)
+        throw new Error('expected an HTML file under 32 KB');
+      const html = Buffer.from(file.content, 'base64').toString('utf8');
+      if (Buffer.byteLength(html) > MAX_SOURCE_BYTES || !/<html[\s>]/i.test(html))
+        throw new Error('invalid source HTML');
+      sources.push({ path, commit, html });
+    } catch (e) { warnings.push(`${path}: ${e.message}`); }
+  }
+  return { sources, warnings };
+}
+
 // Issues opened and closed, pull requests merged, and open suggestions, for the weekly report.
 // since and until are YYYY-MM-DD; until is exclusive.
 export async function activity(since, until) {
@@ -188,18 +217,32 @@ export async function announce(meta) {
 
 async function main() {
   const [cmd, file] = process.argv.slice(2);
-  if (!process.env.GITHUB_TOKEN) throw new Error('GITHUB_TOKEN is not set');
+  if (!process.env.GITHUB_TOKEN && !(cmd === 'component-sources' && process.env.COMPONENTS_DIR)) throw new Error('GITHUB_TOKEN is not set');
   if (cmd === 'suggestions') process.stdout.write(`${JSON.stringify(await fetchSuggestions(), null, 2)}\n`);
   else if (cmd === 'requests') {
     const snapshot = await fetchComponentRequests();
     for (const warning of snapshot.warnings) console.error(`Request source unavailable: ${warning}`);
     process.stdout.write(`${JSON.stringify(snapshot, null, 2)}\n`);
   }
+  else if (cmd === 'component-sources') {
+    const snapshot = await fetchComponentSources();
+    for (const warning of snapshot.warnings) console.error(`Component source unavailable: ${warning}`);
+    process.stdout.write(`${JSON.stringify(snapshot, null, 2)}\n`);
+  }
+  else if (cmd === 'access-check') {
+    const [requests, sources] = await Promise.all([fetchComponentRequests(), fetchComponentSources()]);
+    const warnings = [...requests.warnings, ...sources.warnings];
+    const result = { ok: !warnings.length && sources.sources.length === focusGuide().references.length,
+      requests: requests.requests.map(({ repository, number, title, url }) => ({ repository, number, title, url })),
+      sources: sources.sources.map(({ path, commit, html }) => ({ path, commit, bytes: Buffer.byteLength(html) })), warnings };
+    process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+    if (!result.ok) process.exitCode = 1;
+  }
   else if (cmd === 'close-loop') await closeLoop(JSON.parse(readFileSync(file, 'utf8')));
   else if (cmd === 'announce') await announce(JSON.parse(readFileSync(file, 'utf8')));
   else if (cmd === 'activity' && /^\d{4}-\d{2}-\d{2}$/.test(file ?? '')) {
     process.stdout.write(`${JSON.stringify(await activity(file, addWeek(file)), null, 2)}\n`);
-  } else throw new Error('usage: node github.mjs suggestions | close-loop <season.json> | announce <season.json> | activity <monday>');
+  } else throw new Error('usage: node github.mjs suggestions | requests | component-sources | access-check | close-loop <season.json> | announce <season.json> | activity <monday>');
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

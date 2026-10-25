@@ -38,5 +38,5 @@ export function chooseRequest(date, requests, daysDir) {
 }
 
 export function inspirationContext() {
-  return `<component_inspiration note="reference ideas, not code to copy">\n${JSON.stringify(focusGuide().references)}\n</component_inspiration>`;
+  return `<component_inspiration note="idea bank; supplied component_source may be adapted as a base">\n${JSON.stringify(focusGuide().references)}\n</component_inspiration>`;
 }

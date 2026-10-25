@@ -7,9 +7,15 @@ cd "$(dirname "$0")"
 git pull --ff-only --quiet
 status=0
 request_file=$(mktemp "${TMPDIR:-/tmp}/daily-team-requests.XXXXXX")
-trap 'rm -f "$request_file"' EXIT
+source_file=$(mktemp "${TMPDIR:-/tmp}/daily-team-sources.XXXXXX")
+trap 'rm -f "$request_file" "$source_file"' EXIT
 GITHUB_TOKEN=$(gh auth token) node github.mjs requests > "$request_file" || echo '{"requests":[]}' > "$request_file"
-COMPONENT_REQUESTS_FILE=$request_file PROVIDER=${PROVIDER:-claude} node run.mjs "$@" || status=$?
+if [ "${PROVIDER:-claude}" = claude ]; then
+  GITHUB_TOKEN=$(gh auth token) node github.mjs component-sources > "$source_file" || echo '{"sources":[]}' > "$source_file"
+else
+  echo '{"sources":[]}' > "$source_file"
+fi
+COMPONENT_SOURCES_FILE=$source_file COMPONENT_REQUESTS_FILE=$request_file PROVIDER=${PROVIDER:-claude} node run.mjs "$@" || status=$?
 sh shot.sh days || true
 repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
 GITHUB_TOKEN=$(gh auth token) GITHUB_REPOSITORY=$repo node github.mjs suggestions > "${TMPDIR:-/tmp}/daily-team-suggestions.json" \
