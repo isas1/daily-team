@@ -145,6 +145,7 @@ export function dayReadme(day, daysDir, pagesUrl) {
     '[Today](../../README.md) · [Archive](../../ARCHIVE.md)', '',
     `<img src="team.png" alt="Team for ${day.date}: ${esc(roles(day))}" width="100%">`, '',
     `**Task:** ${day.brief || day.task}`, '',
+    ...(day.request ? [`**Request source:** [${cell(day.request.repository)} #${Number(day.request.number)}](https://github.com/${encodeURI(day.request.repository)}/issues/${Number(day.request.number)}). Local prototype; source issue stays open.`, ''] : []),
     ...(suggestedBy ? [`**Suggested by:** ${suggestedBy}`, ''] : []),
     `**Constraint:** ${constraint}`, '',
     ...(season ? [`**Season:** ${season}`, ''] : []),
@@ -238,7 +239,7 @@ export function weekBlock(root, days, suggestions) {
     const pools = readSeason(root, season);
     const fresh = newcomers(pools);
     lines.push(`**Season ${seasons.indexOf(season) + 1}**, since ${season}. ${fresh.length
-      ? `New this season: ${new Intl.ListFormat('en', { type: 'conjunction' }).format(fresh)}.` : 'The first season, so everyone is new.'} A new season with 8 new roles and 8 new methods is drafted every Monday.`, '');
+      ? `New this season: ${new Intl.ListFormat('en', { type: 'conjunction' }).format(fresh)}.` : 'The first season, so everyone is new.'} A new season is drafted every Monday; from 2026-10-26 it replaces 16 roles and 16 methods.`, '');
   }
   const repo = REPO();
   lines.push('### Vote on what gets built next', '',
@@ -333,6 +334,7 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
     `<div class="kicker">Daily team · ${day.date}</div>`,
     `<h1>${esc(titleCase(title(day)))}</h1>`,
     `<p class="muted">${esc(day.brief || day.task)}</p>`,
+    day.request ? `<p>Request source: <a href="https://github.com/${esc(day.request.repository)}/issues/${Number(day.request.number)}">${esc(day.request.repository)} #${Number(day.request.number)}</a> · Local prototype</p>` : '',
     `<img class="card" src="${imagePrefix}team.png" alt="Team for ${day.date}: ${esc(roles(day))}">`,
     day.decision ? `<p><strong>Decision:</strong> ${esc(day.decision)}</p>` : '',
     ...(frames.length ? frames : [`<p>No asset. ${esc(day.error || '')}</p>`]),

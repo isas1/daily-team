@@ -1,0 +1,109 @@
+{
+  "source": "../CREATIVE_SITES/00-components",
+  "reviewed": "2026-10-25",
+  "principle": "Art serves task. Improve useful behavior, finish and motion; never reproduce weak code or decorative metaphors.",
+  "references": [
+    {
+      "path": "buttons/splitflap/01-riffle-label-button.html",
+      "idea": "A button label changes from action to completion.",
+      "improve": "Use a native button with idle, press, pending, success and retry states. Reserve label width; make the label swap short and legible. Remove physical housing decoration.",
+      "match": [
+        "button",
+        "action",
+        "submit",
+        "save",
+        "send",
+        "undo"
+      ]
+    },
+    {
+      "path": "loaders/05-dash-orbital-ring/var-1-arc-spinner.html",
+      "idea": "A light arc communicates pending work.",
+      "improve": "Add honest pending, complete and failure feedback with replay; use status text and a static reduced-motion state. Do not show made-up progress as real.",
+      "match": [
+        "loader",
+        "spinner",
+        "progress",
+        "loading",
+        "import"
+      ]
+    },
+    {
+      "path": "cards/c16-magnetic-bento.html",
+      "idea": "A card expands the selected metric and reveals detail while neighbors yield space.",
+      "improve": "Keep labels and values readable during resize, support tap and keyboard selection, stop motion when settled. No idle cycling after user input; use current clean palette.",
+      "match": [
+        "card",
+        "metric",
+        "chart",
+        "stat"
+      ]
+    },
+    {
+      "path": "overlays/sam-creates/bottom-sheet/bottom-sheet.html",
+      "idea": "A share panel opens as a bottom sheet with snap positions and useful copy actions.",
+      "improve": "Keep only the panel and its trigger, add focus return, Escape and button alternatives to drag; preserve content at small widths and make clipboard failure visible.",
+      "match": [
+        "sheet",
+        "drawer",
+        "dialog",
+        "share",
+        "overlay"
+      ]
+    },
+    {
+      "path": "monitors-logs/forever/rolling-log-band/rolling-log-band.html",
+      "match": [
+        "log",
+        "event",
+        "severity"
+      ],
+      "idea": "A log panel filters sample events and pauses the stream.",
+      "improve": "Keep severity filtering, replace curved unreadable lines with a crisp selectable event list and detail view. Stop ambient changes after input; add keyboard selection, empty results and readable phone layout."
+    },
+    {
+      "path": "devtools-delivery/ci-oscilloscope/ci-pipeline-oscilloscope.html",
+      "match": [
+        "pipeline",
+        "build",
+        "stage"
+      ],
+      "idea": "A pipeline panel selects execution stages and inspects related logs.",
+      "improve": "Extract stage selection, failure detail and retry into a compact panel. Remove oscilloscope housing and alert dialogs; make retry update consistent sample state, add keyboard access and precise reveal timing."
+    },
+    {
+      "path": "devtools-delivery/forever/interactive-hunk-diff-approver/interactive-hunk-diff-approver.html",
+      "match": [
+        "diff",
+        "hunk",
+        "code review"
+      ],
+      "idea": "A code diff accepts or rejects one hunk.",
+      "improve": "Keep hunk decisions, add a clear pending/resolved state and undo, readable line numbers, horizontal code scrolling, keyboard focus and restrained accept/reject motion."
+    }
+  ],
+  "issueBriefs": [
+    {
+      "url": "https://github.com/isas1/web-components/issues/127",
+      "task": "Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point."
+    },
+    {
+      "url": "https://github.com/isas1/web-components/issues/127",
+      "task": "Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo."
+    },
+    {
+      "url": "https://github.com/isas1/web-components/issues/127",
+      "task": "Log viewer: a compact panel for a developer tool that filters sample events by severity and opens the selected event details."
+    },
+    {
+      "url": "https://github.com/isas1/web-components/issues/45",
+      "task": "Request loader: a loader for a content panel that moves from pending to loaded or failed, with a retry action and stable layout."
+    },
+    {
+      "url": "https://github.com/isas1/web-components/issues/45",
+      "task": "Import progress: a loader for a file tool that shows named stages, lets someone cancel and ends with a clear completion state."
+    }
+  ],
+  "repository": "isas1/creative-sites-vault",
+  "directory": "00-components"
+}
