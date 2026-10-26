@@ -11,23 +11,23 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-25: the way back up
+### 2026-10-26: Bracket and Ledger
 
-<a href="days/2026-10-25/"><img src="days/2026-10-25/team.png" alt="Team for 2026-10-25: Window dresser · Sign painter · Textile designer · Katsushika Hokusai" width="100%"></a>
+<a href="days/2026-10-26/"><img src="days/2026-10-26/team.png" alt="Team for 2026-10-26: Type designer · Motion director · Motion engineer · Lunar archivist" width="100%"></a>
 
-**Task:** Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.
+**Task:** Log viewer: a compact panel for a developer tool that filters sample events by severity and opens the selected event details.
 
-**Decision:** the visitor walks down into a real dye-sample library, and the way back up is a trail of prints they can hover, hold, drag, fling and scrub, with each print deepening as they reach it.
+**Decision:** The page is a compact log panel for a developer tool: the visitor filters sample events by severity, selects one with mouse, touch or keyboard, and opens its details beside or below the list.
 
-<a href="days/2026-10-25/"><img src="days/2026-10-25/piece.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-26/"><img src="days/2026-10-26/piece.png" alt="Screenshot of today's asset" width="100%"></a>
 
-[Open the day](days/2026-10-25/) · [Use it](https://isas1.github.io/daily-team/2026-10-25/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-26/) · [Use it](https://isas1.github.io/daily-team/2026-10-26/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
 
 <!-- WEEK:START -->
-**Season 4**, since 2026-10-19. New this season: Wheelwright, Gilder, Thatcher, Lacemaker, Rope maker, Bell founder, Organ builder, Stage manager, Ariadne, Phileas Fogg, and 4 new temperaments. A new season with 8 new roles and 8 new methods is drafted every Monday.
+**Season 5**, since 2026-10-26. New this season: Interface designer, Motion director, Interaction engineer, Type designer, Accessibility specialist, Human factors engineer, Icon designer, Design systems engineer, Mobile interface designer, Data interface designer, Usability researcher, Interaction prototyper, Visual designer, Motion engineer, Interface copywriter, Quality engineer, Cabinet maker, Watch restorer, Instrument maker, Exhibit light technician, Architectural model maker, Technical illustrator, Medical illustrator, Scientific illustrator, Foley artist, Color grading specialist, Dance choreographer, Puppet maker, Stage illusion builder, Camera operator, Furniture designer, Ergonomist, Railway signaller, Control room operator, Air traffic controller, Flight deck designer, Game interface designer, Technical writer, Cartographic designer, Wayfinding designer, Precision machinist, Optical technician, Lens grinder, Instrument tuner, Kinetic sculptor, Letter cutter, Silversmith, Furniture restorer, the first 36 guests, and 24 temperaments. A new season is drafted every Monday; from 2026-10-26 it replaces 16 roles and 16 methods.
 
 ### Vote on what gets built next
 
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-26](days/2026-10-26/) | <a href="days/2026-10-26/"><img src="days/2026-10-26/piece.png" alt="Bracket and Ledger" width="160"></a> | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist |
 | [2026-10-25](days/2026-10-25/) | <a href="days/2026-10-25/"><img src="days/2026-10-25/piece.png" alt="the way back up" width="160"></a> | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai |
 | [2026-10-24](days/2026-10-24/) | <a href="days/2026-10-24/"><img src="days/2026-10-24/piece.png" alt="Low Water Set" width="160"></a> | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne |
 | [2026-10-23](days/2026-10-23/) | <a href="days/2026-10-23/"><img src="days/2026-10-23/piece.png" alt="Sounding Well" width="160"></a> | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin |
 | [2026-10-22](days/2026-10-22/) | <a href="days/2026-10-22/"><img src="days/2026-10-22/piece.png" alt="Wet Tally" width="160"></a> | Wet Tally | Animator · Chef · Librarian · Gulliver |
 | [2026-10-21](days/2026-10-21/) | <a href="days/2026-10-21/"><img src="days/2026-10-21/piece.png" alt="Fast Colour" width="160"></a> | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe |
 | [2026-10-20](days/2026-10-20/) | <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Wrong-Way Reel" width="160"></a> | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade |
-| [2026-10-19](days/2026-10-19/) | <a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Clew Rim" width="160"></a> | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus |
 
-[All 23 days](ARCHIVE.md)
+[All 24 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

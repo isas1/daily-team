@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Count Shutter log filter for a deploy log panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--mute:#8d9096;--line:#2a2c30;--panel:#141518;--hov:rgba(242,242,240,.06);--acc:#f2b705}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--mute:#5c5f66;--line:#dcdcd8;--panel:#fff;--hov:rgba(18,19,22,.05);--acc:#8a6400}
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--bg);color:var(--ink);font:13px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+.cs-root{--u:32px;width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;display:flex;flex-direction:column;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden;container-type:inline-size}
+@media (pointer:coarse){.cs-root{--u:44px}}
+.cs-root :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.cs-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:16px 16px 8px}
+.cs-title{margin:0;font-size:14px;font-weight:650}
+.cs-sub{color:var(--mute);font-size:12px}
+.cs-seg{display:flex;overflow-x:auto;border-block:1px solid var(--line);scrollbar-width:none}
+.cs-seg button{flex:1 0 auto;min-height:44px;padding:0 12px;border:0;border-right:1px solid var(--line);background:none;color:var(--mute);font:inherit;cursor:pointer;position:relative;white-space:nowrap;transition:background .1s}
+.cs-seg button:last-child{border-right:0}
+.cs-seg button:hover,.cs-seg button:active{background:var(--hov);color:var(--ink)}
+.cs-seg button:focus-visible{outline-offset:-2px}
+.cs-seg button[aria-pressed="true"]{color:var(--ink);font-weight:700}
+.cs-seg button[aria-pressed="true"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--acc)}
+.cs-ck{display:inline-block;width:1.1em;text-align:left}
+.cs-n{margin-left:4px;color:var(--mute);font-weight:400}
+.cs-list{flex:1;min-height:0;overflow-y:auto;position:relative;outline:0}
+.cs-list:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.cs-in{position:relative;margin:0;padding:0;list-style:none}
+.cs-row{position:absolute;left:0;right:0;top:0;z-index:1;height:var(--u);display:grid;grid-template-columns:16px 56px 64px minmax(0,1fr);align-items:center;padding-right:16px;box-sizing:border-box;border-bottom:1px solid var(--line);background:var(--panel);transform-origin:50% 0;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),opacity .2s ease-out}
+.cs-row:hover{background:var(--hov)}
+.cs-row.cs-off{z-index:0;opacity:0;visibility:hidden;pointer-events:none;transition:transform .2s steps(4,end),opacity .2s steps(4,end),visibility 0s .2s}
+.cs-row[aria-selected="true"]{font-weight:700;background:var(--hov)}
+.cs-g{text-align:center;color:var(--acc);font-weight:700}
+.cs-sv{font-size:11px;letter-spacing:.04em}
+.cs-t{color:var(--mute)}
+.cs-m{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.cs-empty{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:8px;padding:16px;text-align:center;color:var(--mute)}
+.cs-empty[hidden]{display:none}
+.cs-btn{min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:6px;background:none;color:var(--ink);font:inherit;font-weight:600;cursor:pointer;transition:background .1s}
+.cs-btn:hover,.cs-btn:active{background:var(--hov)}
+.cs-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 8px;padding:8px 16px;border-top:1px solid var(--line);color:var(--mute);font-size:12px}
+.cs-det{position:absolute;left:0;right:0;bottom:0;z-index:3;max-height:64%;overflow:auto;box-sizing:border-box;padding:16px;background:var(--panel);border-top:1px solid var(--ink);opacity:0;visibility:hidden;transform:translateY(8px);transition:transform .2s cubic-bezier(.16,1,.3,1),opacity .2s ease-out,visibility 0s .2s}
+.cs-det.cs-open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.cs-meta{margin:0;color:var(--mute);font-size:12px;letter-spacing:.04em}
+.cs-msg{margin:8px 0;font-size:14px;font-weight:650;overflow-wrap:anywhere}
+.cs-dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;margin:0 0 16px;font-size:12px}
+.cs-dl dt{color:var(--mute)}.cs-dl dd{margin:0;overflow-wrap:anywhere}
+@container (max-width:360px){.cs-row{grid-template-columns:16px 52px minmax(0,1fr);padding-right:8px}.cs-t,.cs-sub{display:none}.cs-head{padding:8px}.cs-foot,.cs-det{padding:8px}.cs-seg button{padding:0 8px}}
+.cs-still *,.cs-still *::after{transition:none!important}
+@media (prefers-reduced-motion:reduce){.cs-root *{transition:none!important}}
+</style></head><body>
+<div class="cs-root" role="group" aria-label="Deploy log with severity filter and event details">
+  <div class="cs-head"><h1 class="cs-title">Deploy log</h1><span class="cs-sub">Forever plan v4.2.0</span></div>
+  <div class="cs-seg" id="cs-seg" role="group" aria-label="Filter by severity"></div>
+  <div class="cs-list" id="cs-list" role="listbox" tabindex="0" aria-label="Events">
+    <ul class="cs-in" id="cs-in" role="presentation"></ul>
+    <div class="cs-empty" id="cs-empty" hidden><span>No fatal events in this sample.</span><button type="button" class="cs-btn" id="cs-all">Show all events</button></div>
+  </div>
+  <div class="cs-foot"><span id="cs-status" aria-live="polite">Showing 12 of 12</span><span>Tap an event for details</span></div>
+  <section class="cs-det" id="cs-det" aria-label="Event details">
+    <p class="cs-meta" id="cs-meta"></p><p class="cs-msg" id="cs-msg"></p>
+    <dl class="cs-dl"><dt>Source</dt><dd id="cs-src"></dd><dt>Trace</dt><dd id="cs-tr"></dd></dl>
+    <button type="button" class="cs-btn" id="cs-close">Close details</button>
+  </section>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var $=function(i){return document.getElementById(i)};
+  var R=document.querySelector('.cs-root'),SEG=$('cs-seg'),LIST=$('cs-list'),IN=$('cs-in'),EMPTY=$('cs-empty'),DET=$('cs-det'),ST=$('cs-status');
+  var SEV={err:['■','ERR'],wrn:['▲','WRN'],inf:['●','INF'],ok:['○','OK']};
+  var EV=[['inf','10:42:01','Deploy v4.2.0 started for Forever plan','deployer','1a04e7b2'],
+  ['inf','10:42:02','Pulled 14 image layers (310 MB)','builder-1','1a04e7b9'],
+  ['wrn','10:42:03','Build cache 82% full','builder-1','2c51d0aa'],
+  ['inf','10:42:04','Migrations applied: 3 of 3','db-migrate','3e9f2210'],
+  ['err','10:42:05','Rate limiter threshold reached: 800 req/s','edge-gw-2','7f3a9c21'],
+  ['inf','10:42:06','Cache warmed with 596 keys','cache-1','4b2e81f0'],
+  ['wrn','10:42:07','Upload of "Emotional baggage" took 41s (2.1 GB)','uploader','5d70c3e4'],
+  ['ok','10:42:08','Standby replica synced with primary','db-replica','6a19f7d5'],
+  ['inf','10:42:09','Health check passing on 3 of 3 nodes','monitor','6c0d2b18'],
+  ['err','10:42:11','Bucket cat-pics-2 returned 403 Forbidden','storage','8e4419aa'],
+  ['wrn','10:42:13','Retry queue at 40 jobs','worker-3','9b77e002'],
+  ['ok','10:42:14','Release "Monday hotfix" is live','deployer','a2c5d913']];
+  var F=[['all','All'],['err','Errors'],['wrn','Warnings'],['inf','Info'],['ftl','Fatal']];
+  var cur='all',sel=-1,open=false,rows=[],segs=[],raf=0;
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function match(i){return cur==='all'||EV[i][0]===cur}
+  function vis(){var v=[];for(var i=0;i<EV.length;i++)if(match(i))v.push(i);return v}
+  function U(){return parseFloat(getComputedStyle(R).getPropertyValue('--u'))||32}
+
+  F.forEach(function(f,k){
+    var n=EV.filter(function(e){return f[0]==='all'||e[0]===f[0]}).length;
+    var b=el('button');b.type='button';
+    b.appendChild(el('span','cs-ck'));b.appendChild(document.createTextNode(f[1]));b.appendChild(el('span','cs-n',String(n)));
+    b.addEventListener('click',function(){setFilter(f[0])});
+    SEG.appendChild(b);segs.push(b);
+  });
+  SEG.addEventListener('keydown',function(e){
+    var i=segs.indexOf(document.activeElement),j=i;if(i<0)return;
+    if(e.key==='ArrowRight')j=(i+1)%segs.length;else if(e.key==='ArrowLeft')j=(i-1+segs.length)%segs.length;
+    else if(e.key==='Home')j=0;else if(e.key==='End')j=segs.length-1;else return;
+    e.preventDefault();segs.forEach(function(s,k){s.tabIndex=k===j?0:-1});segs[j].focus();
+  });
+  EV.forEach(function(e,i){
+    var r=el('li','cs-row');r.id='cs-r'+i;r.setAttribute('role','option');r.setAttribute('aria-selected','false');
+    r.appendChild(el('span','cs-g'));r.appendChild(el('span','cs-sv',SEV[e[0]].join(' ')));
+    r.appendChild(el('span','cs-t',e[1]));r.appendChild(el('span','cs-m',e[2]));
+    r.addEventListener('click',function(){select(i,true)});
+    IN.appendChild(r);rows.push(r);
+  });
+
+  function layout(){
+    var u=U(),k=0;
+    rows.forEach(function(r,i){
+      if(match(i)){r.dataset.y=k*u;r.style.transform='translateY('+k*u+'px)';r.classList.remove('cs-off');r.removeAttribute('aria-hidden');k++}
+      else{r.style.transform='translateY('+(r.dataset.y||0)+'px) scaleY(0)';r.classList.add('cs-off');r.setAttribute('aria-hidden','true')}
+    });
+    IN.style.height=(k*u+(open?DET.offsetHeight:0))+'px';
+    EMPTY.hidden=k>0;
+    ST.textContent='Showing '+k+' of '+EV.length;
+  }
+  function setFilter(f){
+    cur=f;R.classList.toggle('cs-still',reduce());
+    segs.forEach(function(s,k){var on=F[k][0]===f;s.setAttribute('aria-pressed',on);s.firstChild.textContent=on?'✓':'';s.tabIndex=on?0:-1});
+    if(sel>=0&&!match(sel)){mark(-1);closeDet()}
+    layout();
+  }
+  function mark(i){
+    sel=i;
+    rows.forEach(function(r,k){r.setAttribute('aria-selected',k===i);r.firstChild.textContent=k===i?'›':''});
+    if(i<0)LIST.removeAttribute('aria-activedescendant');else LIST.setAttribute('aria-activedescendant','cs-r'+i);
+  }
+  function reveal(){
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(function(){raf=0;if(sel<0)return;
+      var y=+rows[sel].dataset.y,u=U(),h=LIST.clientHeight-(open?Math.max(0,LIST.getBoundingClientRect().bottom-DET.getBoundingClientRect().top):0);
+      if(y<LIST.scrollTop)LIST.scrollTop=y;else if(y+u>LIST.scrollTop+h)LIST.scrollTop=y+u-h;});
+  }
+  function select(i,o){mark(i);if(o||open)openDet();reveal()}
+  function openDet(){
+    if(sel<0)return;var e=EV[sel];
+    $('cs-meta').textContent=SEV[e[0]].join(' ')+' · '+e[1];$('cs-msg').textContent=e[2];
+    $('cs-src').textContent=e[3];$('cs-tr').textContent=e[4];
+    R.classList.toggle('cs-still',reduce());
+    open=true;DET.classList.add('cs-open');layout();
+  }
+  function closeDet(){
+    if(!open)return;var inside=DET.contains(document.activeElement);
+    open=false;DET.classList.remove('cs-open');layout();
+    if(inside)LIST.focus();
+  }
+
+  LIST.addEventListener('focus',function(){var v=vis();if(sel<0&&v.length)select(v[0],false)});
+  LIST.addEventListener('keydown',function(e){
+    var v=vis(),p=v.indexOf(sel),n=-2;if(!v.length)return;
+    if(e.key==='ArrowDown')n=p<0?0:Math.min(p+1,v.length-1);
+    else if(e.key==='ArrowUp')n=p<0?0:Math.max(p-1,0);
+    else if(e.key==='Home')n=0;else if(e.key==='End')n=v.length-1;
+    else if(e.key==='Enter'||e.key===' '){e.preventDefault();if(sel>=0){openDet();reveal()}return}
+    if(n>-2){e.preventDefault();select(v[n],false)}
+  });
+  R.addEventListener('keydown',function(e){if(e.key==='Escape'&&open){e.preventDefault();var inList=document.activeElement===LIST;closeDet();if(!inList)LIST.focus()}});
+  $('cs-close').addEventListener('click',function(){closeDet();LIST.focus()});
+  $('cs-all').addEventListener('click',function(){setFilter('all');segs[0].focus()});
+
+  if(window.ResizeObserver)new ResizeObserver(function(){layout()}).observe(R);
+  document.addEventListener('visibilitychange',function(){if(document.hidden){cancelAnimationFrame(raf);raf=0}});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))document.documentElement.setAttribute('data-theme',m.theme)});
+  R.classList.add('cs-still');setFilter('all');
+  requestAnimationFrame(function(){R.classList.remove('cs-still')});
+})();</script>
+</body></html>
