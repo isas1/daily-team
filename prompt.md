@@ -51,6 +51,7 @@ In the Decision, after the `Concept:` line (a name for the set), write this tabl
 | # | Member | Concept | Composition | Input | Motion | Visible text |
 
 - Composition fits the component: action button, card, panel, compact list, toolbar, dialog, or another useful arrangement. Do not force radial layouts or particles onto a task.
+- Plan for Forever wall chrome: keep a 44 px top row for the category pill and save star, and a 56 px bottom row for rating. The wall supplies those rows outside the component when catalog `wallInset: true` is set during library conversion. A 352 px card then gives the component a 252 px square. Keep useful content and controls within that smaller frame; do not draw your own wall controls.
 - Input names the actual action: tap, type, select, drag, or scroll, always with a keyboard equivalent. Hover can enhance an action; it cannot be the only way to use it.
 - Motion describes a specific state transition, with timing and easing: press feedback, label swap, progress handoff, panel reveal, selection glide, or another meaningful change.
 - Visible text lists the labels, sample content and feedback needed to use the component. Cards and panels may have headings, several controls and short body text. No arbitrary two-control rule.
@@ -146,6 +147,7 @@ Craft floor:
 - Prefix every class and id with the same short prefix, such as `ab1-`.
 - Never assign `innerHTML`. Build the DOM with `createElement` and `textContent`.
 - Fill a square frame and stay usable from 180 to 640 pixels: `width:clamp(180px,92vmin,640px)`. Size a canvas from its element with ResizeObserver, and cap devicePixelRatio at 2.
+- Wall safe space: the category pill and save star use the top 44 px, and rating uses the bottom 56 px. Library conversion must set catalog `wallInset: true` for UI components so the wall reserves those bands. Fit the smaller content square, allow inner panel/list scroll, and keep labels, inputs and controls clear of overlays on desktop hover, keyboard focus and phones. Standalone pages keep normal padding; do not bake another 100 px of wall padding into reusable HTML.
 - Keyboard: every action works with arrows, Enter or Space, and Escape. Give a visible `:focus-visible` outline in the accent colour.
 - Read `prefers-reduced-motion` live with `matchMedia` each frame, never cached. Under reduced motion, jump to the end state, which must still make sense and still answer input.
 - Store the animation frame handle. Stop the loop when the tab is hidden, and let it sleep when nothing moves.
@@ -205,6 +207,7 @@ Before you return the file, check it and fix what fails:
 - Would a project builder recognize where to use it, and does it still do the task's real job?
 - Can someone reach all applicable states, retry a failure, reverse an action and use it repeatedly without reload?
 - At 180, 390 and 640 pixels, do labels wrap, panels fit and targets stay usable in both themes? Avoid clipping by allowing inner panel scroll where needed.
+- At a 352 px wall card with a 252 px content square, do the top pill/star and bottom rating stay clear of all useful content, including hover, focus, empty and error states? Library conversion must carry `wallInset: true`; source-only checks do not prove this visual check passed.
 - These code checks do not prove visual quality. Do not claim browser verification unless it actually ran.
 
 Return only the file, in one html code block.
