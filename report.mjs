@@ -13,6 +13,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSy
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { completeChecked, conceptName, findBanned, parseTeam, planSections, prepareProvider, sections, taskName, today } from './run.mjs';
+import { markdownCell as cell } from './security.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO = () => process.env.GITHUB_REPOSITORY || 'isas1/daily-team';
@@ -174,7 +175,6 @@ export function weekFacts(root, week, activity = null) {
   return facts;
 }
 
-const cell = (s) => String(s ?? '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
 
 // The full record, built from the facts alone. Always correct, so it is also the fallback.
 export function renderTemplate(facts) {

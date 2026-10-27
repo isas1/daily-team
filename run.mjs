@@ -23,6 +23,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chooseRequest, inspirationContext } from './component-focus.mjs';
 import { chooseSource, localSources, sourceContext } from './component-source.mjs';
+import { markupText, redactCredentials } from './security.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const API_URL = process.env.API_URL || 'https://openrouter.ai/api/v1/chat/completions';
@@ -61,7 +62,7 @@ const CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-i
   + "img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'";
 
 export function die(msg, code = 2) {
-  console.error(`run.mjs: ${msg}`);
+  console.error(`run.mjs: ${redactCredentials(msg)}`);
   process.exit(code);
 }
 
@@ -177,7 +178,7 @@ export function componentProblems(html) {
   let stem = names[0] || '';
   for (const n of names) while (!n.startsWith(stem)) stem = stem.slice(0, -1);
   if (names.length > 1 && stem.length < 2) problems.push('class and id names do not share one short prefix such as "ab1-"');
-  const words = html.replace(/<(script|style|title)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ')
+  const words = markupText(html, true)
     .replace(/&[a-z#0-9]+;/gi, ' ').split(/\s+/).filter((w) => /[a-z]{2}/i.test(w));
   if (words.length > COMPONENT_MAX_WORDS) problems.push(`shows ${words.length} words in the markup; keep visible text to what is needed to use it`);
   return problems;
@@ -212,7 +213,7 @@ export function checkArtifact(html, mode = 'page') {
     || /url\(\s*["']?(https?:)?\/\//i.test(html) || /@import/i.test(html)) problems.push('loads an external resource');
   if (/<form\b[^>]*\baction\s*=\s*["']?(https?:)?\/\//i.test(html)) problems.push('sends a form to another site');
   if (/\bfetch\s*\(|XMLHttpRequest|new\s+WebSocket|sendBeacon|new\s+EventSource/.test(html)) problems.push('makes network calls');
-  const text = html.replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ');
+  const text = markupText(html);
   for (const w of findBanned(text)) problems.push(`uses the word "${w}"`);
   return problems;
 }
@@ -258,7 +259,7 @@ export function decisionLine(plan) {
   const m = plan.match(/^[#*\s\d.]*Decision\b[*:]*\s*\n+([\s\S]*?)(?:\n\s*\n|\n[#*\s\d.]*(?:Build notes|Next steps|Proposals|Objections|Pitch|Clash|Referee|Deadlock)\b|$)/im);
   if (!m) return '';
   const text = m[1].replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/<[^>]*>/g, '').replace(/[*_`#>]/g, '').replace(/\s+/g, ' ').trim();
+    .replace(/<[^>]*>/g, '').replace(/[<>*_`#]/g, '').replace(/\s+/g, ' ').trim();
   const sentence = text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
   return sentence.length > 240 ? `${sentence.slice(0, 237)}...` : sentence;
 }
@@ -352,7 +353,7 @@ export async function completeOpenRouter(messages, maxTokens) {
       }
     }
   }
-  throw new Error(`all models failed: ${errors.join('; ')}`);
+  throw new Error(redactCredentials(`all models failed: ${errors.join('; ')}`));
 }
 
 // Claude Code in print mode, on the user's subscription. No tools, no MCP servers, no user
@@ -383,10 +384,10 @@ export function completeClaude(messages) {
       try {
         body = JSON.parse(stdout);
       } catch {
-        return reject(new Error(`claude exited ${code}: ${(stderr || stdout).trim().slice(0, 300)}`));
+        return reject(new Error(`claude exited ${code}: ${redactCredentials(stderr || stdout).trim().slice(0, 300)}`));
       }
       if (code !== 0 || body.is_error || !body.result?.trim()) {
-        return reject(new Error(`claude: ${String(body.result || stderr || `exit ${code}`).slice(0, 300)}`));
+        return reject(new Error(`claude: ${redactCredentials(body.result || stderr || `exit ${code}`).slice(0, 300)}`));
       }
       const model = Object.keys(body.modelUsage || {})[0] || process.env.CLAUDE_MODEL || DEFAULT_CLAUDE_MODEL;
       resolve({ text: body.result, model });
@@ -401,7 +402,7 @@ export function prepareProvider(provider) {
     const key = (process.env.OPENROUTER_API_KEY || '').trim();
     if (!key) die('OPENROUTER_API_KEY is not set');
     if (!process.env.API_URL && !key.startsWith('sk-or-')) {
-      die(`OPENROUTER_API_KEY does not look like an OpenRouter key: expected it to start with "sk-or-" (length ${key.length})`);
+      die('OPENROUTER_API_KEY does not look like an OpenRouter key: expected it to start with "sk-or-"');
     }
     process.env.OPENROUTER_API_KEY = key;
     return completeOpenRouter;
@@ -410,7 +411,7 @@ export function prepareProvider(provider) {
     const token = process.env.CLAUDE_CODE_OAUTH_TOKEN.trim();
     if (!token) delete process.env.CLAUDE_CODE_OAUTH_TOKEN; // use the local login
     else if (!token.startsWith('sk-ant-oat')) {
-      die(`CLAUDE_CODE_OAUTH_TOKEN does not look like a token from claude setup-token: expected it to start with "sk-ant-oat" (length ${token.length})`);
+      die('CLAUDE_CODE_OAUTH_TOKEN does not look like a token from claude setup-token: expected it to start with "sk-ant-oat"');
     } else process.env.CLAUDE_CODE_OAUTH_TOKEN = token;
   }
   return completeClaude;

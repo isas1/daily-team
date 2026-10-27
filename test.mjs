@@ -771,7 +771,8 @@ test('run.mjs --provider claude calls the CLI with no tools, settings, or CLAUDE
 test('run.mjs --provider claude rejects a malformed token without printing it', async () => {
   const r = await run(['--provider', 'claude', '--out', tmp()], { CLAUDE_CODE_OAUTH_TOKEN: ' secret-value-xyz ' });
   assert.equal(r.status, 2);
-  assert.match(r.stderr, /does not look like a token from claude setup-token.*length 16/);
+  assert.match(r.stderr, /does not look like a token from claude setup-token/);
+  assert.doesNotMatch(r.stderr, /length \d+/);
   assert.doesNotMatch(r.stderr, /secret-value-xyz/);
 });
 
@@ -866,7 +867,7 @@ test('the site runs artifacts only inside a sandboxed frame and uses the brand',
   assert.match(page, /<iframe sandbox="allow-scripts allow-modals allow-downloads allow-popups allow-forms"/);
   assert.doesNotMatch(page, /allow-same-origin/);
   assert.match(page, /srcdoc="[^"]*&lt;script&gt;document\.title=&quot;a&amp;b&quot;/);
-  assert.doesNotMatch(page, /<script>/);
+  assert.doesNotMatch(page, /<script\b/i);
   assert.match(page, /font-src 'self'/);
   assert.match(page, /<link rel="stylesheet" href="\.\.\/brand\/tokens\.css">/);
   assert.match(page, /<meta property="og:image" content="https:\/\/x\.github\.io\/daily-team\/2026-10-02\/team\.png">/);
@@ -1269,7 +1270,7 @@ test('the week block shows the season and a safe vote table', () => {
   assert.match(block, /\*\*Season 1\*\*, since 2026-10-01/);
   assert.match(block, /\| 3 \| \[Coin scriptalert1\/script counter xy yes\]\(https:\/\/github\.com\/isas1\/daily-team\/issues\/5\) \|/);
   assert.match(block, /issues\/10\) \|/);
-  assert.doesNotMatch(block, /<script>|issues\/(6|7|8|9)\)/, 'links, handles, banned words, and unlicensed text stay out');
+  assert.doesNotMatch(block, /<script\b|issues\/(6|7|8|9)\)/i, 'links, handles, banned words, and unlicensed text stay out');
   assert.match(weekBlock(HERE, [day], []), /No open suggestions yet\./);
 });
 
