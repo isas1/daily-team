@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Status line pipeline panel for a pull request build</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#f7f7f5;--ink:#121316;--mut:#5c5f65;--line:#d9dadc;--soft:#ededeb;--acc:#c8102e;--on:#fff}
+:root[data-theme="dark"]{--bg:#0e0f11;--ink:#f2f2f0;--mut:#9c9ea3;--line:#2b2d31;--soft:#17181b;--acc:#ff4d5e;--on:#0e0f11}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+*{box-sizing:border-box}
+.pl7-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:inline-size;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:clamp(11px,4.5cqi,15px);line-height:1.35}
+.pl7-sc{flex:1;min-height:0;overflow:auto;padding:5cqi;display:flex;flex-direction:column;gap:3cqi}
+.pl7-hd{display:flex;gap:.5em;align-items:baseline;white-space:nowrap;overflow:hidden}
+.pl7-hd b{font-weight:650}
+.pl7-hd span{color:var(--mut);overflow:hidden;text-overflow:ellipsis}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out}
+button:active:not(:disabled){transform:scale(.97);transition-duration:80ms}
+button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.pl7-line{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.6em;width:100%;min-height:44px;padding:.5em .7em;background:var(--soft);border:1px solid var(--line);border-radius:6px;text-align:left}
+.pl7-dot{width:.6em;height:.6em;background:var(--acc)}
+.pl7-ok .pl7-dot{background:var(--ink)}
+.pl7-sum{font-weight:600}
+.pl7-more{display:flex;align-items:center;gap:.35em;color:var(--mut);font-size:.88em}
+.pl7-chev{width:1em;height:1em;transition:transform 160ms ease-out}
+.pl7-line[aria-expanded="true"] .pl7-chev{transform:rotate(90deg)}
+@container (max-width:230px){.pl7-more span{display:none}}
+.pl7-reg{display:grid;grid-template-rows:0fr;transition:grid-template-rows 220ms ease-out}
+.pl7-reg.pl7-open{grid-template-rows:1fr}
+.pl7-in{min-height:0;overflow:hidden}
+.pl7-det{display:flex;flex-direction:column;gap:.6em;padding-top:.15em}
+.pl7-sh{display:grid;grid-template-columns:1fr auto auto;gap:.7em;font-weight:600}
+.pl7-log{max-height:8.6em;overflow:auto;padding:.5em .6em;border:1px solid var(--line);border-radius:4px;font:.84em/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.pl7-log div{width:max-content}
+.pl7-log i{font-style:normal;color:var(--mut);margin-right:.8em}
+.pl7-e{color:var(--acc)}
+.pl7-act{display:flex;flex-wrap:wrap;gap:.5em;align-items:center}
+.pl7-rt{display:grid;min-height:44px;padding:0 1em;border:0;border-radius:6px;background:var(--acc);color:var(--on);font-weight:650}
+.pl7-rt span{grid-area:1/1;align-self:center;opacity:0;transition:opacity 120ms ease-out}
+.pl7-rt span.pl7-on{opacity:1}
+.pl7-rt:disabled{background:var(--line);color:var(--mut);cursor:default}
+.pl7-cl{min-height:44px;padding:0 .9em;background:none;border:1px solid var(--line);border-radius:6px}
+.pl7-note{color:var(--mut);font-size:.86em}
+.pl7-st{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.pl7-st li{display:grid;grid-template-columns:1.4em 1fr auto 2.6em;gap:.5em;padding:.32em 0;border-bottom:1px solid var(--line);align-items:center}
+.pl7-st li>:first-child,.pl7-st li>:last-child{color:var(--mut)}
+.pl7-st li>:last-child{text-align:right}
+.pl7-st b{font-weight:500;display:flex;align-items:center;gap:.35em}
+.pl7-st .pl7-f b{color:var(--acc);font-weight:650}
+.pl7-st .pl7-q b{color:var(--mut)}
+.pl7-r b::before{content:"";width:.45em;height:.45em;background:var(--acc);animation:pl7p .9s ease-in-out infinite alternate}
+@keyframes pl7p{to{opacity:.3}}
+.pl7-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.pl7-rm *{transition:none!important;animation:none!important}
+</style></head><body>
+<div class="pl7-root" id="pl7-root" role="group" aria-label="Pipeline status for pull request 412">
+ <div class="pl7-sc">
+  <div class="pl7-hd"><b>cat-pics-2</b><span>PR #412 · Forever CI</span></div>
+  <button class="pl7-line" id="pl7-line" aria-expanded="false" aria-controls="pl7-reg">
+   <span class="pl7-dot"></span><span class="pl7-sum" id="pl7-sum"></span>
+   <span class="pl7-more"><span>Details</span><svg class="pl7-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
+  </button>
+  <div class="pl7-reg" id="pl7-reg" role="region" aria-label="Step 4 log and retry">
+   <div class="pl7-in"><div class="pl7-det">
+    <div class="pl7-sh"><span>4 Build</span><span id="pl7-s4"></span><span id="pl7-d4"></span></div>
+    <div class="pl7-log" id="pl7-log" tabindex="0" aria-label="Step 4 log"></div>
+    <div class="pl7-act">
+     <button class="pl7-rt" id="pl7-rt"><span>Retry step</span><span>Retrying</span><span>Retry on 8 GB</span><span>Reset demo</span></button>
+     <button class="pl7-cl" id="pl7-cl">Collapse</button>
+    </div>
+    <div class="pl7-note" id="pl7-note"></div>
+   </div></div>
+  </div>
+  <ol class="pl7-st" id="pl7-st" aria-label="Steps"></ol>
+ </div>
+ <p class="pl7-sr" id="pl7-live" aria-live="polite"></p>
+</div>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var root=$('pl7-root'),line=$('pl7-line'),reg=$('pl7-reg'),rt=$('pl7-rt'),logEl=$('pl7-log'),list=$('pl7-st'),live=$('pl7-live');
+  var labels=rt.children,rows=[],S,shown=0;
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var BASE=[['12:03:58','turbo run build --filter=client'],['12:04:30','chunk emotional-baggage.js 18 MB, heaviest file'],['12:04:31','warn heap 3,740 of 4,096 MB'],['12:04:37','Killed process 8421 (node): out of memory',1],['12:04:37','Exit code 137',1]];
+  function init(){S={mode:'fail',run:null,log:BASE.slice(),steps:[['Checkout','Passed','0:08'],['Lint','Passed','0:24'],['Unit tests','Passed','0:52'],['Build','Failed','1:21'],['Publish image','Skipped',''],['Smoke test','Skipped','']]};shown=-1}
+  for(var i=0;i<6;i++){var li=document.createElement('li');for(var k=0;k<4;k++)li.appendChild(document.createElement(k===2?'b':'span'));li.firstChild.textContent=i+1;list.appendChild(li);rows.push(li)}
+  function say(m){live.textContent=m}
+  function draw(){
+    var m=S.mode,r=S.run,cur=r?r.seq[r.i][0]+1:4;
+    $('pl7-sum').textContent=m==='fail'?'Build failed · step 4 · exit 137':m==='run'?'Build running · step '+cur+' of 6':m==='again'?'Build failed again · step 4 · exit 137':'Build passed · 6 of 6';
+    line.classList.toggle('pl7-ok',m==='pass'||m==='run');
+    S.steps.forEach(function(s,i){var c=rows[i].children;c[1].textContent=s[0];c[2].textContent=s[1];c[3].textContent=s[2];
+      rows[i].className=s[1]==='Failed'?'pl7-f':s[1]==='Running'?'pl7-r':s[1]==='Queued'||s[1]==='Skipped'?'pl7-q':''});
+    $('pl7-s4').textContent=S.steps[3][1];$('pl7-d4').textContent=S.steps[3][2];
+    var li={fail:0,run:1,again:2,pass:3}[m];
+    for(var j=0;j<4;j++)labels[j].className=j===li?'pl7-on':'';
+    rt.disabled=m==='run';
+    $('pl7-note').textContent=m==='pass'?'Steps 4–6 passed':m==='again'||(r&&r.big)?'Reruns steps 4–6 on 8 GB':'Reruns steps 4–6';
+    if(shown!==S.log.length){
+      while(logEl.firstChild)logEl.removeChild(logEl.firstChild);
+      S.log.forEach(function(l){var d=document.createElement('div'),t=document.createElement('i');t.textContent=l[0];d.appendChild(t);d.appendChild(document.createTextNode(l[1]));if(l[2])d.className='pl7-e';logEl.appendChild(d)});
+      shown=S.log.length;logEl.scrollTop=logEl.scrollHeight}
+  }
+  function fmt(ms){var s=Math.floor(ms/1000);return '0:'+(s<10?'0':'')+s}
+  function step(dt){
+    var r=S.run;if(!r)return false;
+    var seg=r.seq[r.i],st=S.steps[seg[0]];r.t+=dt;st[2]=fmt(r.t);
+    if(r.t>=seg[1]){
+      st[1]=seg[2];st[2]=seg[3];r.t=0;r.i++;
+      if(r.i<r.seq.length){var n=r.seq[r.i][0];S.steps[n][1]='Running';say('Step 4 passed. Running step '+(n+1)+'.')}
+      else{S.run=null;
+        if(r.big){S.mode='pass';S.log.push(['12:11:40','heap peak 5,120 of 8,192 MB'],['12:12:16','Build done in 1:14']);say('Build passed. Steps 5 and 6 passed.')}
+        else{S.mode='again';S.steps[4]=['Publish image','Skipped',''];S.steps[5]=['Smoke test','Skipped',''];S.log.push(['12:10:29','Killed process 8622 (node): out of memory',1],['12:10:29','Exit code 137',1]);say('Step 4 failed again, exit 137. Retry on 8 GB is available.')}}
+    }
+    return !!S.run;
+  }
+  function frame(now){var dt=last?Math.min(now-last,50):16;last=now;
+    root.classList.toggle('pl7-rm',reduce());
+    var moving=step(dt);draw();raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  function setOpen(o,back){line.setAttribute('aria-expanded',o);reg.classList.toggle('pl7-open',o);reg.inert=!o;if(!o&&back)line.focus()}
+  line.addEventListener('click',function(){setOpen(line.getAttribute('aria-expanded')!=='true')});
+  line.addEventListener('keydown',function(e){if(e.key==='ArrowDown'){e.preventDefault();setOpen(true);rt.focus()}else if(e.key==='ArrowUp'){e.preventDefault();setOpen(false)}});
+  $('pl7-cl').addEventListener('click',function(){setOpen(false,true)});
+  reg.addEventListener('keydown',function(e){if(e.key==='ArrowUp'&&e.target!==logEl){e.preventDefault();line.focus()}
+    if((e.key==='ArrowLeft'||e.key==='ArrowRight')&&e.target!==logEl){e.preventDefault();(e.target===rt?$('pl7-cl'):rt).focus()}});
+  root.addEventListener('keydown',function(e){if(e.key==='Escape'&&line.getAttribute('aria-expanded')==='true'){e.preventDefault();setOpen(false,true)}});
+  rt.addEventListener('click',function(){
+    if(S.mode==='run')return;
+    if(S.mode==='pass'){init();draw();say('Demo reset. Build failed at step 4.');return}
+    var big=S.mode==='again';
+    S.run={big:big,t:0,i:0,seq:big?[[3,1400,'Passed','1:14'],[4,800,'Passed','0:31'],[5,800,'Passed','0:22']]:[[3,1400,'Failed','1:19']]};
+    S.mode='run';S.steps[3]=['Build','Running','0:00'];S.steps[4]=['Publish image','Queued',''];S.steps[5]=['Smoke test','Queued',''];
+    S.log.push(big?['12:11:02','retry 2 · runner 8 GB']:['12:09:10','retry 1 · runner 4 GB']);
+    say('Retrying step 4'+(big?' on 8 GB.':'.'));draw();kick()});
+  init();setOpen(false);draw();
+})();</script>
+</body></html>

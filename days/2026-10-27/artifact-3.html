@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pipeline panel: failed build step, log and retry for a team app</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#f7f7f5;--ink:#121316;--mut:#64666b;--line:#dcdcd7;--soft:#eeeeeb;--acc:#c43d12;--on:#f7f7f5}
+:root[data-theme="dark"]{--bg:#0e0f11;--ink:#f2f2f0;--mut:#9a9ca2;--line:#2a2c31;--soft:#17191c;--acc:#ff6b3d;--on:#0e0f11}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink)}
+.pa3-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;container-type:inline-size}
+.pa3-in{position:absolute;inset:0;display:flex;flex-direction:column;font:clamp(11px,5.2cqi,15px)/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg)}
+.pa3-head{display:flex;align-items:center;gap:.6em;padding:.55em .55em .55em .9em;border-bottom:1px solid var(--line)}
+.pa3-tt{flex:1;min-width:0}
+.pa3-h{margin:0;font-size:1.15em;font-weight:650;letter-spacing:-.01em}
+.pa3-meta{color:var(--mut);font-size:.8em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pa3-list{flex:1;overflow-y:auto;margin:0;padding:0;list-style:none;overscroll-behavior:contain}
+.pa3-row{border-bottom:1px solid var(--line)}
+.pa3-hd{all:unset;box-sizing:border-box;display:grid;grid-template-columns:1.5em 1fr auto auto;gap:.6em;align-items:center;width:100%;min-height:44px;padding:0 .9em;cursor:pointer}
+.pa3-hd:hover{background:var(--soft)}
+.pa3-n{color:var(--mut)}
+.pa3-nm{font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pa3-dur{color:var(--mut);font-size:.85em}
+.pa3-st{display:inline-flex;align-items:center;gap:.35em;font-size:.85em;font-weight:600;min-width:4.6em;justify-content:flex-end}
+.pa3-row[data-s="failed"] .pa3-st{color:var(--acc)}
+.pa3-row[data-s="skipped"] .pa3-st,.pa3-row[data-s="queued"] .pa3-st{color:var(--mut);font-weight:500}
+.pa3-sp{width:.8em;height:.8em;border:1.5px solid var(--line);border-top-color:var(--ink);border-radius:50%;animation:pa3-r .8s linear infinite;display:none}
+.pa3-row[data-s="running"] .pa3-sp{display:block}
+@keyframes pa3-r{to{transform:rotate(1turn)}}
+.pa3-chev{width:.55em;height:.55em;border:solid var(--mut);border-width:0 1.5px 1.5px 0;transform:rotate(-45deg);transition:transform 160ms ease-out;margin-left:.2em}
+.pa3-open .pa3-chev{transform:rotate(45deg)}
+.pa3-pan{display:grid;grid-template-rows:0fr;transition:grid-template-rows 200ms ease-out}
+.pa3-open .pa3-pan{grid-template-rows:1fr}
+.pa3-pi{overflow:hidden;min-height:0}
+.pa3-log{height:112px;overflow:auto;margin:0 .9em;padding:.5em .6em;background:var(--soft);border:1px solid var(--line);border-radius:6px;font:.8em/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+.pa3-ln b{font-weight:400;color:var(--mut);margin-right:.8em}
+.pa3-e{color:var(--acc)}
+.pa3-act{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.3em .6em;padding:.5em .9em .2em}
+.pa3-ck{display:inline-flex;align-items:center;gap:.45em;min-height:44px;cursor:pointer;font-size:.9em}
+.pa3-ck input{width:1.1em;height:1.1em;margin:0;accent-color:var(--acc)}
+.pa3-btn{display:inline-grid;min-height:44px;padding:0 1.1em;border:1px solid var(--ink);border-radius:8px;background:var(--ink);color:var(--on);font:inherit;font-weight:600;cursor:pointer;transition:transform 80ms ease-out}
+.pa3-btn:active:not(:disabled){transform:scale(.97)}
+.pa3-btn:disabled{cursor:default;background:transparent;color:var(--ink)}
+.pa3-btn>span{grid-area:1/1;place-self:center;opacity:0;transition:opacity 120ms ease-out;white-space:nowrap}
+.pa3-btn>span.pa3-on{opacity:1}
+.pa3-hint{padding:0 .9em .7em;color:var(--mut);font-size:.8em}
+.pa3-ghost{min-height:44px;padding:0 .8em;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--ink);font:inherit;font-size:.85em;cursor:pointer}
+.pa3-ghost:hover{background:var(--soft)}
+.pa3-foot{padding:.5em .9em;border-top:1px solid var(--line);font-size:.8em;color:var(--mut);min-height:2.4em}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.pa3-hd:focus-visible{outline-offset:-3px}
+@container (max-width:250px){.pa3-dur{display:none}.pa3-hd{grid-template-columns:1.2em 1fr auto;gap:.4em}}
+.pa3-rm *,.pa3-rm *::before{transition:none!important;animation:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="pa3-root" role="group" aria-label="Pipeline panel: inspect and retry a failed build step">
+<div class="pa3-in">
+<div class="pa3-head"><div class="pa3-tt"><h2 class="pa3-h" id="pa3-h">Build failed</h2><div class="pa3-meta">forever-web · fix/cat-pics-2 · #412</div></div>
+<button type="button" class="pa3-ghost" id="pa3-reset" style="visibility:hidden">Reset demo</button></div>
+<ol class="pa3-list" id="pa3-list"></ol>
+<div class="pa3-foot" id="pa3-live" role="status" aria-live="polite"></div>
+</div></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.querySelector('.pa3-root'),list=document.getElementById('pa3-list'),
+      live=document.getElementById('pa3-live'),title=document.getElementById('pa3-h'),
+      resetB=document.getElementById('pa3-reset');
+  var WORD={passed:'Passed',failed:'Failed',skipped:'Skipped',queued:'Queued',running:'Running'};
+  var SKIP=[['','No log. Skipped after step 4 failed.']];
+  function init(){return [
+    {name:'Checkout',dur:'0:08',s:'passed',log:[['12:02:51','git fetch origin fix/cat-pics-2'],['12:02:58','HEAD at 4b9f2c8'],['12:02:59','Done in 0:08']]},
+    {name:'Lint',dur:'0:24',s:'passed',log:[['12:03:00','eslint . --max-warnings 0'],['12:03:23','348 files, 0 warnings'],['12:03:24','Done in 0:24']]},
+    {name:'Unit tests',dur:'0:52',s:'passed',log:[['12:03:25','vitest run'],['12:04:16','184 suites passed'],['12:04:17','Done in 0:52']]},
+    {name:'Build',dur:'1:21',s:'failed',retry:true,log:[['12:04:17','turbo build --filter=forever-web'],['12:04:29','Bundling cat-pics-2 (2,314 modules)'],['12:05:31','warn  Heap at 3,740 of 4,096 MB'],['12:05:38','Killed process 8421 (node): out of memory','e'],['12:05:38','Exit code 137','e']]},
+    {name:'Publish image',dur:'',s:'skipped',log:SKIP},
+    {name:'Smoke test',dur:'',s:'skipped',log:SKIP}]}
+  var S={steps:init(),open:3,busy:false,label:'retry',tries:0,big:false,queue:[]};
+  var rows=[];
+
+  function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e}
+
+  S.steps.forEach(function(st,i){
+    var li=el('li','pa3-row'),hd=el('button','pa3-hd'),pan=el('div','pa3-pan'),pi=el('div','pa3-pi');
+    hd.type='button';hd.id='pa3-hd'+i;pi.id='pa3-p'+i;
+    hd.setAttribute('aria-controls',pi.id);
+    pi.setAttribute('role','region');pi.setAttribute('aria-labelledby',hd.id);
+    var stw=el('span','pa3-st');var sp=el('span','pa3-sp');var sw=el('span');
+    stw.append(sp,sw);
+    var nm=el('span','pa3-nm',st.name),du=el('span','pa3-dur'),ch=el('span','pa3-chev');
+    stw.appendChild(ch);
+    hd.append(el('span','pa3-n',String(i+1)),nm,du,stw);
+    var log=el('div','pa3-log');log.tabIndex=0;log.setAttribute('aria-label',st.name+' log');
+    pi.appendChild(log);pi.appendChild(el('div',null)).style.height='.7em';
+    var r={li:li,hd:hd,pi:pi,sw:sw,du:du,log:log,key:''};
+    if(st.retry){
+      var act=el('div','pa3-act'),ck=el('label','pa3-ck'),cb=el('input');
+      cb.type='checkbox';ck.append(cb,el('span',null,'8 GB runner'));
+      var b=el('button','pa3-btn');b.type='button';
+      r.lab={};[['retry','Retry step'],['pend','Retrying'],['pass','Passed in 1:14'],['again','Failed again']].forEach(function(p){
+        var s=el('span',null,p[1]);r.lab[p[0]]=s;b.appendChild(s)});
+      act.append(ck,b);pi.insertBefore(act,pi.lastChild);
+      pi.insertBefore(el('div','pa3-hint','Reruns steps 4–6'),pi.lastChild);
+      pi.lastChild.remove();
+      r.btn=b;r.cb=cb;
+      cb.addEventListener('change',function(){S.big=cb.checked});
+      b.addEventListener('click',retry);
+    }
+    pan.appendChild(pi);li.append(hd,pan);list.appendChild(li);rows.push(r);
+    hd.addEventListener('click',function(){
+      S.open=S.open===i?-1:i;draw();
+      if(S.open===i)setTimeout(function(){li.scrollIntoView({block:'nearest',behavior:reduce()?'auto':'smooth'})},210);
+    });
+    hd.addEventListener('keydown',function(e){
+      var k=e.key,j=-1;
+      if(k==='ArrowDown')j=(i+1)%6;else if(k==='ArrowUp')j=(i+5)%6;
+      else if(k==='Home')j=0;else if(k==='End')j=5;
+      if(j>-1){e.preventDefault();rows[j].hd.focus()}
+    });
+  });
+
+  root.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&S.open>-1){var r=rows[S.open];S.open=-1;draw();r.hd.focus()}
+  });
+
+  function say(t){live.textContent=t}
+  function add(i,lines){S.steps[i].log=S.steps[i].log.concat(lines)}
+
+  function retry(){
+    if(S.busy)return;
+    var st=S.steps,big=S.big;
+    S.busy=true;S.label='pend';S.tries++;
+    st[3].s='running';st[3].dur='';
+    st[4].s=st[5].s='queued';st[4].log=st[5].log=[['','Waiting for step 4.']];
+    say('Retrying step 4 on '+(big?'8':'4')+' GB runner.');
+    if(!big){
+      S.queue.push({ms:1400,fn:function(){
+        st[3].s='failed';st[3].dur='1:18';
+        add(3,[['12:09:02','Retry '+S.tries+' on 4 GB runner'],['12:10:20','Killed process '+(8430+S.tries)+' (node): out of memory','e'],['12:10:20','Exit code 137','e']]);
+        st[4].s=st[5].s='skipped';st[4].log=st[5].log=SKIP;
+        S.label='again';say('Step 4 failed again: out of memory. Try the 8 GB runner.');
+      }},{ms:1600,fn:function(){S.label='retry';S.busy=false}});
+    }else{
+      S.queue.push({ms:1400,fn:function(){
+        st[3].s='passed';st[3].dur='1:14';
+        add(3,[['12:11:40','Retry on 8 GB runner'],['12:12:50','Heap peak 5,120 of 8,192 MB'],['12:12:54','Done in 1:14']]);
+        S.label='pass';st[4].s='running';st[4].log=[['12:12:55','docker push forever-web:4b9f2c8']];
+        say('Step 4 passed in 1:14. Running step 5.');
+      }},{ms:800,fn:function(){
+        st[4].s='passed';st[4].dur='0:31';add(4,[['12:13:25','Done in 0:31']]);
+        st[5].s='running';st[5].log=[['12:13:26','GET /health on Forever plan preview']];
+        say('Step 5 passed. Running step 6.');
+      }},{ms:800,fn:function(){
+        st[5].s='passed';st[5].dur='0:12';add(5,[['12:13:37','200 OK'],['12:13:38','Done in 0:12']]);
+        say('Build passed. All 6 steps green.');
+      }});
+    }
+    draw();kick();
+  }
+
+  resetB.addEventListener('click',function(){
+    S.steps=init();S.open=3;S.busy=false;S.label='retry';S.tries=0;S.queue=[];
+    say('Demo reset. Step 4 failed: out of memory (exit 137).');draw();rows[3].hd.focus();
+  });
+
+  function step(dt){
+    var q=S.queue;if(!q.length)return false;
+    q[0].ms-=dt;
+    if(q[0].ms<=0){var f=q.shift().fn;f();draw()}
+    return q.length>0;
+  }
+  function draw(){
+    root.classList.toggle('pa3-rm',reduce());
+    var st=S.steps,any='passed';
+    st.forEach(function(s){if(s.s==='failed')any='failed';else if((s.s==='running'||s.s==='queued')&&any!=='failed')any='running'});
+    title.textContent=any==='failed'?'Build failed':any==='running'?'Build running':'Build passed';
+    resetB.style.visibility=S.tries?'visible':'hidden';
+    rows.forEach(function(r,i){
+      var s=st[i],open=S.open===i;
+      r.li.dataset.s=s.s;r.li.classList.toggle('pa3-open',open);
+      r.hd.setAttribute('aria-expanded',open);r.pi.inert=!open;
+      r.sw.textContent=WORD[s.s];r.du.textContent=s.dur;
+      var key=s.log.length+s.s;
+      if(key!==r.key){r.key=key;
+        r.log.replaceChildren();
+        s.log.forEach(function(l){var d=el('div','pa3-ln'+(l[2]?' pa3-e':''));
+          if(l[0])d.appendChild(el('b',null,l[0]));d.appendChild(document.createTextNode(l[1]));r.log.appendChild(d)});
+        r.log.scrollTop=r.log.scrollHeight;
+      }
+      if(r.btn){
+        for(var k in r.lab)r.lab[k].classList.toggle('pa3-on',k===S.label);
+        r.btn.disabled=S.busy||S.label==='pass';r.cb.disabled=S.busy||S.label==='pass';
+        r.cb.checked=S.big=S.tries?r.cb.checked:false;
+        r.btn.setAttribute('aria-label',r.lab[S.label].textContent);
+      }
+    });
+  }
+  function frame(now){var dt=last?Math.min(now-last,50):16.667;last=now;
+    var moving=step(dt);
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden&&S.queue.length){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',draw);
+  say('Step 4 failed: out of memory (exit 137).');
+  draw();
+  list.scrollTop=rows[3].li.offsetTop-list.offsetTop-rows[2].li.offsetHeight;
+})();</script>
+</body></html>

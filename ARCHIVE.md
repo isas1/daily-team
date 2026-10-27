@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 24 days recorded.
+Every daily team and the asset it made, newest first. 25 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-10-27](days/2026-10-27/) | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter | The component fits a narrow phone frame. | [asset](days/2026-10-27/piece.html) |
 | [2026-10-26](days/2026-10-26/) | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist | Every selected item has a non-color state marker. | [asset](days/2026-10-26/piece.html) |
 | [2026-10-25](days/2026-10-25/) | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai | Lowercase only. | [asset](days/2026-10-25/piece.html) |
 | [2026-10-24](days/2026-10-24/) | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne | Prints clearly on a black-and-white printer. | [asset](days/2026-10-24/piece.html) |

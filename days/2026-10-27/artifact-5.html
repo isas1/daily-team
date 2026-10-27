@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pipeline step panel for a team CI view</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#ff6b3d;--sf:#16171a;--lit:#202226;--ln:#2a2c31;--mu:#9a9ca1;--on:#0e0f11}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#c43d12;--sf:#fff;--lit:#f0f0ee;--ln:#dcdcd8;--mu:#5d5f64;--on:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.fx5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:inline-size}
+.fx5-in{height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:6px;padding:10px;background:var(--sf);border:1px solid var(--ln);border-radius:12px;font-size:clamp(10px,4.4cqw,15px);font-variant-numeric:tabular-nums}
+.fx5-sum{font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fx5-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.fx5-lit{position:absolute;left:0;top:0;border:1.5px solid var(--acc);border-radius:6px;background:var(--lit);pointer-events:none;transition:transform .2s cubic-bezier(.2,0,0,1)}
+.fx5-tile{position:relative;min-height:44px;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1px;padding:4px 7px;border:1px solid var(--ln);border-radius:6px;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:border-color .3s ease-out}
+.fx5-on{border-color:transparent}
+.fx5-n,.fx5-s{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fx5-n{font-weight:600;opacity:.7;transition:opacity .3s ease-out}
+.fx5-on .fx5-n{opacity:1}
+.fx5-s{font-size:.86em}
+.fx5-hot .fx5-s{color:var(--acc)}
+.fx5-log{min-height:0;overflow:auto;background:var(--bg);border:1px solid var(--ln);border-radius:6px;padding:5px 7px;font:max(10px,.82em)/1.45 ui-monospace,Menlo,Consolas,monospace;white-space:pre;transition:opacity .15s ease-out}
+.fx5-l{display:flex;gap:.8em}
+.fx5-t{color:var(--mu)}
+.fx5-err{color:var(--acc)}
+.fx5-e{color:var(--mu);white-space:normal}
+.fx5-bar{display:grid;grid-template-columns:1fr 1.3fr;gap:6px}
+.fx5-bar button{min-height:44px;min-width:0;padding:0 6px;border-radius:8px;border:1px solid var(--ln);background:var(--sf);color:var(--ink);font:inherit;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:transform .12s ease-out,opacity .16s,border-color .16s}
+.fx5-bar button:active:not(:disabled){transform:scale(.97);transition-duration:.08s}
+.fx5-bar .fx5-pri{background:var(--acc);border-color:var(--acc);color:var(--on)}
+.fx5-bar button:disabled{opacity:.5;cursor:default}
+.fx5-bar .fx5-ok:disabled{background:none;color:var(--ink);border-color:var(--ln);opacity:1}
+@media(hover:hover){.fx5-tile:hover,.fx5-bar button:hover:not(:disabled):not(.fx5-pri){border-color:var(--mu)}.fx5-on:hover{border-color:transparent}}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="fx5-root" role="group" aria-label="Build pipeline: failed step, log and retry"><div class="fx5-in" id="fx5-in"></div></div>
+<script>(function(){
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var raf=0,last=0,fi=3,prevSel=-1,logKey='',sumTxt='';
+var NAMES=['Checkout','Lint','Tests','Build','Publish','Smoke'];
+var DUR=[0,0,0,1400,800,800];
+function fresh(){return{sel:3,run:null,done:false,flash:0,steps:[
+{st:'Passed',d:'0:08',log:[['0:00','Cloned forever-app @ 4b9f2c8'],['0:08','On branch cat-pics-2']]},
+{st:'Passed',d:'0:16',log:[['0:09','eslint: 348 files'],['0:24','0 warnings']]},
+{st:'Passed',d:'0:27',log:[['0:25','Running 184 suites'],['0:52','184 passed, 0 failed']]},
+{st:'Failed',d:'1:21',log:[['1:01','Bundling emotional-baggage.js'],['2:14','warn Heap at 3,740 MB'],['2:21','Killed process 8421 (node)',1],['2:22','Exit code 137 \u00b7 out of memory',1]]},
+{st:'Skipped',d:'',log:[]},{st:'Skipped',d:'',log:[]}]}}
+var S=fresh();
+function el(t,c,p){var e=document.createElement(t);if(c)e.className=c;if(p)p.appendChild(e);return e}
+var box=document.getElementById('fx5-in');
+var sum=el('div','fx5-sum',box);sum.setAttribute('role','status');sum.setAttribute('aria-live','polite');
+var grid=el('div','fx5-grid',box);grid.setAttribute('role','tablist');grid.setAttribute('aria-label','Build steps');
+var lit=el('div','fx5-lit',grid);
+var log=el('div','fx5-log',box);log.id='fx5-log';log.setAttribute('role','tabpanel');log.tabIndex=0;
+var tiles=NAMES.map(function(n,i){var t=el('button','fx5-tile',grid);t.type='button';t.id='fx5-t'+i;
+t.setAttribute('role','tab');t.setAttribute('aria-controls','fx5-log');
+el('span','fx5-n',t).textContent=(i+1)+' '+n;t._s=el('span','fx5-s',t);
+t.addEventListener('click',function(){S.sel=fi=i;draw()});return t});
+var bar=el('div','fx5-bar',box);
+var A=el('button','',bar),B=el('button','fx5-pri',bar);A.type=B.type='button';
+A.addEventListener('click',function(){if(S.done){S=fresh();fi=3;draw()}else start('a')});
+B.addEventListener('click',function(){start('b')});
+function fmt(s){s=Math.floor(s);return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60}
+function start(m){if(S.run||S.done)return;var b=S.steps[3];b.st='Running';b.d='';
+b.log.push(['+0:00','Retry \u00b7 '+(m==='b'?'8':'4')+' GB runner']);
+for(var i=4;i<6;i++){S.steps[i].st='Queued';S.steps[i].d='';S.steps[i].log=[]}
+S.run={m:m,i:3,t:0};S.sel=fi=3;draw();kick()}
+function step(dt){var r=S.run;if(!r)return false;r.t+=dt;if(r.t<DUR[r.i])return true;
+var p=S.steps[r.i];
+if(r.i===3&&r.m==='a'){p.st='Failed';p.d='1:20';
+p.log.push(['+1:19','Killed process 8533 (node)',1],['+1:20','Exit code 137 \u00b7 out of memory',1]);
+S.steps[4].st=S.steps[5].st='Skipped';S.run=null;S.flash=performance.now()+1800;setTimeout(draw,1850);return false}
+if(r.i===3){p.log.push(['+0:58','Heap peaked at 5,120 MB'],['+1:14','Build passed']);p.d='1:14'}
+else if(r.i===4){p.log.push(['+0:48','Image published']);p.d='0:48'}
+else{p.log.push(['+0:31','Smoke passed \u00b7 12 checks']);p.d='0:31'}
+p.st='Passed';
+if(r.i<5){r.i++;r.t=0;var q=S.steps[r.i];q.st='Running';
+q.log=[['+0:00',r.i===4?'Pushing forever-app:4b9f2c8':'Checking Forever plan preview']];S.sel=fi=r.i;return true}
+S.run=null;S.done=true;return false}
+function placeLit(anim){var t=tiles[S.sel];lit.style.transition=(anim&&!reduce())?'':'none';
+lit.style.width=t.offsetWidth+'px';lit.style.height=t.offsetHeight+'px';
+lit.style.transform='translate('+t.offsetLeft+'px,'+t.offsetTop+'px)';
+if(!anim){void lit.offsetWidth;lit.style.transition=''}}
+function renderLog(){var p=S.steps[S.sel],k=S.sel+'|'+p.log.length+'|'+p.st;if(k===logKey)return;logKey=k;
+log.setAttribute('aria-labelledby','fx5-t'+S.sel);
+while(log.firstChild)log.removeChild(log.firstChild);
+if(!p.log.length)el('div','fx5-e',log).textContent=p.st==='Queued'?'Queued. Starts after step '+S.sel+'.':'No log. Skipped after step 4 failed.';
+p.log.forEach(function(l){var d=el('div','fx5-l'+(l[2]?' fx5-err':''),log);
+el('span','fx5-t',d).textContent=l[0];el('span','',d).textContent=l[1]});
+log.scrollTop=log.scrollHeight;
+if(S.sel!==prevSel&&prevSel>-1&&!reduce()){log.style.transition='none';log.style.opacity=0;void log.offsetWidth;log.style.transition='';log.style.opacity=1}
+prevSel=S.sel}
+function draw(){var now=performance.now(),r=S.run;
+S.steps.forEach(function(p,i){var t=tiles[i],w=p.st;
+if(w==='Running'&&r)w+=' '+fmt(r.t/1000);else if(p.d)w+=' '+p.d;
+if(t._s.textContent!==w)t._s.textContent=w;
+t.className='fx5-tile'+(i===S.sel?' fx5-on':'')+(p.st==='Failed'||p.st==='Running'?' fx5-hot':'');
+t.setAttribute('aria-selected',i===S.sel?'true':'false');t.tabIndex=i===fi?0:-1});
+var s=r?'Running step '+(r.i+1)+' of 6':S.done?'Build passed \u00b7 6 of 6':S.steps[3].log.length>4?'Failed again at step 4':'Build failed at step 4 of 6';
+if(s!==sumTxt){sumTxt=s;sum.textContent=s}
+A.disabled=!!r;B.disabled=!!r||S.done;B.className=S.done?'fx5-ok':'fx5-pri';
+A.textContent=S.done?'Reset demo':r&&r.m==='a'?'Retrying':now<S.flash?'Failed again':'Retry';
+B.textContent=S.done?'Passed in 1:14':r&&r.m==='b'?'Retrying':'Retry on 8 GB';
+renderLog();placeLit(true)}
+grid.addEventListener('keydown',function(e){var k=e.key,n;
+if(k==='ArrowRight')n=(fi+1)%6;else if(k==='ArrowLeft')n=(fi+5)%6;
+else if(k==='ArrowDown'||k==='ArrowUp')n=(fi+3)%6;
+else if(k==='Home')n=0;else if(k==='End')n=5;else return;
+e.preventDefault();fi=n;draw();tiles[n].focus()});
+box.addEventListener('keydown',function(e){if(e.key==='Escape'){fi=S.sel;draw();tiles[S.sel].focus()}});
+function frame(now){var dt=last?Math.min(now-last,50):16;last=now;
+var moving=step(dt);draw();raf=moving?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+document.addEventListener('visibilitychange',function(){
+if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(S.run)kick()});
+window.addEventListener('message',function(e){var m=e.data;
+if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+new ResizeObserver(function(){placeLit(false)}).observe(grid);
+draw();
+})();</script>
+</body></html>
