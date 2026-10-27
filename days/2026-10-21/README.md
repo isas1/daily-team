@@ -12,6 +12,10 @@
 
 **Decision:** The page is a dye house where the visitor dips one strip of cloth through a rack of vats that the tide fills by one pot per visit, and the colour the cloth takes is the swatch they pick, kept in the browser until they return.
 
+<img src="cover.png" alt="Designed cover for Fast Colour" width="100%">
+
+[Cover art direction](cover.json) · [Cover source](cover.html)
+
 ## Asset
 
 <a href="piece.html"><img src="piece.png" alt="Screenshot of piece.html" width="100%"></a>

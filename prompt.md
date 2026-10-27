@@ -276,6 +276,14 @@ Before you return the file, check it against these failures and fix any you find
 - It has the generic look: purple-blue gradients, neon glow, frosted glass, centred hero text.
 - It shows a blank or black screen before WebGL starts, or when WebGL is not available. Draw a canvas 2D or SVG fallback in that case.
 
+## Design the cover
+
+The same four members now design the day's project cover. Use their recorded pitches, clash and decision as art direction. This is a distinct editorial poster for the work, not an interface screenshot or another team card. Keep the branded team image separate.
+
+Return `## Cover direction`, one short contribution per member, and the lead's chosen composition, palette and type treatment. Historical guests contribute their recorded method; never impersonate them. Then return exactly one fenced html document, with a title and a static 1200px by 630px canvas. No JavaScript, external URLs, imports, linked fonts, embedded frames or network resources. CSS and inline SVG geometry are available; avoid fake photographs or sketch illustrations. Fonts `Cover Headline` and `Cover Text` will be embedded by the renderer.
+
+Make a bold, day-specific composition that shows the project's purpose and the team's creative choices. A pipeline cover might expose a broken route and its repair; a dye cover might use interwoven swatches. Choose the visual from the actual plan. Do not use one recurring layout or decorate a screenshot. Give the exact concept title strong hierarchy, readable even in a 160px thumbnail. Keep copy short: title, a short useful task descriptor, and the exact date. Use generous margins, intentional contrast and one strong visual idea. Keep all text inside the canvas. No invented metrics, endorsements or claims. Use the Sam Creates navy #0E2A47 and red #BE4D4D as quiet connective details when they suit the day; the cover can have its own palette. No cast list, logo replacement or team-card grid.
+
 ## Recruit
 
 You draft next week's season for the daily team: new roles, methods, constraints, and tasks. Return only one json code block.

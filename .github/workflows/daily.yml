@@ -83,6 +83,17 @@ jobs:
           COMPONENT_REQUESTS_FILE: ${{ runner.temp }}/component-requests.json
           COMPONENT_SOURCES_FILE: ${{ env.PROVIDER == 'claude' && format('{0}/component-sources.json', runner.temp) || '' }}
         run: node run.mjs $FORCE
+      - name: Design daily project cover
+        continue-on-error: true
+        if: always() && steps.key.outputs.ok == 'true'
+        env:
+          OPENROUTER_API_KEY: ${{ env.PROVIDER != 'claude' && secrets.OPENROUTER_API_KEY || '' }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ env.PROVIDER == 'claude' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+          MODEL: ${{ vars.MODEL }}
+          API_URL: ${{ vars.API_URL }}
+          FORCE: ${{ inputs.force && '--force' || '' }}
+        run: node cover.mjs $FORCE
       - name: Screenshot new artifacts
         if: always() && steps.key.outputs.ok == 'true'
         run: sh shot.sh days || true
