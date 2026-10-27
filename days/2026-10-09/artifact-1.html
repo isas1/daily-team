@@ -205,7 +205,6 @@ var TODAY=d0.getFullYear()+"-"+pad(d0.getMonth()+1)+"-"+pad(d0.getDate());
 function valid(s){return /^\d{4}-\d{2}-\d{2}$/.test(s||"")}
 function dn(s){var p=s.split("-").map(Number);return Math.round(Date.UTC(p[0],p[1]-1,p[2])/864e5)}
 function iso(n){return new Date(n*864e5).toISOString().slice(0,10)}
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function plural(n,w){return n+" "+w+(n===1?"":"s")}
 
 function example(){
@@ -503,15 +502,22 @@ function renderAsh(){
     al.textContent="Plan v"+n+". Was "+p1.toFixed(1)+"% on v1 ("+v1.done+" ÷ "+v1.total+"). Last burn: "+vs[vs.length-1].change+".";
   }
   $("#ashsum").textContent="Ash: "+plural(vs.length,"earlier plan");
-  var h="";
+  var list=$("#ashlist"),fragment=document.createDocumentFragment();
+  function textNode(parent,tag,text){
+    var el=document.createElement(tag);el.textContent=text;parent.appendChild(el);return el;
+  }
   for(var i=vs.length-1;i>=0;i--){
     var v=vs[i],p=v.total?Math.min(100,v.done/v.total*100):0;
-    h+='<div class="ver"><h3>v'+v.v+' · '+v.done+' ÷ '+v.total+' × 100 = '+p.toFixed(1)+'%</h3>'+
-      '<p>Burnt when: '+esc(v.change)+'.</p><p>'+esc(v.start)+' to '+esc(v.target)+'</p><ol>';
-    v.ms.forEach(function(m){h+='<li>'+esc(m.title)+' · due '+esc(m.due)+(valid(m.doneOn)?' · capped '+esc(m.doneOn):'')+'</li>'});
-    h+='</ol></div>';
+    var box=document.createElement("div");box.className="ver";
+    textNode(box,"h3","v"+v.v+" · "+v.done+" ÷ "+v.total+" × 100 = "+p.toFixed(1)+"%");
+    textNode(box,"p","Burnt when: "+v.change+".");
+    textNode(box,"p",v.start+" to "+v.target);
+    var items=document.createElement("ol");
+    v.ms.forEach(function(m){textNode(items,"li",m.title+" · due "+m.due+(valid(m.doneOn)?" · capped "+m.doneOn:""))});
+    box.appendChild(items);fragment.appendChild(box);
   }
-  $("#ashlist").innerHTML=h||'<p class="small">No earlier plans.</p>';
+  if(!vs.length)textNode(fragment,"p","No earlier plans.").className="small";
+  list.replaceChildren(fragment);
 }
 
 /* main render */
