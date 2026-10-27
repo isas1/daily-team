@@ -14,6 +14,10 @@
 
 **Decision:** The page is a phone-width pipeline panel: the visitor opens the failed build step, reads the log line that stopped it, and retries the step in a local demo.
 
+<img src="cover.png" alt="Designed cover for Lit Case" width="100%">
+
+[Cover art direction](cover.json) · [Cover source](cover.html)
+
 ## Asset
 
 <a href="piece.html"><img src="piece.png" alt="Screenshot of piece.html" width="100%"></a>

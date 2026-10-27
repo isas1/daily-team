@@ -15,6 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { dayTitle, findBanned, parseTeam, planSections, teamFor, today } from './run.mjs';
 import { listSeasons, readSeason } from './recruit.mjs';
 import { cardHtml, renderPng, titleCase } from './card.mjs';
+import { hasCover } from './cover.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RECENT_DAYS = 7;
@@ -33,6 +34,9 @@ const roles = (day) => parseTeam(day.team).members.map((m) => m.role).join(' · 
 const firstAsset = (day) => day.artifacts.find((a) => a.kind === 'piece' && a.status !== 'failed')
   ?? day.artifacts.find((a) => a.status !== 'failed');
 const png = (a) => a.file.replace(/\.html$/, '.png');
+// Only a rendered cover matching this exact day record may replace its screenshot.
+const preview = (day, daysDir) => hasCover(day, daysDir) ? 'cover.png'
+  : firstAsset(day) ? png(firstAsset(day)) : '';
 
 export function loadDays(daysDir) {
   if (!existsSync(daysDir)) return [];
@@ -150,7 +154,9 @@ export function dayReadme(day, daysDir, pagesUrl) {
     `**Constraint:** ${constraint}`, '',
     ...(season ? [`**Season:** ${season}`, ''] : []),
     ...(day.decision ? [`**Decision:** ${day.decision}`, ''] : []),
-    '## Asset', '', ...assetLines(day, { dir, href: '' }, pagesUrl),
+    ...(hasCover(day, daysDir) ? [`<img src="cover.png" alt="Designed cover for ${esc(title(day))}" width="100%">`, '', '[Cover art direction](cover.json) · [Cover source](cover.html)', ''] : []),
+    '## Asset', '',
+    ...assetLines(day, { dir, href: '' }, pagesUrl),
     ...(session(day) ? sessionMarkdown(session(day))
       : day.plan ? ['## Team plan', '', day.plan.replace(/^(#{1,5}) /gm, '#$1 '), ''] : []),
     ...guestNote(day),
@@ -166,7 +172,8 @@ export function todayBlock(day, daysDir, pagesUrl) {
   }
   const base = `days/${day.date}/`;
   const a = firstAsset(day);
-  const shot = a && join(daysDir, day.date, png(a));
+  const image = preview(day, daysDir);
+  const shot = image && join(daysDir, day.date, image);
   const lines = [
     `### ${day.date}: ${title(day)}`, '',
     `<a href="${base}"><img src="${base}team.png" alt="Team for ${day.date}: ${esc(roles(day))}" width="100%"></a>`, '',
@@ -174,7 +181,7 @@ export function todayBlock(day, daysDir, pagesUrl) {
     ...(day.decision ? [`**Decision:** ${day.decision}`, ''] : []),
   ];
   if (shot && existsSync(shot)) {
-    lines.push(`<a href="${base}"><img src="${base}${png(a)}" alt="Screenshot of today's asset" width="100%"></a>`, '');
+    lines.push(`<a href="${base}"><img src="${base}${image}" alt="${image === 'cover.png' ? `Designed cover for ${esc(title(day))}` : "Screenshot of today's asset"}" width="100%"></a>`, '');
     if (statSync(shot).size < MIN_SCREENSHOT_BYTES) lines.push('The screenshot may be blank. Open the day to check.', '');
   } else if (!a) lines.push(day.error ? `No asset today. ${day.error}` : 'No asset today.', '');
   const links = [`[Open the day](${base})`];
@@ -184,21 +191,22 @@ export function todayBlock(day, daysDir, pagesUrl) {
   return lines.join('\n');
 }
 
-export function recentBlock(days) {
+export function recentBlock(days, daysDir = join(HERE, 'days')) {
   if (!days.length) return 'The archive starts with the first daily run.';
   const rows = [...days].reverse().slice(0, RECENT_DAYS).map((d) => {
-    const a = firstAsset(d);
-    const thumb = a ? `<a href="days/${d.date}/"><img src="days/${d.date}/${png(a)}" alt="${esc(title(d))}" width="160"></a>` : 'No asset';
+    const image = preview(d, daysDir);
+    const thumb = image ? `<a href="days/${d.date}/"><img src="days/${d.date}/${image}" alt="${esc(title(d))}" width="160"></a>` : 'No asset';
     return `| [${d.date}](days/${d.date}/) | ${thumb} | ${cell(title(d))} | ${cell(roles(d))} |`;
   });
   return ['| Date | Asset | Task | Team |', '|---|---|---|---|', ...rows, '', `[All ${plural(days.length, 'day')}](ARCHIVE.md)`].join('\n');
 }
 
-export function archive(days) {
+export function archive(days, daysDir = join(HERE, 'days')) {
   const rows = [...days].reverse().map((d) => {
     const a = firstAsset(d);
     const asset = a ? `[${a.status === 'ok' ? 'asset' : 'asset, needs review'}](days/${d.date}/${a.file})` : 'no asset';
-    return `| [${d.date}](days/${d.date}/) | ${cell(title(d))} | ${cell(roles(d))} | ${cell(parseTeam(d.team).constraint)} | ${asset} |`;
+    const cover = hasCover(d, daysDir) ? `<a href="days/${d.date}/"><img src="days/${d.date}/cover.png" alt="${esc(title(d))}" width="160"></a> ` : '';
+    return `| [${d.date}](days/${d.date}/) | ${cell(title(d))} | ${cell(roles(d))} | ${cell(parseTeam(d.team).constraint)} | ${cover}${asset} |`;
   });
   return [
     '# Archive', '', `Every daily team and the asset it made, newest first. ${plural(days.length, 'day')} recorded.`, '',
@@ -312,10 +320,10 @@ ${body}
 `;
 }
 
-function grid(days, prefix) {
+function grid(days, prefix, daysDir) {
   return `<h2>All days</h2>\n<ul class="grid">\n${[...days].reverse().map((d) => {
-    const a = firstAsset(d);
-    const img = a ? `<img src="${prefix}${d.date}/${png(a)}" alt="" loading="lazy">` : `<img src="${prefix}${d.date}/team.png" alt="" loading="lazy">`;
+    const image = preview(d, daysDir);
+    const img = image ? `<img src="${prefix}${d.date}/${image}" alt="" loading="lazy">` : `<img src="${prefix}${d.date}/team.png" alt="" loading="lazy">`;
     return `<li><a href="${prefix}${d.date}/">${img}<strong>${d.date}</strong><br>${esc(title(d))}</a></li>`;
   }).join('\n')}\n</ul>`;
 }
@@ -337,9 +345,10 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
     day.request ? `<p>Request source: <a href="https://github.com/${esc(day.request.repository)}/issues/${Number(day.request.number)}">${esc(day.request.repository)} #${Number(day.request.number)}</a> · Local prototype</p>` : '',
     `<img class="card" src="${imagePrefix}team.png" alt="Team for ${day.date}: ${esc(roles(day))}">`,
     day.decision ? `<p><strong>Decision:</strong> ${esc(day.decision)}</p>` : '',
+    hasCover(day, daysDir) ? `<img src="${imagePrefix}cover.png" alt="Designed cover for ${esc(title(day))}">` : '',
     ...(frames.length ? frames : [`<p>No asset. ${esc(day.error || '')}</p>`]),
     s ? sessionHtml(s) : '', plan, archiveHtml,
-  ].join('\n'), { root, image: pagesUrl ? `${pagesUrl}${day.date}/team.png` : '' });
+  ].join('\n'), { root, image: pagesUrl ? `${pagesUrl}${day.date}/${hasCover(day, daysDir) ? 'cover.png' : 'team.png'}` : '' });
 }
 
 export function buildSite(siteDir, days, daysDir, repo, pagesUrl = '') {
@@ -347,14 +356,14 @@ export function buildSite(siteDir, days, daysDir, repo, pagesUrl = '') {
   for (const day of days) {
     const out = join(siteDir, day.date);
     mkdirSync(out, { recursive: true });
-    for (const f of ['team.png', ...day.artifacts.map(png)]) {
+    for (const f of ['team.png', 'cover.png', 'cover.html', 'cover.json', ...day.artifacts.map(png)]) {
       if (existsSync(join(daysDir, day.date, f))) copyFileSync(join(daysDir, day.date, f), join(out, f));
     }
-    writeFileSync(join(out, 'index.html'), dayPage(day, daysDir, repo, grid(days, '../'), { root: '../', pagesUrl, imagePrefix: '' }));
+    writeFileSync(join(out, 'index.html'), dayPage(day, daysDir, repo, grid(days, '../', daysDir), { root: '../', pagesUrl, imagePrefix: '' }));
   }
   const latest = days.at(-1);
   writeFileSync(join(siteDir, 'index.html'), latest
-    ? dayPage(latest, daysDir, repo, grid(days, './'), { root: './', pagesUrl, imagePrefix: `./${latest.date}/` })
+    ? dayPage(latest, daysDir, repo, grid(days, './', daysDir), { root: './', pagesUrl, imagePrefix: `./${latest.date}/` })
     : page('daily-team', '<p>No days yet.</p>'));
 }
 
@@ -380,12 +389,12 @@ export function publish(root, { pagesUrl = '', site = '', repo = '', suggestions
     rmSync(join(daysDir, day.date, 'team.svg'), { force: true });
     writeFileSync(join(daysDir, day.date, 'README.md'), dayReadme(day, daysDir, pagesUrl));
   }
-  writeFileSync(join(root, 'ARCHIVE.md'), archive(days));
+  writeFileSync(join(root, 'ARCHIVE.md'), archive(days, daysDir));
   const readme = join(root, 'README.md');
   let text = readFileSync(readme, 'utf8');
   text = replaceBlock(text, 'TODAY', todayBlock(days.at(-1), daysDir, pagesUrl));
   text = replaceBlock(text, 'WEEK', weekBlock(root, days, suggestions));
-  text = replaceBlock(text, 'RECENT', recentBlock(days));
+  text = replaceBlock(text, 'RECENT', recentBlock(days, daysDir));
   writeFileSync(readme, text);
   if (site) buildSite(site, days, daysDir, repo, pagesUrl);
   return days.length;

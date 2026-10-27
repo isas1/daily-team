@@ -6,13 +6,13 @@ Every daily team and the asset it made, newest first. 25 days recorded.
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
-| [2026-10-27](days/2026-10-27/) | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter | The component fits a narrow phone frame. | [asset](days/2026-10-27/piece.html) |
+| [2026-10-27](days/2026-10-27/) | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter | The component fits a narrow phone frame. | <a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Lit Case" width="160"></a> [asset](days/2026-10-27/piece.html) |
 | [2026-10-26](days/2026-10-26/) | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist | Every selected item has a non-color state marker. | [asset](days/2026-10-26/piece.html) |
 | [2026-10-25](days/2026-10-25/) | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai | Lowercase only. | [asset](days/2026-10-25/piece.html) |
 | [2026-10-24](days/2026-10-24/) | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne | Prints clearly on a black-and-white printer. | [asset](days/2026-10-24/piece.html) |
 | [2026-10-23](days/2026-10-23/) | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin | No buttons. | [asset](days/2026-10-23/piece.html) |
 | [2026-10-22](days/2026-10-22/) | Wet Tally | Animator · Chef · Librarian · Gulliver | Under 30 KB in total. | [asset](days/2026-10-22/piece.html) |
-| [2026-10-21](days/2026-10-21/) | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe | Saves the input in the browser and restores it on reload. | [asset](days/2026-10-21/piece.html) |
+| [2026-10-21](days/2026-10-21/) | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe | Saves the input in the browser and restores it on reload. | <a href="days/2026-10-21/"><img src="days/2026-10-21/cover.png" alt="Fast Colour" width="160"></a> [asset](days/2026-10-21/piece.html) |
 | [2026-10-20](days/2026-10-20/) | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade | Text still reads clearly at 200 percent zoom. | [asset](days/2026-10-20/artifact-1.html) |
 | [2026-10-19](days/2026-10-19/) | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus | All text at 18 px or larger. | [asset](days/2026-10-19/artifact-1.html) |
 | [2026-10-18](days/2026-10-18/) | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin | Changes with the time of day. | [asset](days/2026-10-18/artifact-1.html) |

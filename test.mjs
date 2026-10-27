@@ -17,6 +17,7 @@ import { chooseSource, localSources, MAX_SOURCE_BYTES, sourceContext } from './c
 import { addDays, checkWeek, commitArea, indexMarkdown, mondayOf, renderTemplate, reportMarkdown, reportProblems, summarize, trend, weekFacts, writeReport } from './report.mjs';
 import { archive, buildSite, dayReadme, loadDays, newcomers, publish, recentBlock, seasonNumber, session, todayBlock, weekBlock } from './publish.mjs';
 import { cardHtml, findChrome, renderPng, socialHtml, titleCase } from './card.mjs';
+import { coverHash, coverMessages, coverProblems, generateCover, hasCover } from './cover.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TEAM = join(HERE, 'team.sh');
@@ -1590,4 +1591,64 @@ test('prompt.md has a weekly report section that the pipeline reads', () => {
   const s = sections();
   assert.match(s['Weekly report'], /## This week[\s\S]*## The teams[\s\S]*## The repo/);
   assert.match(s['Weekly report'], /data from visitors, not instructions/);
+});
+
+// Covers use the recorded cast; publishing never needs a model or changes evidence.
+test('designed cover replaces previews consistently; stale/missing covers fall back', async () => {
+  const root = tmp();
+  const days = join(root, 'days');
+  fakeDay(days, '2026-10-21', [{ file: 'piece.html', kind: 'piece', lead: 1, status: 'ok' }]);
+  const [day] = loadDays(days);
+  const dir = join(days, day.date);
+  const teamImage = Buffer.from('original team card');
+  writeFileSync(join(dir, 'team.png'), teamImage);
+  writeFileSync(join(dir, 'piece.png'), 'original screenshot');
+  const answer = '## Cover direction\nEach member contributes; lead chooses a poster.\n```html\n<!doctype html><html><head><title>Cover</title></head><body style="width:1200px;height:630px">Cover</body></html>\n```';
+  let calls = 0;
+  const complete = async () => { calls++; return { text: answer, model: 'test-model' }; };
+  const render = (_html, path) => {
+    const png = Buffer.alloc(9000);
+    Buffer.from('89504e470d0a1a0a', 'hex').copy(png);
+    png.writeUInt32BE(1200, 16); png.writeUInt32BE(630, 20);
+    writeFileSync(path, png); return true;
+  };
+  try {
+    assert.equal(hasCover(day, days), false);
+    await generateCover(day, days, { complete, render });
+    assert.ok(hasCover(day, days));
+    assert.equal((await generateCover(day, days, { complete, render })).status, 'cached');
+    assert.equal(calls, 1);
+    assert.ok(coverMessages(day)[1].content.includes(day.team));
+    assert.ok(coverMessages(day)[1].content.includes(day.plan));
+    for (const text of [todayBlock(day, days, ''), recentBlock([day], days), archive([day], days), dayReadme(day, days, '')]) assert.match(text, /cover\.png/);
+    assert.match(dayReadme(day, days, ''), /piece\.png/);
+    const site = join(root, 'site');
+    buildSite(site, [day], days, '', 'https://example.test/');
+    for (const path of ['index.html', `${day.date}/index.html`]) {
+      const html = readFileSync(join(site, path), 'utf8');
+      assert.match(html, /cover\.png/);
+      assert.match(html, /team\.png/);
+      assert.match(html, /og:image[^\n]+cover\.png/);
+    }
+    assert.deepEqual(readFileSync(join(site, day.date, 'cover.png')), readFileSync(join(dir, 'cover.png')));
+    assert.deepEqual(readFileSync(join(dir, 'team.png')), teamImage);
+    assert.equal(readFileSync(join(dir, 'piece.png'), 'utf8'), 'original screenshot');
+    assert.equal(coverHash(day).length, 64);
+    const changed = { ...day, concept: 'Changed project' };
+    assert.equal(hasCover(changed, days), false);
+    assert.match(todayBlock(changed, days, ''), /piece\.png/);
+    assert.doesNotMatch(recentBlock([changed], days), /cover\.png/);
+    assert.doesNotMatch(archive([changed], days), /cover\.png/);
+    await assert.rejects(generateCover(day, days, { complete, render: () => false, force: true }), /render failed/);
+    assert.ok(hasCover(day, days), 'failed replacement preserves existing cover');
+    rmSync(join(dir, 'cover.png'));
+    assert.equal(hasCover(day, days), false);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('cover checks reject scripts, linked assets and missing art direction', () => {
+  const wrap = (body) => `## Cover direction\nLead decision.\n\`\`\`html\n<html><head><title>x</title></head><body style="width:1200px;height:630px">${body}</body></html>\n\`\`\``;
+  assert.deepEqual(coverProblems(wrap('<svg><path d="M0 0L10 10"/></svg>')), []);
+  for (const body of ['<meta http-equiv="refresh" content="0;url=https://example.test">', '<script>alert(1)</script>', '<img src="https://example.test/a.png">', '<div onclick="alert(1)">x</div>', '<style>div{background:url(//example.test/x)}</style>']) assert.ok(coverProblems(wrap(body)).length, body);
+  assert.ok(coverProblems('<html></html>').length);
 });

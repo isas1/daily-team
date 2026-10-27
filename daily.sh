@@ -16,6 +16,8 @@ else
   echo '{"sources":[]}' > "$source_file"
 fi
 COMPONENT_SOURCES_FILE=$source_file COMPONENT_REQUESTS_FILE=$request_file PROVIDER=${PROVIDER:-claude} node run.mjs "$@" || status=$?
+# Cover runs separately: same saved cast and plan, no artifact regeneration.
+PROVIDER=${PROVIDER:-claude} node cover.mjs "$@" || status=$?
 sh shot.sh days || true
 repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
 GITHUB_TOKEN=$(gh auth token) GITHUB_REPOSITORY=$repo node github.mjs suggestions > "${TMPDIR:-/tmp}/daily-team-suggestions.json" \

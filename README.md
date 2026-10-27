@@ -19,7 +19,7 @@ Everything in `days/` is written by a language model and checked by scripts, not
 
 **Decision:** The page is a phone-width pipeline panel: the visitor opens the failed build step, reads the log line that stopped it, and retries the step in a local demo.
 
-<a href="days/2026-10-27/"><img src="days/2026-10-27/piece.png" alt="Screenshot of today's asset" width="100%"></a>
+<a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Designed cover for Lit Case" width="100%"></a>
 
 [Open the day](days/2026-10-27/) · [Use it](https://isas1.github.io/daily-team/2026-10-27/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
@@ -41,13 +41,13 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
-| [2026-10-27](days/2026-10-27/) | <a href="days/2026-10-27/"><img src="days/2026-10-27/piece.png" alt="Lit Case" width="160"></a> | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter |
+| [2026-10-27](days/2026-10-27/) | <a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Lit Case" width="160"></a> | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter |
 | [2026-10-26](days/2026-10-26/) | <a href="days/2026-10-26/"><img src="days/2026-10-26/piece.png" alt="Bracket and Ledger" width="160"></a> | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist |
 | [2026-10-25](days/2026-10-25/) | <a href="days/2026-10-25/"><img src="days/2026-10-25/piece.png" alt="the way back up" width="160"></a> | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai |
 | [2026-10-24](days/2026-10-24/) | <a href="days/2026-10-24/"><img src="days/2026-10-24/piece.png" alt="Low Water Set" width="160"></a> | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne |
 | [2026-10-23](days/2026-10-23/) | <a href="days/2026-10-23/"><img src="days/2026-10-23/piece.png" alt="Sounding Well" width="160"></a> | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin |
 | [2026-10-22](days/2026-10-22/) | <a href="days/2026-10-22/"><img src="days/2026-10-22/piece.png" alt="Wet Tally" width="160"></a> | Wet Tally | Animator · Chef · Librarian · Gulliver |
-| [2026-10-21](days/2026-10-21/) | <a href="days/2026-10-21/"><img src="days/2026-10-21/piece.png" alt="Fast Colour" width="160"></a> | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe |
+| [2026-10-21](days/2026-10-21/) | <a href="days/2026-10-21/"><img src="days/2026-10-21/cover.png" alt="Fast Colour" width="160"></a> | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe |
 
 [All 25 days](ARCHIVE.md)
 <!-- RECENT:END -->
@@ -59,7 +59,7 @@ No open suggestions yet.
 3. **The cast.** Every Monday a language model drafts the next season: 16 new roles, 16 new methods, 8 new temperaments, and 6 new guests join from 2026-10-26, the longest-serving leave, and voted suggestions become component briefs. Scripts check the draft and it opens as a pull request for review. Seasons start on a future Monday, so past days never change.
 4. **The work.** Each morning a language model plays the team. Each member pitches a different design for the same project need, thinking from their own nature: their craft, or for a guest, their myth, era, or body. They argue for 6 to 10 lines, then plan ten component variations and a working project prototype made from them. Each component stays one self-contained HTML file. Older days keep their original format.
 5. **The checks.** The file must have a title and a mobile layout, stay under 100 KB, and make no network requests. Component tiles may use up to 80 words of useful content, including card and panel labels. A file that fails is retried once, then marked "needs review". These source checks do not prove visual quality; browser review must verify state behavior, motion, both themes and phone fit before reuse.
-6. **The record.** The workflow takes a screenshot, draws the team card, writes the day page, updates the archive and this README, and commits the result. Days that fail are recorded too.
+6. **The record.** The workflow commissions a project cover from the same four members and their saved plan, renders it at 1200 × 630, then uses that cover in Today, thumbnails, day pages, the archive and gallery. The branded team card stays first; interface screenshots stay as evidence. Missing or stale covers fall back to the original screenshots. The workflow writes the pages and commits the result. Days that fail are recorded too.
 7. **The weekly report.** Each Sunday a script gathers the week's changes, days, seasons, and GitHub activity, and a language model writes a short summary from those facts only. A check rejects any number or name that is not in the facts. Reports are in [reports/](reports/).
 
 ## Take part
@@ -71,7 +71,7 @@ No open suggestions yet.
 Fork the repo, then add one secret:
 
 - `OPENROUTER_API_KEY` for OpenRouter's free models (the default). Create the key with a credit limit.
-- Or `CLAUDE_CODE_OAUTH_TOKEN` from `claude setup-token` to use a Claude subscription, and set the repository variable `PROVIDER` to `claude`. A full component day uses 12 requests. Failed checks and a referee can add requests.
+- Or `CLAUDE_CODE_OAUTH_TOKEN` from `claude setup-token` to use a Claude subscription, and set the repository variable `PROVIDER` to `claude`. A full component day uses 13 requests including its cover. Failed checks and a referee can add requests.
 
 The Daily workflow reads component requests before planning. Add optional secret `COMPONENT_REQUESTS_TOKEN` with **Issues: read-only** access to `daily-team` and `web-components` to include private issues; the default Actions token may only read this repo. Unavailable sources print a warning and the task pool remains usable. This lane only reads issues; it never comments on or closes source requests. Label a focused issue `daily-component`, `component-request` or `request:accepted` to include it explicitly, or use the existing task suggestion form. Common component names in issue titles are also screened for relevance; maintenance audits and infrastructure work stay out.
 
@@ -84,6 +84,10 @@ Run `GITHUB_TOKEN=$(gh auth token) node github.mjs access-check` to check both i
 For a local snapshot, run `GITHUB_TOKEN=$(gh auth token) node github.mjs requests > /tmp/daily-team-requests.json`, then `node run.mjs --date 2026-10-26 --requests /tmp/daily-team-requests.json --dry-run`. Add `--brief` to use your own brief instead. Request bodies stay in the temporary input; day records retain the source link and scoped task.
 
 Optional variables: `MODEL`, `CLAUDE_MODEL` (default `claude-opus-5-5`), `ARTIFACTS` (0 to 10; default 10 plus a joined piece on component days, else 1), `TZ`, and `PAGES` (`true` to publish the tools on GitHub Pages). To record a day by hand with your Claude login, run `sh daily.sh`. It commits and pushes.
+
+### Project covers
+
+Run `node cover.mjs --date YYYY-MM-DD --provider claude` to commission only an existing day's cover, without regenerating its artifacts. Use `--out path/to/days` for another records folder, `--dry-run` to inspect the team brief, or `--force` to replace the cover. The stage saves `cover.html`, `cover.png` and `cover.json` (member contributions, chosen direction, actual model, and a hash of the day record). Matching covers resume without a model call. A failed commission leaves the previous files intact; publishing checks the hash and falls back when the day has changed. Run `node publish.mjs` afterward to update image references. Both daily entrypoints run the cover stage with the day's configured provider; no image API key or extra package is needed. Local rendering needs Chrome, as the team cards do.
 
 The folder also works as a Claude Code skill: clone it into `~/.claude/skills/daily-team`, then use `/daily-team`.
 
