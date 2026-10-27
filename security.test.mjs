@@ -7,6 +7,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import { runInNewContext } from 'node:vm';
 import { markupText, markdownCell, redactCredentials } from './security.mjs';
+import { decisionLine } from './run.mjs';
 
 test('plain-text extraction drops raw blocks and leaves no markup delimiters', () => {
   const input = '<title>Title</title><SCRIPT type="module">hidden</SCRIPT><STYLE>hidden</STYLE><p>Visible</p><scr<script>ipt>tail<';
@@ -19,6 +20,11 @@ test('plain-text extraction drops raw blocks and leaves no markup delimiters', (
 test('Markdown cells preserve literal backslashes before pipes and contain no raw HTML or newlines', () => {
   assert.equal(markdownCell('a\\|b'), 'a\\\\\\|b');
   assert.equal(markdownCell(' <SCRIPT>x</SCRIPT>\r\nnext & end '), '&lt;SCRIPT&gt;x&lt;/SCRIPT&gt; next &amp; end');
+});
+
+test('decision headlines discard executable blocks and never reconstruct markup', () => {
+  assert.equal(decisionLine('## Decision\nA <em>useful</em> <SCRIPT>bad()</SCRIPT>tool. More.'), 'A useful tool.');
+  assert.doesNotMatch(decisionLine('## Decision\n<scr<script>ipt> tail<'), /[<>]/);
 });
 
 test('credential validation errors reveal neither token nor length', () => {

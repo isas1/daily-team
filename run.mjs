@@ -258,8 +258,8 @@ export function addCsp(html) {
 export function decisionLine(plan) {
   const m = plan.match(/^[#*\s\d.]*Decision\b[*:]*\s*\n+([\s\S]*?)(?:\n\s*\n|\n[#*\s\d.]*(?:Build notes|Next steps|Proposals|Objections|Pitch|Clash|Referee|Deadlock)\b|$)/im);
   if (!m) return '';
-  const text = m[1].replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/<[^>]*>/g, '').replace(/[<>*_`#]/g, '').replace(/\s+/g, ' ').trim();
+  const text = markupText(m[1].replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]*)\]\([^)]*\)/g, '$1'))
+    .replace(/[*_`#]/g, '').replace(/\s+/g, ' ').trim();
   const sentence = text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
   return sentence.length > 240 ? `${sentence.slice(0, 237)}...` : sentence;
 }
