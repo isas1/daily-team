@@ -1,0 +1,570 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "fe434c97e615bbcb80a19ef2e66da1505388ce1d4f23cc39147149084365698e",
+  "taxonomyHash": "5583ccf89e2b68c5d5f8db151468c108882c0dce7d2a36652b69aa25256cb204",
+  "source": "isas1/web-components catalog.json and taxonomy.json; local read-only snapshot",
+  "totals": {
+    "tiles": 684,
+    "standaloneComponents": 684,
+    "galleries": 21,
+    "galleryDemos": 188,
+    "all": 872,
+    "note": "Public component count = 'tiles'/'standaloneComponents'. 'galleryDemos' are embedded inside gallery pages and are not standalone; 'all' sums both and must not be advertised as the component count."
+  },
+  "producerCategories": [
+    "Actions",
+    "Inputs",
+    "Navigation",
+    "Content",
+    "Feedback",
+    "Data",
+    "Layout",
+    "Media"
+  ],
+  "roleMapping": {
+    "button": "Actions",
+    "input": "Inputs",
+    "nav": "Navigation",
+    "card": "Content",
+    "loader": "Feedback",
+    "feedback": "Feedback",
+    "dataviz": "Data",
+    "background": "Layout",
+    "hero": "Content",
+    "text-effect": null,
+    "decoration": null,
+    "cursor": null,
+    "3d": null
+  },
+  "counts": {
+    "Actions": 24,
+    "Inputs": 36,
+    "Navigation": 19,
+    "Content": 44,
+    "Feedback": 63,
+    "Data": 63,
+    "Layout": 29,
+    "Media": 0
+  },
+  "gaps": [
+    {
+      "category": "Media",
+      "count": 0,
+      "reason": "Low theme-mapped count; provisional opportunity, not a proven inventory gap"
+    },
+    {
+      "category": "Navigation",
+      "count": 19,
+      "reason": "Low theme-mapped count; provisional opportunity, not a proven inventory gap"
+    },
+    {
+      "category": "Actions",
+      "count": 24,
+      "reason": "Low theme-mapped count; provisional opportunity, not a proven inventory gap"
+    }
+  ],
+  "mapping": [
+    {
+      "theme": "kinetic-type",
+      "count": 20,
+      "role": "text-effect",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "micro-dataviz",
+      "count": 22,
+      "role": "dataviz",
+      "proposedCategory": "Data",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "inputs-switches",
+      "count": 24,
+      "role": "input",
+      "proposedCategory": "Inputs",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "css-3d",
+      "count": 20,
+      "role": "3d",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "particles-physics",
+      "count": 23,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "organic-nature",
+      "count": 18,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "generative-geometry",
+      "count": 21,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "retro-glitch",
+      "count": 22,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "ui-microinteractions",
+      "count": 16,
+      "role": "feedback",
+      "proposedCategory": "Feedback",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "cosmic-space",
+      "count": 20,
+      "role": "background",
+      "proposedCategory": "Layout",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "buttons",
+      "count": 24,
+      "role": "button",
+      "proposedCategory": "Actions",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "cards",
+      "count": 17,
+      "role": "card",
+      "proposedCategory": "Content",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "loaders",
+      "count": 18,
+      "role": "loader",
+      "proposedCategory": "Feedback",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "navigation",
+      "count": 19,
+      "role": "nav",
+      "proposedCategory": "Navigation",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "backgrounds",
+      "count": 9,
+      "role": "background",
+      "proposedCategory": "Layout",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "audio-visualizers",
+      "count": 11,
+      "role": "dataviz",
+      "proposedCategory": "Data",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "svg-animations",
+      "count": 6,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "cursor-pointer",
+      "count": 6,
+      "role": "cursor",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "text-effects",
+      "count": 6,
+      "role": "text-effect",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "bauhaus",
+      "count": 12,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "art-deco",
+      "count": 12,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "art-nouveau",
+      "count": 12,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "op-art",
+      "count": 12,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "ukiyo-e",
+      "count": 10,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "pointillism",
+      "count": 10,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "constructivism",
+      "count": 10,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "memphis",
+      "count": 10,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "psychedelic",
+      "count": 10,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "vaporwave",
+      "count": 10,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "swiss",
+      "count": 10,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "de-stijl",
+      "count": 8,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "progress-status",
+      "count": 19,
+      "role": "loader",
+      "proposedCategory": "Feedback",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "feedback-states",
+      "count": 10,
+      "role": "feedback",
+      "proposedCategory": "Feedback",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "drag-reorder",
+      "count": 8,
+      "role": "card",
+      "proposedCategory": "Content",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "fractals-automata",
+      "count": 9,
+      "role": "decoration",
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "charts-flow",
+      "count": 12,
+      "role": "dataviz",
+      "proposedCategory": "Data",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "brutalism",
+      "count": 5,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "terminal",
+      "count": 9,
+      "role": "card",
+      "proposedCategory": "Content",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "neumorphism",
+      "count": 5,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "stained-glass",
+      "count": 2,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "blueprint",
+      "count": 1,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "wabi-sabi",
+      "count": 1,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "post-impressionist-night",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "abstract-improvisation",
+      "count": 10,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "orphist-discs",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "geometric-notation",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "symbolic-abstraction",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "dot-field",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "gold-leaf-ornament",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "ukiyo-e-wave-mountain",
+      "count": 9,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "ukiyo-e-weather-road",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "pointillist-dot-studies",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "art-nouveau-panels",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "primary-grid",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "suprematist-forms",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "arts-and-crafts-pattern",
+      "count": 8,
+      "role": null,
+      "proposedCategory": null,
+      "reviewRequired": true,
+      "reason": "Art-only or unknown role; do not force a functional category"
+    },
+    {
+      "theme": "business-graphics",
+      "count": 5,
+      "role": "dataviz",
+      "proposedCategory": "Data",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "marketing-sections",
+      "count": 10,
+      "role": "card",
+      "proposedCategory": "Content",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "product-flows",
+      "count": 2,
+      "role": "input",
+      "proposedCategory": "Inputs",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "dev-status",
+      "count": 7,
+      "role": "dataviz",
+      "proposedCategory": "Data",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "hierarchy-trees",
+      "count": 6,
+      "role": "dataviz",
+      "proposedCategory": "Data",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    },
+    {
+      "theme": "editor-workflows",
+      "count": 10,
+      "role": "input",
+      "proposedCategory": "Inputs",
+      "reviewRequired": true,
+      "reason": "Theme-level hint only; individual item purpose needs review"
+    }
+  ],
+  "limitations": [
+    "No item migration or production writes",
+    "Theme labels are not reliable per-item categories",
+    "Gallery components and paid pack exclusives require separate review",
+    "All assignments are proposals requiring human review"
+  ]
+}

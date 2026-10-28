@@ -1,0 +1,1491 @@
+{
+  "sourceHash": "43547162ebc3e1da75f4b82fc9d7c7077bbe37695430d3611f910a9d951cb7eb",
+  "width": 1080,
+  "height": 1080,
+  "secondsPerRow": 4,
+  "rows": [
+    {
+      "row": 1,
+      "name": "Mordant Rack",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "28",
+          "text": "Emotional baggage, carmine, 28 percent dyed, 2.0 seconds held"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "2",
+          "text": "Vat 2, 2.2 s held"
+        },
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "28",
+          "text": "Monday gold vat, 2.0 seconds held"
+        }
+      },
+      "history": {
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "cat-pics-2, verdigris, 0 percent dyed, 0.0 seconds held"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "cat-pics-2, verdigris, 0 percent dyed, 0.0 seconds held"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "28",
+            "text": "Emotional baggage, carmine, 28 percent dyed, 2.0 seconds held"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "28",
+            "text": "Emotional baggage, carmine, 28 percent dyed, 2.0 seconds held"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "1",
+            "text": "Vat 1, 0.0 s held"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "1",
+            "text": "Vat 1, 0.0 s held"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "2",
+            "text": "Vat 2, 2.2 s held"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "2",
+            "text": "Vat 2, 2.2 s held"
+          }
+        ],
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "Forever red vat, 0.0 seconds held"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "Monday gold vat, 0.0 seconds held, dipping"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "28",
+            "text": "Monday gold vat, 2.0 seconds held"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "28",
+            "text": "Monday gold vat, 2.0 seconds held"
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 2,
+      "name": "Varnish Coats",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "6",
+          "text": "6 of 7 coats, cloth over Forever red"
+        },
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "5",
+          "text": "5 of 7 coats"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "7",
+          "text": null
+        }
+      },
+      "history": {
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "2",
+            "text": "2 of 7 coats, cloth over Forever red"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "2",
+            "text": "2 of 7 coats, cloth over Forever red"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "6",
+            "text": "6 of 7 coats, cloth over Forever red"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "6",
+            "text": "6 of 7 coats, cloth over Forever red"
+          }
+        ],
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "2",
+            "text": "2 of 7 coats"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "2",
+            "text": "2 of 7 coats"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "5",
+            "text": "5 of 7 coats"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "5",
+            "text": "5 of 7 coats"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "3",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "3",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "7",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "7",
+            "text": null
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 3,
+      "name": "Warp Threads",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "29",
+          "text": "Thread 29 of 40, 30 percent Forever Red. Vat: Forever Red"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "29",
+          "text": "25% dyed"
+        },
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": null,
+          "text": null
+        }
+      },
+      "history": {
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "1",
+            "text": "Thread 1 of 40, undyed. Vat: Forever Red"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "11",
+            "text": "Thread 11 of 40, 85 percent Forever Red. Vat: Forever Red"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "29",
+            "text": "Thread 29 of 40, 30 percent Forever Red. Vat: Forever Red"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "29",
+            "text": "Thread 29 of 40, 30 percent Forever Red. Vat: Forever Red"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "0% dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "0% dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "29",
+            "text": "25% dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "29",
+            "text": "25% dyed"
+          }
+        ],
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": null,
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": null,
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": null,
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": null,
+            "text": null
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 4,
+      "name": "Wreck Pots",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "1",
+          "text": "Pot 1 of 1, Forever indigo, 19 percent dyed. Day 1 ashore."
+        },
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "76",
+          "text": "Day 1, in pot 1 of 1, 76 percent dyed"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "93",
+          "text": null
+        }
+      },
+      "history": {
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "1",
+            "text": "Pot 1 of 1, Forever indigo, 0 percent dyed. Day 1 ashore."
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "1",
+            "text": "Pot 1 of 1, Forever indigo, 0 percent dyed. Day 1 ashore."
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "1",
+            "text": "Pot 1 of 1, Forever indigo, 0 percent dyed. Day 1 ashore."
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "1",
+            "text": "Pot 1 of 1, Forever indigo, 19 percent dyed. Day 1 ashore."
+          }
+        ],
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "8",
+            "text": "Day 1, in pot 1 of 1, 8 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "20",
+            "text": "Day 1, in pot 1 of 1, 20 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "66",
+            "text": "Day 1, in pot 1 of 1, 66 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "76",
+            "text": "Day 1, in pot 1 of 1, 76 percent dyed"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "93",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "93",
+            "text": null
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 5,
+      "name": "Comb Cells",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "0",
+          "text": "Monday red vat"
+        },
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": null,
+          "text": null
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "1",
+          "text": null
+        }
+      },
+      "history": {
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "Monday red vat"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "Monday red vat"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "0",
+            "text": "Monday red vat"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "0",
+            "text": "Monday red vat"
+          }
+        ],
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": null,
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": null,
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": null,
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": null,
+            "text": null
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "1",
+            "text": null
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 6,
+      "name": "Sound Hole Tub",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "58",
+          "text": "Forever Indigo, 58 percent, lifted"
+        },
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "49",
+          "text": "49 percent dyed, Forever persimmon"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "1",
+          "text": null
+        }
+      },
+      "history": {
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "35",
+            "text": "Forever Indigo, 35 percent, lifted"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "35",
+            "text": "Forever Indigo, 35 percent, lifted"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "58",
+            "text": "Forever Indigo, 58 percent, lifted"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "58",
+            "text": "Forever Indigo, 58 percent, lifted"
+          }
+        ],
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "0 percent dyed, Forever persimmon"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "0 percent dyed, Forever persimmon"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "37",
+            "text": "37 percent dyed, Forever persimmon"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "49",
+            "text": "49 percent dyed, Forever persimmon"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "1",
+            "text": null
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 7,
+      "name": "Selvage Pull",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "3",
+          "text": "Emotional baggage, 36 percent dyed"
+        },
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "2",
+          "text": "Cat-pics-2"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "29",
+          "text": null
+        }
+      },
+      "history": {
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "Forever, 0 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "Forever, 0 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "3",
+            "text": "Emotional baggage, 24 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "3",
+            "text": "Emotional baggage, 36 percent dyed"
+          }
+        ],
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "Forever"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "Forever"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "2",
+            "text": "Cat-pics-2"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "2",
+            "text": "Cat-pics-2"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "13",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "29",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "29",
+            "text": null
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 8,
+      "name": "Tide Line",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "92",
+          "text": "Cloth in Forever red, 92 percent taken"
+        },
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "47",
+          "text": "Pot 1 of 1, 47 percent dyed"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "1",
+          "text": null
+        }
+      },
+      "history": {
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "Cloth on bare sand"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "Cloth on bare sand"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "85",
+            "text": "Cloth in Forever red, 85 percent taken"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "92",
+            "text": "Cloth in Forever red, 92 percent taken"
+          }
+        ],
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "Pot 1 of 1, 0 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "Pot 1 of 1, 0 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "32",
+            "text": "Pot 1 of 1, 32 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "47",
+            "text": "Pot 1 of 1, 47 percent dyed"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "1",
+            "text": null
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "1",
+            "text": null
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 9,
+      "name": "Fastness Column",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "92",
+          "text": "92 percent fixed"
+        },
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "31",
+          "text": "cat-pics-2 vat, 31 percent fixed. Selected vat: cat-pics-2"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "33",
+          "text": "Vat 2 of 5, 33 percent dyed"
+        }
+      },
+      "history": {
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "34",
+            "text": "34 percent fixed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "34",
+            "text": "34 percent fixed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "77",
+            "text": "77 percent fixed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "92",
+            "text": "92 percent fixed"
+          }
+        ],
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "31",
+            "text": "Forever vat, 31 percent fixed. Selected vat: Forever"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "31",
+            "text": "Forever vat, 31 percent fixed. Selected vat: cat-pics-2"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "31",
+            "text": "cat-pics-2 vat, 31 percent fixed. Selected vat: cat-pics-2"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "31",
+            "text": "cat-pics-2 vat, 31 percent fixed. Selected vat: cat-pics-2"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "Vat 1 of 5, 0 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "Vat 1 of 5, 0 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "33",
+            "text": "Vat 2 of 5, 33 percent dyed"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "33",
+            "text": "Vat 2 of 5, 33 percent dyed"
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    },
+    {
+      "row": 10,
+      "name": "Last Coat",
+      "quadrants": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 0,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 0,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        },
+        {
+          "x": 540,
+          "y": 540,
+          "width": 540,
+          "height": 540
+        }
+      ],
+      "phases": {
+        "sonnet": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "3",
+          "text": "Forever orange"
+        },
+        "haiku": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "3",
+          "text": "3 coats"
+        },
+        "opus": {
+          "type": "comparison:state",
+          "phase": "done",
+          "value": "0",
+          "text": "Forever Indigo bath"
+        }
+      },
+      "history": {
+        "sonnet": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "2",
+            "text": "Pale Forever orange"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "3",
+            "text": "Forever orange"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "3",
+            "text": "Forever orange"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "3",
+            "text": "Forever orange"
+          }
+        ],
+        "haiku": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "2",
+            "text": "2 coats"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "3",
+            "text": "3 coats"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "3",
+            "text": "3 coats"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "3",
+            "text": "3 coats"
+          }
+        ],
+        "opus": [
+          {
+            "type": "comparison:state",
+            "phase": "ready"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "rest",
+            "value": "0",
+            "text": "Forever Indigo bath, cloth dipping"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "action",
+            "value": "0",
+            "text": "Forever Indigo bath"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "settle",
+            "value": "0",
+            "text": "Forever Indigo bath"
+          },
+          {
+            "type": "comparison:state",
+            "phase": "done",
+            "value": "0",
+            "text": "Forever Indigo bath"
+          }
+        ]
+      },
+      "visualChanged": {
+        "opus": true,
+        "sonnet": true,
+        "haiku": true
+      },
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "video": "comparison.mp4",
+  "duration": 40
+}

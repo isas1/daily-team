@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "task": "Release preparation components",
+  "request": null,
+  "sources": [
+    {
+      "source": "smashing",
+      "status": "fetched",
+      "count": 9
+    },
+    {
+      "source": "hacker-news",
+      "status": "fetched",
+      "count": 20
+    },
+    {
+      "source": "codrops",
+      "status": "disabled",
+      "reason": "2026-10-27: endpoint returns HTTP 410; awaiting verified replacement"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "c15c1be0aad75fb41fbdb15d",
+      "title": "Embracing Playful Imperfection With The CSS `random()` Function",
+      "url": "https://smashingmagazine.com/2026/10/embracing-playful-imperfection-css-random-function/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-20T10:00:00.000Z",
+      "summary": "Design systems thrive on consistency, so where does randomness fit in? Through playful demos of organic typography, bouncing letters, and splayed cards, Brecht De Ruyte shows how the new CSS `random()` function brings a little imperfection to the web without JavaScript libraries or preprocessor loops that generate hundreds of lines of static CSS.",
+      "kind": "feed"
+    },
+    {
+      "id": "906c26c75ab309095d956d6f",
+      "title": "A Practical Guide To Naming Things",
+      "url": "https://smashingmagazine.com/2026/10/how-name-things/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-06T10:00:00.000Z",
+      "summary": "A practical guide to naming UI components, with useful resources, naming conventions, and structures. You’ll find more [useful guides](https://www.smashingmagazine.com/category/guides/) and [online workshops](https://smashingconf.com/online-workshops) here on Smashing Magazine, so make sure to browse and explore.",
+      "kind": "feed"
+    },
+    {
+      "id": "5c9d13f97faabce46da9b702",
+      "title": "Stop Treating CSS Container Queries Like Traditional Media Queries",
+      "url": "https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-16T13:00:00.000Z",
+      "summary": "Despite broad browser support, container queries remain surprisingly underused and frequently misunderstood. Let’s look at how they differ from media queries, when to reach for each, and how container queries help reusable components respond naturally to the contexts in which they appear. - CSS - Tools - Techniques",
+      "kind": "feed"
+    },
+    {
+      "id": "b008f772ace718d60f01070e",
+      "title": "Building A UX ROI Case That Survives The Boardroom",
+      "url": "https://smashingmagazine.com/2026/09/building-ux-roi-case-survives-boardroom/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-11T13:00:00.000Z",
+      "summary": "Strong UX ideas do not secure investment on their own. Through a worked example, Alex Williams breaks down how to define business value, calculate costs, test causality, and build a credible case for the return on a design initiative. - UX - Design - Business",
+      "kind": "feed"
+    },
+    {
+      "id": "8f216ec363408e7c0935b0dd",
+      "title": "The Death Of The Button: Why The Best Interface Is No Interface",
+      "url": "https://smashingmagazine.com/2026/09/death-button-why-best-interface-is-no-interface/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-09T10:00:00.000Z",
+      "summary": "The web is evolving beyond menus, forms, and endless clicks toward experiences shaped around human intent. For UX designers, understanding this shift means re-evaluating their role, moving from designing visible interfaces to guiding transparent, intent-driven AI experiences.",
+      "kind": "feed"
+    },
+    {
+      "id": "daily-task",
+      "kind": "task",
+      "task": "Release preparation components"
+    }
+  ],
+  "recent": [],
+  "inventory": null
+}

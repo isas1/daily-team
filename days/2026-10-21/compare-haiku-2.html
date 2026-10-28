@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Varnish coats on a dyed swatch</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#3cc4a8}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#0b7a66}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.ab2-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none}
+.ab2-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ab2-cv{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+</style></head><body>
+<div class="ab2-root" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="7" aria-valuenow="3" aria-label="Varnish coats on one dyed swatch. Scroll, drag, or use arrow keys to lay or sand coats, up to seven. Escape sands back to bare cloth."></div>
+<script>(function(){
+  var KEY='ab2.varnish.v1',MAX=7,K=0.18,D=0.8,STEP=26,WSTEP=40;
+  var root=document.querySelector('.ab2-root');
+  var cv=document.createElement('canvas');cv.className='ab2-cv';root.appendChild(cv);
+  var ctx=cv.getContext('2d');
+  var coats=3,S=0,dpr=1,wacc=0,drag=null;
+  var rings=[],fill={x:0,v:0};
+  for(var n=0;n<MAX;n++)rings.push({x:0,v:0});
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY));
+    if(s&&typeof s.coats==='number')coats=Math.max(0,Math.min(MAX,Math.round(s.coats)))}catch(e){}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({coats:coats}))}catch(e){}}
+  function tgt(i){return i<coats?1:0}
+
+  function step(dt){
+    var moving=false,i,s,t;
+    for(i=0;i<MAX;i++){
+      s=rings[i];t=tgt(i);
+      s.v=(s.v+(t-s.x)*K*dt)*Math.pow(D,dt);s.x+=s.v*dt;
+      if(Math.abs(t-s.x)>0.0005||Math.abs(s.v)>0.0005)moving=true;
+    }
+    t=coats/MAX;
+    fill.v=(fill.v+(t-fill.x)*K*dt)*Math.pow(D,dt);fill.x+=fill.v*dt;
+    if(Math.abs(t-fill.x)>0.0005||Math.abs(fill.v)>0.0005)moving=true;
+    return moving;
+  }
+
+  function snapToTarget(){
+    for(var i=0;i<MAX;i++){rings[i].x=tgt(i);rings[i].v=0}
+    fill.x=coats/MAX;fill.v=0;
+  }
+
+  function draw(){
+    if(!S)return;
+    var dark=document.documentElement.getAttribute('data-theme')!=='light';
+    var P=dark?{c:[42,45,51],i:[242,242,240],a:[60,196,168]}
+              :{c:[217,219,223],i:[18,19,22],a:[11,122,102]};
+    function rgb(c,a){return 'rgba('+Math.round(c[0])+','+Math.round(c[1])+','+Math.round(c[2])+','+a+')'}
+    var m=S*0.14,L=S-2*m,g=L*0.03,t=Math.max(0,Math.min(1,fill.x));
+    var f=[0,1,2].map(function(k){return P.c[k]+(P.a[k]-P.c[k])*t*0.9});
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,S,S);
+    ctx.globalAlpha=1;
+    ctx.fillStyle=rgb(f,1);
+    ctx.fillRect(m,m,L,L);
+    ctx.strokeStyle=rgb(P.i,0.3);ctx.lineWidth=1;
+    ctx.strokeRect(m+0.5,m+0.5,L-1,L-1);
+    ctx.strokeStyle=rgb(P.i,0.85);ctx.lineWidth=1.5;
+    for(var i=0;i<MAX;i++){
+      var x=Math.max(0,rings[i].x);
+      if(x<=0.001)continue;
+      var d=(i+1)*g*x;
+      ctx.globalAlpha=Math.min(1,x);
+      ctx.strokeRect(m+d,m+d,L-2*d,L-2*d);
+    }
+    ctx.globalAlpha=1;
+  }
+
+  function frame(now){
+    var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);
+    draw();
+    raf=moving?requestAnimationFrame(frame):0;
+  }
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+
+  function setCoats(n){
+    n=Math.max(0,Math.min(MAX,n));
+    if(n===coats)return;
+    coats=n;save();
+    root.setAttribute('aria-valuenow',String(n));
+    kick();
+  }
+
+  root.addEventListener('pointerdown',function(e){
+    e.preventDefault();root.focus();
+    drag={y:e.clientY,acc:0};
+    try{root.setPointerCapture(e.pointerId)}catch(_){}
+  });
+  root.addEventListener('pointermove',function(e){
+    if(!drag)return;
+    var dy=e.clientY-drag.y;drag.y=e.clientY;drag.acc+=dy;
+    while(drag.acc>=STEP){drag.acc-=STEP;setCoats(coats+1)}
+    while(drag.acc<=-STEP){drag.acc+=STEP;setCoats(coats-1)}
+  });
+  function endDrag(){drag=null}
+  root.addEventListener('pointerup',endDrag);
+  root.addEventListener('pointercancel',endDrag);
+
+  root.addEventListener('wheel',function(e){
+    e.preventDefault();
+    wacc+=e.deltaY;
+    while(wacc>=WSTEP){wacc-=WSTEP;setCoats(coats+1)}
+    while(wacc<=-WSTEP){wacc+=WSTEP;setCoats(coats-1)}
+  },{passive:false});
+
+  root.addEventListener('keydown',function(e){
+    var k=e.key,t=null;
+    if(k==='ArrowUp'||k==='ArrowRight'||k==='Enter'||k===' ')t=coats+1;
+    else if(k==='ArrowDown'||k==='ArrowLeft'||k==='Backspace'||k==='Delete')t=coats-1;
+    else if(k==='Escape')t=0;
+    if(t===null)return;
+    e.preventDefault();setCoats(t);
+  });
+
+  new ResizeObserver(function(){
+    S=root.clientWidth;
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    cv.width=Math.round(S*dpr);cv.height=Math.round(S*dpr);
+    draw();
+  }).observe(root);
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+  load();
+  root.setAttribute('aria-valuenow',String(coats));
+  snapToTarget();
+  draw();
+})();</script>
+</body></html>

@@ -16,6 +16,9 @@ else
   echo '{"sources":[]}' > "$source_file"
 fi
 COMPONENT_SOURCES_FILE=$source_file COMPONENT_REQUESTS_FILE=$request_file PROVIDER=${PROVIDER:-claude} node run.mjs "$@" || status=$?
+if [ "$status" -eq 0 ]; then
+  node comparison-pipeline.mjs "$@" || status=$?
+fi
 # Cover runs separately: same saved cast and plan, no artifact regeneration.
 PROVIDER=${PROVIDER:-claude} node cover.mjs "$@" || status=$?
 sh shot.sh days || true
@@ -25,6 +28,7 @@ GITHUB_TOKEN=$(gh auth token) GITHUB_REPOSITORY=$repo node github.mjs suggestion
 pages=$(gh api "repos/$repo/pages" -q .html_url 2>/dev/null || true)
 PAGES_URL=$pages GITHUB_REPOSITORY=$repo node publish.mjs --suggestions "${TMPDIR:-/tmp}/daily-team-suggestions.json"
 git add README.md ARCHIVE.md days
+if [ -f .cache/feed-backlog.json ]; then git add .cache/feed-backlog.json; fi
 if git diff --cached --quiet; then
   echo "Nothing new to commit."
 else

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mordant rack: dip the cloth</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#ff6b3d}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#c43d12}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.mr1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.mr1-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.mr1-root canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style></head><body>
+<div class="mr1-root" role="slider" tabindex="0" aria-label="Mordant rack. Hold over a vat and the cloth sinks; let go and it lifts. Left and right arrows choose a vat, Space holds, Escape lifts." aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+<script>(function(){
+  var root=document.querySelector('.mr1-root'),cv=document.createElement('canvas'),ctx=cv.getContext('2d');
+  root.appendChild(cv);
+  var KEY='mordant.v1',N=5,TAU=6,S=300,dpr=1,raf=0,last=0;
+  var vat=0,depth=0,held=0,holding=false;
+  var sx={x:0.1,v:0,t:0.1},sz={x:0,v:0,t:0};
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  function center(i){return (i+0.5)/N}
+  function hex(h){return [0,2,4].map(function(i){return parseInt(h.substr(i+1,2),16)})}
+  function mx(a,b,t){return [0,1,2].map(function(i){return a[i]+(b[i]-a[i])*t})}
+  function css(c){return 'rgb('+c.map(Math.round).join(',')+')'}
+  function pal(){var d=document.documentElement.getAttribute('data-theme')!=='light';
+    return d?{bg:hex('#0e0f11'),ink:hex('#f2f2f0'),acc:hex('#ff6b3d'),raw:hex('#cfcfca')}
+            :{bg:hex('#f7f7f5'),ink:hex('#121316'),acc:hex('#c43d12'),raw:hex('#e2e2de')}}
+  function spring(s){s.v=s.v*0.8+(s.t-s.x)*0.2;s.x+=s.v;return Math.abs(s.v)>0.0005||Math.abs(s.t-s.x)>0.0005}
+  function snap(){sx.x=sx.t;sx.v=0;sz.x=sz.t;sz.v=0}
+  function step(dt){
+    var t=dt/60;
+    if(holding){held+=t;depth+=(1-depth)*(1-Math.exp(-t/TAU))}
+    var a=spring(sx),b=spring(sz);
+    return a||b||holding;
+  }
+  function draw(){
+    var p=pal(),c=ctx,s=S,i,x,vw=0.15*s,top=0.6*s,bot=0.84*s;
+    c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,s,s);
+    c.globalAlpha=0.3;c.fillStyle=css(p.ink);c.fillRect(0.06*s,0.2*s,0.88*s,1);
+    c.lineWidth=1;
+    for(i=0;i<N;i++){
+      x=center(i)*s-vw/2;
+      c.globalAlpha=1;c.fillStyle=css(mx(p.bg,p.acc,(i+1)/N));
+      c.fillRect(x,top+0.06*s,vw,bot-top-0.06*s);
+      c.globalAlpha=0.5;c.strokeStyle=css(p.ink);c.strokeRect(x+0.5,top+0.5,vw-1,bot-top-1);
+    }
+    c.globalAlpha=1;c.fillStyle=css(p.acc);
+    c.fillRect(center(vat)*s-vw/2,bot+0.05*s,vw,2);
+    var cw=0.1*s,L=sx.x*s-cw/2,R=L+cw,bt=(0.5+0.2*sz.x)*s,bw=Math.max(-0.05,Math.min(0.05,sz.v*1.5))*s;
+    c.beginPath();c.moveTo(L,0.2*s);c.lineTo(R,0.2*s);c.lineTo(R,bt);
+    c.quadraticCurveTo((L+R)/2,bt+bw,L,bt);c.closePath();
+    c.fillStyle=css(mx(p.raw,mx(p.bg,p.acc,(vat+1)/N),depth));c.fill();
+    c.globalAlpha=0.4;c.strokeStyle=css(p.ink);c.stroke();
+    if(holding){
+      c.globalAlpha=1;c.fillStyle=css(p.ink);
+      c.font='500 '+Math.round(s*0.05)+'px system-ui,sans-serif';
+      c.textAlign='center';c.textBaseline='middle';
+      c.fillText(held.toFixed(1)+' s',s/2,0.1*s);
+    }
+    root.setAttribute('aria-valuenow',Math.round(depth*100));
+    root.setAttribute('aria-valuetext','Vat '+(vat+1)+' of '+N+', '+Math.round(depth*100)+' percent dyed');
+  }
+  function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(o){vat=Math.max(0,Math.min(N-1,o.vat|0));depth=Math.max(0,Math.min(1,+o.depth||0));sx.x=sx.t=center(vat)}}catch(e){}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({vat:vat,depth:depth}))}catch(e){}}
+  function pick(i){if(i===vat)return;vat=i;depth=0;held=0;sx.t=center(i)}
+  function press(){holding=true;held=0;sz.t=1;kick()}
+  function release(){if(!holding)return;holding=false;sz.t=0;save();kick()}
+  function idx(e){var r=root.getBoundingClientRect();return Math.max(0,Math.min(N-1,Math.floor((e.clientX-r.left)/r.width*N)))}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    if(reduce())snap();
+    var mv=step(dt);draw();
+    raf=mv?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function size(){var r=root.getBoundingClientRect();S=r.width||S;dpr=Math.min(2,window.devicePixelRatio||1);
+    cv.width=Math.round(S*dpr);cv.height=Math.round(S*dpr);draw()}
+  root.addEventListener('pointerdown',function(e){e.preventDefault();root.focus();root.setPointerCapture(e.pointerId);pick(idx(e));press()});
+  root.addEventListener('pointermove',function(e){if(holding){pick(idx(e));kick()}});
+  root.addEventListener('pointerup',release);
+  root.addEventListener('pointercancel',release);
+  root.addEventListener('blur',release);
+  root.addEventListener('keydown',function(e){var k=e.key,n;
+    if(k==='ArrowLeft'||k==='ArrowRight'){e.preventDefault();n=vat+(k==='ArrowRight'?1:-1);if(n>=0&&n<N){pick(n);save();kick()}}
+    else if(k===' '){e.preventDefault();if(!e.repeat)press()}
+    else if(k==='Escape'){release()}});
+  root.addEventListener('keyup',function(e){if(e.key===' '){e.preventDefault();release()}});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){release();cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  new ResizeObserver(size).observe(root);
+  load();size();
+})();</script>
+</body></html>

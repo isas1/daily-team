@@ -30,4 +30,4 @@ jobs:
       - name: Install gawk and mawk
         if: runner.os == 'Linux'
         run: sudo apt-get install -y gawk mawk
-      - run: node --test test.mjs security.test.mjs
+      - run: node --test test.mjs security.test.mjs comparison.test.mjs pack.test.mjs

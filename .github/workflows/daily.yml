@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       artifacts:
-        description: Number of HTML artifacts, 0 to 10 (empty is 10 plus a piece on component days, else 1)
+        description: Components 0 to 10 (empty is 6 plus connected demo for new packs; historical days keep 10)
         default: ''
       force:
         description: Replace today's results
@@ -17,6 +17,10 @@ on:
         type: choice
         options: ['', openrouter, claude]
         default: ''
+      compare:
+        description: Build Opus, Sonnet, and Haiku comparison plus square MP4 (Claude provider)
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -28,7 +32,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 110
+    timeout-minutes: 240
     permissions:
       contents: write
       issues: read
@@ -81,6 +85,7 @@ jobs:
           ARTIFACTS: ${{ inputs.artifacts || vars.ARTIFACTS || '' }}
           FORCE: ${{ inputs.force && '--force' || '' }}
           COMPONENT_REQUESTS_FILE: ${{ runner.temp }}/component-requests.json
+          COMPONENT_FEED_CACHE: .cache/feed-backlog.json
           COMPONENT_SOURCES_FILE: ${{ env.PROVIDER == 'claude' && format('{0}/component-sources.json', runner.temp) || '' }}
         run: node run.mjs $FORCE
       - name: Design daily project cover
@@ -97,6 +102,30 @@ jobs:
       - name: Screenshot new artifacts
         if: always() && steps.key.outputs.ok == 'true'
         run: sh shot.sh days || true
+      - name: Build three-model comparison
+        id: comparison
+        if: success() && steps.key.outputs.ok == 'true' && env.PROVIDER == 'claude' && (github.event_name != 'workflow_dispatch' || inputs.compare)
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          COMPARE_OPUS_MODEL: ${{ vars.COMPARE_OPUS_MODEL }}
+          COMPARE_SONNET_MODEL: ${{ vars.COMPARE_SONNET_MODEL }}
+          COMPARE_HAIKU_MODEL: ${{ vars.COMPARE_HAIKU_MODEL }}
+        run: |
+          day=$(date +%Y-%m-%d)
+          if node --input-type=module -e 'import fs from "node:fs"; const d=JSON.parse(fs.readFileSync(process.argv[1])); process.exit(d.component && d.artifacts.some(a=>a.row) ? 0 : 1)' "days/$day/day.json"; then
+            node compare.mjs --date "$day"
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install video renderer
+        if: success() && steps.comparison.outputs.ready == 'true'
+        run: |
+          npm install --no-save --package-lock=false playwright@1.63.0
+          npx playwright install --with-deps chromium
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Record square comparison video
+        if: success() && steps.comparison.outputs.ready == 'true'
+        run: node render-comparison.mjs --date "$(date +%Y-%m-%d)"
       - name: Read suggestions for the vote table
         if: always() && steps.key.outputs.ok == 'true'
         env:
@@ -113,7 +142,7 @@ jobs:
         env:
           TOKEN: ${{ github.token }}
         run: |
-          git add README.md ARCHIVE.md days 2>/dev/null || git add README.md ARCHIVE.md
+          git add README.md ARCHIVE.md days .cache/feed-backlog.json 2>/dev/null || git add README.md ARCHIVE.md days
           if git diff --cached --quiet; then echo "Nothing to commit."; exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

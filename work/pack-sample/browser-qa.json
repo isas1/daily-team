@@ -1,0 +1,23 @@
+{
+  "kind": "native browser verification of handwritten fixture",
+  "demo": "days/2026-10-27/piece.html",
+  "demoSha256": "1f51f3a445f4eff4cdd77452a7addab72b735497a498484b2c111b2db22a4636",
+  "checks": {
+    "sharedState": "passed: name, package, audience and budget update resulting release",
+    "errorRecovery": "passed: Full exceeds 20 KB, budget 35 KB recovers",
+    "keyboard": "passed: Space confirms review, Enter builds",
+    "themes": "passed: dark desktop and light phone",
+    "mobile": "passed: 390x844; demo and all six standalone tiles have no horizontal overflow"
+  },
+  "screenshots": {
+    "desktop.png": "7e45fae3804cd1d5c52a0135c186829c4e0dacb57ec4cf936bbd8c2161d845bf",
+    "desktop-full.png": "de8d7cd5ee4a3dd8b6d4856ab56c6a7637a98160e3a48b2268745f277c03f5a9",
+    "mobile-light.png": "d757c05b2c6c1423ea2d1eb379e5406093ce442907d9bbdcf29ef9e0bf051ddc"
+  },
+  "limits": [
+    "Handwritten fixture, not live model output",
+    "No human library acceptance",
+    "No screen-reader audio or device performance claim"
+  ],
+  "viewport": "restored to default"
+}

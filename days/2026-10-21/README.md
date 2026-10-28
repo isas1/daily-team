@@ -18,6 +18,10 @@
 
 ## Asset
 
+[Compare Opus, Sonnet, and Haiku](comparison.html)
+
+[Watch square comparison video](comparison.mp4)
+
 <a href="piece.html"><img src="piece.png" alt="Screenshot of piece.html" width="100%"></a>
 
 [Use it](https://isas1.github.io/daily-team/2026-10-21/) · [piece.html](piece.html), led by Beekeeper. Model: claude-opus-5-5.

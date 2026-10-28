@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comb cells: tap to fold and open</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#3cc4a8}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#0b7a66}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.cb5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;outline:none}
+.cb5-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.cb5-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style></head><body>
+<div class="cb5-root" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" aria-label="Comb cells, twelve. Tap a cell to fold it, tap again to open it. Arrow keys move, Enter or Space folds, Escape opens all."></div>
+<script>(function(){
+  var N=12,KEY='cb5-v1',K=0.2,D=0.8,ANG0=-Math.PI/2;
+  var root=document.querySelector('.cb5-root');
+  var cv=document.createElement('canvas');cv.className='cb5-cv';root.appendChild(cv);
+  var ctx=cv.getContext('2d');
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0,W=0,H=0,dpr=1,cx=0,cy=0,RR=0,R=0,cur=0,cells=[];
+  for(var i=0;i<N;i++)cells.push({t:0,p:0,v:0});
+
+  function load(){
+    try{var a=JSON.parse(localStorage.getItem(KEY));
+      if(Array.isArray(a)&&a.length===N)for(var j=0;j<N;j++)cells[j].t=a[j]?1:0;
+    }catch(e){}
+  }
+  function save(){
+    try{localStorage.setItem(KEY,JSON.stringify(cells.map(function(c){return c.t===1})))}catch(e){}
+  }
+  function hex(x,y,ang,sx,sy,r){
+    var c=Math.cos(ang),s=Math.sin(ang);
+    ctx.beginPath();
+    for(var k=0;k<6;k++){
+      var a=k*Math.PI/3,px=Math.cos(a)*r*sx,py=Math.sin(a)*r*sy;
+      var X=x+px*c-py*s,Y=y+px*s+py*c;
+      if(k)ctx.lineTo(X,Y);else ctx.moveTo(X,Y);
+    }
+    ctx.closePath();
+  }
+  function step(dt){
+    var moving=false;
+    for(var j=0;j<N;j++){
+      var c=cells[j],err=c.t-c.p;
+      c.v=(c.v+err*K*dt)*Math.pow(D,dt);
+      c.p+=c.v*dt;
+      if(Math.abs(c.t-c.p)>0.002||Math.abs(c.v)>0.002)moving=true;
+      else{c.p=c.t;c.v=0}
+    }
+    return moving;
+  }
+  function snapToTarget(){
+    for(var j=0;j<N;j++){cells[j].p=cells[j].t;cells[j].v=0}
+  }
+  function draw(){
+    var cs=getComputedStyle(document.documentElement);
+    var ink=cs.getPropertyValue('--ink').trim(),acc=cs.getPropertyValue('--acc').trim();
+    var count=0;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,W,H);
+    ctx.lineWidth=1;
+    for(var i=0;i<N;i++){
+      var c=cells[i],ang=ANG0+i*2*Math.PI/N;
+      var x=cx+Math.cos(ang)*RR,y=cy+Math.sin(ang)*RR;
+      var f=Math.max(0,Math.min(1,c.p));
+      if(c.t===1)count++;
+      ctx.globalAlpha=0.28;ctx.strokeStyle=ink;
+      hex(x,y,ang,1,1,R);ctx.stroke();
+      if(f>0){
+        ctx.globalAlpha=f;ctx.fillStyle=acc;ctx.strokeStyle=acc;
+        hex(x,y,ang,1-0.55*f,1-0.25*f,R);
+        ctx.fill();ctx.stroke();
+      }
+    }
+    if(document.activeElement===root){
+      var fa=ANG0+cur*2*Math.PI/N;
+      ctx.globalAlpha=1;ctx.strokeStyle=acc;
+      ctx.beginPath();
+      ctx.arc(cx+Math.cos(fa)*RR,cy+Math.sin(fa)*RR,R+6,0,Math.PI*2);
+      ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+    var s=String(count);
+    if(root.getAttribute('aria-valuenow')!==s)root.setAttribute('aria-valuenow',s);
+  }
+  function frame(now){
+    var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);
+    draw();
+    raf=moving?requestAnimationFrame(frame):0;
+  }
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function toggle(i){
+    cells[i].t=cells[i].t?0:1;
+    cur=i;save();kick();
+  }
+  function hit(e){
+    var r=root.getBoundingClientRect(),x=e.clientX-r.left-cx,y=e.clientY-r.top-cy;
+    var best=-1,bd=1e9;
+    for(var i=0;i<N;i++){
+      var ang=ANG0+i*2*Math.PI/N;
+      var d=Math.hypot(x-Math.cos(ang)*RR,y-Math.sin(ang)*RR);
+      if(d<bd){bd=d;best=i}
+    }
+    return bd<=Math.max(22,R*1.4)?best:-1;
+  }
+  function size(){
+    var r=root.getBoundingClientRect();
+    W=r.width;H=r.height;
+    dpr=Math.min(2,window.devicePixelRatio||1);
+    cv.width=Math.max(1,Math.round(W*dpr));
+    cv.height=Math.max(1,Math.round(H*dpr));
+    cx=W/2;cy=H/2;
+    var m=Math.min(W,H);RR=m*0.34;R=m*0.075;
+    draw();kick();
+  }
+
+  root.addEventListener('pointerdown',function(e){
+    var i=hit(e);
+    if(i<0)return;
+    e.preventDefault();
+    root.focus({preventScroll:true});
+    toggle(i);
+  });
+  root.addEventListener('keydown',function(e){
+    var k=e.key,h=true;
+    if(k==='ArrowRight'||k==='ArrowDown')cur=(cur+1)%N;
+    else if(k==='ArrowLeft'||k==='ArrowUp')cur=(cur+N-1)%N;
+    else if(k==='Enter'||k===' ')toggle(cur);
+    else if(k==='Escape'){
+      for(var j=0;j<N;j++)cells[j].t=0;
+      save();kick();
+    }
+    else h=false;
+    if(h){e.preventDefault();draw();kick()}
+  });
+  root.addEventListener('focus',draw);
+  root.addEventListener('blur',draw);
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+  load();
+  for(var j=0;j<N;j++){
+    cells[j].p=cells[j].t+(reduce()?0:0.3*Math.sin(j*1.7));
+    cells[j].v=0;
+  }
+  if('ResizeObserver' in window)new ResizeObserver(size).observe(root);
+  else window.addEventListener('resize',size);
+  size();
+})();</script>
+</body></html>

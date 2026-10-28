@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fastness column: hold to fix dye</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#ff4d5e}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#c8102e}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--bg:#f7f7f5;--ink:#121316;--acc:#c8102e}}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);overflow:hidden;font:500 14px/1 -apple-system,system-ui,"Helvetica Neue",sans-serif}
+.ab1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.ab1-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ab1-c{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ab1-n{position:absolute;left:66%;top:0;transform:translateY(-50%);font-variant-numeric:tabular-nums;letter-spacing:-.02em;white-space:nowrap;pointer-events:none}
+</style></head><body>
+<div class="ab1-root" role="slider" tabindex="0" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-label="Fastness column, percent fixed. Press and hold above the dye line to fix more color, below it to rinse. Keyboard: Space, Enter or arrows to hold, Escape to rinse."></div>
+<script>(function(){
+  var N=20,A=0.0001,F=0.96,KEY='ab1-fast';
+  var root=document.querySelector('.ab1-root');
+  var cv=document.createElement('canvas'),nEl=document.createElement('span');
+  cv.className='ab1-c';nEl.className='ab1-n';nEl.setAttribute('aria-hidden','true');
+  root.appendChild(cv);root.appendChild(nEl);
+  var ctx=cv.getContext('2d'),S=300,dpr=1;
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var v=0.34;
+  try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv&&typeof sv.v==='number')v=Math.min(1,Math.max(0,sv.v))}catch(e){}
+  var vel=0,amp=0.008,ph=0,ra=[],rv=[],parts=[],yf=0,lp=-1,ten=Math.floor(v*10+1e-6);
+  var ptr=false,pf=0,rinse=false,ks={},i;
+  function tgt(i){return Math.min(1,Math.max(0,v*N-i))}
+  for(i=0;i<N;i++){ra[i]=tgt(i)*(reduce()?1:0.55);rv[i]=0}
+  function clamp(x){return Math.min(1,Math.max(0,x))}
+  function kp(){var u=ks[' ']||ks.Enter||ks.ArrowUp||ks.ArrowRight,d=ks.ArrowDown||ks.ArrowLeft;return (u?1:0)-(d?1:0)}
+  function pull(){var p;
+    if(ptr)p=pf>v+0.012?1:pf<v-0.012?-1:0;else p=kp();
+    if(!p&&rinse){if(v>0)p=-1;else rinse=false}
+    if((p>0&&v>=1)||(p<0&&v<=0))p=0;
+    return p}
+  function nudge(p){if(!p)return;if(reduce())v=clamp(v+p*0.04);else vel+=p*0.003}
+  function burst(n){var k=S/300,dir=vel<0?1:-1;
+    for(var j=0;j<n;j++)parts.push({x:(.26+Math.random()*.34)*S,y:yf,
+      vx:(Math.random()-.5)*2.4*k,vy:dir*(Math.random()*1.4+.3)*k,l:1})}
+  function step(dt){
+    var p=pull(),act=false,pv=v;
+    vel+=p*A*(rinse?3:1)*dt;vel*=Math.pow(F,dt);v+=vel*dt;
+    if(v>1){v=1;vel=0}if(v<0){v=0;vel=0}
+    if(v===1&&pv<1)burst(18);
+    if(v===0&&pv>0)burst(6);
+    var t10=Math.floor(v*10+1e-6);
+    if(t10!==ten){if(v<1&&v>0)burst(5);ten=t10}
+    for(var j=0;j<N;j++){var t=tgt(j);
+      rv[j]=(rv[j]+(t-ra[j])*(0.16+0.05*Math.sin(j*1.7))*dt)*Math.pow(0.75,dt);
+      ra[j]+=rv[j]*dt;
+      if(Math.abs(rv[j])>0.0005||Math.abs(t-ra[j])>0.0005)act=true}
+    amp+=(Math.min(0.016,Math.abs(vel)*6)-amp)*0.1*dt;
+    ph+=(0.05+Math.abs(vel)*60)*dt;
+    if(amp>0.0004||Math.abs(vel)>0.00004||p)act=true;
+    for(var q=parts.length-1;q>=0;q--){var a=parts[q];
+      a.x+=a.vx*dt;a.y+=a.vy*dt;a.vx*=Math.pow(.92,dt);a.vy*=Math.pow(.92,dt);a.l-=0.03*dt;
+      if(a.l<=0)parts.splice(q,1)}
+    if(parts.length)act=true;
+    return act}
+  function snapToTarget(dt){var p=pull();
+    if(p)v=clamp(v+p*0.004*dt);
+    vel=0;amp=0;parts.length=0;ten=Math.floor(v*10+1e-6);
+    for(var j=0;j<N;j++){ra[j]=tgt(j);rv[j]=0}
+    return p!==0}
+  function rest(){vel=0;amp=0;for(var j=0;j<N;j++){ra[j]=tgt(j);rv[j]=0}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({v:Math.round(v*1000)/1000}))}catch(e){}}
+  function draw(){
+    var cs=getComputedStyle(document.documentElement),
+        ink=cs.getPropertyValue('--ink').trim(),acc=cs.getPropertyValue('--acc').trim();
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,S,S);
+    var x0=.26*S,w=.34*S,bot=.93*S,rh=.86*S/N,g=Math.max(1,S*.004),h=rh-g,filled=0,j,ox,y,a,k;
+    ctx.fillStyle=ink;ctx.globalAlpha=.08;
+    for(j=0;j<N;j++){ox=Math.sin(j*.55-ph)*amp*S;y=bot-(j+1)*rh+g;ctx.fillRect(x0+ox,y,w,h)}
+    ctx.fillStyle=acc;ctx.globalAlpha=1;
+    for(j=0;j<N;j++){ox=Math.sin(j*.55-ph)*amp*S;y=bot-(j+1)*rh+g;a=clamp(ra[j]);filled+=a;
+      if(a>0)ctx.fillRect(x0+ox,y+h*(1-a),w,h*a)}
+    ctx.strokeStyle=ink;ctx.globalAlpha=.18;ctx.lineWidth=1;ctx.beginPath();
+    for(j=0;j<N;j++){ox=Math.sin(j*.55-ph)*amp*S;y=bot-(j+1)*rh+g;
+      for(k=1;k<9;k++){var xx=x0+ox+w*k/9;ctx.moveTo(xx,y);ctx.lineTo(xx,y+h)}}
+    ctx.stroke();
+    yf=bot-filled*rh;
+    ctx.globalAlpha=1;ctx.strokeStyle=acc;ctx.lineWidth=1.5;ctx.beginPath();
+    ctx.moveTo(x0-.035*S,yf);ctx.lineTo(x0+w+.045*S,yf);ctx.stroke();
+    ctx.fillStyle=acc;var sz=Math.max(2,S*.008);
+    for(j=0;j<parts.length;j++){ctx.globalAlpha=parts[j].l;ctx.fillRect(parts[j].x,parts[j].y,sz,sz)}
+    ctx.globalAlpha=1;
+    nEl.style.top=yf+'px';
+    var pct=Math.round(v*100);
+    if(pct!==lp){lp=pct;nEl.textContent=pct+'%';
+      root.setAttribute('aria-valuenow',pct);root.setAttribute('aria-valuetext',pct+' percent fixed')}
+  }
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?snapToTarget(dt):step(dt);
+    if(!moving){rest();save()}
+    draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function pfrom(e){var r=root.getBoundingClientRect();
+    pf=clamp((.93*r.height-(e.clientY-r.top))/(.86*r.height))}
+  root.addEventListener('pointerdown',function(e){
+    if(e.button>0)return;
+    ptr=true;rinse=false;
+    try{root.setPointerCapture(e.pointerId)}catch(_){}
+    pfrom(e);nudge(pull());
+    root.focus({preventScroll:true});
+    e.preventDefault();kick()});
+  root.addEventListener('pointermove',function(e){if(ptr){pfrom(e);kick()}});
+  function up(){ptr=false;kick()}
+  root.addEventListener('pointerup',up);
+  root.addEventListener('pointercancel',up);
+  root.addEventListener('keydown',function(e){var k=e.key;
+    if(k==='Escape'){e.preventDefault();rinse=true;nudge(-1);kick();return}
+    if(k===' '||k==='Enter'||k.indexOf('Arrow')===0){
+      e.preventDefault();
+      if(!ks[k]){ks[k]=1;rinse=false;nudge(pull())}
+      kick()}});
+  root.addEventListener('keyup',function(e){delete ks[e.key];kick()});
+  root.addEventListener('blur',function(){ks={};kick()});
+  if(window.ResizeObserver)new ResizeObserver(function(){
+    var r=root.getBoundingClientRect();if(!r.width)return;
+    S=r.width;dpr=Math.min(2,window.devicePixelRatio||1);
+    cv.width=Math.round(S*dpr);cv.height=Math.round(S*dpr);
+    nEl.style.fontSize=Math.max(12,S*.075)+'px';
+    draw()}).observe(root);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0;save()}else kick()});
+  window.addEventListener('pagehide',save);
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  if(matchMedia('(prefers-color-scheme: light)').addEventListener)
+    matchMedia('(prefers-color-scheme: light)').addEventListener('change',function(){draw()});
+  draw();kick();
+})();</script>
+</body></html>

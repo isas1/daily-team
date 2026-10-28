@@ -1,0 +1,27 @@
+{
+  "kind": "handwritten integration fixture",
+  "liveModelCalls": 0,
+  "mockProviderCalls": 8,
+  "generatedComponents": 6,
+  "demo": "days/2026-10-27/piece.html",
+  "exportValidation": "passed",
+  "libraryAccepted": 0,
+  "note": "Browser evidence recorded separately; fixtures do not establish live model quality",
+  "browserEvidence": "browser-qa.json",
+  "regressionTests": {
+    "total": 94,
+    "passed": 94,
+    "failed": 0
+  },
+  "finalFocusedTests": {
+    "total": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "liveFeedEvidence": "live-discovery.json",
+  "outcomes": {
+    "generated": 6,
+    "unreviewed": 6,
+    "accepted": 0
+  }
+}

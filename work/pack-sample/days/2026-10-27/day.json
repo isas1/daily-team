@@ -1,0 +1,377 @@
+{
+  "date": "2026-10-27",
+  "task": "Unread count: a badge for an inbox that updates when messages arrive or someone marks them read.",
+  "brief": null,
+  "team": "Team for 2026-10-27\nSeason: 2026-10-26\n\n1. Exhibit light technician [new]\n   Method: Name the useful result before naming the concept. [new]\n   Stance: Insists it must be beautiful.\n   Temperament: Asks what a stranger would expect next.\n2. Medical illustrator [new]\n   Method: Make the main action clear before adding a hint. [new]\n   Stance: Breaks the frame.\n   Temperament: Interrupts with a counterexample, then listens.\n3. Interface designer [new]\n   Method: Build the useful action before adding any motion. [new]\n   Stance: Wants it to last.\n   Temperament: Prefers a clear label to a clever one.\n4. Impatient commuter (archetype; invented) [guest] [new]\n   Method: Complete the action with one thumb in a short pause.\n   Stance: Speaks for the one who finds it.\n   Temperament: Looks for the hidden cost in a simple idea.\n\nConstraint: The component fits a narrow phone frame.\nTask: Unread count: a badge for an inbox that updates when messages arrive or someone marks them read.",
+  "provider": "openrouter",
+  "model": "handwritten-fixture",
+  "studio": false,
+  "component": true,
+  "packMode": true,
+  "requestedArtifacts": 6,
+  "planning": {
+    "inputHash": "dcac06ad6397423a4e2ca0f72fc3aec62a0f1a48d85ee2e4467fc5280f315c86",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [],
+    "selection": {
+      "id": "daily-task",
+      "rationale": "Concrete input, useful result and reversible steps"
+    }
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "The project prepares a local release and shows its result.",
+  "concept": "Forever release",
+  "plan": "## Pitch\n**Member 1: Release**\nA release kit.\n**Member 2: Preview**\nA preview tool.\n**Member 3: Share**\nA sharing tool.\n**Member 4: Review**\nA review kit.\n\n## Clash\n**Member 1:** Keep a distinct useful job.\n**Member 2:** Keep a distinct useful job.\n**Member 3:** Keep a distinct useful job.\n**Member 4:** Keep a distinct useful job.\n**Member 1:** Keep a distinct useful job.\n**Member 2:** Keep a distinct useful job.\n\n## Decision\nThe project prepares a local release and shows its result.\nConcept: Forever release\n\n```json\n{\n  \"schemaVersion\": 1,\n  \"categoryVersion\": 1,\n  \"id\": \"release-kit\",\n  \"name\": \"Forever release\",\n  \"description\": \"A coordinated local release preparation pack\",\n  \"project\": \"Prepare a release without sending data\",\n  \"sizeRationale\": \"6 distinct jobs cover the requested sample flow\",\n  \"opportunities\": [\n    {\n      \"id\": \"daily-task\",\n      \"need\": \"Prepare release settings\",\n      \"use\": \"Local project release\",\n      \"interaction\": \"Settings affect package readiness\",\n      \"similarity\": \"No recent matching pack in fixture\"\n    }\n  ],\n  \"selection\": {\n    \"id\": \"daily-task\",\n    \"rationale\": \"Concrete input, useful result and reversible steps\"\n  },\n  \"tokens\": {\n    \"colors\": {\n      \"dark\": {\n        \"bg\": \"#101215\",\n        \"surface\": \"#1b1e23\",\n        \"text\": \"#f6f6f3\",\n        \"muted\": \"#b0b6bf\",\n        \"accent\": \"#ee875f\",\n        \"border\": \"#414751\"\n      },\n      \"light\": {\n        \"bg\": \"#f7f8fa\",\n        \"surface\": \"#ffffff\",\n        \"text\": \"#171a1f\",\n        \"muted\": \"#535b66\",\n        \"accent\": \"#a73b16\",\n        \"border\": \"#c5cad1\"\n      }\n    },\n    \"typography\": {\n      \"family\": \"system-ui, sans-serif\",\n      \"size\": \"16px\"\n    },\n    \"spacing\": {\n      \"gap\": \"16px\",\n      \"padding\": \"24px\"\n    },\n    \"radii\": {\n      \"control\": \"8px\"\n    },\n    \"motion\": {\n      \"duration\": \"180ms\",\n      \"easing\": \"ease-out\"\n    }\n  },\n  \"components\": [\n    {\n      \"id\": \"release-name\",\n      \"name\": \"Release name\",\n      \"category\": \"Inputs\",\n      \"purpose\": \"Name the release\",\n      \"mechanism\": \"inline text edit\",\n      \"input\": \"Type a name; keyboard typing works\",\n      \"outcome\": \"Release label updates\",\n      \"recovery\": \"Replace text or clear and retype\",\n      \"row\": 1,\n      \"file\": \"artifact-1.html\",\n      \"description\": \"Release name for release preparation\",\n      \"use\": \"Prepare a local sample release\",\n      \"tags\": [\n        \"release\",\n        \"release-name\"\n      ],\n      \"nearestAnalogue\": \"No recent matching pack in fixture\",\n      \"usefulness\": \"Name the release\",\n      \"creativeDifference\": \"Distinct inline text edit for this step\",\n      \"states\": [\n        \"Normal with sample values\",\n        \"Keyboard focus\",\n        \"Changed: Release label updates\",\n        \"Recovery: Replace text or clear and retype\"\n      ],\n      \"sources\": [\n        {\n          \"title\": \"WAI interaction patterns for Release name\",\n          \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\"\n        }\n      ]\n    },\n    {\n      \"id\": \"package-card\",\n      \"name\": \"Package card\",\n      \"category\": \"Content\",\n      \"purpose\": \"Choose package contents\",\n      \"mechanism\": \"radio-card selection\",\n      \"input\": \"Choose Starter or Full with pointer or arrow keys\",\n      \"outcome\": \"Package size changes\",\n      \"recovery\": \"Choose another package\",\n      \"row\": 2,\n      \"file\": \"artifact-2.html\",\n      \"description\": \"Package card for release preparation\",\n      \"use\": \"Prepare a local sample release\",\n      \"tags\": [\n        \"release\",\n        \"package-card\"\n      ],\n      \"nearestAnalogue\": \"No recent matching pack in fixture\",\n      \"usefulness\": \"Choose package contents\",\n      \"creativeDifference\": \"Distinct radio-card selection for this step\",\n      \"states\": [\n        \"Normal with sample values\",\n        \"Keyboard focus\",\n        \"Changed: Package size changes\",\n        \"Recovery: Choose another package\"\n      ],\n      \"sources\": [\n        {\n          \"title\": \"WAI interaction patterns for Package card\",\n          \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\"\n        }\n      ]\n    },\n    {\n      \"id\": \"audience-switch\",\n      \"name\": \"Audience switch\",\n      \"category\": \"Inputs\",\n      \"purpose\": \"Set audience visibility\",\n      \"mechanism\": \"binary native checkbox\",\n      \"input\": \"Toggle Public with pointer or Space\",\n      \"outcome\": \"Audience changes\",\n      \"recovery\": \"Toggle back to private\",\n      \"row\": 3,\n      \"file\": \"artifact-3.html\",\n      \"description\": \"Audience switch for release preparation\",\n      \"use\": \"Prepare a local sample release\",\n      \"tags\": [\n        \"release\",\n        \"audience-switch\"\n      ],\n      \"nearestAnalogue\": \"No recent matching pack in fixture\",\n      \"usefulness\": \"Set audience visibility\",\n      \"creativeDifference\": \"Distinct binary native checkbox for this step\",\n      \"states\": [\n        \"Normal with sample values\",\n        \"Keyboard focus\",\n        \"Changed: Audience changes\",\n        \"Recovery: Toggle back to private\"\n      ],\n      \"sources\": [\n        {\n          \"title\": \"WAI interaction patterns for Audience switch\",\n          \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\"\n        }\n      ]\n    },\n    {\n      \"id\": \"size-budget\",\n      \"name\": \"Size budget\",\n      \"category\": \"Data\",\n      \"purpose\": \"Check package against size budget\",\n      \"mechanism\": \"range threshold meter\",\n      \"input\": \"Adjust budget with pointer or arrow keys\",\n      \"outcome\": \"Remaining capacity updates\",\n      \"recovery\": \"Increase budget or choose smaller package\",\n      \"row\": 4,\n      \"file\": \"artifact-4.html\",\n      \"description\": \"Size budget for release preparation\",\n      \"use\": \"Prepare a local sample release\",\n      \"tags\": [\n        \"release\",\n        \"size-budget\"\n      ],\n      \"nearestAnalogue\": \"No recent matching pack in fixture\",\n      \"usefulness\": \"Check package against size budget\",\n      \"creativeDifference\": \"Distinct range threshold meter for this step\",\n      \"states\": [\n        \"Normal with sample values\",\n        \"Keyboard focus\",\n        \"Changed: Remaining capacity updates\",\n        \"Recovery: Increase budget or choose smaller package\"\n      ],\n      \"sources\": [\n        {\n          \"title\": \"WAI interaction patterns for Size budget\",\n          \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\"\n        }\n      ]\n    },\n    {\n      \"id\": \"review-panel\",\n      \"name\": \"Review panel\",\n      \"category\": \"Feedback\",\n      \"purpose\": \"Confirm local review\",\n      \"mechanism\": \"disclosure with confirmation\",\n      \"input\": \"Expand with Enter and check review with Space\",\n      \"outcome\": \"Review marks ready\",\n      \"recovery\": \"Uncheck review to revise\",\n      \"row\": 5,\n      \"file\": \"artifact-5.html\",\n      \"description\": \"Review panel for release preparation\",\n      \"use\": \"Prepare a local sample release\",\n      \"tags\": [\n        \"release\",\n        \"review-panel\"\n      ],\n      \"nearestAnalogue\": \"No recent matching pack in fixture\",\n      \"usefulness\": \"Confirm local review\",\n      \"creativeDifference\": \"Distinct disclosure with confirmation for this step\",\n      \"states\": [\n        \"Normal with sample values\",\n        \"Keyboard focus\",\n        \"Changed: Review marks ready\",\n        \"Recovery: Uncheck review to revise\"\n      ],\n      \"sources\": [\n        {\n          \"title\": \"WAI interaction patterns for Review panel\",\n          \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\"\n        }\n      ]\n    },\n    {\n      \"id\": \"release-action\",\n      \"name\": \"Release action\",\n      \"category\": \"Actions\",\n      \"purpose\": \"Build local release summary\",\n      \"mechanism\": \"validated commit with reset\",\n      \"input\": \"Press Build release with pointer or Enter\",\n      \"outcome\": \"Local summary shows current settings\",\n      \"recovery\": \"Reset clears result and allows another build\",\n      \"row\": 6,\n      \"file\": \"artifact-6.html\",\n      \"description\": \"Release action for release preparation\",\n      \"use\": \"Prepare a local sample release\",\n      \"tags\": [\n        \"release\",\n        \"release-action\"\n      ],\n      \"nearestAnalogue\": \"No recent matching pack in fixture\",\n      \"usefulness\": \"Build local release summary\",\n      \"creativeDifference\": \"Distinct validated commit with reset for this step\",\n      \"states\": [\n        \"Normal with sample values\",\n        \"Keyboard focus\",\n        \"Changed: Local summary shows current settings\",\n        \"Recovery: Reset clears result and allows another build\"\n      ],\n      \"sources\": [\n        {\n          \"title\": \"WAI interaction patterns for Release action\",\n          \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\"\n        }\n      ]\n    }\n  ],\n  \"demo\": {\n    \"file\": \"piece.html\",\n    \"rows\": [\n      1,\n      2,\n      3,\n      4,\n      5,\n      6\n    ],\n    \"sharedState\": \"One release name, package, audience, budget and review state feed one build summary\"\n  }\n}\n```\n\n## Build notes\nConnect state. Keep labels clear. Check keyboard input.",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "piece.html",
+      "kind": "piece",
+      "lead": 1,
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sha256": "1f51f3a445f4eff4cdd77452a7addab72b735497a498484b2c111b2db22a4636",
+      "model": "handwritten-fixture",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-1.html",
+      "sha256": "cfa0cf4635530385cd21dd97bbcc80a50237885326236d694f950730b744b1de",
+      "componentId": "release-name",
+      "lead": 1,
+      "row": 1,
+      "model": "handwritten-fixture",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-2.html",
+      "sha256": "69c31e50fbc5af637402745848556a3478c71e90eb016c8adb26991c597a821e",
+      "componentId": "package-card",
+      "lead": 2,
+      "row": 2,
+      "model": "handwritten-fixture",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-3.html",
+      "sha256": "d57146050f4b4af160a78bcd86157f7102c46eb4c4a9f39c1fa908e64f334bcf",
+      "componentId": "audience-switch",
+      "lead": 3,
+      "row": 3,
+      "model": "handwritten-fixture",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-4.html",
+      "sha256": "739a6b45dabbd32c48864fca71164234a4fb5e9e007792088ee25f04ed9c3a8b",
+      "componentId": "size-budget",
+      "lead": 4,
+      "row": 4,
+      "model": "handwritten-fixture",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-5.html",
+      "sha256": "7a4790b422f0ac5a7898a6541766e0de4516f8bcf93d8404d9b37305d82f0fd7",
+      "componentId": "review-panel",
+      "lead": 1,
+      "row": 5,
+      "model": "handwritten-fixture",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-6.html",
+      "sha256": "560b987c80fc1ce816b1ad6ebf7c6152a84ece02b97df5580acd27b2e928d0fe",
+      "componentId": "release-action",
+      "lead": 2,
+      "row": 6,
+      "model": "handwritten-fixture",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "pack": {
+    "schemaVersion": 1,
+    "categoryVersion": 1,
+    "id": "release-kit",
+    "name": "Forever release",
+    "description": "A coordinated local release preparation pack",
+    "project": "Prepare a release without sending data",
+    "sizeRationale": "6 distinct jobs cover the requested sample flow",
+    "opportunities": [
+      {
+        "id": "daily-task",
+        "need": "Prepare release settings",
+        "use": "Local project release",
+        "interaction": "Settings affect package readiness",
+        "similarity": "No recent matching pack in fixture"
+      }
+    ],
+    "selection": {
+      "id": "daily-task",
+      "rationale": "Concrete input, useful result and reversible steps"
+    },
+    "tokens": {
+      "colors": {
+        "dark": {
+          "bg": "#101215",
+          "surface": "#1b1e23",
+          "text": "#f6f6f3",
+          "muted": "#b0b6bf",
+          "accent": "#ee875f",
+          "border": "#414751"
+        },
+        "light": {
+          "bg": "#f7f8fa",
+          "surface": "#ffffff",
+          "text": "#171a1f",
+          "muted": "#535b66",
+          "accent": "#a73b16",
+          "border": "#c5cad1"
+        }
+      },
+      "typography": {
+        "family": "system-ui, sans-serif",
+        "size": "16px"
+      },
+      "spacing": {
+        "gap": "16px",
+        "padding": "24px"
+      },
+      "radii": {
+        "control": "8px"
+      },
+      "motion": {
+        "duration": "180ms",
+        "easing": "ease-out"
+      }
+    },
+    "components": [
+      {
+        "id": "release-name",
+        "name": "Release name",
+        "category": "Inputs",
+        "purpose": "Name the release",
+        "mechanism": "inline text edit",
+        "input": "Type a name; keyboard typing works",
+        "outcome": "Release label updates",
+        "recovery": "Replace text or clear and retype",
+        "row": 1,
+        "file": "artifact-1.html",
+        "description": "Release name for release preparation",
+        "use": "Prepare a local sample release",
+        "tags": [
+          "release",
+          "release-name"
+        ],
+        "nearestAnalogue": "No recent matching pack in fixture",
+        "usefulness": "Name the release",
+        "creativeDifference": "Distinct inline text edit for this step",
+        "states": [
+          "Normal with sample values",
+          "Keyboard focus",
+          "Changed: Release label updates",
+          "Recovery: Replace text or clear and retype"
+        ],
+        "sources": [
+          {
+            "title": "WAI interaction patterns for Release name",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      },
+      {
+        "id": "package-card",
+        "name": "Package card",
+        "category": "Content",
+        "purpose": "Choose package contents",
+        "mechanism": "radio-card selection",
+        "input": "Choose Starter or Full with pointer or arrow keys",
+        "outcome": "Package size changes",
+        "recovery": "Choose another package",
+        "row": 2,
+        "file": "artifact-2.html",
+        "description": "Package card for release preparation",
+        "use": "Prepare a local sample release",
+        "tags": [
+          "release",
+          "package-card"
+        ],
+        "nearestAnalogue": "No recent matching pack in fixture",
+        "usefulness": "Choose package contents",
+        "creativeDifference": "Distinct radio-card selection for this step",
+        "states": [
+          "Normal with sample values",
+          "Keyboard focus",
+          "Changed: Package size changes",
+          "Recovery: Choose another package"
+        ],
+        "sources": [
+          {
+            "title": "WAI interaction patterns for Package card",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      },
+      {
+        "id": "audience-switch",
+        "name": "Audience switch",
+        "category": "Inputs",
+        "purpose": "Set audience visibility",
+        "mechanism": "binary native checkbox",
+        "input": "Toggle Public with pointer or Space",
+        "outcome": "Audience changes",
+        "recovery": "Toggle back to private",
+        "row": 3,
+        "file": "artifact-3.html",
+        "description": "Audience switch for release preparation",
+        "use": "Prepare a local sample release",
+        "tags": [
+          "release",
+          "audience-switch"
+        ],
+        "nearestAnalogue": "No recent matching pack in fixture",
+        "usefulness": "Set audience visibility",
+        "creativeDifference": "Distinct binary native checkbox for this step",
+        "states": [
+          "Normal with sample values",
+          "Keyboard focus",
+          "Changed: Audience changes",
+          "Recovery: Toggle back to private"
+        ],
+        "sources": [
+          {
+            "title": "WAI interaction patterns for Audience switch",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      },
+      {
+        "id": "size-budget",
+        "name": "Size budget",
+        "category": "Data",
+        "purpose": "Check package against size budget",
+        "mechanism": "range threshold meter",
+        "input": "Adjust budget with pointer or arrow keys",
+        "outcome": "Remaining capacity updates",
+        "recovery": "Increase budget or choose smaller package",
+        "row": 4,
+        "file": "artifact-4.html",
+        "description": "Size budget for release preparation",
+        "use": "Prepare a local sample release",
+        "tags": [
+          "release",
+          "size-budget"
+        ],
+        "nearestAnalogue": "No recent matching pack in fixture",
+        "usefulness": "Check package against size budget",
+        "creativeDifference": "Distinct range threshold meter for this step",
+        "states": [
+          "Normal with sample values",
+          "Keyboard focus",
+          "Changed: Remaining capacity updates",
+          "Recovery: Increase budget or choose smaller package"
+        ],
+        "sources": [
+          {
+            "title": "WAI interaction patterns for Size budget",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      },
+      {
+        "id": "review-panel",
+        "name": "Review panel",
+        "category": "Feedback",
+        "purpose": "Confirm local review",
+        "mechanism": "disclosure with confirmation",
+        "input": "Expand with Enter and check review with Space",
+        "outcome": "Review marks ready",
+        "recovery": "Uncheck review to revise",
+        "row": 5,
+        "file": "artifact-5.html",
+        "description": "Review panel for release preparation",
+        "use": "Prepare a local sample release",
+        "tags": [
+          "release",
+          "review-panel"
+        ],
+        "nearestAnalogue": "No recent matching pack in fixture",
+        "usefulness": "Confirm local review",
+        "creativeDifference": "Distinct disclosure with confirmation for this step",
+        "states": [
+          "Normal with sample values",
+          "Keyboard focus",
+          "Changed: Review marks ready",
+          "Recovery: Uncheck review to revise"
+        ],
+        "sources": [
+          {
+            "title": "WAI interaction patterns for Review panel",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      },
+      {
+        "id": "release-action",
+        "name": "Release action",
+        "category": "Actions",
+        "purpose": "Build local release summary",
+        "mechanism": "validated commit with reset",
+        "input": "Press Build release with pointer or Enter",
+        "outcome": "Local summary shows current settings",
+        "recovery": "Reset clears result and allows another build",
+        "row": 6,
+        "file": "artifact-6.html",
+        "description": "Release action for release preparation",
+        "use": "Prepare a local sample release",
+        "tags": [
+          "release",
+          "release-action"
+        ],
+        "nearestAnalogue": "No recent matching pack in fixture",
+        "usefulness": "Build local release summary",
+        "creativeDifference": "Distinct validated commit with reset for this step",
+        "states": [
+          "Normal with sample values",
+          "Keyboard focus",
+          "Changed: Local summary shows current settings",
+          "Recovery: Reset clears result and allows another build"
+        ],
+        "sources": [
+          {
+            "title": "WAI interaction patterns for Release action",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      }
+    ],
+    "demo": {
+      "file": "piece.html",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sharedState": "One release name, package, audience, budget and review state feed one build summary"
+    }
+  },
+  "packWarnings": []
+}
