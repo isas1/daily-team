@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Labeled build log with retry for a pull request check</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--sf:#141518;--ink:#f2f2f0;--mu:#8e9096;--ln:#26282d;--sel:#1e1f23;--acc:#ff4d5e;--on:#0e0f11}
+:root[data-theme="light"]{--bg:#f7f7f5;--sf:#fff;--ink:#121316;--mu:#5c5f66;--ln:#dedfdb;--sel:#efefec;--acc:#c8102e;--on:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:13px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.lg6-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:inline-size}
+.lg6-w{height:100%;display:flex;flex-direction:column;gap:8px;padding:clamp(8px,3cqi,16px);background:var(--sf);border:1px solid var(--ln);border-radius:10px;font-size:clamp(11px,2.4cqi,14px);font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.lg6-hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 8px}
+.lg6-h{margin:0;font-size:1em;font-weight:600}
+.lg6-st{margin:0;color:var(--mu)}
+.lg6-st.lg6-bad{color:var(--acc);font-weight:600}
+.lg6-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px;border:1px solid var(--ln);border-radius:9px}
+.lg6-sg{min-height:44px;border:0;border-radius:7px;background:none;color:var(--mu);font:inherit;cursor:pointer;transition:background .16s,color .16s}
+.lg6-sg[aria-checked="true"]{background:var(--sel);color:var(--ink);font-weight:600}
+.lg6-log{flex:1;min-height:0;overflow:auto;position:relative;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);overscroll-behavior:contain}
+.lg6-grp{display:grid;grid-template-columns:minmax(76px,32%) 1fr;border-bottom:1px solid var(--ln)}
+.lg6-grp:last-child{border-bottom:0}
+.lg6-lab{position:sticky;top:0;align-self:start;min-height:44px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1px;padding:6px 12px 6px 6px;border:0;border-radius:6px;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.lg6-lab::after{content:"";position:absolute;right:0;top:50%;width:8px;height:1px;background:var(--mu)}
+.lg6-lab:focus-visible{outline-offset:-2px}
+.lg6-lab[aria-current="true"]{background:var(--sel)}
+.lg6-nm{font-weight:600}
+.lg6-nm b{color:var(--mu);font-weight:500;margin-right:4px}
+.lg6-ss{font-size:.86em;color:var(--mu)}
+.lg6-ss.lg6-f{color:var(--acc);font-weight:600}
+.lg6-lines{padding:6px 0 6px 10px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;min-width:0}
+.lg6-row{display:grid;grid-template-rows:1fr;opacity:1;transition:grid-template-rows .15s cubic-bezier(.2,0,0,1),opacity .15s cubic-bezier(.2,0,0,1)}
+.lg6-row.lg6-off{grid-template-rows:0fr;opacity:0;transition-timing-function:cubic-bezier(.4,0,1,1)}
+.lg6-in{overflow:hidden;min-height:0}
+.lg6-ln{display:grid;grid-template-columns:3.4em 1fr;gap:6px;padding:2px 0}
+.lg6-tg{font-size:.8em;line-height:1.7;color:var(--mu);font-weight:700}
+.lg6-tx{overflow-wrap:anywhere}
+.lg6-ts{color:var(--mu)}
+.lg6-e,.lg6-e .lg6-tg{color:var(--acc)}
+.lg6-w .lg6-w .lg6-tg{color:var(--ink)}
+.lg6-ln.lg6-wr .lg6-tg{color:var(--ink)}
+.lg6-set{animation:lg6s .15s cubic-bezier(.2,0,0,1)}
+@keyframes lg6s{from{transform:translateY(-3px);opacity:.6}}
+.lg6-em .lg6-ln{display:block;color:var(--mu);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.lg6-bar{display:flex;gap:8px}
+.lg6-b{flex:1;min-height:44px;padding:0 8px;border:1px solid var(--ln);border-radius:9px;background:none;color:var(--ink);font:inherit;font-weight:600;cursor:pointer;transition:transform .12s ease-out,background .16s}
+.lg6-b:active{transform:scale(.97);transition-duration:.08s}
+.lg6-p{background:var(--acc);border-color:var(--acc);color:var(--on)}
+.lg6-b[aria-disabled="true"]{opacity:.45;cursor:default;transform:none}
+.lg6-b[hidden]{display:none}
+@media (hover:hover){.lg6-b:not(.lg6-p):not([aria-disabled="true"]):hover,.lg6-lab:hover,.lg6-sg:hover{background:var(--sel)}}
+@container (max-width:300px){
+.lg6-grp{grid-template-columns:1fr}
+.lg6-lab{flex-direction:row;align-items:center;gap:6px;width:100%;z-index:1;background:var(--sf);padding:0 4px}
+.lg6-lab::after{display:none}
+.lg6-ss{margin-left:auto}
+.lg6-lines{padding:0 4px 6px}
+.lg6-ts{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="lg6-root" role="group" aria-label="Build log for forever-app pull request 412">
+<div class="lg6-w">
+<div class="lg6-hd"><h1 class="lg6-h">forever-app · PR 412</h1><p class="lg6-st lg6-bad" id="lg6-st" aria-live="polite">Failed at step 4 · exit 137</p></div>
+<div class="lg6-seg" id="lg6-seg" role="radiogroup" aria-label="Filter log lines">
+<button class="lg6-sg" role="radio" aria-checked="true" tabindex="0" data-f="a">All</button><button class="lg6-sg" role="radio" aria-checked="false" tabindex="-1" data-f="w">Warn</button><button class="lg6-sg" role="radio" aria-checked="false" tabindex="-1" data-f="e">Error</button>
+</div>
+<div class="lg6-log" id="lg6-log"></div>
+<div class="lg6-bar"><button class="lg6-b" id="lg6-r1" aria-disabled="false">Retry</button><button class="lg6-b lg6-p" id="lg6-r8" aria-disabled="false">Retry on 8 GB</button><button class="lg6-b" id="lg6-rs" hidden>Reset demo</button></div>
+</div></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var $=function(i){return document.getElementById(i)};
+  var log=$('lg6-log'),st=$('lg6-st'),r1=$('lg6-r1'),r8=$('lg6-r8'),rs=$('lg6-rs'),seg=$('lg6-seg');
+  var radios=[].slice.call(seg.children);
+  var D=[
+    ['Checkout','Passed',[['i','12:01:02','Cloned forever-app 4b9f2c8'],['i','12:01:09','348 files ready']]],
+    ['Lint','Passed',[['w','12:01:15','Unused import in cat-pics-2.ts'],['i','12:01:33','Lint passed']]],
+    ['Unit tests','Passed',[['i','12:02:25','184 suites passed']]],
+    ['Build','Failed',[['i','12:03:16','Heaviest chunk: emotional-baggage.js (2.1 MB)'],['w','12:04:31','Heap at 3,740 MB'],['e','12:04:37','Killed process 8421 (node): out of memory'],['e','12:04:37','Exit code 137']]],
+    ['Publish image','Skipped',[],'Pushed forever-app:4b9f2c8'],
+    ['Smoke test','Skipped',[],'3 checks passed']];
+  var S,f='a',busy=0,done=false,runI=-1,t0=0,tm=[],clk,sel=3;
+  function E(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function ts(){clk+=7;var h=Math.floor(clk/3600),m=Math.floor(clk/60)%60,s=clk%60;return h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function mk(o,hid){var r=E('div','lg6-row'+(hid?' lg6-off':'')),i=E('div','lg6-in'),
+    l=E('div','lg6-ln'+(o.v==='e'?' lg6-e':o.v==='w'?' lg6-wr':'')),tx=E('span','lg6-tx');
+    l.appendChild(E('span','lg6-tg',o.v==='e'?'ERR':o.v==='w'?'WARN':''));
+    tx.appendChild(E('span','lg6-ts',o.t+' '));tx.appendChild(document.createTextNode(o.x));
+    l.appendChild(tx);i.appendChild(l);r.appendChild(i);o.el=r;o.ln=l;return r}
+  function build(){
+    clk=12*3600+9*60+10;
+    while(log.firstChild)log.removeChild(log.firstChild);
+    S=D.map(function(d,k){
+      var g={n:d[0],s:d[1],ok:d[3],l:d[2].map(function(x){return{v:x[0],t:x[1],x:x[2]}})};
+      var el=E('div','lg6-grp'),lab=E('button','lg6-lab'),nm=E('span','lg6-nm'),box=E('div','lg6-lines');
+      nm.appendChild(E('b',null,String(k+1)));nm.appendChild(document.createTextNode(d[0]));
+      g.ss=E('span','lg6-ss');lab.appendChild(nm);lab.appendChild(g.ss);
+      lab.addEventListener('click',function(){jump(k)});
+      lab.addEventListener('keydown',labKey);
+      g.l.forEach(function(o){box.appendChild(mk(o))});
+      g.em=E('div','lg6-row lg6-em lg6-off');var ei=E('div','lg6-in');g.et=E('div','lg6-ln');ei.appendChild(g.et);g.em.appendChild(ei);box.appendChild(g.em);
+      el.appendChild(lab);el.appendChild(box);log.appendChild(el);
+      g.el=el;g.lab=lab;g.box=box;return g});
+    apply(false);
+  }
+  function match(o){return f==='a'||(f==='w'&&o.v!=='i')||(f==='e'&&o.v==='e')}
+  function apply(settle){
+    S.forEach(function(g,k){var vis=0;
+      g.l.forEach(function(o){var m=match(o),was=!o.el.classList.contains('lg6-off');
+        if(m)vis++;o.el.classList.toggle('lg6-off',!m);
+        if(m&&was&&settle){o.ln.classList.remove('lg6-set');void o.ln.offsetWidth;o.ln.classList.add('lg6-set')}});
+      var msg='';
+      if(!g.l.length)msg=g.s==='Skipped'?'No log. Skipped after step 4 failed.':g.s==='Queued'?'Queued.':'Running.';
+      else if(!vis)msg=(f==='e'?'No errors in ':'No warnings in ')+g.n;
+      if(msg)g.et.textContent=msg;g.em.classList.toggle('lg6-off',!msg);
+      g.ss.textContent=g.s==='Running'?'Running'+el():g.s;
+      g.ss.classList.toggle('lg6-f',g.s==='Failed');
+      g.lab.setAttribute('aria-current',k===sel?'true':'false')});
+  }
+  function el(){if(reduce())return'';var s=Math.floor((performance.now()-t0)/1000);return' 0:'+(s<10?'0':'')+s}
+  function jump(k){sel=k;apply(false);log.scrollTo({top:S[k].el.offsetTop,behavior:reduce()?'auto':'smooth'})}
+  function labKey(e){var k=S.findIndex(function(g){return g.lab===e.currentTarget}),n=k;
+    if(e.key==='ArrowDown')n=Math.min(5,k+1);else if(e.key==='ArrowUp')n=Math.max(0,k-1);
+    else if(e.key==='Home')n=0;else if(e.key==='End')n=5;else return;
+    e.preventDefault();S[n].lab.focus({preventScroll:true});jump(n)}
+  function setF(v,focus){f=v;radios.forEach(function(b){var on=b.dataset.f===v;
+    b.setAttribute('aria-checked',on);b.tabIndex=on?0:-1;if(on&&focus)b.focus()});apply(true)}
+  radios.forEach(function(b,i){
+    b.addEventListener('click',function(){setF(b.dataset.f)});
+    b.addEventListener('keydown',function(e){var n=i;
+      if(e.key==='ArrowRight')n=(i+1)%3;else if(e.key==='ArrowLeft')n=(i+2)%3;
+      else if(e.key==='Home')n=0;else if(e.key==='End')n=2;else return;
+      e.preventDefault();setF(radios[n].dataset.f,true)})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&f!=='a')setF('a')});
+  function say(t,bad){st.textContent=t;st.classList.toggle('lg6-bad',!!bad)}
+  function bar(){var a=document.activeElement,inBar=a===r1||a===r8||a===rs;
+    r1.setAttribute('aria-disabled',!!busy);r8.setAttribute('aria-disabled',!!busy);
+    r1.textContent=busy===1?'Retrying':'Retry';r8.textContent=busy===2?'Retrying':'Retry on 8 GB';
+    r1.hidden=r8.hidden=done;rs.hidden=!done;
+    if(inBar&&done)rs.focus();else if(inBar&&!done&&a===rs)r8.focus()}
+  function later(ms,fn){tm.push(setTimeout(fn,ms))}
+  function add(k,v,x){var o={v:v,t:ts(),x:x};S[k].l.push(o);S[k].box.insertBefore(mk(o,true),S[k].em);void o.el.offsetWidth}
+  function start(k){runI=k;t0=performance.now();S[k].s='Running';jump(k);kick()}
+  function run(big){if(busy)return;busy=big?2:1;
+    if(big){S[4].s=S[5].s='Queued'}
+    start(3);say('Retrying step 4'+(big?' on 8 GB':''));bar();
+    later(1400,function(){
+      if(!big){add(3,'w','Heap at 3,980 MB');add(3,'e','Failed again · exit 137');S[3].s='Failed';
+        runI=-1;busy=0;apply(false);say('Failed again at step 4 · exit 137',1);bar();return}
+      add(3,'i','Heap at 5,120 of 8,192 MB');add(3,'i','Passed in 1:14');S[3].s='Passed';next(4)})}
+  function next(k){
+    if(k>5){runI=-1;busy=0;done=true;apply(false);say('Build passed');bar();return}
+    start(k);say('Running step '+(k+1));
+    later(800,function(){add(k,'i',S[k].ok);S[k].s='Passed';next(k+1)})}
+  r1.addEventListener('click',function(){run(false)});
+  r8.addEventListener('click',function(){run(true)});
+  rs.addEventListener('click',function(){tm.forEach(clearTimeout);tm=[];busy=0;done=false;runI=-1;
+    build();jump(3);say('Failed at step 4 · exit 137',1);bar();r8.focus()});
+  function step(){if(runI<0)return false;S[runI].ss.textContent='Running'+el();return true}
+  function draw(){}
+  function snapToTarget(){if(runI>=0)S[runI].ss.textContent='Running'}
+  function frame(now){last=now;
+    var moving=reduce()?(snapToTarget(),false):step();draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  build();log.scrollTop=S[3].el.offsetTop;
+})();</script>
+</body></html>

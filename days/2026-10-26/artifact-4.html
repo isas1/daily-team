@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pinned Ledger log viewer for a deploy dashboard</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#f7f7f5;--pan:#fff;--ink:#121316;--mut:#5d6066;--line:#dcdcd8;--hov:#efefec;--acc:#0b7a66}
+:root[data-theme="dark"]{--bg:#0e0f11;--pan:#16171a;--ink:#f2f2f0;--mut:#9a9da3;--line:#2b2d31;--hov:#212327;--acc:#3cc4a8}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+*{box-sizing:border-box}
+.pl-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;display:flex;flex-direction:column;background:var(--pan);color:var(--ink);border:1px solid var(--line);border-radius:8px;overflow:auto;font:clamp(11px,2.2vmin,14px)/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+.pl-head{padding:8px 16px 0;font-weight:600}
+.pl-head span{color:var(--mut);font-weight:400}
+.pl-chips{display:flex;gap:8px;padding:8px 16px;overflow-x:auto;flex:none}
+button{font:inherit;color:inherit;background:none;border:1px solid var(--line);border-radius:6px;min-height:44px;padding:0 12px;cursor:pointer;white-space:nowrap}
+button:hover{background:var(--hov)}
+button:active{transform:translateY(1px)}
+button:focus-visible,.pl-row:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.pl-chip[aria-pressed="true"]{border-color:var(--ink);font-weight:700}
+.pl-ck{display:inline-block;width:1.1em;color:var(--acc)}
+.pl-n{color:var(--mut);margin-left:6px;font-weight:400}
+button[aria-disabled="true"]{color:var(--mut);opacity:.55;cursor:default}
+button[aria-disabled="true"]:hover{background:none}
+.pl-ledger{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex:none}
+.pl-entry{flex:1 1 9em;margin:0;min-width:0;overflow:hidden}
+.pl-et{display:inline-block;font-weight:600;will-change:transform}
+.pl-ec{color:var(--mut);margin-left:8px}
+.pl-wrap{position:relative;flex:1;min-height:9.5em;display:flex}
+.pl-list{list-style:none;margin:0;padding:0;flex:1;overflow:auto}
+.pl-row{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 0;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+.pl-row:hover{background:var(--hov)}
+.pl-row[aria-selected="true"]{background:var(--hov);font-weight:700}
+.pl-g{flex:none;width:16px;text-align:center;color:var(--acc);font-weight:700}
+.pl-s{flex:none;width:4.4em}
+.pl-t{flex:none;color:var(--mut)}
+.pl-m{overflow:hidden;text-overflow:ellipsis}
+.pl-empty{margin:auto;padding:16px;text-align:center;color:var(--mut)}
+.pl-empty button{display:block;margin:8px auto 0;color:var(--ink)}
+.pl-det{position:absolute;left:0;right:0;bottom:0;max-height:100%;overflow:auto;background:var(--pan);border-top:1px solid var(--ink);padding:8px 16px 16px}
+.pl-det h2{font-size:1em;margin:0 0 8px;white-space:normal}
+.pl-det dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:0 0 8px}
+.pl-det dt{color:var(--mut)}
+.pl-det dd{margin:0;overflow-wrap:anywhere}
+.pl-note{color:var(--mut);margin:0 0 8px}
+.pl-acts{display:flex;flex-wrap:wrap;gap:8px}
+.pl-cp{min-width:10em;white-space:normal;text-align:left}
+</style></head><body>
+<section class="pl-root" role="group" aria-label="Deploy log: filter events by severity, undo filters, open event details">
+<div class="pl-head">Deploy log <span>forever-api 4.2.0</span></div>
+<div class="pl-chips" role="group" aria-label="Show events by severity"></div>
+<div class="pl-ledger">
+<p class="pl-entry" aria-live="polite"><span class="pl-et"></span><span class="pl-ec"></span></p>
+<button type="button" id="pl-undo" title="Ctrl+Z">Undo filter</button>
+<button type="button" id="pl-clear">Clear filter</button>
+</div>
+<div class="pl-wrap">
+<ul class="pl-list" role="listbox" aria-label="Events"></ul>
+<div class="pl-det" role="region" aria-label="Event details" hidden>
+<h2 class="pl-dm"></h2>
+<p class="pl-note" hidden>Hidden by this filter. Kept open.</p>
+<dl><dt>Level</dt><dd class="pl-dl"></dd><dt>Time</dt><dd class="pl-dt"></dd><dt>Source</dt><dd class="pl-ds"></dd><dt>ID</dt><dd class="pl-di"></dd></dl>
+<div class="pl-acts"><button type="button" class="pl-cp">Copy event ID</button><button type="button" class="pl-x">Close details</button></div>
+</div>
+</div>
+</section>
+<script>(function(){
+var q=function(s){return document.querySelector(s)};
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var E=[['inf','10:42:01','forever-api 4.2.0 deploy started','deploy-runner','evt_7f3a2c21'],
+['ok','10:42:03','Forever plan price cache warmed','cache-1','evt_1b9e40d7'],
+['wrn','10:42:05','cat-pics-2 bucket at 82% of quota','storage','evt_c04d77a1'],
+['err','10:42:06','rate limiter threshold reached: 800 req/s','edge-gw-2','evt_9a12fe03'],
+['inf','10:42:08','Monday cron moved to 9:00 AM','scheduler','evt_5e6b0c94'],
+['ok','10:42:09','standby replica synced with primary','db-replica','evt_2d88a1f6'],
+['wrn','10:42:11','"Emotional baggage" job 3x over time budget','worker-2','evt_e7310b5c'],
+['err','10:42:12','health check failed on worker-3 (503)','worker-3','evt_48fc9d2e'],
+['inf','10:42:13','Delete queued for 214 stale previews','janitor','evt_b3a5e819'],
+['ok','10:42:14','release marked healthy','deploy-runner','evt_0c7d42ba']];
+var L={all:['','all events','All'],err:['■ ERR','errors','Errors'],wrn:['▲ WRN','warnings','Warnings'],inf:['● INF','info','Info'],ok:['○ OK','OK events','OK']};
+var K=['all','err','wrn','inf','ok'];
+var filter='all',hist=[],sel=0,open=false,rows={},timer=0,busy=false;
+var chips=q('.pl-chips'),list=q('.pl-list'),wrap=q('.pl-wrap'),det=q('.pl-det'),et=q('.pl-et'),ec=q('.pl-ec'),
+undoB=q('#pl-undo'),clearB=q('#pl-clear'),cp=q('.pl-cp'),di=q('.pl-di'),note=q('.pl-note');
+var led={p:1,dir:1,t0:0},dv={v:0,from:0,to:0,t0:0};
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function vis(){var r=[];E.forEach(function(e,i){if(filter==='all'||e[0]===filter)r.push(i)});return r}
+K.forEach(function(k){var n=k==='all'?E.length:E.filter(function(e){return e[0]===k}).length;
+var b=el('button','pl-chip');b.type='button';b.dataset.k=k;
+b.appendChild(el('span','pl-ck'));b.appendChild(el('span','',L[k][2]));b.appendChild(el('span','pl-n',n));
+b.addEventListener('click',function(){setFilter(k,'Filter: ')});chips.appendChild(b)});
+chips.addEventListener('keydown',function(e){var b=[].slice.call(chips.children),i=b.indexOf(document.activeElement);
+if(i<0)return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();b[(i+(e.key==='ArrowRight'?1:b.length-1))%b.length].focus()}});
+function renderChips(){[].forEach.call(chips.children,function(b){var on=b.dataset.k===filter;
+b.setAttribute('aria-pressed',on);b.firstChild.textContent=on?'✓':''})}
+function renderList(){while(list.firstChild)list.removeChild(list.firstChild);rows={};
+var old=wrap.querySelector('.pl-empty');if(old)wrap.removeChild(old);
+var v=vis();
+if(!v.length){var p=el('div','pl-empty','No '+L[filter][1]+' in this sample.'),b=el('button','','Show all events');
+b.type='button';b.addEventListener('click',function(){setFilter('all','Cleared: ')});p.appendChild(b);wrap.insertBefore(p,list);list.hidden=true;return}
+list.hidden=false;
+if(v.indexOf(sel)<0&&!open)sel=v[0];
+v.forEach(function(i){var e=E[i],r=el('li','pl-row');r.id='pl-r'+i;r.setAttribute('role','option');
+r.appendChild(el('span','pl-g'));r.appendChild(el('span','pl-s',L[e[0]][0]));r.appendChild(el('span','pl-t',e[1]));r.appendChild(el('span','pl-m',e[2]));
+r.addEventListener('click',function(){select(i,true);openDet()});rows[i]=r;list.appendChild(r)});
+mark()}
+function mark(){var v=vis(),f=v.indexOf(sel)<0?v[0]:sel;
+v.forEach(function(i){var r=rows[i],on=i===sel;r.setAttribute('aria-selected',on);r.tabIndex=i===f?0:-1;r.firstChild.textContent=on?'›':''});
+if(open)fill()}
+function select(i,focus){sel=i;mark();var r=rows[i];if(r){if(focus)r.focus();r.scrollIntoView({block:'nearest'})}}
+list.addEventListener('keydown',function(e){var v=vis(),i=v.indexOf(sel),k=e.key;
+if(k==='ArrowDown'||k==='ArrowUp'||k==='Home'||k==='End'){e.preventDefault();
+if(i<0)i=0;else if(k==='ArrowDown')i=Math.min(v.length-1,i+1);else if(k==='ArrowUp')i=Math.max(0,i-1);else i=k==='Home'?0:v.length-1;
+select(v[i],true)}else if(k==='Enter'||k===' '){e.preventDefault();if(v.indexOf(sel)>=0)openDet()}});
+function setLedger(t,dir){et.textContent=t;led={p:reduce()?1:0,dir:dir,t0:performance.now()};
+ec.textContent=hist.length?hist.length+' to undo':'Nothing to undo';
+undoB.setAttribute('aria-disabled',!hist.length);clearB.setAttribute('aria-disabled',filter==='all');kick()}
+function setFilter(k,pre){if(k===filter)return;hist.push(filter);filter=k;apply(pre+L[k][1],1)}
+function undo(){if(!hist.length)return;filter=hist.pop();apply('Restored: '+L[filter][1],-1)}
+function apply(t,d){renderChips();renderList();setLedger(t,d)}
+undoB.addEventListener('click',undo);
+clearB.addEventListener('click',function(){setFilter('all','Cleared: ')});
+function fill(){var e=E[sel];q('.pl-dm').textContent=e[2];q('.pl-dl').textContent=L[e[0]][0];
+q('.pl-dt').textContent=e[1];q('.pl-ds').textContent=e[3];di.textContent=e[4];note.hidden=vis().indexOf(sel)>=0}
+function tw(to){dv.from=dv.v;dv.to=to;dv.t0=performance.now();kick()}
+function openDet(){open=true;fill();resetCp();det.hidden=false;tw(1);
+list.style.paddingBottom=det.offsetHeight+'px';if(rows[sel])rows[sel].scrollIntoView({block:'nearest'})}
+function closeDet(){if(!open)return;open=false;tw(0);list.style.paddingBottom='';
+if(rows[sel])rows[sel].focus();else list.focus();renderList()}
+q('.pl-x').addEventListener('click',closeDet);
+function resetCp(){clearTimeout(timer);busy=false;cp.textContent='Copy event ID'}
+cp.addEventListener('click',function(){if(busy)return;busy=true;cp.textContent='Copying…';var id=di.textContent;
+var done=function(ok){busy=false;cp.textContent=ok?'Copied ID':'Copy failed. ID text selected.';
+if(ok)timer=setTimeout(resetCp,1600);else{var r=document.createRange();r.selectNodeContents(di);var s=getSelection();s.removeAllRanges();s.addRange(r)}};
+try{Promise.race([navigator.clipboard.writeText(id),new Promise(function(_,j){setTimeout(j,400)})]).then(function(){done(1)},function(){done(0)})}catch(x){done(0)}});
+document.addEventListener('keydown',function(e){
+if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}
+else if(e.key==='Escape'&&open){e.preventDefault();closeDet()}});
+var raf=0,now=0;
+function ease(t){return 1-Math.pow(1-t,4)}
+function step(){var m=false,t;
+if(led.p<1){led.p=Math.min(1,(now-led.t0)/180);m=m||led.p<1}
+t=Math.min(1,(now-dv.t0)/180);dv.v=dv.from+(dv.to-dv.from)*ease(t);if(t<1)m=true;return m}
+function snapToTarget(){led.p=1;dv.v=dv.to}
+function draw(){var e=ease(led.p);et.style.transform='translateX('+(led.dir*8*(1-e)).toFixed(2)+'px)';et.style.opacity=e;
+if(dv.v<=0&&dv.to===0)det.hidden=true;else{det.style.transform='translateY('+(8*(1-dv.v)).toFixed(2)+'px)';det.style.opacity=dv.v}}
+function frame(n){now=n;var moving=reduce()?(snapToTarget(),false):step();draw();raf=moving?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame);if(document.hidden){snapToTarget();draw()}}
+document.addEventListener('visibilitychange',function(){if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+window.addEventListener('message',function(e){var m=e.data;
+if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+renderChips();renderList();setLedger('Filter: all events',1);led.p=1;draw();
+})();</script>
+</body></html>

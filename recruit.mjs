@@ -12,6 +12,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { completeChecked, die, findBanned, prepareProvider, sections, today } from './run.mjs';
 import { inspirationContext } from './component-focus.mjs';
+import { markdownCell } from './security.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const KINDS = ['roles', 'methods', 'stances', 'constraints', 'tasks', 'guests', 'temperaments'];
@@ -280,7 +281,7 @@ export function nextSeason(base, draft, suggestions, start = '') {
 }
 
 export function summary(meta) {
-  const rows = (items) => items.map((t) => `| ${String(t).replace(/\|/g, '\\|')} |`).join('\n');
+  const rows = (items) => items.map((t) => `| ${markdownCell(t)} |`).join('\n');
   const table = (title, items) => (items.length ? [`### ${title}`, '', '| Item |', '|---|', rows(items), ''] : []);
   const lines = [
     `Season starting **${meta.start}**, drafted by ${meta.provider} (${meta.model}) from season ${meta.base}.`, '',
@@ -293,7 +294,7 @@ export function summary(meta) {
   }
   if (meta.suggestions.length) {
     lines.push('### Suggestions', '', '| Issue | Votes | Decision | Reason |', '|---|---|---|---|');
-    for (const s of meta.suggestions) lines.push(`| #${s.issue} | ${s.votes} | ${s.decision} | ${s.reason.replace(/\|/g, '\\|')} |`);
+    for (const s of meta.suggestions) lines.push(`| #${s.issue} | ${s.votes} | ${s.decision} | ${markdownCell(s.reason)} |`);
     lines.push('', 'When this merges, the season workflow comments on each issue, closes accepted and declined ones, and posts an announcement.');
   }
   return `${lines.join('\n')}\n`;

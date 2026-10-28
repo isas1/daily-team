@@ -1,0 +1,1043 @@
+{
+  "facts": {
+    "week": {
+      "start": "2026-10-19",
+      "end": "2026-10-25"
+    },
+    "repository": "isas1/daily-team",
+    "changes": {
+      "commits": [
+        {
+          "sha": "8ba83d6",
+          "date": "2026-10-20",
+          "subject": "Component days: control x process tasks, four variations, craft gate (#26)",
+          "area": "Seasons and suggestions"
+        },
+        {
+          "sha": "5262d9c",
+          "date": "2026-10-20",
+          "subject": "Component tiles: own palette per variation, first frame shows the process (#28)",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "cab4eb4",
+          "date": "2026-10-20",
+          "subject": "Component days: ten tiles, then one finished piece built from them (#29)",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "6a87e66",
+          "date": "2026-10-20",
+          "subject": "Season 2026-10-26 (#27)",
+          "area": "Seasons and suggestions"
+        },
+        {
+          "sha": "bc2baa7",
+          "date": "2026-10-20",
+          "subject": "Bump actions/setup-node from 7.0.0 to 7.1.0 in the actions group (#24)",
+          "area": "Automation"
+        },
+        {
+          "sha": "9c19c68",
+          "date": "2026-10-21",
+          "subject": "Component days: clean modern style (off-white/off-black, one accent, no beige, neon or gradients) (#31)",
+          "area": "Team and sessions"
+        }
+      ],
+      "testsAtStart": 70,
+      "testsAtEnd": 74
+    },
+    "days": [
+      {
+        "date": "2026-10-19",
+        "status": "ok",
+        "task": "Scroll progress",
+        "concept": "Clew Rim",
+        "decision": "The page is a 2 px line that runs around all four edges of the window, cooling behind its hot head as you read, leaving persistent knots where you paused, and pressing any knot or point on it takes you back there.",
+        "constraint": "All text at 18 px or larger.",
+        "roles": [
+          "Taxidermist",
+          "Wheelwright",
+          "Glassblower"
+        ],
+        "guest": {
+          "name": "Daedalus",
+          "kind": "myth"
+        },
+        "temperaments": [
+          "Brings up the budget whenever the talk gets abstract.",
+          "Treats every rule as a challenge.",
+          "Measures twice and says so.",
+          "Wants everything decided before lunch."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 9,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 23253
+          }
+        ]
+      },
+      {
+        "date": "2026-10-20",
+        "status": "ok",
+        "task": "Undo in rewind",
+        "concept": "Wrong-Way Reel",
+        "decision": "The page is a set of four undo controls, each running the visitor's own actions backward the way tape reverses, and the visitor makes marks, then takes them back by dragging a seam ripper, spinning a crown, holding a word, or flinging a ...",
+        "constraint": "Text still reads clearly at 200 percent zoom.",
+        "roles": [
+          "Upholsterer",
+          "Clockmaker",
+          "Translator"
+        ],
+        "guest": {
+          "name": "Scheherazade",
+          "kind": "myth"
+        },
+        "temperaments": [
+          "Insists on hearing from the quietest person.",
+          "Repeats the other side's point before answering it.",
+          "Goes quiet, then returns with a written list.",
+          "Sides with whoever is losing."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8579
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8113
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7484
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9487
+          }
+        ]
+      },
+      {
+        "date": "2026-10-21",
+        "status": "ok",
+        "task": "Color swatch in dye bath",
+        "concept": "Fast Colour",
+        "decision": "The page is a dye house where the visitor dips one strip of cloth through a rack of vats that the tide fills by one pot per visit, and the colour the cloth takes is the swatch they pick, kept in the browser until they return.",
+        "constraint": "Saves the input in the browser and restores it on reload.",
+        "roles": [
+          "Beekeeper",
+          "Luthier",
+          "Weaver"
+        ],
+        "guest": {
+          "name": "Robinson Crusoe",
+          "kind": "literary"
+        },
+        "temperaments": [
+          "Will not accept a plan they cannot draw.",
+          "Tells a story from the workshop instead of arguing.",
+          "Laughs at the problem first, then takes it apart.",
+          "Asks what would change their mind, then waits."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 34767
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8588
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9295
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8902
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9331
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9374
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8200
+          },
+          {
+            "file": "artifact-7.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8677
+          },
+          {
+            "file": "artifact-8.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8705
+          },
+          {
+            "file": "artifact-9.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7692
+          },
+          {
+            "file": "artifact-10.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8042
+          }
+        ]
+      },
+      {
+        "date": "2026-10-22",
+        "status": "ok",
+        "task": "Badge in droplets",
+        "concept": "Wet Tally",
+        "decision": "The set is ten droplet badges that add by merging and subtract by shedding a drop that is kept, and the visitor taps, holds, flings, and rescales them to count.",
+        "constraint": "Under 30 KB in total.",
+        "roles": [
+          "Animator",
+          "Chef",
+          "Librarian"
+        ],
+        "guest": {
+          "name": "Gulliver",
+          "kind": "literary"
+        },
+        "temperaments": [
+          "Gets louder the more sure they are.",
+          "Praises an idea, then takes it apart.",
+          "Turns every disagreement into a wager.",
+          "Will not go on until a word is defined."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 9,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 27062
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9023
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7608
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10181
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9280
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8895
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10418
+          },
+          {
+            "file": "artifact-7.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9222
+          },
+          {
+            "file": "artifact-8.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10223
+          },
+          {
+            "file": "artifact-9.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9338
+          },
+          {
+            "file": "artifact-10.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8928
+          }
+        ]
+      },
+      {
+        "date": "2026-10-23",
+        "status": "ok",
+        "task": "File drop in a well",
+        "concept": "Sounding Well",
+        "decision": "The page is a well that takes a dropped file, drops it down a measured shaft, stitches it in chunk by chunk, holds back the echo until the receiver's hash agrees, and keeps every file and its record in layers for whoever finds it later.",
+        "constraint": "No buttons.",
+        "roles": [
+          "Printmaker",
+          "Packaging designer",
+          "Bookbinder"
+        ],
+        "guest": {
+          "name": "Charles Darwin",
+          "kind": "historical"
+        },
+        "temperaments": [
+          "Asks for a demonstration before any opinion.",
+          "Changes their mind out loud, mid-argument.",
+          "Answers questions with sketches and numbers.",
+          "Distrusts anything that came too easily."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 44726
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9626
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11100
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7815
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10440
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7715
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10641
+          },
+          {
+            "file": "artifact-7.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9750
+          },
+          {
+            "file": "artifact-8.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8176
+          },
+          {
+            "file": "artifact-9.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7691
+          },
+          {
+            "file": "artifact-10.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10447
+          }
+        ]
+      },
+      {
+        "date": "2026-10-24",
+        "status": "ok",
+        "task": "Empty state in tide pool",
+        "concept": "Low Water Set",
+        "decision": "The set is ten working empty states for a list, each a still tide pool with one small creature waiting, all drawn in pure black line so they print cleanly, and each one lets the visitor add, remove, and return to empty.",
+        "constraint": "Prints clearly on a black-and-white printer.",
+        "roles": [
+          "Museum curator",
+          "Urban planner",
+          "Comic artist"
+        ],
+        "guest": {
+          "name": "Arachne",
+          "kind": "myth"
+        },
+        "temperaments": [
+          "Concedes small points to win the big one.",
+          "Speaks rarely, and only in short verdicts.",
+          "Defends the first idea in the room.",
+          "Keeps score of every point won and lost."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 9,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 42205
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9765
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10586
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 6514
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9703
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9110
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8383
+          },
+          {
+            "file": "artifact-7.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12077
+          },
+          {
+            "file": "artifact-8.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8965
+          },
+          {
+            "file": "artifact-9.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9517
+          },
+          {
+            "file": "artifact-10.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9923
+          }
+        ]
+      },
+      {
+        "date": "2026-10-25",
+        "status": "ok",
+        "task": "Breadcrumb in footprints",
+        "concept": "the way back up",
+        "decision": "the visitor walks down into a real dye-sample library, and the way back up is a trail of prints they can hover, hold, drag, fling and scrub, with each print deepening as they reach it.",
+        "constraint": "Lowercase only.",
+        "roles": [
+          "Window dresser",
+          "Sign painter",
+          "Textile designer"
+        ],
+        "guest": {
+          "name": "Katsushika Hokusai",
+          "kind": "historical"
+        },
+        "temperaments": [
+          "Sides with whoever is losing.",
+          "Goes quiet, then returns with a written list.",
+          "Will not accept a plan they cannot draw.",
+          "Repeats the other side's point before answering it."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 35079
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8353
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8176
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7094
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7283
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8162
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 6836
+          },
+          {
+            "file": "artifact-7.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8529
+          },
+          {
+            "file": "artifact-8.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7709
+          },
+          {
+            "file": "artifact-9.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 7174
+          },
+          {
+            "file": "artifact-10.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 8006
+          }
+        ]
+      }
+    ],
+    "seasons": [
+      {
+        "start": "2026-10-19",
+        "when": "started this week",
+        "addedCounts": {
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 40,
+          "guests": 2,
+          "temperaments": 4
+        },
+        "retiredCounts": {
+          "guests": 2,
+          "temperaments": 4,
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 40
+        },
+        "added": {
+          "roles": [
+            "Wheelwright",
+            "Gilder",
+            "Thatcher",
+            "Lacemaker",
+            "Rope maker",
+            "Bell founder",
+            "Organ builder",
+            "Stage manager"
+          ],
+          "methods": [
+            "Name every part before arranging any of them.",
+            "Find the slowest step, make it visible, and speed up only that step.",
+            "Build two versions that disagree and keep what both share.",
+            "Stop each session mid-sentence so the next one starts easily.",
+            "Trace one piece of input from entry to exit and note every stop.",
+            "Decide what gets thrown away before deciding what stays.",
+            "Make the worst version on purpose, then list what makes it bad.",
+            "Write the rule for when to stop before you start."
+          ],
+          "constraints": [
+            "Text still reads clearly at 200 percent zoom.",
+            "No more than seven elements visible at once."
+          ],
+          "tasks": [
+            "Toggle in risograph: two ink layers slip out of register as it flips, then lock back into one clean print.",
+            "Slider in sediment: each step lays down a stratum, and dragging back scrapes the layers away.",
+            "Button in letterpress: the press bites into paper, and the deboss stays as proof it was pressed.",
+            "Loader in phosphor: a trace writes the wait across a dark screen, and the glow fades behind the beam.",
+            "Progress ring in phyllotaxis: seeds spiral out from the center until the head is full.",
+            "Dial in cymatics: turning changes the tone, and sand gathers on the nodal lines when it locks.",
+            "Stepper in split flap: each count clatters through the flaps and settles on the new number.",
+            "Rating in thermal: a press leaves a warm print that cools to the score that was given.",
+            "Countdown in marbled ink: rings of ink spread on water and close in as the moment nears.",
+            "Tooltip in frost: a hint crystallizes where the hand pauses and melts when it moves on.",
+            "Tabs in folded paper: panels crease and refold so the one in front always lies flat.",
+            "Accordion in bellows: a section draws breath as it opens, and the last one breathes out.",
+            "Toast in smoke: a notice rises, holds its shape long enough to read, and drifts apart.",
+            "Segmented control in iron filings: a magnet slides between three choices and the filings follow.",
+            "Checkbox in embroidery: a stitch crosses the box, can be unpicked, or stops halfway as a half state.",
+            "Search field in a sieve: letters shake a mesh, and only the matching words stay on top.",
+            "Date picker in tide: drag the tide line along a shore of days, and it leaves one day wet.",
+            "Copy button in carbon paper: one tap presses a copy through, and the second sheet shows it worked.",
+            "Password field in crystal growth: each character feeds a crystal that grows larger and more ordered.",
+            "Tag input in beads: each word becomes a bead on a thread, and a tap slips one off the end.",
+            "Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
+            "Skeleton in graphite rubbing: the shape of the content appears as if rubbed over a hidden relief.",
+            "Empty state in tide pool: an empty list is a still pool with one small creature waiting.",
+            "Reorder list in rope: items hang on a rope, and lifting one moves the slack along the line.",
+            "Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.",
+            "Key hint in ripples: each key on screen sends one ring across still water when it is pressed.",
+            "Character counter in sand: grains drain as text is typed, showing how much room is left.",
+            "Theme switch in eclipse: light and dark trade places as one disc slides across another.",
+            "File drop in a well: a dropped file falls, rings spread, and the echo confirms it arrived.",
+            "Scroll progress in a wick: a thin flame burns along the edge as the page is read.",
+            "Split view in surface tension: two pools share one edge that the hand can drag.",
+            "Carousel in a zoetrope: cards spin past a slit and stop one at a time, by swipe or key.",
+            "Status dot in fireflies: one light pulses slowly when away, steadily when online, and fast when busy.",
+            "Command menu in magnetism: typing pulls the matching actions up out of a scattered field.",
+            "Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.",
+            "Sparkline in seismograph: a needle draws the numbers inside a sentence and settles at rest.",
+            "Initials stack in shadow play: a few figures overlap behind a screen, and the rest are a count.",
+            "Pagination in flipbook: pages riffle under the thumb and stop with the number in view.",
+            "Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.",
+            "Slider in pendulum: a weighted bob swings to the value and slowly comes to rest."
+          ],
+          "guests": [
+            "myth | Ariadne | Leave a thread so you can always find the way back. | Greek myth",
+            "literary | Phileas Fogg | Set a fixed deadline and plan every stop against it. | Jules Verne, died 1905"
+          ],
+          "temperaments": [
+            "Repeats the other side's point before answering it.",
+            "Goes quiet, then returns with a written list.",
+            "Asks what would change their mind, then waits.",
+            "Brings up the budget whenever the talk gets abstract."
+          ]
+        },
+        "retired": {
+          "guests": [
+            "historical | Euclid | State a few assumptions, then build everything from them. | died c. 270 BC",
+            "historical | Ibn al-Haytham | Trust nothing until an experiment shows it. | died c. 1040"
+          ],
+          "temperaments": [
+            "Impatient; cuts people off mid-sentence.",
+            "Hoards evidence before saying anything.",
+            "Agrees fast, then quietly does it their own way.",
+            "Argues the opposite side to test an idea."
+          ],
+          "roles": [
+            "Industrial designer",
+            "Furniture maker",
+            "Set designer",
+            "Lighting designer",
+            "Costume designer",
+            "Game designer",
+            "Puppeteer",
+            "Choreographer"
+          ],
+          "methods": [
+            "Design the error and empty states first.",
+            "List the assumptions in the brief and check each one.",
+            "Make it work in black and white before adding color.",
+            "Prototype in the final material.",
+            "Take the conventions of a genre and break exactly one.",
+            "Storyboard every change of state.",
+            "Write the copy before the layout.",
+            "Scope the work to what fits in one day."
+          ],
+          "constraints": [
+            "Under 100 words of fixed text on the page.",
+            "Three colors at most."
+          ],
+          "tasks": [
+            "Statusline: a Claude Code status line that lives like a creature at the bottom of the terminal.",
+            "Spinner: what Claude Code shows while it thinks, made into a tiny performance.",
+            "Gatekeeper: a Claude Code hook that stands at the door before a tool acts and asks its own question.",
+            "Aftermath: a Claude Code hook that wakes after every edit and leaves a mark.",
+            "Last word: a Claude Code hook that speaks when a session ends.",
+            "Morning ritual: what a Claude Code session does the moment it starts.",
+            "Output style: a Claude Code voice that changes how every answer sounds.",
+            "Slash command: one word typed after a slash in Claude Code that sets something strange in motion.",
+            "Skill: a Claude Code skill that teaches one craft nobody thought to teach.",
+            "Subagent: a small helper Claude Code sends off alone, and what it brings back.",
+            "Swarm: many Claude Code helpers working at once on one problem.",
+            "Memory file: what Claude Code remembers about a person between sessions.",
+            "Forgetting: what Claude Code loses, and what it keeps, when a long conversation is compacted.",
+            "Permission: the moment Claude Code asks before it acts, and what that asking feels like.",
+            "Plan mode: Claude Code thinking out loud before it touches anything.",
+            "Plugin: a bundle of Claude Code mods that arrives like a traveller with a full pack.",
+            "Marketplace: a place where Claude Code plugins are shown, traded, and chosen.",
+            "MCP server: a bridge that lets Claude Code reach into another world of tools.",
+            "Notification: how Claude Code calls someone back when it needs them.",
+            "Worktree: Claude Code working in a parallel copy of the same project.",
+            "Diff: the visible trace of every change Claude Code makes.",
+            "Checkpoint: a Claude Code rewind that lets someone step back in time.",
+            "Theme: the Claude Code terminal dressed for a season, a mood, or a creature.",
+            "Keybinding: one key press in Claude Code that does something no one expects.",
+            "Prompt line: the blank line where a person speaks to Claude Code, made into something more.",
+            "Context window: everything Claude Code can hold in mind at once, and the edge where it ends.",
+            "Long task: a Claude Code job that runs for hours while no one watches.",
+            "Loop: Claude Code waking on a schedule to check on something again and again.",
+            "Handoff: one Claude Code session passing its work to the next.",
+            "Review: a Claude Code mod that reads someone's work and answers in its own voice.",
+            "Guardrail: a Claude Code rule that stops one thing from ever happening.",
+            "Tool call: the instant Claude Code reaches for a tool, slowed down and shown.",
+            "Session log: the trail a Claude Code session leaves behind it.",
+            "Companion: a Claude Code mod that keeps someone company while they work.",
+            "Greeting: the first thing Claude Code says, made worth waiting for.",
+            "Ghost in the terminal: a Claude Code mod that leaves small surprises for the curious.",
+            "Crew: hooks, skills, and commands in Claude Code that work together like a ship's crew.",
+            "Celebration: what Claude Code does when the tests finally pass.",
+            "Error: a Claude Code failure turned into something kind, funny, or useful.",
+            "Mod workshop: a place to build a Claude Code mod from parts."
+          ]
+        },
+        "accepted": []
+      },
+      {
+        "start": "2026-10-26",
+        "when": "starts next Monday",
+        "addedCounts": {
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 6,
+          "guests": 2,
+          "temperaments": 4
+        },
+        "retiredCounts": {
+          "guests": 2,
+          "temperaments": 4,
+          "roles": 8,
+          "methods": 8,
+          "constraints": 2,
+          "tasks": 6
+        },
+        "added": {
+          "roles": [
+            "Cooper",
+            "Basket maker",
+            "Farrier",
+            "Paper maker",
+            "Mosaic artist",
+            "Jeweller",
+            "Saddler",
+            "Boat builder"
+          ],
+          "methods": [
+            "Write three titles for the work before starting it.",
+            "Start with the part you understand least.",
+            "Hand the work over in silence and note where the eyes go first.",
+            "Log every choice in one line with its reason.",
+            "Measure the current version before changing anything.",
+            "Finish a working version in half the time, then spend the rest fixing it.",
+            "Turn the work upside down and mark whatever now looks wrong.",
+            "Remove the surroundings and check the work still holds up alone."
+          ],
+          "constraints": [
+            "Works fully with scripts turned off.",
+            "Every interactive element shows a visible focus outline."
+          ],
+          "tasks": [
+            "Inline edit in hot wax: a line of text softens into a field when clicked and sets hard again when left.",
+            "Code input in dominoes: each digit drops into its box and tips the next box ready for the one after.",
+            "Signature pad in wet ink: a mark drawn by hand bleeds and dries, and one wipe lifts it away to start again.",
+            "Timeline in tree rings: a few dated moments grow outward as rings, and today is the newest, softest edge.",
+            "Time picker in shadow: an hour and a minute are set by moving the light until the shadow falls on them.",
+            "Level meter in boiling water: bubbles rise faster as the sound gets louder and settle as it fades."
+          ],
+          "guests": [
+            "historical | Gregor Mendel | Count the results of many small trials before naming a pattern. | died 1884",
+            "creature | Sphinx | Set a riddle at the entrance and let only clear answers through. | Greek myth"
+          ],
+          "temperaments": [
+            "Splits every question into smaller ones first.",
+            "Asks who will have to live with the result.",
+            "Agrees with the goal, argues only about the steps.",
+            "Reads back the notes before anyone leaves."
+          ]
+        },
+        "retired": {
+          "guests": [
+            "historical | Leonardo da Vinci | Sketch the subject many times before deciding anything. | died 1519",
+            "historical | Benjamin Franklin | List the pros and cons, weigh them, and cross out equals. | died 1790"
+          ],
+          "temperaments": [
+            "Speaks rarely, and only in short verdicts.",
+            "Gets louder the more sure they are.",
+            "Concedes small points to win the big one.",
+            "Asks for a demonstration before any opinion."
+          ],
+          "roles": [
+            "Playwright",
+            "Stand-up comedian",
+            "Radio producer",
+            "Documentary director",
+            "Animator",
+            "Comic artist",
+            "Printmaker",
+            "Ceramicist"
+          ],
+          "methods": [
+            "Use found material only.",
+            "Show it to someone at 10 percent done.",
+            "Repeat one motif with variation.",
+            "Design for the slowest device and connection first.",
+            "Count words, clicks, and seconds, then reduce each.",
+            "Find what the audience already does and build on it.",
+            "Interview someone who dislikes the category.",
+            "Collect references, then put them away and work from memory."
+          ],
+          "constraints": [
+            "Usable with one thumb on a phone.",
+            "No animation."
+          ],
+          "tasks": [
+            "Toggle in risograph: two ink layers slip out of register as it flips, then lock back into one clean print.",
+            "Slider in sediment: each step lays down a stratum, and dragging back scrapes the layers away.",
+            "Button in letterpress: the press bites into paper, and the deboss stays as proof it was pressed.",
+            "Loader in phosphor: a trace writes the wait across a dark screen, and the glow fades behind the beam.",
+            "Tooltip in frost: a hint crystallizes where the hand pauses and melts when it moves on.",
+            "Tabs in folded paper: panels crease and refold so the one in front always lies flat."
+          ]
+        },
+        "accepted": []
+      }
+    ],
+    "github": {
+      "suggestionsOpenedThisWeekCount": 0,
+      "issuesOpenedCount": 0,
+      "issuesClosedCount": 0,
+      "issuesOpenedAndClosedCount": 0,
+      "issuesOpened": [],
+      "issuesClosed": [],
+      "prsMerged": [
+        {
+          "number": 31,
+          "title": "Component days: clean modern style"
+        },
+        {
+          "number": 24,
+          "title": "Bump actions/setup-node from 7.0.0 to 7.1.0 in the actions group"
+        },
+        {
+          "number": 27,
+          "title": "Season 2026-10-26"
+        },
+        {
+          "number": 29,
+          "title": "Component days: ten tiles, then one finished piece built from them"
+        },
+        {
+          "number": 28,
+          "title": "Component tiles: own palette per variation, first frame shows the process"
+        },
+        {
+          "number": 26,
+          "title": "Component days: control × process tasks, four variations, craft gate"
+        }
+      ],
+      "openSuggestionsNow": []
+    },
+    "metrics": {
+      "days": 7,
+      "failed": 0,
+      "flagged": 0,
+      "deadlocks": 0,
+      "refereed": 0,
+      "meanClashLines": 9.6,
+      "artifacts": 60,
+      "meanArtifactKB": 11.2,
+      "guestKinds": {
+        "myth": 3,
+        "literary": 2,
+        "historical": 2
+      },
+      "commits": 6,
+      "commitsByArea": {
+        "Seasons and suggestions": 2,
+        "Team and sessions": 3,
+        "Automation": 1
+      },
+      "testsAtEnd": 74
+    },
+    "trend": {
+      "days": 0,
+      "failed": 0,
+      "flagged": 0,
+      "deadlocks": 0,
+      "refereed": 0,
+      "meanClashLines": -0.4,
+      "artifacts": 53,
+      "meanArtifactKB": -30.4,
+      "commits": 4,
+      "testsAtEnd": 4
+    }
+  },
+  "model": "claude-sonnet-5-5",
+  "status": "ok",
+  "problems": []
+}

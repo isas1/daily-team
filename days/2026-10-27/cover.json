@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "7d37b5ccebd7aa93faec10beb8db8fcb26d5b072c7aa58518ca84dd27584cabf",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n- **Exhibit light technician:** One lamp and one beam. The beam falls on step 4 of six slots. The other five slots stay in low light, but their numerals remain readable. The cover shows where to look before any word explains it.\n- **Medical illustrator:** The lit slot is drawn as a cutaway. It holds log lines as thin bars, and one red bar marks the fatal line. A short leader stays inside the slot, as the clash required. Nothing crosses the frame.\n- **Interface designer:** The slots use plain numerals 1 to 6 with no labels. The title is the largest element, then the descriptor, then the date. There is one visual idea and no motion cues.\n- **Impatient commuter:** The route along the floor breaks at step 4. Steps 5 and 6 are dashed because they never ran. The copy gives the task in six words, so the cover reads at thumbnail size.\n\n**Lead's choice**\n\n- **Composition:** The title block sits on the left. On the right, six display slots stand on a floor line. A spotlight cone drops from a lamp onto slot 4, and a pool of light lands on the floor beneath it. The floor route is solid through steps 1–3, has a red break at 4, and is dashed through 5–6.\n- **Palette:**\n  - Case dark #0A1622\n  - Navy #0E2A47 for the slots\n  - Lamp cream #F4E9C8\n  - Red #BE4D4D for the fatal line and the break\n  - Slate #8FA3B8 for the dim numerals\n- **Type:**\n  - Cover Headline at 168 px in cream for \"Lit Case\".\n  - Cover Text at 30 px for the descriptor.\n  - Cover Text at 22 px, letterspaced, in slate for the date.",
+  "width": 1200,
+  "height": 630
+}

@@ -2,7 +2,7 @@
 
 Design inspiration for people building small or large projects and prototypes. Each day a new four-person creative team explores working interface components you can try and adapt. This repository is the record: each day's team, its plan, and its asset, kept in [days/](days/) and listed in the [archive](ARCHIVE.md).
 
-From 2026-10-26, the cast resets around UI craft. Buttons, loaders, panels and cards lead the brief pool; useful inputs, navigation and engineering data views follow. Readable states, precise spacing and short, purposeful animation matter more than an abstract concept. Ideas from `00-components` are distilled into [component-inspiration.json](component-inspiration.json), so cloud runs can use them without the local source folder.
+From 2026-10-26, the cast resets around UI craft. Buttons, loaders, panels and cards lead the brief pool; useful inputs, navigation and engineering data views follow. Readable states, precise spacing and short, purposeful animation matter more than an abstract concept. Ideas and reviewed source paths from `00-components` live in [component-inspiration.json](component-inspiration.json). Claude daily runs can read their actual HTML/CSS/JS from `isas1/creative-sites-vault`, choose a base that fits the task, and improve its useful mechanism, finish, states and motion. The initial bank covers a button, arc loader, metric card, bottom sheet, log viewer, pipeline panel and code diff; add reviewed paths and matching terms to expand it.
 
 Tasks start with a project need: upload a photo, switch a pricing plan, find a command, edit a title, or show progress. The team explores different forms and motion while keeping that purpose clear. You do not need design training to recognize where a component could fit in your project.
 
@@ -11,23 +11,23 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-21: Fast Colour
+### 2026-10-27: Lit Case
 
-<a href="days/2026-10-21/"><img src="days/2026-10-21/team.png" alt="Team for 2026-10-21: Beekeeper · Luthier · Weaver · Robinson Crusoe" width="100%"></a>
+<a href="days/2026-10-27/"><img src="days/2026-10-27/team.png" alt="Team for 2026-10-27: Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter" width="100%"></a>
 
-**Task:** Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.
+**Task:** Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo.
 
-**Decision:** The page is a dye house where the visitor dips one strip of cloth through a rack of vats that the tide fills by one pot per visit, and the colour the cloth takes is the swatch they pick, kept in the browser until they return.
+**Decision:** The page is a phone-width pipeline panel: the visitor opens the failed build step, reads the log line that stopped it, and retries the step in a local demo.
 
-<a href="days/2026-10-21/"><img src="days/2026-10-21/cover.png" alt="Designed cover for Fast Colour" width="100%"></a>
+<a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Designed cover for Lit Case" width="100%"></a>
 
-[Open the day](days/2026-10-21/) · [Use it](https://isas1.github.io/daily-team/2026-10-21/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-27/) · [Use it](https://isas1.github.io/daily-team/2026-10-27/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
 
 <!-- WEEK:START -->
-**Season 4**, since 2026-10-19. New this season: Wheelwright, Gilder, Thatcher, Lacemaker, Rope maker, Bell founder, Organ builder, Stage manager, Ariadne, Phileas Fogg, and 4 new temperaments. A new season with 8 new roles and 8 new methods is drafted every Monday.
+**Season 5**, since 2026-10-26. New this season: Interface designer, Motion director, Interaction engineer, Type designer, Accessibility specialist, Human factors engineer, Icon designer, Design systems engineer, Mobile interface designer, Data interface designer, Usability researcher, Interaction prototyper, Visual designer, Motion engineer, Interface copywriter, Quality engineer, Cabinet maker, Watch restorer, Instrument maker, Exhibit light technician, Architectural model maker, Technical illustrator, Medical illustrator, Scientific illustrator, Foley artist, Color grading specialist, Dance choreographer, Puppet maker, Stage illusion builder, Camera operator, Furniture designer, Ergonomist, Railway signaller, Control room operator, Air traffic controller, Flight deck designer, Game interface designer, Technical writer, Cartographic designer, Wayfinding designer, Precision machinist, Optical technician, Lens grinder, Instrument tuner, Kinetic sculptor, Letter cutter, Silversmith, Furniture restorer, the first 36 guests, and 24 temperaments. A new season is drafted every Monday; from 2026-10-26 it replaces 16 roles and 16 methods.
 
 ### Vote on what gets built next
 
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-27](days/2026-10-27/) | <a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Lit Case" width="160"></a> | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter |
+| [2026-10-26](days/2026-10-26/) | <a href="days/2026-10-26/"><img src="days/2026-10-26/piece.png" alt="Bracket and Ledger" width="160"></a> | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist |
+| [2026-10-25](days/2026-10-25/) | <a href="days/2026-10-25/"><img src="days/2026-10-25/piece.png" alt="the way back up" width="160"></a> | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai |
+| [2026-10-24](days/2026-10-24/) | <a href="days/2026-10-24/"><img src="days/2026-10-24/piece.png" alt="Low Water Set" width="160"></a> | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne |
+| [2026-10-23](days/2026-10-23/) | <a href="days/2026-10-23/"><img src="days/2026-10-23/piece.png" alt="Sounding Well" width="160"></a> | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin |
+| [2026-10-22](days/2026-10-22/) | <a href="days/2026-10-22/"><img src="days/2026-10-22/piece.png" alt="Wet Tally" width="160"></a> | Wet Tally | Animator · Chef · Librarian · Gulliver |
 | [2026-10-21](days/2026-10-21/) | <a href="days/2026-10-21/"><img src="days/2026-10-21/cover.png" alt="Fast Colour" width="160"></a> | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe |
-| [2026-10-20](days/2026-10-20/) | <a href="days/2026-10-20/"><img src="days/2026-10-20/artifact-1.png" alt="Wrong-Way Reel" width="160"></a> | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade |
-| [2026-10-19](days/2026-10-19/) | <a href="days/2026-10-19/"><img src="days/2026-10-19/artifact-1.png" alt="Clew Rim" width="160"></a> | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus |
-| [2026-10-18](days/2026-10-18/) | <a href="days/2026-10-18/"><img src="days/2026-10-18/artifact-1.png" alt="Weft" width="160"></a> | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin |
-| [2026-10-17](days/2026-10-17/) | <a href="days/2026-10-17/"><img src="days/2026-10-17/artifact-1.png" alt="The Cold Room" width="160"></a> | The Cold Room | Florist · Teacher · Calligrapher · Daedalus |
-| [2026-10-16](days/2026-10-16/) | <a href="days/2026-10-16/"><img src="days/2026-10-16/artifact-1.png" alt="Glass Cylinder" width="160"></a> | Glass Cylinder | Locksmith · Packaging designer · Window dresser · Scheherazade |
-| [2026-10-15](days/2026-10-15/) | <a href="days/2026-10-15/"><img src="days/2026-10-15/artifact-1.png" alt="Spyhole" width="160"></a> | Spyhole | Ceramicist · Textile designer · Costume designer · Ada Lovelace |
 
-[All 19 days](ARCHIVE.md)
+[All 25 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works
@@ -79,7 +79,13 @@ Fork the repo, then add one secret:
 - `OPENROUTER_API_KEY` for OpenRouter's free models (the default). Create the key with a credit limit.
 - Or `CLAUDE_CODE_OAUTH_TOKEN` from `claude setup-token` to use a Claude subscription, and set the repository variable `PROVIDER` to `claude`. A default six-component pack uses nine requests including its cover, before comparisons; Sonnet and Haiku add twelve. Legacy ten-variation days use thirteen plus twenty comparison requests. Failed checks and a referee can add requests.
 
-The Daily workflow reads component requests before planning. Add optional secret `COMPONENT_REQUESTS_TOKEN` with read access to both repos to include private `web-components` issues; the default Actions token may only read this repo. Unavailable sources print a warning and the task pool remains usable. This lane only reads issues; it never comments on or closes source requests. Label a focused issue `daily-component`, `component-request` or `request:accepted` to include it explicitly, or use the existing task suggestion form. Common component names in issue titles are also screened for relevance; maintenance audits and infrastructure work stay out.
+The Daily workflow reads component requests before planning. Add optional secret `COMPONENT_REQUESTS_TOKEN` with **Issues: read-only** access to `daily-team` and `web-components` to include private issues; the default Actions token may only read this repo. Unavailable sources print a warning and the task pool remains usable. This lane only reads issues; it never comments on or closes source requests. Label a focused issue `daily-component`, `component-request` or `request:accepted` to include it explicitly, or use the existing task suggestion form. Common component names in issue titles are also screened for relevance; maintenance audits and infrastructure work stay out.
+
+To read source code too, select `isas1/creative-sites-vault` on the same fine-grained token and add **Contents: read-only**. The source step fetches only the reviewed files under `00-components`, at one pinned commit. Missing access or files produce warnings and fall back to idea notes; generation still runs. One relevant base reaches planning and every build. The plan names the retained mechanism and concrete improvements; `day.json` records its path, commit and content hash, not the original source. Source snapshots stay temporary and source code is never executed by the intake. New outputs still need browser review. Private source context is enabled for Claude only; OpenRouter runs use the idea notes.
+
+For local source reuse, set `COMPONENTS_DIR` to your `00-components` folder before `sh daily.sh` or `node run.mjs --provider claude`. You can also save `GITHUB_TOKEN=$(gh auth token) node github.mjs component-sources > /tmp/daily-team-sources.json` and pass `--sources /tmp/daily-team-sources.json`. Custom briefs and historical dates do not use this source bank. Source code is sent to Claude as prompt context.
+
+Run `GITHUB_TOKEN=$(gh auth token) node github.mjs access-check` to check both issue repositories and every reviewed vault source without model calls. The Component access workflow performs the same check with `COMPONENT_REQUESTS_TOKEN` and prints metadata only, never original source. On forks, configure the secret or skip that optional workflow.
 
 For a local snapshot, run `GITHUB_TOKEN=$(gh auth token) node github.mjs requests > /tmp/daily-team-requests.json`, then `node run.mjs --date 2026-10-26 --requests /tmp/daily-team-requests.json --dry-run`. Add `--brief` to use your own brief instead. Request bodies stay in the temporary input; day records retain the source link and scoped task.
 

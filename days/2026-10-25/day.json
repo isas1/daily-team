@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-25",
+  "task": "Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.",
+  "brief": null,
+  "team": "Team for 2026-10-25\nSeason: 2026-10-19\n\n1. Window dresser\n   Method: Invert the default and see what still works.\n   Stance: Wants it to last.\n   Temperament: Sides with whoever is losing.\n2. Sign painter\n   Method: Interview someone who dislikes the category.\n   Stance: Insists it must be beautiful.\n   Temperament: Goes quiet, then returns with a written list.\n3. Textile designer\n   Method: Use real content only, no placeholders.\n   Stance: Breaks the frame.\n   Temperament: Will not accept a plan they cannot draw.\n4. Katsushika Hokusai (historical; died 1849) [guest]\n   Method: Show the same subject from many viewpoints.\n   Stance: Speaks for the one who finds it.\n   Temperament: Repeats the other side's point before answering it.\n\nConstraint: Lowercase only.\nTask: Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": true,
+  "status": "ok",
+  "error": null,
+  "decision": "the visitor walks down into a real dye-sample library, and the way back up is a trail of prints they can hover, hold, drag, fling and scrub, with each print deepening as they reach it.",
+  "concept": "the way back up",
+  "plan": "## Pitch\n\n**Window dresser: the window faces back**\nturn it round. the page you're on is the shallowest print, just pressed.\nhome is the deepest, trodden by everyone who came down before you.\nthe trail sits in one line across the top, like a shop window seen from inside.\nbring the cursor near a print and it sinks a little more, ready to take your weight.\nnothing fades. old prints only get deeper. that's how it lasts.\n\n**Sign painter: one gilded heel**\ni asked a man who hates breadcrumbs. he said \"i never look at them. too many little words.\"\nso: one print only. the one behind you.\nhold it, and it presses down. the sand runs off the rim in grains.\nunder each layer of sand there's the name of the step before, lettered in gold.\nhold long enough and you reach home. let go and you've gone back that far.\n\n**Textile designer: warp trail**\nno \"level 1, level 2\". a real path: library / indigo / shibori / arashi / sample 14.\nthe trail hangs down the left edge as a warp thread and runs off the bottom of the screen.\ndrag the thread up and each print folds into the cloth like a tuck.\nthe tucks deepen as you pull. the cloth gathers above you.\nif i can't draw where your hand goes, it isn't a breadcrumb.\n\n**Katsushika Hokusai: many views of one step**\nthe same trail, seen from several places.\nfrom above you see the shape of the prints and the names. from the side you see how deep each one is.\nfrom low down, behind the walker, you see the slope going up.\nthe wheel turns the view around the trail, in a circle.\nthe person who is lost reads the trail more closely than anyone. give them every angle.\n\n## Clash\n\n**Textile designer:** window dresser, if the current page is the faintest print, i can't draw it. show me where the visitor's feet are.\n\n**Window dresser:** textile designer, they're in the newest print. new snow is shallow. it doesn't vanish, the others just go deeper around it.\n\n**Katsushika Hokusai:** sign painter, you're saying one print is enough because your man never reads the trail. but someone who is lost reads every print. they need the side view, the depth, more than one step.\n\n**Sign painter:** i'll write it down.\n\n**Textile designer:** hokusai, the wheel breaks the frame and i'm for that. but the names stay real on every view. \"arashi\", not \"step 3\".\n\n**Katsushika Hokusai:** you want real names on every view. i'd keep them only on the view from above. from the side, the one who finds the trail reads depth, not names.\n\n**Window dresser:** the sign painter's single print is losing this room, so i'm siding with it. it's the one thing the visitor actually holds. it stays.\n\n**Sign painter:** list. one: gold only in the deepest print. two: names lettered, never set in a stock font. three: no print ever fills back in. four: one colour of sand.\n\n**Textile designer:** sign painter, point three fights the snow. snow fills in. i can draw it filling, slow, over a minute.\n\n**Sign painter:** then the trail ends. i want it to stay.\n\n## Decision\n\nthe visitor walks down into a real dye-sample library, and the way back up is a trail of prints they can hover, hold, drag, fling and scrub, with each print deepening as they reach it.\n\nConcept: the way back up\n\n| # | Member | Concept | Composition | Input | Motion | Visible text |\n|---|---|---|---|---|---|---|\n| 1 | Window dresser | the window faces back | horizontal line | hover nearness | morph | the real crumb names, lowercase |\n| 2 | Sign painter | one gilded heel | single object | press and hold | particles | one name in gold |\n| 3 | Textile designer | warp trail | vertical stack | drag | fold | library / indigo / shibori / arashi / sample 14 |\n| 4 | Katsushika Hokusai | many views of one step | radial | scrub or wheel | morph | steps back: 3 |\n| 5 | Window dresser | thrown home | field of many | fling | inertia and friction | nothing |\n| 6 | Sign painter | struck print | horizontal line | tap | spring overshoot | depth number, e.g. 4 |\n| 7 | Textile designer | sand loom | field of many | drag | particles | the name under the cursor |\n| 8 | Katsushika Hokusai | cross-section | vertical stack | hover nearness | fold | depth in cm |\n| 9 | Window dresser | one boot | single object | scrub or wheel | inertia and friction | nothing |\n| 10 | Sign painter | gilt compass | radial | tap | fold | \"home\" |\n\ncheck: no two rows share composition, input and motion. radial 4 and 10, horizontal line 1 and 6, vertical stack 3 and 8, single object 2 and 9, field of many 5 and 7.\n\nPiece: a working navigator for a real indigo-sample library, built as a snow slope: the visitor descends by clicking into folders, the trail back is the line of prints (1) whose depth shows in the side cross-section (8), the wheel turns the view around the trail (4), holding the gilded heel (2) steps back level by level, a fling (5) throws them partway home, and the single boot (9) scrubs back one exact step, using rows 1, 2, 4, 5, 8 and 9.\n\n- window dresser: the reversal, so home is deepest and the current page shallowest, and the rule that nothing fades.\n- sign painter: the one held print, the gold that sits only in the deepest print, and lettered names.\n- textile designer: the real path from the dye library on every print, and a trail that runs off the edge of the screen.\n- katsushika hokusai: the wheel of viewpoints and the side cross-section that shows depth instead of names.\n- textile designer lost the argument for names on every view. hokusai's case held: from the side, the lost visitor reads depth. the argument over snow filling back in is still open. the build ships with prints that stay, and the textile designer's slow fill is held back for review.\n\n## Build notes\n\n1. Hard-code the path `library / indigo / shibori / arashi / sample 14` in `trail.json`. Store each print's depth as a count of visits. Home starts at 5. Each new print starts at 1.\n2. Draw prints as SVG paths in one sand colour, #d8cdb8, with a gold fill, #b8913a, only on the print with the highest count. Letter the names by hand as SVG outlines. Do not set them in a system font. All text is lowercase.\n3. Bind the inputs. Hover within 80px deepens a print by a 0.2 morph. Press and hold steps back one level every 600ms and sheds 12 particles per step. Wheel rotates the view through 0°, 90° and 160°. Fling uses a friction of 0.92 per frame. Arrow keys and Enter mirror every gesture.",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "piece.html",
+      "kind": "piece",
+      "lead": 1,
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-1.html",
+      "lead": 1,
+      "row": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-2.html",
+      "lead": 2,
+      "row": 2,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-3.html",
+      "lead": 3,
+      "row": 3,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-4.html",
+      "lead": 4,
+      "row": 4,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-5.html",
+      "lead": 1,
+      "row": 5,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-6.html",
+      "lead": 2,
+      "row": 6,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-7.html",
+      "lead": 3,
+      "row": 7,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-8.html",
+      "lead": 4,
+      "row": 8,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-9.html",
+      "lead": 1,
+      "row": 9,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-10.html",
+      "lead": 2,
+      "row": 10,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ]
+}

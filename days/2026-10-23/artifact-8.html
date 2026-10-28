@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Against Log: press and hold to fold a dropped file down the well</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#ff4d5e}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#c8102e}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.al8-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.al8-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.al8-c{position:absolute;inset:0;width:100%;height:100%;display:block}
+.al8-f{display:none}
+</style></head><body>
+<div class="al8-root" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" aria-label="Against Log well. Press and hold to lower the file; each fold is a check, and folds that argue against arrival stay bent. Tap to pick a file, or drop one. Arrows change file. Escape folds it shut."></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.querySelector('.al8-root'),c=document.createElement('canvas'),g=c.getContext('2d');
+  c.className='al8-c';root.appendChild(c);
+  var inp=document.createElement('input');inp.type='file';inp.className='al8-f';inp.tabIndex=-1;document.body.appendChild(inp);
+  var CK=['size','chunks','hash','order','name','too easy'];
+  var files=[{n:'cat-pics-2.zip',b:3.1e6,a:[1,2]},{n:'Forever plan.pdf',b:2.4e5,a:[5]},
+    {n:'Emotional baggage',b:4e7,a:[0,2,3]},{n:'Monday.txt',b:812,a:[5]}];
+  var idx=0,hp=0,holding=false,auto=true,committed=false,pressT=0,cyc=false;
+  var L=[],i;for(i=0;i<6;i++)L.push({p:0,v:0});
+  var sq={p:1,v:0},W=0,dpr=1,ac=null,heard=0;
+  function cur(){return files[idx]}
+  function bad(i){return cur().a.indexOf(i)>=0}
+  function tgt(i){return Math.min(1,Math.max(0,hp*6-i))*(bad(i)?.56:1)}
+  function tone(f,d){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    var o=ac.createOscillator(),v=ac.createGain(),t=ac.currentTime;o.frequency.value=f;o.type='triangle';
+    v.gain.setValueAtTime(.06,t);v.gain.exponentialRampToValueAtTime(.0001,t+d);
+    o.connect(v);v.connect(ac.destination);o.start(t);o.stop(t+d)}catch(e){}}
+  function aria(){var n=0;for(var i=0;i<6;i++)if(bad(i)&&hp*6>i+.5)n++;
+    var k=Math.min(6,Math.floor(hp*6+.001));root.setAttribute('aria-valuenow',k);
+    root.setAttribute('aria-valuetext',cur().n+', '+k+' of 6 checks, '+n+' against'+(n?': '+cur().a.map(function(j){return CK[j]}).join(', '):'')+(committed?', settled':''))}
+  function advance(dt){
+    if(holding&&!committed&&!cyc&&performance.now()-pressT<160)return true;
+    if(auto||(holding&&!committed)){hp=Math.min(1,hp+dt/(auto?70:95));
+      var k=Math.floor(hp*6+.001);if(k>heard&&!auto){tone(bad(k-1)?196:440+k*40,.12)}heard=k;
+      if(hp>=1){committed=true;auto=false;if(!reduce()||holding)tone(cur().a.length?233:660,.35);aria()}}
+    else if(!committed&&hp>0){hp=Math.max(0,hp-dt*.03);heard=Math.floor(hp*6);if(hp===0)aria()}
+    if(holding&&committed&&!cyc&&performance.now()-pressT>=160){next(1);cyc=true}
+    return auto||holding||(!committed&&hp>0)}
+  function step(dt){var m=advance(dt),k=Math.pow(.8,dt);
+    for(var i=0;i<6;i++){var l=L[i];l.v+=(tgt(i)-l.p)*.18*dt;l.v*=k;l.p+=l.v*dt;
+      if(Math.abs(l.v)>.0005||Math.abs(tgt(i)-l.p)>.001)m=true;else{l.p=tgt(i);l.v=0}}
+    sq.v+=(1-sq.p)*.22*dt;sq.v*=Math.pow(.76,dt);sq.p+=sq.v*dt;
+    if(Math.abs(sq.v)>.0005||Math.abs(1-sq.p)>.001)m=true;else{sq.p=1;sq.v=0}
+    return m}
+  function snapToTarget(dt){var m=advance(dt||1);for(var i=0;i<6;i++){L[i].p=tgt(i);L[i].v=0}sq.p=1;sq.v=0;return m}
+  function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+  function draw(){if(!W)return;var S=W,ink=css('--ink'),acc=css('--acc');
+    g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,S,S);
+    var x0=S*.2,x1=S*.8,top=S*.13,l=S*.1,y=top;
+    g.fillStyle=ink;g.globalAlpha=.9;g.fillRect(x0-S*.06,top-1,S*.72,1);
+    for(var i=0;i<6;i++){var p=Math.max(0,L[i].p),q=Math.min(p,1),ph=3+(l-3)*p,b=bad(i)&&p>.08,
+      ins=(1-q)*S*.035,a0=i%2?ins:0,a1=i%2?0:ins;
+      g.beginPath();g.moveTo(x0+a0,y);g.lineTo(x1-a0,y);g.lineTo(x1-a1,y+ph);g.lineTo(x0+a1,y+ph);g.closePath();
+      g.globalAlpha=b?.16:(i%2?.05:.11)*(.4+.6*q);g.fillStyle=b?acc:ink;g.fill();
+      g.globalAlpha=b?1:.55;g.fillStyle=b?acc:ink;g.fillRect(x0+a1,y+ph-1,x1-x0-2*a1,1);
+      if(b){g.fillRect(x1-a1,y+ph-1,S*.06*Math.min(1,p*2),1);g.fillRect(x1-a1+S*.06*Math.min(1,p*2)-1,y+ph-S*.02,1,S*.02)}
+      y+=ph}
+    var f=cur(),w=S*(.08+.035*Math.log10(Math.max(f.b,10)/10)),h=S*.045,s=sq.p;
+    w*=2-s;h*=s;g.globalAlpha=1;g.fillStyle=ink;g.fillRect(S/2-w/2,y+4,w,h);
+    var n=0;for(i=0;i<6;i++)if(bad(i)&&L[i].p>.3)n++;
+    g.font='500 '+Math.max(11,S*.036)+'px system-ui,-apple-system,sans-serif';
+    g.fontVariantNumeric='tabular-nums';g.textBaseline='alphabetic';g.textAlign='left';
+    g.fillStyle=n?acc:ink;g.globalAlpha=n?1:.5;g.fillText(n+' against',x0-S*.06,S*.93);g.globalAlpha=1}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?snapToTarget(dt):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function next(d){idx=(idx+d+files.length)%files.length;committed=false;hp=0;heard=0;auto=false;aria()}
+  function press(){if(holding)return;holding=true;cyc=false;pressT=performance.now();auto=false;sq.v=-.16;kick()}
+  function release(open){if(!holding)return;holding=false;
+    if(open&&performance.now()-pressT<160)inp.click();aria();kick()}
+  function load(f){var a=[];if(f.size===0)a.push(0);if(f.name.indexOf('.')<0)a.push(4);if(f.size<1024)a.push(5);
+    files.push({n:f.name,b:f.size,a:a});idx=files.length-1;committed=false;hp=0;heard=0;auto=true;sq.v=-.2;aria();kick()}
+  root.addEventListener('pointerdown',function(e){try{root.setPointerCapture(e.pointerId)}catch(x){}press()});
+  root.addEventListener('pointerup',function(){release(true)});
+  root.addEventListener('pointercancel',function(){release(false)});
+  root.addEventListener('keydown',function(e){var k=e.key;
+    if(k===' '||k==='Enter'){e.preventDefault();if(!e.repeat)press()}
+    else if(k==='ArrowRight'||k==='ArrowDown'){e.preventDefault();next(1);kick()}
+    else if(k==='ArrowLeft'||k==='ArrowUp'){e.preventDefault();next(-1);kick()}
+    else if(k==='Escape'){holding=false;auto=false;committed=false;hp=0;heard=0;aria();kick()}});
+  root.addEventListener('keyup',function(e){if(e.key===' '||e.key==='Enter')release(true)});
+  root.addEventListener('blur',function(){release(false)});
+  root.addEventListener('dragover',function(e){e.preventDefault();sq.v=-.05;kick()});
+  root.addEventListener('drop',function(e){e.preventDefault();var f=e.dataTransfer&&e.dataTransfer.files[0];if(f)load(f)});
+  inp.addEventListener('change',function(){if(inp.files[0])load(inp.files[0]);inp.value=''});
+  new ResizeObserver(function(){var r=root.getBoundingClientRect();dpr=Math.min(2,window.devicePixelRatio||1);
+    W=r.width;c.width=Math.round(r.width*dpr);c.height=Math.round(r.height*dpr);draw()}).observe(root);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  aria();draw();kick();
+})();</script>
+</body></html>

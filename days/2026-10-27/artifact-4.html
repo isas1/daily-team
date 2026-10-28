@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Failed build retry sheet for a team app</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#f7f7f5;--sf:#fff;--ink:#121316;--mu:#5c5f66;--ln:rgba(18,19,22,.12);--acc:#8a6400;--on:#fff;--sh:0 1px 2px rgba(18,19,22,.06),0 10px 28px rgba(18,19,22,.08)}
+:root[data-theme="dark"]{--bg:#0e0f11;--sf:#17181b;--ink:#f2f2f0;--mu:#9b9da4;--ln:rgba(242,242,240,.13);--acc:#f2b705;--on:#0e0f11;--sh:0 1px 0 rgba(242,242,240,.04)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.ts4-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;container-type:size;--p:clamp(10px,5cqi,24px)}
+.ts4-sheet{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;background:var(--sf);border:1px solid var(--ln);border-radius:clamp(10px,4cqi,18px);box-shadow:var(--sh);overflow:hidden}
+@media (prefers-reduced-motion:no-preference){.ts4-sheet,.ts4-rise{animation:ts4-up 260ms ease-out both}}
+@keyframes ts4-up{from{transform:translateY(12px);opacity:0}}
+.ts4-top{padding:var(--p) var(--p) clamp(6px,2.5cqi,12px)}
+.ts4-ctx{margin:0;font-size:clamp(10px,3.1cqi,13px);color:var(--mu)}
+.ts4-sum{margin:.2em 0 0;font-size:clamp(14px,6cqi,25px);font-weight:650;line-height:1.15;letter-spacing:-.01em}
+.ts4-strip{display:flex;gap:3px;margin:clamp(6px,2.4cqi,12px) 0 clamp(4px,1.6cqi,8px)}
+.ts4-seg{flex:1;height:clamp(4px,1.2cqi,6px);border-radius:3px;background:var(--ln)}
+.ts4-s-Passed{background:var(--ink)}
+.ts4-s-Failed,.ts4-s-Running,.ts4-s-again{background:var(--acc)}
+.ts4-step{margin:0;font-size:clamp(11px,3.4cqi,14px);font-variant-numeric:tabular-nums}
+.ts4-mid{overflow:auto;padding:0 var(--p);min-height:0}
+.ts4-log{list-style:none;margin:0;padding:clamp(6px,2.4cqi,12px);background:var(--bg);border:1px solid var(--ln);border-radius:8px;font:clamp(10px,3.2cqi,13px)/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto;white-space:nowrap}
+.ts4-log li{display:flex;gap:.8em}
+.ts4-t{color:var(--mu);font-variant-numeric:tabular-nums}
+.ts4-err{font-weight:700}
+.ts4-tools{display:flex;justify-content:space-between}
+.ts4-tools button{min-height:44px;padding:0 2px;background:none;border:0;color:var(--ink);font:inherit;font-size:clamp(11px,3.4cqi,14px);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--ln);cursor:pointer}
+.ts4-bar{padding:clamp(8px,3cqi,14px) var(--p) var(--p);border-top:1px solid var(--ln);display:grid;grid-template-columns:1fr 1.35fr;gap:8px}
+.ts4-btn{min-height:44px;border-radius:10px;font:600 clamp(12px,3.8cqi,16px)/1.1 inherit;font-family:inherit;padding:0 6px;cursor:pointer;border:1px solid var(--ln);background:var(--sf);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:transform 120ms ease-out,opacity 160ms}
+.ts4-btn:active:not(:disabled){transform:scale(.97);transition-duration:80ms}
+.ts4-pri{background:var(--acc);border-color:var(--acc);color:var(--on)}
+.ts4-btn:disabled{opacity:.45;cursor:default}
+.ts4-btn.ts4-done{opacity:1;background:var(--sf);color:var(--ink);border-color:var(--ink)}
+.ts4-note{grid-column:1/-1;margin:0;text-align:center;font-size:clamp(10px,3cqi,12px);color:var(--mu)}
+button:focus-visible,.ts4-log:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.ts4-btn{transition:none}}
+</style></head><body>
+<div class="ts4-root" role="group" aria-label="Failed build: read the log and retry the step"></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0,t=0,seq=0;
+  function el(g,c,x){var e=document.createElement(g);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  var NAMES=['Checkout','Lint','Unit tests','Build','Publish image','Smoke test'];
+  var BASE=[['12:03:16','checkout: forever-app @ 4b9f2c8'],['12:03:40','lint: 0 warnings in 348 files'],['12:04:32','test: 184 suites passed'],['12:04:33','build: bundling cat-pics-2 uploader'],['12:04:36','warn: heap at 3,740 of 4,096 MB'],['12:04:37','Killed process 8421 (node)',1],['12:04:37','Exit code 137 · out of memory',1]];
+  var S;
+  function init(){S={st:['Passed','Passed','Passed','Failed','Skipped','Skipped'],tm:['0:08','0:24','0:52','1:21','',''],cur:3,ph:'failed',big:0,log:BASE.slice(),full:S?S.full:false}}
+  init();
+
+  var root=document.querySelector('.ts4-root'),sheet=el('div','ts4-sheet'),top=el('div','ts4-top'),
+      live=el('div');live.setAttribute('role','status');live.setAttribute('aria-live','polite');
+  var ctx=el('p','ts4-ctx','Forever app · PR #412 cat-pics-2'),sum=el('p','ts4-sum'),strip=el('div','ts4-strip'),stepL=el('p','ts4-step');
+  strip.setAttribute('aria-hidden','true');
+  var segs=NAMES.map(function(){var s=el('span','ts4-seg');strip.appendChild(s);return s});
+  live.append(sum,stepL);top.append(ctx,live,strip);top.insertBefore(strip,stepL.parentNode===live?live.nextSibling:null);
+  live.insertBefore(strip,stepL);
+  var mid=el('div','ts4-mid'),log=el('ol','ts4-log'),tools=el('div','ts4-tools'),tog=el('button',null,'Show full log'),rst=el('button',null,'Reset demo');
+  log.tabIndex=0;log.setAttribute('aria-label','Build log');tog.type=rst.type='button';tog.setAttribute('aria-expanded','false');
+  tools.append(tog,rst);mid.append(log,tools);
+  var bar=el('div','ts4-bar'),b1=el('button','ts4-btn','Retry'),b2=el('button','ts4-btn ts4-pri','Retry on 8 GB'),note=el('p','ts4-note','Reruns steps 4–6 · Retry keeps the 4 GB limit');
+  b1.type=b2.type='button';bar.append(b1,b2,note);
+  sheet.append(top,mid,bar);root.appendChild(sheet);
+
+  function rise(n){n.classList.remove('ts4-rise');void n.offsetWidth;n.classList.add('ts4-rise')}
+  function renderLog(){
+    var lines=S.full?S.log:S.log.slice(-3);log.replaceChildren();
+    lines.forEach(function(l){var li=el('li',l[2]?'ts4-err':null);li.append(el('span','ts4-t',l[0]),el('span',null,l[1]));log.appendChild(li)});
+    log.scrollLeft=0;
+  }
+  function render(){
+    var p=S.ph,i=S.cur;
+    sum.textContent=p==='passed'?'Build passed':p==='again'?'Build failed again at step 4 of 6':p==='pending'?(i===3?'Retrying step 4 on '+(S.big?'8':'4')+' GB':'Running step '+(i+1)+' of 6'):'Build failed at step 4 of 6';
+    stepL.textContent=(i+1)+' '+NAMES[i]+' · '+S.st[i]+(S.tm[i]&&S.st[i]!=='Running'?' · '+S.tm[i]:'');
+    segs.forEach(function(s,k){s.className='ts4-seg ts4-s-'+S.st[k].replace('Failed again','again');s.style.opacity=''});
+    renderLog();
+    var pend=p==='pending';
+    b1.textContent=pend&&!S.big?'Retrying':p==='again'?'Failed again':'Retry';
+    b1.disabled=pend||p==='again'||p==='passed';
+    b2.textContent=pend&&S.big?'Retrying':p==='passed'?'Passed in 1:14':'Retry on 8 GB';
+    b2.disabled=pend||p==='passed';b2.classList.toggle('ts4-done',p==='passed');
+    rst.hidden=p==='failed'||pend;
+    if(pend)kick();
+  }
+  function fix(){var a=document.activeElement;if(a===document.body||(a&&a.disabled))(S.ph==='again'?b2:rst).focus()}
+  function after(ms,tok,fn){setTimeout(function(){if(tok===seq){fn();render();fix()}},ms)}
+  function retry(big){
+    if(S.ph==='pending'||S.ph==='passed'||(!big&&S.ph==='again'))return;
+    var tok=++seq;S.ph='pending';S.big=big;S.cur=3;S.st[3]='Running';S.st[4]=S.st[5]='Queued';
+    S.log.push([big?'12:11:00':'12:09:02','retry: steps 4–6 on '+(big?8:4)+' GB']);render();
+    after(1400,tok,function(){
+      if(!big){S.ph='again';S.st[3]='Failed again';S.tm[3]='1:19';S.st[4]=S.st[5]='Skipped';
+        S.log.push(['12:10:21','Killed process 8533 (node)',1],['12:10:21','Exit code 137 · out of memory',1]);return}
+      S.st[3]='Passed';S.tm[3]='1:14';S.log.push(['12:12:14','build: done, peak 5,120 of 8,192 MB']);S.st[4]='Running';S.cur=4;
+      after(800,tok,function(){S.st[4]='Passed';S.tm[4]='0:26';S.log.push(['12:12:40','publish image: forever-app:412']);S.st[5]='Running';S.cur=5;
+        after(800,tok,function(){S.st[5]='Passed';S.tm[5]='0:25';S.log.push(['12:13:05','smoke test: 12 passed']);S.ph='passed'})});
+    });
+  }
+  function setFull(v){S.full=v;tog.textContent=v?'Show less':'Show full log';tog.setAttribute('aria-expanded',String(v));renderLog();rise(log);if(v)mid.scrollTop=mid.scrollHeight}
+  b1.addEventListener('click',function(){retry(0)});
+  b2.addEventListener('click',function(){retry(1)});
+  tog.addEventListener('click',function(){setFull(!S.full)});
+  rst.addEventListener('click',function(){seq++;init();render();rise(sheet);b2.focus()});
+  bar.addEventListener('keydown',function(e){
+    if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+    var o=document.activeElement===b1?b2:b1;if(!o.disabled){e.preventDefault();o.focus()}});
+  root.addEventListener('keydown',function(e){if(e.key==='Escape'&&S.full){setFull(false);tog.focus()}});
+
+  function runSeg(){return S.ph==='pending'?segs[S.cur]:null}
+  function step(dt){t+=dt*16.667;return S.ph==='pending'}
+  function draw(){var s=runSeg();if(s)s.style.opacity=String(.35+.65*(.5+.5*Math.cos(t/900*Math.PI*2)))}
+  function snapToTarget(){var s=runSeg();if(s)s.style.opacity=''}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);if(moving)draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  render();
+})();</script>
+</body></html>

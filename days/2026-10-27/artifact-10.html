@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Before / After Plate: pipeline retry panel for a team app</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#f7f7f5;--ink:#121316;--mut:#5d6066;--hair:#d6d7d9;--soft:#ecedeb;--acc:#c43d12;--on:#f7f7f5}
+:root[data-theme="dark"]{--bg:#0e0f11;--ink:#f2f2f0;--mut:#9a9ca1;--hair:#2b2d31;--soft:#17181b;--acc:#ff6b3d;--on:#0e0f11}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.bp-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;container-type:inline-size;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+.bp-in{position:absolute;inset:0;box-sizing:border-box;padding:4cqw;display:flex;flex-direction:column;gap:.5em;font-size:clamp(10px,4.3cqw,15px);line-height:1.3}
+.bp-root :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.bp-mut{color:var(--mut);font-size:.86em}
+.bp-top{display:flex;justify-content:space-between;align-items:baseline;gap:.2em .6em;flex-wrap:wrap}
+.bp-top b{font-size:1.08em;font-weight:650}
+.bp-tabrow{display:flex;align-items:center;gap:.5em}
+.bp-tabs{display:flex;gap:.35em;flex:1 1 auto;min-width:0}
+.bp-tab{flex:0 1 8.5em;min-width:0;min-height:2.95em;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:.25em .6em;border:1px solid var(--hair);border-radius:6px;background:none;color:inherit;font:inherit;line-height:1.15;cursor:pointer;transition:background 160ms,border-color 160ms}
+.bp-tab span{font-size:.86em;color:var(--mut)}
+.bp-tab.bp-bad span{color:var(--acc)}
+.bp-tab[aria-selected="true"]{border-color:var(--ink);background:var(--soft)}
+.bp-tab:hover{background:var(--soft)}
+.bp-hint{flex:1 0 auto;text-align:right}
+.bp-plate{display:flex;flex-direction:column;gap:.5em;flex:1 1 auto;min-height:0}
+.bp-cap{font-weight:600}
+.bp-bar{position:relative;height:.5em;border-radius:3px;background:var(--soft);box-shadow:inset 0 0 0 1px var(--hair);margin:.15em 0}
+.bp-fill{position:absolute;inset:0;border-radius:3px;background:var(--ink);transform-origin:left;transform:scaleX(0);transition:transform 240ms cubic-bezier(.2,0,0,1)}
+.bp-fill.bp-bad{background:var(--acc)}
+.bp-tw{position:absolute;inset:0;pointer-events:none;transition:transform 240ms cubic-bezier(.2,0,0,1)}
+.bp-tick{position:absolute;left:-1px;top:-.3em;bottom:-.3em;width:2px;background:var(--ink)}
+.bp-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:.3em}
+.bp-st{min-height:2.6em;display:flex;align-items:center;justify-content:center;gap:.35em;border:1px solid var(--hair);border-radius:6px;background:none;color:inherit;font:inherit;font-weight:600;cursor:pointer;padding:0;transition:background 160ms,border-color 160ms}
+.bp-st:hover{background:var(--soft)}
+.bp-st[aria-current="true"]{border-color:var(--ink);background:var(--soft)}
+.bp-st i{width:.62em;height:.62em;box-sizing:border-box;border-radius:50%;border:1.5px solid var(--mut)}
+.bp-st[data-s="passed"] i{background:var(--ink);border-color:var(--ink)}
+.bp-st[data-s="failed"] i{background:var(--acc);border-color:var(--acc);border-radius:1px;transform:rotate(45deg)}
+.bp-st[data-s="skipped"]{color:var(--mut)}
+.bp-st[data-s="skipped"] i{border-style:dashed}
+.bp-st[data-s="running"] i{border-color:var(--acc);border-top-color:transparent;animation:bp-spin .8s linear infinite}
+.bp-det{font-weight:600}
+.bp-log{flex:1 1 auto;min-height:2.4em;overflow:auto;position:relative;border:1px solid var(--hair);border-radius:6px;padding:.35em .55em;font:.86em/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+.bp-fat{color:var(--acc);font-weight:600}
+.bp-cut{display:flex;align-items:center;gap:.4em;color:var(--acc);font:600 1em/1.45 system-ui,-apple-system,sans-serif;white-space:nowrap}
+.bp-cut i{width:24px;height:1px;background:currentColor;transform-origin:left;animation:bp-draw 180ms 120ms cubic-bezier(.3,0,0,1) both}
+.bp-act{display:flex;flex-wrap:wrap;align-items:center;gap:.4em .5em}
+.bp-act button{font:inherit;font-weight:600;min-height:2.95em;padding:0 .9em;border-radius:6px;border:1px solid var(--ink);background:none;color:var(--ink);cursor:pointer;transition:transform 120ms,background 160ms,opacity 160ms}
+.bp-act button:hover{background:var(--soft)}
+.bp-act .bp-pri{background:var(--acc);border-color:var(--acc);color:var(--on)}
+.bp-act .bp-pri:hover{background:var(--acc)}
+.bp-act button:active{transform:scale(.97);transition-duration:80ms}
+.bp-act button:disabled{opacity:.45;cursor:default;transform:none}
+#bp-r{min-width:6.6em}
+[hidden]{display:none!important}
+@keyframes bp-spin{to{transform:rotate(360deg)}}
+@keyframes bp-draw{from{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){.bp-root *{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="bp-root" role="region" aria-label="Pipeline panel: compare build runs, read the failed step log and retry">
+<div class="bp-in">
+<div class="bp-top"><b id="bp-sum" role="status"></b><span class="bp-mut">pr/412 cat-pics-2</span></div>
+<div class="bp-tabrow"><div class="bp-tabs" role="tablist" aria-label="Runs"></div><span class="bp-hint bp-mut" id="bp-hint">Retry to compare runs</span></div>
+<div class="bp-plate" role="tabpanel" id="bp-panel">
+<div class="bp-cap" id="bp-cap"></div>
+<div class="bp-bar" aria-hidden="true"><i class="bp-fill" id="bp-fill"></i><span class="bp-tw" id="bp-tw"><i class="bp-tick"></i></span></div>
+<div class="bp-steps" role="group" aria-label="Steps"></div>
+<div class="bp-det" id="bp-det"></div>
+<div class="bp-log" id="bp-log" tabindex="0" aria-label="Step log"></div>
+</div>
+<div class="bp-act"><button type="button" id="bp-r">Retry</button><button type="button" id="bp-r8" class="bp-pri">Retry on 8 GB</button><button type="button" id="bp-reset" hidden>Reset demo</button><span class="bp-mut" id="bp-scope">Reruns steps 4–6</span></div>
+</div></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var $=function(i){return document.getElementById(i)};
+  var NAMES=['Checkout','Lint','Unit tests','Build','Publish image','Smoke test'];
+  var WORD={passed:'Passed',failed:'Failed',skipped:'Skipped',running:'Running',queued:'Queued'};
+  var BASE=[
+    {t:'0:08',log:['12:02:10 Cloned forever-web @ 4b9f2c8','12:02:18 Checked out pr/412 cat-pics-2']},
+    {t:'0:24',log:['12:02:19 eslint 348 files','12:02:43 0 warnings, 0 errors']},
+    {t:'0:52',log:['12:02:44 vitest 184 suites','12:03:36 1,492 tests passed']}];
+  var FAIL1={t:'1:21',fatal:2,log:['12:03:37 turbo build forever-web','12:04:30 Heap at 3,740 MB','12:04:58 Killed process 8421 (node)','Exit code 137']};
+  var FAIL2={t:'1:19',fatal:2,log:['12:09:02 turbo build forever-web','12:09:55 Heap at 3,760 MB','12:10:21 Killed process 9133 (node)','Exit code 137']};
+  var PASS=[
+    {t:'1:14',log:['12:09:02 turbo build forever-web','12:09:51 Heap peak 5,120 MB','12:10:16 Built cat-pics-2 bundle, 2.4 MB','Exit code 0']},
+    {t:'0:31',log:['12:10:17 docker push forever-web:4b9f2c8','12:10:48 Pushed image, 184 MB']},
+    {t:'0:42',log:['12:10:49 Smoke: open inbox, upload cat-pics-2','12:11:31 12 checks passed']}];
+  var fmt=function(n){return n.toLocaleString('en-US')};
+  function first(){return{n:1,limit:4096,peak:3980,st:'failed',
+    steps:BASE.map(function(d){return{s:'passed',d:d}}).concat([{s:'failed',d:FAIL1},{s:'skipped'},{s:'skipped'}])}}
+  var runs,sel,cur,follow,pend,dirty,sig='';
+  function reset(){runs=[first()];sel=0;cur=3;follow=false;pend=null;dirty=true}
+  reset();
+  var tabsEl=document.querySelector('.bp-tabs'),stepsEl=document.querySelector('.bp-steps');
+  var tabs=[],sbtn=[],logEl=$('bp-log'),detEl=$('bp-det'),capEl=$('bp-cap');
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  [0,1,2].forEach(function(i){var b=el('button','bp-tab');b.type='button';b.id='bp-t'+i;
+    b.setAttribute('role','tab');b.setAttribute('aria-controls','bp-panel');b.append(el('b'),el('span'));
+    b.addEventListener('click',function(){pick(i)});tabsEl.append(b);tabs.push(b)});
+  NAMES.forEach(function(n,i){var b=el('button','bp-st');b.type='button';b.append(el('span','',String(i+1)),el('i'));
+    b.addEventListener('click',function(){cur=i;follow=false;draw()});stepsEl.append(b);sbtn.push(b)});
+  function keyStep(r){for(var i=0;i<6;i++)if(r.steps[i].s==='failed'||r.steps[i].s==='running')return i;return 3}
+  function fade(){if(reduce())return;[capEl,detEl,logEl].forEach(function(e){
+    e.animate([{opacity:0},{opacity:1}],{duration:180,easing:'cubic-bezier(.2,0,0,1)'})})}
+  function pick(i){if(i===sel||i>=runs.length)return;sel=i;cur=keyStep(runs[i]);follow=!!(pend&&pend.r===runs[i]);draw();fade()}
+  function retry(big){
+    if(pend||done())return;
+    var r={n:runs.length+1,limit:big?8192:4096,peak:null,st:'running',
+      steps:BASE.map(function(d){return{s:'passed',d:d,reused:1}}).concat([{s:'running'},{s:'queued'},{s:'queued'}])};
+    runs.push(r);pend={r:r,big:big,clock:0,ph:0};sel=runs.length-1;cur=3;follow=true;draw();fade();
+    tabs[sel].focus();kick();
+  }
+  function done(){return !pend&&(runs.length>=3||runs.some(function(r){return r.st==='passed'}))}
+  function step(dt){
+    if(!pend)return false;
+    var p=pend,r=p.r,s=r.steps;p.clock+=dt;
+    if(p.ph===0&&p.clock>=1400){
+      if(p.big){s[3]={s:'passed',d:PASS[0]};s[4].s='running';p.ph=1;if(follow&&sel===runs.indexOf(r))cur=4}
+      else{s[3]={s:'failed',d:FAIL2};s[4]={s:'skipped'};s[5]={s:'skipped'};r.peak=3980;r.st='failed';pend=null}
+      dirty=true}
+    else if(p.ph===1&&p.clock>=2200){s[4]={s:'passed',d:PASS[1]};s[5].s='running';p.ph=2;if(follow&&sel===runs.indexOf(r))cur=5;dirty=true}
+    else if(p.ph===2&&p.clock>=3000){s[5]={s:'passed',d:PASS[2]};r.peak=5120;r.st='passed';pend=null;dirty=true}
+    return !!pend;
+  }
+  function logLines(r,i){
+    var s=r.steps[i];
+    if(s.reused)return['Reused from Run 1. Passed in '+s.d.t];
+    if(s.s==='queued')return['Queued. Starts after step '+i+'.'];
+    if(s.s==='running')return['Running on the '+(r.limit===8192?'8 GB':'4 GB')+' runner...'];
+    if(s.s==='skipped')return['No log. Skipped after step 4 failed.'];
+    return s.d.log;
+  }
+  function draw(){
+    dirty=false;
+    var last=runs[runs.length-1],r=runs[sel],s=r.steps[cur];
+    $('bp-sum').textContent=pend?'Run '+last.n+' · step '+(keyStep(last)+1)+' running':
+      last.n===1?'Build failed at step 4 of 6':last.st==='failed'?'Failed again at step 4':'Build passed in Run '+last.n;
+    tabs.forEach(function(b,i){var q=runs[i];b.hidden=!q;if(!q)return;
+      b.firstChild.textContent='Run '+q.n;b.lastChild.textContent=WORD[q.st];
+      b.classList.toggle('bp-bad',q.st==='failed');
+      b.setAttribute('aria-selected',i===sel);b.tabIndex=i===sel?0:-1});
+    $('bp-hint').hidden=runs.length>1;
+    $('bp-panel').setAttribute('aria-labelledby','bp-t'+sel);
+    capEl.textContent='Run '+r.n+' · '+WORD[r.st]+' · '+(r.peak?fmt(r.peak)+' of '+fmt(r.limit)+' MB':fmt(r.limit)+' MB limit');
+    var f=$('bp-fill');f.style.transform='scaleX('+(r.peak?r.peak/8192:0)+')';f.classList.toggle('bp-bad',r.st==='failed');
+    $('bp-tw').style.transform='translateX('+(r.limit/8192*100)+'%)';
+    sbtn.forEach(function(b,i){var q=r.steps[i];b.dataset.s=q.s;
+      b.setAttribute('aria-label',(i+1)+' '+NAMES[i]+', '+WORD[q.s]);
+      b.setAttribute('aria-current',i===cur);b.tabIndex=i===cur?0:-1});
+    detEl.textContent=(cur+1)+' '+NAMES[cur]+' · '+WORD[s.s]+(s.d?' · '+s.d.t:'')+(s.reused?' · reused':'');
+    var k=sel+'|'+cur+'|'+s.s+'|'+(s.d?s.d.t:'');
+    if(k!==sig){sig=k;var lines=logLines(r,cur),nodes=[],fat=s.s==='failed'&&s.d?s.d.fatal:-1;
+      lines.forEach(function(t,i){nodes.push(el('div','bp-ln'+(i===fat?' bp-fat':''),t));
+        if(i===fat){var c=el('div','bp-cut');c.append(el('i'),el('span','','Killed: out of memory'));nodes.push(c)}});
+      logEl.replaceChildren.apply(logEl,nodes);
+      logEl.scrollTop=fat>1?nodes[fat-2].offsetTop-4:0;logEl.scrollLeft=0}
+    var d=done(),r1=$('bp-r'),r8=$('bp-r8');
+    r1.hidden=r8.hidden=d;$('bp-reset').hidden=!d;
+    r1.disabled=r8.disabled=!!pend;
+    r1.textContent=pend&&!pend.big?'Retrying':'Retry';
+    r8.textContent=pend&&pend.big?'Retrying':'Retry on 8 GB';
+    $('bp-scope').textContent=d?'Tap a run to compare':'Reruns steps 4–6';
+  }
+  $('bp-r').addEventListener('click',function(){retry(false)});
+  $('bp-r8').addEventListener('click',function(){retry(true)});
+  $('bp-reset').addEventListener('click',function(){reset();draw();fade();tabs[0].focus()});
+  tabsEl.addEventListener('keydown',function(e){
+    var n=runs.length,i=sel,k=e.key;
+    if(k==='ArrowRight')i=(sel+1)%n;else if(k==='ArrowLeft')i=(sel+n-1)%n;
+    else if(k==='Home')i=0;else if(k==='End')i=n-1;else return;
+    e.preventDefault();pick(i);tabs[sel].focus()});
+  stepsEl.addEventListener('keydown',function(e){
+    var k=e.key,d=k==='ArrowRight'||k==='ArrowDown'?1:k==='ArrowLeft'||k==='ArrowUp'?-1:0;
+    if(!d)return;e.preventDefault();cur=(cur+d+6)%6;follow=false;draw();sbtn[cur].focus()});
+  document.querySelector('.bp-root').addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;cur=keyStep(runs[sel]);follow=!!pend;draw();tabs[sel].focus()});
+  var raf=0,last=0;
+  function frame(now){var dt=last?Math.min(now-last,50):16.7;last=now;
+    var moving=step(dt);if(dirty)draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>

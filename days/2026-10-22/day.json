@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-22",
+  "task": "Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.",
+  "brief": null,
+  "team": "Team for 2026-10-22\nSeason: 2026-10-19\n\n1. Animator\n   Method: Use found material only.\n   Stance: Cuts until only the core is left.\n   Temperament: Gets louder the more sure they are.\n2. Chef\n   Method: Remove the feature everyone assumes is required.\n   Stance: Pushes toward the strange.\n   Temperament: Praises an idea, then takes it apart.\n3. Librarian\n   Method: Write down what it must never do.\n   Stance: Defends the material.\n   Temperament: Turns every disagreement into a wager.\n4. Gulliver (literary; Jonathan Swift, died 1745) [guest]\n   Method: Change the scale until something looks absurd.\n   Stance: Guards the feeling it leaves behind.\n   Temperament: Will not go on until a word is defined.\n\nConstraint: Under 30 KB in total.\nTask: Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": true,
+  "status": "ok",
+  "error": null,
+  "decision": "The set is ten droplet badges that add by merging and subtract by shedding a drop that is kept, and the visitor taps, holds, flings, and rescales them to count.",
+  "concept": "Wet Tally",
+  "plan": "## Pitch\n\n**Animator: Bead**\nOne drop. That is the badge.\nTap it and a second drop rolls in from the edge and swallows into it. The number inside goes up.\nDecrease it and the drop pinches and lets a small one fall.\nI took the red from the browser's own focus ring and the shine from the cursor's outline. Found, all of it.\nNo ring, no shadow, no box. Cut everything until a drop is left.\n\n**Chef: Unsalted**\nLovely bead. Now take the number out.\nEveryone thinks a badge is a digit in a circle. It isn't. It's weight.\nHold and the drop swells, overshoots, settles fat. Let go and it sheds a bead that wobbles off.\nYou read the count the way you read a pot about to boil. By how it trembles.\nScreen readers still get the number. Eyes get the heft.\n\n**Librarian: Ledger of Drops**\nRule one, written before anything else: a drop must never disappear.\nWhen the count goes down, the drop that splits off is kept. It rolls into a line under the badge and stays there.\nFling a drop off the badge and friction parks it on the shelf, in order.\nThe badge shows what you have now. The line shows what you gave away.\nNothing is thrown out. That is the whole design.\n\n**Gulliver: Two Shores**\nFirst tell me what you mean by \"count\". The number of drops, or the amount of water? These are not the same sum.\nI propose a badge that may be seen at two sizes. From afar it is a speck, and the speck says seven.\nTurn the wheel and you descend until each of the seven is a lake, and the merges are slow floods.\nTurn it back and all that labour is a dot again.\nWhat I would keep is the small cold feeling of seeing one's great matter shrink to a freckle.\n\n## Clash\n\n**Chef:** Librarian, your shelf is a lovely idea and it ruins the badge. A badge that remembers every loss is a guilt counter.\n\n**Librarian:** I'll wager you a full shelf that nobody who sees their old drops lined up calls it guilt. They call it a record. Defend the water, don't pour it out.\n\n**Gulliver:** Before you two wager anything, define \"loss\". When a drop splits from the badge, is the badge smaller, or has the water only moved house?\n\n**Librarian:** Moved house. Same volume, two addresses. That is exactly why it must stay on screen.\n\n**Animator:** Then the shelf stays. And the number stays in my bead. Chef, a badge with no digit is a blob. People need to read seven at a glance.\n\n**Chef:** At a glance they read red and round. Your digit is the salt everyone pours before tasting. Cut it, you cut things for a living.\n\n**Gulliver:** Animator, at my far scale the speck is too small to wear a digit. At my near scale each lake is too large to need one. Your number lives only in the middle size.\n\n**Animator:** Then the middle size is the badge. That is where it sits on a real screen. The number STAYS where people actually look.\n\n**Chef:** Then put it in and watch me take it out of every other row.\n\n## Decision\n\nThe set is ten droplet badges that add by merging and subtract by shedding a drop that is kept, and the visitor taps, holds, flings, and rescales them to count.\n\nConcept: Wet Tally\n\n| # | Member | Concept | Composition | Input | Motion | Visible text |\n|---|---|---|---|---|---|---|\n| 1 | Animator | Bead | single object | tap | morph | number |\n| 2 | Chef | Unsalted | single object | press and hold | spring overshoot | nothing |\n| 3 | Librarian | Ledger of Drops | horizontal line | fling | inertia and friction | number |\n| 4 | Gulliver | Two Shores | field of many | scrub or wheel | particles | number |\n| 5 | Animator | Gutter | vertical stack | drag | inertia and friction | number |\n| 6 | Chef | Lean | field of many | hover nearness | morph | nothing |\n| 7 | Librarian | Never Spilled | vertical stack | press and hold | fold | kept |\n| 8 | Gulliver | Tide Ring | radial | hover nearness | spring overshoot | number |\n| 9 | Animator | Drip | horizontal line | tap | particles | number |\n| 10 | Chef | Seed Pod | radial | drag | morph | nothing |\n\nCheck: all five compositions appear. No two rows share composition, input, and motion together.\n\nPiece: Wet Tally, a hand counter for counting anything at a door or a window, where tapping the pane drips a drop in (rows 1, 9), drops run down and merge into the badge (5), holding splits one off and folds it onto a kept shelf below (7, 3), the wheel drops between the speck and the lakes (4, 8), and the drops lean toward a hand that comes near (6).\n\n- Animator: the single bead with its number, the tap that drips, the gutter the drops run down. Colours are taken from the browser's focus ring.\n- Chef: the drops lean and swell toward the hand. The number is absent in rows 2, 6, and 10.\n- Librarian: no drop is ever deleted. Every subtraction lands on the shelf with the label \"kept\".\n- Gulliver: the wheel that rescales the whole counter, and the definition used on the page, where count means drops and not volume.\n- Chef lost the main badge's number. The number stays because at working size people read it at a glance. The argument about the shelf as a guilt counter is still open, and Chef has said so.\n\n## Build notes\n\n1. Write one `index.html` with inline JS and CSS. Draw the drops as metaballs on a single `<canvas>` using a threshold on summed radial fields. Target under 18 KB and keep the 30 KB limit as a ceiling.\n2. Store state as an array of drops `{x, y, r, vx, vy, kept}`. A merge adds areas (`r = sqrt(r1² + r2²)`). A split halves area into a child with `kept: true` that runs on friction 0.92 to the shelf. Nothing is ever removed from the array.\n3. Put a real `<button aria-live=\"polite\">` over the canvas. Space or Enter adds a drop, Shift+Enter or Backspace splits one, and `+`/`-` or the wheel switches scale. The accessible name always reads the current count, including in the rows that show no digit.",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "piece.html",
+      "kind": "piece",
+      "lead": 1,
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-1.html",
+      "lead": 1,
+      "row": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-2.html",
+      "lead": 2,
+      "row": 2,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-3.html",
+      "lead": 3,
+      "row": 3,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-4.html",
+      "lead": 4,
+      "row": 4,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-5.html",
+      "lead": 1,
+      "row": 5,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-6.html",
+      "lead": 2,
+      "row": 6,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-7.html",
+      "lead": 3,
+      "row": 7,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-8.html",
+      "lead": 4,
+      "row": 8,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-9.html",
+      "lead": 1,
+      "row": 9,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-10.html",
+      "lead": 2,
+      "row": 10,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ]
+}

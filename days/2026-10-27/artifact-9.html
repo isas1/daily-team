@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Timeline Sweep: build step log and retry for a pull request check</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--mute:#8d8f94;--line:#2a2c30;--seg:#55585e;--hl:#1c1e22;--acc:#f2b705;--on:#0e0f11}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--mute:#5f6167;--line:#dcdcd8;--seg:#b4b5b1;--hl:#ebebe7;--acc:#8a6400;--on:#f7f7f5}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:13px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+.ts9-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;padding:clamp(10px,4%,22px);display:flex;flex-direction:column;gap:clamp(6px,2.2%,12px);border:1px solid var(--line);border-radius:14px;min-height:0}
+.ts9-h{font-size:clamp(14px,3.4vmin,18px);font-weight:650;margin:0;letter-spacing:-.01em}
+.ts9-sub{color:var(--mute);font-size:12px;margin-top:2px}
+.ts9-read{display:flex;justify-content:space-between;gap:8px;font-size:12px;flex-wrap:wrap}
+.ts9-read b{font-weight:600}
+.ts9-step{color:var(--mute);text-align:right}
+.ts9-track{position:relative;height:44px;flex:none;border-radius:6px}
+.ts9-track:has(input:focus-visible){outline:2px solid var(--acc);outline-offset:2px}
+.ts9-bar{position:absolute;left:0;right:0;top:13px;height:18px;display:flex;gap:2px}
+.ts9-seg{flex:1 1 0;min-width:3px;border-radius:3px;background:var(--seg);box-sizing:border-box}
+.ts9-seg.ts9-f{background:var(--acc)}
+.ts9-seg.ts9-s{background:none;border:1px dashed var(--seg)}
+.ts9-seg.ts9-q{background:none;border:1px dashed var(--mute)}
+.ts9-seg.ts9-r{background:none;border:2px solid var(--acc);animation:ts9-p .9s ease-in-out infinite alternate}
+@keyframes ts9-p{from{opacity:.4}to{opacity:1}}
+.ts9-cur{position:absolute;top:5px;bottom:5px;width:2px;margin-left:-1px;background:var(--ink);pointer-events:none}
+.ts9-cur::before{content:"";position:absolute;top:0;left:-3px;width:8px;height:4px;border-radius:2px;background:var(--ink)}
+.ts9-rng{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none;background:none}
+.ts9-rng::-webkit-slider-thumb{-webkit-appearance:none;width:2px;height:44px}
+.ts9-rng::-moz-range-thumb{width:2px;height:44px;border:0}
+.ts9-log{flex:1 1 auto;min-height:0;overflow:auto;position:relative;border:1px solid var(--line);border-radius:8px;padding:4px 0;font:11.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.ts9-ln{display:flex;gap:10px;padding:2px 10px;white-space:nowrap;cursor:pointer;transition:background-color .12s ease-out,opacity .12s ease-out;width:max-content;min-width:100%;box-sizing:border-box}
+.ts9-ln span:first-child{color:var(--mute)}
+.ts9-ln.ts9-e span+span{color:var(--acc);font-weight:600}
+.ts9-ln.ts9-w span+span{font-weight:600}
+.ts9-ln.ts9-m span+span{color:var(--mute)}
+.ts9-ln.ts9-fut{opacity:.38}
+.ts9-ln.ts9-on{background:var(--hl);box-shadow:inset 2px 0 var(--acc)}
+.ts9-acts{display:flex;gap:8px;flex:none}
+.ts9-b{flex:1 1 0;min-height:44px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--ink);font:600 13px/1.2 inherit;cursor:pointer;transition:transform .12s ease-out,opacity .16s}
+.ts9-b.ts9-pri{background:var(--ink);color:var(--on);border-color:var(--ink)}
+.ts9-b:active{transform:scale(.97);transition-duration:.08s}
+.ts9-b[aria-disabled="true"]{opacity:.45;cursor:default;transform:none}
+.ts9-b:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ts9-still *{transition:none!important;animation:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="ts9-root" id="ts9-root" role="group" aria-label="Build run timeline for forever-app, branch cat-pics-2">
+  <div role="status" aria-live="polite"><p class="ts9-h" id="ts9-h"></p><div class="ts9-sub" id="ts9-sub"></div></div>
+  <div class="ts9-read"><b id="ts9-time"></b><span class="ts9-step" id="ts9-step"></span></div>
+  <div class="ts9-track"><div class="ts9-bar" id="ts9-bar"></div><div class="ts9-cur" id="ts9-cur"></div>
+    <input class="ts9-rng" id="ts9-rng" type="range" min="0" step="1" aria-label="Run time"></div>
+  <div class="ts9-log" id="ts9-log" role="log" aria-label="Step log"></div>
+  <div class="ts9-acts"><button class="ts9-b" id="ts9-b1" type="button"></button><button class="ts9-b ts9-pri" id="ts9-b2" type="button"></button></div>
+</div>
+<script>(function(){
+var $=function(i){return document.getElementById('ts9-'+i)};
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var NAMES=['Checkout','Lint','Unit tests','Build','Publish image','Smoke test'];
+var HEAD=[[0,0,'Runner ready · Forever plan · 4 GB'],[0,2,'Cloned forever-app @ cat-pics-2'],[1,8,'Lint: 348 files, 0 warnings'],[2,32,'Unit tests: 184 passed']];
+var FAIL=[[3,84,'Build: bundling client'],[3,151,'Heap at 3,740 of 4,096 MB','w'],[3,164,'Killed process 8421 (node): out of memory','e'],[3,165,'Exit code 137','e'],[4,166,'Steps 5–6 skipped after step 4 failed','m']];
+var PASS=[[3,84,'Build on 8 GB runner: bundling client'],[3,140,'Heap peak 5,120 of 8,192 MB'],[3,158,'Build passed in 1:14'],[4,158,'Publish image: pushed cat-pics-2'],[5,206,'Smoke test: 12 checks passed'],[5,248,'Build passed · 4:08']];
+var S,raf=0,last=0,logVer=-1,segs=[],lines=[];
+var bar=$('bar'),rng=$('rng'),logEl=$('log'),b1=$('b1'),b2=$('b2');
+for(var i=0;i<6;i++){var d=document.createElement('div');d.className='ts9-seg';bar.appendChild(d);segs.push(d)}
+function reset(){S={st:['Passed','Passed','Passed','Failed','Skipped','Skipped'],dur:[8,24,52,81,48,42],log:HEAD.concat(FAIL),cur:165,mode:'fail',run:null,ver:(S?S.ver+1:0)}}
+function total(){return S.dur.reduce(function(a,b){return a+b},0)}
+function start(i){var t=0;for(var k=0;k<i;k++)t+=S.dur[k];return t}
+function fmt(t){t=Math.round(t);return Math.floor(t/60)+':'+(t%60<10?'0':'')+t%60}
+function setLog(a){S.log=a;S.ver++}
+function retry(big){
+  if(S.run||S.mode==='pass')return;
+  S.run={big:big,i:3,acc:0};S.mode='run';S.st[3]='Running';S.st[4]=S.st[5]='Queued';
+  setLog(HEAD.concat([[3,84,'Retrying step 4 on '+(big?'8':'4')+' GB runner…','m']]));S.cur=84;
+  draw();kick();
+}
+function step(dt){
+  var r=S.run;if(!r)return false;
+  r.acc+=dt;var need=r.i===3?1400:800;
+  if(r.acc<need)return true;
+  r.acc-=need;
+  if(!r.big){S.st=['Passed','Passed','Passed','Failed','Skipped','Skipped'];setLog(HEAD.concat(FAIL));S.cur=165;S.mode='again';S.run=null;return false}
+  S.st[r.i]='Passed';if(r.i===3)S.dur[3]=74;
+  if(r.i<5){r.i++;S.st[r.i]='Running';S.cur=start(r.i);
+    setLog(HEAD.concat(PASS.filter(function(l){return l[0]<r.i}),[[r.i,S.cur,NAMES[r.i]+' running…','m']]));return true}
+  setLog(HEAD.concat(PASS));S.cur=248;S.mode='pass';S.run=null;return false;
+}
+function buildLog(){
+  while(logEl.firstChild)logEl.removeChild(logEl.firstChild);lines=[];
+  S.log.forEach(function(l){var d=document.createElement('div'),a=document.createElement('span'),b=document.createElement('span');
+    d.className='ts9-ln'+(l[3]?' ts9-'+l[3]:'');a.textContent=fmt(l[1]);b.textContent=l[2];d.appendChild(a);d.appendChild(b);
+    d.addEventListener('click',function(){if(S.run)return;S.cur=Math.min(l[1],total());draw()});
+    logEl.appendChild(d);lines.push(d)});
+  logVer=S.ver;
+}
+function draw(){
+  var T=total(),i,c=S.cur,on=-1;
+  document.getElementById('ts9-root').classList.toggle('ts9-still',reduce());
+  for(i=0;i<6;i++){segs[i].style.flexGrow=S.dur[i];
+    segs[i].className='ts9-seg'+({Failed:' ts9-f',Skipped:' ts9-s',Queued:' ts9-q',Running:' ts9-r'}[S.st[i]]||'')}
+  $('cur').style.left=(c/T*100)+'%';
+  rng.max=T;rng.value=c;rng.disabled=!!S.run;
+  var si=5;for(i=0;i<6;i++){if(c<start(i)+S.dur[i]){si=i;break}}
+  var stepTxt=(si+1)+' '+NAMES[si]+' · '+S.st[si];
+  $('time').textContent=fmt(c)+' of '+fmt(T);$('step').textContent=stepTxt;
+  rng.setAttribute('aria-valuetext',fmt(c)+' of '+fmt(T)+', step '+stepTxt);
+  var r=S.run,h,s;
+  if(S.mode==='fail'){h='Build failed';s='Step 4 of 6 · out of memory'}
+  else if(S.mode==='again'){h='Failed again';s='Step 4 · out of memory on 4 GB'}
+  else if(S.mode==='pass'){h='Build passed';s='Total 4:08 · step 4 in 1:14'}
+  else{h=r.i===3?'Retrying step 4':'Running step '+(r.i+1);s=(r.big?'8':'4')+' GB runner · steps '+(r.i+1)+'–6'}
+  if($('h').textContent!==h)$('h').textContent=h;
+  if($('sub').textContent!==s)$('sub').textContent=s;
+  if(logVer!==S.ver)buildLog();
+  S.log.forEach(function(l,k){if(l[1]<=c)on=k});
+  lines.forEach(function(d,k){d.classList.toggle('ts9-on',k===on);d.classList.toggle('ts9-fut',S.log[k][1]>c)});
+  if(on>=0){var el=lines[on],top=el.offsetTop,bt=top+el.offsetHeight;
+    if(top<logEl.scrollTop)logEl.scrollTop=top-4;else if(bt>logEl.scrollTop+logEl.clientHeight)logEl.scrollTop=bt-logEl.clientHeight+4}
+  var pass=S.mode==='pass';
+  b1.textContent=pass?'Reset demo':(r&&!r.big?'Retrying':'Retry');
+  b2.textContent=pass?'Passed in 1:14':(r&&r.big?'Retrying':'Retry on 8 GB');
+  b1.setAttribute('aria-disabled',r?'true':'false');
+  b2.setAttribute('aria-disabled',(r||pass)?'true':'false');
+}
+function frame(now){var dt=last?Math.min(now-last,50):16.667;last=now;
+  var moving=step(dt);draw();raf=moving?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+rng.addEventListener('input',function(){if(S.run)return;S.cur=+rng.value;draw()});
+rng.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();S.cur=S.mode==='pass'?248:165;draw()}});
+b1.addEventListener('click',function(){if(S.run)return;if(S.mode==='pass'){reset();draw()}else retry(false)});
+b2.addEventListener('click',function(){retry(true)});
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(S.run)kick()});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+    document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+reset();draw();
+})();</script>
+</body></html>

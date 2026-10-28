@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Breadcrumb in footprints</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#f7f7f5;--ink:#121316;--acc:#c43d12}
+:root[data-theme="dark"]{--bg:#0e0f11;--ink:#f2f2f0;--acc:#ff6b3d}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.fp1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.fp1-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.fp1-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style></head><body>
+<div class="fp1-root" role="slider" tabindex="0" aria-orientation="horizontal" aria-valuemin="1" aria-valuemax="5" aria-label="breadcrumb trail drawn as footprints in snow. home is the deepest print, the page you are on is the newest and shallowest. move along the trail with touch, mouse or arrow keys, tap or press enter to step back to a print. each print you reach sinks deeper. escape returns to where you are."></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.querySelector('.fp1-root'),cv=document.createElement('canvas');
+  cv.className='fp1-cv';root.appendChild(cv);var cx=cv.getContext('2d');
+  var names=['forever','forever plan','monday','cat-pics-2','emotional baggage'],n=5;
+  var count=[5,4,3,2,1],cur=4,focus=4,near=[0,0,0,0,0],nt=[0,0,0,0,0];
+  var v=[0,0,0,0,0],vel=[0,0,0,0,0],t0=performance.now(),S=300,dpr=1,actx=null;
+  function base(c){return 1-Math.exp(-c*0.32)}
+  function pos(i){return{x:S*(0.13+i*0.185),y:S*0.44+(i%2?1:-1)*S*0.05}}
+  function tgt(i,now){return(now<t0+i*120?0:base(count[i]))+0.2*near[i]}
+  function step(dt){var now=performance.now(),mv=now<t0+n*120,k=0.16,d=Math.pow(0.8,dt);
+    for(var i=0;i<n;i++){near[i]+=(nt[i]-near[i])*Math.min(1,0.3*dt);
+      if(Math.abs(nt[i]-near[i])>0.002)mv=true;else near[i]=nt[i];
+      var t=tgt(i,now);vel[i]+=(t-v[i])*k*dt;vel[i]*=d;v[i]+=vel[i]*dt;
+      if(Math.abs(t-v[i])>0.0008||Math.abs(vel[i])>0.0008)mv=true;else{v[i]=t;vel[i]=0}}
+    return mv}
+  function snapToTarget(){t0=-1e9;for(var i=0;i<n;i++){near[i]=nt[i];v[i]=tgt(i,0);vel[i]=0}}
+  function hex(h){h=h.trim().replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
+  function mix(a,b,t){return'rgb('+[0,1,2].map(function(j){return Math.round(a[j]+(b[j]-a[j])*t)}).join(',')+')'}
+  function sole(L,W,dep,flip){cx.beginPath();var waist=0.12+0.2*Math.min(dep,1);
+    for(var s=0;s<=48;s++){var a=s/48*Math.PI*2,u=Math.cos(a),
+      h=W/2*(0.8+0.2*u-waist*Math.exp(-Math.pow((u+0.12)/0.26,2))),
+      x=L/2*u,y=Math.sin(a)*h+flip*W*0.07*(1-u*u);
+      s?cx.lineTo(x,y):cx.moveTo(x,y)}cx.closePath()}
+  function draw(){var cs=getComputedStyle(document.documentElement),
+    bg=hex(cs.getPropertyValue('--bg')),ink=hex(cs.getPropertyValue('--ink')),acc=cs.getPropertyValue('--acc').trim(),
+    dark=bg[0]<128,shade=dark?[0,0,0]:ink;
+    cx.setTransform(dpr,0,0,dpr,0,0);cx.clearRect(0,0,S,S);
+    var L=S*0.15,W=L*0.44,a,b,i;
+    cx.strokeStyle=mix(bg,ink,0.12);cx.lineWidth=1;cx.setLineDash([2,5]);cx.beginPath();
+    for(i=0;i<n-1;i++){a=pos(i);b=pos(i+1);cx.moveTo(a.x+L*0.55,a.y);cx.lineTo(b.x-L*0.55,b.y)}
+    cx.stroke();cx.setLineDash([]);
+    for(i=0;i<n;i++){var p=pos(i),dp=Math.max(0,v[i]),sc=0.86+0.14*Math.min(dp,1.2),fl=i%2?1:-1;
+      cx.save();cx.translate(p.x,p.y);cx.rotate(fl*0.05);cx.scale(sc,sc);
+      sole(L,W,dp,fl);cx.fillStyle=mix(bg,ink,0.025+0.13*dp);cx.fill();
+      cx.save();cx.clip();var off=1+W*0.22*dp;
+      cx.translate(off*0.3,off);sole(L,W,dp,fl);cx.lineWidth=off*2;
+      cx.strokeStyle=dark?'rgba(0,0,0,'+(0.55*dp)+')':mix(bg,shade,0.06+0.16*dp);cx.stroke();
+      cx.translate(-off*0.3,-off);cx.strokeStyle='rgba('+ink.join(',')+','+(0.05+0.1*dp)+')';cx.lineWidth=1;cx.beginPath();
+      for(var t=-4;t<=4;t++){var tx=t*L/10;cx.moveTo(tx,-W);cx.lineTo(tx,W)}cx.stroke();cx.restore();
+      sole(L,W,dp,fl);cx.lineWidth=i===cur?1.6/sc:1/sc;
+      cx.strokeStyle=i===cur?acc:'rgba('+ink.join(',')+','+(0.2+0.4*Math.min(dp,1))+')';cx.stroke();
+      if(i===focus&&focus!==cur){cx.beginPath();cx.arc(0,W*0.95,1.6/sc,0,7);cx.fillStyle=acc;cx.fill()}
+      cx.restore()}
+    var fs=Math.max(12,S*0.058);cx.font='500 '+fs+'px system-ui,-apple-system,"Helvetica Neue",sans-serif';
+    cx.textAlign='center';cx.textBaseline='middle';
+    var fp=pos(focus),tx2=Math.min(Math.max(fp.x,S*0.06+cx.measureText(names[focus]).width/2),S*0.94-cx.measureText(names[focus]).width/2);
+    cx.fillStyle=focus===cur?acc:mix(bg,ink,0.92);cx.fillText(names[focus],tx2,S*0.68);
+    root.setAttribute('aria-valuenow',focus+1);
+    root.setAttribute('aria-valuetext',names[focus]+(focus===cur?', you are here':'')+', reached '+count[focus]+' times')}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  function thud(dep){try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();
+    var len=Math.floor(actx.sampleRate*0.09),buf=actx.createBuffer(1,len,actx.sampleRate),d=buf.getChannelData(0);
+    for(var j=0;j<len;j++)d[j]=(Math.random()*2-1)*Math.pow(1-j/len,3);
+    var s=actx.createBufferSource(),f=actx.createBiquadFilter(),g=actx.createGain();
+    f.type='lowpass';f.frequency.value=260+dep*90;g.gain.value=0.35;
+    s.buffer=buf;s.connect(f);f.connect(g);g.connect(actx.destination);s.start()}catch(e){}}
+  function reach(i){count[i]++;cur=i;focus=i;vel[i]-=0.08;thud(count[i]);kick()}
+  function setNear(px,py){var best=-1,bn=0,r=Math.max(80,S*0.12);
+    for(var i=0;i<n;i++){var p=pos(i),q=Math.max(0,1-Math.hypot(px-p.x,py-p.y)/r);nt[i]=q;if(q>bn){bn=q;best=i}}
+    focus=best<0?cur:best;kick();return best}
+  function clear(){for(var i=0;i<n;i++)nt[i]=0;focus=cur;kick()}
+  function rel(e){var r=root.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]}
+  var down=false;
+  root.addEventListener('pointerdown',function(e){down=true;try{root.setPointerCapture(e.pointerId)}catch(_){}var q=rel(e);setNear(q[0],q[1])});
+  root.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse'&&!down)return;var q=rel(e);setNear(q[0],q[1])});
+  root.addEventListener('pointerup',function(e){if(!down)return;down=false;var q=rel(e),b=setNear(q[0],q[1]);
+    if(b>=0&&nt[b]>0.15)reach(b);if(e.pointerType!=='mouse')clear()});
+  root.addEventListener('pointercancel',function(){down=false;clear()});
+  root.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'&&!down)clear()});
+  function keyFocus(i){focus=Math.max(0,Math.min(n-1,i));for(var j=0;j<n;j++)nt[j]=j===focus?1:0;kick()}
+  root.addEventListener('keydown',function(e){var k=e.key;
+    if(k==='ArrowLeft'||k==='ArrowUp')keyFocus(focus-1);
+    else if(k==='ArrowRight'||k==='ArrowDown')keyFocus(focus+1);
+    else if(k==='Home')keyFocus(0);else if(k==='End')keyFocus(n-1);
+    else if(k==='Enter'||k===' ')reach(focus);
+    else if(k==='Escape')clear();else return;e.preventDefault()});
+  root.addEventListener('blur',clear);
+  new ResizeObserver(function(){var r=root.getBoundingClientRect();S=r.width||300;dpr=Math.min(2,window.devicePixelRatio||1);
+    cv.width=Math.round(S*dpr);cv.height=Math.round(S*dpr);draw();kick()}).observe(root);
+  draw();kick();
+})();</script>
+</body></html>

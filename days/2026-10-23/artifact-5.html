@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ring gauge in a sounding well</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#3cc4a8}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#0b7a66}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.wr5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:50%}
+.wr5-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.wr5-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.wr5-n{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--ink);font:500 16px/1 -apple-system,system-ui,"Helvetica Neue",sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;pointer-events:none;user-select:none}
+.wr5-in{display:none}
+</style></head><body>
+<div class="wr5-root" role="region" tabindex="0" aria-label="Forever well, ring gauge"><canvas class="wr5-cv"></canvas><span class="wr5-n" aria-hidden="true">12</span><input class="wr5-in" type="file" tabindex="-1" aria-hidden="true"></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.querySelector('.wr5-root'),cv=root.querySelector('.wr5-cv'),cx=cv.getContext('2d'),
+    num=root.querySelector('.wr5-n'),inp=root.querySelector('.wr5-in');
+  var W=0,D=1,R=296,R0=56,CAP=400,rings=[],mb=12,name='cat-pics-2',
+    near=0,nearT=0,sc=1,scv=0,ox=0,oy=0,oxT=0,oyT=0;
+  function build(m,pre){mb=m;var c=Math.min(m,CAP),now=performance.now(),gap=Math.min(40,1200/c);rings=[];
+    for(var i=0;i<c;i++){var r={r:0,v:0,b:now+i*gap};if(pre){r.b=0;r.r=tgt(i)*.86}rings.push(r)}}
+  function tgt(i){var n=rings.length||Math.min(mb,CAP),rest=Math.min(5,(R-R0)/n),sp=rest+(14-rest)*near;return R0+(i+1)*sp}
+  function label(){root.setAttribute('aria-label','Forever well, ring gauge. '+name+' weighs '+mb+' megabyte'+(mb>1?'s':'')+': '+mb+' rings, one per megabyte, 14 pixels apart when you come close. Move closer or use the arrow keys to spread the rings. Tap or press Enter to drop a file. Escape to step back.')}
+  function step(dt){var now=performance.now(),mv=false,i,r,t;
+    near+=(nearT-near)*Math.min(1,.2*dt);if(Math.abs(nearT-near)>.001)mv=true;else near=nearT;
+    ox+=(oxT*near-ox)*Math.min(1,.15*dt);oy+=(oyT*near-oy)*Math.min(1,.15*dt);
+    if(Math.abs(oxT*near-ox)+Math.abs(oyT*near-oy)>.05)mv=true;
+    for(i=0;i<rings.length;i++){r=rings[i];if(now<r.b){mv=true;continue}
+      t=tgt(i);var k=Math.max(.1,.2-i*.002);
+      r.v+=(t-r.r)*k*dt;r.v*=Math.pow(.8,dt);r.r+=r.v*dt;
+      if(Math.abs(r.v)>.02||Math.abs(t-r.r)>.05)mv=true;else{r.r=t;r.v=0}}
+    t=1+.32*near;scv+=(t-sc)*.2*dt;scv*=Math.pow(.78,dt);sc+=scv*dt;
+    if(Math.abs(scv)>.001||Math.abs(t-sc)>.001)mv=true;else{sc=t;scv=0}
+    return mv}
+  function snapToTarget(){near=nearT;ox=oxT*near;oy=oyT*near;
+    for(var i=0;i<rings.length;i++){var r=rings[i];r.b=0;r.r=tgt(i);r.v=0}sc=1+.32*near;scv=0}
+  function draw(){if(!W)return;var cs=getComputedStyle(document.documentElement),
+      ink=cs.getPropertyValue('--ink').trim(),acc=cs.getPropertyValue('--acc').trim(),
+      k=W/640,c=W/2,x=c+ox*k,y=c+oy*k,now=performance.now(),landed=0,i,r,rr,a,lim=R*k;
+    cx.setTransform(D,0,0,D,0,0);cx.clearRect(0,0,W,W);
+    cx.strokeStyle=ink;cx.globalAlpha=.18;cx.lineWidth=1;
+    cx.beginPath();cx.arc(c,c,(R+8)*k,0,6.2832);cx.stroke();
+    for(i=0;i<rings.length;i++){r=rings[i];if(now<r.b||r.r<=0)continue;
+      if(r.r>R0)landed++;rr=r.r*k;a=rr>lim?Math.max(0,1-(rr-lim)/(24*k)):1;if(!a)continue;
+      var lastR=i===rings.length-1;
+      cx.globalAlpha=a*(lastR?1:(i+1)%5===0?.72:.34);cx.strokeStyle=lastR?acc:ink;cx.lineWidth=lastR?1.5:1;
+      cx.beginPath();cx.arc(x,y,rr,0,6.2832);cx.stroke()}
+    cx.globalAlpha=1;
+    var shown=rings.length?Math.round(landed/rings.length*mb):0;
+    num.textContent=shown;num.style.fontSize=Math.max(13,46*k)+'px';
+    num.style.transform='translate(calc(-50% + '+ox*k+'px),calc(-50% + '+oy*k+'px)) scale('+sc.toFixed(3)+')'}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  new ResizeObserver(function(){var b=root.getBoundingClientRect();W=b.width;D=Math.min(2,window.devicePixelRatio||1);
+    cv.width=Math.round(W*D);cv.height=Math.round(W*D);draw()}).observe(root);
+  function sense(px,py){var b=root.getBoundingClientRect(),h=b.width/2,dx=(px-b.left-h)/h,dy=(py-b.top-h)/h,d=Math.hypot(dx,dy);
+    nearT=Math.max(0,Math.min(1,(1.6-d)/1.4));oxT=Math.max(-1,Math.min(1,dx))*7;oyT=Math.max(-1,Math.min(1,dy))*7;kick()}
+  var down=null;
+  window.addEventListener('pointermove',function(e){if(e.pointerType!=='touch'||down)sense(e.clientX,e.clientY)});
+  document.documentElement.addEventListener('pointerleave',function(){nearT=0;kick()});
+  root.addEventListener('pointerdown',function(e){down={x:e.clientX,y:e.clientY,t:performance.now()};
+    try{root.setPointerCapture(e.pointerId)}catch(_){}sense(e.clientX,e.clientY)});
+  root.addEventListener('pointerup',function(e){if(!down)return;
+    var tap=Math.hypot(e.clientX-down.x,e.clientY-down.y)<10&&performance.now()-down.t<450;down=null;
+    if(e.pointerType==='touch'){nearT=0;kick()}if(tap)inp.click()});
+  root.addEventListener('pointercancel',function(){down=null;nearT=0;kick()});
+  root.addEventListener('keydown',function(e){var K=e.key;
+    if(K==='ArrowUp'||K==='ArrowRight'){nearT=Math.min(1,nearT+.25);oxT=oyT=0}
+    else if(K==='ArrowDown'||K==='ArrowLeft'){nearT=Math.max(0,nearT-.25)}
+    else if(K==='Enter'||K===' '){inp.click()}
+    else if(K==='Escape'){nearT=0}else return;
+    e.preventDefault();kick()});
+  var ac;function ping(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();var t=ac.currentTime;
+    [0,.16].forEach(function(d,j){var o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=880-j*220;
+      g.gain.setValueAtTime(.1/(j+1),t+d);g.gain.exponentialRampToValueAtTime(.0001,t+d+.3);
+      o.connect(g);g.connect(ac.destination);o.start(t+d);o.stop(t+d+.32)})}catch(_){}}
+  function land(f){if(!f)return;name=f.name||'Untitled';build(Math.max(1,Math.ceil(f.size/1048576)));
+    scv=-.25;label();ping();kick()}
+  root.addEventListener('dragover',function(e){e.preventDefault();nearT=1;oxT=oyT=0;kick()});
+  root.addEventListener('dragleave',function(){nearT=0;kick()});
+  root.addEventListener('drop',function(e){e.preventDefault();nearT=0;land(e.dataTransfer&&e.dataTransfer.files[0])});
+  inp.addEventListener('change',function(){land(inp.files[0]);inp.value=''});
+  build(12,true);label();
+  draw();kick();
+})();</script>
+</body></html>

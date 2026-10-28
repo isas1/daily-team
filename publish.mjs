@@ -17,6 +17,7 @@ import { listSeasons, readSeason } from './recruit.mjs';
 import { cardHtml, renderPng, titleCase } from './card.mjs';
 import { hasCover } from './cover.mjs';
 import { assertPackExport } from './component-pack.mjs';
+import { markdownCell as cell } from './security.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RECENT_DAYS = 7;
@@ -27,7 +28,6 @@ const SITE_CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'sel
 
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const cell = (s) => String(s).replace(/\|/g, '\\|').replace(/\n/g, ' ');
 
 export const title = dayTitle;
 const roles = (day) => parseTeam(day.team).members.map((m) => m.role).join(' · ');
