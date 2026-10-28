@@ -1,0 +1,356 @@
+{
+  "date": "2026-10-21",
+  "task": "Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
+  "hook": "Build Color swatch in dye bath",
+  "seconds": 4,
+  "models": [
+    {
+      "key": "opus",
+      "label": "Opus",
+      "model": "claude-opus-5-5"
+    },
+    {
+      "key": "sonnet",
+      "label": "Sonnet",
+      "model": "claude-sonnet-5-5"
+    },
+    {
+      "key": "haiku",
+      "label": "Haiku",
+      "model": "claude-haiku-5-5"
+    }
+  ],
+  "status": "ok",
+  "rows": [
+    {
+      "row": 1,
+      "name": "Mordant Rack",
+      "input": "press and hold",
+      "variants": {
+        "opus": {
+          "file": "artifact-1.html",
+          "lead": 1,
+          "row": 1,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "d51c2fb178d236c0dbf6413505d0c05ac8760610084037d8411d15529d11f446"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-1.html",
+          "hash": "d51c2fb178d236c0dbf6413505d0c05ac8760610084037d8411d15529d11f446",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-1.html",
+          "hash": "d51c2fb178d236c0dbf6413505d0c05ac8760610084037d8411d15529d11f446",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 2,
+      "name": "Varnish Coats",
+      "input": "scrub or wheel",
+      "variants": {
+        "opus": {
+          "file": "artifact-2.html",
+          "lead": 2,
+          "row": 2,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "ba87c9055056cf50818670d04a60f558d83317dce2859b50203791781ca6cf18"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-2.html",
+          "hash": "ba87c9055056cf50818670d04a60f558d83317dce2859b50203791781ca6cf18",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-2.html",
+          "hash": "ba87c9055056cf50818670d04a60f558d83317dce2859b50203791781ca6cf18",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 3,
+      "name": "Warp Threads",
+      "input": "drag",
+      "variants": {
+        "opus": {
+          "file": "artifact-3.html",
+          "lead": 3,
+          "row": 3,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "424cb7bd96ec0d0d7f27977d46cfabfa1b0a34cfaf5e4fb5b05dd2ea11dc445b"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-3.html",
+          "hash": "424cb7bd96ec0d0d7f27977d46cfabfa1b0a34cfaf5e4fb5b05dd2ea11dc445b",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-3.html",
+          "hash": "424cb7bd96ec0d0d7f27977d46cfabfa1b0a34cfaf5e4fb5b05dd2ea11dc445b",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 4,
+      "name": "Wreck Pots",
+      "input": "fling",
+      "variants": {
+        "opus": {
+          "file": "artifact-4.html",
+          "lead": 4,
+          "row": 4,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "68e5cfefce6e43758d1f2d842ac063fd78fa43667f18fa573ccbc81521f2cdc3"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-4.html",
+          "hash": "68e5cfefce6e43758d1f2d842ac063fd78fa43667f18fa573ccbc81521f2cdc3",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-4.html",
+          "hash": "68e5cfefce6e43758d1f2d842ac063fd78fa43667f18fa573ccbc81521f2cdc3",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 5,
+      "name": "Comb Cells",
+      "input": "tap",
+      "variants": {
+        "opus": {
+          "file": "artifact-5.html",
+          "lead": 1,
+          "row": 5,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "cfba233c95fb28133d9831c69cafa900c2976aa286859110d17968f18c74401a"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-5.html",
+          "hash": "cfba233c95fb28133d9831c69cafa900c2976aa286859110d17968f18c74401a",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-5.html",
+          "hash": "cfba233c95fb28133d9831c69cafa900c2976aa286859110d17968f18c74401a",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 6,
+      "name": "Sound Hole Tub",
+      "input": "hover nearness",
+      "variants": {
+        "opus": {
+          "file": "artifact-6.html",
+          "lead": 2,
+          "row": 6,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "ceba7dab531602048340bf3b83b731e96ce04c237a6a4499d80709f367641b43"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-6.html",
+          "hash": "ceba7dab531602048340bf3b83b731e96ce04c237a6a4499d80709f367641b43",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-6.html",
+          "hash": "ceba7dab531602048340bf3b83b731e96ce04c237a6a4499d80709f367641b43",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 7,
+      "name": "Selvage Pull",
+      "input": "drag",
+      "variants": {
+        "opus": {
+          "file": "artifact-7.html",
+          "lead": 3,
+          "row": 7,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "756dcd5fa812f7f422d0c056192a38adc85acdf4726fb1ac64513157a81ec87e"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-7.html",
+          "hash": "756dcd5fa812f7f422d0c056192a38adc85acdf4726fb1ac64513157a81ec87e",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-7.html",
+          "hash": "756dcd5fa812f7f422d0c056192a38adc85acdf4726fb1ac64513157a81ec87e",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 8,
+      "name": "Tide Line",
+      "input": "hover nearness",
+      "variants": {
+        "opus": {
+          "file": "artifact-8.html",
+          "lead": 4,
+          "row": 8,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "3fc9e3cb99e65d0b20f2a9830d075820b2a4270cbe11c479466739f76532f5e4"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-8.html",
+          "hash": "3fc9e3cb99e65d0b20f2a9830d075820b2a4270cbe11c479466739f76532f5e4",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-8.html",
+          "hash": "3fc9e3cb99e65d0b20f2a9830d075820b2a4270cbe11c479466739f76532f5e4",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 9,
+      "name": "Fastness Column",
+      "input": "press and hold",
+      "variants": {
+        "opus": {
+          "file": "artifact-9.html",
+          "lead": 1,
+          "row": 9,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "830ea2f9527d8710d8b4aa2c5bb0b3fd91b81771ea624ea77a0fa3e7498b99b8"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-9.html",
+          "hash": "830ea2f9527d8710d8b4aa2c5bb0b3fd91b81771ea624ea77a0fa3e7498b99b8",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-9.html",
+          "hash": "830ea2f9527d8710d8b4aa2c5bb0b3fd91b81771ea624ea77a0fa3e7498b99b8",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 10,
+      "name": "Last Coat",
+      "input": "tap",
+      "variants": {
+        "opus": {
+          "file": "artifact-10.html",
+          "lead": 2,
+          "row": 10,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "98ed6f4091372e5e3f3f46a007a0ff6a930bc72d26a61f7110494afa9817d021"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-10.html",
+          "hash": "98ed6f4091372e5e3f3f46a007a0ff6a930bc72d26a61f7110494afa9817d021",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-10.html",
+          "hash": "98ed6f4091372e5e3f3f46a007a0ff6a930bc72d26a61f7110494afa9817d021",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    }
+  ]
+}

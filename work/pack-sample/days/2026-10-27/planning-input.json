@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "task": "Unread count: a badge for an inbox that updates when messages arrive or someone marks them read.",
+  "request": null,
+  "sources": [
+    {
+      "source": "smashing",
+      "status": "offline"
+    },
+    {
+      "source": "hacker-news",
+      "status": "offline"
+    },
+    {
+      "source": "codrops",
+      "status": "disabled",
+      "reason": "2026-10-27: endpoint returns HTTP 410; awaiting verified replacement"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "daily-task",
+      "kind": "task",
+      "task": "Unread count: a badge for an inbox that updates when messages arrive or someone marks them read."
+    }
+  ],
+  "recent": [],
+  "inventory": null
+}

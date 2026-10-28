@@ -15,6 +15,8 @@ import { fileURLToPath } from 'node:url';
 import { dayTitle, findBanned, parseTeam, planSections, teamFor, today } from './run.mjs';
 import { listSeasons, readSeason } from './recruit.mjs';
 import { cardHtml, renderPng, titleCase } from './card.mjs';
+import { hasCover } from './cover.mjs';
+import { assertPackExport } from './component-pack.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RECENT_DAYS = 7;
@@ -33,6 +35,9 @@ const roles = (day) => parseTeam(day.team).members.map((m) => m.role).join(' · 
 const firstAsset = (day) => day.artifacts.find((a) => a.kind === 'piece' && a.status !== 'failed')
   ?? day.artifacts.find((a) => a.status !== 'failed');
 const png = (a) => a.file.replace(/\.html$/, '.png');
+// Only a rendered cover matching this exact day record may replace its screenshot.
+const preview = (day, daysDir) => hasCover(day, daysDir) ? 'cover.png'
+  : firstAsset(day) ? png(firstAsset(day)) : '';
 
 export function loadDays(daysDir) {
   if (!existsSync(daysDir)) return [];
@@ -140,16 +145,26 @@ function guestNote(day) {
 export function dayReadme(day, daysDir, pagesUrl) {
   const { constraint, season, suggestedBy } = parseTeam(day.team);
   const dir = join(daysDir, day.date);
+  assertPackExport(day, dir);
   return [
     `# ${day.date}: ${title(day)}`, '',
     '[Today](../../README.md) · [Archive](../../ARCHIVE.md)', '',
     `<img src="team.png" alt="Team for ${day.date}: ${esc(roles(day))}" width="100%">`, '',
     `**Task:** ${day.brief || day.task}`, '',
+    ...(day.request ? [`**Request source:** [${cell(day.request.repository)} #${Number(day.request.number)}](https://github.com/${encodeURI(day.request.repository)}/issues/${Number(day.request.number)}). Local prototype; source issue stays open.`, ''] : []),
     ...(suggestedBy ? [`**Suggested by:** ${suggestedBy}`, ''] : []),
     `**Constraint:** ${constraint}`, '',
     ...(season ? [`**Season:** ${season}`, ''] : []),
     ...(day.decision ? [`**Decision:** ${day.decision}`, ''] : []),
-    '## Asset', '', ...assetLines(day, { dir, href: '' }, pagesUrl),
+    ...(hasCover(day, daysDir) ? [`<img src="cover.png" alt="Designed cover for ${esc(title(day))}" width="100%">`, '', '[Cover art direction](cover.json) · [Cover source](cover.html)', ''] : []),
+    '## Asset', '',
+    ...(day.pack ? ['[Pack manifest](pack.json) · [Shared tokens](tokens.json) · [Planning input](planning-input.json)', '',
+      'Generated candidates require human review. Library acceptance: unreviewed.', ''] : []),
+    ...(existsSync(join(dir, 'comparison.html')) ? [
+      '[Compare Opus, Sonnet, and Haiku](comparison.html)', '',
+      ...(existsSync(join(dir, 'comparison.mp4')) ? ['[Watch square comparison video](comparison.mp4)', ''] : []),
+    ] : []),
+    ...assetLines(day, { dir, href: '' }, pagesUrl),
     ...(session(day) ? sessionMarkdown(session(day))
       : day.plan ? ['## Team plan', '', day.plan.replace(/^(#{1,5}) /gm, '#$1 '), ''] : []),
     ...guestNote(day),
@@ -165,7 +180,8 @@ export function todayBlock(day, daysDir, pagesUrl) {
   }
   const base = `days/${day.date}/`;
   const a = firstAsset(day);
-  const shot = a && join(daysDir, day.date, png(a));
+  const image = preview(day, daysDir);
+  const shot = image && join(daysDir, day.date, image);
   const lines = [
     `### ${day.date}: ${title(day)}`, '',
     `<a href="${base}"><img src="${base}team.png" alt="Team for ${day.date}: ${esc(roles(day))}" width="100%"></a>`, '',
@@ -173,7 +189,7 @@ export function todayBlock(day, daysDir, pagesUrl) {
     ...(day.decision ? [`**Decision:** ${day.decision}`, ''] : []),
   ];
   if (shot && existsSync(shot)) {
-    lines.push(`<a href="${base}"><img src="${base}${png(a)}" alt="Screenshot of today's asset" width="100%"></a>`, '');
+    lines.push(`<a href="${base}"><img src="${base}${image}" alt="${image === 'cover.png' ? `Designed cover for ${esc(title(day))}` : "Screenshot of today's asset"}" width="100%"></a>`, '');
     if (statSync(shot).size < MIN_SCREENSHOT_BYTES) lines.push('The screenshot may be blank. Open the day to check.', '');
   } else if (!a) lines.push(day.error ? `No asset today. ${day.error}` : 'No asset today.', '');
   const links = [`[Open the day](${base})`];
@@ -183,21 +199,22 @@ export function todayBlock(day, daysDir, pagesUrl) {
   return lines.join('\n');
 }
 
-export function recentBlock(days) {
+export function recentBlock(days, daysDir = join(HERE, 'days')) {
   if (!days.length) return 'The archive starts with the first daily run.';
   const rows = [...days].reverse().slice(0, RECENT_DAYS).map((d) => {
-    const a = firstAsset(d);
-    const thumb = a ? `<a href="days/${d.date}/"><img src="days/${d.date}/${png(a)}" alt="${esc(title(d))}" width="160"></a>` : 'No asset';
+    const image = preview(d, daysDir);
+    const thumb = image ? `<a href="days/${d.date}/"><img src="days/${d.date}/${image}" alt="${esc(title(d))}" width="160"></a>` : 'No asset';
     return `| [${d.date}](days/${d.date}/) | ${thumb} | ${cell(title(d))} | ${cell(roles(d))} |`;
   });
   return ['| Date | Asset | Task | Team |', '|---|---|---|---|', ...rows, '', `[All ${plural(days.length, 'day')}](ARCHIVE.md)`].join('\n');
 }
 
-export function archive(days) {
+export function archive(days, daysDir = join(HERE, 'days')) {
   const rows = [...days].reverse().map((d) => {
     const a = firstAsset(d);
     const asset = a ? `[${a.status === 'ok' ? 'asset' : 'asset, needs review'}](days/${d.date}/${a.file})` : 'no asset';
-    return `| [${d.date}](days/${d.date}/) | ${cell(title(d))} | ${cell(roles(d))} | ${cell(parseTeam(d.team).constraint)} | ${asset} |`;
+    const cover = hasCover(d, daysDir) ? `<a href="days/${d.date}/"><img src="days/${d.date}/cover.png" alt="${esc(title(d))}" width="160"></a> ` : '';
+    return `| [${d.date}](days/${d.date}/) | ${cell(title(d))} | ${cell(roles(d))} | ${cell(parseTeam(d.team).constraint)} | ${cover}${asset} |`;
   });
   return [
     '# Archive', '', `Every daily team and the asset it made, newest first. ${plural(days.length, 'day')} recorded.`, '',
@@ -238,7 +255,7 @@ export function weekBlock(root, days, suggestions) {
     const pools = readSeason(root, season);
     const fresh = newcomers(pools);
     lines.push(`**Season ${seasons.indexOf(season) + 1}**, since ${season}. ${fresh.length
-      ? `New this season: ${new Intl.ListFormat('en', { type: 'conjunction' }).format(fresh)}.` : 'The first season, so everyone is new.'} A new season with 8 new roles and 8 new methods is drafted every Monday.`, '');
+      ? `New this season: ${new Intl.ListFormat('en', { type: 'conjunction' }).format(fresh)}.` : 'The first season, so everyone is new.'} A new season is drafted every Monday; from 2026-10-26 it replaces 16 roles and 16 methods.`, '');
   }
   const repo = REPO();
   lines.push('### Vote on what gets built next', '',
@@ -311,20 +328,26 @@ ${body}
 `;
 }
 
-function grid(days, prefix) {
+function grid(days, prefix, daysDir) {
   return `<h2>All days</h2>\n<ul class="grid">\n${[...days].reverse().map((d) => {
-    const a = firstAsset(d);
-    const img = a ? `<img src="${prefix}${d.date}/${png(a)}" alt="" loading="lazy">` : `<img src="${prefix}${d.date}/team.png" alt="" loading="lazy">`;
+    const image = preview(d, daysDir);
+    const img = image ? `<img src="${prefix}${d.date}/${image}" alt="" loading="lazy">` : `<img src="${prefix}${d.date}/team.png" alt="" loading="lazy">`;
     return `<li><a href="${prefix}${d.date}/">${img}<strong>${d.date}</strong><br>${esc(title(d))}</a></li>`;
   }).join('\n')}\n</ul>`;
 }
 
 function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix }) {
+  const comparisonDir = join(daysDir, day.date);
+  const comparison = existsSync(join(comparisonDir, 'comparison.html'))
+    ? `<p><a href="${imagePrefix}comparison.html">Compare Opus, Sonnet, and Haiku</a>`
+      + (existsSync(join(comparisonDir, 'comparison.mp4')) ? ` · <a href="${imagePrefix}comparison.mp4">Watch square video</a>` : '') + '</p>' : '';
   const frames = day.artifacts.filter((a) => a.status !== 'failed' && existsSync(join(daysDir, day.date, a.file))).map((a) => {
     const html = readFileSync(join(daysDir, day.date, a.file), 'utf8');
     const note = a.status === 'ok' ? '' : ` <span class="muted">(${esc(a.status)}: ${esc(a.problems.join('; '))})</span>`;
     const lead = parseTeam(day.team).members[a.lead - 1]?.role ?? '';
-    const heading = a.kind === 'piece' ? 'The piece' : a.row ? `Component ${a.row}${lead ? ` · ${lead}` : ''}` : 'The tool';
+    const component = day.pack?.components.find((c) => c.row === a.row);
+    const heading = a.kind === 'piece' ? 'The piece' : component ? `${component.name} · ${component.category}`
+      : a.row ? `Component ${a.row}${lead ? ` · ${lead}` : ''}` : 'The tool';
     return `<h2>${esc(heading)}${note}</h2>\n<iframe sandbox="${SANDBOX}" title="${esc(a.file)}" srcdoc="${esc(html)}"></iframe>`;
   });
   const s = session(day);
@@ -333,26 +356,33 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
     `<div class="kicker">Daily team · ${day.date}</div>`,
     `<h1>${esc(titleCase(title(day)))}</h1>`,
     `<p class="muted">${esc(day.brief || day.task)}</p>`,
+    day.request ? `<p>Request source: <a href="https://github.com/${esc(day.request.repository)}/issues/${Number(day.request.number)}">${esc(day.request.repository)} #${Number(day.request.number)}</a> · Local prototype</p>` : '',
     `<img class="card" src="${imagePrefix}team.png" alt="Team for ${day.date}: ${esc(roles(day))}">`,
     day.decision ? `<p><strong>Decision:</strong> ${esc(day.decision)}</p>` : '',
+    hasCover(day, daysDir) ? `<img src="${imagePrefix}cover.png" alt="Designed cover for ${esc(title(day))}">` : '',
+    comparison,
+    ...(day.pack ? [`<p>Generated pack candidates await human review. <a href="${imagePrefix}pack.json">Pack manifest</a> · <a href="${imagePrefix}tokens.json">Shared tokens</a> · <a href="${imagePrefix}planning-input.json">Saved input</a></p>`] : []),
     ...(frames.length ? frames : [`<p>No asset. ${esc(day.error || '')}</p>`]),
     s ? sessionHtml(s) : '', plan, archiveHtml,
-  ].join('\n'), { root, image: pagesUrl ? `${pagesUrl}${day.date}/team.png` : '' });
+  ].join('\n'), { root, image: pagesUrl ? `${pagesUrl}${day.date}/${hasCover(day, daysDir) ? 'cover.png' : 'team.png'}` : '' });
 }
 
 export function buildSite(siteDir, days, daysDir, repo, pagesUrl = '') {
+  for (const day of days) assertPackExport(day, join(daysDir, day.date));
   cpSync(join(HERE, 'brand'), join(siteDir, 'brand'), { recursive: true });
   for (const day of days) {
     const out = join(siteDir, day.date);
     mkdirSync(out, { recursive: true });
-    for (const f of ['team.png', ...day.artifacts.map(png)]) {
+    for (const f of ['team.png', 'cover.png', 'cover.html', 'cover.json', ...day.artifacts.map(png),
+      ...(day.pack ? ['pack.json', 'tokens.json', 'planning-input.json', ...day.artifacts.filter((a) => a.status !== 'failed').map((a) => a.file)] : []),
+      'comparison.html', 'comparison.png', 'comparison.mp4']) {
       if (existsSync(join(daysDir, day.date, f))) copyFileSync(join(daysDir, day.date, f), join(out, f));
     }
-    writeFileSync(join(out, 'index.html'), dayPage(day, daysDir, repo, grid(days, '../'), { root: '../', pagesUrl, imagePrefix: '' }));
+    writeFileSync(join(out, 'index.html'), dayPage(day, daysDir, repo, grid(days, '../', daysDir), { root: '../', pagesUrl, imagePrefix: '' }));
   }
   const latest = days.at(-1);
   writeFileSync(join(siteDir, 'index.html'), latest
-    ? dayPage(latest, daysDir, repo, grid(days, './'), { root: './', pagesUrl, imagePrefix: `./${latest.date}/` })
+    ? dayPage(latest, daysDir, repo, grid(days, './', daysDir), { root: './', pagesUrl, imagePrefix: `./${latest.date}/` })
     : page('daily-team', '<p>No days yet.</p>'));
 }
 
@@ -367,6 +397,7 @@ export function seasonNumber(seasons, day) {
 export function publish(root, { pagesUrl = '', site = '', repo = '', suggestions = [], cards = false } = {}) {
   const daysDir = join(root, 'days');
   const days = loadDays(daysDir);
+  for (const day of days) assertPackExport(day, join(daysDir, day.date));
   const seasons = listSeasons(root);
   for (const day of days) {
     const card = join(daysDir, day.date, 'team.png');
@@ -378,12 +409,12 @@ export function publish(root, { pagesUrl = '', site = '', repo = '', suggestions
     rmSync(join(daysDir, day.date, 'team.svg'), { force: true });
     writeFileSync(join(daysDir, day.date, 'README.md'), dayReadme(day, daysDir, pagesUrl));
   }
-  writeFileSync(join(root, 'ARCHIVE.md'), archive(days));
+  writeFileSync(join(root, 'ARCHIVE.md'), archive(days, daysDir));
   const readme = join(root, 'README.md');
   let text = readFileSync(readme, 'utf8');
   text = replaceBlock(text, 'TODAY', todayBlock(days.at(-1), daysDir, pagesUrl));
   text = replaceBlock(text, 'WEEK', weekBlock(root, days, suggestions));
-  text = replaceBlock(text, 'RECENT', recentBlock(days));
+  text = replaceBlock(text, 'RECENT', recentBlock(days, daysDir));
   writeFileSync(readme, text);
   if (site) buildSite(site, days, daysDir, repo, pagesUrl);
   return days.length;

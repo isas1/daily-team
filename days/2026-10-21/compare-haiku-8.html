@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tide line: sand pushed by the tide</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:#0e0f11;--ink:#f2f2f0;--acc:#3cc4a8}
+:root[data-theme="light"]{--bg:#f7f7f5;--ink:#121316;--acc:#0b7a66}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.ab8-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;touch-action:none;background:var(--bg);user-select:none;-webkit-user-select:none;outline:none}
+.ab8-root:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ab8-root canvas{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.ab8-n{position:absolute;left:0;right:0;bottom:3%;text-align:center;font-family:system-ui,-apple-system,sans-serif;font-size:clamp(12px,4vmin,16px);font-weight:500;font-variant-numeric:tabular-nums;line-height:1;color:var(--ink);pointer-events:none}
+</style></head><body>
+<div class="ab8-root" role="slider" tabindex="0" aria-label="Tide line. Sand in a field, with the wet line the tide has reached. Drag or move across the sand to push it. Arrow keys move the cursor. Space or Enter sends a wave. Escape lets go. The number is the pots the tide has brought in."></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  var root=document.querySelector('.ab8-root');
+  var KEY='tideline.v1',M=0.1,N=28,RAD=0.16,K=0.18,D=0.8,AMP=0.07,PUSH=0.035;
+
+  var st={visits:0};
+  try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s.visits==='number'&&s.visits>=0)st.visits=Math.floor(s.visits)}catch(e){}
+  st.visits+=1;
+  try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}
+  var pots=Math.min(5,st.visits);
+
+  var rx=[],ry=[],ox=[],oy=[],vx=[],vy=[],tide=[],r,c,k;
+  for(r=0;r<N;r++)for(c=0;c<N;c++){rx.push((c+0.5)/N);ry.push((r+0.5)/N);ox.push(0);oy.push(0);vx.push(0);vy.push(0)}
+  var NG=rx.length;
+  function tideY(x){return 0.42+0.06*Math.sin(x*Math.PI*2*1.2)}
+  for(k=0;k<NG;k++)tide.push(Math.abs(ry[k]-tideY(rx[k]))<0.9/N);
+
+  var ptr={x:0.5,y:0.5,on:false},cur={x:0.5,y:0.5};
+  var wx=-0.12,waveOn=false,W=320,dpr=1,px_=0,py_=0;
+  var cv=document.createElement('canvas'),ctx=cv.getContext('2d'),num=document.createElement('span');
+  num.className='ab8-n';num.textContent=String(pots);
+  cv.setAttribute('aria-hidden','true');
+  root.appendChild(cv);root.appendChild(num);
+  root.setAttribute('aria-valuemin','1');
+  root.setAttribute('aria-valuemax','5');
+  root.setAttribute('aria-valuenow',String(pots));
+  root.setAttribute('aria-readonly','true');
+
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function waveNow(){wx=-0.12;waveOn=true;kick()}
+
+  function pushAt(j){
+    var dx=rx[j]-ptr.x,dy=ry[j]-ptr.y,d=Math.sqrt(dx*dx+dy*dy),f;
+    px_=0;py_=0;
+    if(ptr.on&&d<RAD&&d>0.0001){f=1-d/RAD;f=f*f*AMP;px_=dx/d*f;py_=dy/d*f}
+  }
+
+  function step(dt){
+    var moving=false,tx,ty,e;
+    if(waveOn){wx+=0.022*dt;if(wx>1.15)waveOn=false}
+    for(k=0;k<NG;k++){
+      pushAt(k);tx=px_;ty=py_;
+      if(waveOn){e=1-Math.abs(rx[k]-wx)/0.12;if(e>0)ty-=PUSH*e*e}
+      vx[k]=(vx[k]+(tx-ox[k])*K)*D;ox[k]+=vx[k];
+      vy[k]=(vy[k]+(ty-oy[k])*K)*D;oy[k]+=vy[k];
+      if(Math.abs(vx[k])>1e-5||Math.abs(vy[k])>1e-5||Math.abs(tx-ox[k])>1e-5||Math.abs(ty-oy[k])>1e-5)moving=true;
+    }
+    return moving||waveOn;
+  }
+
+  function snapToTarget(){
+    waveOn=false;
+    for(k=0;k<NG;k++){pushAt(k);ox[k]=px_;oy[k]=py_;vx[k]=0;vy[k]=0}
+  }
+
+  function draw(){
+    if(!ctx)return;
+    var cs=getComputedStyle(root),
+        ink=cs.getPropertyValue('--ink').trim()||'#f2f2f0',
+        acc=cs.getPropertyValue('--acc').trim()||'#3cc4a8',
+        s=Math.max(1.5,W*0.0095),x,y;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,W,W);
+    for(k=0;k<NG;k++){
+      x=(M+(rx[k]+ox[k])*(1-2*M))*W;
+      y=(M+(ry[k]+oy[k])*(1-2*M))*W;
+      if(tide[k]){ctx.fillStyle=acc;ctx.globalAlpha=1}
+      else{ctx.fillStyle=ink;ctx.globalAlpha=ry[k]<tideY(rx[k])?0.22:0.5}
+      ctx.fillRect(x-s/2,y-s/2,s,s);
+    }
+    ctx.globalAlpha=1;
+  }
+
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+
+  function size(){
+    W=root.clientWidth||320;
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    cv.width=Math.round(W*dpr);cv.height=cv.width;
+    draw();
+  }
+
+  function locate(e){
+    var b=root.getBoundingClientRect();
+    ptr.x=((e.clientX-b.left)/b.width-M)/(1-2*M);
+    ptr.y=((e.clientY-b.top)/b.height-M)/(1-2*M);
+    cur.x=ptr.x;cur.y=ptr.y;
+  }
+
+  root.addEventListener('pointerdown',function(e){
+    e.preventDefault();
+    try{root.setPointerCapture(e.pointerId)}catch(_){}
+    try{root.focus({preventScroll:true})}catch(_){}
+    locate(e);ptr.on=true;waveNow();
+  });
+  root.addEventListener('pointermove',function(e){locate(e);ptr.on=true;kick()});
+  function release(e){if(e.pointerType!=='mouse'){ptr.on=false;kick()}}
+  root.addEventListener('pointerup',release);
+  root.addEventListener('pointercancel',release);
+  root.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){ptr.on=false;kick()}});
+
+  root.addEventListener('keydown',function(e){
+    var key=e.key,moved=false;
+    if(key==='ArrowLeft'){cur.x=Math.max(0,cur.x-0.05);moved=true}
+    else if(key==='ArrowRight'){cur.x=Math.min(1,cur.x+0.05);moved=true}
+    else if(key==='ArrowUp'){cur.y=Math.max(0,cur.y-0.05);moved=true}
+    else if(key==='ArrowDown'){cur.y=Math.min(1,cur.y+0.05);moved=true}
+    if(moved){ptr.x=cur.x;ptr.y=cur.y;ptr.on=true;kick();e.preventDefault();return}
+    if(key===' '||key==='Enter'){
+      ptr.x=cur.x;ptr.y=cur.y;ptr.on=true;
+      if(!e.repeat)waveNow();else kick();
+      e.preventDefault();return;
+    }
+    if(key==='Escape'){ptr.on=false;kick();e.preventDefault()}
+  });
+  root.addEventListener('blur',function(){ptr.on=false;kick()});
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+  if(window.ResizeObserver)new ResizeObserver(size).observe(root);
+  else window.addEventListener('resize',size);
+  size();
+  waveNow();
+})();</script>
+</body></html>

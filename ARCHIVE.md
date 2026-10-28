@@ -6,7 +6,7 @@ Every daily team and the asset it made, newest first. 19 days recorded.
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
-| [2026-10-21](days/2026-10-21/) | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe | Saves the input in the browser and restores it on reload. | [asset](days/2026-10-21/piece.html) |
+| [2026-10-21](days/2026-10-21/) | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe | Saves the input in the browser and restores it on reload. | <a href="days/2026-10-21/"><img src="days/2026-10-21/cover.png" alt="Fast Colour" width="160"></a> [asset](days/2026-10-21/piece.html) |
 | [2026-10-20](days/2026-10-20/) | Wrong-Way Reel | Upholsterer · Clockmaker · Translator · Scheherazade | Text still reads clearly at 200 percent zoom. | [asset](days/2026-10-20/artifact-1.html) |
 | [2026-10-19](days/2026-10-19/) | Clew Rim | Taxidermist · Wheelwright · Glassblower · Daedalus | All text at 18 px or larger. | [asset](days/2026-10-19/artifact-1.html) |
 | [2026-10-18](days/2026-10-18/) | Weft | Blacksmith · Urban planner · Weaver · Charles Darwin | Changes with the time of day. | [asset](days/2026-10-18/artifact-1.html) |

@@ -1,0 +1,44 @@
+[
+  {
+    "row": 1,
+    "theme": "light",
+    "viewport": 390,
+    "width": 390,
+    "ax": "Browser tab: 1, Title: \"Forever release sample\", URL: \"http://127.0.0.1:52146/artifact-1.html?theme=light\".\n1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-1.html?theme=light\n\t2 container Release preparation sample\n\t\t3 container\n\t\t\t4 text Release name\n\t\t\t5 text field (settable) Release name, Value: Forever kit\n\nThe focused UI element is 1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-1.html?theme=light"
+  },
+  {
+    "row": 2,
+    "theme": "light",
+    "viewport": 390,
+    "width": 390,
+    "ax": "Browser tab: 1, Title: \"Forever release sample\", URL: \"http://127.0.0.1:52146/artifact-2.html?theme=light\".\n1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-2.html?theme=light\n\t2 container Release preparation sample\n\t\t3 container Package\n\t\t\t4 text Package\n\t\t\t5 radio button (settable, integer) Description: Starter · 12 KB, Value: 1\n\t\t\t6 radio button (settable, integer) Description: Full · 28 KB, Value: 0\n\nThe focused UI element is 1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-2.html?theme=light"
+  },
+  {
+    "row": 3,
+    "theme": "light",
+    "viewport": 390,
+    "width": 390,
+    "ax": "Browser tab: 1, Title: \"Forever release sample\", URL: \"http://127.0.0.1:52146/artifact-3.html?theme=light\".\n1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-3.html?theme=light\n\t2 container Release preparation sample\n\t\t3 checkbox (settable, integer) Description: Public release, Value: 0\n\nThe focused UI element is 1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-3.html?theme=light"
+  },
+  {
+    "row": 4,
+    "theme": "light",
+    "viewport": 390,
+    "width": 390,
+    "ax": "Browser tab: 1, Title: \"Forever release sample\", URL: \"http://127.0.0.1:52146/artifact-4.html?theme=light\".\n1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-4.html?theme=light\n\t2 container Release preparation sample\n\t\t3 container\n\t\t\t4 text Size budget\n\t\t\t5 slider (settable, integer) Size budget, Value: 20\n\t\t\t6 text 12 KB / 20 KB · Within budget\n\nThe focused UI element is 1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-4.html?theme=light"
+  },
+  {
+    "row": 5,
+    "theme": "light",
+    "viewport": 390,
+    "width": 390,
+    "ax": "Browser tab: 1, Title: \"Forever release sample\", URL: \"http://127.0.0.1:52146/artifact-5.html?theme=light\".\n1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-5.html?theme=light\n\t2 container Release preparation sample\n\t\t3 button (collapsed) Review release, Secondary Actions: Expand\n\t\t\t4 text Review release\n\nThe focused UI element is 1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-5.html?theme=light"
+  },
+  {
+    "row": 6,
+    "theme": "light",
+    "viewport": 390,
+    "width": 390,
+    "ax": "Browser tab: 1, Title: \"Forever release sample\", URL: \"http://127.0.0.1:52146/artifact-6.html?theme=light\".\n1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-6.html?theme=light\n\t2 container Release preparation sample\n\t\t3 container\n\t\t\t4 button Build release\n\t\t\t5 button Reset\n\nThe focused UI element is 1 AXWebArea Forever release sample, URL: 127.0.0.1:52146/artifact-6.html?theme=light"
+  }
+]

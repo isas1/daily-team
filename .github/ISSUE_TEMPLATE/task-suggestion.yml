@@ -1,5 +1,5 @@
 name: Suggest a task
-description: Suggest a spark for the daily team to make something from.
+description: Suggest a component for people building projects and prototypes.
 title: "Task: "
 labels: [task-suggestion]
 body:
@@ -11,22 +11,22 @@ body:
     id: task
     attributes:
       label: Task
-      description: One line. An image, a force, a place, or a moment the team can make something from.
-      placeholder: "Tide: something that arrives, stays a while, and leaves."
+      description: One line. Name one component, its project use, and what someone can do with it. Leave its visual style open.
+      placeholder: "Pricing switch: a toggle for a subscription page that changes monthly to yearly billing and updates the price."
     validations:
       required: true
   - type: input
     id: helps
     attributes:
       label: Who it is for
-      placeholder: Anyone who likes watching things change slowly.
+      placeholder: Someone building a subscription page for a small app or larger product.
     validations:
       required: true
   - type: input
     id: check
     attributes:
       label: What you hope to see
-      placeholder: "Something that moves in and out on its own."
+      placeholder: "Switch billing periods and see the price update with clear feedback."
   - type: checkboxes
     id: credit
     attributes:

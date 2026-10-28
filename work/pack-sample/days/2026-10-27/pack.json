@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "categoryVersion": 1,
+  "id": "2026-10-27-release-kit",
+  "name": "Forever release",
+  "description": "A coordinated local release preparation pack",
+  "project": "Prepare a release without sending data",
+  "sizeRationale": "6 distinct jobs cover the requested sample flow",
+  "opportunities": [
+    {
+      "id": "daily-task",
+      "need": "Prepare release settings",
+      "use": "Local project release",
+      "interaction": "Settings affect package readiness",
+      "similarity": "No recent matching pack in fixture"
+    }
+  ],
+  "selection": {
+    "id": "daily-task",
+    "rationale": "Concrete input, useful result and reversible steps"
+  },
+  "tokens": {
+    "colors": {
+      "dark": {
+        "bg": "#101215",
+        "surface": "#1b1e23",
+        "text": "#f6f6f3",
+        "muted": "#b0b6bf",
+        "accent": "#ee875f",
+        "border": "#414751"
+      },
+      "light": {
+        "bg": "#f7f8fa",
+        "surface": "#ffffff",
+        "text": "#171a1f",
+        "muted": "#535b66",
+        "accent": "#a73b16",
+        "border": "#c5cad1"
+      }
+    },
+    "typography": {
+      "family": "system-ui, sans-serif",
+      "size": "16px"
+    },
+    "spacing": {
+      "gap": "16px",
+      "padding": "24px"
+    },
+    "radii": {
+      "control": "8px"
+    },
+    "motion": {
+      "duration": "180ms",
+      "easing": "ease-out"
+    }
+  },
+  "components": [
+    {
+      "id": "2026-10-27-release-kit-release-name",
+      "name": "Release name",
+      "category": "Inputs",
+      "purpose": "Name the release",
+      "mechanism": "inline text edit",
+      "input": "Type a name; keyboard typing works",
+      "outcome": "Release label updates",
+      "recovery": "Replace text or clear and retype",
+      "row": 1,
+      "file": "artifact-1.html",
+      "description": "Release name for release preparation",
+      "use": "Prepare a local sample release",
+      "tags": [
+        "release",
+        "release-name"
+      ],
+      "nearestAnalogue": "No recent matching pack in fixture",
+      "usefulness": "Name the release",
+      "creativeDifference": "Distinct inline text edit for this step",
+      "states": [
+        "Normal with sample values",
+        "Keyboard focus",
+        "Changed: Release label updates",
+        "Recovery: Replace text or clear and retype"
+      ],
+      "sources": [
+        {
+          "title": "WAI interaction patterns for Release name",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-27-release-kit",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "cfa0cf4635530385cd21dd97bbcc80a50237885326236d694f950730b744b1de"
+    },
+    {
+      "id": "2026-10-27-release-kit-package-card",
+      "name": "Package card",
+      "category": "Content",
+      "purpose": "Choose package contents",
+      "mechanism": "radio-card selection",
+      "input": "Choose Starter or Full with pointer or arrow keys",
+      "outcome": "Package size changes",
+      "recovery": "Choose another package",
+      "row": 2,
+      "file": "artifact-2.html",
+      "description": "Package card for release preparation",
+      "use": "Prepare a local sample release",
+      "tags": [
+        "release",
+        "package-card"
+      ],
+      "nearestAnalogue": "No recent matching pack in fixture",
+      "usefulness": "Choose package contents",
+      "creativeDifference": "Distinct radio-card selection for this step",
+      "states": [
+        "Normal with sample values",
+        "Keyboard focus",
+        "Changed: Package size changes",
+        "Recovery: Choose another package"
+      ],
+      "sources": [
+        {
+          "title": "WAI interaction patterns for Package card",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-27-release-kit",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "69c31e50fbc5af637402745848556a3478c71e90eb016c8adb26991c597a821e"
+    },
+    {
+      "id": "2026-10-27-release-kit-audience-switch",
+      "name": "Audience switch",
+      "category": "Inputs",
+      "purpose": "Set audience visibility",
+      "mechanism": "binary native checkbox",
+      "input": "Toggle Public with pointer or Space",
+      "outcome": "Audience changes",
+      "recovery": "Toggle back to private",
+      "row": 3,
+      "file": "artifact-3.html",
+      "description": "Audience switch for release preparation",
+      "use": "Prepare a local sample release",
+      "tags": [
+        "release",
+        "audience-switch"
+      ],
+      "nearestAnalogue": "No recent matching pack in fixture",
+      "usefulness": "Set audience visibility",
+      "creativeDifference": "Distinct binary native checkbox for this step",
+      "states": [
+        "Normal with sample values",
+        "Keyboard focus",
+        "Changed: Audience changes",
+        "Recovery: Toggle back to private"
+      ],
+      "sources": [
+        {
+          "title": "WAI interaction patterns for Audience switch",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-27-release-kit",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "d57146050f4b4af160a78bcd86157f7102c46eb4c4a9f39c1fa908e64f334bcf"
+    },
+    {
+      "id": "2026-10-27-release-kit-size-budget",
+      "name": "Size budget",
+      "category": "Data",
+      "purpose": "Check package against size budget",
+      "mechanism": "range threshold meter",
+      "input": "Adjust budget with pointer or arrow keys",
+      "outcome": "Remaining capacity updates",
+      "recovery": "Increase budget or choose smaller package",
+      "row": 4,
+      "file": "artifact-4.html",
+      "description": "Size budget for release preparation",
+      "use": "Prepare a local sample release",
+      "tags": [
+        "release",
+        "size-budget"
+      ],
+      "nearestAnalogue": "No recent matching pack in fixture",
+      "usefulness": "Check package against size budget",
+      "creativeDifference": "Distinct range threshold meter for this step",
+      "states": [
+        "Normal with sample values",
+        "Keyboard focus",
+        "Changed: Remaining capacity updates",
+        "Recovery: Increase budget or choose smaller package"
+      ],
+      "sources": [
+        {
+          "title": "WAI interaction patterns for Size budget",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-27-release-kit",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "739a6b45dabbd32c48864fca71164234a4fb5e9e007792088ee25f04ed9c3a8b"
+    },
+    {
+      "id": "2026-10-27-release-kit-review-panel",
+      "name": "Review panel",
+      "category": "Feedback",
+      "purpose": "Confirm local review",
+      "mechanism": "disclosure with confirmation",
+      "input": "Expand with Enter and check review with Space",
+      "outcome": "Review marks ready",
+      "recovery": "Uncheck review to revise",
+      "row": 5,
+      "file": "artifact-5.html",
+      "description": "Review panel for release preparation",
+      "use": "Prepare a local sample release",
+      "tags": [
+        "release",
+        "review-panel"
+      ],
+      "nearestAnalogue": "No recent matching pack in fixture",
+      "usefulness": "Confirm local review",
+      "creativeDifference": "Distinct disclosure with confirmation for this step",
+      "states": [
+        "Normal with sample values",
+        "Keyboard focus",
+        "Changed: Review marks ready",
+        "Recovery: Uncheck review to revise"
+      ],
+      "sources": [
+        {
+          "title": "WAI interaction patterns for Review panel",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-27-release-kit",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "7a4790b422f0ac5a7898a6541766e0de4516f8bcf93d8404d9b37305d82f0fd7"
+    },
+    {
+      "id": "2026-10-27-release-kit-release-action",
+      "name": "Release action",
+      "category": "Actions",
+      "purpose": "Build local release summary",
+      "mechanism": "validated commit with reset",
+      "input": "Press Build release with pointer or Enter",
+      "outcome": "Local summary shows current settings",
+      "recovery": "Reset clears result and allows another build",
+      "row": 6,
+      "file": "artifact-6.html",
+      "description": "Release action for release preparation",
+      "use": "Prepare a local sample release",
+      "tags": [
+        "release",
+        "release-action"
+      ],
+      "nearestAnalogue": "No recent matching pack in fixture",
+      "usefulness": "Build local release summary",
+      "creativeDifference": "Distinct validated commit with reset for this step",
+      "states": [
+        "Normal with sample values",
+        "Keyboard focus",
+        "Changed: Local summary shows current settings",
+        "Recovery: Reset clears result and allows another build"
+      ],
+      "sources": [
+        {
+          "title": "WAI interaction patterns for Release action",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-27-release-kit",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "560b987c80fc1ce816b1ad6ebf7c6152a84ece02b97df5580acd27b2e928d0fe"
+    }
+  ],
+  "demo": {
+    "file": "piece.html",
+    "rows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "sharedState": "One release name, package, audience, budget and review state feed one build summary",
+    "generationStatus": "ok"
+  },
+  "date": "2026-10-27",
+  "reviewStatus": "needs-review",
+  "inputHash": "dcac06ad6397423a4e2ca0f72fc3aec62a0f1a48d85ee2e4467fc5280f315c86",
+  "warnings": []
+}
