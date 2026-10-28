@@ -19,13 +19,13 @@ const decode = (s) => s.replace(/&#(x[\da-f]+|\d+);/gi, (_, n) => {
   return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : '';
 }).replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, '&');
 const clean = (s, max = 350) => decode(s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1'))
-  .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
+  .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]*>/g, ' ').replace(/[<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
 
 // Restricted feed XML reader, not a general XML interpreter. Reject DTD/entities and
 // malformed nesting instead of attempting recovery or entity expansion.
 export function parseFeed(xml, source, date) {
   if (Buffer.byteLength(xml) > MAX_BYTES || /<!DOCTYPE|<!ENTITY/i.test(xml)) throw new Error('unsafe or oversized feed');
-  const stripped = xml.replace(/<!\[CDATA\[[\s\S]*?\]\]>/g, '').replace(/<!--[\s\S]*?-->/g, '').replace(/<\?[\s\S]*?\?>/g, '');
+  const stripped = xml.replace(/<!\[CDATA\[[\s\S]*?\]\]>/g, ' ').replace(/<!--[\s\S]*?-->/g, ' ').replace(/<\?[\s\S]*?\?>/g, ' ');
   const stack = [];
   for (const m of stripped.matchAll(/<([^>]+)>/g)) {
     const tag = m[1];

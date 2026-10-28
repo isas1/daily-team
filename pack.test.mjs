@@ -50,6 +50,9 @@ test('pack contract rejects unknown categories, overlapping jobs, unsafe paths a
 test('restricted RSS/Atom reader rejects malformed/hostile XML and deduplicates canonical links', () => {
   const items = parseFeed(rss(item('https://example.test/post?utm_source=x') + item()), source, date);
   assert.equal(items.length, 1); assert.equal(items[0].summary, 'Useful controls'); assert.equal(items[0].url, 'https://example.test/post');
+  const hostile = rss(item().replace('<p>Useful controls</p><script>bad()</script>', '<scr<script>bad()</script>ipt>alert(1)</script><broken'));
+  assert.doesNotMatch(parseFeed(hostile, source, date)[0].summary, /[<>]/);
+  assert.throws(() => parseFeed('<rs<!-- split -->s><channel></channel></rss>', source, date), /malformed/);
   const atom = `<feed xmlns="http://www.w3.org/2005/Atom"><entry><title>Keyboard tool</title><link rel="self" href="https://example.test/ignored"/><link rel="alternate" href="https://example.test/atom"/><updated>2026-10-26T12:00:00Z</updated><summary>Type &amp; edit</summary></entry></feed>`;
   assert.equal(parseFeed(atom, source, date)[0].url, 'https://example.test/atom');
   assert.throws(() => parseFeed('<rss><channel></rss>', source, date), /malformed/);
