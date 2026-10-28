@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cursor chart · checkout-api request latency</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--sf:var(--pack-surface);--mut:var(--pack-muted);--bd:var(--pack-border);--e:var(--pack-motion-easing);--mono:ui-monospace,"SF Mono",Menlo,monospace}
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.lc4-root{box-sizing:border-box;width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:size;display:grid;grid-template-rows:auto auto minmax(64px,1fr) auto;gap:clamp(6px,2vmin,var(--pack-spacing-gap));padding:clamp(8px,3vmin,var(--pack-spacing-padding));background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--pack-radii-control)*2);overflow:auto}
+.lc4-title{font-weight:600;font-size:clamp(12px,3.4cqi,16px)}
+.lc4-sub{font-size:clamp(11px,2.6cqi,13px);color:var(--mut);margin-top:2px}
+@container (max-height:210px){.lc4-head{display:none}}
+@container (max-height:330px){.lc4-sub{display:none}}
+.lc4-read{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-variant-numeric:tabular-nums;transition:opacity var(--pack-motion-duration) var(--e)}
+.lc4-time{font-family:var(--mono);color:var(--mut);font-size:clamp(11px,3cqi,14px);min-width:5ch}
+.lc4-val{font-size:clamp(20px,8cqi,40px);font-weight:600;line-height:1;min-width:5.6ch;white-space:nowrap}
+.lc4-val small{font-size:.42em;font-weight:500;color:var(--mut);margin:0 3px}
+.lc4-delta{font-size:clamp(11px,2.8cqi,13px);padding:3px 8px;border-radius:999px;border:1px solid var(--bd);color:var(--mut);min-width:12.5ch;text-align:center;white-space:nowrap;transition:background-color var(--pack-motion-duration) var(--e),color var(--pack-motion-duration) var(--e),border-color var(--pack-motion-duration) var(--e)}
+.lc4-root[data-over] .lc4-delta{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--sf);font-weight:600}
+.lc4-plot{position:relative;border-radius:var(--pack-radii-control);touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair;transition:opacity var(--pack-motion-duration) var(--e)}
+.lc4-plot:focus-visible,.lc4-btn:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.lc4-root[data-stale] .lc4-plot,.lc4-root[data-stale] .lc4-read{opacity:.45}
+.lc4-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.lc4-svg text{font:10px var(--mono);fill:var(--mut)}
+.lc4-grid{stroke:var(--bd);stroke-width:1}
+.lc4-slo{stroke:var(--pack-text);stroke-opacity:.55;stroke-dasharray:4 3}
+.lc4-dep{stroke:var(--mut);stroke-opacity:.7;stroke-dasharray:2 3}
+.lc4-area{fill:var(--pack-accent);fill-opacity:.1}
+.lc4-br{fill:var(--pack-accent);fill-opacity:.34}
+.lc4-line{fill:none;stroke:var(--pack-accent);stroke-width:2;stroke-linejoin:round}
+.lc4-cur{stroke:var(--pack-text);stroke-opacity:.6}
+.lc4-dot{fill:var(--pack-accent);stroke:var(--sf);stroke-width:2}
+.lc4-hint{position:absolute;left:34px;top:16px;max-width:52%;font-size:11px;line-height:1.3;color:var(--mut);pointer-events:none}
+.lc4-empty{position:absolute;inset:0;display:none;place-items:center;color:var(--mut);font-size:13px;text-align:center}
+.lc4-root[data-empty] .lc4-empty{display:grid}
+.lc4-root[data-empty] .lc4-data,.lc4-root[data-empty] .lc4-hint{display:none}
+.lc4-foot{display:flex;align-items:center;gap:8px}
+.lc4-stat{flex:1;min-width:0;font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@container (max-width:250px){.lc4-stat{display:none}.lc4-foot{justify-content:flex-end}}
+.lc4-btn{min-height:44px;min-width:44px;padding:0 12px;border:1px solid var(--bd);border-radius:var(--pack-radii-control);background:transparent;color:var(--pack-text);font:inherit;font-size:13px;cursor:pointer;transition:transform var(--pack-motion-duration) var(--e),border-color var(--pack-motion-duration) var(--e),opacity var(--pack-motion-duration) var(--e)}
+.lc4-btn:hover{border-color:var(--mut)}
+.lc4-btn:active{transform:scale(.96)}
+.lc4-btn[aria-disabled=true]{opacity:.5;cursor:default;transform:none}
+#lc4-reload{min-width:9ch}#lc4-toggle{min-width:8.5ch}
+.lc4-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.lc4-root *{transition:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111315;--pack-surface:#1A1D20;--pack-text:#E6E4DF;--pack-muted:#9A9790;--pack-accent:#7FA8C9;--pack-border:#2C3035}:root[data-theme="light"]{--pack-bg:#F5F4F1;--pack-surface:#FFFFFF;--pack-text:#1C1E21;--pack-muted:#5F5D58;--pack-accent:#3C6A8E;--pack-border:#D9D6D0}</style></head><body>
+<div class="lc4-root" id="lc4-root" role="group" aria-label="Cursor chart: checkout-api p99 latency">
+ <div class="lc4-head"><div class="lc4-title">checkout-api · p99 latency</div><div class="lc4-sub">Forever plan · last 6h · 5 min samples</div></div>
+ <div class="lc4-read" aria-hidden="true"><span class="lc4-time" id="lc4-t"></span><span class="lc4-val"><small>p99</small><span id="lc4-v"></span><small>ms</small></span><span class="lc4-delta" id="lc4-o"></span></div>
+ <div class="lc4-plot" id="lc4-plot" tabindex="0" role="group" aria-label="Latency plot" aria-describedby="lc4-hint">
+  <svg class="lc4-svg" id="lc4-svg" aria-hidden="true"></svg>
+  <div class="lc4-hint" id="lc4-hint"></div>
+  <div class="lc4-empty">No samples in range</div>
+ </div>
+ <div class="lc4-foot"><span class="lc4-stat" id="lc4-stat">Updated 15:55</span><button class="lc4-btn" id="lc4-reload" type="button">Reload</button><button class="lc4-btn" id="lc4-toggle" type="button">Empty</button></div>
+ <div class="lc4-sr" id="lc4-live" aria-live="polite"></div>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var $=function(i){return document.getElementById('lc4-'+i)};
+  var root=$('root'),plot=$('plot'),svg=$('svg'),hint=$('hint'),stat=$('stat'),rel=$('reload'),tog=$('toggle'),live=$('live');
+  var SLO=300,YMAX=700,N=72,T0=600,DEP=52,PL=30,PR=8,PT=14,PB=18;
+  var HINT='Drag across the chart to read any point',KEYS='\u2190 \u2192 5 min · PgUp/PgDn 1 h · Esc worst';
+  var data=[],s=11,i,k;
+  function rnd(){s=(s*9301+49297)%233280;return s/233280}
+  for(i=0;i<N;i++)data.push(Math.round(168+rnd()*42));
+  var bump={14:334,15:352,16:311,33:308,34:319,51:228,52:262,53:418,54:566,55:640,56:604,57:472,58:296,66:348,67:331};
+  for(k in bump)data[k]=bump[k];
+  var empty=false,stale=false,gen=0,timer=0,drag=false,w=0,h=0,idx=0,cx=0,at=0;
+  function fmt(j){var m=T0+j*5,hh=Math.floor(m/60),mm=m%60;return(hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm}
+  function worst(){var b=0;for(var j=1;j<N;j++)if(data[j]>data[b])b=j;return b}
+  function X(j){return PL+(w-PL-PR)*j/(N-1)}
+  function Y(v){return PT+(h-PT-PB)*(1-v/YMAX)}
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var q in a)e.setAttribute(q,a[q]);return e}
+  function el(t,a,p){var e=set(document.createElementNS(NS,t),a);(p||svg).appendChild(e);return e}
+  function tx(x,y,str,an,p){var t=el('text',{x:x,y:y,'text-anchor':an},p);t.textContent=str;return t}
+  var clip=el('rect',{},el('clipPath',{id:'lc4-clip'},el('defs',{})));
+  var grid=el('g',{}),dep=el('line',{'class':'lc4-dep'}),depT=tx(0,0,'','end'),slo=el('line',{'class':'lc4-slo'}),sloT=tx(0,0,'SLO 300','end');
+  var g=el('g',{'class':'lc4-data'}),area=el('path',{'class':'lc4-area'},g),br=el('path',{'class':'lc4-br','clip-path':'url(#lc4-clip)'},g),line=el('path',{'class':'lc4-line'},g),cur=el('line',{'class':'lc4-cur'},g),dot=el('circle',{'class':'lc4-dot',r:4.5},g);
+  function layout(){
+    w=plot.clientWidth;h=plot.clientHeight;if(!w||!h)return;
+    svg.setAttribute('viewBox','0 0 '+w+' '+h);
+    while(grid.firstChild)grid.removeChild(grid.firstChild);
+    [0,200,400,600].forEach(function(v){var y=Y(v);el('line',{x1:PL,x2:w-PR,y1:y,y2:y,'class':'lc4-grid'},grid);if(v)tx(PL-4,y+3,v,'end',grid)});
+    [0,24,48].forEach(function(j){tx(X(j),h-4,fmt(j),j?'middle':'start',grid)});
+    var y3=Y(SLO),xd=X(DEP);
+    set(slo,{x1:PL,x2:w-PR,y1:y3,y2:y3});set(sloT,{x:w-PR,y:y3-4});
+    set(dep,{x1:xd,x2:xd,y1:PT,y2:h-PB});set(depT,{x:xd-4,y:PT-3});depT.textContent=w>=320?'cat-pics-2 deploy':'deploy';
+    var p='';for(var j=0;j<N;j++)p+=(j?'L':'M')+X(j).toFixed(1)+','+Y(data[j]).toFixed(1);
+    var a=p+'L'+X(N-1)+','+Y(0)+'L'+X(0)+','+Y(0)+'Z';
+    set(line,{d:p});set(area,{d:a});set(br,{d:a});set(clip,{x:0,y:0,width:w,height:y3});
+  }
+  function draw(){
+    if(!w)return;
+    var i0=Math.floor(cx),i1=Math.min(i0+1,N-1),f=cx-i0,v=data[i0]+(data[i1]-data[i0])*f,x=X(cx);
+    set(cur,{x1:x,x2:x,y1:PT,y2:h-PB});set(dot,{cx:x,cy:Y(v)});
+  }
+  function readout(){
+    if(empty){$('t').textContent='--:--';$('v').textContent='\u2014';$('o').textContent='No data';root.removeAttribute('data-over');return}
+    var v=data[idx],o=v-SLO;
+    $('t').textContent=fmt(idx);$('v').textContent=v;
+    $('o').textContent=o>0?'+'+o+' over SLO':o<0?'\u2212'+(-o)+' under SLO':'At SLO';
+    if(o>0)root.setAttribute('data-over','');else root.removeAttribute('data-over');
+    clearTimeout(at);at=setTimeout(function(){live.textContent=fmt(idx)+', p99 '+v+' ms, '+(o>0?o+' over':(-o)+' under')+' SLO'},300);
+  }
+  function setIdx(j,ease){
+    idx=Math.max(0,Math.min(N-1,j));
+    if(!ease||reduce())cx=idx;
+    readout();kick();
+  }
+  var raf=0,last=0;
+  function step(dt){var d=idx-cx;if(Math.abs(d)<.005){cx=idx;return false}cx+=d*(1-Math.pow(.65,dt));return true}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(cx=idx,false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  function pick(e){var r=plot.getBoundingClientRect();setIdx(Math.round((e.clientX-r.left-PL)/(w-PL-PR)*(N-1)),false)}
+  plot.addEventListener('pointerdown',function(e){if(empty)return;drag=true;try{plot.setPointerCapture(e.pointerId)}catch(_){}pick(e)});
+  plot.addEventListener('pointermove',function(e){if(!empty&&(drag||e.pointerType==='mouse'))pick(e)});
+  plot.addEventListener('pointerup',function(){drag=false});
+  plot.addEventListener('pointercancel',function(){drag=false});
+  plot.addEventListener('keydown',function(e){
+    if(empty)return;
+    var m={ArrowLeft:-1,ArrowRight:1,PageUp:12,PageDown:-12}[e.key],j;
+    if(m)j=idx+m;else if(e.key==='Home')j=0;else if(e.key==='End')j=N-1;else if(e.key==='Escape')j=worst();else return;
+    e.preventDefault();setIdx(j,true);
+  });
+  plot.addEventListener('focus',function(){hint.textContent=KEYS});
+  plot.addEventListener('blur',function(){hint.textContent=HINT});
+  function setStale(on){stale=on;if(on)root.setAttribute('data-stale','');else root.removeAttribute('data-stale');
+    rel.setAttribute('aria-disabled',on?'true':'false');rel.textContent=on?'Loading':'Reload'}
+  rel.addEventListener('click',function(){
+    if(stale)return;
+    var my=++gen;setStale(true);stat.textContent='Reloading 6h\u2026';
+    timer=setTimeout(function(){if(my!==gen)return;setStale(false);stat.textContent=empty?'Range empty':'Updated 15:55';readout()},900);
+  });
+  tog.addEventListener('click',function(){
+    gen++;clearTimeout(timer);setStale(false);empty=!empty;
+    if(empty){root.setAttribute('data-empty','');tog.textContent='Restore';stat.textContent='Range empty'}
+    else{root.removeAttribute('data-empty');tog.textContent='Empty';stat.textContent='Updated 15:55';idx=cx=worst()}
+    readout();kick();
+  });
+  new ResizeObserver(function(){layout();draw()}).observe(plot);
+  hint.textContent=HINT;idx=cx=worst();layout();readout();draw();
+})();</script>
+</body></html>

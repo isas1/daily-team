@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Range selector for the checkout-api latency card</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.rs1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:inline-size}
+.rs1-panel{height:100%;overflow:auto;background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--pack-radii-control) * 2);padding:min(var(--pack-spacing-padding),6cqw);display:flex;flex-direction:column;gap:min(var(--pack-spacing-gap),4cqw)}
+.rs1-h{margin:0;font-size:1em;font-weight:600}
+.rs1-seg{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--bd);border-radius:var(--pack-radii-control);overflow:hidden}
+.rs1-seg input{position:absolute;opacity:0;width:1px;height:1px}
+.rs1-seg label{position:relative;display:grid;place-items:center;min-height:44px;cursor:pointer;color:var(--mu);font-variant-numeric:tabular-nums;font-weight:600;user-select:none;-webkit-tap-highlight-color:transparent;transition:background var(--pack-motion-duration) var(--pack-motion-easing),color var(--pack-motion-duration) var(--pack-motion-easing)}
+.rs1-seg label+input+label{border-left:1px solid var(--bd)}
+.rs1-seg input:checked+label{background:var(--acc);color:var(--bg)}
+.rs1-seg input:focus-visible+label{outline:2px solid var(--acc);outline-offset:-4px;box-shadow:inset 0 0 0 4px var(--bg)}
+.rs1-seg label:active{transform:scale(.97)}
+.rs1-seg label::after{content:"";position:absolute;left:8px;right:8px;bottom:5px;height:2px;background:var(--bg);transform:scaleX(0);transform-origin:left;opacity:0}
+.rs1-seg input:checked+label.rs1-p::after{opacity:1;animation:rs1-run 1.4s linear infinite}
+@keyframes rs1-run{0%{transform:scaleX(0);transform-origin:left}50%{transform:scaleX(1);transform-origin:left}51%{transform-origin:right}100%{transform:scaleX(0);transform-origin:right}}
+.rs1-res{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;transition:opacity var(--pack-motion-duration) var(--pack-motion-easing)}
+.rs1-res.rs1-dim{opacity:.4}
+.rs1-num{font-size:2.2em;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1;min-width:7ch}
+.rs1-sub{color:var(--mu);font-size:.9em}
+.rs1-st{min-height:2.6em;margin:0;font-size:.9em;color:var(--ink)}
+.rs1-st.rs1-bad{color:var(--acc);font-weight:600}
+.rs1-row{display:flex;gap:8px}
+.rs1-b{flex:1;min-height:44px;padding:0 10px;border:1px solid var(--bd);border-radius:var(--pack-radii-control);background:transparent;color:var(--ink);font:inherit;cursor:pointer;transition:background var(--pack-motion-duration) var(--pack-motion-easing),transform 90ms var(--pack-motion-easing)}
+.rs1-b:active:not(:disabled){transform:scale(.97)}
+.rs1-b:disabled{opacity:.45;cursor:default}
+.rs1-b[aria-pressed=true]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.rs1-b:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@container (max-width:230px){.rs1-seg{grid-template-columns:repeat(2,1fr)}.rs1-seg input:nth-of-type(n+3)+label{border-top:1px solid var(--bd)}.rs1-seg label:nth-of-type(3){border-left:0}.rs1-row{flex-direction:column}.rs1-num{font-size:1.7em}}
+[data-rm] *{transition:none!important;animation:none!important}
+[data-rm] .rs1-seg input:checked+label.rs1-p::after{opacity:1;transform:scaleX(1)}
+</style><style data-pack-tokens>:root{--pack-typography-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111315;--pack-surface:#1A1D20;--pack-text:#E6E4DF;--pack-muted:#9A9790;--pack-accent:#7FA8C9;--pack-border:#2C3035}:root[data-theme="light"]{--pack-bg:#F5F4F1;--pack-surface:#FFFFFF;--pack-text:#1C1E21;--pack-muted:#5F5D58;--pack-accent:#3C6A8E;--pack-border:#D9D6D0}</style></head><body>
+<div class="rs1-root" role="group" aria-label="Time range selector for the checkout-api latency card">
+<div class="rs1-panel">
+<p class="rs1-h" id="rs1-t">Time range</p>
+<div class="rs1-seg" id="rs1-seg" role="radiogroup" aria-labelledby="rs1-t"></div>
+<div class="rs1-res" id="rs1-res"><div class="rs1-num" id="rs1-n"></div><div class="rs1-sub" id="rs1-s"></div></div>
+<p class="rs1-st" id="rs1-st" role="status" aria-live="polite"></p>
+<div class="rs1-row"><button class="rs1-b" id="rs1-act" type="button">Cancel</button><button class="rs1-b" id="rs1-f" type="button" aria-pressed="false">Fail next load</button></div>
+</div></div>
+<script>(function(){
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var D={'1h':{n:12,p:410},'6h':{n:72,p:640},'24h':{n:288,p:640},'7d':{n:336,p:880}};
+var keys=['1h','6h','24h','7d'],loaded='6h',pending=null,failed=null,gen=0,timer=0,failNext=false,msg='Loaded 6h \u00b7 72 points',bad=false;
+var $=function(i){return document.getElementById(i)};
+var seg=$('rs1-seg'),radios=[],labels=[];
+keys.forEach(function(k){
+  var i=document.createElement('input');i.type='radio';i.name='rs1-r';i.id='rs1-i'+k;i.value=k;
+  var l=document.createElement('label');l.htmlFor=i.id;l.textContent=k;
+  seg.appendChild(i);seg.appendChild(l);radios.push(i);labels.push(l);
+  i.addEventListener('change',function(){pick(k)});
+});
+function pick(r){
+  if(r===pending)return;
+  if(r===loaded){if(pending)cancel();return}
+  start(r);
+}
+function start(r){
+  gen++;clearTimeout(timer);var g=gen;
+  pending=r;failed=null;bad=false;msg='Loading '+r+'\u2026';render();
+  timer=setTimeout(function(){
+    if(g!==gen)return;
+    pending=null;
+    if(failNext){failNext=false;failed=r;bad=true;msg='Load failed \u00b7 Kept '+loaded}
+    else{loaded=r;msg='Loaded '+r+' \u00b7 '+D[r].n+' points'}
+    render();
+  },reduce()?600:1400);
+}
+function cancel(){
+  gen++;clearTimeout(timer);pending=null;bad=false;
+  msg='Cancelled \u00b7 Kept '+loaded;render();
+}
+function render(){
+  var rm=reduce();
+  if(rm)document.documentElement.setAttribute('data-rm','');
+  else document.documentElement.removeAttribute('data-rm');
+  var shown=pending||loaded;
+  radios.forEach(function(r,i){r.checked=r.value===shown;labels[i].className=(pending&&r.value===pending)?'rs1-p':''});
+  $('rs1-n').textContent=D[loaded].p+' ms';
+  $('rs1-s').textContent='p99 peak \u00b7 '+loaded;
+  $('rs1-res').className='rs1-res'+(pending?' rs1-dim':'');
+  var st=$('rs1-st');st.textContent=msg;st.className='rs1-st'+(bad?' rs1-bad':'');
+  var a=$('rs1-act');
+  a.textContent=failed&&!pending?'Retry '+failed:'Cancel';
+  a.disabled=!pending&&!failed;
+  $('rs1-f').setAttribute('aria-pressed',failNext);
+}
+$('rs1-act').addEventListener('click',function(){
+  if(pending)cancel();else if(failed)start(failed);
+});
+$('rs1-f').addEventListener('click',function(){failNext=!failNext;render()});
+seg.addEventListener('keydown',function(e){
+  if(e.key==='Home'||e.key==='End'){
+    e.preventDefault();var k=e.key==='Home'?0:3;radios[k].focus();radios[k].checked=true;pick(keys[k]);
+  }
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&pending)cancel()});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+    document.documentElement.setAttribute('data-theme',m.theme)});
+render();
+})();</script>
+</body></html>

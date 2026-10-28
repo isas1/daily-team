@@ -1,0 +1,269 @@
+{
+  "items": [
+    {
+      "id": "a47fefdfcbeeae76e48fe45c",
+      "title": "Ten days later, Git on macOS still trusts the compromised eMudhra certificates",
+      "url": "https://emudhra.we-have-a-problem.com/apple.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-28T11:03:40.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "05bc0d7f4074116b92cd25ad",
+      "title": "Barcelona unrest: how to fabricate a protest in the age of TikTok",
+      "url": "https://theconversation.com/barcelona-unrest-how-to-fabricate-a-protest-in-the-age-of-tiktok-295263",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-28T10:41:27.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "001b60c8250b041f8f6baaaa",
+      "title": "Git for the US Code",
+      "url": "https://lexifina.com/blog/git-for-the-us-code",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-28T01:47:50.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "dcad83d827337ce853e769bf",
+      "title": "Early progress on accelerating drug development with Claude",
+      "url": "https://www.anthropic.com/research/early-progress-drug-development",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T20:50:42.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "5c06ba9ffd4d24cad72bc41a",
+      "title": "Raspberry Pi Zero 3W and Pi 4 Model A spotted in device trees",
+      "url": "https://bret.dk/raspberry-pi-zero-3-w-pi-4-model-a/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T20:48:49.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "041404daf6ce6d0bf2812f42",
+      "title": "Code-execution flaw in UEFI firmware threatens most servers on planet Earth",
+      "url": "https://arstechnica.com/security/2026/10/code-execution-flaw-in-uefi-firmware-threatens-most-servers-on-planet-earth/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T20:35:09.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ebfe71ec9852c66d306e05a1",
+      "title": "Tailscale SSH: Investigation and remediation update",
+      "url": "https://tailscale.com/ssh-investigation-update",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T19:55:21.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "b9b5de18e9156d548c9e56f0",
+      "title": "Survival LLM: AI assistant and emergency library that runs on your own computer",
+      "url": "https://www.brangus.io/survival-llm",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T19:55:06.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "89bdc41236fdfe55d838a313",
+      "title": "Ghostty 1.4",
+      "url": "https://ghostty.org/docs/install/release-notes/1-4-0",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T16:51:22.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6bbc36fbd0cd5b77ebe4a065",
+      "title": "New 14‑inch MacBook Pro with M6",
+      "url": "https://www.apple.com/in/newsroom/2026/10/apple-introduces-the-new-14-inch-macbook-pro-with-m6/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T16:08:32.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "393575ee7d83ff0a65d333d8",
+      "title": "Genie 4",
+      "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T16:06:01.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "1cec09ed32b2c8fbc1d5f285",
+      "title": "New iMac with M6",
+      "url": "https://www.apple.com/imac/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T13:02:02.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "39973e9d451dfefe58b4c20a",
+      "title": "Python's experimental JIT to be removed",
+      "url": "https://lwn.net/SubscriberLink/1102102/0c00e4d550f25f8c/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T11:17:57.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "61e512383f3ecddc813390d1",
+      "title": "Jokes for the ZX81",
+      "url": "https://spelk.press/gb/products/81-jokes-for-the-zx81",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-26T12:45:16.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a657e4818f3f23e6634f5766",
+      "title": "SS United States to be sunk as largest artificial reef",
+      "url": "https://divemagazine.com/scuba-diving-news/ss-united-states-to-be-sunk-as-worlds-largest-artificial-reef-in-november",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-26T04:41:15.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "d5ac2c7b27ff800e48285768",
+      "title": "Closing the Sea: Lessons from Ancient Mediterranean Blockades",
+      "url": "https://maritime-executive.com/editorials/closing-the-sea-lessons-from-ancient-mediterranean-blockades",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-26T04:28:49.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a35ae37c90a4ccbdc3cb7955",
+      "title": "Ink droplets in motion snag top prize in Nikon Small World contest",
+      "url": "https://arstechnica.com/science/2026/10/meet-the-2026-winner-of-nikons-small-world-photomicrography-contest/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-25T18:49:48.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6edbfaf7649cfb413853e299",
+      "title": "Decompiling Fast Food Tycoon 2: Drawing the World",
+      "url": "https://healeycodes.com/decompiling-fast-food-tycoon-2-drawing-the-world",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-24T18:17:57.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "716d0a8110a4b987d5a1ead5",
+      "title": "The Colors of a Soap Film",
+      "url": "https://aseemrb.me/blog/colors-of-a-soap-film/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-24T03:46:00.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "8c285bd437575ecaa3031a6d",
+      "title": "Start Doing Graph Theory",
+      "url": "https://vertex.degree/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-23T13:49:50.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "b02e415c5f4a28873ac1c300",
+      "title": "Accordion Icons: Which Work Best?",
+      "url": "https://smashingmagazine.com/2026/10/accordion-icons-which-work-best/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-23T13:00:00.000Z",
+      "summary": "A closer look at accordion icons, why split menus are harmful, and why it’s better not to have icons and text labels link to different actions. Plus, why the caret is the safest icon choice. You’ll find more [useful guides](https://www.smashingmagazine.com/category/guides/) and [online workshops](https://smashingconf.com/online-workshops) here on S"
+    },
+    {
+      "id": "c15c1be0aad75fb41fbdb15d",
+      "title": "Embracing Playful Imperfection With The CSS `random()` Function",
+      "url": "https://smashingmagazine.com/2026/10/embracing-playful-imperfection-css-random-function/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-20T10:00:00.000Z",
+      "summary": "Design systems thrive on consistency, so where does randomness fit in? Through playful demos of organic typography, bouncing letters, and splayed cards, Brecht De Ruyte shows how the new CSS `random()` function brings a little imperfection to the web without JavaScript libraries or preprocessor loops that generate hundreds of lines of static CSS."
+    },
+    {
+      "id": "8b9be77adbdfad86b7899b47",
+      "title": "Is Your Organization Messing Up AI Adoption?",
+      "url": "https://smashingmagazine.com/2026/10/is-your-organization-messing-up-ai-adoption/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-16T10:00:00.000Z",
+      "summary": "What can digital transformation teach us about AI adoption? Paul Boag revisits his book Digital Adaptation to show how lessons from the past can help organizations navigate the challenges of AI today."
+    },
+    {
+      "id": "906c26c75ab309095d956d6f",
+      "title": "A Practical Guide To Naming Things",
+      "url": "https://smashingmagazine.com/2026/10/how-name-things/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-06T10:00:00.000Z",
+      "summary": "A practical guide to naming UI components, with useful resources, naming conventions, and structures. You’ll find more [useful guides](https://www.smashingmagazine.com/category/guides/) and [online workshops](https://smashingconf.com/online-workshops) here on Smashing Magazine, so make sure to browse and explore."
+    },
+    {
+      "id": "83b5297dec1e9cb2e15593c3",
+      "title": "Under Autumn’s Spell (October 2026 Wallpapers Edition)",
+      "url": "https://smashingmagazine.com/2026/09/desktop-wallpaper-calendars-october-2026/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-30T13:30:00.000Z",
+      "summary": "October is just around the corner, which means it’s time for some new desktop wallpapers! Designed by the community for the community, they’re here to brighten your screens, and maybe spark some creativity along the way."
+    },
+    {
+      "id": "5c9d13f97faabce46da9b702",
+      "title": "Stop Treating CSS Container Queries Like Traditional Media Queries",
+      "url": "https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-16T13:00:00.000Z",
+      "summary": "Despite broad browser support, container queries remain surprisingly underused and frequently misunderstood. Let’s look at how they differ from media queries, when to reach for each, and how container queries help reusable components respond naturally to the contexts in which they appear. - CSS - Tools - Techniques"
+    },
+    {
+      "id": "b008f772ace718d60f01070e",
+      "title": "Building A UX ROI Case That Survives The Boardroom",
+      "url": "https://smashingmagazine.com/2026/09/building-ux-roi-case-survives-boardroom/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-11T13:00:00.000Z",
+      "summary": "Strong UX ideas do not secure investment on their own. Through a worked example, Alex Williams breaks down how to define business value, calculate costs, test causality, and build a credible case for the return on a design initiative. - UX - Design - Business"
+    },
+    {
+      "id": "8f216ec363408e7c0935b0dd",
+      "title": "The Death Of The Button: Why The Best Interface Is No Interface",
+      "url": "https://smashingmagazine.com/2026/09/death-button-why-best-interface-is-no-interface/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-09T10:00:00.000Z",
+      "summary": "The web is evolving beyond menus, forms, and endless clicks toward experiences shaped around human intent. For UX designers, understanding this shift means re-evaluating their role, moving from designing visible interfaces to guiding transparent, intent-driven AI experiences."
+    },
+    {
+      "id": "234692c6daccbe4c55e4b542",
+      "title": "The Many Faces Of September (2026 Wallpapers Edition)",
+      "url": "https://smashingmagazine.com/2026/08/desktop-wallpaper-calendars-september-2026/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-08-31T11:00:00.000Z",
+      "summary": "Could there be a better way to welcome the new month than with a new collection of desktop wallpapers? Whether you’re holding tightly onto summer or eagerly awaiting autumn, we’ve got some eye-catching designs to make your September just a bit more colorful. Enjoy!"
+    }
+  ],
+  "fetched": {
+    "smashing": "2026-10-28",
+    "hacker-news": "2026-10-28"
+  }
+}

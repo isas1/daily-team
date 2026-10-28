@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "task": "Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point.",
+  "request": {
+    "repository": "isas1/web-components",
+    "number": 127,
+    "url": "https://github.com/isas1/web-components/issues/127",
+    "title": "Engineering-leaning charts and UI components (visitor request)",
+    "task": "Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point.",
+    "votes": 0
+  },
+  "sources": [
+    {
+      "source": "smashing",
+      "status": "fetched",
+      "count": 9
+    },
+    {
+      "source": "hacker-news",
+      "status": "fetched",
+      "count": 20
+    },
+    {
+      "source": "codrops",
+      "status": "disabled",
+      "reason": "2026-10-27: endpoint returns HTTP 410; awaiting verified replacement"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "request-isas1/web-components-127",
+      "kind": "request",
+      "task": "Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point.",
+      "url": "https://github.com/isas1/web-components/issues/127"
+    },
+    {
+      "id": "c15c1be0aad75fb41fbdb15d",
+      "title": "Embracing Playful Imperfection With The CSS `random()` Function",
+      "url": "https://smashingmagazine.com/2026/10/embracing-playful-imperfection-css-random-function/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-20T10:00:00.000Z",
+      "summary": "Design systems thrive on consistency, so where does randomness fit in? Through playful demos of organic typography, bouncing letters, and splayed cards, Brecht De Ruyte shows how the new CSS `random()` function brings a little imperfection to the web without JavaScript libraries or preprocessor loops that generate hundreds of lines of static CSS.",
+      "kind": "feed"
+    },
+    {
+      "id": "906c26c75ab309095d956d6f",
+      "title": "A Practical Guide To Naming Things",
+      "url": "https://smashingmagazine.com/2026/10/how-name-things/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-06T10:00:00.000Z",
+      "summary": "A practical guide to naming UI components, with useful resources, naming conventions, and structures. You’ll find more [useful guides](https://www.smashingmagazine.com/category/guides/) and [online workshops](https://smashingconf.com/online-workshops) here on Smashing Magazine, so make sure to browse and explore.",
+      "kind": "feed"
+    },
+    {
+      "id": "5c9d13f97faabce46da9b702",
+      "title": "Stop Treating CSS Container Queries Like Traditional Media Queries",
+      "url": "https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-16T13:00:00.000Z",
+      "summary": "Despite broad browser support, container queries remain surprisingly underused and frequently misunderstood. Let’s look at how they differ from media queries, when to reach for each, and how container queries help reusable components respond naturally to the contexts in which they appear. - CSS - Tools - Techniques",
+      "kind": "feed"
+    },
+    {
+      "id": "b008f772ace718d60f01070e",
+      "title": "Building A UX ROI Case That Survives The Boardroom",
+      "url": "https://smashingmagazine.com/2026/09/building-ux-roi-case-survives-boardroom/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-11T13:00:00.000Z",
+      "summary": "Strong UX ideas do not secure investment on their own. Through a worked example, Alex Williams breaks down how to define business value, calculate costs, test causality, and build a credible case for the return on a design initiative. - UX - Design - Business",
+      "kind": "feed"
+    },
+    {
+      "id": "8f216ec363408e7c0935b0dd",
+      "title": "The Death Of The Button: Why The Best Interface Is No Interface",
+      "url": "https://smashingmagazine.com/2026/09/death-button-why-best-interface-is-no-interface/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-09-09T10:00:00.000Z",
+      "summary": "The web is evolving beyond menus, forms, and endless clicks toward experiences shaped around human intent. For UX designers, understanding this shift means re-evaluating their role, moving from designing visible interfaces to guiding transparent, intent-driven AI experiences.",
+      "kind": "feed"
+    },
+    {
+      "id": "daily-task",
+      "kind": "task",
+      "task": "Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point."
+    }
+  ],
+  "recent": [
+    {
+      "date": "2026-10-03",
+      "task": "Running pace calculator: distance and time give pace per km and per mile and projected times for 5 km, 10 km, half, and full marathon.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-04",
+      "task": "Weekly planner page with priorities, appointments, and notes, printable on A4.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-05",
+      "task": "CV checklist: 15 checks with a score, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-06",
+      "task": "Water tracker: a daily goal the user sets and a tap-to-add log that resets each day.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-07",
+      "task": "Stretch sequence timer: the user lists stretches and hold times, and the timer runs through them.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-08",
+      "task": "Weekly workout planner: days, exercises, sets, and reps, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-09",
+      "task": "Goal tracker: one goal with milestones, dates, and percent done.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-10",
+      "task": "Camping checklist grouped by shelter, cooking, clothing, and safety, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-11",
+      "task": "Daily routine builder: morning and evening steps with times, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-12",
+      "task": "Output style: a Claude Code voice that changes how every answer sounds.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-13",
+      "task": "Plugin: a bundle of Claude Code mods that arrives like a traveller with a full pack.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-14",
+      "task": "Long task: a Claude Code job that runs for hours while no one watches.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-15",
+      "task": "Loop: Claude Code waking on a schedule to check on something again and again.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-16",
+      "task": "Session log: the trail a Claude Code session leaves behind it.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-17",
+      "task": "Mod workshop: a place to build a Claude Code mod from parts.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-18",
+      "task": "Companion: a Claude Code mod that keeps someone company while they work.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-19",
+      "task": "Scroll progress: a thin line that shows how much of a page is read.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-20",
+      "task": "Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-21",
+      "task": "Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-22",
+      "task": "Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-23",
+      "task": "File drop in a well: a dropped file falls, rings spread, and the echo confirms it arrived.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-24",
+      "task": "Empty state in tide pool: an empty list is a still pool with one small creature waiting.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-25",
+      "task": "Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-26",
+      "task": "Log viewer: a compact panel for a developer tool that filters sample events by severity and opens the selected event details.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-27",
+      "task": "Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo.",
+      "components": [],
+      "usedSources": []
+    }
+  ],
+  "inventory": null
+}

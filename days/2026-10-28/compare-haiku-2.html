@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Load stages for checkout-api latency</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family)}
+.ab2-root{box-sizing:border-box;width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:inline-size}
+.ab2-card{box-sizing:border-box;height:100%;display:flex;flex-direction:column;gap:max(6px,min(var(--pack-spacing-gap),3.5cqi));padding:max(10px,min(var(--pack-spacing-padding),4cqi));font-size:max(11px,min(var(--pack-typography-size),4.4cqi));background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);overflow:auto}
+.ab2-title{font-weight:600;font-size:1.1em}
+.ab2-kept{color:var(--pack-muted)}
+.ab2-status{min-height:1.5em;font-weight:500}
+.ab2-status[data-p=done]{color:var(--pack-accent)}
+.ab2-status[data-p=fail]{font-weight:700}
+.ab2-stages{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.ab2-stage{display:flex;align-items:center;gap:10px;min-height:28px;color:var(--pack-muted);transition:color var(--pack-motion-duration) var(--pack-motion-easing)}
+.ab2-stage[data-s=active],.ab2-stage[data-s=done],.ab2-stage[data-s=fail]{color:var(--pack-text)}
+.ab2-stage::before{content:'';flex:none;box-sizing:border-box;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--pack-border);display:grid;place-items:center;font-size:10px;font-weight:700;line-height:1;transition:background-color var(--pack-motion-duration) var(--pack-motion-easing),border-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.ab2-stage[data-s=active]::before{border-color:var(--pack-accent);animation:ab2-pulse 1.2s ease-in-out infinite}
+.ab2-stage[data-s=done]::before{content:'\2713';background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-surface)}
+.ab2-stage[data-s=fail]::before{content:'!';border-color:var(--pack-text);color:var(--pack-text)}
+@keyframes ab2-pulse{50%{opacity:.35}}
+.ab2-actions{display:flex;gap:8px;margin-top:auto}
+.ab2-btn{flex:1;min-width:44px;min-height:44px;padding:0 12px;font:inherit;font-weight:600;color:var(--pack-text);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);cursor:pointer;transition:background-color var(--pack-motion-duration) var(--pack-motion-easing),border-color var(--pack-motion-duration) var(--pack-motion-easing),opacity var(--pack-motion-duration) var(--pack-motion-easing)}
+.ab2-go{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-surface)}
+.ab2-btn:hover:not(:disabled){border-color:var(--pack-accent)}
+.ab2-btn:active:not(:disabled){transform:translateY(1px)}
+.ab2-btn:disabled{opacity:.45;cursor:default}
+.ab2-btn:focus-visible,.ab2-demo input:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ab2-demo{display:flex;align-items:center;gap:8px;min-height:44px;color:var(--pack-muted);cursor:pointer}
+.ab2-demo input{width:20px;height:20px;margin:0;accent-color:var(--pack-accent)}
+.ab2-still,.ab2-still *{transition:none!important;animation:none!important}
+@media (prefers-reduced-motion:reduce){.ab2-root,.ab2-root *{transition:none!important;animation:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111315;--pack-surface:#1A1D20;--pack-text:#E6E4DF;--pack-muted:#9A9790;--pack-accent:#7FA8C9;--pack-border:#2C3035}:root[data-theme="light"]{--pack-bg:#F5F4F1;--pack-surface:#FFFFFF;--pack-text:#1C1E21;--pack-muted:#5F5D58;--pack-accent:#3C6A8E;--pack-border:#D9D6D0}</style></head><body>
+<div class="ab2-root" role="group" aria-label="Load stages for checkout-api latency"></div>
+<script>(function(){
+var LOADS={'6h':{points:72,samples:216},'24h':{points:288,samples:864}};
+var ENDS=[900,2000,2600];
+var NAMES=['Fetch','Aggregate','Draw'];
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e}
+var root=document.querySelector('.ab2-root');
+var card=el('div','ab2-card');
+var title=el('div','ab2-title','checkout-api latency');
+var kept=el('div','ab2-kept');
+var status=el('div','ab2-status');
+status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+var list=el('ol','ab2-stages');list.setAttribute('aria-label','Load stages');
+var stages=NAMES.map(function(n){var li=el('li','ab2-stage',n);list.appendChild(li);return li});
+var acts=el('div','ab2-actions');
+var cancelBtn=el('button','ab2-btn','Cancel');cancelBtn.type='button';
+var goBtn=el('button','ab2-btn ab2-go','Load 24h');goBtn.type='button';
+acts.appendChild(cancelBtn);acts.appendChild(goBtn);
+var demoLab=el('label','ab2-demo');var demo=el('input');demo.type='checkbox';
+demoLab.appendChild(demo);demoLab.appendChild(el('span',null,'Simulate aggregate failure'));
+card.appendChild(title);card.appendChild(kept);card.appendChild(status);card.appendChild(list);card.appendChild(acts);card.appendChild(demoLab);
+root.appendChild(card);
+
+var S={phase:'idle',kept:'6h',stage:0,text:'',failed:null};
+var job=null,raf=0,last=0;
+
+function keptLine(){return 'Showing '+S.kept+' · '+LOADS[S.kept].points+' points'}
+function stageText(i,r){return i===0?'Fetching '+r:i===1?'Aggregating '+LOADS[r].samples+' samples':'Drawing p99'}
+function stop(){cancelAnimationFrame(raf);raf=0}
+function kick(){if(!raf&&job&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+
+function start(r){
+  if(job)job.ctl.abort();
+  job={ctl:new AbortController(),range:r,fail:demo.checked,t:0};
+  S.phase='run';S.stage=0;S.failed=null;S.text=stageText(0,r);
+  kick();draw();
+}
+function cancel(){
+  if(!job)return;
+  job.ctl.abort();job=null;stop();
+  S.phase='cancel';S.text='Cancelled · kept '+S.kept;
+  draw();
+}
+function finish(ok,r){
+  job=null;
+  if(ok){S.phase='done';S.kept=r;S.stage=3;S.text='Loaded '+r+' · '+LOADS[r].points+' points · 14:52'}
+  else{S.phase='fail';S.failed=r;S.text='Aggregate failed · kept '+S.kept}
+  kept.textContent=keptLine();
+}
+function frame(now){
+  var j=job;
+  var dt=last?Math.min(now-last,50):0;last=now;
+  if(!j||j.ctl.signal.aborted){raf=0;return}
+  j.t+=dt;
+  if(j.t>=(j.fail?ENDS[1]:ENDS[2])){finish(!j.fail,j.range);draw();raf=0;return}
+  var i=j.t<ENDS[0]?0:j.t<ENDS[1]?1:2;
+  if(i!==S.stage){S.stage=i;S.text=stageText(i,j.range)}
+  draw();
+  raf=requestAnimationFrame(frame);
+}
+function draw(){
+  var p=S.phase,run=p==='run';
+  root.classList.toggle('ab2-still',reduce());
+  if(status.textContent!==S.text)status.textContent=S.text;
+  status.setAttribute('data-p',p);
+  stages.forEach(function(li,i){
+    var s='';
+    if(p==='run')s=i<S.stage?'done':i===S.stage?'active':'';
+    else if(p==='done')s='done';
+    else if(p==='fail')s=i===0?'done':i===1?'fail':'';
+    li.setAttribute('data-s',s);
+    if(s==='active')li.setAttribute('aria-current','step');else li.removeAttribute('aria-current');
+  });
+  var label=p==='fail'?'Retry '+S.failed:'Load '+(S.kept==='6h'?'24h':'6h');
+  if(goBtn.textContent!==label)goBtn.textContent=label;
+  var had=document.activeElement;
+  goBtn.disabled=run;
+  cancelBtn.disabled=!run;
+  if(had===cancelBtn&&cancelBtn.disabled)goBtn.focus();
+  else if(had===goBtn&&goBtn.disabled)cancelBtn.focus();
+}
+
+goBtn.addEventListener('click',function(){start(S.phase==='fail'?S.failed:(S.kept==='6h'?'24h':'6h'))});
+cancelBtn.addEventListener('click',cancel);
+root.addEventListener('keydown',function(e){if(e.key==='Escape')cancel()});
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden)stop();else kick();
+});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+    document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+kept.textContent=keptLine();
+draw();
+})();</script>
+</body></html>

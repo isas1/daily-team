@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Load stages for a checkout-api latency card</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mut:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--t:var(--pack-motion-duration) var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:var(--pack-typography-size)/1.3 var(--pack-typography-family)}
+*{box-sizing:border-box}
+.ls1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:inline-size;background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--pack-radii-control)*2);overflow:hidden}
+.ls1-in{height:100%;overflow:auto;padding:min(var(--pack-spacing-padding),5cqw);display:flex;flex-direction:column;gap:var(--pack-spacing-gap)}
+.ls1-hd{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.ls1-hd b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ls1-hd span{color:var(--mut);font-size:.9em;white-space:nowrap}
+.ls1-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.ls1-st{display:flex;align-items:center;gap:8px;min-height:30px;padding:0 8px;border:1px solid transparent;border-radius:var(--pack-radii-control);color:var(--mut);transition:background var(--t),color var(--t),border-color var(--t)}
+.ls1-st em{margin-left:auto;font-style:normal;font-size:.85em;white-space:nowrap}
+.ls1-ic{flex:none;width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);position:relative;transition:background var(--t),border-color var(--t)}
+.ls1-active{color:var(--ink);border-color:var(--bd);background:var(--bg)}
+.ls1-active .ls1-ic{border-color:var(--bd);border-top-color:var(--acc);animation:ls1-spin 800ms linear infinite}
+.ls1-hid .ls1-active .ls1-ic{animation-play-state:paused}
+.ls1-done{color:var(--ink)}
+.ls1-done .ls1-ic{background:var(--acc);border-color:var(--acc)}
+.ls1-done .ls1-ic:after{content:"";position:absolute;left:3px;top:0;width:3px;height:7px;border:solid var(--bg);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ls1-error{color:var(--ink);border-color:var(--ink)}
+.ls1-error .ls1-ic{border-color:var(--ink)}
+.ls1-error .ls1-ic:after{content:"!";position:absolute;inset:0;display:grid;place-items:center;font-size:10px;font-weight:700;line-height:1}
+@keyframes ls1-spin{to{transform:rotate(360deg)}}
+.ls1-msg{min-height:2.6em;margin:0;font-variant-numeric:tabular-nums}
+.ls1-ft{display:flex;gap:var(--pack-spacing-gap);margin-top:auto;flex-wrap:wrap}
+.ls1-b{min-height:44px;border-radius:var(--pack-radii-control);font:inherit;cursor:pointer;border:1px solid var(--acc);background:var(--acc);color:var(--bg);font-weight:600;flex:1 1 80px;padding:0 10px;transition:transform 100ms var(--pack-motion-easing),background var(--t),color var(--t)}
+.ls1-b:active{transform:scale(.97)}
+.ls1-b.ls1-out{background:transparent;color:var(--ink);border-color:var(--bd)}
+.ls1-tg{min-height:44px;flex:0 1 auto;display:flex;align-items:center;gap:6px;padding:0 10px;background:transparent;color:var(--mut);border:1px solid var(--bd);border-radius:var(--pack-radii-control);font:inherit;font-size:.9em;cursor:pointer;transition:transform 100ms var(--pack-motion-easing),border-color var(--t)}
+.ls1-tg:active{transform:scale(.97)}
+.ls1-tg i{width:12px;height:12px;border:2px solid var(--bd);border-radius:3px;transition:background var(--t),border-color var(--t)}
+.ls1-tg[aria-pressed=true]{color:var(--ink);border-color:var(--ink)}
+.ls1-tg[aria-pressed=true] i{background:var(--acc);border-color:var(--acc)}
+.ls1-b:focus-visible,.ls1-tg:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.ls1-active .ls1-ic{animation:none;border-top-color:var(--acc);border-right-color:var(--acc)}}
+</style><style data-pack-tokens>:root{--pack-typography-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111315;--pack-surface:#1A1D20;--pack-text:#E6E4DF;--pack-muted:#9A9790;--pack-accent:#7FA8C9;--pack-border:#2C3035}:root[data-theme="light"]{--pack-bg:#F5F4F1;--pack-surface:#FFFFFF;--pack-text:#1C1E21;--pack-muted:#5F5D58;--pack-accent:#3C6A8E;--pack-border:#D9D6D0}</style></head><body>
+<div class="ls1-root" role="group" aria-label="Load stages for the checkout-api latency range"><div class="ls1-in" id="ls1-in"></div></div>
+<script>(function(){
+var $=function(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var root=document.querySelector('.ls1-root'),box=document.getElementById('ls1-in');
+var names=['Fetch','Aggregate','Draw'],DUR=[700,850,600];
+var shown={r:'6h',n:72,s:216},job=null,phase='idle',st=['pending','pending','pending'],cur=0,failNext=false,when='';
+var raf=0,last=0;
+var tgt=function(){return shown.r==='6h'?{r:'24h',n:288,s:864}:{r:'6h',n:72,s:216}};
+var T=tgt();
+var hd=$('div','ls1-hd'),title=$('b',0,'checkout-api'),sh=$('span');
+hd.append(title,sh);
+var ul=$('ul','ls1-list'),rows=[],dets=[];
+names.forEach(function(n){var li=$('li','ls1-st'),ic=$('span','ls1-ic'),nm=$('span',0,n),d=$('em');
+li.append(ic,nm,d);ul.append(li);rows.push(li);dets.push(d)});
+var msg=$('p','ls1-msg');msg.setAttribute('role','status');msg.setAttribute('aria-live','polite');
+var ft=$('div','ls1-ft'),btn=$('button','ls1-b'),tg=$('button','ls1-tg'),tgi=$('i');
+btn.type='button';tg.type='button';tg.append(tgi,document.createTextNode('Fail next'));
+ft.append(btn,tg);box.append(hd,ul,msg,ft);
+function render(){
+ if(!job&&phase!=='fail')T=tgt();
+ sh.textContent='Showing '+shown.r;
+ rows.forEach(function(li,i){li.className='ls1-st ls1-'+st[i]});
+ dets[0].textContent=T.r;dets[1].textContent=T.s+' \u2192 '+T.n;dets[2].textContent='p99';
+ var m;
+ if(phase==='run')m=['Fetching '+T.r,'Aggregating '+T.s+' samples','Drawing p99'][cur];
+ else if(phase==='done')m='Loaded '+shown.r+' \u00b7 '+shown.n+' points \u00b7 '+when;
+ else if(phase==='cancel')m='Cancelled \u00b7 kept '+shown.r;
+ else if(phase==='fail')m=names[cur]+' failed \u00b7 kept '+shown.r;
+ else m='Ready to load '+T.r;
+ msg.textContent=m;
+ btn.textContent=job?'Cancel':phase==='fail'?'Retry':'Load '+T.r;
+ btn.className='ls1-b'+(job?' ls1-out':'');
+ tg.setAttribute('aria-pressed',failNext);
+}
+function frame(now){
+ raf=0;if(!job||document.hidden)return;
+ var dt=last?Math.min(now-last,50):0;last=now;
+ job.el+=dt;
+ var i=job.i,dur=reduce()?Math.min(DUR[i],200):DUR[i];
+ if(job.el>=dur){
+  if(i===1&&failNext){failNext=false;st[i]='error';phase='fail';job=null;render();return}
+  st[i]='done';
+  if(i===2){
+   var d=new Date();
+   when=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+   shown=T;phase='done';job=null;render();return;
+  }
+  i=job.i=i+1;cur=i;st[i]='active';job.el=0;render();
+ }
+ raf=requestAnimationFrame(frame);
+}
+function kick(){if(!raf&&job&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+function start(){
+ if(job)return;
+ if(phase!=='fail')T=tgt();
+ job={i:0,el:0};cur=0;phase='run';st=['active','pending','pending'];
+ render();kick();
+}
+function cancel(){
+ if(!job)return;
+ cancelAnimationFrame(raf);raf=0;
+ job=null;phase='cancel';st=['pending','pending','pending'];render();
+}
+btn.addEventListener('click',function(){job?cancel():start()});
+tg.addEventListener('click',function(){failNext=!failNext;render()});
+root.addEventListener('keydown',function(e){if(e.key==='Escape'&&job){e.preventDefault();cancel()}});
+document.addEventListener('visibilitychange',function(){
+ document.documentElement.classList.toggle('ls1-hid',document.hidden);
+ if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+window.addEventListener('message',function(e){var m=e.data;
+ if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+  document.documentElement.setAttribute('data-theme',m.theme)});
+render();
+})();</script>
+</body></html>

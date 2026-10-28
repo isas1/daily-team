@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-27: Lit Case
+### 2026-10-28: Breach Reader
 
-<a href="days/2026-10-27/"><img src="days/2026-10-27/team.png" alt="Team for 2026-10-27: Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter" width="100%"></a>
+<a href="days/2026-10-28/"><img src="days/2026-10-28/team.png" alt="Team for 2026-10-28: Precision machinist · Air traffic controller · Furniture designer · Asteroid workshop tutor" width="100%"></a>
 
-**Task:** Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo.
+**Task:** Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point.
 
-**Decision:** The page is a phone-width pipeline panel: the visitor opens the failed build step, reads the log line that stopped it, and retries the step in a local demo.
+**Decision:** The team builds a single latency card for checkout-api where a visitor picks a range, watches named load stages, chooses a percentile, reads any point, steps between SLO breaches, and pins two points to get a delta.
 
-<a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Designed cover for Lit Case" width="100%"></a>
+<a href="days/2026-10-28/"><img src="days/2026-10-28/cover.png" alt="Designed cover for Breach Reader" width="100%"></a>
 
-[Open the day](days/2026-10-27/) · [Use it](https://isas1.github.io/daily-team/2026-10-27/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-28/) · [Use it](https://isas1.github.io/daily-team/2026-10-28/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-28](days/2026-10-28/) | <a href="days/2026-10-28/"><img src="days/2026-10-28/cover.png" alt="Breach Reader" width="160"></a> | Breach Reader | Precision machinist · Air traffic controller · Furniture designer · Asteroid workshop tutor |
 | [2026-10-27](days/2026-10-27/) | <a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Lit Case" width="160"></a> | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter |
 | [2026-10-26](days/2026-10-26/) | <a href="days/2026-10-26/"><img src="days/2026-10-26/piece.png" alt="Bracket and Ledger" width="160"></a> | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist |
 | [2026-10-25](days/2026-10-25/) | <a href="days/2026-10-25/"><img src="days/2026-10-25/piece.png" alt="the way back up" width="160"></a> | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai |
 | [2026-10-24](days/2026-10-24/) | <a href="days/2026-10-24/"><img src="days/2026-10-24/piece.png" alt="Low Water Set" width="160"></a> | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne |
 | [2026-10-23](days/2026-10-23/) | <a href="days/2026-10-23/"><img src="days/2026-10-23/piece.png" alt="Sounding Well" width="160"></a> | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin |
 | [2026-10-22](days/2026-10-22/) | <a href="days/2026-10-22/"><img src="days/2026-10-22/piece.png" alt="Wet Tally" width="160"></a> | Wet Tally | Animator · Chef · Librarian · Gulliver |
-| [2026-10-21](days/2026-10-21/) | <a href="days/2026-10-21/"><img src="days/2026-10-21/cover.png" alt="Fast Colour" width="160"></a> | Fast Colour | Beekeeper · Luthier · Weaver · Robinson Crusoe |
 
-[All 25 days](ARCHIVE.md)
+[All 26 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

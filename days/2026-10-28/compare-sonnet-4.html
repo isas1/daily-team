@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cursor chart for reading Forever checkout p99 latency</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--ink:var(--pack-text);--acc:var(--pack-accent)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.ab4-root{box-sizing:border-box;width:clamp(180px,92vmin,640px);aspect-ratio:1;display:flex;flex-direction:column;gap:calc(var(--pack-spacing-gap)*.45);padding:calc(var(--pack-spacing-padding)*.65);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2);overflow:hidden}
+.ab4-head{font-size:.8em;color:var(--pack-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ab4-ro{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;min-height:2.7em;align-content:flex-start;font-size:.93em;font-variant-numeric:tabular-nums;line-height:1.3}
+.ab4-ro span{white-space:nowrap}
+.ab4-t{font-weight:650}
+.ab4-d{color:var(--pack-muted)}
+.ab4-d.ab4-over{background:var(--pack-accent);color:var(--pack-bg);padding:0 7px;border-radius:99px;font-weight:650}
+.ab4-plot{position:relative;flex:1;min-height:0;touch-action:pan-y;cursor:crosshair;border-radius:var(--pack-radii-control);transition:opacity var(--pack-motion-duration) var(--pack-motion-easing);-webkit-tap-highlight-color:transparent}
+.ab4-plot:focus-visible,.ab4-btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ab4-stale{opacity:.35}
+.ab4-svg{position:absolute;inset:0;display:block;width:100%;height:100%}
+.ab4-area{fill:var(--pack-accent);opacity:.14}
+.ab4-line{fill:none;stroke:var(--pack-accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.ab4-slo{stroke:var(--pack-muted);stroke-width:1;stroke-dasharray:4 3}
+.ab4-dep{stroke:var(--pack-border);stroke-width:1.5}
+.ab4-cur{stroke:var(--pack-text);stroke-width:1;opacity:.55}
+.ab4-dot{fill:var(--pack-surface);stroke:var(--pack-accent);stroke-width:2}
+.ab4-dot.ab4-hot{fill:var(--pack-accent)}
+.ab4-lbl{font-size:10px;fill:var(--pack-muted);paint-order:stroke;stroke:var(--pack-surface);stroke-width:3px;font-family:inherit}
+.ab4-empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--pack-muted);font-size:.9em;border:1px dashed var(--pack-border);border-radius:var(--pack-radii-control);padding:6px}
+.ab4-empty[hidden]{display:none}
+.ab4-axis{display:flex;justify-content:space-between;gap:4px;font-size:.72em;color:var(--pack-muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ab4-btns{display:flex;gap:calc(var(--pack-spacing-gap)*.45)}
+.ab4-btn{flex:1;min-height:44px;min-width:44px;padding:0 2px;font:inherit;font-size:.82em;line-height:1.15;color:var(--pack-text);background:transparent;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);cursor:pointer;transition:background var(--pack-motion-duration) var(--pack-motion-easing),transform 90ms var(--pack-motion-easing)}
+.ab4-btn:hover{background:var(--pack-border)}
+.ab4-btn:active{transform:scale(.96)}
+.ab4-btn[aria-pressed=true]{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-bg)}
+.ab4-btn[aria-disabled=true]{opacity:.5;cursor:default}
+@media (max-width:260px),(max-height:260px){.ab4-head,.ab4-hint{display:none}}
+@media (prefers-reduced-motion:reduce){.ab4-plot,.ab4-btn{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111315;--pack-surface:#1A1D20;--pack-text:#E6E4DF;--pack-muted:#9A9790;--pack-accent:#7FA8C9;--pack-border:#2C3035}:root[data-theme="light"]{--pack-bg:#F5F4F1;--pack-surface:#FFFFFF;--pack-text:#1C1E21;--pack-muted:#5F5D58;--pack-accent:#3C6A8E;--pack-border:#D9D6D0}</style></head><body>
+<div class="ab4-root" id="ab4-root" role="group" aria-label="Latency cursor chart for Forever checkout"></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var NS='http://www.w3.org/2000/svg',N=72,SLO=300,MAXV=700,PL=6,PR=6,PT=14,PB=4;
+  var v=[],i,b=[[19,470,5],[34,250,3],[48,205,3],[64,340,4]];
+  for(i=0;i<N;i++){var x=178+Math.round(Math.sin(i*12.9898)*6+Math.sin(i*4.1)*5);
+    b.forEach(function(k){x+=k[1]*Math.max(0,1-Math.abs(i-k[0])/k[2])});v.push(Math.round(x))}
+  v[19]=640;
+  var worst=v.indexOf(Math.max.apply(null,v));
+  function pad(n){return (n<10?'0':'')+n}
+  function tm(k){var m=780+k*5;return pad(Math.floor(m/60))+':'+pad(m%60)}
+  function el(tag,cls,txt,par){var e=document.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;if(par)par.appendChild(e);return e}
+  function sv(tag,cls,par,at){var e=document.createElementNS(NS,tag);if(cls)e.setAttribute('class',cls);for(var k in at)e.setAttribute(k,at[k]);par.appendChild(e);return e}
+  var root=document.getElementById('ab4-root');
+  el('div','ab4-head','Forever checkout · p99, last 6h',root);
+  var ro=el('div','ab4-ro',null,root);ro.setAttribute('aria-live','polite');
+  var rt=el('span','ab4-t',null,ro),rv=el('span',null,null,ro),rd=el('span','ab4-d',null,ro);
+  var plot=el('div','ab4-plot',null,root);
+  plot.tabIndex=0;plot.setAttribute('role','group');
+  plot.setAttribute('aria-label','Latency chart. Left and Right step one sample, Page Up and Page Down step one hour, Home and End jump to the ends, Escape returns to the worst spike.');
+  var svg=sv('svg','ab4-svg',plot,{'aria-hidden':'true'});
+  var area=sv('path','ab4-area',svg,{}),dep=sv('line','ab4-dep',svg,{}),slo=sv('line','ab4-slo',svg,{}),
+      line=sv('path','ab4-line',svg,{}),sl=sv('text','ab4-lbl',svg,{'text-anchor':'middle'}),
+      dl=sv('text','ab4-lbl',svg,{'text-anchor':'end'}),cur=sv('line','ab4-cur',svg,{}),dot=sv('circle','ab4-dot',svg,{});
+  sl.textContent='SLO 300';dl.textContent='deploy';
+  var emp=el('div','ab4-empty','No samples in range',plot);emp.hidden=true;
+  var ax=el('div','ab4-axis',null,root);
+  el('span',null,tm(0),ax);el('span','ab4-hint','Drag or ← →',ax);el('span',null,tm(N-1),ax);
+  var bt=el('div','ab4-btns',null,root);
+  function btn(t){var e=el('button','ab4-btn',t,bt);e.type='button';return e}
+  var bW=btn('Worst spike'),bR=btn('Reload'),bE=btn('Empty');
+  bE.setAttribute('aria-pressed','false');
+
+  var W=0,H=0,idx=worst,ci=worst,loading=false,empty=false,drag=false,tid=0;
+  function X(k){return PL+k*(W-PL-PR)/(N-1)}
+  function Y(val){return PT+(1-val/MAXV)*(H-PT-PB)}
+  function layout(){
+    W=plot.clientWidth;H=plot.clientHeight;if(!W||!H)return;
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    var p=v.map(function(q,k){return X(k).toFixed(1)+','+Y(q).toFixed(1)});
+    line.setAttribute('d','M'+p.join('L'));
+    area.setAttribute('d','M'+p.join('L')+'L'+X(N-1).toFixed(1)+','+(H-PB)+'L'+X(0).toFixed(1)+','+(H-PB)+'Z');
+    var ys=Y(SLO);slo.setAttribute('x1',PL);slo.setAttribute('x2',W-PR);slo.setAttribute('y1',ys);slo.setAttribute('y2',ys);
+    sl.setAttribute('x',X(41));sl.setAttribute('y',ys-4);
+    var dx=X(16);dep.setAttribute('x1',dx);dep.setAttribute('x2',dx);dep.setAttribute('y1',2);dep.setAttribute('y2',H-PB);
+    dl.setAttribute('x',dx-4);dl.setAttribute('y',10);
+  }
+  function readout(){
+    if(loading){rt.textContent='Loading 6h…';rv.textContent='';rd.textContent='';rd.className='ab4-d';return}
+    if(empty){rt.textContent='No samples';rv.textContent='';rd.textContent='';rd.className='ab4-d';return}
+    var q=v[idx],d=q-SLO;
+    rt.textContent=tm(idx)+' ·';rv.textContent='p99 '+q+' ms ·';
+    rd.textContent=d>0?'+'+d+' over SLO':d<0?(-d)+' under SLO':'at SLO';
+    rd.className='ab4-d'+(d>0?' ab4-over':'');
+  }
+  function mode(){
+    plot.classList.toggle('ab4-stale',loading);
+    plot.setAttribute('aria-busy',loading);
+    svg.style.visibility=empty?'hidden':'visible';emp.hidden=!empty;
+    bR.setAttribute('aria-disabled',loading);bE.setAttribute('aria-disabled',loading);
+    bE.setAttribute('aria-pressed',empty);readout();
+  }
+  function step(dt){
+    var k=1-Math.pow(1-.35,dt),dlt=idx-ci;
+    if(Math.abs(dlt)<.01){ci=idx;return false}
+    ci+=dlt*k;return true;
+  }
+  function snapToTarget(){ci=idx}
+  function draw(){
+    if(!W)return;
+    var f=Math.min(N-1,Math.max(0,Math.floor(ci))),g=Math.min(N-1,f+1),t=ci-f,
+        val=v[f]+(v[g]-v[f])*t,x=X(ci),hot=v[idx]>SLO;
+    cur.setAttribute('x1',x);cur.setAttribute('x2',x);cur.setAttribute('y1',PT-4);cur.setAttribute('y2',H-PB);
+    dot.setAttribute('cx',x);dot.setAttribute('cy',Y(val));dot.setAttribute('r',hot?5.5:4);
+    dot.setAttribute('class','ab4-dot'+(hot?' ab4-hot':''));
+  }
+  var raf=0,last=0;
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else{kick()}});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+  function blocked(){return loading||empty}
+  function set(k){if(blocked())return;k=Math.max(0,Math.min(N-1,k));if(k===idx)return;idx=k;readout();kick()}
+  function pick(e){var r=plot.getBoundingClientRect();set(Math.round((e.clientX-r.left-PL)/((W-PL-PR)/(N-1))))}
+  plot.addEventListener('pointerdown',function(e){if(blocked())return;drag=true;
+    try{plot.setPointerCapture(e.pointerId)}catch(_){}pick(e)});
+  plot.addEventListener('pointermove',function(e){if(drag||e.pointerType==='mouse')pick(e)});
+  function up(){drag=false}
+  plot.addEventListener('pointerup',up);plot.addEventListener('pointercancel',up);
+  plot.addEventListener('keydown',function(e){
+    var m={ArrowLeft:idx-1,ArrowRight:idx+1,PageUp:idx+12,PageDown:idx-12,Home:0,End:N-1,Escape:worst};
+    if(e.key in m){e.preventDefault();set(m[e.key])}});
+  bW.addEventListener('click',function(){set(worst)});
+  bR.addEventListener('click',function(){
+    if(loading)return;loading=true;mode();
+    tid=setTimeout(function(){loading=false;idx=worst;mode();kick()},800)});
+  bE.addEventListener('click',function(){
+    if(loading)return;empty=!empty;if(!empty){idx=worst}mode();draw();kick()});
+
+  if(window.ResizeObserver)new ResizeObserver(function(){layout();draw()}).observe(plot);
+  else addEventListener('resize',function(){layout();draw()});
+  layout();mode();draw();
+})();</script>
+</body></html>

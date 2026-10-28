@@ -1,0 +1,248 @@
+{
+  "date": "2026-10-28",
+  "task": "Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point.",
+  "hook": "Build Latency chart",
+  "seconds": 4,
+  "models": [
+    {
+      "key": "opus",
+      "label": "Opus",
+      "model": "claude-opus-5-5"
+    },
+    {
+      "key": "sonnet",
+      "label": "Sonnet",
+      "model": "claude-sonnet-5-5"
+    },
+    {
+      "key": "haiku",
+      "label": "Haiku",
+      "model": "claude-haiku-5-5"
+    }
+  ],
+  "status": "incomplete",
+  "rows": [
+    {
+      "row": 1,
+      "name": "Range selector",
+      "input": "Click or tap a segment. Keyboard: Tab into the group, arrow keys move and select, Home and End jump to the ends.",
+      "variants": {
+        "opus": {
+          "file": "artifact-1.html",
+          "sha256": "38b6970eb18e7530c851d59cd2fde69dac0b7706061d3466ba81ae42dd34ef50",
+          "componentId": "range-selector",
+          "lead": 1,
+          "row": 1,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "9378befeed0e09e09b14e4c0c2233b0786b7b5a2c15efd3b32532d07931046e5"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-1.html",
+          "hash": "9378befeed0e09e09b14e4c0c2233b0786b7b5a2c15efd3b32532d07931046e5",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "needs review",
+          "problems": [
+            "does not stop when the tab is hidden"
+          ]
+        },
+        "haiku": {
+          "file": "compare-haiku-1.html",
+          "hash": "9378befeed0e09e09b14e4c0c2233b0786b7b5a2c15efd3b32532d07931046e5",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 2,
+      "name": "Load stages",
+      "input": "Click or tap Cancel or Retry. Keyboard: Tab to the button, Enter or Space.",
+      "variants": {
+        "opus": {
+          "file": "artifact-2.html",
+          "sha256": "a32a3fe3525053ca288c3bf9e7c207605907f3edc3b5e949160479124c8c31bd",
+          "componentId": "load-stages",
+          "lead": 2,
+          "row": 2,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "c8527b3e056b5f0451aa6b73eab0699b9f1d734f6a79dae1b27653369d95a79e"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-2.html",
+          "hash": "c8527b3e056b5f0451aa6b73eab0699b9f1d734f6a79dae1b27653369d95a79e",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-2.html",
+          "hash": "c8527b3e056b5f0451aa6b73eab0699b9f1d734f6a79dae1b27653369d95a79e",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 3,
+      "name": "Percentile tiles",
+      "input": "Click or tap a tile. Keyboard: Tab to a tile, Enter or Space selects.",
+      "variants": {
+        "opus": {
+          "file": "artifact-3.html",
+          "sha256": "c4394e0b86fa2818416f7df6b34525e2969d13adc48d113944cc69796d3e4ce2",
+          "componentId": "percentile-tiles",
+          "lead": 3,
+          "row": 3,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "e97509836983c81a29e1e96a55b76c164e3b952ea49e6b462ab5d3bdf009cf59"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-3.html",
+          "hash": "e97509836983c81a29e1e96a55b76c164e3b952ea49e6b462ab5d3bdf009cf59",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-3.html",
+          "hash": "e97509836983c81a29e1e96a55b76c164e3b952ea49e6b462ab5d3bdf009cf59",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 4,
+      "name": "Cursor chart",
+      "input": "Pointer move or touch drag over the plot. Keyboard: focus the plot, Left and Right step one sample, Page Up and Page Down step 12, Home and End jump to the ends.",
+      "variants": {
+        "opus": {
+          "file": "artifact-4.html",
+          "sha256": "d0c63cf37e3f793c6e049ffb3a7323a9c5270791c1020ef37f2056e5e3f781af",
+          "componentId": "cursor-chart",
+          "lead": 4,
+          "row": 4,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "0c04586909ebf08f080878220f06fcdb274c3d624f652d7e51a3ea2008f29c7d"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-4.html",
+          "hash": "0c04586909ebf08f080878220f06fcdb274c3d624f652d7e51a3ea2008f29c7d",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-4.html",
+          "hash": "0c04586909ebf08f080878220f06fcdb274c3d624f652d7e51a3ea2008f29c7d",
+          "requestedModel": "claude-haiku-5-5",
+          "model": null,
+          "status": "failed",
+          "problems": [
+            "claude: You've hit your session limit · resets 12:50pm (UTC)"
+          ]
+        }
+      }
+    },
+    {
+      "row": 5,
+      "name": "Breach stepper",
+      "input": "Click or tap Previous or Next. Keyboard: Tab to the buttons, Enter or Space. Held keys move one step per keydown.",
+      "variants": {
+        "opus": {
+          "file": "artifact-5.html",
+          "sha256": "8f20c1eb02860f11eeca90e7bc674ba3bf52adf6ae9f8cad32782cd5dae351e1",
+          "componentId": "breach-stepper",
+          "lead": 1,
+          "row": 5,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "58dd5bbafa24b69c5c828e98319f006e04e69f9202c13e8137ea161624a55a76"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-5.html",
+          "hash": "58dd5bbafa24b69c5c828e98319f006e04e69f9202c13e8137ea161624a55a76",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": null,
+          "status": "failed",
+          "problems": [
+            "claude: You've hit your session limit · resets 12:50pm (UTC)"
+          ]
+        },
+        "haiku": {
+          "file": "compare-haiku-5.html",
+          "hash": "58dd5bbafa24b69c5c828e98319f006e04e69f9202c13e8137ea161624a55a76",
+          "requestedModel": "claude-haiku-5-5",
+          "model": null,
+          "status": "failed",
+          "problems": [
+            "claude: You've hit your session limit · resets 12:50pm (UTC)"
+          ]
+        }
+      }
+    },
+    {
+      "row": 6,
+      "name": "Pin pair",
+      "input": "Click or tap Pin. Keyboard: Tab to Pin, Enter or Space. P while the chart has focus. Each pin chip has a remove button.",
+      "variants": {
+        "opus": {
+          "file": "artifact-6.html",
+          "sha256": "698e7165f0d0b720a627b2cddde4d325cc4c5db7de8f4bd9d9db21f534e2f27b",
+          "componentId": "pin-pair",
+          "lead": 2,
+          "row": 6,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "f08bd6c581d69c974e6f6dd1a83250dfb3573001113eaf80212e5560e046b39e"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-6.html",
+          "hash": "f08bd6c581d69c974e6f6dd1a83250dfb3573001113eaf80212e5560e046b39e",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": null,
+          "status": "failed",
+          "problems": [
+            "claude: You've hit your session limit · resets 12:50pm (UTC)"
+          ]
+        },
+        "haiku": {
+          "file": "compare-haiku-6.html",
+          "hash": "f08bd6c581d69c974e6f6dd1a83250dfb3573001113eaf80212e5560e046b39e",
+          "requestedModel": "claude-haiku-5-5",
+          "model": null,
+          "status": "failed",
+          "problems": [
+            "claude: You've hit your session limit · resets 12:50pm (UTC)"
+          ]
+        }
+      }
+    }
+  ]
+}
