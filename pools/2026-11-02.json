@@ -1,0 +1,315 @@
+{
+  "start": "2026-11-02",
+  "base": "2026-10-26",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "added": {
+    "roles": [
+      {
+        "text": "Form designer",
+        "credit": ""
+      },
+      {
+        "text": "Localization designer",
+        "credit": ""
+      },
+      {
+        "text": "Screen reader tester",
+        "credit": ""
+      },
+      {
+        "text": "Haptics designer",
+        "credit": ""
+      },
+      {
+        "text": "Voice interface designer",
+        "credit": ""
+      },
+      {
+        "text": "Onboarding designer",
+        "credit": ""
+      },
+      {
+        "text": "Font hinting engineer",
+        "credit": ""
+      },
+      {
+        "text": "Frontend performance engineer",
+        "credit": ""
+      },
+      {
+        "text": "Kite maker",
+        "credit": ""
+      },
+      {
+        "text": "Boat builder",
+        "credit": ""
+      },
+      {
+        "text": "Neon sign bender",
+        "credit": ""
+      },
+      {
+        "text": "Paper conservator",
+        "credit": ""
+      },
+      {
+        "text": "Mosaic artist",
+        "credit": ""
+      },
+      {
+        "text": "Bicycle mechanic",
+        "credit": ""
+      },
+      {
+        "text": "Rigging technician",
+        "credit": ""
+      },
+      {
+        "text": "Harbour pilot",
+        "credit": ""
+      }
+    ],
+    "methods": [
+      {
+        "text": "Read the component aloud the way a screen reader would announce it.",
+        "credit": ""
+      },
+      {
+        "text": "Time each state change with a stopwatch and write the number down.",
+        "credit": ""
+      },
+      {
+        "text": "Swap the sample text for a language with longer words and recheck the layout.",
+        "credit": ""
+      },
+      {
+        "text": "Press every control in reverse order and note what breaks.",
+        "credit": ""
+      },
+      {
+        "text": "List what the component shows when data arrives late, partly, or twice.",
+        "credit": ""
+      },
+      {
+        "text": "Look at the screen from arm's length and note what reads first.",
+        "credit": ""
+      },
+      {
+        "text": "Draw the hit area of each control as an outline over the design.",
+        "credit": ""
+      },
+      {
+        "text": "Hand the component to a teammate and stay silent while they try it.",
+        "credit": ""
+      },
+      {
+        "text": "Mark every place a person must wait and give each one a label.",
+        "credit": ""
+      },
+      {
+        "text": "Zoom the browser to 400 percent and fix the first thing that breaks.",
+        "credit": ""
+      },
+      {
+        "text": "Record a short screen capture and step through it frame by frame.",
+        "credit": ""
+      },
+      {
+        "text": "Reload in the middle of every action and check what survives.",
+        "credit": ""
+      },
+      {
+        "text": "Rename each state in plain words a visitor would use.",
+        "credit": ""
+      },
+      {
+        "text": "Measure how far the eye travels from trigger to result, then shorten it.",
+        "credit": ""
+      },
+      {
+        "text": "Use the component with the screen dimmed to its lowest brightness.",
+        "credit": ""
+      },
+      {
+        "text": "Change one property per pass and compare it with the previous pass.",
+        "credit": ""
+      }
+    ],
+    "constraints": [
+      {
+        "text": "Status text announces each state change to assistive technology.",
+        "credit": ""
+      },
+      {
+        "text": "Hit areas never overlap between neighbouring controls.",
+        "credit": ""
+      },
+      {
+        "text": "Body text keeps a line length under 75 characters.",
+        "credit": ""
+      },
+      {
+        "text": "Text and its background meet a 4.5 to 1 contrast ratio.",
+        "credit": ""
+      }
+    ],
+    "tasks": [
+      {
+        "text": "Publish button: an action button for a blog editor that checks required fields, shows publishing, and lists what is missing when it cannot publish.",
+        "credit": ""
+      },
+      {
+        "text": "Sync status: a loader for a notes app that shows syncing, synced and offline states and lets someone retry a failed sync.",
+        "credit": ""
+      },
+      {
+        "text": "Change review: a panel for a code review tool that accepts or rejects one block of changed lines and lets someone undo the choice.",
+        "credit": ""
+      },
+      {
+        "text": "Order card: a card for a shop account that shows delivery status and opens the tracking steps for one sample order.",
+        "credit": ""
+      },
+      {
+        "text": "Document upload: an upload area for a document tool that accepts files by drop or browse and lists each file with its size.",
+        "credit": ""
+      },
+      {
+        "text": "Alert settings: a toggle list for an account page that switches each alert type on or off and confirms the saved choice.",
+        "credit": ""
+      }
+    ],
+    "guests": [
+      {
+        "text": "historical | Johannes Gutenberg | Set each line by hand and check it before printing. | died 1468",
+        "credit": ""
+      },
+      {
+        "text": "myth | Icarus | Find how far the design can go before the wax melts. | Greek myth",
+        "credit": ""
+      },
+      {
+        "text": "literary | Captain Nemo | Build a sealed vessel that runs on what it carries. | Jules Verne, died 1905",
+        "credit": ""
+      },
+      {
+        "text": "future | Seed vault keeper | Label every stored state so a stranger can restore it. | invented",
+        "credit": ""
+      },
+      {
+        "text": "creature | Lantern eel | Light only the part someone needs to see next. | invented",
+        "credit": ""
+      },
+      {
+        "text": "creature | Moss tortoise | Keep the slow part visible so nobody thinks it stopped. | invented",
+        "credit": ""
+      }
+    ],
+    "temperaments": [
+      {
+        "text": "Draws the disputed state on paper before replying.",
+        "credit": ""
+      },
+      {
+        "text": "Asks for the exact number behind every claim.",
+        "credit": ""
+      },
+      {
+        "text": "Rephrases the question until everyone agrees on it.",
+        "credit": ""
+      },
+      {
+        "text": "Waits until the end, then summarizes both sides.",
+        "credit": ""
+      },
+      {
+        "text": "Brings a second example whenever one is challenged.",
+        "credit": ""
+      },
+      {
+        "text": "Sets a time limit on each disagreement.",
+        "credit": ""
+      },
+      {
+        "text": "Splits a large objection into smaller ones.",
+        "credit": ""
+      },
+      {
+        "text": "Writes each agreed point down before moving on.",
+        "credit": ""
+      }
+    ]
+  },
+  "retired": {
+    "guests": [
+      "archetype | First-time visitor | Find the main action without reading a guide. | invented",
+      "archetype | Impatient commuter | Complete the action with one thumb in a short pause. | invented",
+      "archetype | Keyboard regular | Reach every state without moving a pointer. | invented",
+      "archetype | Night shift operator | Keep status clear without bright light or constant motion. | invented",
+      "archetype | Careful reviewer | Compare the result with the original before agreeing. | invented",
+      "archetype | Busy shop owner | Show the next useful action beside the result. | invented"
+    ],
+    "temperaments": [
+      "Asks what the user can do with it.",
+      "Pushes for one more pass on the weakest state.",
+      "Shows a working sample before making a claim.",
+      "Checks the small screen before agreeing.",
+      "Argues for fewer moving parts.",
+      "Questions every effect with no useful result.",
+      "Asks how a person gets back after a mistake.",
+      "Notices uneven spacing before anyone else."
+    ],
+    "roles": [
+      "Interface designer",
+      "Motion director",
+      "Interaction engineer",
+      "Type designer",
+      "Accessibility specialist",
+      "Human factors engineer",
+      "Icon designer",
+      "Design systems engineer",
+      "Mobile interface designer",
+      "Data interface designer",
+      "Usability researcher",
+      "Interaction prototyper",
+      "Visual designer",
+      "Motion engineer",
+      "Interface copywriter",
+      "Quality engineer"
+    ],
+    "methods": [
+      "List each state before drawing the first frame.",
+      "Build the useful action before adding any motion.",
+      "Reserve space for the longest label in every state.",
+      "Compare the resting state with the state after an error.",
+      "Try every action twice before calling it finished.",
+      "Work through the whole control without touching a mouse.",
+      "Test with a long name and an empty value.",
+      "Make the main action clear before adding a hint.",
+      "Remove any effect that hides the result.",
+      "Give one transition a clear start, middle and end.",
+      "Interrupt each transition halfway and keep the state correct.",
+      "Check the edge alignment before adding shadows.",
+      "Choose one spacing unit and use it throughout.",
+      "Draw focus and pressed states beside the resting state.",
+      "Show what changes when the main action succeeds.",
+      "Make failure easy to spot and easy to recover from."
+    ],
+    "constraints": [
+      "Every action works without a mouse.",
+      "Tap targets are at least 44 pixels tall.",
+      "Text stays legible at 200 percent zoom.",
+      "Every action gives immediate visible feedback."
+    ],
+    "tasks": [
+      "Feature details: an accordion for a product page that expands one feature and keeps the other summaries easy to scan.",
+      "Preview zoom: a slider for an image editor that changes magnification while keeping the selected area in view.",
+      "Save notice: a toast for a project editor that confirms a save and then clears without blocking the work.",
+      "Item quantity: a stepper for a shopping cart that changes item count and updates the total.",
+      "Product rating: a rating control for a shop that lets someone select a score and change it before saving.",
+      "Workspace search: a search field for a team app that filters project names and shows when nothing matches."
+    ]
+  },
+  "suggestions": []
+}

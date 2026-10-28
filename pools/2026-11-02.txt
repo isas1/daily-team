@@ -1,0 +1,259 @@
+#@ roles
+Cabinet maker
+Watch restorer
+Instrument maker
+Exhibit light technician
+Architectural model maker
+Technical illustrator
+Medical illustrator
+Scientific illustrator
+Foley artist
+Color grading specialist
+Dance choreographer
+Puppet maker
+Stage illusion builder
+Camera operator
+Furniture designer
+Ergonomist
+Railway signaller
+Control room operator
+Air traffic controller
+Flight deck designer
+Game interface designer
+Technical writer
+Cartographic designer
+Wayfinding designer
+Precision machinist
+Optical technician
+Lens grinder
+Instrument tuner
+Kinetic sculptor
+Letter cutter
+Silversmith
+Furniture restorer
++ Form designer
++ Localization designer
++ Screen reader tester
++ Haptics designer
++ Voice interface designer
++ Onboarding designer
++ Font hinting engineer
++ Frontend performance engineer
++ Kite maker
++ Boat builder
++ Neon sign bender
++ Paper conservator
++ Mosaic artist
++ Bicycle mechanic
++ Rigging technician
++ Harbour pilot
+
+#@ methods
+Test the smallest frame before the largest one.
+Compare light and dark with the same content.
+Keep the label still while the icon changes.
+Replace one vague label with a clear action verb.
+Name the useful result before naming the concept.
+Find one familiar pattern and improve its weakest state.
+Count the steps between intent and result, then remove one.
+Check the control with motion turned off.
+Make a still frame that explains the same action as the animation.
+Use one quiet surface to make the important edge clear.
+Compare two easing curves at the same duration.
+Keep the moving part inside a steady layout.
+Match icon weight to the weight of nearby text.
+Make a narrow version with the same useful content.
+Check which state needs a retry or a cancel action.
+Make the active state clear without relying on color.
+Replace a fake percentage with an honest pending state.
+Put useful sample data in place before adjusting type.
+Try a second click before the first action finishes.
+Use the same visual rule for every selected item.
+Check the quiet parts before adding another accent.
+Give every moving part a reason to stop.
+Keep the user's last choice when a panel closes.
+Test the action with one thumb and no hover.
+Write one sentence naming what a builder can reuse.
+Separate the sample state from the rendered view.
+Keep a clear path back from the most expanded state.
+Find the smallest change that makes the result easier to read.
+Make two versions with different hierarchy and compare them.
+Check the border and surface at the smallest size.
+Keep the animation speed stable across frame rates.
+Use the last pass to remove visual and code clutter.
++ Read the component aloud the way a screen reader would announce it.
++ Time each state change with a stopwatch and write the number down.
++ Swap the sample text for a language with longer words and recheck the layout.
++ Press every control in reverse order and note what breaks.
++ List what the component shows when data arrives late, partly, or twice.
++ Look at the screen from arm's length and note what reads first.
++ Draw the hit area of each control as an outline over the design.
++ Hand the component to a teammate and stay silent while they try it.
++ Mark every place a person must wait and give each one a label.
++ Zoom the browser to 400 percent and fix the first thing that breaks.
++ Record a short screen capture and step through it frame by frame.
++ Reload in the middle of every action and check what survives.
++ Rename each state in plain words a visitor would use.
++ Measure how far the eye travels from trigger to result, then shorten it.
++ Use the component with the screen dimmed to its lowest brightness.
++ Change one property per pass and compare it with the previous pass.
+
+#@ stances
+Pushes toward the strange.
+Defends the material.
+Guards the feeling it leaves behind.
+Cuts until only the core is left.
+Speaks for the one who finds it.
+Wants it to last.
+Breaks the frame.
+Insists it must be beautiful.
+
+#@ constraints
+Changing labels never shift the main control.
+Reduced motion keeps every state usable.
+Focus stays visible on both light and dark surfaces.
+A failed action always offers a useful next step.
+No information relies only on color.
+Every drag action has a button or key alternative.
+A pending action can finish without a layout jump.
+An empty state offers one clear action.
+A panel returns focus to its trigger on close.
+Use one consistent spacing scale.
+Long labels wrap without hiding the action.
+The first frame shows the useful component.
+Every selected item has a non-color state marker.
+Repeated input cannot queue duplicate work.
+The component fits a narrow phone frame.
+Light and dark modes keep equal visual hierarchy.
+Use one accent only for state or action.
+Icons have a consistent stroke weight.
+No motion delays access to content.
+The component remains useful with sound off.
+A completed action can be tried again.
+Every field keeps its label visible.
+Disabled controls explain their reason when needed.
+Error text stays beside the relevant action.
+The useful result stays visible after motion stops.
+A loading state preserves the final content size.
+An open overlay closes with the escape key.
+Space and enter trigger focused buttons.
+Keyboard focus follows the visible reading order.
+Use realistic short sample content.
+Hidden pages stop all animation work.
+Idle components stop their render loop.
+The main action uses a clear verb.
+Borders and shadows share one visual weight.
+The state remains correct during rapid input.
+Use tabular figures where values change.
+No control depends on hover alone.
+The component has a clear reset or reverse action.
++ Status text announces each state change to assistive technology.
++ Hit areas never overlap between neighbouring controls.
++ Body text keeps a line length under 75 characters.
++ Text and its background meet a 4.5 to 1 contrast ratio.
+
+#@ tasks
+Booking date: a date picker for an appointment prototype that selects an available day and shows the choice.
+Upload progress: a progress ring for a media tool that shows how much of a file has uploaded and when it finishes.
+Result pages: pagination for a content library that moves through results and marks the current page.
+Folder trail: breadcrumbs for a file browser that show the current folder and let someone return to a parent.
+Copy invite: a copy button for a team app that copies an invite link and confirms success.
+Password reveal: a password field for a signup prototype that switches between hidden and visible text without losing input.
+Content tags: a tag input for a publishing tool that adds, edits, and removes labels from a draft.
+Brand color: a color picker for a site builder that changes the accent color in a live preview.
+Loading preview: a skeleton for a project gallery that holds the card layout while sample content loads.
+First project: an empty state for a workspace that explains the next action and lets someone create a first project.
+Launch countdown: a countdown for a product launch page that shows time remaining and changes state when the launch arrives.
+View switch: a segmented control for a project library that switches between list, grid, and compact views.
+Task selection: a checkbox for a task list that selects one task or shows a partly selected group.
+Board order: a reorder list for a planning board that moves tasks and makes their new order clear.
+Team members: an avatar stack for a project header that shows collaborators and reveals the people hidden in the count.
+Unread count: a badge for an inbox that updates when messages arrive or someone marks them read.
+Activity trend: a sparkline for a product dashboard that shows a short activity history and reveals a selected value.
+Undo edit: an undo control for a canvas editor that restores the previous change and shows what came back.
+Save button: an action button for an editor that shows pending work, confirms success and offers retry after a sample failure.
+Download button: a button for a file panel that shows preparation, completion and a repeat action in a local demo.
+Destructive action: a delete button for a project card that asks for confirmation and offers undo after removal.
+Split action: a split button for a publishing tool that offers save, schedule and draft choices with clear state feedback.
+Request loader: a loader for a content panel that moves from pending to loaded or failed, with retry and stable layout.
+Import stages: a loader for a file tool that shows named stages, allows cancel and ends in a clear completion state.
+Details panel: a side panel for a project tool that opens from a card, edits a title and returns focus when closed.
+Share sheet: a bottom panel for a media tool that copies a link, reports failure and closes with a swipe, button or key.
+Filter panel: a panel for a library that applies and clears filters while showing the resulting item count.
+Project card: a card for a workspace that opens useful details and lets someone pin or archive the sample project.
+Metric card: a card for a service dashboard that changes time range and reveals the selected metric value.
+Plan card: a card for a pricing page that changes billing period and clearly marks the selected plan.
+Latency chart: a chart card for a service dashboard that selects a time range and reveals latency at a chosen point.
+Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo.
+Log viewer: a panel for a developer tool that filters sample events by severity and opens the chosen event details.
+Data table: a compact table for a project tool that sorts rows, selects an item and shows a useful empty state.
++ Publish button: an action button for a blog editor that checks required fields, shows publishing, and lists what is missing when it cannot publish.
++ Sync status: a loader for a notes app that shows syncing, synced and offline states and lets someone retry a failed sync.
++ Change review: a panel for a code review tool that accepts or rejects one block of changed lines and lets someone undo the choice.
++ Order card: a card for a shop account that shows delivery status and opens the tracking steps for one sample order.
++ Document upload: an upload area for a document tool that accepts files by drop or browse and lists each file with its size.
++ Alert settings: a toggle list for an account page that switches each alert type on or off and confirms the saved choice.
+
+#@ guests
+future | Orbital mechanic | Keep controls clear while the whole frame moves. | invented
+future | Deep space dispatcher | Show pending work honestly when replies take a long time. | invented
+future | Lunar archivist | Make every saved choice easy to find and reverse. | invented
+future | Ocean station keeper | Use a quiet signal that stays clear at a glance. | invented
+future | Remote habitat gardener | Show slow progress without pretending it is complete. | invented
+future | Cloud city inspector | Check the weakest edge before adding another layer. | invented
+creature | Glass moth | Find the useful edge without flying toward decoration. | invented
+creature | Copper snail | Keep the path clear even when the action takes time. | invented
+creature | Paper fox | Fold away detail while keeping the main action visible. | invented
+creature | Pocket octopus | Give each action its own clear reach and feedback. | invented
+creature | Ink wren | Use a small mark to show exactly what changed. | invented
+creature | Slate tortoise | Keep a steady shell while the state inside changes. | invented
+archetype | Cautious beginner | Make the first action safe and easy to reverse. | invented
+archetype | Screen reader user | Name each state and result without relying on its shape. | invented
+archetype | Returning collaborator | Keep the last useful choice when the view opens again. | invented
+archetype | One-handed maker | Place related actions within one easy reach. | invented
+archetype | Detail collector | Reveal a useful detail without losing the overview. | invented
+archetype | Deadline editor | Keep feedback immediate and recovery short. | invented
+future | Mars relay technician | Separate queued work from work that has actually started. | invented
+future | Polar city navigator | Keep the route back visible in every expanded view. | invented
+future | Asteroid workshop tutor | Teach the action through its first useful result. | invented
+future | Tidal library custodian | Let detail appear and recede without moving the main label. | invented
+future | Floating market clerk | Keep changing totals aligned and easy to compare. | invented
+future | Satellite repair apprentice | Test the same action twice before trusting it. | invented
+creature | Velvet beetle | Use quiet depth to make the pressed state feel clear. | invented
+creature | Porcelain hare | Land a quick move without a second bounce. | invented
+creature | Silver heron | Move only the part that helps someone see the change. | invented
+creature | Thread lizard | Keep a visible connection between trigger and result. | invented
+creature | Amber crab | Make side steps as clear as steps forward. | invented
+creature | Stone swallow | Return to a steady resting frame after every move. | invented
++ historical | Johannes Gutenberg | Set each line by hand and check it before printing. | died 1468
++ myth | Icarus | Find how far the design can go before the wax melts. | Greek myth
++ literary | Captain Nemo | Build a sealed vessel that runs on what it carries. | Jules Verne, died 1905
++ future | Seed vault keeper | Label every stored state so a stranger can restore it. | invented
++ creature | Lantern eel | Light only the part someone needs to see next. | invented
++ creature | Moss tortoise | Keep the slow part visible so nobody thinks it stopped. | invented
+
+#@ temperaments
+Insists on trying it with keys only.
+Defends a familiar pattern when it helps.
+Wants to see the resting frame first.
+Tests the longest label in the room.
+Interrupts with a counterexample, then listens.
+Keeps asking which action matters most.
+Rejects a claim until the state can be shown.
+Asks for the exact moment the motion should stop.
+Prefers a clear label to a clever one.
+Offers two small options before backing one.
+Looks for the hidden cost in a simple idea.
+Names what improved before asking for more.
+Asks the quietest member to try it first.
+Tracks the unresolved point until someone answers.
+Changes their mind after a useful demonstration.
+Asks what a stranger would expect next.
++ Draws the disputed state on paper before replying.
++ Asks for the exact number behind every claim.
++ Rephrases the question until everyone agrees on it.
++ Waits until the end, then summarizes both sides.
++ Brings a second example whenever one is challenged.
++ Sets a time limit on each disagreement.
++ Splits a large objection into smaller ones.
++ Writes each agreed point down before moving on.
