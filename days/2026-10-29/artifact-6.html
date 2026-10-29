@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Undo import for a canvas editor brand kit import</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font:var(--pack-typography-size)/1.35 var(--pack-typography-family)}
+.ui6-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:size;display:grid}
+.ui6-panel{box-sizing:border-box;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*1.5)}
+.ui6-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-width:0}
+.ui6-title{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ui6-count{color:var(--pack-muted);font-size:.87em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ui6-list{list-style:none;margin:0;padding:0;overflow:auto;min-height:0;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);overscroll-behavior:contain}
+.ui6-row{position:relative;display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid var(--pack-border);min-height:20px}
+.ui6-row:last-child{border-bottom:0}
+.ui6-row::after{content:"";position:absolute;inset:2px;border:2px solid var(--pack-accent);border-radius:calc(var(--pack-radii-control) - 2px);opacity:var(--hl,0);pointer-events:none}
+.ui6-g{width:1.1em;text-align:center;color:var(--pack-muted);flex:none}
+.ui6-n{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ui6-t{font-size:.8em;color:var(--pack-muted);flex:none}
+.ui6-back .ui6-g,.ui6-back .ui6-t{color:var(--pack-text);font-weight:700}
+.ui6-new .ui6-g{color:var(--pack-text)}
+.ui6-stat{min-height:2.7em;display:grid;align-content:end;gap:2px}
+.ui6-msg{font-weight:600;overflow-wrap:anywhere}
+.ui6-hint{color:var(--pack-muted);font-size:.8em}
+.ui6-btn{min-height:44px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--pack-radii-control);background:var(--pack-accent);color:var(--pack-surface);font:inherit;font-weight:600;cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.28),0 3px 8px rgba(0,0,0,.16);transition:transform var(--pack-motion-duration) var(--pack-motion-easing),box-shadow var(--pack-motion-duration) var(--pack-motion-easing);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.ui6-btn:active,.ui6-down{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.28),0 1px 2px rgba(0,0,0,.12);transition-duration:60ms}
+.ui6-btn[aria-disabled=true]{cursor:default}
+.ui6-lbl{min-width:11ch;text-align:left}
+.ui6-btn:focus-visible,.ui6-list:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+@container (max-width:300px){
+.ui6-panel{padding:calc(var(--pack-spacing-padding)*.5);gap:calc(var(--pack-spacing-gap)*.5);font-size:.85em}
+.ui6-row{padding:4px 8px}
+.ui6-hint{display:none}
+.ui6-stat{min-height:2.6em}}
+@media (prefers-reduced-motion:reduce){.ui6-btn{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#0f1012;--pack-surface:#17181b;--pack-text:#ececef;--pack-muted:#a0a1a8;--pack-accent:#6aa8ff;--pack-border:#2a2c31}:root[data-theme="light"]{--pack-bg:#f7f7f8;--pack-surface:#ffffff;--pack-text:#16171a;--pack-muted:#5b5d66;--pack-accent:#2563c9;--pack-border:#dcdde2}</style></head><body>
+<div class="ui6-root" role="group" aria-label="Undo import: reverse the brand kit import and list restored layers">
+<div class="ui6-panel">
+<div class="ui6-head"><span class="ui6-title">Spring poster</span><span class="ui6-count" id="ui6-count"></span></div>
+<ol class="ui6-list" id="ui6-list" tabindex="0" aria-label="Layers, front to back"></ol>
+<div class="ui6-stat"><div class="ui6-msg" id="ui6-msg" role="status" aria-live="polite"></div><div class="ui6-hint" id="ui6-hint"></div></div>
+<button class="ui6-btn" id="ui6-btn" type="button"><span aria-hidden="true" id="ui6-ico">↶</span><span class="ui6-lbl" id="ui6-lbl">Undo import</span></button>
+</div></div>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var listEl=$('ui6-list'),msg=$('ui6-msg'),btn=$('ui6-btn'),lbl=$('ui6-lbl'),ico=$('ui6-ico'),cnt=$('ui6-count');
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var mac=/Mac|iP/.test(navigator.platform);
+  $('ui6-hint').textContent=mac?'⌘Z undo · ⇧⌘Z redo':'Ctrl+Z undo · Ctrl+Shift+Z redo';
+  var uid=0;function mk(n){return{id:'L'+(++uid),name:n}}
+  function cl(o){return{id:o.id,name:o.name}}
+  var layers=['logo-mark','headline','subhead','hero-photo','Forever plan badge','Monday date','cat-pics-2','footer','background'].map(mk);
+  var rep=['logo-mark','headline','hero-photo'];
+  var after=['Forever wordmark','Forever plan sticker','brand-colors','type-scale','icon-set','cat-pics-2 (final)','cat-pics-2 (final final)','Emotional baggage','QR code'].map(mk)
+    .concat(layers.map(function(l){return rep.indexOf(l.name)>=0?mk(l.name):cl(l)}));
+  function has(a,id){return a.some(function(x){return x.id===id})}
+  var entry={added:[],removed:[]};
+  after.forEach(function(l,i){if(!has(layers,l.id))entry.added.push({l:cl(l),i:i})});
+  layers.forEach(function(l,i){if(!has(after,l.id))entry.removed.push({l:cl(l),i:i})});
+  function swap(out,inn){var ids=out.map(function(x){return x.l.id});
+    layers=layers.filter(function(l){return ids.indexOf(l.id)<0});
+    inn.slice().sort(function(a,b){return a.i-b.i}).forEach(function(x){layers.splice(x.i,0,cl(x.l))})}
+  var undoS=[],redoS=[],marks={},hl={},rows={},flashT=0,busy=false;
+  function markImport(e){marks={};e.added.forEach(function(x){marks[x.l.id]=rep.indexOf(x.l.name)>=0?'rep':'new'})}
+  swap(entry.removed,entry.added);undoS.push(entry);markImport(entry);
+  var G={'':'□',new:'■',rep:'◎',back:'↺'},T={'':'',new:'new',rep:'replaced',back:'restored'};
+  function render(){
+    while(listEl.firstChild)listEl.removeChild(listEl.firstChild);rows={};
+    layers.forEach(function(l){var m=marks[l.id]||'',li=document.createElement('li');
+      li.className='ui6-row'+(m?' ui6-'+m:'');
+      var g=document.createElement('span');g.className='ui6-g';g.setAttribute('aria-hidden','true');g.textContent=G[m];
+      var n=document.createElement('span');n.className='ui6-n';n.textContent=l.name;
+      li.appendChild(g);li.appendChild(n);
+      if(m){var t=document.createElement('span');t.className='ui6-t';t.textContent=T[m];li.appendChild(t)}
+      listEl.appendChild(li);rows[l.id]=li});
+    cnt.textContent=layers.length+' layers';
+    setLabel();draw();
+  }
+  function setLabel(){var u=undoS.length>0;
+    if(!busy){lbl.textContent=u?'Undo import':'Redo import';ico.textContent=u?'↶':'↷'}}
+  function flash(w){busy=true;lbl.textContent=w;ico.textContent='✓';btn.setAttribute('aria-disabled','true');
+    clearTimeout(flashT);flashT=setTimeout(function(){busy=false;btn.removeAttribute('aria-disabled');setLabel()},500)}
+  function say(t){msg.textContent=t}
+  function doUndo(){
+    if(!undoS.length){say('Nothing to undo');return}
+    var e=undoS.pop();swap(e.added,e.removed);redoS.push(e);
+    marks={};hl={};var now=performance.now(),names=[];
+    e.removed.forEach(function(x){marks[x.l.id]='back';hl[x.l.id]=now;names.push(x.l.name)});
+    say('Restored '+names.join(', ')+' · removed '+e.added.length);
+    flash('Undone');render();
+    var f=rows[e.removed[0].l.id];if(f)f.scrollIntoView({block:'nearest'});kick();
+  }
+  function doRedo(){
+    if(!redoS.length){say('Nothing to redo');return}
+    var e=redoS.pop();swap(e.removed,e.added);undoS.push(e);markImport(e);hl={};
+    say('Reapplied brand-kit.zip · '+e.added.length+' layers, '+e.removed.length+' replaced');
+    flash('Redone');render();listEl.scrollTop=0;
+  }
+  var raf=0,last=0,HOLD=1100,FADE=400;
+  function step(){var now=performance.now(),mv=false;
+    for(var k in hl){if(now-hl[k]>=HOLD+FADE)delete hl[k];else mv=true}return mv}
+  function draw(){var now=performance.now();
+    for(var k in rows){var a=0;if(hl[k]!=null){var t=now-hl[k];a=t<HOLD?1:Math.max(0,1-(t-HOLD)/FADE)}
+      rows[k].style.setProperty('--hl',a.toFixed(3))}}
+  function snapToTarget(){hl={}}
+  function frame(now){last=now;
+    var moving=reduce()?(snapToTarget(),false):step();draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  btn.addEventListener('click',function(){if(busy)return;undoS.length?doUndo():doRedo()});
+  btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')btn.classList.add('ui6-down')});
+  btn.addEventListener('keyup',function(){btn.classList.remove('ui6-down')});
+  btn.addEventListener('blur',function(){btn.classList.remove('ui6-down')});
+  document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
+    if((e.ctrlKey||e.metaKey)&&(k==='z'||k==='y')){e.preventDefault();
+      if(e.repeat)return;(k==='y'||e.shiftKey)?doRedo():doUndo()}
+    else if(k==='escape'){hl={};draw()}});
+  say('Imported brand-kit.zip · 12 layers, 3 replaced');
+  render();
+})();</script>
+</body></html>

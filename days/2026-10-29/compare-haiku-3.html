@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cancel import · brand-kit.zip into Spring poster.canvas</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.ci3-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;display:flex;flex-direction:column;position:relative}
+.ci3-card{flex:1;min-height:0;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.ci3-ctx{margin:0;color:var(--pack-muted);font-size:.85em;line-height:1.4}
+.ci3-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:6px;overflow:auto}
+.ci3-head{margin:0;font-size:1.1em;font-weight:600;line-height:1.3}
+.ci3-head:focus{outline:none}
+.ci3-meta{margin:0;color:var(--pack-muted);line-height:1.45}
+.ci3-foot{display:flex;flex-direction:column;gap:var(--pack-spacing-gap)}
+.ci3-hint{margin:0;color:var(--pack-muted);font-size:.85em;text-align:center}
+.ci3-btn{display:block;width:100%;min-width:14ch;min-height:44px;margin:0;padding:0 16px;font:inherit;font-weight:600;color:var(--pack-text);background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);box-shadow:0 2px 0 var(--pack-border);cursor:pointer;touch-action:manipulation;transition:transform 80ms linear,box-shadow 80ms linear,border-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.ci3-btn:hover:not(:disabled){border-color:var(--pack-accent)}
+.ci3-btn:active:not(:disabled),.ci3-btn.ci3-pressed:not(:disabled){transform:translateY(1px);box-shadow:0 1px 0 var(--pack-border)}
+.ci3-btn:disabled{color:var(--pack-muted);cursor:default}
+.ci3-btn:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ci3-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion: reduce){.ci3-btn{transition:none}}
+</style>
+<style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#0f1012;--pack-surface:#17181b;--pack-text:#ececef;--pack-muted:#a0a1a8;--pack-accent:#6aa8ff;--pack-border:#2a2c31}:root[data-theme="light"]{--pack-bg:#f7f7f8;--pack-surface:#ffffff;--pack-text:#16171a;--pack-muted:#5b5d66;--pack-accent:#2563c9;--pack-border:#dcdde2}</style></head>
+<body>
+<section class="ci3-root" aria-label="Cancel import"></section>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var STAGES=[['Read',14,40],['Check',14,30],['Convert',13,180],['Place',12,150]];
+  var mode='running',si=2,n=7,acc=0,P=0,cAt='',cT=0,rb=0,hT=0;
+  var raf=0,last=0;
+
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text)e.textContent=text;return e}
+  function txt(e,s){if(e.textContent!==s)e.textContent=s}
+  function btn(label,cls){var b=el('button',cls,label);b.type='button';return b}
+
+  var root=document.querySelector('.ci3-root');
+  var card=el('div','ci3-card');
+  var ctx=el('p','ci3-ctx','brand-kit.zip into Spring poster.canvas');
+  var body=el('div','ci3-body');
+  var head=el('h2','ci3-head');head.tabIndex=-1;
+  var meta=el('p','ci3-meta');
+  var foot=el('div','ci3-foot');
+  var hint=el('p','ci3-hint','Escape also cancels');
+  var cancelBtn=btn('Cancel import','ci3-btn');
+  var startBtn=btn('Start import','ci3-btn');
+  var live=el('p','ci3-live');live.setAttribute('role','status');
+
+  body.appendChild(head);body.appendChild(meta);
+  foot.appendChild(hint);foot.appendChild(cancelBtn);foot.appendChild(startBtn);
+  card.appendChild(ctx);card.appendChild(body);card.appendChild(foot);
+  root.appendChild(card);root.appendChild(live);
+
+  function headText(){
+    if(mode==='empty')return 'Nothing imported yet';
+    if(mode==='running')return STAGES[si][0]+' · '+n+' of '+STAGES[si][1];
+    if(mode==='cancelling')return 'Stopping at '+cAt;
+    if(mode==='holding')return 'Cancelled at '+cAt+' · canvas unchanged';
+    return 'Imported 12 of 14';
+  }
+  function metaText(){
+    if(mode==='empty')return 'brand-kit.zip · 14 files, 3.2 MB';
+    if(mode==='running')return P?P+' layers placed. Cancel removes them.':'Nothing placed yet. Cancel stops the import.';
+    if(mode==='cancelling')return P?'Removing '+P+' placed layers':'Stopping the job';
+    if(mode==='holding')return 'New layers removed. Replaced layers restored.';
+    return '3 replaced · 2 skipped';
+  }
+  function draw(){
+    var busy=mode==='cancelling'||mode==='holding';
+    card.setAttribute('data-mode',mode);
+    cancelBtn.hidden=!(mode==='running'||busy);
+    cancelBtn.disabled=busy;
+    hint.hidden=mode!=='running';
+    startBtn.hidden=!(mode==='empty'||mode==='complete');
+    txt(startBtn,mode==='complete'?'Import again':'Start import');
+    txt(cancelBtn,mode==='cancelling'?'Cancelling':mode==='holding'?'Cancelled':'Cancel import');
+    txt(head,headText());
+    txt(meta,metaText());
+  }
+
+  function setMode(m){
+    mode=m;
+    draw();
+    if(m==='empty'&&document.activeElement===head)startBtn.focus();
+    if(m==='cancelling')live.textContent='Cancelling import';
+    else if(m==='holding')live.textContent='Cancelled at '+cAt+'. Canvas unchanged.';
+    else if(m==='complete')live.textContent='Import complete. 12 of 14 files placed.';
+  }
+
+  function startJob(){
+    si=0;n=0;acc=0;P=0;
+    setMode('running');
+    head.focus();
+    kick();
+  }
+  function cancelJob(){
+    if(mode!=='running')return;
+    cAt=STAGES[si][0];cT=0;rb=0;
+    cancelBtn.classList.remove('ci3-pressed');
+    setMode('cancelling');
+    head.focus();
+    kick();
+  }
+
+  function advance(dt){
+    acc+=dt;
+    while(mode==='running'&&acc>=STAGES[si][2]){
+      acc-=STAGES[si][2];
+      n++;
+      if(si===3)P++;
+      if(n>=STAGES[si][1]){
+        si++;n=0;
+        if(si>=STAGES.length){acc=0;setMode('complete')}
+      }
+    }
+  }
+  function step(dt){
+    if(mode==='running')advance(dt);
+    else if(mode==='cancelling'){
+      cT+=dt;rb+=dt;
+      if(reduce()){P=0;cT=240}
+      while(P>0&&rb>=60){P--;rb-=60}
+      if(P===0&&cT>=240){hT=0;setMode('holding')}
+    }
+    else if(mode==='holding'){
+      hT+=dt;
+      if(hT>=1200)setMode('empty');
+    }
+    return mode==='running'||mode==='cancelling'||mode==='holding';
+  }
+
+  function frame(now){
+    var dt=last?Math.min(now-last,50):0;last=now;
+    var moving=step(dt);
+    draw();
+    raf=moving?requestAnimationFrame(frame):0;
+  }
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+
+  cancelBtn.addEventListener('click',cancelJob);
+  startBtn.addEventListener('click',startJob);
+  cancelBtn.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' ')cancelBtn.classList.add('ci3-pressed')});
+  cancelBtn.addEventListener('keyup',function(){cancelBtn.classList.remove('ci3-pressed')});
+  cancelBtn.addEventListener('blur',function(){cancelBtn.classList.remove('ci3-pressed')});
+  root.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&mode==='running'){e.preventDefault();cancelJob()}});
+
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+  draw();
+  kick();
+})();</script>
+</body>
+</html>

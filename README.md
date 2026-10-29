@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-28: Breach Reader
+### 2026-10-29: Brand kit import
 
-<a href="days/2026-10-28/"><img src="days/2026-10-28/team.png" alt="Team for 2026-10-28: Precision machinist · Air traffic controller · Furniture designer · Asteroid workshop tutor" width="100%"></a>
+<a href="days/2026-10-29/"><img src="days/2026-10-29/team.png" alt="Team for 2026-10-29: Puppet maker · Control room operator · Foley artist · Velvet beetle" width="100%"></a>
 
-**Task:** Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point.
+**Task:** Import progress: a loader for a file tool that shows named stages, lets someone cancel and ends with a clear completion state.
 
-**Decision:** The team builds a single latency card for checkout-api where a visitor picks a range, watches named load stages, chooses a percentile, reads any point, steps between SLO breaches, and pins two points to get a delta.
+**Decision:** The team builds an import panel for a canvas editor, and a visitor can bring 14 files into a poster, see each named stage with real counts, cancel at any point, read a clear completion summary, and undo the import with the replaced layer...
 
-<a href="days/2026-10-28/"><img src="days/2026-10-28/cover.png" alt="Designed cover for Breach Reader" width="100%"></a>
+<a href="days/2026-10-29/"><img src="days/2026-10-29/cover.png" alt="Designed cover for Brand kit import" width="100%"></a>
 
-[Open the day](days/2026-10-28/) · [Use it](https://isas1.github.io/daily-team/2026-10-28/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-29/) · [Use it](https://isas1.github.io/daily-team/2026-10-29/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-10-29](days/2026-10-29/) | <a href="days/2026-10-29/"><img src="days/2026-10-29/cover.png" alt="Brand kit import" width="160"></a> | Brand kit import | Puppet maker · Control room operator · Foley artist · Velvet beetle |
 | [2026-10-28](days/2026-10-28/) | <a href="days/2026-10-28/"><img src="days/2026-10-28/cover.png" alt="Breach Reader" width="160"></a> | Breach Reader | Precision machinist · Air traffic controller · Furniture designer · Asteroid workshop tutor |
 | [2026-10-27](days/2026-10-27/) | <a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Lit Case" width="160"></a> | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter |
 | [2026-10-26](days/2026-10-26/) | <a href="days/2026-10-26/"><img src="days/2026-10-26/piece.png" alt="Bracket and Ledger" width="160"></a> | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist |
 | [2026-10-25](days/2026-10-25/) | <a href="days/2026-10-25/"><img src="days/2026-10-25/piece.png" alt="the way back up" width="160"></a> | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai |
 | [2026-10-24](days/2026-10-24/) | <a href="days/2026-10-24/"><img src="days/2026-10-24/piece.png" alt="Low Water Set" width="160"></a> | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne |
 | [2026-10-23](days/2026-10-23/) | <a href="days/2026-10-23/"><img src="days/2026-10-23/piece.png" alt="Sounding Well" width="160"></a> | Sounding Well | Printmaker · Packaging designer · Bookbinder · Charles Darwin |
-| [2026-10-22](days/2026-10-22/) | <a href="days/2026-10-22/"><img src="days/2026-10-22/piece.png" alt="Wet Tally" width="160"></a> | Wet Tally | Animator · Chef · Librarian · Gulliver |
 
-[All 26 days](ARCHIVE.md)
+[All 27 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

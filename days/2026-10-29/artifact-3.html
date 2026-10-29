@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cancel import for a canvas editor brand kit import</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;min-height:100%;background:var(--pack-bg)}
+body{min-height:100vh;display:grid;place-items:center}
+.ci3-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;container-type:size;background:var(--pack-surface);color:var(--pack-text);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*1.5);overflow:hidden;font:var(--pack-typography-size)/1.35 var(--pack-typography-family)}
+.ci3-p{height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding)}
+.ci3-p p{margin:0}
+.ci3-t{font-weight:650;font-size:1.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci3-sub,.ci3-ch,.ci3-st{color:var(--pack-muted);font-size:.86em}
+.ci3-ch b{color:var(--pack-text);font-weight:600}
+.ci3-sg{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 14px}
+.ci3-sg li{display:flex;align-items:center;gap:6px;min-height:16px;color:var(--pack-muted);font-size:.86em}
+.ci3-sg .ci3-on,.ci3-sg .ci3-stop{color:var(--pack-text);font-weight:700}
+.ci3-sg .ci3-ok{color:var(--pack-text)}
+.ci3-g{width:10px;height:10px;border:1.5px solid currentColor;border-radius:2px;box-sizing:border-box;position:relative;flex:none}
+.ci3-ok .ci3-g{border-color:transparent}
+.ci3-ok .ci3-g::after{content:'';position:absolute;left:2px;top:-2px;width:4px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ci3-on .ci3-g{width:14px;height:14px;border-radius:50%;border:2px solid var(--pack-border);border-top-color:var(--pack-accent);animation:ci3-spin .8s linear infinite}
+.ci3-stop .ci3-g::after{content:'';position:absolute;left:calc(50% - .75px);top:-3px;width:1.5px;height:13px;background:currentColor;transform:rotate(45deg)}
+@keyframes ci3-spin{to{transform:rotate(360deg)}}
+.ci3-now{font-weight:700;font-variant-numeric:tabular-nums}
+.ci3-cv{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;padding:8px 10px;background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.ci3-chips{list-style:none;margin:0;padding:0;flex:1;min-height:0;overflow:auto;display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px}
+.ci3-chip{font-size:.8em;padding:3px 8px;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-surface);transition:opacity var(--pack-motion-duration) var(--pack-motion-easing),transform var(--pack-motion-duration) var(--pack-motion-easing)}
+.ci3-new{border-style:dashed;border-color:var(--pack-accent)}
+.ci3-new::before{content:'+ '}
+.ci3-rep{border:3px double var(--pack-text);padding:1px 6px}
+.ci3-rep::before{content:'\21C4  '}
+.ci3-in{animation:ci3-pop var(--pack-motion-duration) var(--pack-motion-easing)}
+@keyframes ci3-pop{from{opacity:0;transform:scale(.85)}}
+.ci3-out{opacity:0;transform:scale(.85)}
+.ci3-st{min-height:2.7em}
+.ci3-btn{flex:none;min-height:44px;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:650;color:var(--pack-text);background:var(--pack-surface);border:1.5px solid var(--pack-text);border-radius:var(--pack-radii-control);box-shadow:0 2px 0 var(--pack-border);cursor:pointer;touch-action:manipulation;transition:transform var(--pack-motion-duration) var(--pack-motion-easing),box-shadow var(--pack-motion-duration) var(--pack-motion-easing)}
+.ci3-go{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-bg)}
+.ci3-btn[aria-disabled=true]{color:var(--pack-muted);border-color:var(--pack-border);box-shadow:none;cursor:default}
+.ci3-btn:active:not([aria-disabled=true]),.ci3-down{transform:translateY(1px);box-shadow:0 1px 0 var(--pack-border)}
+.ci3-btn:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ci3-lb{min-width:13ch;text-align:center}
+.ci3-k{font-size:.72em;font-weight:500;color:var(--pack-muted);border:1px solid var(--pack-border);border-radius:4px;padding:1px 5px}
+[hidden]{display:none!important}
+@container (max-width:320px){.ci3-p{font-size:12px;padding:10px;gap:7px}.ci3-sn,.ci3-k,.ci3-sub{display:none}.ci3-sg{gap:8px}.ci3-cv{padding:6px 8px;gap:5px}}
+@media (prefers-reduced-motion:reduce){.ci3-on .ci3-g{animation:none}.ci3-chip,.ci3-btn{animation:none!important;transition:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#0f1012;--pack-surface:#17181b;--pack-text:#ececef;--pack-muted:#a0a1a8;--pack-accent:#6aa8ff;--pack-border:#2a2c31}:root[data-theme="light"]{--pack-bg:#f7f7f8;--pack-surface:#ffffff;--pack-text:#16171a;--pack-muted:#5b5d66;--pack-accent:#2563c9;--pack-border:#dcdde2}</style></head><body>
+<div class="ci3-root" role="group" aria-label="Cancel import for Spring poster.canvas">
+<div class="ci3-p">
+<div><p class="ci3-t" id="ci3-t">Importing brand-kit.zip</p><p class="ci3-sub">14 files · 3.2 MB into Spring poster.canvas</p></div>
+<ol class="ci3-sg" id="ci3-sg" aria-label="Import stages"></ol>
+<p class="ci3-now" id="ci3-now"></p>
+<div class="ci3-cv"><p class="ci3-ch"><b>Canvas</b> <span id="ci3-n"></span></p><ul class="ci3-chips" id="ci3-l" aria-label="Canvas layers"></ul></div>
+<p class="ci3-st" id="ci3-st" role="status" aria-live="polite"></p>
+<button type="button" class="ci3-btn" id="ci3-c"><span class="ci3-lb" id="ci3-cl">Cancel import</span><kbd class="ci3-k" id="ci3-k">Esc</kbd></button>
+<button type="button" class="ci3-btn ci3-go" id="ci3-g" hidden></button>
+</div></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var $=function(i){return document.getElementById(i)};
+  var tEl=$('ci3-t'),sg=$('ci3-sg'),now=$('ci3-now'),cnt=$('ci3-n'),list=$('ci3-l'),stEl=$('ci3-st'),cb=$('ci3-c'),cl=$('ci3-cl'),kb=$('ci3-k'),gb=$('ci3-g');
+  var BASE=['background','logo-mark','hero-photo','headline','subhead','Monday date-line','Forever badge','footer','grid'];
+  var IN=['logo-mark','hero-photo','headline','cat-pics-2','emotional-baggage','forever-wordmark','icon-set','pattern-a','pattern-b','sticker-monday','swatch-sheet','type-specimen'];
+  var S=[{n:'Read',tot:14,ms:70},{n:'Check',tot:14,ms:70},{n:'Convert',tot:13,ms:240},{n:'Place',tot:12,ms:700}];
+  var lis=S.map(function(s){var li=document.createElement('li'),g=document.createElement('span'),t=document.createElement('span');
+    g.className='ci3-g';t.className='ci3-sn';t.textContent=s.n;li.appendChild(g);li.appendChild(t);sg.appendChild(li);return li});
+  var st='idle',job=null,layers=[],placed=[],rb=[],rbN=0,stop=0,raf=0,last=0;
+  function set(el,t){if(el.textContent!==t)el.textContent=t}
+  function chip(L){var li=document.createElement('li');li.className='ci3-chip';li.textContent=L.name;L.el=li;return li}
+  function resetCanvas(){list.replaceChildren();layers=BASE.map(function(n,i){return{id:'b'+i,name:n,tag:''}});
+    layers.forEach(function(L){list.appendChild(chip(L))})}
+  function placeOne(k){var name=IN[k],ex=null;
+    for(var i=0;i<layers.length;i++)if(layers[i].name===name&&!layers[i].tag){ex=layers[i];break}
+    if(ex){ex.tag='rep';ex.el.classList.add('ci3-rep');placed.push({L:ex,rep:true})}
+    else{var L={id:'n'+k,name:name,tag:'new'};layers.push(L);var el=chip(L);el.classList.add('ci3-new','ci3-in');list.appendChild(el);placed.push({L:L,rep:false});list.scrollTop=list.scrollHeight}}
+  function undoOne(p){var L=p.L;
+    if(p.rep){L.tag='';L.el.classList.remove('ci3-rep')}
+    else{layers.splice(layers.indexOf(L),1);var el=L.el;el.classList.remove('ci3-in');el.classList.add('ci3-out');
+      if(reduce())el.remove();else setTimeout(function(){el.remove()},200)}
+    placed.splice(placed.indexOf(p),1)}
+  function onAbort(){st='cxl';stop=job.s;rb=placed.slice().reverse();rbN=rb.length;job.t=0;render();kick()}
+  function start(){if(st==='run'||st==='cxl'||st==='cxd')return;
+    resetCanvas();placed=[];job={s:0,n:0,t:0,ctrl:new AbortController()};
+    job.ctrl.signal.addEventListener('abort',onAbort);st='run';render();kick()}
+  function cancel(){if(st!=='run')return;job.ctrl.abort()}
+  function step(ms){
+    if(st==='run'){if(job.ctrl.signal.aborted)return true;job.t+=ms;var s=S[job.s];
+      while(job.t>=s.ms){job.t-=s.ms;job.n++;if(job.s===3)placeOne(job.n-1);
+        if(job.n>=s.tot){if(job.s===3){st='done';return false}job.s++;job.n=0;s=S[job.s]}}
+      return true}
+    if(st==='cxl'){
+      if(reduce()){while(rb.length)undoOne(rb.shift())}
+      else{job.t+=ms;while(rb.length&&job.t>=140){job.t-=140;undoOne(rb.shift())}}
+      if(!rb.length){st='cxd';job.t=0}return true}
+    if(st==='cxd'){job.t+=ms;if(job.t>=900){st='idle';return false}return true}
+    return false}
+  function render(){
+    var s=job?S[job.s]:S[0],stopped=st==='cxl'||st==='cxd'||st==='idle';
+    set(tEl,st==='done'?'Imported brand-kit.zip':stopped?'Import cancelled':'Importing brand-kit.zip');
+    lis.forEach(function(li,i){var c='';
+      if(st==='done'||(job&&i<job.s))c='ci3-ok';else if(st==='run'&&i===job.s)c='ci3-on';else if(stopped&&i===stop)c='ci3-stop';
+      if(li.className!==c)li.className=c;
+      if(c==='ci3-on')li.setAttribute('aria-current','step');else li.removeAttribute('aria-current')});
+    set(now,st==='run'?s.n+' · '+job.n+' of '+s.tot+(reduce()?' · running':''):st==='done'?'All 4 stages done':st==='cxl'?'Stopping at '+S[stop].n:'Stopped at '+S[stop].n);
+    var run=placed.length;set(cnt,layers.length+' layers'+(run?' · '+run+' from this run':''));
+    set(stEl,st==='run'?'Cancel removes anything placed so far.':st==='cxl'?(rbN?'Removing '+rbN+' placed layer'+(rbN>1?'s':''):'Stopping'):st==='done'?'12 of 14 placed · 3 replaced · 2 skipped':'Cancelled at '+S[stop].n+' · canvas unchanged');
+    var showC=st==='run'||st==='cxl'||st==='cxd';
+    set(cl,st==='cxl'?'Cancelling':st==='cxd'?'Cancelled':'Cancel import');
+    cb.setAttribute('aria-disabled',st==='run'?'false':'true');kb.hidden=st!=='run';
+    if(!showC)cb.classList.remove('ci3-down');
+    var hadFocus=document.activeElement===cb||document.activeElement===gb;
+    cb.hidden=!showC;gb.hidden=showC;set(gb,st==='done'?'Import again':'Import brand-kit.zip');
+    if(hadFocus){var t=showC?cb:gb;if(document.activeElement!==t)t.focus()}}
+  function frame(t){var ms=last?Math.min(t-last,50):16;last=t;var moving=step(ms);render();raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  cb.addEventListener('click',cancel);
+  gb.addEventListener('click',start);
+  [cb,gb].forEach(function(b){
+    b.addEventListener('keydown',function(e){if((e.key===' '||e.key==='Enter')&&b.getAttribute('aria-disabled')!=='true')b.classList.add('ci3-down')});
+    b.addEventListener('keyup',function(){b.classList.remove('ci3-down')});
+    b.addEventListener('blur',function(){b.classList.remove('ci3-down')})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&st==='run'){e.preventDefault();
+    cb.classList.add('ci3-down');setTimeout(function(){cb.classList.remove('ci3-down')},120);cancel()}});
+  document.addEventListener('visibilitychange',function(){if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',render);
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){document.documentElement.setAttribute('data-theme',m.theme);render()}});
+  start();
+  while(st==='run'&&!(job.s===3&&job.n>=4))step(70);
+  placed.forEach(function(p){if(p.L.el)p.L.el.classList.remove('ci3-in')});
+  render();
+})();</script>
+</body></html>

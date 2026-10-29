@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 26 days recorded.
+Every daily team and the asset it made, newest first. 27 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-10-29](days/2026-10-29/) | Brand kit import | Puppet maker · Control room operator · Foley artist · Velvet beetle | An empty state offers one clear action. | <a href="days/2026-10-29/"><img src="days/2026-10-29/cover.png" alt="Brand kit import" width="160"></a> [asset](days/2026-10-29/piece.html) |
 | [2026-10-28](days/2026-10-28/) | Breach Reader | Precision machinist · Air traffic controller · Furniture designer · Asteroid workshop tutor | Repeated input cannot queue duplicate work. | <a href="days/2026-10-28/"><img src="days/2026-10-28/cover.png" alt="Breach Reader" width="160"></a> [asset](days/2026-10-28/piece.html) |
 | [2026-10-27](days/2026-10-27/) | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter | The component fits a narrow phone frame. | <a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Lit Case" width="160"></a> [asset](days/2026-10-27/piece.html) |
 | [2026-10-26](days/2026-10-26/) | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist | Every selected item has a non-color state marker. | [asset](days/2026-10-26/piece.html) |

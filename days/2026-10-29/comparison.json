@@ -1,0 +1,240 @@
+{
+  "date": "2026-10-29",
+  "task": "Import progress: a loader for a file tool that shows named stages, lets someone cancel and ends with a clear completion state.",
+  "hook": "Build Import progress",
+  "seconds": 4,
+  "models": [
+    {
+      "key": "opus",
+      "label": "Opus",
+      "model": "claude-opus-5-5"
+    },
+    {
+      "key": "sonnet",
+      "label": "Sonnet",
+      "model": "claude-sonnet-5-5"
+    },
+    {
+      "key": "haiku",
+      "label": "Haiku",
+      "model": "claude-haiku-5-5"
+    }
+  ],
+  "status": "incomplete",
+  "rows": [
+    {
+      "row": 1,
+      "name": "Choose files empty state",
+      "input": "Click or tap Choose files, or drop files onto the zone. Keyboard: Tab to the button, then Enter or Space opens the native file picker.",
+      "variants": {
+        "opus": {
+          "file": "artifact-1.html",
+          "sha256": "40033dc7e326baf222a637e87b0fb5e480841b3b39ef0ab3d1e7955c453aa908",
+          "componentId": "choose-files-empty",
+          "lead": 1,
+          "row": 1,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "0bf27821d79b79f614af1cc39b39371883cb46c43d3c32c157f4184cbb55aaf2"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-1.html",
+          "hash": "0bf27821d79b79f614af1cc39b39371883cb46c43d3c32c157f4184cbb55aaf2",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-1.html",
+          "hash": "0bf27821d79b79f614af1cc39b39371883cb46c43d3c32c157f4184cbb55aaf2",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 2,
+      "name": "Import stage track",
+      "input": "Display only. Keyboard: the track is skipped in tab order, and its live region is announced by screen readers.",
+      "variants": {
+        "opus": {
+          "file": "artifact-2.html",
+          "sha256": "ea5c1b051cc4c4897a64916ec9d671e186419215b18c9197be1ceba49f239e56",
+          "componentId": "import-stage-track",
+          "lead": 2,
+          "row": 2,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "c140adc8a23da4044dcba224ff315f8dfa1568bae4489fde9cbfd8668023e019"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-2.html",
+          "hash": "c140adc8a23da4044dcba224ff315f8dfa1568bae4489fde9cbfd8668023e019",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-2.html",
+          "hash": "c140adc8a23da4044dcba224ff315f8dfa1568bae4489fde9cbfd8668023e019",
+          "requestedModel": "claude-haiku-5-5",
+          "model": null,
+          "status": "failed",
+          "problems": [
+            "model returned no HTML"
+          ]
+        }
+      }
+    },
+    {
+      "row": 3,
+      "name": "Cancel import",
+      "input": "Click or tap Cancel import (44px tall, full width at the panel's foot). Keyboard: Tab to it and press Enter or Space, or press Escape anywhere in the panel.",
+      "variants": {
+        "opus": {
+          "file": "artifact-3.html",
+          "sha256": "b98759db38ffee86605ba9205555fed24c609db3994831565535cb6186cd43c0",
+          "componentId": "cancel-import",
+          "lead": 3,
+          "row": 3,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "896b85df9ab0f5b8b8305f42254b549737618a3509ed9abef22aa9eb193584ae"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-3.html",
+          "hash": "896b85df9ab0f5b8b8305f42254b549737618a3509ed9abef22aa9eb193584ae",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-3.html",
+          "hash": "896b85df9ab0f5b8b8305f42254b549737618a3509ed9abef22aa9eb193584ae",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "needs review",
+          "problems": [
+            "no element with both a role and an aria-label"
+          ]
+        }
+      }
+    },
+    {
+      "row": 4,
+      "name": "File manifest",
+      "input": "Click or tap a row to expand its reason. Keyboard: Tab into the list, Up and Down move between rows, Home and End jump, Enter expands.",
+      "variants": {
+        "opus": {
+          "file": "artifact-4.html",
+          "sha256": "07dc51ce8a0c9a7b975f3f469155c806121e5be70ae367fa662b9f1b02e3fa64",
+          "componentId": "file-manifest",
+          "lead": 4,
+          "row": 4,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "df866fdfe9fd3b8db3e032d7171a840b67e65c237f0a0513f7bbdbcf8fdb446a"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-4.html",
+          "hash": "df866fdfe9fd3b8db3e032d7171a840b67e65c237f0a0513f7bbdbcf8fdb446a",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-4.html",
+          "hash": "df866fdfe9fd3b8db3e032d7171a840b67e65c237f0a0513f7bbdbcf8fdb446a",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 5,
+      "name": "Import summary",
+      "input": "Click or tap Show skipped to jump to the manifest rows. Keyboard: Tab to the link and press Enter. Focus moves to the summary heading on completion.",
+      "variants": {
+        "opus": {
+          "file": "artifact-5.html",
+          "sha256": "8928952971b2fdcce11b1263ea98e90ff48cdd5256bffbd4d77bd6c12cd62e49",
+          "componentId": "import-summary",
+          "lead": 1,
+          "row": 5,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "8098b6d4d9a79017163fc5e8a6d274ce1e30cfa83d07fa755ea92a543259390f"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-5.html",
+          "hash": "8098b6d4d9a79017163fc5e8a6d274ce1e30cfa83d07fa755ea92a543259390f",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-5.html",
+          "hash": "8098b6d4d9a79017163fc5e8a6d274ce1e30cfa83d07fa755ea92a543259390f",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 6,
+      "name": "Undo import",
+      "input": "Click or tap Undo import. Keyboard: Tab to it and press Enter or Space, or press Ctrl+Z (Cmd+Z on macOS) while the editor has focus.",
+      "variants": {
+        "opus": {
+          "file": "artifact-6.html",
+          "sha256": "ad918ea26f5ca059821e977a1dcd56c3e55aa6416ec35a59b65694968d349fa0",
+          "componentId": "undo-import",
+          "lead": 2,
+          "row": 6,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "e441a57cda5d94959cad8bb9f6e9704014a4b621c0b7e6604423d43197d660c0"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-6.html",
+          "hash": "e441a57cda5d94959cad8bb9f6e9704014a4b621c0b7e6604423d43197d660c0",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-6.html",
+          "hash": "e441a57cda5d94959cad8bb9f6e9704014a4b621c0b7e6604423d43197d660c0",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    }
+  ]
+}

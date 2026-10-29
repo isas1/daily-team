@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Choose files empty state · Brand kit import for Spring poster</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+*{box-sizing:border-box}
+.ki1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;container-type:size;display:grid;grid-template-rows:1fr auto;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding)}
+.ki1-input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.ki1-zone,.ki1-done{grid-row:1;grid-column:1;min-height:0;border-radius:calc(var(--pack-radii-control)*2);background:var(--pack-surface)}
+.ki1-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);border:2px dashed color-mix(in srgb,var(--pack-muted) 60%,transparent);color:inherit;font:inherit;cursor:pointer;text-align:center;transition:border-color var(--pack-motion-duration) var(--pack-motion-easing),background-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.ki1-zone:hover{border-color:var(--pack-muted)}
+.ki1-zone:focus-visible,.ki1-btn:focus-visible,.ki1-head:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ki1-over .ki1-zone{border-style:solid;border-color:var(--pack-accent);background:color-mix(in srgb,var(--pack-accent) 8%,var(--pack-surface))}
+.ki1-icon{width:clamp(24px,10cqi,44px);height:auto;color:var(--pack-muted);transition:transform var(--pack-motion-duration) var(--pack-motion-easing)}
+.ki1-over .ki1-icon{color:var(--pack-accent);transform:translateY(3px)}
+.ki1-title{font-weight:600;font-size:clamp(14px,5cqi,22px);line-height:1.2}
+.ki1-hint{color:var(--pack-muted);font-size:clamp(12px,3.4cqi,var(--pack-typography-size));line-height:1.35;min-height:1.35em}
+.ki1-over .ki1-hint{color:var(--pack-text);font-weight:600}
+.ki1-pill,.ki1-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:13ch;padding:0 18px;border-radius:var(--pack-radii-control);font:inherit;font-weight:600;font-size:clamp(13px,3.6cqi,var(--pack-typography-size));box-shadow:0 2px 0 color-mix(in srgb,var(--pack-text) 22%,transparent);transition:transform 90ms var(--pack-motion-easing),box-shadow 90ms var(--pack-motion-easing)}
+.ki1-pill{background:var(--pack-accent);color:var(--pack-bg)}
+.ki1-zone:active .ki1-pill,.ki1-btn:active{transform:translateY(1px);box-shadow:0 1px 0 color-mix(in srgb,var(--pack-text) 22%,transparent)}
+.ki1-over .ki1-pill{visibility:hidden}
+.ki1-note{margin:0;min-height:2.7em;color:var(--pack-muted);font-size:clamp(11px,3cqi,14px);line-height:1.35;text-align:center}
+.ki1-err .ki1-note{color:var(--pack-text);font-weight:600}
+.ki1-err .ki1-note::before{content:"\25B2  ";font-size:.8em}
+.ki1-done{display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);border:2px solid var(--pack-border);overflow:auto}
+.ki1-done[hidden],.ki1-zone[hidden]{display:none}
+.ki1-head{margin:0;font-size:clamp(15px,5.4cqi,24px);font-weight:600;line-height:1.2}
+.ki1-head::before{content:"\2713  ";color:var(--pack-accent)}
+.ki1-list{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:clamp(12px,3.4cqi,var(--pack-typography-size))}
+.ki1-list li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--pack-border);min-width:0}
+.ki1-list span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ki1-list span:last-child,.ki1-more{color:var(--pack-muted);white-space:nowrap}
+.ki1-stat{margin:0;color:var(--pack-muted);font-size:clamp(12px,3.4cqi,var(--pack-typography-size))}
+.ki1-btn{margin-top:auto;align-self:flex-start;background:transparent;color:var(--pack-text);border:1px solid var(--pack-border);cursor:pointer}
+@container (max-width:250px){.ki1-icon{display:none}.ki1-zone,.ki1-done{padding:10px;gap:8px}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#0f1012;--pack-surface:#17181b;--pack-text:#ececef;--pack-muted:#a0a1a8;--pack-accent:#6aa8ff;--pack-border:#2a2c31}:root[data-theme="light"]{--pack-bg:#f7f7f8;--pack-surface:#ffffff;--pack-text:#16171a;--pack-muted:#5b5d66;--pack-accent:#2563c9;--pack-border:#dcdde2}</style></head><body>
+<div class="ki1-root" id="ki1-root" role="group" aria-label="Import files into Spring poster">
+<input class="ki1-input" id="ki1-input" type="file" multiple tabindex="-1" aria-hidden="true">
+<button class="ki1-zone" id="ki1-zone" type="button" aria-labelledby="ki1-pill ki1-title" aria-describedby="ki1-hint ki1-note">
+<svg class="ki1-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4v15M10 10l6-6 6 6"/><path d="M4 18v7a3 3 0 0 0 3 3h18a3 3 0 0 0 3-3v-7"/></svg>
+<span class="ki1-title" id="ki1-title">Import into Spring poster</span>
+<span class="ki1-hint" id="ki1-hint">Drop brand-kit.zip here, or</span>
+<span class="ki1-pill" id="ki1-pill">Choose files</span>
+</button>
+<section class="ki1-done" id="ki1-done" hidden aria-labelledby="ki1-head">
+<h2 class="ki1-head" id="ki1-head" tabindex="-1"></h2>
+<ul class="ki1-list" id="ki1-list"></ul>
+<p class="ki1-stat">Import started. Next stage: Read.</p>
+<button class="ki1-btn" id="ki1-back" type="button">Start over</button>
+</section>
+<p class="ki1-note" id="ki1-note" aria-live="polite"></p>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var $=function(i){return document.getElementById(i)};
+  var root=$('ki1-root'),zone=$('ki1-zone'),input=$('ki1-input'),hint=$('ki1-hint'),note=$('ki1-note'),done=$('ki1-done'),head=$('ki1-head'),list=$('ki1-list');
+  var HINT='Drop brand-kit.zip here, or',NOTE='PNG, SVG, JPG or ZIP · up to 200 MB on the Forever plan';
+  var raf=0,anim=null,depth=0,DUR=180;
+  function fmt(b){return b<1024?b+' B':b<1048576?Math.round(b/1024)+' KB':(b/1048576).toFixed(1)+' MB'}
+  function step(now){
+    if(!anim)return false;
+    if(!anim.t0)anim.t0=now;
+    var p=Math.min(1,(now-anim.t0)/DUR),e=1-Math.pow(1-p,3);
+    anim.el.style.opacity=e;anim.el.style.transform='translateY('+(8*(1-e)).toFixed(2)+'px)';
+    if(p>=1){anim=null;return false}return true}
+  function snapToTarget(){if(anim){anim.el.style.opacity=1;anim.el.style.transform='none';anim=null}}
+  function frame(now){var moving=reduce()?(snapToTarget(),false):step(now);raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+  function enter(el){el.style.opacity=reduce()?1:0;anim={el:el,t0:0};kick()}
+  function setNote(t,err){note.textContent=t;root.classList.toggle('ki1-err',!!err)}
+  function reset(){
+    done.hidden=true;zone.hidden=false;input.value='';hint.textContent=HINT;
+    root.classList.remove('ki1-over');depth=0;setNote(NOTE);enter(zone);zone.focus()}
+  function nothing(){
+    hint.textContent=HINT;setNote('Nothing dropped. Files only, not feelings.',true);zone.focus()}
+  function take(files){
+    if(!files||!files.length){nothing();return}
+    var total=0,i,n=files.length;
+    for(i=0;i<n;i++)total+=files[i].size;
+    while(list.firstChild)list.removeChild(list.firstChild);
+    for(i=0;i<Math.min(3,n);i++){
+      var li=document.createElement('li'),a=document.createElement('span'),b=document.createElement('span');
+      a.textContent=files[i].name;b.textContent=fmt(files[i].size);li.appendChild(a);li.appendChild(b);list.appendChild(li)}
+    if(n>3){var m=document.createElement('li');m.className='ki1-more';m.textContent='and '+(n-3)+' more';list.appendChild(m)}
+    head.textContent=n+(n===1?' file':' files')+' · '+fmt(total);
+    zone.hidden=true;done.hidden=false;setNote('Press Escape or Start over to choose again.');
+    enter(done);head.focus()}
+  zone.addEventListener('click',function(){setNote(NOTE);input.click()});
+  input.addEventListener('change',function(){if(input.files&&input.files.length)take(input.files)});
+  zone.addEventListener('dragenter',function(e){e.preventDefault();depth++;root.classList.add('ki1-over');hint.textContent='Drop to import'});
+  zone.addEventListener('dragover',function(e){e.preventDefault();if(e.dataTransfer)e.dataTransfer.dropEffect='copy'});
+  zone.addEventListener('dragleave',function(){if(--depth<=0){depth=0;root.classList.remove('ki1-over');hint.textContent=HINT}});
+  zone.addEventListener('drop',function(e){e.preventDefault();depth=0;root.classList.remove('ki1-over');take(e.dataTransfer&&e.dataTransfer.files)});
+  window.addEventListener('dragover',function(e){e.preventDefault()});
+  window.addEventListener('drop',function(e){e.preventDefault()});
+  $('ki1-back').addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!done.hidden){e.preventDefault();reset()}});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+      document.documentElement.setAttribute('data-theme',m.theme)});
+  setNote(NOTE);
+})();</script>
+</body></html>

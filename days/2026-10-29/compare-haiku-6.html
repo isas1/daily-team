@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Undo import: brand kit into Spring poster.canvas</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg)}
+.ab6-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:inline-size;font-family:var(--pack-typography-family);font-size:var(--pack-typography-size);color:var(--pack-text)}
+.ab6-card{box-sizing:border-box;height:100%;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);overflow:auto}
+.ab6-head{display:grid;gap:2px}
+.ab6-title{margin:0;font-weight:650;font-size:1em}
+.ab6-meta{margin:0;min-height:1.4em;color:var(--pack-muted);font-size:.85em}
+.ab6-layers{list-style:none;margin:0;padding:0;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);overflow:hidden}
+.ab6-layers li{display:flex;justify-content:space-between;gap:8px;padding:7px 10px;font-size:.85em;border-top:1px solid var(--pack-border);outline:2px solid transparent;outline-offset:-2px;transition:outline-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.ab6-layers li:first-child{border-top:0}
+.ab6-layers .ab6-hit{outline-color:var(--pack-accent)}
+.ab6-tag{color:var(--pack-muted);font-variant-numeric:tabular-nums}
+.ab6-line{margin:0;min-height:3.6em;line-height:1.4}
+.ab6-main,.ab6-link{font:inherit;min-height:44px;border-radius:var(--pack-radii-control);cursor:pointer}
+.ab6-main{width:100%;min-width:15ch;flex:none;border:1px solid var(--pack-accent);background:var(--pack-accent);color:var(--pack-bg);font-weight:600;box-shadow:0 1px 0 color-mix(in srgb,var(--pack-text) 25%,transparent);transition:transform var(--pack-motion-duration) var(--pack-motion-easing),box-shadow var(--pack-motion-duration) var(--pack-motion-easing)}
+.ab6-main:active,.ab6-main.ab6-press{transform:translateY(1px);box-shadow:0 0 0 transparent}
+.ab6-main:disabled{background:var(--pack-border);border-color:var(--pack-border);color:var(--pack-muted);box-shadow:none;transform:none;cursor:default}
+.ab6-foot{margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.ab6-status{margin:0;min-height:1.4em;color:var(--pack-muted);font-size:.85em}
+.ab6-link{padding:0 8px;margin-left:-8px;border:0;background:none;color:var(--pack-muted);text-decoration:underline}
+.ab6-link:active{color:var(--pack-text)}
+.ab6-root button:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+@container (max-width:300px){.ab6-layers{display:none}.ab6-line{min-height:0}}
+@media (prefers-reduced-motion: reduce){.ab6-root *{transition:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#0f1012;--pack-surface:#17181b;--pack-text:#ececef;--pack-muted:#a0a1a8;--pack-accent:#6aa8ff;--pack-border:#2a2c31}:root[data-theme="light"]{--pack-bg:#f7f7f8;--pack-surface:#ffffff;--pack-text:#16171a;--pack-muted:#5b5d66;--pack-accent:#2563c9;--pack-border:#dcdde2}</style></head>
+<body>
+<div class="ab6-root" role="group" aria-label="Undo import. Reverses the last import and names the layers that come back." data-state="done">
+  <div class="ab6-card">
+    <div class="ab6-head">
+      <p class="ab6-title">Spring poster.canvas</p>
+      <p class="ab6-meta" id="ab6-meta"></p>
+    </div>
+    <ul class="ab6-layers" id="ab6-rows" aria-label="Layers changed by the import"></ul>
+    <p class="ab6-line" id="ab6-line"></p>
+    <button type="button" class="ab6-main" id="ab6-undo"></button>
+    <div class="ab6-foot">
+      <p class="ab6-status" id="ab6-status" role="status" aria-live="polite"></p>
+      <button type="button" class="ab6-link" id="ab6-reset"></button>
+    </div>
+  </div>
+</div>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var meta=$('ab6-meta'),line=$('ab6-line'),btn=$('ab6-undo'),reset=$('ab6-reset'),status=$('ab6-status'),ul=$('ab6-rows'),root=document.querySelector('.ab6-root');
+  var ROWS=[['logo-mark','kit','orig'],['hero-photo','kit','orig'],['headline','kit','orig'],['12 added layers','in','out']];
+  var state='done',glow=0,tmp=0,raf=0,last=0,lis=[];
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+
+  ROWS.forEach(function(r){
+    var li=document.createElement('li'),name=document.createElement('span'),tag=document.createElement('span');
+    name.textContent=r[0];tag.className='ab6-tag';
+    li.appendChild(name);li.appendChild(tag);ul.appendChild(li);
+    lis.push({li:li,tag:tag,r:r});
+  });
+
+  function setText(el,t){if(el.textContent!==t)el.textContent=t}
+  function say(t){setText(status,t)}
+
+  function render(){
+    var done=state==='done',undone=state==='undone',empty=state==='empty';
+    root.setAttribute('data-state',state);
+    setText(meta,done?'Import complete \u00b7 14:52':undone?'Undone at 14:53':'No import in history');
+    setText(line,undone?'Restored logo-mark, hero-photo, headline \u00b7 removed 12':empty?'Nothing has been imported in this session.':'Undo removes 12 added layers and brings back logo-mark, hero-photo, headline.');
+    setText(btn,done?'Undo import':undone?(tmp>0?'Undone':'Redo import'):'Nothing to undo');
+    btn.disabled=empty;
+    setText(reset,empty?'Load sample import':'Clear history');
+    lis.forEach(function(x,i){
+      setText(x.tag,done?x.r[1]:x.r[2]);
+      x.li.classList.toggle('ab6-hit',undone&&glow>0&&i<3);
+    });
+  }
+
+  function undo(){
+    if(state!=='done'){say('Nothing to undo');return}
+    state='undone';glow=1400;tmp=900;say('');render();kick();
+  }
+  function redo(){
+    if(state!=='undone')return;
+    state='done';glow=0;tmp=0;say('');render();
+  }
+  function clearOrLoad(){
+    if(state==='empty'){state='done';say('Sample import loaded')}
+    else{state='empty';glow=0;tmp=0;say('History cleared')}
+    render();kick();
+  }
+
+  btn.addEventListener('click',function(){
+    if(state==='done')undo();else if(state==='undone')redo();
+  });
+  reset.addEventListener('click',clearOrLoad);
+  btn.addEventListener('keydown',function(e){
+    if(e.key===' '||e.key==='Enter')btn.classList.add('ab6-press');
+  });
+  btn.addEventListener('keyup',function(){btn.classList.remove('ab6-press')});
+  btn.addEventListener('blur',function(){btn.classList.remove('ab6-press')});
+
+  document.addEventListener('keydown',function(e){
+    if(!e.key||/INPUT|TEXTAREA/.test(e.target.tagName))return;
+    var k=e.key.toLowerCase(),mod=e.ctrlKey||e.metaKey;
+    if(mod&&k==='z'){e.preventDefault();if(e.shiftKey)redo();else undo()}
+    else if(k==='escape'){say('');glow=0;tmp=0;render();kick()}
+  });
+
+  function step(ms){
+    glow=Math.max(0,glow-ms);tmp=Math.max(0,tmp-ms);
+    return glow>0||tmp>0;
+  }
+  function frame(now){
+    var ms=last?Math.min(now-last,50):16.667;last=now;
+    if(reduce())tmp=0;
+    var moving=step(ms);
+    render();
+    raf=moving?requestAnimationFrame(frame):0;
+    if(!moving)last=0;
+  }
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick();
+  });
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);render()}});
+
+  render();
+})();</script>
+</body></html>

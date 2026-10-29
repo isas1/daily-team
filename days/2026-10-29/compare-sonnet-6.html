@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Undo import for Spring poster.canvas</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.ab6-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;box-sizing:border-box}
+.ab6-panel{box-sizing:border-box;height:100%;overflow:auto;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.ab6-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--pack-spacing-gap);font-size:13px}
+.ab6-head b{overflow-wrap:anywhere}
+.ab6-count{color:var(--pack-muted);min-width:9ch;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ab6-btn{box-sizing:border-box;min-height:44px;width:100%;flex:none;font:inherit;font-weight:600;color:var(--pack-bg);background:var(--pack-accent);border:1px solid var(--pack-accent);border-radius:var(--pack-radii-control);box-shadow:0 3px 0 var(--pack-border);cursor:pointer;touch-action:manipulation;transition:transform var(--pack-motion-duration) var(--pack-motion-easing),box-shadow var(--pack-motion-duration) var(--pack-motion-easing)}
+.ab6-btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--pack-border);transition-duration:60ms}
+.ab6-btn[data-redo]{color:var(--pack-accent);background:transparent}
+.ab6-btn:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ab6-status{font-size:12px;line-height:1.35;min-height:3.2em;color:var(--pack-text)}
+.ab6-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.ab6-row{display:flex;align-items:center;gap:8px;min-height:28px;box-sizing:border-box;padding:2px 8px;font-size:12px;border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control) - 2px);outline:2px solid transparent;outline-offset:1px;background:transparent}
+.ab6-row.ab6-hit{outline-color:var(--pack-accent);background:var(--pack-bg)}
+.ab6-g{width:1.2em;text-align:center;color:var(--pack-accent)}
+.ab6-n{flex:1;font-weight:600;overflow-wrap:anywhere}
+.ab6-t{color:var(--pack-muted);white-space:nowrap}
+.ab6-hint{font-size:11px;color:var(--pack-muted);margin-top:auto}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#0f1012;--pack-surface:#17181b;--pack-text:#ececef;--pack-muted:#a0a1a8;--pack-accent:#6aa8ff;--pack-border:#2a2c31}:root[data-theme="light"]{--pack-bg:#f7f7f8;--pack-surface:#ffffff;--pack-text:#16171a;--pack-muted:#5b5d66;--pack-accent:#2563c9;--pack-border:#dcdde2}</style></head><body>
+<div class="ab6-root" role="group" aria-label="Undo import for Spring poster.canvas">
+<div class="ab6-panel" id="ab6-panel"></div></div>
+<script>(function(){
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var $=function(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+var NAMES=['background','logo-mark','hero-photo','headline','tagline','border','shadow','cat-pics-2','doodle'];
+var REP=['logo-mark','hero-photo','headline'];
+var EXTRA=['forever-wordmark','forever-plan-badge','sticker-a','sticker-b','sticker-c','sticker-d','grain','corner-mark','qr-code'];
+var layers=NAMES.map(function(n,i){return{id:'o'+i,name:n,ver:'original'}});
+var entry=null,state='ready',added=[];
+var raf=0,flashUntil=0;
+function doImport(){
+  var snaps=[];
+  REP.forEach(function(n){var i=layers.findIndex(function(l){return l.name===n});
+    snaps.push({at:i,layer:Object.assign({},layers[i])})});
+  layers=layers.filter(function(l){return REP.indexOf(l.name)<0});
+  added=REP.concat(EXTRA).map(function(n,i){return{id:'k'+i,name:n,ver:'kit'}});
+  layers=layers.concat(added);
+  entry={snaps:snaps,ids:added.map(function(l){return l.id}),n:added.length};
+}
+function undo(){
+  layers=layers.filter(function(l){return entry.ids.indexOf(l.id)<0});
+  entry.snaps.slice().sort(function(a,b){return a.at-b.at}).forEach(function(s){
+    layers.splice(s.at,0,Object.assign({},s.layer))});
+}
+function redo(){
+  entry.snaps.forEach(function(s){layers=layers.filter(function(l){return l.id!==s.layer.id})});
+  layers=layers.concat(added.map(function(l){return Object.assign({},l)}));
+}
+var P=document.getElementById('ab6-panel');
+var head=$('div','ab6-head'),title=$('b','','Spring poster.canvas'),count=$('span','ab6-count');
+head.appendChild(title);head.appendChild(count);
+var btn=$('button','ab6-btn','Undo import');btn.type='button';
+var status=$('div','ab6-status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+var list=$('ul','ab6-list');list.setAttribute('aria-label','Layers affected by the import');
+var rows=REP.map(function(n){var li=$('li','ab6-row'),g=$('span','ab6-g'),nm=$('span','ab6-n',n),t=$('span','ab6-t');
+  li.appendChild(g);li.appendChild(nm);li.appendChild(t);list.appendChild(li);return{li:li,g:g,t:t,n:n}});
+var hint=$('div','ab6-hint','Ctrl+Z undo \u00b7 Ctrl+Shift+Z redo');
+[head,btn,status,list,hint].forEach(function(e){P.appendChild(e)});
+/* flash outline is timed inside the frame loop: it sleeps when nothing is flashing,
+   stops when the tab is hidden, and under reduced motion is dropped at once */
+function frame(now){
+  raf=0;
+  var on=!reduce()&&now<flashUntil;
+  rows.forEach(function(r){r.li.classList.toggle('ab6-hit',on)});
+  if(on)raf=requestAnimationFrame(frame);
+}
+function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+function render(msg,flash){
+  count.textContent=layers.length+' layers';
+  if(state==='ready'){btn.textContent='Undo import';btn.removeAttribute('data-redo')}
+  else{btn.textContent='Redo import';btn.setAttribute('data-redo','')}
+  rows.forEach(function(r){var l=layers.find(function(x){return x.name===r.n});
+    var kit=l&&l.ver==='kit';
+    r.g.textContent=kit?'\u25ce':'\u2713';
+    r.t.textContent=kit?'replaced':'restored'});
+  status.textContent=msg;
+  if(flash&&!reduce()){flashUntil=performance.now()+900;kick()}
+  else{flashUntil=0;rows.forEach(function(r){r.li.classList.remove('ab6-hit')})}
+}
+function note(m){status.textContent=m}
+function doUndo(){
+  if(state!=='ready'){note('Nothing to undo');return}
+  undo();state='undone';
+  render('Restored '+REP.join(', ')+' \u00b7 removed '+entry.n,true);
+}
+function doRedo(){
+  if(state!=='undone'){note('Nothing to redo');return}
+  redo();state='ready';
+  render('Imported brand-kit.zip \u00b7 '+entry.n+' added \u00b7 '+REP.length+' replaced',true);
+}
+btn.addEventListener('click',function(){state==='ready'?doUndo():doRedo()});
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){
+    e.preventDefault();e.shiftKey?doRedo():doUndo()}});
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);raf=0}
+  else if(performance.now()<flashUntil)kick();
+  else{flashUntil=0;rows.forEach(function(r){r.li.classList.remove('ab6-hit')})}});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+    document.documentElement.setAttribute('data-theme',m.theme)});
+doImport();
+render('Imported brand-kit.zip \u00b7 '+entry.n+' added \u00b7 '+REP.length+' replaced',false);
+})();</script>
+</body></html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Import summary: brand kit import into a canvas editor</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+[hidden]{display:none!important}
+.ab5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative}
+.ab5-card{position:absolute;inset:0;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);box-sizing:border-box;background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);overflow-y:auto}
+.ab5-card>*{flex:none}
+.ab5-h{margin:0;font-size:17px;line-height:1.25;font-weight:650;border-radius:4px}
+.ab5-h:focus{outline:none}
+.ab5-h:focus-visible{outline:2px solid var(--pack-accent);outline-offset:3px}
+.ab5-h.struck{text-decoration:line-through;color:var(--pack-muted)}
+.ab5-meta{margin:4px 0 0;font-size:13px;color:var(--pack-muted)}
+.ab5-tray{display:grid;grid-template-columns:repeat(14,1fr);gap:3px}
+.ab5-cell{height:14px;box-sizing:border-box;border-radius:2px;display:inline-block}
+.ab5-cell.p{background:var(--pack-accent)}
+.ab5-cell.r{border:2px solid var(--pack-accent)}
+.ab5-cell.s{border:1px dashed var(--pack-muted)}
+.ab5-legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin:0;padding:0;list-style:none;font-size:13px;color:var(--pack-muted)}
+.ab5-legend li{display:flex;align-items:center;gap:6px}
+.ab5-legend .ab5-cell{width:10px;height:10px;flex:none}
+.ab5-note{margin:0;font-size:14px;line-height:1.45}
+.ab5-btn{width:100%;min-height:44px;padding:0 16px;font:inherit;font-weight:600;color:var(--pack-text);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);cursor:pointer;transition:transform 80ms ease-out,border-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.ab5-btn:hover{border-color:var(--pack-accent)}
+.ab5-btn:active{transform:translateY(1px)}
+.ab5-btn.pri{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-surface)}
+.ab5-btn:focus-visible,.ab5-link:focus-visible,.ab5-skip:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ab5-link{align-self:flex-start;min-height:44px;padding:0;font:inherit;font-weight:600;color:var(--pack-accent);background:none;border:0;cursor:pointer}
+.ab5-link:hover{text-decoration:underline}
+.ab5-link:active{opacity:.7}
+.ab5-skip{margin:0;padding:0;list-style:none;max-height:112px;overflow-y:auto;border-top:1px solid var(--pack-border)}
+.ab5-skip li{padding:8px 0;border-bottom:1px solid var(--pack-border);font-size:13px;overflow-wrap:anywhere}
+.ab5-skip span{display:block;color:var(--pack-muted)}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:12px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#0f1012;--pack-surface:#17181b;--pack-text:#ececef;--pack-muted:#a0a1a8;--pack-accent:#6aa8ff;--pack-border:#2a2c31}:root[data-theme="light"]{--pack-bg:#f7f7f8;--pack-surface:#ffffff;--pack-text:#16171a;--pack-muted:#5b5d66;--pack-accent:#2563c9;--pack-border:#dcdde2}</style></head><body>
+<div class="ab5-root" role="group" aria-label="Import summary">
+  <div class="ab5-card" id="ab5-card"></div>
+</div>
+<script>(function(){
+  var DATA={
+    complete:{h:'Imported 12 of 14',m:'brand-kit.zip · 14:52',p:9,r:3,s:[['cat-pics-2.gif','Unsupported type .gif'],['ad-banner.psd','Unsupported type .psd']]},
+    clean:{h:'Imported 14 of 14',m:'brand-kit.zip · 14:52',p:11,r:3,s:[]},
+    nothing:{h:'Nothing imported',m:'brand-kit.zip · 14:52',n:'No file passed the check. Canvas unchanged.'},
+    undone:{h:'Imported 12 of 14',m:'Undone at 14:53',n:'Restored logo-mark, hero-photo, headline.',u:1}
+  };
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var card=document.getElementById('ab5-card'),raf=0,last=0,settle=-1,trayEl=null,listEl=null,btn=null,open=false;
+  var picker=document.createElement('input');
+  picker.type='file';picker.multiple=true;picker.hidden=true;document.body.appendChild(picker);
+  picker.onchange=function(){if(picker.files.length){picker.value='';render('complete',true)}};
+
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+
+  function toggle(){
+    open=!open;
+    listEl.hidden=!open;
+    btn.textContent=open?'Hide skipped':'Show skipped';
+    btn.setAttribute('aria-expanded',String(open));
+  }
+
+  function render(k,focus){
+    var d=DATA[k],ok=!!d.p,h=el('h2','ab5-h',d.h);
+    h.id='ab5-h';h.tabIndex=-1;
+    if(d.u)h.className+=' struck';
+    open=false;trayEl=null;listEl=null;btn=null;
+    card.textContent='';
+    card.appendChild(h);
+    card.appendChild(el('p','ab5-meta',d.m));
+    if(ok){
+      trayEl=el('div','ab5-tray');
+      trayEl.style.opacity='0';
+      for(var i=0;i<14;i++)trayEl.appendChild(el('span','ab5-cell '+(i<d.p?'p':i<d.p+d.r?'r':'s')));
+      card.appendChild(trayEl);
+      var lg=el('ul','ab5-legend');
+      [['p','placed',d.p],['r','replaced',d.r],['s','skipped',d.s.length]].forEach(function(x){
+        var li=el('li');
+        li.appendChild(el('span','ab5-cell '+x[0]));
+        li.appendChild(document.createTextNode(x[2]+' '+x[1]));
+        lg.appendChild(li);
+      });
+      card.appendChild(lg);
+    }
+    if(d.n)card.appendChild(el('p','ab5-note',d.n));
+    if(k==='nothing'){
+      btn=el('button','ab5-btn pri','Choose other files');
+      btn.type='button';
+      btn.onclick=function(){picker.click()};
+      card.appendChild(btn);
+    }else if(d.s&&d.s.length){
+      btn=el('button','ab5-link','Show skipped');
+      btn.type='button';
+      btn.setAttribute('aria-controls','ab5-skip');
+      btn.setAttribute('aria-expanded','false');
+      btn.onclick=toggle;
+      card.appendChild(btn);
+      listEl=el('ul','ab5-skip');
+      listEl.id='ab5-skip';listEl.tabIndex=0;listEl.hidden=true;
+      listEl.setAttribute('aria-label','Skipped files');
+      d.s.forEach(function(s){
+        var li=el('li');
+        li.appendChild(document.createTextNode(s[0]));
+        li.appendChild(el('span',null,s[1]));
+        listEl.appendChild(li);
+      });
+      card.appendChild(listEl);
+    }
+    settle=ok?0:-1;
+    if(focus)h.focus();
+    kick();
+  }
+
+  function step(dt){
+    if(settle<0)return false;
+    settle=reduce()?180:settle+dt;
+    return settle<180;
+  }
+  function draw(){
+    if(!trayEl)return;
+    var p=settle<0?1:Math.min(settle/180,1),e=1-Math.pow(1-p,3);
+    trayEl.style.transform='translateY('+(-6*(1-e)).toFixed(2)+'px)';
+    trayEl.style.opacity=e.toFixed(3);
+  }
+  function frame(now){
+    var dt=last?Math.min(now-last,50):0;last=now;
+    var moving=step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;
+    if(!moving)last=0;
+  }
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+      document.documentElement.setAttribute('data-theme',m.theme)});
+
+  var q=new URLSearchParams(location.search).get('state');
+  render(DATA.hasOwnProperty(q)?q:'complete',false);
+})();</script>
+</body></html>
