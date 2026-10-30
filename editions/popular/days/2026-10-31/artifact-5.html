@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Attempt verdict · pipeline panel for web-app #482</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--r:var(--pack-radii-control);--gap:var(--pack-spacing-gap);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+*{box-sizing:border-box}
+.av5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;display:flex;flex-direction:column;gap:var(--gap);padding:clamp(10px,4%,var(--pack-spacing-padding));background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--r)*2);overflow:auto}
+.av5-head{display:flex;justify-content:space-between;gap:var(--gap);color:var(--mu);font-size:.86em;flex-wrap:wrap}
+.av5-head b{color:var(--ink);font-weight:600}
+.av5-card{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bd);border-left:2px solid var(--acc);border-radius:var(--r);background:var(--bg)}
+.av5-g{flex:0 0 20px;width:20px;height:20px;margin-top:1px;color:var(--ink)}
+.av5-g g{display:none}.av5-g[data-s=failed] .av5-gf,.av5-g[data-s=passed] .av5-gp,.av5-g[data-s=stopped] .av5-gs,.av5-g[data-s=running] .av5-gr{display:inline}
+.av5-gp{color:var(--acc)}
+.av5-gr path{transform-origin:10px 10px;animation:av5-spin .9s linear infinite}
+@keyframes av5-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.av5-gr path{animation:none}}
+.av5-txt{min-width:0;flex:1}
+.av5-line{margin:0;font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+.av5-sub{margin:3px 0 0;color:var(--mu);font-size:.86em;line-height:1.35}
+.av5-link{font:inherit;color:var(--acc);background:none;border:0;padding:0;min-height:24px;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.av5-log{margin:0;flex:1 1 auto;min-height:3.6em;overflow:auto;padding:6px 0;border:1px solid var(--bd);border-radius:var(--r);font:.8em/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--mu);white-space:pre}
+.av5-log span{display:block;padding:0 10px;transition:background-color var(--dur) var(--ease)}
+.av5-log .av5-e{color:var(--ink)}
+.av5-log .av5-fl{background:color-mix(in srgb,var(--acc) 22%,transparent)}
+.av5-seg{display:flex;margin:0;padding:0;border:0;min-width:0}
+.av5-seg legend{float:left;margin-right:8px;align-self:center;color:var(--mu);font-size:.86em;padding:0}
+.av5-opts{display:flex;flex:1;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.av5-opts label{flex:1;position:relative;min-height:44px;display:grid;place-items:center;font-size:.86em;cursor:pointer;color:var(--mu);border-left:1px solid var(--bd);text-align:center;padding:0 4px}
+.av5-opts label:first-child{border-left:0}
+.av5-opts input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.av5-opts label:has(input:checked){color:var(--ink);box-shadow:inset 0 -2px 0 var(--acc);font-weight:600}
+.av5-opts label:has(input:focus-visible){outline:2px solid var(--acc);outline-offset:-3px}
+.av5-seg:disabled{opacity:.55}
+.av5-act{display:flex;gap:var(--gap)}
+.av5-btn{font:inherit;font-weight:600;min-height:44px;padding:0 14px;border-radius:var(--r);border:1px solid var(--bd);background:var(--sf);color:var(--ink);cursor:pointer;transition:transform 90ms var(--ease),background-color var(--dur) var(--ease)}
+.av5-btn:active{transform:translateY(1px)}
+.av5-run{flex:1;background:var(--acc);border-color:var(--acc);color:var(--sf)}
+.av5-run[data-s=running]{background:var(--sf);color:var(--ink);border-color:var(--bd)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e7e9ec;--pack-muted:#9aa1ab;--pack-accent:#6fa8dc;--pack-border:#2c3138}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16191d;--pack-muted:#5b636e;--pack-accent:#2f6db3;--pack-border:#d6dae0}</style></head><body>
+<main class="av5-root" role="group" aria-label="Attempt verdict for the Test step of build web-app #482">
+<div class="av5-head"><span><b>Test</b> · web-app #482</span><span id="av5-att"></span></div>
+<div class="av5-card">
+<svg class="av5-g" id="av5-g" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+<g class="av5-gf"><circle cx="10" cy="10" r="7.5"/><path d="M5 15 15 5"/></g>
+<g class="av5-gp"><circle cx="10" cy="10" r="7.5" opacity=".35"/><path id="av5-ck" d="M6 10.4 8.8 13 14 7.2" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0"/></g>
+<g class="av5-gs"><circle cx="10" cy="10" r="7.5"/><path d="M6.5 10h7"/></g>
+<g class="av5-gr"><circle cx="10" cy="10" r="7.5" opacity=".25"/><path d="M10 2.5a7.5 7.5 0 0 1 7.5 7.5"/></g>
+</svg>
+<div class="av5-txt"><p class="av5-line" id="av5-line" role="status" aria-live="polite"></p><p class="av5-sub" id="av5-sub"></p></div>
+</div>
+<pre class="av5-log" id="av5-log" tabindex="0" aria-label="Log lines for the latest attempt"></pre>
+<fieldset class="av5-seg" id="av5-seg"><legend>Next attempt</legend><div class="av5-opts">
+<label><input type="radio" name="av5-o" value="pass" checked>Passes</label>
+<label><input type="radio" name="av5-o" value="same">Same fail</label>
+<label><input type="radio" name="av5-o" value="new">New fail</label>
+</div></fieldset>
+<div class="av5-act"><button class="av5-btn av5-run" id="av5-run" type="button"></button><button class="av5-btn" id="av5-reset" type="button">Reset</button></div>
+</main>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var T1=['checkout.spec.ts › pays for Forever plan','checkout.spec.ts › applies coupon'];
+  var T2=['upload.spec.ts › rejects cat-pics-2 over 2 GB'];
+  var OUT={pass:{o:'passed',f:[],dur:39},same:{o:'failed',f:T1,dur:41,ln:[212,219],why:'timeout 5000 ms'},new:{o:'failed',f:T2,dur:33,ln:[187],why:'expected 413, got 500'}};
+  var att,running=null,timer=0,raf=0,drawStart=0;
+  function seed(){att=[{n:1,o:'failed',f:T1,dur:41,ln:[212,219],why:'timeout 5000 ms'}]}
+  function file(a){return a.f[0].split(' ›')[0]}
+  function same(a,b){if(a.length!==b.length)return false;for(var i=0;i<a.length;i++)if(b.indexOf(a[i])<0)return false;return true}
+  function prevVerdict(k){for(var i=k-1;i>=0;i--)if(att[i].o!=='stopped')return att[i];return null}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function clear(e){while(e.firstChild)e.removeChild(e.firstChild)}
+  function logLine(t,cls,id){var s=el('span',cls,t);if(id)s.id=id;$('av5-log').appendChild(s)}
+  function render(){
+    var line=$('av5-line'),sub=$('av5-sub'),g=$('av5-g'),log=$('av5-log');
+    clear(line);clear(log);
+    var last=att[att.length-1],next=att.length+1;
+    $('av5-seg').disabled=!!running;
+    var rb=$('av5-run');
+    if(running){
+      g.dataset.s='running';$('av5-att').textContent='Attempt '+running.n;
+      line.textContent='Attempt '+running.n+' running';
+      var pv=prevVerdict(att.length);
+      sub.textContent=pv?'Will compare with attempt '+pv.n:'No earlier attempt to compare';
+      logLine('  1 $ npm test -- --retry='+running.n);logLine('  2 running 148 tests…');
+      rb.textContent='Stop';rb.dataset.s='running';return;
+    }
+    rb.textContent='Retry · attempt '+next;rb.dataset.s='ready';
+    $('av5-att').textContent='Attempt '+last.n+' of '+att.length;
+    g.dataset.s=last.o;
+    var pv2=prevVerdict(att.length-1);
+    if(last.o==='passed'){
+      line.textContent='Passed on attempt '+last.n+' · '+last.dur+' s';
+      sub.textContent='Slowest: checkout.spec.ts at 4900 ms of a 5000 ms limit';
+      logLine('301 148 passed · 0 failed','av5-e');logLine('302 exit 0');
+    }else if(last.o==='stopped'){
+      line.textContent='Stopped at '+last.dur+' s · no verdict';
+      sub.textContent=pv2?'Last verdict: attempt '+pv2.n+' '+pv2.o:'No verdict yet';
+      logLine(' 88 stopped by user · Escape pressed','av5-e');
+    }else{
+      var lead;
+      if(!pv2){lead='Failed · '+last.f.length+' of 148 tests · ';sub.textContent=last.dur+' s · '+last.why}
+      else if(pv2.o==='passed'){lead='Failed after a pass · ';sub.textContent='Attempt '+pv2.n+' passed, so this may be flaky'}
+      else if(same(last.f,pv2.f)){lead='Failed again · same test · ';sub.textContent='Matches attempt '+pv2.n+' · retrying will not fix it'}
+      else{lead='Failed · different error · ';sub.textContent='Attempt '+pv2.n+' failed in '+file(pv2)}
+      line.appendChild(document.createTextNode(lead));
+      var b=el('button','av5-link',file(last));b.type='button';
+      b.addEventListener('click',jump);line.appendChild(b);
+      last.f.forEach(function(t,i){logLine(String(last.ln[i]).padStart(3)+' FAIL '+t+' · '+last.why,'av5-e','av5-l'+i)});
+      logLine(String(last.ln[last.ln.length-1]+40).padStart(3)+' exit 1');
+    }
+  }
+  function jump(){
+    var log=$('av5-log'),t=$('av5-l0');if(!t)return;
+    log.scrollTop=t.offsetTop-log.offsetTop-8;log.scrollLeft=0;
+    var ls=log.querySelectorAll('.av5-e');ls.forEach(function(s){s.classList.add('av5-fl')});
+    log.focus();setTimeout(function(){ls.forEach(function(s){s.classList.remove('av5-fl')})},900);
+  }
+  function start(){
+    if(running)return;
+    var v=document.querySelector('input[name=av5-o]:checked').value,o=OUT[v];
+    running={n:att.length+1,o:o.o,f:o.f,dur:o.dur,ln:o.ln||[],why:o.why||'',t:performance.now()};
+    render();timer=setTimeout(finish,1600);
+  }
+  function finish(){
+    var r=running;if(!r)return;running=null;clearTimeout(timer);
+    att.push({n:r.n,o:r.o,f:r.f,dur:r.dur,ln:r.ln,why:r.why});render();
+    if(r.o==='passed'){drawStart=0;$('av5-ck').style.strokeDashoffset='1';kick()}
+  }
+  function stop(){
+    var r=running;if(!r)return;running=null;clearTimeout(timer);
+    var s=Math.max(1,Math.round((performance.now()-r.t)/1600*r.dur));
+    att.push({n:r.n,o:'stopped',f:[],dur:s,ln:[]});render();
+  }
+  function step(now){
+    if(!drawStart)drawStart=now;
+    var p=Math.min(1,(now-drawStart)/200),e=1-Math.pow(1-p,3);
+    $('av5-ck').style.strokeDashoffset=String(1-e);return p<1;
+  }
+  function snapToTarget(){$('av5-ck').style.strokeDashoffset='0'}
+  function frame(now){var moving=reduce()?(snapToTarget(),false):step(now);raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame);else if(document.hidden)snapToTarget()}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0;snapToTarget()}});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+      document.documentElement.setAttribute('data-theme',m.theme)});
+  $('av5-run').addEventListener('click',function(){running?stop():start()});
+  $('av5-reset').addEventListener('click',function(){running=null;clearTimeout(timer);seed();render()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&running){e.preventDefault();stop();$('av5-run').focus()}});
+  seed();render();
+})();</script>
+</body></html>

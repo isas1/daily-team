@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step rail for the web-app #482 pipeline panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg)}
+.sr-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;display:flex;flex-direction:column;background:var(--pack-surface);color:var(--pack-text);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);font:var(--pack-typography-size)/1.4 var(--pack-typography-family);overflow:hidden}
+.sr-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px var(--pack-spacing-gap);padding:12px var(--pack-spacing-padding);border-bottom:1px solid var(--pack-border)}
+.sr-title{font-weight:600}
+.sr-stat{color:var(--pack-muted);font-size:.93em}
+.sr-list{list-style:none;margin:0;padding:4px 0;flex:1;overflow:auto;overscroll-behavior:contain}
+.sr-row{position:relative;display:grid;grid-template-columns:20px 1fr 16px;gap:var(--pack-spacing-gap);align-items:center;width:100%;min-height:48px;padding:6px var(--pack-spacing-padding);border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sr-row::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;border-radius:1px;background:transparent}
+.sr-row[aria-expanded=true]::before{background:var(--pack-accent)}
+.sr-row:active{background:color-mix(in srgb,var(--pack-text) 7%,transparent)}
+@media (hover:hover){.sr-row:hover{background:color-mix(in srgb,var(--pack-text) 5%,transparent)}}
+.sr-row:focus-visible,.sr-act:focus-visible{outline:2px solid var(--pack-accent);outline-offset:-4px}
+.sr-act:focus-visible{outline-offset:2px}
+.sr-g{display:block;width:20px;height:20px}
+.sr-row.sr-blocked .sr-g,.sr-row.sr-blocked .sr-name{color:var(--pack-muted)}
+.sr-name{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sr-row.sr-failed .sr-name{font-weight:600}
+.sr-meta{display:block;color:var(--pack-muted);font-size:.86em;font-variant-numeric:tabular-nums}
+.sr-chev{width:16px;height:16px;color:var(--pack-muted);transition:transform var(--pack-motion-duration) var(--pack-motion-easing)}
+.sr-row[aria-expanded=true] .sr-chev{transform:rotate(180deg)}
+.sr-det{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows var(--pack-motion-duration) var(--pack-motion-easing),visibility 0s linear var(--pack-motion-duration)}
+.sr-det.sr-open{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows var(--pack-motion-duration) var(--pack-motion-easing),visibility 0s}
+.sr-in{overflow:hidden;min-height:0}
+.sr-body{padding:0 var(--pack-spacing-padding) 12px calc(var(--pack-spacing-padding) + 20px + var(--pack-spacing-gap))}
+.sr-body p{margin:0 0 var(--pack-spacing-gap);overflow-wrap:anywhere}
+.sr-act{min-height:44px;padding:0 14px;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);color:var(--pack-text);font:inherit;font-weight:600;cursor:pointer}
+.sr-act:active{transform:translateY(1px)}
+@media (prefers-reduced-motion:reduce){.sr-det,.sr-det.sr-open,.sr-chev{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e7e9ec;--pack-muted:#9aa1ab;--pack-accent:#6fa8dc;--pack-border:#2c3138}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16191d;--pack-muted:#5b636e;--pack-accent:#2f6db3;--pack-border:#d6dae0}</style></head><body>
+<div class="sr-root" role="group" aria-label="Step rail for build web-app #482">
+<div class="sr-head"><span class="sr-title">web-app #482</span><span class="sr-stat" id="sr-stat" role="status" aria-live="polite"></span></div>
+<ol class="sr-list" id="sr-list"></ol>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var NS='http://www.w3.org/2000/svg';
+  var S,open,cur,timers=[],raf=0,rows=[],dets=[],glyphs=[];
+  function seed(){
+    S=[{n:'Install',s:'passed',d:22,t:'312 packages. Heaviest: emotional-baggage, 4.1 MB.'},
+       {n:'Lint',s:'passed',d:6,t:'0 errors. Skipped cat-pics-2/.'},
+       {n:'Build',s:'passed',d:14,t:'Forever plan bundle, 1.8 MB.'},
+       {n:'Test',s:'failed',d:41,t:'2 of 148 tests failed. checkout.spec.ts timed out after 5000 ms.',ms:2600,ok:'148 of 148 passed on attempt 2.',d2:39},
+       {n:'Package',s:'blocked',d:18,ms:1400,ok:'web-app-482.tgz, 2.3 MB.'},
+       {n:'Deploy preview',s:'blocked',d:11,ms:1200,ok:'Preview #482 is up on the Forever plan.'}];
+    open=3;cur=3;
+  }
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function sv(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+  function glyph(s){
+    var g=sv('svg',{viewBox:'0 0 20 20','class':'sr-g','aria-hidden':'true',fill:'none',stroke:'currentColor','stroke-width':'1.75','stroke-linecap':'round'});
+    if(s==='passed')g.appendChild(sv('circle',{cx:10,cy:10,r:5,fill:'currentColor',stroke:'none'}));
+    else if(s==='running')g.appendChild(sv('path',{d:'M10 3a7 7 0 1 1-7 7'}));
+    else{g.appendChild(sv('circle',{cx:10,cy:10,r:7}));
+      g.appendChild(sv('line',s==='failed'?{x1:5,y1:15,x2:15,y2:5}:{x1:6.5,y1:10,x2:13.5,y2:10}))}
+    g.dataset.s=s;return g;
+  }
+  function failed(){for(var i=0;i<S.length;i++)if(S[i].s==='failed')return i;return -1}
+  function meta(x){
+    if(x.s==='blocked')return 'blocked by Test';
+    if(x.s==='running')return 'running · '+Math.floor((performance.now()-x.st)/1000)+' s';
+    return x.s+' · '+x.d+' s';
+  }
+  function busy(){return S.some(function(x){return x.s==='running'})}
+  function build(){
+    var list=document.getElementById('sr-list');
+    S.forEach(function(x,i){
+      var li=el('li'),b=el('button','sr-row'),tx=el('span');
+      b.type='button';b.id='sr-r'+i;b.setAttribute('aria-controls','sr-d'+i);
+      var g=glyph(x.s);glyphs[i]=g;
+      tx.appendChild(el('span','sr-name',x.n));tx.appendChild(el('span','sr-meta'));
+      var ch=sv('svg',{viewBox:'0 0 16 16','class':'sr-chev','aria-hidden':'true',fill:'none',stroke:'currentColor','stroke-width':'1.5','stroke-linecap':'round','stroke-linejoin':'round'});
+      ch.appendChild(sv('path',{d:'M4 6l4 4 4-4'}));
+      b.appendChild(g);b.appendChild(tx);b.appendChild(ch);
+      var d=el('div','sr-det'),inn=el('div','sr-in');d.id='sr-d'+i;d.setAttribute('role','region');d.setAttribute('aria-labelledby','sr-r'+i);
+      inn.appendChild(el('div','sr-body'));d.appendChild(inn);
+      b.addEventListener('click',function(){open=open===i?-1:i;cur=i;render()});
+      b.addEventListener('focus',function(){cur=i;roving()});
+      li.appendChild(b);li.appendChild(d);list.appendChild(li);rows[i]=b;dets[i]=d;
+    });
+  }
+  function roving(){rows.forEach(function(b,i){b.tabIndex=i===cur?0:-1})}
+  function render(){
+    var f=failed(),st=document.getElementById('sr-stat'),r=S.filter(function(x){return x.s==='running'})[0];
+    st.textContent=r?'Running '+r.n:f>=0?S[f].n+' failed':S.every(function(x){return x.s==='passed'})?'All 6 passed':'';
+    S.forEach(function(x,i){
+      var b=rows[i];
+      b.className='sr-row sr-'+x.s;
+      b.setAttribute('aria-expanded',open===i?'true':'false');
+      if(glyphs[i].dataset.s!==x.s){var g=glyph(x.s);b.replaceChild(g,glyphs[i]);glyphs[i]=g}
+      b.querySelector('.sr-meta').textContent=meta(x);
+      dets[i].classList.toggle('sr-open',open===i);
+      var body=dets[i].querySelector('.sr-body'),p=el('p',null,x.s==='blocked'?'Waits for Test to pass.':x.s==='running'?'Running now. Hang tight.':x.t);
+      var kids=[p];
+      if(x.s==='failed')kids.push(act('Rerun '+x.n,function(){run(i)}));
+      else if(!busy()&&f<0&&x.ok&&S[S.length-1].s==='passed')kids.push(act('Reset demo',reset));
+      body.replaceChildren.apply(body,kids);
+    });
+    roving();
+  }
+  function act(label,fn){var b=el('button','sr-act',label);b.type='button';b.addEventListener('click',fn);return b}
+  function run(i){
+    var x=S[i];if(!x||x.s==='running'||busy())return;
+    x.s='running';x.st=performance.now();render();kick();
+    timers.push(setTimeout(function(){
+      x.s='passed';x.d=x.d2||x.d;x.t=x.ok;
+      var foc=document.activeElement&&document.activeElement.classList.contains('sr-act');
+      if(S[i+1]&&S[i+1].s==='blocked')run(i+1);else render();
+      if(foc&&open===i)rows[i].focus();
+    },x.ms));
+  }
+  function reset(){timers.forEach(clearTimeout);timers=[];seed();render();rows[3].focus()}
+  document.getElementById('sr-list').addEventListener('keydown',function(e){
+    var k=e.key,n=rows.length,t=-1;
+    if(!e.target.classList.contains('sr-row')){if(k==='Escape'&&open>=0){var o=open;open=-1;render();rows[o].focus()}return}
+    if(k==='ArrowDown')t=(cur+1)%n;else if(k==='ArrowUp')t=(cur-1+n)%n;
+    else if(k==='Home')t=0;else if(k==='End')t=n-1;
+    else if(k==='Escape'&&open>=0){cur=open;open=-1;render();rows[cur].focus();e.preventDefault();return}
+    if(t<0)return;e.preventDefault();cur=t;roving();rows[t].focus();
+  });
+  function frame(now){
+    var any=false;
+    S.forEach(function(x,i){if(x.s!=='running')return;any=true;
+      glyphs[i].style.transform=reduce()?'':'rotate('+((now/1000*300)%360)+'deg)';
+      rows[i].querySelector('.sr-meta').textContent=meta(x)});
+    raf=any&&!document.hidden?requestAnimationFrame(frame):0;
+  }
+  function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(busy())kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))document.documentElement.setAttribute('data-theme',m.theme)});
+  seed();build();render();
+})();</script>
+</body></html>

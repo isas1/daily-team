@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Attempt history for a build pipeline panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font:var(--pack-typography-size)/1.35 var(--pack-typography-family)}
+.ah6-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:min(var(--pack-spacing-padding),4vmin);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2);overflow:hidden}
+.ah6-top{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ah6-seg{display:flex;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);overflow:hidden}
+.ah6-seg label{position:relative;display:grid;place-items:center;min-height:42px;padding:0 12px;cursor:pointer;color:var(--pack-muted);transition:color var(--pack-motion-duration) var(--pack-motion-easing),box-shadow var(--pack-motion-duration) var(--pack-motion-easing)}
+.ah6-seg input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.ah6-seg label:has(input:checked){color:var(--pack-text);box-shadow:inset 0 -2px var(--pack-accent)}
+.ah6-seg label:has(input:focus-visible){outline:2px solid var(--pack-accent);outline-offset:-2px}
+.ah6-btn{min-height:44px;padding:0 12px;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);color:var(--pack-text);font:inherit;cursor:pointer;transition:transform 90ms var(--pack-motion-easing)}
+.ah6-btn:active{transform:translateY(1px)}
+.ah6-ghost{background:transparent;border-color:transparent;color:var(--pack-muted);margin-left:auto}
+.ah6-list{position:relative;display:flex;gap:6px;overflow-x:auto;padding:3px;flex:none;scrollbar-width:thin}
+.ah6-chip{flex:0 0 72px;box-sizing:border-box;min-height:50px;padding:6px 8px;display:flex;flex-direction:column;justify-content:center;gap:2px;font-size:12px;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);cursor:pointer;user-select:none;transition:box-shadow var(--pack-motion-duration) var(--pack-motion-easing),border-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.ah6-chip[aria-selected=true]{border-color:var(--pack-muted);box-shadow:inset 2px 0 var(--pack-accent)}
+.ah6-new{animation:ah6-in var(--pack-motion-duration) var(--pack-motion-easing)}
+@keyframes ah6-in{from{opacity:0;transform:translateX(8px)}}
+.ah6-ct{display:flex;align-items:center;gap:5px}
+.ah6-cb{color:var(--pack-muted);white-space:nowrap}
+.ah6-empty{margin:0;padding:12px 0;color:var(--pack-muted)}
+.ah6-detail{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--pack-border);padding-top:6px}
+.ah6-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 8px;min-height:44px}
+.ah6-bar b{font-weight:600}
+.ah6-track{position:relative;height:6px;border-radius:3px;background:var(--pack-border);margin-top:4px}
+.ah6-fill{position:absolute;inset:0;border-radius:3px;background:var(--pack-text);transform-origin:left;transition:transform var(--pack-motion-duration) var(--pack-motion-easing)}
+.ah6-tick{position:absolute;top:-3px;width:2px;height:12px;margin-left:-1px;background:var(--pack-muted)}
+.ah6-cap{margin:6px 0 0}
+.ah6-oth{margin:2px 0 0;color:var(--pack-muted);font-size:12px}
+.ah6-log{margin:0;flex:none;padding:8px;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;overflow-x:auto;background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);color:var(--pack-text)}
+.ah6-chip:focus-visible,.ah6-btn:focus-visible,.ah6-log:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e7e9ec;--pack-muted:#9aa1ab;--pack-accent:#6fa8dc;--pack-border:#2c3138}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16191d;--pack-muted:#5b636e;--pack-accent:#2f6db3;--pack-border:#d6dae0}</style></head><body>
+<div class="ah6-root" role="group" aria-label="Attempt history for build web-app #482">
+  <div class="ah6-top">
+    <div class="ah6-seg" role="radiogroup" aria-label="Step">
+      <label><input type="radio" name="ah6-step" value="test" checked>Test</label>
+      <label><input type="radio" name="ah6-step" value="lint">Lint</label>
+    </div>
+    <button class="ah6-btn" id="ah6-retry" type="button">Retry Test</button>
+    <button class="ah6-btn ah6-ghost" id="ah6-reset" type="button">Reset</button>
+  </div>
+  <div class="ah6-list" id="ah6-list" role="listbox" aria-label="Attempts" aria-orientation="horizontal"></div>
+  <p class="ah6-empty" id="ah6-empty" hidden>No attempts for Lint yet</p>
+  <div class="ah6-detail" id="ah6-detail">
+    <div class="ah6-bar" aria-live="polite"><span id="ah6-bt"></span><button class="ah6-btn" id="ah6-back" type="button" hidden>Back to latest</button></div>
+    <div id="ah6-meter"><div class="ah6-track" aria-hidden="true"><div class="ah6-fill" id="ah6-fill"></div><div id="ah6-ticks"></div></div><p class="ah6-cap" id="ah6-cap"></p><p class="ah6-oth" id="ah6-oth"></p></div>
+    <pre class="ah6-log" id="ah6-log" tabindex="0" role="region" aria-label="Attempt log, read-only"></pre>
+  </div>
+</div>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0,anim=null;
+  var LIMIT=5000;
+  var T=[{ok:1,d:41,s:5000,f:'checkout'},{ok:1,d:39,s:4900},{ok:0,d:42,s:5000,f:'checkout'},{ok:1,d:40,s:4980},{ok:0,d:36,s:3100,f:'cat'},{ok:1,d:38,s:4700}];
+  T[0].ok=0;
+  function make(step,n){
+    var b=step==='lint'?{ok:1,d:6,s:0}:T[n<=6?n-1:2+((n-3)%4)];
+    var m=52+6*(n-1),h=14+Math.floor(m/60);m%=60;
+    return {n:n,ok:b.ok,d:b.d,s:b.s,f:b.f,at:h+':'+(m<10?'0':'')+m};
+  }
+  function lines(a){
+    if(step==='lint')return['$ forever lint','Checked 212 files','0 problems'];
+    var L=['$ forever test --step Test','PASS  cart.spec.ts','PASS  profile.spec.ts'];
+    if(a.f==='checkout')L.push('FAIL  checkout.spec.ts','  \u2715 pays with saved card \u00b7 timeout 5000 ms','  \u2715 applies Forever plan coupon \u00b7 timeout 5000 ms','Tests: 2 failed, 146 passed, 148 total');
+    else{L.push('PASS  checkout.spec.ts \u00b7 slowest '+a.s+' ms');
+      if(a.f)L.push('FAIL  cat-pics-2.spec.ts','  \u2715 upload fixture missing: cat-pics-2.png','Tests: 1 failed, 147 passed, 148 total');
+      else L.push('Tests: 148 passed, 148 total');}
+    return L;
+  }
+  var data,seen,step='test',sel=0,foc=0;
+  function seed(full){data={test:[make('test',1)],lint:[]};if(full)data.test.push(make('test',2));
+    seen={test:data.test.length,lint:0};sel=foc=data[step].length-1}
+  function hist(){return data[step]}
+  var NS='http://www.w3.org/2000/svg';
+  function glyph(ok){var s=document.createElementNS(NS,'svg');s.setAttribute('width','12');s.setAttribute('height','12');s.setAttribute('viewBox','0 0 12 12');s.setAttribute('aria-hidden','true');
+    var c=document.createElementNS(NS,'circle');c.setAttribute('cx','6');c.setAttribute('cy','6');
+    if(ok){c.setAttribute('r','4.5');c.setAttribute('fill','currentColor');s.appendChild(c)}
+    else{c.setAttribute('r','4.5');c.setAttribute('fill','none');c.setAttribute('stroke','currentColor');c.setAttribute('stroke-width','1.5');
+      var l=document.createElementNS(NS,'path');l.setAttribute('d','M2.8 9.2 9.2 2.8');l.setAttribute('stroke','currentColor');l.setAttribute('stroke-width','1.5');s.appendChild(c);s.appendChild(l)}
+    return s}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x)e.textContent=x;return e}
+  var list=$('ah6-list');
+  function render(focusChip){
+    var H=hist(),n=H.length;
+    $('ah6-retry').textContent='Retry '+(step==='test'?'Test':'Lint');
+    while(list.firstChild)list.removeChild(list.firstChild);
+    list.hidden=!n;$('ah6-empty').hidden=!!n;$('ah6-detail').hidden=!n;
+    if(!n)return;
+    H.forEach(function(a,i){
+      var c=el('div','ah6-chip'+(i>=seen[step]?' ah6-new':''));
+      c.id='ah6-o'+i;c.setAttribute('role','option');
+      c.setAttribute('aria-selected',i===sel?'true':'false');c.tabIndex=i===foc?0:-1;
+      var t=el('span','ah6-ct');t.appendChild(glyph(a.ok));t.appendChild(el('span','',a.ok?'passed':'failed'));
+      c.appendChild(t);c.appendChild(el('span','ah6-cb','#'+a.n+' \u00b7 '+a.d+' s'));
+      c.addEventListener('click',function(){choose(i,true)});
+      list.appendChild(c);
+    });
+    seen[step]=n;
+    var a=H[sel],latest=sel===n-1;
+    var bt=$('ah6-bt');while(bt.firstChild)bt.removeChild(bt.firstChild);
+    bt.appendChild(el('b','',latest?'Latest':'Viewing'));
+    bt.appendChild(document.createTextNode(' attempt '+a.n+' \u00b7 '+a.at));
+    $('ah6-back').hidden=latest;
+    var tm=step==='test';$('ah6-meter').hidden=!tm;
+    if(tm){
+      $('ah6-fill').style.transform='scaleX('+(a.s/LIMIT)+')';
+      var tk=$('ah6-ticks');while(tk.firstChild)tk.removeChild(tk.firstChild);
+      var oth=[];H.forEach(function(b,i){if(i!==sel){oth.push(b.s);var d=el('div','ah6-tick');d.style.left=(b.s/LIMIT*100)+'%';tk.appendChild(d)}});
+      $('ah6-cap').textContent='Slowest '+a.s+' ms \u00b7 '+(a.s>=LIMIT?'hit the 5000 ms limit':!a.ok?'failed on an error, not time':(LIMIT-a.s)+' ms under the limit');
+      $('ah6-oth').textContent=oth.length?'Other attempts: '+oth.join(', ')+' ms':'';
+    }
+    $('ah6-log').textContent=lines(a).join('\n');
+    var ch=list.children[sel];
+    if(focusChip&&list.children[foc])list.children[foc].focus({preventScroll:true});
+    scrollTo(list.children[focusChip?foc:sel]||ch);
+  }
+  function scrollTo(c){var max=list.scrollWidth-list.clientWidth;
+    var to=Math.max(0,Math.min(max,c.offsetLeft-(list.clientWidth-c.offsetWidth)/2));
+    anim={from:list.scrollLeft,to:to,t:0};kick()}
+  function choose(i,f){sel=foc=i;render(f)}
+  function back(){var n=hist().length;if(!n||sel===n-1)return;
+    var f=list.contains(document.activeElement)||document.activeElement===$('ah6-back');choose(n-1,f)}
+  list.addEventListener('keydown',function(e){var n=hist().length,k=e.key,i=foc;
+    if(k==='ArrowRight'||k==='ArrowDown')i=Math.min(n-1,foc+1);
+    else if(k==='ArrowLeft'||k==='ArrowUp')i=Math.max(0,foc-1);
+    else if(k==='Home')i=0;else if(k==='End')i=n-1;
+    else if(k==='Enter'||k===' '){e.preventDefault();choose(foc,true);return}
+    else return;
+    e.preventDefault();foc=i;
+    Array.prototype.forEach.call(list.children,function(c,j){c.tabIndex=j===i?0:-1});
+    list.children[i].focus({preventScroll:true});scrollTo(list.children[i]);
+  });
+  ['wheel','pointerdown','touchstart'].forEach(function(t){list.addEventListener(t,function(){anim=null},{passive:true})});
+  document.querySelector('.ah6-root').addEventListener('keydown',function(e){if(e.key==='Escape')back()});
+  $('ah6-back').addEventListener('click',back);
+  $('ah6-retry').addEventListener('click',function(){var H=hist();H.push(make(step,H.length+1));sel=foc=H.length-1;render(false)});
+  $('ah6-reset').addEventListener('click',function(){seed(false);render(false)});
+  Array.prototype.forEach.call(document.querySelectorAll('input[name=ah6-step]'),function(r){
+    r.addEventListener('change',function(){step=r.value;sel=foc=Math.max(0,hist().length-1);render(false)})});
+  function step_(dt){if(!anim)return false;anim.t+=dt;var p=Math.min(1,anim.t/220),e=1-Math.pow(1-p,3);
+    list.scrollLeft=anim.from+(anim.to-anim.from)*e;if(p>=1){anim=null;return false}return true}
+  function snapToTarget(){if(anim){list.scrollLeft=anim.to;anim=null}}
+  function frame(now){var dt=last?Math.min(now-last,50):16.7;last=now;
+    var moving=reduce()?(snapToTarget(),false):step_(dt);
+    raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+      document.documentElement.setAttribute('data-theme',m.theme)});
+  seed(true);render(false);
+})();</script>
+</body></html>
