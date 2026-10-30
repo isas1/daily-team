@@ -1,0 +1,10 @@
+{
+  "url": "https://forevercomponents.com/?collection=popular",
+  "observedDate": "2026-10-30",
+  "method": "Live Popular collection, 12 results; first three rendered cards in ranked order. Displayed score includes the site's implicit +1; not raw vote totals. Snapshot reused for both experiment nights, not claimed as a fresh ranking at run time.",
+  "components": [
+    {"rank": 1, "name": "Morphing Action FAB", "category": "Buttons & Toggles", "displayedScore": 9},
+    {"rank": 2, "name": "Success Check", "category": "Feedback & States", "displayedScore": 7},
+    {"rank": 3, "name": "Typewriter Loop", "category": "Kinetic Typography", "displayedScore": 6}
+  ]
+}

@@ -1,0 +1,127 @@
+name: Two-night editions
+
+on:
+  schedule:
+    - cron: '30 0 * * *'
+    - cron: '30 2 * * *'
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: Edition lane
+        type: choice
+        options: [news, culture, popular]
+        required: true
+      date:
+        description: Approved date (2026-10-30 or 2026-10-31)
+        required: true
+
+permissions:
+  contents: read
+
+# Same lock as Daily: generated records and Pages must not overwrite each other.
+concurrency:
+  group: daily
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      due: ${{ steps.slot.outputs.due }}
+      date: ${{ steps.slot.outputs.date }}
+      lane: ${{ steps.slot.outputs.lane }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: slot
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          REQUEST_DATE: ${{ inputs.date }}
+          REQUEST_LANE: ${{ inputs.lane }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = workflow_dispatch ]; then
+            node --input-type=module <<'JS' >> "$GITHUB_OUTPUT"
+          import { DATES, LANES } from './editions.mjs';
+          const date = process.env.REQUEST_DATE, lane = process.env.REQUEST_LANE;
+          if (!DATES.includes(date) || !LANES.includes(lane)) throw new Error('outside approved experiment');
+          console.log(`due=true\ndate=${date}\nlane=${lane}`);
+          JS
+          else
+            node editions.mjs slot >> "$GITHUB_OUTPUT"
+          fi
+  run:
+    needs: gate
+    if: needs.gate.outputs.due == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    permissions:
+      contents: write
+    env:
+      TZ: Europe/Lisbon
+      PROVIDER: claude
+      RUN_DATE: ${{ needs.gate.outputs.date }}
+      LANE: ${{ needs.gate.outputs.lane }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - run: npm install --global @anthropic-ai/claude-code@2.1.288
+      - name: Generate six components and connected demo
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+        run: node editions.mjs run "$LANE" "$RUN_DATE"
+      - name: Cover
+        if: success()
+        continue-on-error: true
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+        run: node cover.mjs --date "$RUN_DATE" --out "editions/$LANE/days"
+      - name: Screenshots
+        if: always()
+        run: sh shot.sh "editions/$LANE/days" || true
+      - name: Publish normal and extra editions
+        if: always()
+        env:
+          PAGES_URL: https://isas1.github.io/daily-team/
+          GITHUB_REPOSITORY: isas1/daily-team
+        run: node publish.mjs --site _site
+      - name: Save receipts and generated records
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add README.md ARCHIVE.md days editions
+          if [ -f .cache/feed-backlog.json ]; then git add .cache/feed-backlog.json; fi
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "feat: adds $RUN_DATE $LANE edition"
+          gh auth setup-git
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        if: always() && vars.PAGES == 'true'
+        with:
+          path: _site
+  pages:
+    needs: run
+    if: always() && needs.run.result != 'skipped' && vars.PAGES == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

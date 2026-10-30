@@ -142,6 +142,20 @@ function guestNote(day) {
   return [`**Guest:** ${g.role} (${g.guest.kind}; ${g.guest.source}). The method is drawn from public-domain history, myth, or literature, or invented. ${voice}, and nothing here is endorsed by anyone.`, ''];
 }
 
+// Fetch success and actual influence are separate facts, both visible in the receipt.
+export function feedEvidence(day, daysDir) {
+  const file = join(daysDir, day.date, 'planning-input.json');
+  if (!existsSync(file)) return [];
+  const input = JSON.parse(readFileSync(file, 'utf8'));
+  const selected = new Set(day.planning?.selectedSourceIds || []);
+  return [
+    ...(input.sources || []).map(s => `${s.source}: ${s.status}${s.count !== undefined ? ` (${s.count} items)` : ''}${s.reason ? ` — ${s.reason}` : ''}`),
+    ...(input.candidates || []).filter(c => selected.has(c.id)).map(c => `Used feed inspiration: ${c.title} — ${c.url}`),
+    ...(selected.size ? [] : ['No feed article recorded as used; fetched items may have been considered without selection.']),
+    ...(day.planning?.selection ? [`Chosen opportunity: ${day.planning.selection.id}. ${day.planning.selection.rationale}`] : []),
+  ];
+}
+
 export function dayReadme(day, daysDir, pagesUrl) {
   const { constraint, season, suggestedBy } = parseTeam(day.team);
   const dir = join(daysDir, day.date);
@@ -157,6 +171,7 @@ export function dayReadme(day, daysDir, pagesUrl) {
     ...(season ? [`**Season:** ${season}`, ''] : []),
     ...(day.decision ? [`**Decision:** ${day.decision}`, ''] : []),
     ...(hasCover(day, daysDir) ? [`<img src="cover.png" alt="Designed cover for ${esc(title(day))}" width="100%">`, '', '[Cover art direction](cover.json) · [Cover source](cover.html)', ''] : []),
+    ...(feedEvidence(day, daysDir).length ? ['## Feed evidence', '', ...feedEvidence(day, daysDir).map(line => `- ${cell(line)}`), '', '[Saved planning input](planning-input.json)', ''] : []),
     '## Asset', '',
     ...(day.pack ? ['[Pack manifest](pack.json) · [Shared tokens](tokens.json) · [Planning input](planning-input.json)', '',
       'Generated candidates require human review. Library acceptance: unreviewed.', ''] : []),
@@ -351,9 +366,10 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
     return `<h2>${esc(heading)}${note}</h2>\n<iframe sandbox="${SANDBOX}" title="${esc(a.file)}" srcdoc="${esc(html)}"></iframe>`;
   });
   const s = session(day);
-  const plan = repo ? `<p><a href="https://github.com/${esc(repo)}/tree/main/days/${day.date}">${s ? 'Source' : 'Team plan and source'}</a></p>` : '';
+  const plan = repo ? `<p><a href="https://github.com/${esc(repo)}/tree/main/${day.edition ? `editions/${encodeURIComponent(day.edition.lane)}/` : ''}days/${day.date}">${s ? 'Source' : 'Team plan and source'}</a></p>` : '';
   return page(`${day.date}: ${title(day)}`, [
     `<div class="kicker">Daily team · ${day.date}</div>`,
+    ...(!day.edition ? [`<p><a href="${root}editions/">Extra editions</a></p>`] : []),
     `<h1>${esc(titleCase(title(day)))}</h1>`,
     `<p class="muted">${esc(day.brief || day.task)}</p>`,
     day.request ? `<p>Request source: <a href="https://github.com/${esc(day.request.repository)}/issues/${Number(day.request.number)}">${esc(day.request.repository)} #${Number(day.request.number)}</a> · Local prototype</p>` : '',
@@ -361,6 +377,7 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
     day.decision ? `<p><strong>Decision:</strong> ${esc(day.decision)}</p>` : '',
     hasCover(day, daysDir) ? `<img src="${imagePrefix}cover.png" alt="Designed cover for ${esc(title(day))}">` : '',
     comparison,
+    ...(feedEvidence(day, daysDir).length ? ['<h2>Feed evidence</h2>', `<ul>${feedEvidence(day, daysDir).map(line => `<li>${esc(line)}</li>`).join('')}</ul>`] : []),
     ...(day.pack ? [`<p>Generated pack candidates await human review. <a href="${imagePrefix}pack.json">Pack manifest</a> · <a href="${imagePrefix}tokens.json">Shared tokens</a> · <a href="${imagePrefix}planning-input.json">Saved input</a></p>`] : []),
     ...(frames.length ? frames : [`<p>No asset. ${esc(day.error || '')}</p>`]),
     s ? sessionHtml(s) : '', plan, archiveHtml,
@@ -417,7 +434,33 @@ export function publish(root, { pagesUrl = '', site = '', repo = '', suggestions
   text = replaceBlock(text, 'RECENT', recentBlock(days, daysDir));
   writeFileSync(readme, text);
   if (site) buildSite(site, days, daysDir, repo, pagesUrl);
+  publishEditions(root, { site, repo, pagesUrl });
   return days.length;
+}
+
+export function publishEditions(root, { site = '', repo = '', pagesUrl = '' } = {}) {
+  const links = [];
+  for (const lane of ['news', 'culture', 'popular']) {
+    const base = join(root, 'editions', lane), dir = join(base, 'days');
+    const records = loadDays(dir), ready = [];
+    if (!records.length) continue;
+    for (const day of records) {
+      try { assertPackExport(day, join(dir, day.date)); }
+      catch (e) { console.warn(`Edition ${lane}/${day.date} withheld: ${e.message}`); continue; }
+      const card = join(dir, day.date, 'team.png');
+      if (!existsSync(card)) renderPng(cardHtml(day, 1), card, 1200, 630);
+      writeFileSync(join(dir, day.date, 'README.md'), dayReadme(day, dir, pagesUrl ? `${pagesUrl}editions/${lane}/` : ''));
+      ready.push(day);
+    }
+    writeFileSync(join(base, 'ARCHIVE.md'), archive(ready, dir));
+    writeFileSync(join(base, 'README.md'), `# ${lane} editions\n\n[Main daily record](../../README.md)\n\n` + recentBlock(ready, dir) + '\n');
+    if (site) buildSite(join(site, 'editions', lane), ready, dir, repo, pagesUrl ? `${pagesUrl}editions/${lane}/` : '');
+    links.push(`<li><a href="${lane}/">${lane}</a>: ${ready.length} published / ${records.length} recorded</li>`);
+  }
+  if (site) {
+    const out = join(site, 'editions'); mkdirSync(out, { recursive: true });
+    writeFileSync(join(out, 'index.html'), page('Extra editions', `<h1>Extra editions</h1><p>30–31 October 2026. Normal daily runs continue.</p><ul>${links.join('')}</ul><a href="../">Normal daily run</a>`, { root: '../' }));
+  }
 }
 
 function main() {
