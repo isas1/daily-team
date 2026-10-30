@@ -143,6 +143,7 @@ jobs:
           TOKEN: ${{ github.token }}
         run: |
           git add README.md ARCHIVE.md days .cache/feed-backlog.json 2>/dev/null || git add README.md ARCHIVE.md days
+          if [ -d editions ]; then git add editions; fi
           if git diff --cached --quiet; then echo "Nothing to commit."; exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

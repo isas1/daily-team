@@ -66,6 +66,12 @@ No open suggestions yet.
 
 [Suggest a task](https://github.com/isas1/daily-team/issues/new?template=task-suggestion.yml), vote with a thumbs-up on open suggestions, or read [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Two-night extra editions
+
+30–31 October 2026, Lisbon time: 00:30 news/feed inspiration, 02:30 culture, 04:30 popular-component expansion. Normal 06:00 run continues. Culture continues daily afterward: a different past or present culture, without repeats, until the sourced queue ends. Twelve cultures currently queued through 10 November; the list can be extended by appending new culture IDs. News/popular stop after 31 October. Separate records preserve the normal day. Extra runs use six components plus one connected demo and skip model comparisons. Scheduled GitHub jobs may start late.
+
+[Browse extra editions](https://isas1.github.io/daily-team/editions/) · [Schedule and evidence guide](docs/extra-editions.md)
+
 ## Component packs and feed planning
 
 From 2026-10-27, packs contain distinct standalone components, shared tokens and one connected project. One planning call handles team debate, opportunity selection and structured metadata. Smashing Magazine and Hacker News feeds supply bounded inspiration; cached backlog and original tasks handle source failure. Codrops stays disabled after its candidate feed returned HTTP 410. Custom briefs retain priority.

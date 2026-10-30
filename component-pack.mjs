@@ -82,6 +82,7 @@ export function packInputProblems(pack, input, custom = false) {
   const allowed = new Set(input.candidates.map((c) => c.id));
   const problems = [];
   if (Array.isArray(pack.opportunities) && pack.opportunities.some((o) => !allowed.has(o?.id))) problems.push('shortlist references unknown input opportunity');
+  if (input.requiredKind && input.candidates.find(c => c.id === pack.selection?.id)?.kind !== input.requiredKind) problems.push(`edition must select a ${input.requiredKind} opportunity`);
   if (custom && pack.selection?.id !== 'daily-task') problems.push('explicit custom brief must be selected');
   return problems;
 }
@@ -131,11 +132,12 @@ export function packArtifactProblems(html) {
 export function makeManifest(day) {
   const problems = packProblems(day.pack);
   if (problems.length) throw new Error(`invalid pack: ${problems.join('; ')}`);
-  return { ...day.pack, id: `${day.date}-${day.pack.id}`, date: day.date, reviewStatus: 'needs-review',
+  const prefix = `${day.date}${day.edition ? `-${day.edition.lane}` : ''}-${day.pack.id}`;
+  return { ...day.pack, ...(day.edition ? { edition: day.edition } : {}), id: prefix, date: day.date, reviewStatus: 'needs-review',
     inputHash: day.planning?.inputHash, warnings: day.packWarnings || [],
     components: day.pack.components.map((c) => {
       const a = day.artifacts.find((a) => a.row === c.row);
-      return { ...c, id: `${day.date}-${day.pack.id}-${c.id}`, packId: `${day.date}-${day.pack.id}`,
+      return { ...c, id: `${prefix}-${c.id}`, packId: prefix,
         reviewStatus: 'needs-review', libraryAcceptance: 'unreviewed',
         generationStatus: a?.status || 'not-built', problems: a?.problems || [], sha256: a?.sha256 || null };
     }), demo: { ...day.pack.demo, generationStatus: day.artifacts.find((a) => a.kind === 'piece')?.status || 'not-built' } };
