@@ -42,7 +42,7 @@ test('feed receipt separates fetched from used and escapes hostile saved text', 
   const day={date,task:'Test task',team:'',artifacts:[],status:'failed',planning:{selection:{id:'daily-task',rationale:'Task fits'},selectedSourceIds:[]}};
   assert.match(feedEvidence(day,root).join(), /fetched \(20 items\)/); assert.match(feedEvidence(day,root).join(), /No feed article/);
   day.planning.selectedSourceIds=['feed-1']; assert.match(feedEvidence(day,root).join(), /Used feed inspiration/);
-  assert.doesNotMatch(dayReadme(day,root,''), /<script>/);
+  assert.doesNotMatch(dayReadme(day,root,''), /<script>/i);
   rmSync(root,{recursive:true,force:true});
 });
 
