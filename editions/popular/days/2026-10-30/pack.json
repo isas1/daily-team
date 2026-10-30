@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "categoryVersion": 1,
+  "id": "2026-10-30-popular-moment-link-share-sheet",
+  "name": "Moment link",
+  "description": "A bottom share sheet for a media tool that builds a clip link with an optional start time, copies it, reports clipboard failure with recovery, and closes by swipe, button or Escape.",
+  "project": "Share panel for a clip editor. Sample clip harbour-dawn.mp4, 4:12 long, base link https://media.example/v/hd7k2. Three popular seeds from the dated 2026-10-30 snapshot are extended into share jobs: Morphing Action FAB as the trigger, Typewriter Loop as a one-pass link line, and Success Check as the copy result.",
+  "sizeRationale": "Six rows cover open, contain, change, show, copy and recover. Each removal breaks one visitor step. Extra share targets would repeat the copy job.",
+  "opportunities": [
+    {
+      "id": "daily-task",
+      "need": "Extend the three highest-ranked components in the supplied snapshot into a coherent project with new states, without claiming fresh rankings.",
+      "use": "An editor shares a clip that starts at 1:42 with a reviewer and gets a definite copied or failed result.",
+      "interaction": "Trigger morph, sheet drag and snap with button and Escape alternatives, start-time input, one-pass link typing, copy with check, failure notice with Retry and manual select.",
+      "similarity": "2026-10-29 import rows used label swaps and cancel. 2026-10-28 used failure with retry. This pack adds a modal surface, clipboard permission failure and a link that changes from user input. Tradeoff: there are no destination targets, so it is narrower than a system share sheet."
+    }
+  ],
+  "selection": {
+    "id": "daily-task",
+    "rationale": "It is the only candidate and the explicit brief. The seeds map to distinct share jobs, not palette variants."
+  },
+  "tokens": {
+    "colors": {
+      "dark": {
+        "bg": "#111316",
+        "surface": "#1a1d21",
+        "text": "#e8eaed",
+        "muted": "#9aa0a6",
+        "accent": "#5b9cf5",
+        "border": "#2c3036"
+      },
+      "light": {
+        "bg": "#f6f7f9",
+        "surface": "#ffffff",
+        "text": "#16181c",
+        "muted": "#5f6670",
+        "accent": "#1f6fd6",
+        "border": "#d9dde3"
+      }
+    },
+    "typography": {
+      "family": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+      "size": "15px"
+    },
+    "spacing": {
+      "gap": "8px",
+      "padding": "16px"
+    },
+    "radii": {
+      "control": "10px"
+    },
+    "motion": {
+      "duration": "200ms",
+      "easing": "ease-out"
+    }
+  },
+  "components": [
+    {
+      "row": 1,
+      "id": "2026-10-30-popular-moment-link-share-sheet-share-morph-trigger",
+      "file": "artifact-1.html",
+      "name": "Share morph trigger",
+      "description": "Floating share button that morphs into the sheet's close control and takes focus back when the sheet closes.",
+      "category": "Actions",
+      "tags": [
+        "fab",
+        "morph",
+        "trigger",
+        "aria-expanded",
+        "focus-return"
+      ],
+      "purpose": "Open the share panel and give one constant place to close it.",
+      "use": "An editor finishes a cut and taps Share at the bottom right.",
+      "input": "Click or tap the 56px button. Keyboard: Tab to it, Enter or Space toggles.",
+      "outcome": "aria-expanded becomes true. The share glyph rotates into a close glyph, the label swaps from Share to Close in a reserved width, and the sheet opens.",
+      "recovery": "Pressing it again closes the sheet. When the sheet closes by any path, focus returns to this button.",
+      "mechanism": "One native button. Glyph strokes move with a single transform transition. Repeated presses during the 200ms morph set the final state directly, with no queue.",
+      "nearestAnalogue": "2026-10-29 cancel import used a reserved-width label swap. This button changes role between open and close and owns focus return.",
+      "usefulness": "A fixed open and close target avoids hunting for a dismiss control.",
+      "creativeDifference": "Extends Morphing Action FAB: the morph carries meaning (open versus close) and links to a dialog's state.",
+      "states": [
+        "idle: 'Share', reached on load",
+        "pressed: 1px sink, reached on pointer or key down",
+        "open: close glyph with 'Close', reached when the sheet opens",
+        "focus: 2px accent ring at 2px offset, reached by Tab",
+        "focus-return: focused after any close",
+        "reduced-motion: glyph swaps without rotation"
+      ],
+      "sources": [
+        {
+          "title": "Forever Components popular collection (snapshot 2026-10-30)",
+          "url": "https://forevercomponents.com/?collection=popular"
+        },
+        {
+          "title": "ARIA Authoring Practices: Button",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-30-popular-moment-link-share-sheet",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "e8966b84de857a13a0ce9466d0158d45ad5ba15144e89a1b640611a5b574c7f9"
+    },
+    {
+      "row": 2,
+      "id": "2026-10-30-popular-moment-link-share-sheet-snap-bottom-sheet",
+      "file": "artifact-2.html",
+      "name": "Snap bottom sheet",
+      "description": "Modal bottom panel with peek and full snap points that closes by swipe, button or Escape.",
+      "category": "Layout",
+      "tags": [
+        "bottom-sheet",
+        "dialog",
+        "drag",
+        "snap",
+        "escape-key",
+        "focus-trap"
+      ],
+      "purpose": "Hold the share controls above the media without leaving the editor.",
+      "use": "On a phone, the editor swipes the sheet down after copying.",
+      "input": "Drag the handle or swipe the sheet. Keyboard: the handle is a button where Enter toggles peek and full and Up and Down choose a snap. Escape closes. Close button in the header.",
+      "outcome": "The sheet settles at peek (50% height), full (90%) or closed. Focus stays inside while it is open.",
+      "recovery": "A drag released above the threshold snaps back. Closing restores focus to row 1.",
+      "mechanism": "Pointer events track translateY. On release, a swipe faster than 0.5 px/ms or a drag past 40% closes the sheet. Otherwise it snaps to the nearest point. A native dialog element provides the backdrop and inert background. Content scrolls inside a max-height body.",
+      "nearestAnalogue": "2026-10-26 log viewer was a compact inline panel. This is a modal surface with three dismiss paths.",
+      "usefulness": "A thumb-reach surface on phones that stays usable by keyboard on desktop.",
+      "creativeDifference": "Swipe, button and key are equal paths to one close function, so none is decorative.",
+      "states": [
+        "closed: not rendered, reached on load and after close",
+        "peek: 50% height, reached on open",
+        "full: 90% height, reached by drag up or handle Up",
+        "dragging: follows pointer without transition",
+        "snapping-back: returns to last snap, reached by a short drag",
+        "focus: handle ring, reached by Tab",
+        "reduced-motion: snaps set instantly"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Dialog (Modal)",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-30-popular-moment-link-share-sheet",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "d3cf02fab2abd40cc11aa6e00ed07b4f184f00840687a07b5c6041ad1d4a2e74"
+    },
+    {
+      "row": 3,
+      "id": "2026-10-30-popular-moment-link-share-sheet-start-at-field",
+      "file": "artifact-3.html",
+      "name": "Start-at field",
+      "description": "Checkbox and mm:ss field that adds a start time to the link, clamped to the clip length.",
+      "category": "Inputs",
+      "tags": [
+        "timestamp",
+        "checkbox",
+        "time-field",
+        "validation",
+        "media"
+      ],
+      "purpose": "Make the shared link open at a chosen moment.",
+      "use": "The editor ticks 'Start at' and enters 1:42 so the reviewer lands on the cut.",
+      "input": "Click or tap the checkbox and type in the field. Keyboard: Space toggles, Tab to the field, Up and Down step 1 second, Shift with Up or Down steps 10.",
+      "outcome": "A valid time writes t=102 into the shared state. The field prefills with the playhead time 1:42.",
+      "recovery": "An invalid or out-of-range entry shows 'Clip is 4:12 long' and keeps the last valid value. Unticking removes the parameter.",
+      "mechanism": "Native checkbox plus a text input with inputmode numeric. Parses m:ss or plain seconds. Commits on blur or Enter, never mid-typing.",
+      "nearestAnalogue": "2026-10-28 range selector chose a data window. This sets one point inside a media file.",
+      "usefulness": "A link that starts at 0:00 makes the reviewer scrub to find the cut.",
+      "creativeDifference": "Commit-on-blur keeps the link line from retyping on every keystroke.",
+      "states": [
+        "off: field disabled, link without t, reached on load",
+        "on: field enabled with playhead time, reached by checking",
+        "invalid: message below the field with the last value kept",
+        "clamped: values above 4:12 are refused, not rounded",
+        "focus: 2px ring"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Checkbox",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-30-popular-moment-link-share-sheet",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "dc5c316b8454b243e4007e87daffb3c29f7f74b1cab796182fd8cddbe91f4a36"
+    },
+    {
+      "row": 4,
+      "id": "2026-10-30-popular-moment-link-share-sheet-link-retype-line",
+      "file": "artifact-4.html",
+      "name": "Link retype line",
+      "description": "Read-only link display that retypes only the changed tail once and middle-truncates long URLs.",
+      "category": "Content",
+      "tags": [
+        "typewriter",
+        "url",
+        "truncation",
+        "read-only",
+        "diff"
+      ],
+      "purpose": "Show exactly which link will be copied, and show visibly when it changes.",
+      "use": "After entering 1:42, the editor sees '?t=102' type onto the end of the link.",
+      "input": "Display only. Click or tap selects the full text. Keyboard: Tab focuses the read-only input, and Ctrl+A or Cmd+A selects it.",
+      "outcome": "The common prefix stays fixed and the differing suffix deletes and types at 24ms per character, once.",
+      "recovery": "A new change during typing jumps straight to the new target. The underlying input value is always the full final URL.",
+      "mechanism": "Compute the longest common prefix between the old and new URL, animate only the remainder, then stop. The visual layer uses middle ellipsis with the host and query always visible. The full value sits in a read-only input for selection and screen readers.",
+      "nearestAnalogue": "None in recent dates. Typewriter Loop in the 2026-10-30 snapshot is the ancestor.",
+      "usefulness": "The visitor confirms the start time before copying, without parsing a URL.",
+      "creativeDifference": "Extends Typewriter Loop: no loop, and the typing marks the diff, so motion carries information.",
+      "states": [
+        "static: full link shown, reached on open",
+        "retyping: suffix animates, reached by a row 3 commit",
+        "truncated: middle ellipsis below 360px width",
+        "selected: text highlighted, reached by tap or row 6 Select link",
+        "focus: 2px ring",
+        "reduced-motion: new text replaced instantly"
+      ],
+      "sources": [
+        {
+          "title": "Forever Components popular collection (snapshot 2026-10-30)",
+          "url": "https://forevercomponents.com/?collection=popular"
+        }
+      ],
+      "packId": "2026-10-30-popular-moment-link-share-sheet",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "4c24deac2ecb58a0ef23cc3ac3fd392d078352d7e2407e480f6c6407fb10cac8"
+    },
+    {
+      "row": 5,
+      "id": "2026-10-30-popular-moment-link-share-sheet-copy-check-button",
+      "file": "artifact-5.html",
+      "name": "Copy check button",
+      "description": "Copy button that writes to the clipboard and draws a check once on success.",
+      "category": "Actions",
+      "tags": [
+        "copy",
+        "clipboard",
+        "success-check",
+        "button",
+        "idempotent"
+      ],
+      "purpose": "Put the current link on the clipboard and confirm it.",
+      "use": "The editor taps Copy link and sees 'Copied 1:42 link'.",
+      "input": "Click or tap the 44px full-width button. Keyboard: Tab, then Enter or Space.",
+      "outcome": "navigator.clipboard.writeText runs. On success the check stroke draws over 200ms and the label reads 'Copied'. It returns to 'Copy link' after 2s.",
+      "recovery": "On rejection or a 1500ms timeout, the state hands off to row 6. A press while pending is ignored. A press while 'Copied' writes again and restarts one timer.",
+      "mechanism": "A single job with an attempt id. Late results from older attempts are dropped. Label sits in a width reserved for its longest string: Copy link, Copying, Copied, Copy failed.",
+      "nearestAnalogue": "2026-10-29 undo import used a reserved-width label swap. This adds an external permission-dependent result.",
+      "usefulness": "Copy is the core action. A silent copy leaves the visitor unsure.",
+      "creativeDifference": "Extends Success Check: the check appears only for a confirmed write, never optimistically.",
+      "states": [
+        "idle: 'Copy link', reached on open",
+        "pressed: 1px sink",
+        "pending: disabled 'Copying', reached on press",
+        "copied: check plus 'Copied', reached on resolve",
+        "failed: 'Copy failed', reached on reject or timeout",
+        "focus: 2px ring",
+        "reduced-motion: check appears without stroke draw"
+      ],
+      "sources": [
+        {
+          "title": "Forever Components popular collection (snapshot 2026-10-30)",
+          "url": "https://forevercomponents.com/?collection=popular"
+        },
+        {
+          "title": "ARIA Authoring Practices: Button",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-30-popular-moment-link-share-sheet",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "865ead7764756a4a244d7b37223c9173b64a9f5601a57dcd11f911c78d21db67"
+    },
+    {
+      "row": 6,
+      "id": "2026-10-30-popular-moment-link-share-sheet-copy-failure-notice",
+      "file": "artifact-6.html",
+      "name": "Copy failure notice",
+      "description": "Inline notice that names the clipboard failure and offers Retry, Select link and Dismiss.",
+      "category": "Feedback",
+      "tags": [
+        "error",
+        "retry",
+        "clipboard",
+        "live-region",
+        "fallback"
+      ],
+      "purpose": "Give a working path to the link when automatic copy fails.",
+      "use": "In a locked-down browser the editor reads 'Clipboard blocked by browser', taps Select link and presses Ctrl+C.",
+      "input": "Click or tap Retry, Select link or Dismiss. Keyboard: focus moves to the notice heading. Tab to each button, Enter or Space.",
+      "outcome": "The reason is named: 'Clipboard blocked by browser', 'Page not secure' or 'Clipboard did not answer'. Select link focuses and selects row 4.",
+      "recovery": "Retry disables while pending and clears the notice on success. Dismiss returns row 5 to idle. Closing the sheet clears the notice.",
+      "mechanism": "Maps NotAllowedError, a missing isSecureContext and the timeout to three messages. role=alert on first show only. A demo toggle 'Simulate blocked clipboard' forces the first path.",
+      "nearestAnalogue": "2026-10-28 load stages failure named the failed stage with one Retry. This adds a manual fallback that needs no permission.",
+      "usefulness": "A clipboard failure with no fallback strands the visitor.",
+      "creativeDifference": "Every failure state ends in a path that works: retry or manual select.",
+      "states": [
+        "hidden: no failure, reached on open",
+        "blocked: permission message, reached by NotAllowedError or the demo toggle",
+        "insecure: 'Page not secure', reached when isSecureContext is false",
+        "timed-out: reached after 1500ms with no answer",
+        "retrying: Retry disabled",
+        "manual: link selected with hint 'Press Ctrl+C', reached by Select link",
+        "focus: 2px ring"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Alert",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-30-popular-moment-link-share-sheet",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "525c79912306e537c5c3c8daf59d5ac7a2013901759e4f8f210b2a9ff5d93568"
+    }
+  ],
+  "demo": {
+    "file": "piece.html",
+    "rows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "sharedState": "One shareState object {open, snap, startOn, startSec:102, duration:252, baseUrl:'https://media.example/v/hd7k2', url, copy:{status, attempt, reason}}. Row 1 sets open and row 2 renders it. Row 3 commits startSec, which rebuilds url. Row 4 retypes the url diff. Row 5 writes url and sets copy.status. Row 6 renders on status 'failed' and calls row 5's job for Retry or row 4's select for the manual path. Closing resets copy and returns focus to row 1.",
+    "generationStatus": "ok"
+  },
+  "edition": {
+    "lane": "popular",
+    "date": "2026-10-30",
+    "timezone": "Europe/Lisbon",
+    "popularSnapshot": {
+      "url": "https://forevercomponents.com/?collection=popular",
+      "observedDate": "2026-10-30",
+      "method": "Live Popular collection, 12 results; first three rendered cards in ranked order. Displayed score includes the site's implicit +1; not raw vote totals. Snapshot reused for both experiment nights, not claimed as a fresh ranking at run time.",
+      "components": [
+        {
+          "rank": 1,
+          "name": "Morphing Action FAB",
+          "category": "Buttons & Toggles",
+          "displayedScore": 9
+        },
+        {
+          "rank": 2,
+          "name": "Success Check",
+          "category": "Feedback & States",
+          "displayedScore": 7
+        },
+        {
+          "rank": 3,
+          "name": "Typewriter Loop",
+          "category": "Kinetic Typography",
+          "displayedScore": 6
+        }
+      ]
+    }
+  },
+  "date": "2026-10-30",
+  "reviewStatus": "needs-review",
+  "inputHash": "9550e31b045bf935a8ca442e048b4c5f5dc3f6ed3ec8f19c99701a28ae223876",
+  "warnings": []
+}

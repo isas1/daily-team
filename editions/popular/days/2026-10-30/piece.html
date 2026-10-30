@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Moment link · Share sheet for harbour-dawn.mp4</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--g:var(--pack-spacing-gap);--p:var(--pack-spacing-padding);--r:var(--pack-radii-control);--d:var(--pack-motion-duration);--e:var(--pack-motion-easing);--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+html[data-theme=light]{color-scheme:light}html[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font:var(--pack-typography-size)/1.35 var(--pack-typography-family)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ms-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.ms-root{position:relative;width:min(100%,720px);height:100%;overflow:hidden;container:ms-root/size;background:var(--pack-bg);border-inline:1px solid var(--pack-border)}
+
+/* Editor behind the sheet */
+.ms-ed{position:absolute;inset:0;display:flex;flex-direction:column;gap:var(--g);padding:var(--p) var(--p) calc(56px + var(--p)*2)}
+.ms-top{display:flex;justify-content:space-between;align-items:baseline;gap:var(--g);flex-wrap:wrap}
+.ms-name{margin:0;font-size:1.07em;font-weight:600;overflow-wrap:anywhere}
+.ms-meta{margin:0;color:var(--pack-muted);font-size:.87em}
+.ms-prev{flex:1;min-height:0;position:relative;display:flex;align-items:flex-end;padding:var(--g);border:1px solid var(--pack-border);border-radius:var(--r);background:linear-gradient(180deg,var(--pack-surface) 0 58%,color-mix(in srgb,var(--pack-accent) 18%,var(--pack-surface)) 58% 60%,var(--pack-bg) 60%);overflow:hidden}
+.ms-tc{padding:4px var(--g);border-radius:calc(var(--r) - 4px);background:var(--pack-bg);border:1px solid var(--pack-border);font-size:.87em;font-variant-numeric:tabular-nums}
+.ms-track{flex:none;height:4px;border-radius:4px;background:var(--pack-border)}
+.ms-track span{display:block;height:100%;width:40.5%;border-radius:inherit;background:var(--pack-accent)}
+.ms-est{margin:0;min-height:1.35em;color:var(--pack-muted);font-size:.87em}
+
+.ms-scrim{position:absolute;inset:0;z-index:1;background:var(--pack-bg);opacity:0}
+
+/* Row 2: snap bottom sheet */
+.ms-sheet{position:absolute;left:0;right:0;bottom:0;z-index:2;height:90%;display:flex;flex-direction:column;background:var(--pack-surface);border:1px solid var(--pack-border);border-bottom:0;border-radius:16px 16px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.18);will-change:transform;container:ms-sheet/inline-size;transform:translateY(100%)}
+.ms-hd{flex:none;display:flex;align-items:flex-end;gap:var(--g);padding-right:var(--p);touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.ms-grip{position:relative;flex:1;min-width:0;min-height:56px;padding:24px var(--p) var(--g);border:0;background:none;text-align:left;font-weight:600;cursor:grab;border-radius:var(--r);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms-grip::before{content:"";position:absolute;top:8px;left:50%;width:32px;height:4px;margin-left:-16px;border-radius:4px;background:var(--pack-muted);opacity:.6}
+.ms-close{flex:none;min-height:44px;margin-bottom:4px;padding:0 var(--p);border:1px solid var(--pack-border);border-radius:var(--r);background:none;cursor:pointer;transition:transform 80ms var(--e),border-color var(--d) var(--e)}
+.ms-body{flex:none;min-height:0;overflow:auto;overscroll-behavior:contain;padding:var(--g) var(--p) var(--p);display:flex;flex-direction:column;gap:var(--g)}
+.ms-ft{flex:none;height:calc(56px + var(--p));display:flex;align-items:center;padding:0 calc(56px + var(--p)*2) var(--p) var(--p);border-top:1px solid var(--pack-border)}
+.ms-lab{color:var(--pack-muted);font-size:.87em}
+.ms-hint{margin:0;color:var(--pack-muted);font-size:.8em}
+
+/* Row 3: start-at field */
+.ms-start{display:flex;flex-direction:column;gap:4px}
+.ms-srow{display:flex;flex-wrap:wrap;align-items:center;gap:var(--g)}
+.ms-chk{display:flex;align-items:center;gap:var(--g);min-height:44px;padding-right:var(--g);cursor:pointer;font-weight:500}
+.ms-chk input{width:20px;height:20px;margin:0;accent-color:var(--pack-accent);cursor:pointer}
+.ms-time{display:flex;gap:4px;flex:1 1 auto;min-width:0}
+.ms-tin,.ms-step{height:44px;border:1px solid var(--pack-border);border-radius:var(--r);background:var(--pack-bg);transition:border-color var(--d) var(--e),opacity var(--d) var(--e),transform 80ms var(--e)}
+.ms-tin{flex:1 1 4.6em;width:4.6em;min-width:0;max-width:6em;padding:0 4px;text-align:center;font-size:1.07em;font-variant-numeric:tabular-nums}
+.ms-tin[aria-invalid=true]{border:2px solid var(--pack-text)}
+.ms-step{flex:0 0 44px;width:44px;padding:0;font-size:1.2em;cursor:pointer}
+.ms-tin:disabled,.ms-step:disabled{opacity:.45;cursor:not-allowed}
+.ms-tmsg{margin:0;min-height:1.35em;font-size:.87em;color:var(--pack-muted)}
+.ms-tmsg.ms-bad{color:var(--pack-text);font-weight:600;border-left:4px solid var(--pack-accent);padding-left:var(--g)}
+
+/* Row 4: link retype line */
+.ms-box{position:relative;height:44px;border:1px solid var(--pack-border);border-radius:var(--r);background:var(--pack-bg);font-family:var(--mono);font-size:.86em;transition:border-color var(--d) var(--e)}
+.ms-box:focus-within,.ms-box[data-sel]{outline:2px solid var(--pack-accent);outline-offset:2px;border-color:var(--pack-accent)}
+.ms-vis{position:absolute;inset:0;display:flex;align-items:center;padding:0 var(--g);white-space:nowrap;overflow:hidden;pointer-events:none}
+.ms-mid{min-width:0;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
+.ms-sch,.ms-host,.ms-tail{flex:none}
+.ms-sch{color:var(--pack-muted)}
+.ms-host{font-weight:600}
+.ms-car{flex:none;width:2px;height:1.2em;margin-left:1px;background:var(--pack-accent);opacity:0}
+.ms-typing .ms-car{opacity:1}
+.ms-new{color:var(--pack-accent);transition:color 600ms var(--e)}
+.ms-fade .ms-new{color:inherit}
+.ms-linp{position:absolute;inset:0;width:100%;margin:0;padding:0 var(--g);border:0;border-radius:inherit;background:transparent;color:transparent;caret-color:transparent;font:inherit;outline:none;cursor:pointer;text-overflow:ellipsis}
+.ms-box.ms-sel .ms-linp{color:var(--pack-text)}
+.ms-box.ms-sel .ms-vis{visibility:hidden}
+.ms-linp::selection{background:var(--pack-accent);color:var(--pack-bg)}
+.ms-st{margin:0;min-height:1.35em;font-size:.87em;color:var(--pack-muted)}
+.ms-st[data-s=failed]{color:var(--pack-text)}
+
+/* Row 5: copy check button */
+.ms-copy{flex:1;min-width:0;min-height:44px;display:flex;align-items:center;justify-content:center;gap:var(--g);padding:0 var(--p);border:1px solid var(--pack-accent);border-radius:var(--r);background:var(--pack-accent);color:var(--pack-bg);font-weight:600;cursor:pointer;transition:transform 80ms var(--e),background-color var(--d) var(--e),color var(--d) var(--e);-webkit-tap-highlight-color:transparent}
+.ms-copy[aria-disabled=true]{opacity:.72;cursor:progress}
+.ms-copy[data-s=failed]{background:var(--pack-surface);color:var(--pack-text);border-color:var(--pack-text)}
+.ms-ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ms-ck{stroke-dasharray:22;stroke-dashoffset:22;opacity:0}
+.ms-copy[data-s=copied] .ms-ck{stroke-dashoffset:0;opacity:1;transition:stroke-dashoffset var(--d) var(--e)}
+.ms-copy[data-s=copied] .ms-cp{opacity:0}
+.ms-copy[data-s=pending] .ms-cp{opacity:.5}
+.ms-clab{display:grid}
+.ms-clab span{grid-area:1/1;visibility:hidden;text-align:center;white-space:nowrap}
+.ms-copy[data-s=idle] [data-k=idle],.ms-copy[data-s=pending] [data-k=pending],.ms-copy[data-s=copied] [data-k=copied],.ms-copy[data-s=failed] [data-k=failed]{visibility:visible}
+
+/* Row 6: failure notice */
+.ms-note{display:flex;flex-direction:column;gap:var(--g);padding:var(--g);border:1px solid var(--pack-border);border-left:4px solid var(--pack-accent);border-radius:var(--r);animation:ms-in var(--d) var(--e)}
+@keyframes ms-in{from{opacity:0;transform:translateY(4px)}}
+.ms-nh{margin:0;display:flex;align-items:center;gap:var(--g);font-size:1em;font-weight:650}
+.ms-nh:focus{outline:none}.ms-nh:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ms-nh svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round}
+.ms-nsub{margin:0;color:var(--pack-muted);font-size:.87em}
+.ms-acts{display:flex;flex-wrap:wrap;gap:var(--g)}
+.ms-btn{flex:1 1 auto;min-height:44px;padding:0 var(--g);border:1px solid var(--pack-border);border-radius:var(--r);background:transparent;font-size:.9em;font-weight:600;cursor:pointer;transition:transform 80ms var(--e),background-color var(--d) var(--e),opacity var(--d) var(--e)}
+.ms-btn[aria-disabled=true]{opacity:.55;cursor:default}
+
+/* Test controls */
+.ms-test{display:flex;flex-wrap:wrap;align-items:center;gap:var(--g);margin-top:var(--g);padding-top:var(--g);border-top:1px solid var(--pack-border)}
+.ms-test select{flex:1 1 128px;min-height:44px;padding:0 var(--g);border:1px solid var(--pack-border);border-radius:var(--r);background:var(--pack-bg);font-size:.9em}
+.ms-test .ms-chk{font-size:.87em;font-weight:400;color:var(--pack-muted)}
+
+/* Row 1: share morph trigger */
+.ms-fab{position:absolute;right:var(--p);bottom:var(--p);z-index:3;height:56px;min-width:56px;display:inline-flex;align-items:center;gap:var(--g);padding:0 24px 0 var(--p);border:0;border-radius:28px;background:var(--pack-accent);color:var(--pack-bg);font-weight:600;line-height:1;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.22);transition:transform 80ms var(--e),background-color var(--d) var(--e);-webkit-tap-highlight-color:transparent}
+.ms-fab svg{width:24px;height:24px;flex:none;overflow:visible}
+.ms-fab svg *{transform-box:view-box;transform-origin:12px 12px;transition:transform var(--d) var(--e),opacity var(--d) var(--e)}
+.ms-shaft{transform:translateY(-1.2px) scaleY(.8)}
+.ms-x{transform:scaleX(0);opacity:0}
+.ms-fab[aria-expanded=true] .ms-rot{transform:rotate(45deg)}
+.ms-fab[aria-expanded=true] .ms-shaft{transform:none}
+.ms-fab[aria-expanded=true] .ms-x{transform:none;opacity:1}
+.ms-fab[aria-expanded=true] .ms-head{transform:translateY(-3px) scale(.6);opacity:0}
+.ms-fab[aria-expanded=true] .ms-tray{transform:scale(.6);opacity:0}
+.ms-flab{display:grid}
+.ms-flab span{grid-area:1/1;transition:opacity var(--d) var(--e),transform var(--d) var(--e)}
+.ms-l2{opacity:0;transform:translateY(8px)}
+.ms-fab[aria-expanded=true] .ms-l1{opacity:0;transform:translateY(-8px)}
+.ms-fab[aria-expanded=true] .ms-l2{opacity:1;transform:none}
+
+.ms-fab:active,.ms-fab.ms-dn,.ms-copy:active:not([aria-disabled=true]),.ms-close:active,.ms-step:active:not(:disabled),.ms-btn:active:not([aria-disabled=true]){transform:translateY(1px)}
+@media (hover:hover){
+ .ms-fab:hover{background:color-mix(in srgb,var(--pack-accent) 86%,var(--pack-text))}
+ .ms-close:hover,.ms-step:hover:not(:disabled){border-color:var(--pack-accent)}
+ .ms-btn:not([aria-disabled=true]):hover{background:color-mix(in srgb,var(--pack-text) 8%,transparent)}
+}
+@container ms-root (max-width:299px){.ms-fab{width:56px;padding:0;justify-content:center}.ms-flab{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}
+@container ms-sheet (max-width:300px){.ms-sch{display:none}.ms-box{font-size:.8em}}
+@media (prefers-reduced-motion:reduce){
+ .ms-fab svg *,.ms-flab span,.ms-new,.ms-box,.ms-btn,.ms-copy,.ms-tin,.ms-step{transition:none!important}
+ .ms-copy[data-s=copied] .ms-ck{transition:none}
+ .ms-note{animation:none}
+}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:10px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e8eaed;--pack-muted:#9aa0a6;--pack-accent:#5b9cf5;--pack-border:#2c3036}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181c;--pack-muted:#5f6670;--pack-accent:#1f6fd6;--pack-border:#d9dde3}</style></head><body>
+<div class="ms-root" id="ms-root" role="group" aria-label="Clip editor with a share sheet for harbour-dawn.mp4">
+
+ <div class="ms-ed" id="ms-ed">
+  <div class="ms-top"><h1 class="ms-name">harbour-dawn.mp4</h1><p class="ms-meta">Final cut · 4:12</p></div>
+  <div class="ms-prev" role="img" aria-label="Preview frame at 1:42"><span class="ms-tc">1:42 / 4:12</span></div>
+  <div class="ms-track" role="img" aria-label="Playhead at 1:42 of 4:12"><span></span></div>
+  <p class="ms-est" id="ms-est" aria-live="polite">Tap Share to open the sheet.</p>
+ </div>
+
+ <div class="ms-scrim" id="ms-scrim" hidden></div>
+
+ <section class="ms-sheet" id="ms-sheet" role="dialog" aria-modal="true" aria-labelledby="ms-grip" hidden>
+  <div class="ms-hd" id="ms-hd">
+   <button class="ms-grip" id="ms-grip" type="button" aria-describedby="ms-size">Share harbour-dawn.mp4</button>
+   <span class="ms-sr" id="ms-size"></span>
+   <button class="ms-close" id="ms-close" type="button">Close</button>
+  </div>
+
+  <div class="ms-body" id="ms-body">
+   <div class="ms-start" role="group" aria-label="Start time">
+    <div class="ms-srow">
+     <label class="ms-chk"><input type="checkbox" id="ms-on" aria-describedby="ms-tmsg">Start at</label>
+     <div class="ms-time">
+      <button class="ms-step" id="ms-dn" type="button" aria-label="Back 1 second">−</button>
+      <input class="ms-tin" id="ms-tin" type="text" inputmode="numeric" autocomplete="off" value="1:42" aria-label="Start time, minutes and seconds" aria-describedby="ms-tmsg" aria-invalid="false">
+      <button class="ms-step" id="ms-up" type="button" aria-label="Forward 1 second">+</button>
+     </div>
+    </div>
+    <p class="ms-tmsg" id="ms-tmsg" aria-live="polite"></p>
+   </div>
+
+   <label class="ms-lab" for="ms-linp" id="ms-llab">Link to copy</label>
+   <div class="ms-box" id="ms-box">
+    <div class="ms-vis" id="ms-vis" aria-hidden="true"><span class="ms-sch"></span><span class="ms-host"></span><span class="ms-mid"></span><span class="ms-tail"></span><span class="ms-car"></span></div>
+    <input class="ms-linp" id="ms-linp" readonly spellcheck="false" autocomplete="off">
+   </div>
+   <p class="ms-st" id="ms-st" role="status" aria-live="polite"></p>
+
+   <div class="ms-note" id="ms-note" hidden>
+    <h2 class="ms-nh" id="ms-nh" tabindex="-1"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5"/><path d="M10 5.5v5.5M10 14.2v.1"/></svg><span id="ms-nht">Clipboard blocked by browser</span></h2>
+    <p class="ms-nsub" id="ms-nsub">Retry, or select the link and copy it yourself.</p>
+    <div class="ms-acts" id="ms-acts">
+     <button class="ms-btn" id="ms-retry" type="button">Retry</button>
+     <button class="ms-btn" id="ms-sel" type="button">Select link</button>
+     <button class="ms-btn" id="ms-dis" type="button">Dismiss</button>
+    </div>
+   </div>
+
+   <div class="ms-test" role="group" aria-label="Test settings">
+    <label class="ms-lab" for="ms-sim">Test clipboard</label>
+    <select id="ms-sim">
+     <option value="real">Real clipboard</option>
+     <option value="blocked">Simulate blocked clipboard</option>
+     <option value="insecure">Simulate page not secure</option>
+     <option value="hang">Simulate no answer</option>
+    </select>
+    <label class="ms-chk"><input type="checkbox" id="ms-long">Long file link</label>
+   </div>
+   <p class="ms-hint">Drag the top edge, or focus the title and press Up or Down. Swipe down, Escape or Close dismisses.</p>
+  </div>
+
+  <div class="ms-ft" id="ms-ft">
+   <button class="ms-copy" id="ms-copy" type="button" data-s="idle" aria-describedby="ms-st">
+    <svg class="ms-ic" viewBox="0 0 24 24" aria-hidden="true"><g class="ms-cp"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></g><path class="ms-ck" d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+    <span class="ms-clab"><span data-k="idle">Copy link</span><span data-k="pending">Copying</span><span data-k="copied">Copied</span><span data-k="failed">Copy failed</span></span>
+   </button>
+  </div>
+ </section>
+
+ <button class="ms-fab" id="ms-fab" type="button" aria-expanded="false" aria-controls="ms-sheet">
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g class="ms-rot">
+   <path class="ms-tray" d="M5 13v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"/>
+   <path class="ms-head" d="M8 8.5l4-4 4 4"/>
+   <path class="ms-shaft" d="M12 5v14"/>
+   <path class="ms-x" d="M5 12h14"/>
+  </g></svg>
+  <span class="ms-flab"><span class="ms-l1" id="ms-l1">Share</span><span class="ms-l2" id="ms-l2" aria-hidden="true">Close</span></span>
+ </button>
+</div>
+
+<script>(function(){
+var $=function(i){return document.getElementById('ms-'+i)};
+var BASE='https://media.example/v/hd7k2',LONG='https://media.example/v/hd7k2-harbour-dawn-final-v3';
+
+/* One shared state. Every row renders from it. */
+var shareState={open:false,snap:'closed',startOn:false,startSec:102,duration:252,baseUrl:BASE,url:BASE,err:'',sim:'real',
+  copy:{status:'idle',attempt:0,reason:null,shown:false,manual:false}};
+var S=shareState,C=S.copy;
+
+var root=$('root'),ed=$('ed'),est=$('est'),scrim=$('scrim'),sheet=$('sheet'),hd=$('hd'),grip=$('grip'),size=$('size'),cls=$('close'),
+  body=$('body'),ft=$('ft'),fab=$('fab'),l1=$('l1'),l2=$('l2'),
+  on=$('on'),tin=$('tin'),dn=$('dn'),up=$('up'),tmsg=$('tmsg'),
+  box=$('box'),vis=$('vis'),linp=$('linp'),st=$('st'),copyB=$('copy'),
+  note=$('note'),nh=$('nh'),nht=$('nht'),nsub=$('nsub'),acts=$('acts'),retry=$('retry'),selB=$('sel'),dis=$('dis'),
+  sim=$('sim'),lng=$('long');
+var parts=[vis.querySelector('.ms-sch'),vis.querySelector('.ms-host'),vis.querySelector('.ms-mid'),vis.querySelector('.ms-tail')];
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var MSG={blocked:'Clipboard blocked by browser',insecure:'Page not secure',timeout:'Clipboard did not answer'};
+var KEY=/Mac|iP/.test(navigator.platform)?'Cmd+C':'Ctrl+C';
+
+function fmt(s){var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r}
+function buildUrl(){return S.baseUrl+(S.startOn&&S.startSec>0?'?t='+S.startSec:'')}
+function linkName(){return S.startOn&&S.startSec>0?fmt(S.startSec)+' link':'link'}
+
+/* ---------- motion loop: sheet spring + link typing ---------- */
+var raf=0,last=0,H=root.clientHeight||480,x=0,v=0,drag=null,eat=0,hdH=0,ftH=0;
+function Y(s){return s==='full'?0:s==='peek'?H*.4:H*.9+24}
+function measure(){hdH=hd.offsetHeight;ftH=ft.offsetHeight;
+  var s=S.snap==='closed'?'peek':S.snap;size.textContent='Size: '+s+'. Enter toggles peek and full. Up and Down choose a size.'}
+function stepSheet(dt){if(drag)return false;
+  var t=Y(S.snap),k=420,c=S.snap==='closed'?41:34,n=Math.ceil(dt/.008),h=dt/n;
+  for(var i=0;i<n;i++){v+=(-k*(x-t)-c*v)*h;x+=v*h}
+  if(S.snap==='closed'&&x>=t-.5||Math.abs(x-t)<.5&&Math.abs(v)<8){x=t;v=0;return false}
+  return true}
+function snapSheet(){if(!drag){x=Y(S.snap);v=0}}
+function drawSheet(){
+  sheet.style.transform='translateY('+x.toFixed(1)+'px)';
+  var o=(Y('closed')-x)/(Y('closed')-Y('peek'));
+  scrim.style.opacity=(Math.max(0,Math.min(1,o))*.6).toFixed(3);
+  body.style.height=Math.max(0,H*.9-Math.max(0,x)-hdH-ftH).toFixed(1)+'px';
+  if(!S.open&&!drag&&x>=Y('closed')-.5){sheet.hidden=true;scrim.hidden=true}
+}
+
+var shown=S.url,anim=null,diffAt=Infinity,fadeT=0,sel=false;
+function lcp(a,b){var i=0;while(i<a.length&&i<b.length&&a[i]===b[i])i++;return i}
+function split(s){var a=s.indexOf('://');a=a<0?0:a+3;var h=s.indexOf('/',a);if(h<0)h=s.length;
+  var r=s.slice(h),q=r.indexOf('?'),p=q<0?r:r.slice(0,q),qs=q<0?'':r.slice(q),k=Math.min(3,p.length);
+  return [s.slice(0,a),s.slice(a,h),p.slice(0,p.length-k),p.slice(p.length-k)+qs]}
+function fill(el,str,off){el.replaceChildren();var c=Math.max(0,Math.min(str.length,diffAt-off));
+  if(c>0)el.append(document.createTextNode(str.slice(0,c)));
+  if(c<str.length){var n=document.createElement('span');n.className='ms-new';n.textContent=str.slice(c);el.append(n)}}
+function endType(){anim=null;clearTimeout(fadeT);fadeT=setTimeout(function(){vis.classList.add('ms-fade')},700)}
+function stepLink(now){if(!anim)return false;
+  var k=Math.floor((now-anim.t0)/24);
+  if(k>=anim.del+anim.add){shown=anim.to;endType();return false}
+  shown=k<anim.del?anim.from.slice(0,anim.from.length-k):anim.to.slice(0,anim.p+k-anim.del);
+  return true}
+function snapLink(){if(anim){shown=anim.to;endType()}}
+var drawnShown=null,drawnTyping=null;
+function drawLink(){var typing=!!anim;
+  if(shown!==drawnShown||typing!==drawnTyping){var p=split(shown),off=0;
+    for(var i=0;i<4;i++){fill(parts[i],p[i],off);off+=p[i].length}
+    drawnShown=shown;drawnTyping=typing}
+  vis.classList.toggle('ms-typing',typing);box.classList.toggle('ms-sel',sel)}
+
+function frame(now){var dt=last?Math.min(now-last,50)/1000:1/60;last=now;
+  var m1,m2;
+  if(reduce()){snapSheet();snapLink();m1=m2=false}else{m1=stepSheet(dt);m2=stepLink(now)}
+  drawSheet();drawLink();
+  raf=(m1||m2)?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+
+/* ---------- Row 1 + Row 2: open, snap, close ---------- */
+function renderTrigger(){
+  fab.setAttribute('aria-expanded',String(S.open));
+  l1.setAttribute('aria-hidden',String(S.open));l2.setAttribute('aria-hidden',String(!S.open));
+  sheet.inert=!S.open;ed.inert=S.open}
+function setSnap(s,vel){S.snap=s;if(vel!==undefined)v=vel;measure();kick()}
+function openSheet(focus){
+  if(S.open)return;
+  var wasHidden=sheet.hidden;
+  S.open=true;sheet.hidden=false;scrim.hidden=false;
+  if(wasHidden){x=Y('closed');v=0}
+  renderTrigger();setSnap('peek');drawSheet();
+  est.textContent='Sheet open. The button now reads Close.';
+  if(focus!==false)grip.focus({preventScroll:true})}
+function closeSheet(why,vel){
+  if(!S.open)return;
+  S.open=false;resetCopy();clearStatus();
+  renderTrigger();setSnap('closed',vel);
+  fab.focus({preventScroll:true});
+  est.textContent='Closed by '+why+'. Focus is back on Share.'}
+
+fab.addEventListener('click',function(){S.open?closeSheet('the Close button'):openSheet()});
+cls.addEventListener('click',function(){closeSheet('the header Close button')});
+scrim.addEventListener('click',function(){closeSheet('a tap outside')});
+fab.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter')fab.classList.add('ms-dn')});
+['keyup','blur'].forEach(function(t){fab.addEventListener(t,function(){fab.classList.remove('ms-dn')})});
+
+grip.addEventListener('click',function(){if(performance.now()<eat)return;setSnap(S.snap==='full'?'peek':'full')});
+grip.addEventListener('keydown',function(e){
+  if(e.key==='ArrowUp'){e.preventDefault();setSnap('full')}
+  else if(e.key==='ArrowDown'){e.preventDefault();S.snap==='full'?setSnap('peek'):closeSheet('the Down key')}});
+
+hd.addEventListener('pointerdown',function(e){
+  if(e.button>0||e.target===cls||!S.open)return;
+  drag={id:e.pointerId,y0:e.clientY,x0:x,from:S.snap,moved:false,s:[[e.timeStamp,e.clientY]]};v=0;
+  hd.setPointerCapture(e.pointerId)});
+hd.addEventListener('pointermove',function(e){if(!drag||e.pointerId!==drag.id)return;
+  var dy=e.clientY-drag.y0;if(Math.abs(dy)>6)drag.moved=true;
+  var nx=drag.x0+dy;x=nx<0?nx/3:nx;
+  drag.s.push([e.timeStamp,e.clientY]);while(drag.s.length>2&&e.timeStamp-drag.s[0][0]>100)drag.s.shift();
+  drawSheet()});
+function release(e){if(!drag||e.pointerId!==drag.id)return;var d=drag;drag=null;
+  if(!d.moved){kick();return}eat=performance.now()+300;
+  var a=d.s[0],b=d.s[d.s.length-1],vel=b[0]>a[0]?(b[1]-a[1])/(b[0]-a[0]):0,
+    visH=H*.9-Y(d.from),dist=x-Y(d.from);
+  if(e.timeStamp-b[0]>100)vel=0;
+  if(vel>.5||dist>.4*visH)closeSheet('a swipe',vel*1000);
+  else if(vel<-.5)setSnap('full',vel*1000);
+  else setSnap(Math.abs(x-Y('full'))<Math.abs(x-Y('peek'))?'full':'peek',vel*1000)}
+hd.addEventListener('pointerup',release);hd.addEventListener('pointercancel',release);
+
+function focusables(){
+  var list=[].slice.call(sheet.querySelectorAll('button,input,select')).filter(function(el){return !el.disabled&&el.getClientRects().length});
+  list.push(fab);return list}
+document.addEventListener('keydown',function(e){
+  if(!S.open)return;
+  if(e.key==='Escape'){
+    if(document.activeElement===tin&&S.startOn&&tin.value!==fmt(S.startSec)){
+      e.preventDefault();tin.value=fmt(S.startSec);S.err='';renderStart();return}
+    e.preventDefault();closeSheet('Escape');return}
+  if(e.key==='Tab'){var f=focusables(),i=f.indexOf(document.activeElement);
+    if(i<0){e.preventDefault();f[0].focus()}
+    else if(e.shiftKey&&i===0){e.preventDefault();f[f.length-1].focus()}
+    else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}}});
+
+/* ---------- Row 3: start-at field ---------- */
+function parse(val){val=val.trim();var m;
+  if(/^\d{1,4}$/.test(val))return +val;
+  if((m=/^(\d{1,3}):([0-5]\d)$/.exec(val)))return m[1]*60+(+m[2]);
+  return NaN}
+function renderStart(){
+  on.checked=S.startOn;
+  tin.disabled=dn.disabled=up.disabled=!S.startOn;
+  tin.setAttribute('aria-invalid',S.err?'true':'false');
+  tmsg.className='ms-tmsg'+(S.err?' ms-bad':'');
+  tmsg.textContent=S.err||(S.startOn?'Type m:ss, then Enter. Up and Down step 1s, Shift steps 10s.':'Tick Start at to open the link at a moment.')}
+function commitTime(){if(!S.startOn)return;
+  var n=parse(tin.value);
+  if(isNaN(n))S.err='Use m:ss, like 1:42. Link keeps '+fmt(S.startSec)+'.';
+  else if(n>S.duration)S.err='Clip is '+fmt(S.duration)+' long. Link keeps '+fmt(S.startSec)+'.';
+  else{S.startSec=n;S.err='';tin.value=fmt(n)}
+  renderStart();setUrl()}
+function nudge(d){if(!S.startOn)return;
+  S.startSec=Math.max(0,Math.min(S.duration,S.startSec+d));S.err='';tin.value=fmt(S.startSec);
+  renderStart();setUrl()}
+on.addEventListener('change',function(){S.startOn=on.checked;S.err='';tin.value=fmt(S.startSec);renderStart();setUrl();if(S.startOn)tin.focus()});
+on.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();on.click()}});
+tin.addEventListener('keydown',function(e){
+  if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();nudge((e.key==='ArrowUp'?1:-1)*(e.shiftKey?10:1))}
+  else if(e.key==='Enter'){e.preventDefault();commitTime()}});
+tin.addEventListener('blur',commitTime);
+tin.addEventListener('focus',function(){tin.select()});
+dn.addEventListener('click',function(e){nudge(e.shiftKey?-10:-1)});
+up.addEventListener('click',function(e){nudge(e.shiftKey?10:1)});
+
+/* ---------- Row 4: link retype line ---------- */
+function setUrl(){
+  var nu=buildUrl();if(nu===S.url)return;
+  S.url=nu;linp.value=nu;if(sel)linp.select();
+  vis.classList.remove('ms-fade');clearTimeout(fadeT);
+  if(anim||reduce()){diffAt=lcp(S.url,shown);shown=nu;anim=null;diffAt=Math.min(diffAt,lcp(anim?anim.from:shown,nu));endType()}
+  else{var p=lcp(shown,nu);diffAt=p;anim={from:shown,to:nu,p:p,del:shown.length-p,add:nu.length-p,t0:performance.now()}}
+  drawLink();kick();
+  if(C.status==='copied'){C.attempt++;clearTimeout(backT);C.status='idle';renderCopy()}
+  setStatus(S.startOn&&S.startSec>0?'Link now opens at '+fmt(S.startSec)+'. Copy again to share it.':'Link opens at 0:00.')}
+function selectAll(){sel=true;linp.select();try{linp.setSelectionRange(0,linp.value.length)}catch(_){}drawLink()}
+linp.addEventListener('focus',function(){setTimeout(function(){if(document.activeElement===linp)selectAll()},0)});
+linp.addEventListener('click',selectAll);
+linp.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();selectAll()}});
+linp.addEventListener('blur',function(){sel=false;if(C.manual){C.manual=false;renderCopy()}drawLink()});
+linp.addEventListener('copy',function(){if(C.status!=='pending'){C.attempt++;clearTimeout(toT);copiedState('Copied '+linkName()+' with '+KEY+'.')}});
+
+/* ---------- Row 5: copy check button ---------- */
+var backT=0,toT=0;
+function setStatus(t){st.textContent=t}
+function clearStatus(){st.textContent=''}
+function renderCopy(){
+  var pend=C.status==='pending';
+  copyB.dataset.s=C.status;st.dataset.s=C.status;
+  copyB.setAttribute('aria-disabled',String(pend));
+  retry.setAttribute('aria-disabled',String(pend));
+  note.hidden=!C.shown;
+  if(C.reason)nht.textContent=MSG[C.reason];
+  nsub.textContent=pend?'Retrying.':C.manual?(matchMedia('(pointer:coarse)').matches?'Link selected. Use Copy in the menu.':'Link selected. Press '+KEY+'.'):'Retry, or select the link and copy it yourself.';
+  if(C.manual)box.setAttribute('data-sel','');else box.removeAttribute('data-sel')}
+function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function copyJob(){
+  if(C.status==='pending')return;
+  var id=++C.attempt,url=S.url,m=S.sim,p;
+  clearTimeout(backT);clearTimeout(toT);
+  C.status='pending';C.manual=false;renderCopy();setStatus('Copying link.');
+  toT=setTimeout(function(){finish(id,'timeout')},1500);
+  if(m==='blocked')p=wait(400).then(function(){throw{name:'NotAllowedError'}});
+  else if(m==='insecure')p=wait(240).then(function(){throw{name:'Insecure'}});
+  else if(m==='hang')p=new Promise(function(){});
+  else if(!window.isSecureContext||!navigator.clipboard||!navigator.clipboard.writeText)p=Promise.reject({name:'Insecure'});
+  else{try{p=navigator.clipboard.writeText(url)}catch(err){p=Promise.reject(err)}}
+  p.then(function(){finish(id)},function(err){finish(id,err&&(err.name==='Insecure'||err.name==='SecurityError')?'insecure':'blocked')})}
+function copiedState(msg){
+  var id=C.attempt,inNote=note.contains(document.activeElement);
+  clearTimeout(backT);
+  C.status='copied';C.shown=false;C.reason=null;C.manual=false;note.removeAttribute('role');
+  renderCopy();setStatus(msg);if(inNote)copyB.focus();
+  backT=setTimeout(function(){if(id===C.attempt&&C.status==='copied'){C.status='idle';renderCopy()}},2000)}
+function finish(id,reason){
+  if(id!==C.attempt||C.status!=='pending')return;
+  clearTimeout(toT);
+  if(!reason){copiedState('Copied '+linkName()+'.');return}
+  var first=!C.shown;
+  C.status='failed';C.reason=reason;C.shown=true;
+  if(first){note.setAttribute('role','alert');clearStatus()}else setStatus(MSG[reason]+'. Retry or select the link.');
+  renderCopy();if(first)nh.focus()}
+function resetCopy(){C.attempt++;clearTimeout(backT);clearTimeout(toT);
+  C.status='idle';C.shown=false;C.reason=null;C.manual=false;note.removeAttribute('role');renderCopy()}
+copyB.addEventListener('click',copyJob);
+
+/* ---------- Row 6: failure notice ---------- */
+retry.addEventListener('click',function(){if(C.status!=='pending')copyJob()});
+selB.addEventListener('click',function(){C.manual=true;renderCopy();linp.focus();selectAll();
+  setStatus(nsub.textContent)});
+dis.addEventListener('click',function(){resetCopy();setStatus('Notice dismissed.');copyB.focus()});
+acts.addEventListener('keydown',function(e){
+  var b=[retry,selB,dis],i=b.indexOf(document.activeElement),d=0;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')d=1;else if(e.key==='ArrowLeft'||e.key==='ArrowUp')d=-1;
+  if(d&&i>-1){e.preventDefault();b[(i+d+3)%3].focus()}});
+
+/* ---------- Test controls ---------- */
+sim.addEventListener('change',function(){S.sim=sim.value});
+lng.addEventListener('change',function(){S.baseUrl=lng.checked?LONG:BASE;setUrl()});
+
+/* ---------- lifecycle ---------- */
+new ResizeObserver(function(){H=root.clientHeight||H;if(!sheet.hidden)measure();if(!drag&&!raf){x=Y(S.snap)}drawSheet()}).observe(root);
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+    document.documentElement.setAttribute('data-theme',m.theme);drawSheet();drawLink()}});
+
+/* Initial sample state: sheet at peek, start time off, link ready. */
+linp.value=S.url;sim.value=S.sim;
+renderStart();renderCopy();
+S.open=true;S.snap='peek';sheet.hidden=false;scrim.hidden=false;
+renderTrigger();measure();x=Y('peek');drawSheet();drawLink();
+est.textContent='Sheet open at peek. Escape, Close or a swipe down closes it.';
+})();</script>
+</body></html>

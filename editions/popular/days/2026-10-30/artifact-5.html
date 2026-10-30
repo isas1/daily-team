@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Copy check button for a clip share sheet</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+*{box-sizing:border-box}
+.cc5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;display:grid;place-items:center;padding:8px}
+.cc5-card{width:100%;max-width:400px;max-height:100%;overflow:auto;background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control) + 8px);padding:var(--pack-spacing-padding);display:grid;gap:var(--pack-spacing-gap)}
+.cc5-t{margin:0;font-weight:600;line-height:1.3;overflow-wrap:anywhere}
+.cc5-m{margin:0;color:var(--pack-muted);font-size:.87em}
+.cc5-link{display:block;padding:8px;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);font:.85em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:rtl;text-align:left}
+.cc5-link bdi{direction:ltr;unicode-bidi:isolate}
+.cc5-btn{width:100%;min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 16px;border:1px solid var(--pack-accent);border-radius:var(--pack-radii-control);background:var(--pack-accent);color:var(--pack-bg);font:600 1em var(--pack-typography-family);cursor:pointer;transition:transform 80ms var(--pack-motion-easing),background var(--pack-motion-duration) var(--pack-motion-easing),color var(--pack-motion-duration) var(--pack-motion-easing);-webkit-tap-highlight-color:transparent}
+.cc5-btn:active{transform:translateY(1px)}
+.cc5-btn[aria-disabled="true"]{opacity:.72;cursor:progress}
+.cc5-btn[aria-disabled="true"]:active{transform:none}
+.cc5-btn[data-s="failed"]{background:var(--pack-surface);color:var(--pack-text);border-color:var(--pack-text)}
+.cc5-btn:focus-visible,.cc5-tg input:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.cc5-ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cc5-lab{display:grid}
+.cc5-lab span{grid-area:1/1;visibility:hidden;text-align:center;white-space:nowrap}
+.cc5-lab span.cc5-on{visibility:visible}
+.cc5-st{margin:0;min-height:2.6em;font-size:.87em;line-height:1.3;color:var(--pack-muted)}
+.cc5-st[data-s="failed"]{color:var(--pack-text)}
+.cc5-tg{display:flex;align-items:center;gap:8px;min-height:44px;font-size:.87em;color:var(--pack-muted);cursor:pointer}
+.cc5-tg input{width:20px;height:20px;margin:0;accent-color:var(--pack-accent)}
+@media (max-width:240px){.cc5-card{padding:8px}.cc5-root{padding:4px}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:10px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e8eaed;--pack-muted:#9aa0a6;--pack-accent:#5b9cf5;--pack-border:#2c3036}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181c;--pack-muted:#5f6670;--pack-accent:#1f6fd6;--pack-border:#d9dde3}</style></head><body>
+<div class="cc5-root" role="group" aria-label="Copy link button for a clip share sheet">
+<div class="cc5-card">
+<div><p class="cc5-t">cat-pics-2.mp4</p><p class="cc5-m">Forever plan link, starts at 1:42</p></div>
+<span class="cc5-link" id="cc5-link"><bdi>https://media.example/v/hd7k2?t=102</bdi></span>
+<button class="cc5-btn" id="cc5-btn" type="button" data-s="idle" aria-describedby="cc5-st">
+<svg class="cc5-ic" viewBox="0 0 24 24" aria-hidden="true">
+<g id="cc5-copy"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></g>
+<path id="cc5-chk" d="M5 12.5l4.5 4.5L19 7.5" style="display:none"/>
+</svg>
+<span class="cc5-lab" id="cc5-lab"><span data-k="idle">Copy link</span><span data-k="pending">Copying</span><span data-k="copied">Copied</span><span data-k="failed">Copy failed</span></span>
+</button>
+<p class="cc5-st" id="cc5-st" role="status" aria-live="polite">Tap to copy. Esc resets.</p>
+<label class="cc5-tg"><input type="checkbox" id="cc5-blk">Simulate blocked clipboard</label>
+</div></div>
+<script>(function(){
+var URL_='https://media.example/v/hd7k2?t=102';
+var $=function(i){return document.getElementById(i)};
+var btn=$('cc5-btn'),st=$('cc5-st'),blk=$('cc5-blk'),copy=$('cc5-copy'),chk=$('cc5-chk'),labs=$('cc5-lab').children;
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var S={status:'idle',attempt:0},backT=0,toT=0,drawStart=0,LEN=22;
+var MSG={blocked:'Clipboard blocked by browser. Press again to retry.',insecure:'Page not secure. Press again to retry.',timeout:'Clipboard did not answer. Press again to retry.'};
+var raf=0,last=0;
+function ease(p){return 1-Math.pow(1-p,3)}
+function render(text){
+  btn.dataset.s=S.status;st.dataset.s=S.status;
+  btn.setAttribute('aria-disabled',S.status==='pending'?'true':'false');
+  for(var i=0;i<labs.length;i++)labs[i].className=labs[i].dataset.k===S.status?'cc5-on':'';
+  var c=S.status==='copied';
+  copy.style.display=c?'none':'';chk.style.display=c?'':'none';
+  copy.style.opacity=S.status==='pending'?'.5':'1';
+  if(text!=null)st.textContent=text;
+}
+function step(now){
+  if(!drawStart)return false;
+  var p=Math.min(1,(now-drawStart)/200);
+  chk.style.strokeDashoffset=String(LEN*(1-ease(p)));
+  if(p>=1){drawStart=0;return false}return true;
+}
+function snapToTarget(){drawStart=0;chk.style.strokeDashoffset='0'}
+function frame(now){var moving=reduce()?(snapToTarget(),false):step(now);
+  raf=moving?requestAnimationFrame(frame):0;}
+function kick(){if(!raf&&!document.hidden){raf=requestAnimationFrame(frame)}}
+function startCheck(){chk.style.strokeDasharray=String(LEN);chk.style.strokeDashoffset=String(LEN);
+  drawStart=performance.now();if(reduce())snapToTarget();else kick();}
+function finish(id,ok,reason){
+  if(id!==S.attempt||S.status!=='pending')return;
+  clearTimeout(toT);
+  if(ok){S.status='copied';render('Copied 1:42 link.');startCheck();
+    backT=setTimeout(function(){if(id===S.attempt&&S.status==='copied'){S.status='idle';render('Tap to copy. Esc resets.')}},2000);}
+  else{S.status='failed';render(MSG[reason]||MSG.blocked);}
+}
+function press(){
+  if(S.status==='pending')return;
+  var id=++S.attempt;clearTimeout(backT);clearTimeout(toT);
+  S.status='pending';render('Copying link...');
+  if(blk.checked){setTimeout(function(){finish(id,false,'blocked')},240);return}
+  if(!window.isSecureContext||!navigator.clipboard||!navigator.clipboard.writeText){setTimeout(function(){finish(id,false,'insecure')},120);return}
+  toT=setTimeout(function(){finish(id,false,'timeout')},1500);
+  try{navigator.clipboard.writeText(URL_).then(function(){finish(id,true)},function(e){
+    finish(id,false,e&&e.name==='SecurityError'?'insecure':'blocked')});}
+  catch(e){finish(id,false,'blocked')}
+}
+function reset(){if(S.status==='idle')return;S.attempt++;clearTimeout(backT);clearTimeout(toT);snapToTarget();
+  S.status='idle';render('Tap to copy. Esc resets.');}
+btn.addEventListener('click',press);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')reset()});
+blk.addEventListener('change',function(){if(S.status==='failed')reset()});
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(drawStart)kick()});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+    document.documentElement.setAttribute('data-theme',m.theme)}});
+render();
+})();</script>
+</body></html>

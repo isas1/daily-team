@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start-at field for a clip share link</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg)}
+html[data-theme=light]{color-scheme:light}html[data-theme=dark]{color-scheme:dark}
+.sa3-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;display:grid;place-items:center;box-sizing:border-box;padding:8px;font-family:var(--pack-typography-family);font-size:var(--pack-typography-size);color:var(--pack-text);line-height:1.35}
+.sa3-card{box-sizing:border-box;width:min(100%,400px);max-height:100%;overflow:auto;background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control) + 6px);padding:var(--pack-spacing-padding);display:grid;gap:var(--pack-spacing-gap)}
+.sa3-h{margin:0;font-size:1em;font-weight:600}
+.sa3-sub{margin:0;color:var(--pack-muted);font-size:.87em;overflow-wrap:anywhere}
+.sa3-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.sa3-chk{display:flex;align-items:center;gap:8px;min-height:44px;padding-right:8px;cursor:pointer;font-weight:500}
+.sa3-chk input{width:20px;height:20px;margin:0;accent-color:var(--pack-accent);cursor:pointer}
+.sa3-time{display:flex;gap:4px;flex:1 1 auto;min-width:0}
+.sa3-in,.sa3-btn{box-sizing:border-box;height:44px;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);color:var(--pack-text);font:inherit;transition:border-color var(--pack-motion-duration) var(--pack-motion-easing),opacity var(--pack-motion-duration) var(--pack-motion-easing),transform 80ms var(--pack-motion-easing)}
+.sa3-in{width:4.6em;min-width:0;flex:1 1 4.6em;max-width:6em;text-align:center;font-size:1.13em;font-variant-numeric:tabular-nums;padding:0 4px}
+.sa3-in[aria-invalid=true]{border:2px solid var(--pack-text)}
+.sa3-btn{width:44px;flex:0 0 44px;font-size:1.25em;cursor:pointer;padding:0}
+.sa3-btn:active:not(:disabled){transform:translateY(1px)}
+.sa3-btn:hover:not(:disabled){border-color:var(--pack-accent)}
+.sa3-in:disabled,.sa3-btn:disabled{opacity:.45;cursor:not-allowed}
+.sa3-root :focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.sa3-msg{margin:0;min-height:2.7em;font-size:.87em;color:var(--pack-muted)}
+.sa3-msg.sa3-bad{color:var(--pack-text);font-weight:600;border-left:4px solid var(--pack-accent);padding-left:8px}
+.sa3-link{display:grid;gap:4px;background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);padding:8px}
+.sa3-ll{font-size:.8em;color:var(--pack-muted)}
+.sa3-url{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82em;word-break:break-all}
+.sa3-tail{color:var(--pack-accent);font-weight:600;border-radius:4px;background:color-mix(in srgb,var(--pack-accent) calc(var(--h,0)*28%),transparent)}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:10px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e8eaed;--pack-muted:#9aa0a6;--pack-accent:#5b9cf5;--pack-border:#2c3036}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181c;--pack-muted:#5f6670;--pack-accent:#1f6fd6;--pack-border:#d9dde3}</style></head><body>
+<div class="sa3-root" role="group" aria-label="Start-at field for a clip share link">
+<div class="sa3-card">
+<h2 class="sa3-h" id="sa3-title">Start time</h2>
+<p class="sa3-sub">final-final-v3.mp4 · 4:12 · Forever plan</p>
+<div class="sa3-row">
+<label class="sa3-chk"><input type="checkbox" id="sa3-on" aria-describedby="sa3-msg">Start at</label>
+<div class="sa3-time">
+<button class="sa3-btn" id="sa3-dn" type="button" aria-label="Back 1 second">−</button>
+<input class="sa3-in" id="sa3-in" type="text" inputmode="numeric" autocomplete="off" value="1:42" aria-label="Start time, minutes and seconds" aria-describedby="sa3-msg" aria-invalid="false">
+<button class="sa3-btn" id="sa3-up" type="button" aria-label="Forward 1 second">+</button>
+</div></div>
+<p class="sa3-msg" id="sa3-msg" aria-live="polite"></p>
+<div class="sa3-link"><span class="sa3-ll" id="sa3-ll"></span>
+<output class="sa3-url" id="sa3-url" aria-live="polite"><span id="sa3-base"></span><span class="sa3-tail" id="sa3-tail"></span></output></div>
+</div></div>
+<script>(function(){
+  var $=function(i){return document.getElementById('sa3-'+i)};
+  var on=$('on'),inp=$('in'),dn=$('dn'),up=$('up'),msg=$('msg'),ll=$('ll'),base=$('base'),tail=$('tail');
+  var S={on:false,sec:102,dur:252,base:'https://media.example/v/hd7k2',err:''};
+  var lastUrl='',h=0;
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  function fmt(s){var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r}
+  function parse(v){v=v.trim();var m;
+    if(/^\d{1,4}$/.test(v))return +v;
+    if((m=/^(\d{1,3}):([0-5]\d)$/.exec(v)))return m[1]*60+(+m[2]);
+    return NaN}
+  function url(){return S.on&&S.sec>0?S.base+'?t='+S.sec:S.base}
+  function step(dt){h=Math.max(0,h-dt*16.667/700);return h>0}
+  function snapToTarget(){h=0}
+  function draw(){
+    var u=url();
+    inp.disabled=dn.disabled=up.disabled=!S.on;
+    inp.setAttribute('aria-invalid',S.err?'true':'false');
+    msg.className='sa3-msg'+(S.err?' sa3-bad':'');
+    msg.textContent=S.err||(S.on?'Type m:ss, then Enter. Arrow keys step 1s, Shift steps 10s.':'Tick Start at to share from a moment.');
+    ll.textContent='Link · opens at '+(S.on&&S.sec>0?fmt(S.sec):'0:00');
+    base.textContent=S.base;tail.textContent=u.slice(S.base.length);
+    tail.style.setProperty('--h',h.toFixed(3));
+    if(u!==lastUrl){if(lastUrl){h=1;kick()}lastUrl=u}
+  }
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function commit(){if(!S.on)return;
+    var v=parse(inp.value);
+    if(isNaN(v))S.err='Use m:ss, like 1:42. Link keeps '+fmt(S.sec)+'.';
+    else if(v>S.dur)S.err='Clip is 4:12 long. Link keeps '+fmt(S.sec)+'.';
+    else{S.sec=v;S.err='';inp.value=fmt(v)}
+    draw()}
+  function nudge(d){if(!S.on)return;
+    S.sec=Math.max(0,Math.min(S.dur,S.sec+d));S.err='';inp.value=fmt(S.sec);draw()}
+  on.addEventListener('change',function(){S.on=on.checked;S.err='';inp.value=fmt(S.sec);draw();if(S.on)inp.focus()});
+  on.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();on.click()}});
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();nudge((e.key==='ArrowUp'?1:-1)*(e.shiftKey?10:1))}
+    else if(e.key==='Enter'){e.preventDefault();commit()}
+    else if(e.key==='Escape'){e.preventDefault();inp.value=fmt(S.sec);S.err='';draw()}});
+  inp.addEventListener('blur',commit);
+  inp.addEventListener('focus',function(){inp.select()});
+  dn.addEventListener('click',function(e){nudge(e.shiftKey?-10:-1)});
+  up.addEventListener('click',function(e){nudge(e.shiftKey?10:1)});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(h>0)kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>

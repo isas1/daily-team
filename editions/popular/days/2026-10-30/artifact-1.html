@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Share morph trigger · Clip editor share sheet</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--d:var(--pack-motion-duration);--e:var(--pack-motion-easing);--g:var(--pack-spacing-gap);--p:var(--pack-spacing-padding)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font:var(--pack-typography-size)/1.35 var(--pack-typography-family)}
+.sm1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;overflow:hidden;container-type:size;display:grid;grid-template-rows:minmax(0,1fr) 56px;gap:var(--g);padding:var(--p);background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.sm1-clip{min-height:0;display:flex;flex-direction:column;gap:4px;padding:var(--p);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);overflow:hidden}
+.sm1-prev{flex:1;min-height:0;display:flex;align-items:flex-end;padding:var(--g);margin-bottom:var(--g);background:var(--pack-bg);border-radius:calc(var(--pack-radii-control) - 4px)}
+.sm1-tc,.sm1-meta,.sm1-st{font-size:13px;color:var(--pack-muted)}
+.sm1-tc{font-variant-numeric:tabular-nums}
+.sm1-name,.sm1-h,.sm1-link{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sm1-name{font-weight:600}
+.sm1-meta,.sm1-st{margin:0}
+.sm1-track{height:4px;margin-top:var(--g);border-radius:2px;background:var(--pack-border);flex:none}
+.sm1-track span{display:block;height:100%;width:40.5%;background:var(--pack-accent);border-radius:inherit}
+.sm1-st{margin-top:var(--g)}
+.sm1-scrim{position:absolute;inset:0;z-index:1;background:var(--pack-bg);opacity:0}
+.sm1-sheet{position:absolute;left:0;right:0;bottom:0;z-index:2;height:clamp(136px,56%,288px);display:flex;flex-direction:column;gap:var(--g);padding:0 var(--p) var(--p);background:var(--pack-surface);border-top:1px solid var(--pack-border);border-radius:16px 16px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.18);touch-action:none;user-select:none;-webkit-user-select:none;transform:translateY(100%)}
+.sm1-grab{height:24px;flex:none;display:grid;place-items:center;cursor:grab}
+.sm1-grab span{width:36px;height:4px;border-radius:2px;background:var(--pack-muted);opacity:.5}
+.sm1-h{margin:0;font-size:inherit;font-weight:600;flex:none}
+.sm1-link{flex:none;padding:var(--g);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control) - 2px);background:var(--pack-bg);color:var(--pack-muted);font-size:13px}
+.sm1-row{margin-top:auto;height:56px;flex:none;display:flex;align-items:center;padding-right:136px}
+.sm1-done{min-height:44px;padding:0 var(--p);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:transparent;color:var(--pack-text);font:inherit;cursor:pointer;transition:transform 80ms ease-out,border-color var(--d) var(--e)}
+.sm1-bar{position:relative;z-index:3;display:flex;justify-content:flex-end;align-items:center;pointer-events:none}
+.sm1-fab{pointer-events:auto;height:56px;min-width:56px;display:inline-flex;align-items:center;gap:var(--g);padding:0 24px 0 var(--p);border:0;border-radius:28px;background:var(--pack-accent);color:var(--pack-bg);font:600 var(--pack-typography-size)/1 var(--pack-typography-family);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.22);transition:transform 80ms ease-out,background-color var(--d) var(--e);-webkit-tap-highlight-color:transparent}
+.sm1-fab svg{width:24px;height:24px;flex:none;overflow:visible}
+.sm1-fab svg *{transform-box:view-box;transform-origin:12px 12px;transition:transform var(--d) var(--e),opacity var(--d) var(--e)}
+.sm1-shaft{transform:translateY(-1.2px) scaleY(.8)}
+.sm1-x{transform:scaleX(0);opacity:0}
+.sm1-fab[aria-expanded=true] .sm1-rot{transform:rotate(45deg)}
+.sm1-fab[aria-expanded=true] .sm1-shaft{transform:none}
+.sm1-fab[aria-expanded=true] .sm1-x{transform:none;opacity:1}
+.sm1-fab[aria-expanded=true] .sm1-head{transform:translateY(-3px) scale(.6);opacity:0}
+.sm1-fab[aria-expanded=true] .sm1-tray{transform:scale(.6);opacity:0}
+.sm1-lab{display:grid}
+.sm1-lab span{grid-area:1/1;transition:opacity var(--d) var(--e),transform var(--d) var(--e)}
+.sm1-l2{opacity:0;transform:translateY(6px)}
+.sm1-fab[aria-expanded=true] .sm1-l1{opacity:0;transform:translateY(-6px)}
+.sm1-fab[aria-expanded=true] .sm1-l2{opacity:1;transform:none}
+.sm1-fab:active,.sm1-fab.sm1-dn,.sm1-done:active{transform:translateY(1px)}
+:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.sm1-h:focus{outline:none}.sm1-h:focus-visible{outline:2px solid var(--pack-accent)}
+@media (hover:hover){.sm1-fab:hover{background:color-mix(in srgb,var(--pack-accent) 86%,var(--pack-text))}.sm1-done:hover{border-color:var(--pack-accent)}}
+@container (max-width:299px){.sm1-row{padding-right:64px}.sm1-fab{width:56px;padding:0;justify-content:center}.sm1-lab{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}
+@container (max-height:299px){.sm1-link{display:none}}
+@container (max-height:239px){.sm1-prev{display:none}.sm1-st{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}
+@media (prefers-reduced-motion:reduce){.sm1-fab svg *,.sm1-lab span{transition:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:10px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e8eaed;--pack-muted:#9aa0a6;--pack-accent:#5b9cf5;--pack-border:#2c3036}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181c;--pack-muted:#5f6670;--pack-accent:#1f6fd6;--pack-border:#d9dde3}</style></head><body>
+<div class="sm1-root" role="group" aria-label="Share morph trigger for a clip editor">
+  <div class="sm1-clip">
+    <div class="sm1-prev"><span class="sm1-tc">1:42 / 4:12</span></div>
+    <div class="sm1-name">cat-pics-2.mp4</div>
+    <p class="sm1-meta">Forever plan · Final cut</p>
+    <div class="sm1-track"><span></span></div>
+    <p class="sm1-st" aria-live="polite">Tap Share to open the sheet.</p>
+  </div>
+  <div class="sm1-scrim" hidden></div>
+  <section id="sm1-sheet" class="sm1-sheet" role="dialog" aria-labelledby="sm1-h" hidden>
+    <div class="sm1-grab" aria-hidden="true"><span></span></div>
+    <h2 id="sm1-h" class="sm1-h" tabindex="-1">Share cat-pics-2.mp4</h2>
+    <div class="sm1-link">media.example/v/hd7k2</div>
+    <div class="sm1-row"><button class="sm1-done" type="button">Done</button></div>
+  </section>
+  <div class="sm1-bar">
+    <button class="sm1-fab" type="button" aria-expanded="false" aria-controls="sm1-sheet">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g class="sm1-rot">
+        <path class="sm1-tray" d="M5 13v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"/>
+        <path class="sm1-head" d="M8 8.5l4-4 4 4"/>
+        <path class="sm1-shaft" d="M12 5v14"/>
+        <path class="sm1-x" d="M5 12h14"/>
+      </g></svg>
+      <span class="sm1-lab"><span class="sm1-l1">Share</span><span class="sm1-l2" aria-hidden="true">Close</span></span>
+    </button>
+  </div>
+</div>
+<script>(function(){
+  var q=function(s){return document.querySelector(s)};
+  var fab=q('.sm1-fab'),sheet=q('.sm1-sheet'),scrim=q('.sm1-scrim'),done=q('.sm1-done'),
+      st=q('.sm1-st'),h=q('.sm1-h'),l1=q('.sm1-l1'),l2=q('.sm1-l2');
+  var S={open:false,p:0,v:0,t:0,drag:null};
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0,K=520,C=2*Math.sqrt(K);
+
+  function setOpen(o,why){
+    if(S.open===o)return;
+    S.open=o;S.t=o?1:0;
+    fab.setAttribute('aria-expanded',String(o));
+    l1.setAttribute('aria-hidden',String(o));
+    l2.setAttribute('aria-hidden',String(!o));
+    sheet.inert=!o;
+    if(o){sheet.hidden=scrim.hidden=false;st.textContent='Sheet open. The button now reads Close.';h.focus({preventScroll:true})}
+    else{fab.focus({preventScroll:true});st.textContent='Closed by '+why+'. Focus is back on Share.'}
+    kick();
+  }
+  function step(dt){
+    if(S.drag)return false;
+    for(var i=0,n=4,s=dt/n;i<n;i++){S.v+=(K*(S.t-S.p)-C*S.v)*s;S.p+=S.v*s}
+    if(Math.abs(S.t-S.p)<.001&&Math.abs(S.v)<.01){S.p=S.t;S.v=0;return false}
+    return true;
+  }
+  function draw(){
+    sheet.style.transform='translateY('+((1-S.p)*100).toFixed(2)+'%)';
+    scrim.style.opacity=(Math.max(0,Math.min(1,S.p))*.6).toFixed(3);
+    if(!S.open&&!S.drag&&S.p<=0){sheet.hidden=scrim.hidden=true}
+  }
+  function frame(now){
+    var dt=last?Math.min(now-last,50)/1000:1/60;last=now;
+    var moving;
+    if(reduce()&&!S.drag){S.p=S.t;S.v=0;moving=false}else moving=step(dt);
+    draw();
+    raf=moving?requestAnimationFrame(frame):0;
+  }
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+
+  fab.addEventListener('click',function(){setOpen(!S.open,'the Close button')});
+  done.addEventListener('click',function(){setOpen(false,'Done')});
+  scrim.addEventListener('click',function(){setOpen(false,'a tap outside')});
+  fab.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter')fab.classList.add('sm1-dn')});
+  ['keyup','blur'].forEach(function(t){fab.addEventListener(t,function(){fab.classList.remove('sm1-dn')})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&S.open){e.preventDefault();setOpen(false,'Escape')}});
+
+  sheet.addEventListener('pointerdown',function(e){
+    if(!S.open||e.target.closest('button'))return;
+    sheet.setPointerCapture(e.pointerId);
+    S.drag={y:e.clientY,p0:S.p,h:sheet.offsetHeight||1,ly:e.clientY,lt:e.timeStamp,vy:0};S.v=0;
+  });
+  sheet.addEventListener('pointermove',function(e){
+    var d=S.drag;if(!d)return;
+    var p=d.p0-(e.clientY-d.y)/d.h;if(p>1)p=1+(p-1)*.2;
+    S.p=Math.max(0,Math.min(1.05,p));
+    var dt=e.timeStamp-d.lt;if(dt>0)d.vy=(e.clientY-d.ly)/dt;
+    d.ly=e.clientY;d.lt=e.timeStamp;draw();
+  });
+  function release(e){
+    var d=S.drag;if(!d)return;S.drag=null;
+    if(e.timeStamp-d.lt>100)d.vy=0;
+    S.v=-d.vy*1000/d.h;
+    if(d.p0-S.p>.4||d.vy>.5)setOpen(false,'a swipe');else S.t=1;
+    kick();
+  }
+  sheet.addEventListener('pointerup',release);
+  sheet.addEventListener('pointercancel',release);
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  sheet.inert=true;
+  draw();
+})();</script>
+</body></html>

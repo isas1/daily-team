@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Link retype line for a clip share sheet</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--ink:var(--pack-text);--acc:var(--pack-accent);--mut:var(--pack-muted);--sf:var(--pack-surface);--bd:var(--pack-border);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing);--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.ab4-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;container-type:inline-size;display:grid}
+.ab4-card{box-sizing:border-box;width:100%;height:100%;overflow:auto;background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--pack-radii-control)*1.6);padding:var(--pack-spacing-padding);display:flex;flex-direction:column;gap:var(--pack-spacing-gap);font-size:clamp(12px,3cqi + 4px,calc(var(--pack-typography-size) + 4px))}
+.ab4-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.ab4-t{margin:0;font-size:1em;font-weight:600}
+.ab4-lab,.ab4-st,.ab4-m{font-size:.8em;color:var(--mut);margin:0}
+.ab4-st{min-height:1.4em}
+.ab4-mid-sec{margin-block:auto;display:flex;flex-direction:column;gap:8px}
+.ab4-box{position:relative;min-height:44px;height:2.8em;border:1px solid var(--bd);border-radius:var(--pack-radii-control);background:var(--bg);font-family:var(--mono);font-size:.86em;transition:border-color var(--dur) var(--ease)}
+.ab4-box:has(.ab4-inp:focus-visible){outline:2px solid var(--acc);outline-offset:2px}
+.ab4-vis{position:absolute;inset:0;display:flex;align-items:center;padding:0 8px;white-space:nowrap;pointer-events:none;overflow:hidden}
+.ab4-mid{min-width:0;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
+.ab4-sch,.ab4-host,.ab4-tail{flex:none}
+.ab4-sch{color:var(--mut)}
+.ab4-host{font-weight:600}
+.ab4-car{flex:none;width:2px;height:1.2em;margin-left:1px;background:var(--acc);opacity:0}
+.ab4-typing .ab4-car{opacity:1}
+.ab4-new{color:var(--acc);transition:color 600ms var(--ease)}
+.ab4-fade .ab4-new{color:inherit}
+.ab4-inp{position:absolute;inset:0;width:100%;box-sizing:border-box;border:0;margin:0;background:transparent;padding:0 8px;font:inherit;color:transparent;caret-color:transparent;border-radius:inherit;outline:none;cursor:pointer}
+.ab4-sel{border-color:var(--acc)}
+.ab4-sel .ab4-inp{color:var(--ink)}
+.ab4-sel .ab4-vis{visibility:hidden}
+.ab4-inp::selection{background:var(--acc);color:var(--bg)}
+.ab4-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ab4-btn{min-height:44px;border:1px solid var(--bd);border-radius:var(--pack-radii-control);background:transparent;color:var(--ink);font:inherit;font-size:.9em;padding:4px 8px;cursor:pointer;transition:background-color var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease),transform 80ms var(--ease)}
+.ab4-btn:active{transform:translateY(1px)}
+.ab4-btn[aria-pressed=true]{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc);color:var(--acc)}
+.ab4-btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media (hover:hover){.ab4-btn:hover{background:color-mix(in srgb,var(--acc) 8%,transparent)}}
+@container (max-width:300px){.ab4-card{padding:8px}.ab4-sch{display:none}.ab4-box{font-size:.8em}}
+@media (prefers-reduced-motion:reduce){.ab4-new,.ab4-btn,.ab4-box{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:10px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e8eaed;--pack-muted:#9aa0a6;--pack-accent:#5b9cf5;--pack-border:#2c3036}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181c;--pack-muted:#5f6670;--pack-accent:#1f6fd6;--pack-border:#d9dde3}</style></head><body>
+<div class="ab4-root" role="group" aria-label="Link retype line: the clip link that will be copied">
+<div class="ab4-card">
+<div class="ab4-hd"><h2 class="ab4-t">cat-pics-2.mp4</h2><p class="ab4-m">Forever plan · 4:12</p></div>
+<div class="ab4-mid-sec">
+<label class="ab4-lab" for="ab4-inp">Link to copy</label>
+<div class="ab4-box" id="ab4-box">
+<div class="ab4-vis" id="ab4-vis" aria-hidden="true"><span class="ab4-sch"></span><span class="ab4-host"></span><span class="ab4-mid"></span><span class="ab4-tail"></span><span class="ab4-car"></span></div>
+<input class="ab4-inp" id="ab4-inp" readonly spellcheck="false" autocomplete="off">
+</div>
+<p class="ab4-st" id="ab4-st" aria-live="polite">Tap the link to select it.</p>
+</div>
+<p class="ab4-lab" id="ab4-gl">Try a change</p>
+<div class="ab4-grid" id="ab4-grid" role="group" aria-labelledby="ab4-gl">
+<button class="ab4-btn" type="button" data-s="0" aria-pressed="true">No start</button>
+<button class="ab4-btn" type="button" data-s="102" aria-pressed="false">Start 1:42</button>
+<button class="ab4-btn" type="button" data-s="185" aria-pressed="false">Start 3:05</button>
+<button class="ab4-btn" type="button" data-l="1" aria-pressed="false">Long name</button>
+</div>
+</div></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0;
+  var $=function(s){return document.querySelector(s)};
+  var box=$('#ab4-box'),vis=$('#ab4-vis'),inp=$('#ab4-inp'),st=$('#ab4-st'),grid=$('#ab4-grid');
+  var parts=[$('.ab4-sch'),$('.ab4-host'),$('.ab4-mid'),$('.ab4-tail')];
+  var btns=[].slice.call(grid.querySelectorAll('button'));
+  var BASE='https://media.example/v/hd7k2',LONG='https://media.example/v/hd7k2-cat-pics-2-final-final-v3';
+  var HINT='Tap the link to select it.';
+  var S={start:0,long:false};
+  function url(){return (S.long?LONG:BASE)+(S.start?'?t='+S.start:'')}
+  function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+  var shown=url(),target=shown,anim=null,diffAt=Infinity,fadeT=0,sel=false;
+  inp.value=target;
+  function lcp(a,b){var i=0;while(i<a.length&&i<b.length&&a[i]===b[i])i++;return i}
+  function split(s){var a=s.indexOf('://');a=a<0?0:a+3;var h=s.indexOf('/',a);if(h<0)h=s.length;
+    var r=s.slice(h),q=r.indexOf('?'),p=q<0?r:r.slice(0,q),qs=q<0?'':r.slice(q),k=Math.min(3,p.length);
+    return [s.slice(0,a),s.slice(a,h),p.slice(0,p.length-k),p.slice(p.length-k)+qs]}
+  function fill(el,str,off){el.replaceChildren();var c=Math.max(0,Math.min(str.length,diffAt-off));
+    if(c>0)el.append(document.createTextNode(str.slice(0,c)));
+    if(c<str.length){var n=document.createElement('span');n.className='ab4-new';n.textContent=str.slice(c);el.append(n)}}
+  function finish(){anim=null;clearTimeout(fadeT);fadeT=setTimeout(function(){vis.classList.add('ab4-fade')},700)}
+  function step(now){if(!anim)return false;
+    var k=Math.floor((now-anim.t0)/24);
+    if(k>=anim.del+anim.add){shown=anim.to;finish();return false}
+    shown=k<anim.del?anim.from.slice(0,anim.from.length-k):anim.to.slice(0,anim.p+k-anim.del);
+    return true}
+  function snapToTarget(){if(anim){shown=anim.to;finish()}}
+  function draw(){var p=split(shown),off=0;
+    for(var i=0;i<4;i++){fill(parts[i],p[i],off);off+=p[i].length}
+    vis.classList.toggle('ab4-typing',!!anim);box.classList.toggle('ab4-sel',sel)}
+  function frame(now){var moving=reduce()?(snapToTarget(),false):step(now);draw();
+    raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+  function change(msg){var nu=url();if(nu===target)return;
+    target=nu;inp.value=nu;if(sel)inp.select();
+    var from=shown,p=lcp(from,nu);
+    diffAt=p;vis.classList.remove('ab4-fade');clearTimeout(fadeT);
+    anim={from:from,to:nu,p:p,del:from.length-p,add:nu.length-p,t0:performance.now()};
+    st.textContent=msg;
+    if(reduce()){snapToTarget();draw()}else kick()}
+  function sync(){btns.forEach(function(b){var on=b.dataset.l?S.long:+b.dataset.s===S.start;
+    b.setAttribute('aria-pressed',on?'true':'false')})}
+  btns.forEach(function(b){b.addEventListener('click',function(){var m;
+    if(b.dataset.l){S.long=!S.long;m=S.long?'Long file name, middle trimmed.':'Short file name.'}
+    else{var s=+b.dataset.s;if(s===S.start&&!anim)return;S.start=s;m=s?'Now starts at '+fmt(s)+'.':'Start time removed.'}
+    sync();change(m)})});
+  grid.addEventListener('keydown',function(e){var i=btns.indexOf(document.activeElement);if(i<0)return;
+    var d={ArrowRight:1,ArrowLeft:-1,ArrowDown:2,ArrowUp:-2}[e.key];if(!d)return;
+    e.preventDefault();btns[(i+d+4)%4].focus()});
+  function selectAll(){sel=true;inp.select();box.classList.add('ab4-sel');st.textContent='Selected. Ctrl+C or Cmd+C copies.'}
+  function deselect(){sel=false;try{inp.setSelectionRange(0,0)}catch(_){}box.classList.remove('ab4-sel');st.textContent=HINT}
+  inp.addEventListener('focus',function(){setTimeout(selectAll,0)});
+  inp.addEventListener('click',selectAll);
+  inp.addEventListener('blur',function(){sel=false;box.classList.remove('ab4-sel');if(/^Selected/.test(st.textContent))st.textContent=HINT});
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){e.preventDefault();e.stopPropagation();snapToTarget();deselect();draw()}
+    else if(e.key==='Enter'||e.key===' '){e.preventDefault();selectAll()}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&anim){snapToTarget();draw()}});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(anim)kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>

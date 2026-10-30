@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Copy failure notice for a clip share sheet</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--g:var(--pack-spacing-gap);--p:var(--pack-spacing-padding);--r:var(--pack-radii-control);--d:var(--pack-motion-duration);--e:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size);line-height:1.35}
+.cf6-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;padding:var(--pack-spacing-gap);display:flex;flex-direction:column;overflow:auto;container-type:inline-size}
+.cf6-card{margin:auto;width:100%;max-width:400px;box-sizing:border-box;background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--pack-radii-control) + 4px);padding:var(--p);display:flex;flex-direction:column;gap:var(--g)}
+@container (max-width:300px){.cf6-card{padding:var(--g)}}
+.cf6-lbl{color:var(--mu);font-size:.875em}
+.cf6-link{width:100%;box-sizing:border-box;min-height:44px;padding:0 var(--g);font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);text-overflow:ellipsis}
+.cf6-link::selection{background:var(--acc);color:var(--sf)}
+*:focus-visible,.cf6-link[data-sel]{outline:2px solid var(--pack-accent);outline-offset:2px}
+.cf6-h:focus{outline:none}.cf6-h:focus-visible{outline:2px solid var(--acc)}
+.cf6-btn{min-height:44px;box-sizing:border-box;padding:0 var(--g);font:inherit;font-weight:600;color:var(--ink);background:transparent;border:1px solid var(--bd);border-radius:var(--r);cursor:pointer;transition:transform 80ms var(--e),background-color var(--pack-motion-duration) var(--e),opacity var(--d) var(--e);-webkit-tap-highlight-color:transparent}
+.cf6-btn:active{transform:translateY(1px)}
+.cf6-btn[aria-disabled=true]{opacity:.55;cursor:default;transform:none}
+@media(hover:hover){.cf6-btn:not([aria-disabled=true]):hover{background-color:color-mix(in srgb,var(--ink) 8%,transparent)}.cf6-copy:not([aria-disabled=true]):hover{background-color:color-mix(in srgb,var(--acc) 88%,var(--ink))}}
+.cf6-copy{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:var(--g);background:var(--acc);border-color:var(--acc);color:var(--sf)}
+.cf6-ico{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.cf6-ck{stroke-dasharray:16;stroke-dashoffset:16;opacity:0;transition:stroke-dashoffset var(--d) var(--e),opacity 1ms}
+.cf6-copy[data-s=copied] .cf6-ck{stroke-dashoffset:0;opacity:1}
+.cf6-copy[data-s=copied] .cf6-cp{opacity:0}
+.cf6-lab{display:grid}.cf6-lab>span{grid-area:1/1;visibility:hidden;text-align:center}
+.cf6-copy[data-s=idle] [data-k=idle],.cf6-copy[data-s=pending] [data-k=pending],.cf6-copy[data-s=copied] [data-k=copied],.cf6-copy[data-s=failed] [data-k=failed]{visibility:visible}
+.cf6-bar{position:absolute;left:0;bottom:0;width:100%;height:4px;background:var(--sf);opacity:.6;transform:scaleX(0);transform-origin:left}
+.cf6-note{border:1px solid var(--bd);border-left:4px solid var(--acc);border-radius:var(--r);padding:var(--g);display:flex;flex-direction:column;gap:var(--g);animation:cf6-in var(--d) var(--e)}
+.cf6-note[hidden]{display:none}
+@keyframes cf6-in{from{opacity:0;transform:translateY(4px)}}
+.cf6-h{margin:0;font-size:1em;font-weight:650;display:flex;gap:var(--g);align-items:center}
+.cf6-bang{flex:none;width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;box-sizing:border-box;display:grid;place-items:center;font-size:12px;font-weight:700}
+.cf6-sub{margin:0;color:var(--mu);font-size:.875em}
+.cf6-acts{display:flex;flex-wrap:wrap;gap:var(--g)}.cf6-acts .cf6-btn{flex:1 1 auto;font-size:.9em}
+.cf6-sim{display:flex;flex-wrap:wrap;align-items:center;gap:var(--g)}
+.cf6-sim select{flex:1 1 120px;min-height:44px;font:inherit;font-size:.9em;color:var(--ink);background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:0 var(--g)}
+.cf6-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.cf6-note{animation:none}.cf6-ck,.cf6-btn{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:10px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e8eaed;--pack-muted:#9aa0a6;--pack-accent:#5b9cf5;--pack-border:#2c3036}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181c;--pack-muted:#5f6670;--pack-accent:#1f6fd6;--pack-border:#d9dde3}</style></head><body>
+<div class="cf6-root" id="cf6-root" role="group" aria-label="Copy failure notice for a clip share link">
+ <div class="cf6-card">
+  <label class="cf6-lbl" for="cf6-link">Forever clip: cat-pics-2 at 1:42</label>
+  <input class="cf6-link" id="cf6-link" readonly value="https://media.example/v/hd7k2?t=102">
+  <button class="cf6-btn cf6-copy" id="cf6-copy" type="button" data-s="failed">
+   <svg class="cf6-ico" viewBox="0 0 16 16" aria-hidden="true"><g class="cf6-cp"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5"/><path d="M10.5 2.5h-7a1 1 0 0 0-1 1v7"/></g><path class="cf6-ck" d="M3 8.5l3 3 7-7"/></svg>
+   <span class="cf6-lab"><span data-k="idle">Copy link</span><span data-k="pending">Copying</span><span data-k="copied">Copied</span><span data-k="failed">Copy failed</span></span>
+   <span class="cf6-bar" id="cf6-bar"></span>
+  </button>
+  <div class="cf6-note" id="cf6-note">
+   <h2 class="cf6-h" id="cf6-h" tabindex="-1"><span class="cf6-bang" aria-hidden="true">!</span><span id="cf6-ht">Clipboard blocked by browser</span></h2>
+   <p class="cf6-sub" id="cf6-sub">Retry, or select the link and copy it yourself.</p>
+   <div class="cf6-acts" id="cf6-acts">
+    <button class="cf6-btn" id="cf6-retry" type="button">Retry</button>
+    <button class="cf6-btn" id="cf6-sel" type="button">Select link</button>
+    <button class="cf6-btn" id="cf6-dis" type="button">Dismiss</button>
+   </div>
+  </div>
+  <div class="cf6-sim"><label class="cf6-lbl" for="cf6-mode">Test as</label>
+   <select id="cf6-mode"><option value="blocked">Blocked clipboard</option><option value="insecure">Page not secure</option><option value="hang">No answer</option><option value="real">Real clipboard</option></select>
+  </div>
+  <div class="cf6-sr" id="cf6-sr" aria-live="polite"></div>
+ </div>
+</div>
+<script>(function(){
+  var $=function(i){return document.getElementById('cf6-'+i)};
+  var link=$('link'),copyB=$('copy'),bar=$('bar'),note=$('note'),h=$('h'),ht=$('ht'),sub=$('sub'),acts=$('acts'),retry=$('retry'),sel=$('sel'),dis=$('dis'),mode=$('mode'),sr=$('sr');
+  var MSG={blocked:'Clipboard blocked by browser',insecure:'Page not secure',timeout:'Clipboard did not answer'};
+  var KEY=/Mac|iP/.test(navigator.platform)?'\u2318C':'Ctrl+C';
+  var S={status:'failed',reason:'blocked',shown:true,manual:false,attempt:0,t0:0};
+  var limitT=0,doneT=0,sayT=0;
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  function say(t){sr.textContent='';clearTimeout(sayT);sayT=setTimeout(function(){sr.textContent=t},60)}
+  function manualHint(){return matchMedia('(pointer:coarse)').matches?'Link selected. Use Copy in the menu.':'Link selected. Press '+KEY+'.'}
+  function render(){
+    var pend=S.status==='pending';
+    copyB.dataset.s=S.status;copyB.setAttribute('aria-disabled',pend);
+    note.hidden=!S.shown;
+    if(S.reason)ht.textContent=MSG[S.reason];
+    sub.textContent=pend?'Retrying':S.manual?manualHint():'Retry, or select the link and copy it yourself.';
+    retry.setAttribute('aria-disabled',pend);
+    if(S.manual)link.setAttribute('data-sel','');else link.removeAttribute('data-sel');
+    draw();
+  }
+  function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
+  function copy(){
+    if(S.status==='pending')return;
+    var id=++S.attempt;clearTimeout(doneT);clearTimeout(limitT);
+    S.status='pending';S.manual=false;S.t0=performance.now();render();kick();
+    limitT=setTimeout(function(){done(id,'timeout')},1500);
+    var m=mode.value,p;
+    if(m==='blocked')p=wait(500).then(function(){throw{name:'NotAllowedError'}});
+    else if(m==='insecure')p=wait(300).then(function(){throw{name:'Insecure'}});
+    else if(m==='hang')p=new Promise(function(){});
+    else if(!window.isSecureContext||!navigator.clipboard)p=Promise.reject({name:'Insecure'});
+    else p=navigator.clipboard.writeText(link.value);
+    p.then(function(){done(id)},function(e){done(id,e&&e.name==='Insecure'?'insecure':'blocked')});
+  }
+  function copied(){
+    S.status='copied';S.shown=false;S.manual=false;note.removeAttribute('role');
+    clearTimeout(doneT);doneT=setTimeout(function(){S.status='idle';render()},2000);
+    say('Link copied');
+  }
+  function done(id,r){
+    if(id!==S.attempt||S.status!=='pending')return;
+    clearTimeout(limitT);
+    var inNote=note.contains(document.activeElement);
+    if(!r){copied();render();if(inNote)copyB.focus();return}
+    var first=!S.shown;
+    S.status='failed';S.reason=r;S.shown=true;
+    if(first)note.setAttribute('role','alert');else say(MSG[r]);
+    render();if(first)h.focus();
+  }
+  function dismiss(){
+    S.attempt++;clearTimeout(limitT);
+    S.status='idle';S.shown=false;S.manual=false;S.reason=null;
+    note.removeAttribute('role');render();copyB.focus();
+  }
+  function selectLink(){
+    S.manual=true;render();link.focus();link.select();
+    try{link.setSelectionRange(0,link.value.length)}catch(e){}
+    say(manualHint());
+  }
+  copyB.addEventListener('click',copy);
+  retry.addEventListener('click',function(){if(S.status!=='pending')copy()});
+  sel.addEventListener('click',selectLink);
+  dis.addEventListener('click',dismiss);
+  link.addEventListener('click',function(){link.select()});
+  link.addEventListener('blur',function(){if(S.manual){S.manual=false;render()}});
+  link.addEventListener('copy',function(){if(S.shown&&S.status!=='pending'){copied();render()}});
+  acts.addEventListener('keydown',function(e){
+    var b=[retry,sel,dis],i=b.indexOf(document.activeElement),d=0;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')d=1;else if(e.key==='ArrowLeft'||e.key==='ArrowUp')d=-1;
+    if(d&&i>-1){e.preventDefault();b[(i+d+3)%3].focus()}
+  });
+  $('root').addEventListener('keydown',function(e){if(e.key==='Escape'&&S.shown){e.preventDefault();dismiss()}});
+
+  var raf=0,last=0;
+  function step(){return S.status==='pending'}
+  function draw(){
+    var k=S.status==='pending'&&!reduce()?Math.min(1,(performance.now()-S.t0)/1500):0;
+    bar.style.transform='scaleX('+k+')';
+  }
+  function snapToTarget(){bar.style.transform='scaleX(0)'}
+  function frame(now){last=now;
+    var moving=reduce()?(snapToTarget(),false):step();
+    if(!reduce())draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  render();
+})();</script>
+</body></html>
