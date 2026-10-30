@@ -459,7 +459,7 @@ export function publishEditions(root, { site = '', repo = '', pagesUrl = '' } = 
   }
   if (site) {
     const out = join(site, 'editions'); mkdirSync(out, { recursive: true });
-    writeFileSync(join(out, 'index.html'), page('Extra editions', `<h1>Extra editions</h1><p>30–31 October 2026. Normal daily runs continue.</p><ul>${links.join('')}</ul><a href="../">Normal daily run</a>`, { root: '../' }));
+    writeFileSync(join(out, 'index.html'), page('Extra editions', `<h1>Extra editions</h1><p>News and popular: 30–31 October 2026. Culture: a different sourced culture daily until the queue ends. Normal daily runs continue.</p><ul>${links.join('')}</ul><a href="../">Normal daily run</a>`, { root: '../' }));
   }
 }
 

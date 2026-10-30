@@ -5,17 +5,27 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
-import { slot, editionInput, DATES, LANES } from './editions.mjs';
+import { slot, editionInput, DATES, LANES, CULTURES, cultureFor, allowedEdition } from './editions.mjs';
 import { packInputProblems, makeManifest } from './component-pack.mjs';
 import { feedEvidence, dayReadme, publishEditions } from './publish.mjs';
 import { samplePack, samplePlan, sampleHtml } from './test-fixtures/pack.mjs';
 const temp = () => mkdtempSync(join(tmpdir(), 'daily-editions-'));
 
-test('experiment has exactly six extra slots; date guard expires and unknown cron never runs', () => {
+test('news/popular stop after two nights; culture continues with unique past and present cultures until queue ends', () => {
   for (const date of DATES) for (const cron of ['30 0 * * *', '30 2 * * *', '30 4 * * *']) assert.equal(slot(new Date(`${date}T04:00:00Z`), cron).due, true);
   assert.equal(DATES.length * LANES.length, 6);
   for (const date of ['2026-10-29', '2026-11-01', '2027-10-30']) assert.equal(slot(new Date(`${date}T00:30:00Z`), '30 0 * * *').due, false);
   assert.equal(slot(new Date('2026-10-30T00:30:00Z'), 'unknown').due, false);
+  assert.equal(new Set(CULTURES.map(c => c.id)).size, CULTURES.length);
+  assert.deepEqual(new Set(CULTURES.map(c => c.era)), new Set(['living', 'historical']));
+  for (let i = 0; i < CULTURES.length; i++) {
+    const now = new Date(Date.parse(`${DATES[0]}T02:30:00Z`) + i * 86400000), date = now.toISOString().slice(0,10);
+    assert.equal(slot(now, '30 2 * * *').due, true);
+    assert.equal(cultureFor(date).id, CULTURES[i].id);
+  }
+  const exhausted = new Date(Date.parse(`${DATES[0]}T02:30:00Z`) + CULTURES.length * 86400000);
+  assert.equal(slot(exhausted, '30 2 * * *').due, false);
+  for (const date of ['2026-10-29', '2026-02-30', '2026-10-300', 'garbage']) assert.equal(allowedEdition(date,'culture'),false);
 });
 
 test('news must choose a feed, cultures differ, popular snapshot names actual observed seeds', async () => {
@@ -28,6 +38,9 @@ test('news must choose a feed, cultures differ, popular snapshot names actual ob
     pack.opportunities[0].id = pack.selection.id; assert.deepEqual(packInputProblems(pack, news), []);
     const cultures = await Promise.all(DATES.map(date => editionInput(date, 'culture', { root })));
     assert.match(cultures[0].task, /sashiko/); assert.match(cultures[1].task, /azulejo/);
+    const historical = await editionInput('2026-11-01','culture',{root});
+    assert.equal(historical.edition.culture.era, 'historical'); assert.match(historical.task,/Egyptian/);
+    await assert.rejects(editionInput('2027-10-30','culture',{root}), /exhausted/);
     const popular = await editionInput(DATES[0], 'popular', { root });
     assert.match(popular.task, /Morphing Action FAB/); assert.equal(popular.edition.popularSnapshot.components[0].displayedScore, 9);
     await assert.rejects(editionInput('2026-11-01', 'news', {root}), /outside/);

@@ -1,4 +1,4 @@
-name: Two-night editions
+name: Extra editions
 
 on:
   schedule:
@@ -13,7 +13,7 @@ on:
         options: [news, culture, popular]
         required: true
       date:
-        description: Approved date (2026-10-30 or 2026-10-31)
+        description: Date (news/popular 30–31 Oct; culture within sourced queue)
         required: true
 
 permissions:
@@ -44,9 +44,9 @@ jobs:
         run: |
           if [ "$EVENT" = workflow_dispatch ]; then
             node --input-type=module <<'JS' >> "$GITHUB_OUTPUT"
-          import { DATES, LANES } from './editions.mjs';
+          import { allowedEdition } from './editions.mjs';
           const date = process.env.REQUEST_DATE, lane = process.env.REQUEST_LANE;
-          if (!DATES.includes(date) || !LANES.includes(lane)) throw new Error('outside approved experiment');
+          if (!allowedEdition(date, lane)) throw new Error('outside approved dates or culture queue exhausted');
           console.log(`due=true\ndate=${date}\nlane=${lane}`);
           JS
           else

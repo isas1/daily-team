@@ -68,7 +68,7 @@ No open suggestions yet.
 
 ## Two-night extra editions
 
-30–31 October 2026, Lisbon time: 00:30 news/feed inspiration, 02:30 culture, 04:30 popular-component expansion. Normal 06:00 run continues. Three extra packs per day, six total; separate records preserve the normal day. Extra runs use six components plus one connected demo and skip model comparisons. Scheduled GitHub jobs may start late. Date guard stops generation after 31 October.
+30–31 October 2026, Lisbon time: 00:30 news/feed inspiration, 02:30 culture, 04:30 popular-component expansion. Normal 06:00 run continues. Culture continues daily afterward: a different past or present culture, without repeats, until the sourced queue ends. Twelve cultures currently queued through 10 November; the list can be extended by appending new culture IDs. News/popular stop after 31 October. Separate records preserve the normal day. Extra runs use six components plus one connected demo and skip model comparisons. Scheduled GitHub jobs may start late.
 
 [Browse extra editions](https://isas1.github.io/daily-team/editions/) · [Schedule and evidence guide](docs/extra-editions.md)
 
