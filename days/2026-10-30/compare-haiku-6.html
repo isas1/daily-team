@@ -1,0 +1,26 @@
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+){e.preventDefault();pick(act);return}
+    else return;
+    e.preventDefault();act=i;paint();rows[i].focus();
+  });
+
+  root.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&sel!=null){sel=null;msg='';paint()}
+  });
+
+  bSwitch.addEventListener('click',function(){start(src==='inbox'?'shared':'inbox',true)});
+  bReload.addEventListener('click',function(){start(src,true)});
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}
+    else if(p<1)kick();
+  });
+
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+      document.documentElement.setAttribute('data-theme',m.theme)});
+
+  apply('inbox');
+  draw();
+})();</script>
+</body></html>

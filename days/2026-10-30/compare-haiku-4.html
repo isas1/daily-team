@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Retry guard, Holding Panel: reading-list source retry</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--s2:8px;--s3:16px;--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--fam:var(--pack-typography-family);--fs:var(--pack-typography-size);--rad:var(--pack-radii-control);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.ab4-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:var(--ink);font:var(--fs)/1.4 var(--fam)}
+.ab4-card{box-sizing:border-box;width:min(100%,320px);max-height:100%;overflow:auto;display:grid;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--sf);border:1px solid var(--bd);border-radius:var(--rad)}
+.ab4-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s2)}
+.ab4-src{font-weight:600}
+.ab4-att{color:var(--mu);font-size:.875em}
+.ab4-msg{margin:0;min-height:2.8em}
+[data-state=retrying] .ab4-msg{color:var(--mu)}
+.ab4-act{display:grid}
+.ab4-btn{box-sizing:border-box;min-height:44px;width:100%;display:flex;align-items:center;justify-content:center;gap:var(--s2);padding:0 var(--s3);border:0;border-radius:var(--rad);background:var(--acc);color:var(--bg);font:inherit;font-weight:600;cursor:pointer;transition:background-color var(--dur) var(--ease),color var(--dur) var(--ease),transform 80ms var(--ease)}
+.ab4-btn:not([aria-disabled=true]):hover{opacity:.92}
+.ab4-btn:active{transform:scale(.98)}
+.ab4-btn[aria-disabled=true]{background:var(--bd);color:var(--ink);cursor:progress}
+.ab4-btn:focus-visible,.ab4-reset:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ab4-spin{width:16px;height:16px;flex:none;box-sizing:border-box;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;opacity:0;transition:opacity var(--dur) var(--ease)}
+[data-state=retrying] .ab4-spin{opacity:1}
+.ab4-lbl{display:grid}
+.ab4-lbl>span{grid-area:1/1;text-align:center}
+.ab4-l2{visibility:hidden}
+[data-state=retrying] .ab4-l1{visibility:hidden}
+[data-state=retrying] .ab4-l2{visibility:visible}
+[data-state=loaded] .ab4-btn{visibility:hidden}
+.ab4-reset{justify-self:center;min-height:44px;padding:0 var(--s2);border:0;background:none;color:var(--acc);font:inherit;text-decoration:underline;cursor:pointer;visibility:hidden}
+[data-state=loaded] .ab4-reset{visibility:visible}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:160ms;--pack-motion-easing:ease-out;--pack-bg:#111214;--pack-surface:#1a1c1f;--pack-text:#ececee;--pack-muted:#9a9ca3;--pack-accent:#6aa8ff;--pack-border:#2c2f34}:root[data-theme="light"]{--pack-bg:#f6f6f7;--pack-surface:#ffffff;--pack-text:#17181a;--pack-muted:#5d6068;--pack-accent:#2457c5;--pack-border:#d9dbe0}</style></head><body>
+<div class="ab4-root" role="group" aria-label="Retry guard for the Archive source"></div>
+<script>(function(){
+  var root=document.querySelector('.ab4-root');
+  var refs={},raf=0,last=0,angle=0,timer=0;
+  var st='failed',att=1,reqId=0,cycle=0;
+
+  // Read the preference live on every call. Never cached.
+  function reduce(){return matchMedia('(prefers-reduced-motion: reduce)').matches}
+  function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e}
+
+  // Attempt 1 fails. Attempt 2 succeeds on the first cycle.
+  // After a reset, attempt 2 also fails so the failed-again path can be seen.
+  function succeeds(n){return n>(cycle?2:1)}
+
+  function msg(){
+    if(st==='loaded')return 'Loaded 9 items';
+    if(st==='retrying')return 'Requesting attempt '+att+' from Archive';
+    return att>1?'Attempt '+att+' failed':'Timed out after 6 s';
+  }
+
+  function spin(){
+    var a=reduce()?0:angle;
+    refs.spin.style.transform='rotate('+a.toFixed(1)+'deg)';
+  }
+
+  function kick(){
+    if(!raf&&!document.hidden&&st==='retrying'&&!reduce()){last=0;raf=requestAnimationFrame(frame)}
+  }
+
+  function frame(now){
+    var dt=last?Math.min(now-last,50)/16.667:0;last=now;
+    if(!reduce()&&st==='retrying')angle=(angle+6*dt)%360;
+    else angle=0;
+    spin();
+    raf=(st==='retrying'&&!reduce())?requestAnimationFrame(frame):0;
+  }
+
+  function draw(){
+    root.dataset.state=st;
+    refs.att.textContent='Attempt '+att;
+    refs.msg.textContent=msg();
+    refs.btn.setAttribute('aria-disabled',st==='retrying'?'true':'false');
+    spin();
+    kick();
+  }
+
+  function retry(){
+    if(st!=='failed')return; // presses during an attempt or after load are ignored
+    var id=++reqId,n=att+1;
+    att=n;st='retrying';draw();
+    timer=setTimeout(function(){settle(id,n)},1500);
+  }
+
+  function settle(id,n){
+    timer=0;
+    if(id!==reqId)return; // stale reply, dropped
+    st=succeeds(n)?'loaded':'failed';
+    draw();
+    if(st==='loaded')refs.reset.focus();
+    else refs.btn.focus();
+  }
+
+  function reset(){
+    clearTimeout(timer);timer=0;
+    reqId++;cycle++;att=1;st='failed';
+    draw();
+    refs.btn.focus();
+  }
+
+  var card=el('div','ab4-card');
+  var head=el('div','ab4-head');
+  refs.att=el('span','ab4-att');
+  head.append(el('span','ab4-src','Archive'),refs.att);
+  refs.msg=el('p','ab4-msg');
+  refs.msg.setAttribute('aria-live','polite');
+  refs.btn=el('button','ab4-btn');
+  refs.btn.type='button';
+  refs.spin=el('span','ab4-spin');
+  refs.spin.setAttribute('aria-hidden','true');
+  var lbl=el('span','ab4-lbl');
+  lbl.append(el('span','ab4-l1','Retry'),el('span','ab4-l2','Retrying'));
+  refs.btn.append(refs.spin,lbl);
+  var act=el('div','ab4-act');
+  act.append(refs.btn);
+  refs.reset=el('button','ab4-reset','Reset sample');
+  refs.reset.type='button';
+  card.append(head,refs.msg,act,refs.reset);
+  root.append(card);
+
+  refs.btn.addEventListener('click',retry);
+  refs.reset.addEventListener('click',reset);
+  root.addEventListener('keydown',function(e){
+    if((e.key==='r'||e.key==='R')&&st==='failed'){e.preventDefault();retry()}
+  });
+
+  // If the preference changes mid-attempt, resume or stop the spinner.
+  matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',function(){spin();kick()});
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick();
+  });
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+  draw();
+})();</script>
+</body></html>

@@ -1,0 +1,360 @@
+# 2026-10-30: Holding Panel
+
+[Today](../../README.md) · [Archive](../../ARCHIVE.md)
+
+<img src="team.png" alt="Team for 2026-10-30: Dance choreographer · Railway signaller · Optical technician · Satellite repair apprentice" width="100%">
+
+**Task:** Request loader: a loader for a content panel that moves from pending to loaded or failed, with a retry action and stable layout.
+
+**Request source:** [isas1/web-components #45](https://github.com/isas1/web-components/issues/45). Local prototype; source issue stays open.
+
+**Constraint:** Use one consistent spacing scale.
+
+**Season:** 2026-10-26
+
+**Decision:** The team builds a reading-list panel that loads three sample sources and holds its layout through every state.
+
+<img src="cover.png" alt="Designed cover for Holding Panel" width="100%">
+
+[Cover art direction](cover.json) · [Cover source](cover.html)
+
+## Feed evidence
+
+- smashing: cached
+- hacker-news: cached
+- codrops: disabled — 2026-10-27: endpoint returns HTTP 410; awaiting verified replacement
+- No feed article recorded as used; fetched items may have been considered without selection.
+- Chosen opportunity: request-isas1/web-components-45. The explicit brief and the eligible issue name the same scoped need. Pending, loaded, empty and failed with retry form a practical panel pattern that the 10-28 and 10-29 staged loaders do not cover.
+
+[Saved planning input](planning-input.json)
+
+## Asset
+
+[Pack manifest](pack.json) · [Shared tokens](tokens.json) · [Planning input](planning-input.json)
+
+Generated candidates require human review. Library acceptance: unreviewed.
+
+[Compare Opus, Sonnet, and Haiku](comparison.html)
+
+<a href="piece.html"><img src="piece.png" alt="Screenshot of piece.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-30/) · [piece.html](piece.html), led by Dance choreographer. Model: claude-opus-5-5.
+
+<a href="artifact-1.html"><img src="artifact-1.png" alt="Screenshot of artifact-1.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-30/) · [artifact-1.html](artifact-1.html), led by Dance choreographer. Model: claude-opus-5-5.
+
+<a href="artifact-2.html"><img src="artifact-2.png" alt="Screenshot of artifact-2.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-30/) · [artifact-2.html](artifact-2.html), led by Railway signaller. Model: claude-opus-5-5.
+
+<a href="artifact-3.html"><img src="artifact-3.png" alt="Screenshot of artifact-3.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-30/) · [artifact-3.html](artifact-3.html), led by Optical technician. Model: claude-opus-5-5.
+
+<a href="artifact-4.html"><img src="artifact-4.png" alt="Screenshot of artifact-4.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-30/) · [artifact-4.html](artifact-4.html), led by Satellite repair apprentice. Model: claude-opus-5-5.
+
+<a href="artifact-5.html"><img src="artifact-5.png" alt="Screenshot of artifact-5.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-30/) · [artifact-5.html](artifact-5.html), led by Dance choreographer. Model: claude-opus-5-5.
+
+<a href="artifact-6.html"><img src="artifact-6.png" alt="Screenshot of artifact-6.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-10-30/) · [artifact-6.html](artifact-6.html), led by Railway signaller. Model: claude-opus-5-5.
+
+## The session
+
+### Pitch
+
+### Clash
+
+**4 · Satellite repair apprentice:** The share sheet has a failure state too. Clipboard denied. Isn't that the same lesson?
+
+**1 · Dance choreographer:** The brief says request loader. Pending, loaded, failed, retry. Your sheet has no pending phase worth a component. It's a good piece for another day.
+
+**4 · Satellite repair apprentice:** Fine. Then retry has to survive a double press. Two clicks, one request. Second click reads "Retrying", nothing else.
+
+**3 · Optical technician:** The developing skeleton is my strange part. It shows the shape of what's coming before it comes.
+
+**2 · Railway signaller:** Animated grey rows change brightness at different times. That reads as uneven. A static block at the final row height does the real job. No layout shift.
+
+**3 · Optical technician:** Then the strangeness goes somewhere honest. The failure plate keeps the last good list visible underneath, dimmed and stamped with its time. The panel stays full and you can still read the old copy.
+
+**1 · Dance choreographer:** That plate overlaps the pending indicator. Who owns "Still waiting"?
+
+**3 · Optical technician:** Pending owns time. The plate owns cause. Cancel lives on pending after 8 s. Retry lives on the plate. Neither one says the other's line.
+
+**2 · Railway signaller:** And selection in the list uses the tab rule. One 2px left bar, accent, the same everywhere. No second treatment.
+
+### Decision
+
+The team builds a reading-list panel that loads three sample sources and holds its layout through every state. The visitor can cancel a slow request or retry a failed one without losing the last good copy.
+
+Concept: Holding Panel
+
+The choreographer set the boundary. One store per source feeds six views, and every part answers "what can I do here". The signaller fixed the material: 56px rows, a 24px glyph slot on tabs, one selection rule across tabs and list, and every gap drawn from a 4/8/16/24 scale. The optical technician split cancel from retry by state and sized the failure plate from its longest label. The technician also kept the dimmed last-good list under the failure plate. The apprentice made the Archive outcome deterministic and added the double-press guard on retry, so every action gives the same result on a second test.
+
+Rejected direction: the share sheet from the team card. It has merit, but the edition brief and the issue scope ask for a request loader. The feed item on CSS `random()` was also set aside, because random skeleton widths would undercut stable layout.
+
+Source: https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/loaders/05-dash-orbital-ring/var-1-arc-spinner.html. The retained mechanism is the rotating top-border arc on a 2px ring, used only in row 2. The team makes three improvements:
+1. The source declares `role=status` on both the host and the inner div. The rebuild puts one polite live region on a text line that reads "Waiting · 3 s", and only that line is announced.
+2. Under reduced motion, the source stops the ring, which leaves a shape that looks finished. The rebuild draws a static three-quarter arc and keeps the word "Waiting".
+3. The source spins forever in hardcoded white. The rebuild waits 400 ms before showing, takes its colour from tokens, adds Cancel at 8 s and unmounts on loaded or failed.
+
+Six components earn their place because each one covers a separate state or job. A seventh candidate, an outcome switch for the demo, was cut. The Archive source fails once by design, so the demo needs no extra test control.
+
+```json
+{
+  "schemaVersion": 1,
+  "categoryVersion": 1,
+  "id": "holding-panel",
+  "name": "Holding Panel",
+  "description": "A reading-list content panel that loads three sample sources through pending, loaded, empty and failed states with retry, cancel and fixed layout.",
+  "project": "Reading-list panel for a notes tool. Three sources (Inbox, Shared, Archive) load sample articles. Archive times out on attempt 1 and succeeds on attempt 2. Shared returns zero items.",
+  "sizeRationale": "Six rows map to six jobs: switch source, hold layout, report waiting, explain failure, act on failure, read results. An outcome-switch test control was cut because the deterministic Archive failure covers that case.",
+  "opportunities": [
+    {
+      "id": "request-isas1/web-components-45",
+      "need": "A loader for a content panel that moves from pending to loaded or failed, with retry and stable layout.",
+      "use": "A reader opens Archive, waits, sees a timeout, retries once and gets the list without the panel jumping.",
+      "interaction": "Tab or arrow between sources, Cancel after 8 s of waiting, Retry on failure, arrow through loaded rows.",
+      "similarity": "2026-10-28 load stages and 2026-10-29 import track report staged jobs. This panel has no stages. It reports elapsed time, keeps last-good content and holds row geometry across states."
+    },
+    {
+      "id": "daily-task",
+      "need": "Same scoped request loader.",
+      "use": "Same as the request.",
+      "interaction": "Same as the request.",
+      "similarity": "Identical to the request. The request is chosen because it carries the issue attribution."
+    },
+    {
+      "id": "c15c1be0aad75fb41fbdb15d",
+      "need": "Organic variation in CSS without JavaScript.",
+      "use": "Could vary skeleton line widths.",
+      "interaction": "None beyond display.",
+      "similarity": "Weak fit. Randomised widths shift between renders and work against the stable-layout requirement. Rejected."
+    }
+  ],
+  "selection": {
+    "id": "request-isas1/web-components-45",
+    "rationale": "The explicit brief and the eligible issue name the same scoped need. Pending, loaded, empty and failed with retry form a practical panel pattern that the 10-28 and 10-29 staged loaders do not cover."
+  },
+  "tokens": {
+    "colors": {
+      "dark": { "bg": "#111214", "surface": "#1a1c1f", "text": "#ececee", "muted": "#9a9ca3", "accent": "#6aa8ff", "border": "#2c2f34" },
+      "light": { "bg": "#f6f6f7", "surface": "#ffffff", "text": "#17181a", "muted": "#5d6068", "accent": "#2457c5", "border": "#d9dbe0" }
+    },
+    "typography": { "family": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif", "size": "15px" },
+    "spacing": { "gap": "8px", "padding": "16px" },
+    "radii": { "control": "6px" },
+    "motion": { "duration": "160ms", "easing": "ease-out" }
+  },
+  "components": [
+    {
+      "row": 1,
+      "id": "source-tabs",
+      "file": "artifact-1.html",
+      "name": "Source tabs",
+      "description": "Tablist of three sources, each tab carrying a request-state glyph in a fixed 24px slot.",
+      "category": "Navigation",
+      "tags": ["tabs", "tablist", "request-state", "glyph", "fixed-width"],
+      "purpose": "Switch between content sources and see each source's request state at a glance.",
+      "use": "A reader sees a slashed glyph on Archive, leaves it, reads Inbox, then returns.",
+      "input": "Click or tap a tab. Keyboard: Tab into the list, Left and Right move, Home and End jump, Enter or Space activates.",
+      "outcome": "The panel shows the chosen source. Each source keeps its own request, so switching never restarts or cancels another load.",
+      "recovery": "Returning to a failed tab shows its failure plate with Retry. Nothing is lost by switching.",
+      "mechanism": "ARIA tabs with roving tabindex and manual activation. Each tab reads status from a per-source store. Glyphs: hollow ring for pending, filled dot for loaded, dash for empty, slashed ring for failed, each with a visually hidden word. Selection is a 2px accent left bar, shared with row 6.",
+      "nearestAnalogue": "2026-10-28 range selector. That control replaced one data window and aborted prior work. These tabs keep three requests alive in parallel.",
+      "usefulness": "Readers move between sources while one is slow, so per-source state must be visible before they arrive.",
+      "creativeDifference": "Tabs act as a signal board. Request state shows by shape in a fixed slot, so the labels never shift.",
+      "states": [
+        "default: Inbox selected, reached on load",
+        "pending glyph: hollow ring, reached while that source loads",
+        "loaded glyph: filled dot, reached on success",
+        "empty glyph: dash, reached when Shared returns zero items",
+        "failed glyph: slashed ring, reached on Archive attempt 1 timeout",
+        "focus: 2px ring, reached by Tab or arrows"
+      ],
+      "sources": [{ "title": "ARIA Authoring Practices: Tabs", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/" }]
+    },
+    {
+      "row": 2,
+      "id": "pending-arc",
+      "file": "artifact-2.html",
+      "name": "Pending arc",
+      "description": "Delayed arc with an elapsed-seconds line that escalates to Still waiting and Cancel after 8 s.",
+      "category": "Feedback",
+      "tags": ["loader", "spinner", "elapsed-time", "cancel", "live-region", "reduced-motion"],
+      "purpose": "Say that a request is running and for how long, without inventing progress.",
+      "use": "A reader sees 'Still waiting · 9 s' on Archive and cancels.",
+      "input": "Display until 8 s. Then click or tap Cancel. Keyboard: Tab to Cancel, Enter or Space, or Escape while the panel has focus.",
+      "outcome": "The arc appears after 400 ms with 'Waiting · n s'. At 8 s the line reads 'Still waiting' and Cancel appears in a reserved slot. Cancel aborts the request.",
+      "recovery": "Cancel leaves the source in a cancelled state with Retry on row 4 and keeps any last-good list from row 5.",
+      "mechanism": "The source's rotating top-border arc is kept on a 20px ring in accent. A setTimeout of 400 ms prevents a flash on fast loads. A 1 s interval updates text, and the live region announces only at 0 s and 8 s. An AbortController is tied to Cancel. The component unmounts on loaded or failed.",
+      "nearestAnalogue": "2026-10-29 import stage track used the same arc on its active stage. That row counted files per stage. This row counts elapsed time on a single request and adds a cancel threshold.",
+      "usefulness": "Elapsed seconds are the honest measure for a request with no known size.",
+      "creativeDifference": "The wait escalates once at a fixed threshold. The visitor gets an exit only when it matters.",
+      "states": [
+        "hidden: first 400 ms of a request, or no request running",
+        "waiting: arc and 'Waiting · n s', reached after 400 ms",
+        "still-waiting: 'Still waiting · n s' with Cancel, reached at 8 s",
+        "cancelling: Cancel disabled with label 'Cancelling', reached on press",
+        "reduced-motion: static three-quarter arc with the word 'Waiting'"
+      ],
+      "sources": [
+        { "title": "Minimalist arc spinner (creative-sites-vault)", "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/loaders/05-dash-orbital-ring/var-1-arc-spinner.html" },
+        { "title": "Loader tile variety pack (library content)", "url": "https://github.com/isas1/web-components/issues/45" }
+      ]
+    },
+    {
+      "row": 3,
+      "id": "reserved-skeleton",
+      "file": "artifact-3.html",
+      "name": "Reserved skeleton",
+      "description": "Static placeholder rows at the exact height and column structure of loaded rows.",
+      "category": "Layout",
+      "tags": ["skeleton", "placeholder", "layout-shift", "fixed-height", "static"],
+      "purpose": "Hold the panel's geometry while content is pending so nothing moves on arrival.",
+      "use": "A reader starts reading Inbox the moment it loads, with the first title where the first bar sat.",
+      "input": "Display only. Skipped in tab order. The panel sets aria-busy=true while it renders.",
+      "outcome": "Five 56px rows render, each with a 40px thumb box, a title bar and a meta bar. Loaded rows replace them one for one.",
+      "recovery": "On failure or cancel, the skeleton is replaced by the failure plate at the same panel height.",
+      "mechanism": "Rows share the grid template of row 6 through one CSS class. Bar widths are fixed percentages: 72, 64, 80, 58 and 68. There is no shimmer and no randomness. The panel min-height equals five rows plus 4 gaps of 8px.",
+      "nearestAnalogue": "None in recent dates. 2026-10-28 cursor chart dimmed a stale plot, which is a different job.",
+      "usefulness": "Layout shift during loading makes readers lose their place and mis-tap.",
+      "creativeDifference": "The skeleton and the list use one grid template, so the match is structural.",
+      "states": [
+        "pending: five static rows, reached when a request starts with no last-good data",
+        "short-list: rows beyond the loaded count collapse after load, reached when fewer than five items return",
+        "hidden: removed on loaded, empty or failed"
+      ],
+      "sources": [{ "title": "Loader tile variety pack (library content)", "url": "https://github.com/isas1/web-components/issues/45" }]
+    },
+    {
+      "row": 4,
+      "id": "retry-guard",
+      "file": "artifact-4.html",
+      "name": "Retry guard",
+      "description": "Retry button with a reserved label width, attempt count and a double-press guard.",
+      "category": "Actions",
+      "tags": ["retry", "button", "dedupe", "attempt-count", "label-swap"],
+      "purpose": "Start one new attempt for a failed or cancelled source.",
+      "use": "A reader presses Retry on Archive twice by accident, and one request runs.",
+      "input": "Click or tap Retry. Keyboard: Tab to it, Enter or Space, or R while the panel has focus.",
+      "outcome": "Attempt n+1 starts. The label reads 'Retrying' and the button disables until the request settles.",
+      "recovery": "If attempt 2 also fails, the label returns to 'Retry' with 'Attempt 2 failed'. Focus returns to the button.",
+      "mechanism": "A request id increments per attempt. Presses while a request is in flight are ignored. Replies with an older id are dropped. Label width is reserved from the longest label, 'Retrying'.",
+      "nearestAnalogue": "2026-10-27 pipeline panel retried a build step. This retry adds a double-press guard and stale-reply dropping for a content request.",
+      "usefulness": "Double taps on slow networks are common, and duplicate requests cause flicker and wrong content.",
+      "creativeDifference": "The button reports the attempt number, so a second failure reads as new information.",
+      "states": [
+        "ready: 'Retry', reached on failed or cancelled",
+        "retrying: disabled 'Retrying', reached on press",
+        "ignored: second press during retrying, no change",
+        "failed-again: 'Retry' with 'Attempt 2 failed', reached by a second failure",
+        "hidden: not rendered when loaded or empty",
+        "focus: 2px ring"
+      ],
+      "sources": [{ "title": "ARIA Authoring Practices: Button", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/" }]
+    },
+    {
+      "row": 5,
+      "id": "failure-plate",
+      "file": "artifact-5.html",
+      "name": "Failure plate",
+      "description": "Failure notice naming the cause, laid over a dimmed last-good list stamped with its time.",
+      "category": "Content",
+      "tags": ["error", "failure", "last-good", "stale-content", "disclosure"],
+      "purpose": "Explain why the load failed and keep previous content readable.",
+      "use": "A reader sees 'Timed out after 6 s · showing copy from 14:02' and keeps reading the old list.",
+      "input": "Click or tap Details to expand the cause. Keyboard: Tab to Details, Enter or Space toggles.",
+      "outcome": "The plate states the cause and the last-good time. Details show the sample source, the attempt and the elapsed time.",
+      "recovery": "Retry in row 4 sits inside the plate. With no last-good data, the plate reads 'Nothing loaded yet' at the same height.",
+      "mechanism": "The plate is a disclosure button and region. The last-good list renders at 0.55 opacity with inert set. The plate width is sized from the longest message, and text wraps on narrow widths without truncation.",
+      "nearestAnalogue": "2026-10-28 load stages reported 'Aggregate failed · kept 6h' in one line. This plate keeps the old content readable and gives it a timestamp.",
+      "usefulness": "A blank panel on failure throws away content the reader already had.",
+      "creativeDifference": "Failure shows as a layer over still-readable old content, so the panel keeps its height and its use.",
+      "states": [
+        "timed-out: 'Timed out after 6 s', reached on Archive attempt 1",
+        "cancelled: 'Cancelled at 9 s', reached by row 2 Cancel",
+        "with-last-good: dimmed list plus timestamp",
+        "no-last-good: 'Nothing loaded yet'",
+        "details-open: cause, attempt and elapsed time shown",
+        "focus: 2px ring on Details"
+      ],
+      "sources": [{ "title": "ARIA Authoring Practices: Disclosure", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/" }]
+    },
+    {
+      "row": 6,
+      "id": "loaded-list",
+      "file": "artifact-6.html",
+      "name": "Loaded list",
+      "description": "Article list with a single selection rule, a loaded-at line and an empty result.",
+      "category": "Data",
+      "tags": ["listbox", "article-list", "selection", "empty-state", "timestamp"],
+      "purpose": "Show the loaded items and let the reader pick one.",
+      "use": "A reader opens 'Field notes on rail signalling' from Inbox.",
+      "input": "Click or tap a row. Keyboard: Tab into the list, Up and Down move, Home and End jump, Enter selects.",
+      "outcome": "The selected row gets the 2px accent left bar. The footer reads 'Loaded 12 · 14:06'. Focus moves to the list heading after load only if the reader triggered the load.",
+      "recovery": "Selection survives a reload when the item id still exists. Otherwise it clears with 'Selection no longer in list'.",
+      "mechanism": "A listbox with roving tabindex. Rows reuse the row 3 grid template at 56px. Titles clamp to 2 lines and the full title sits in a title attribute and the accessible name. Shared returns zero items and renders 'No shared articles' at row height.",
+      "nearestAnalogue": "2026-10-26 log viewer event list filtered events by severity. This list is the arrival point of a request and keeps selection across reloads.",
+      "usefulness": "This list is the reason the panel exists.",
+      "creativeDifference": "The selection mark is shared with the source tabs, so one visual rule reads across the panel.",
+      "states": [
+        "loaded: rows with footer count and time",
+        "selected: 2px accent left bar, reached by click or Enter",
+        "focus: row ring, reached by arrows",
+        "empty: 'No shared articles', reached on Shared",
+        "selection-cleared: note shown, reached when a reload drops the selected id",
+        "long-title: two-line clamp with full accessible name"
+      ],
+      "sources": [{ "title": "ARIA Authoring Practices: Listbox", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/" }]
+    }
+  ],
+  "demo": {
+    "file": "piece.html",
+    "rows": [1, 2, 3, 4, 5, 6],
+    "sharedState": "One store keyed by source id (inbox, shared, archive), each holding {status, attempt, requestId, startedAt, items, lastGood, lastGoodAt, error}. Row 1 reads status for glyphs and sets the active source. Rows 2 and 3 render while status is pending. Row 2 Cancel aborts and sets status to cancelled. Rows 4 and 5 render on failed or cancelled. Row 4 dispatches load(source) with attempt+1. Row 6 renders items on loaded or empty. Inbox loads 12 items in 1.2 s. Shared returns 0 in 0.8 s. Archive times out at 6 s on attempt 1 and returns 9 items in 1.5 s on attempt 2. Views never write to each other, only to the store."
+  }
+}
+```
+
+### Build notes
+
+1. Define spacing once as `--s1: 4px; --s2: 8px; --s3: 16px; --s4: 24px`. Every margin, gap and padding in all six files uses only these values. Row height is 56px, which is 16 + 24 + 16.
+2. Archive is deterministic: a timeout at 6000 ms on attempt 1 and success on attempt 2. Press Retry twice inside 100 ms and confirm that the request id increments once and the list renders once.
+3. At 320px width, test the plate with "Timed out after 6 s · showing copy from 14:02" and the longest sample title. Both must wrap without truncation and keep the panel's min-height. Measure layout stability with a ResizeObserver log. This pack does not claim stability from inspection.
+
+**Guest:** Satellite repair apprentice (future; invented). The method is drawn from public-domain history, myth, or literature, or invented. The guest speaks in character in original words, never quoting the source, and nothing here is endorsed by anyone.
+
+## Team
+
+```text
+Team for 2026-10-30
+Season: 2026-10-26
+
+1. Dance choreographer [new]
+   Method: Separate the sample state from the rendered view. [new]
+   Stance: Cuts until only the core is left.
+   Temperament: Asks what the user can do with it.
+2. Railway signaller [new]
+   Method: Use the same visual rule for every selected item. [new]
+   Stance: Defends the material.
+   Temperament: Notices uneven spacing before anyone else.
+3. Optical technician [new]
+   Method: Check which state needs a retry or a cancel action. [new]
+   Stance: Pushes toward the strange.
+   Temperament: Tests the longest label in the room.
+4. Satellite repair apprentice (future; invented) [guest] [new]
+   Method: Test the same action twice before trusting it.
+   Stance: Guards the feeling it leaves behind.
+   Temperament: Argues for fewer moving parts.
+
+Constraint: Use one consistent spacing scale.
+Task: Share sheet: a bottom panel for a media tool that copies a link, reports failure and closes with a swipe, button or key.
+```
+
+Provider: claude. Model: claude-opus-5-5.

@@ -1,0 +1,266 @@
+{
+  "date": "2026-10-30",
+  "task": "Request loader: a loader for a content panel that moves from pending to loaded or failed, with a retry action and stable layout.",
+  "hook": "Build Request loader",
+  "seconds": 4,
+  "models": [
+    {
+      "key": "opus",
+      "label": "Opus",
+      "model": "claude-opus-5-5"
+    },
+    {
+      "key": "sonnet",
+      "label": "Sonnet",
+      "model": "claude-sonnet-5-5"
+    },
+    {
+      "key": "haiku",
+      "label": "Haiku",
+      "model": "claude-haiku-5-5"
+    }
+  ],
+  "status": "incomplete",
+  "rows": [
+    {
+      "row": 1,
+      "name": "Source tabs",
+      "input": "Click or tap a tab. Keyboard: Tab into the list, Left and Right move, Home and End jump, Enter or Space activates.",
+      "variants": {
+        "opus": {
+          "file": "artifact-1.html",
+          "sha256": "81651a64a7c1a2b79b877d89fd36754e475b307daa19dfd22126f1de855122c1",
+          "componentId": "source-tabs",
+          "lead": 1,
+          "row": 1,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "3fbf2970662c8aae60f6793e11991e3d3104a5473291dd3bd3112833fbbc305a"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-1.html",
+          "hash": "3fbf2970662c8aae60f6793e11991e3d3104a5473291dd3bd3112833fbbc305a",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-1.html",
+          "hash": "3fbf2970662c8aae60f6793e11991e3d3104a5473291dd3bd3112833fbbc305a",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 2,
+      "name": "Pending arc",
+      "input": "Display until 8 s. Then click or tap Cancel. Keyboard: Tab to Cancel, Enter or Space, or Escape while the panel has focus.",
+      "variants": {
+        "opus": {
+          "file": "artifact-2.html",
+          "sha256": "0b74de85f24f53c622661ee71dff2d65f114a0f59eb5ccff8daf0b60c20eef56",
+          "componentId": "pending-arc",
+          "lead": 2,
+          "row": 2,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "8732ab94d633991eb8e99f4e884238f8db273a1fce2ed5587e0cf341972e4ef9"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-2.html",
+          "hash": "8732ab94d633991eb8e99f4e884238f8db273a1fce2ed5587e0cf341972e4ef9",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-2.html",
+          "hash": "8732ab94d633991eb8e99f4e884238f8db273a1fce2ed5587e0cf341972e4ef9",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "needs review",
+          "problems": [
+            "no lang=\"en\" on the html element",
+            "no element with both a role and an aria-label",
+            "does not read prefers-reduced-motion with matchMedia",
+            "no :focus-visible outline",
+            "no title element",
+            "no viewport meta tag",
+            "missing complete head for shared token injection",
+            "does not use shared token --pack-bg",
+            "does not use shared token --pack-text",
+            "does not use shared token --pack-accent",
+            "does not use shared token --pack-typography-family",
+            "does not use shared token --pack-spacing-gap",
+            "does not use shared token --pack-radii-control",
+            "does not use shared token --pack-motion-duration"
+          ]
+        }
+      }
+    },
+    {
+      "row": 3,
+      "name": "Reserved skeleton",
+      "input": "Display only. Skipped in tab order. The panel sets aria-busy=true while it renders.",
+      "variants": {
+        "opus": {
+          "file": "artifact-3.html",
+          "sha256": "63cd93b58127134c52452e1f7803bddb9897ac2b38f15fe9013f658ab41c3c7b",
+          "componentId": "reserved-skeleton",
+          "lead": 3,
+          "row": 3,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "577770a1b435c1c8021b44f1180146e36c8fa51d6f5bd52a2add7a8d32d7f7bd"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-3.html",
+          "hash": "577770a1b435c1c8021b44f1180146e36c8fa51d6f5bd52a2add7a8d32d7f7bd",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-3.html",
+          "hash": "577770a1b435c1c8021b44f1180146e36c8fa51d6f5bd52a2add7a8d32d7f7bd",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 4,
+      "name": "Retry guard",
+      "input": "Click or tap Retry. Keyboard: Tab to it, Enter or Space, or R while the panel has focus.",
+      "variants": {
+        "opus": {
+          "file": "artifact-4.html",
+          "sha256": "599f121279d94da0b342c576685ee63907a95683a274084acd4495a11fb9196a",
+          "componentId": "retry-guard",
+          "lead": 4,
+          "row": 4,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "8216ff2aab34f69c8212ad7d3ada3d9d2f07ce8422a7a628a362cdbc13b5621b"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-4.html",
+          "hash": "8216ff2aab34f69c8212ad7d3ada3d9d2f07ce8422a7a628a362cdbc13b5621b",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-4.html",
+          "hash": "8216ff2aab34f69c8212ad7d3ada3d9d2f07ce8422a7a628a362cdbc13b5621b",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 5,
+      "name": "Failure plate",
+      "input": "Click or tap Details to expand the cause. Keyboard: Tab to Details, Enter or Space toggles.",
+      "variants": {
+        "opus": {
+          "file": "artifact-5.html",
+          "sha256": "a7337283f43664be832d316edb3947fd33e4018781395f90385c1ca3bd49db33",
+          "componentId": "failure-plate",
+          "lead": 1,
+          "row": 5,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "c4921e8235c3e41e76d13b1e32d6c69b77f6c09329d030e478e372ba2d67dc57"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-5.html",
+          "hash": "c4921e8235c3e41e76d13b1e32d6c69b77f6c09329d030e478e372ba2d67dc57",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-5.html",
+          "hash": "c4921e8235c3e41e76d13b1e32d6c69b77f6c09329d030e478e372ba2d67dc57",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "ok",
+          "problems": []
+        }
+      }
+    },
+    {
+      "row": 6,
+      "name": "Loaded list",
+      "input": "Click or tap a row. Keyboard: Tab into the list, Up and Down move, Home and End jump, Enter selects.",
+      "variants": {
+        "opus": {
+          "file": "artifact-6.html",
+          "sha256": "5a4edca8a0b4e4dea1157ead99cbb40e0d2091c75847796bb35c11dade2b0f99",
+          "componentId": "loaded-list",
+          "lead": 2,
+          "row": 6,
+          "model": "claude-opus-5-5",
+          "status": "ok",
+          "problems": [],
+          "requestedModel": "claude-opus-5-5",
+          "hash": "34316abb19650212a27218588d7e9e97c420d641d46aff2a4e0ad31cd05db509"
+        },
+        "sonnet": {
+          "file": "compare-sonnet-6.html",
+          "hash": "34316abb19650212a27218588d7e9e97c420d641d46aff2a4e0ad31cd05db509",
+          "requestedModel": "claude-sonnet-5-5",
+          "model": "claude-sonnet-5-5",
+          "status": "ok",
+          "problems": []
+        },
+        "haiku": {
+          "file": "compare-haiku-6.html",
+          "hash": "34316abb19650212a27218588d7e9e97c420d641d46aff2a4e0ad31cd05db509",
+          "requestedModel": "claude-haiku-5-5",
+          "model": "claude-haiku-5-5",
+          "status": "needs review",
+          "problems": [
+            "no lang=\"en\" on the html element",
+            "no element with both a role and an aria-label",
+            "does not read prefers-reduced-motion with matchMedia",
+            "no :focus-visible outline",
+            "no title element",
+            "no viewport meta tag",
+            "missing complete head for shared token injection",
+            "does not use shared token --pack-bg",
+            "does not use shared token --pack-text",
+            "does not use shared token --pack-accent",
+            "does not use shared token --pack-typography-family",
+            "does not use shared token --pack-spacing-gap",
+            "does not use shared token --pack-radii-control",
+            "does not use shared token --pack-motion-duration"
+          ]
+        }
+      }
+    }
+  ]
+}
