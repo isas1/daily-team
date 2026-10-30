@@ -1,6 +1,168 @@
 {
   "items": [
     {
+      "id": "cfee38c25797a9a1dea16d5f",
+      "title": "Show HN: I Turned DOOM into a Transformer",
+      "url": "https://github.com/mottopanikeiku/doomformer",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T23:25:46.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "bd60b9150ad7f90d4aef4125",
+      "title": "A Pig, the State, and War: Porco Rosso (Kurenai No Buta) (2014)",
+      "url": "https://journal.animationstudies.org/article/id/66/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T22:26:38.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "93b995452ff2bcb56b50f4a3",
+      "title": "The Great American Rascal: Tom Sawyer at 150",
+      "url": "https://claremontreviewofbooks.com/the-great-american-rascal/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T22:14:23.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "aee952625e88acbbe9c37634",
+      "title": "El Niño Is Flooding California's Coasts with the Highest Tides to Come",
+      "url": "https://gizmodo.com/el-nino-is-already-flooding-californias-coasts-and-the-years-highest-tides-havent-arrived-2000832574",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T21:48:35.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "2cf1fb795ba0396c9bccccb3",
+      "title": "We ran AI agent swarms in Minecraft and Mindustry",
+      "url": "https://labs.ycombinator.com/projects/games/index.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T21:40:28.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "541ef083bcb7fa9234f025c4",
+      "title": "Binance-hacker-1029 – $5.6B stolen from Binance",
+      "url": "https://arkm.com/explorer/entity/21a94755-f604-45e5-9501-6542e23005e8",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T21:38:59.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e4627a961fb430573f016ac7",
+      "title": "Sylphide OS: a general-purpose OS for microcontroller-based computers",
+      "url": "https://projects.freehackers.org/sylphide-os/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T20:59:55.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "07e3e92c34b3a3969c2b0cb6",
+      "title": "ElementaryUI – Swift, in the Browser",
+      "url": "https://elementary.codes/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T20:56:39.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "7b84f0e97724d28a1cefcae9",
+      "title": "A tiny world model running games on a Raspberry Pi Pico 2 W",
+      "url": "https://github.com/SheepSeb/tinyworldformer",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T20:32:28.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "359d8adedf56d9a882b5a64e",
+      "title": "Patrick Stewart has died",
+      "url": "https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T19:41:39.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "519a776207ed3493f80c56db",
+      "title": "Show HN: Auto Dismiss Mac OS \"Allow to find devices on local networks?\"",
+      "url": "https://github.com/johncassil/dontallow",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T19:27:44.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "2086ec152456586631a89823",
+      "title": "IgE disruptor for food allergy with Claude-enabled antibody design [pdf]",
+      "url": "https://divergencelabs.com/publications/ige-preprint.pdf",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T19:25:48.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "700f3e4bbfb43c82f28d7ce5",
+      "title": "Launch HN: Simantic (YC F26) – Firmware Simulation for AI Agents",
+      "url": "https://news.ycombinator.com/item?id=50291116",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T15:56:32.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e812e22ff0c3b6d70fddc922",
+      "title": "H.264 Is Magic (2016)",
+      "url": "https://sidbala.com/h-264-is-magic/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T15:53:03.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "815e9f76383a90122a5efa26",
+      "title": "LLM Voice",
+      "url": "https://martinfowler.com/bliki/LLM-Voice.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T14:57:55.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "bd03e4a483646b8532a8be38",
+      "title": "We're releasing the weights of Mistral Large 4",
+      "url": "https://mistral.ai/news/mistral-large-4-oss/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T14:13:21.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e4af34a2153ac44b0ad60877",
+      "title": "DoorDash to acquire Instacart",
+      "url": "https://about.doordash.com/en-us/news/doordash-to-acquire-instacart",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T12:33:05.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "2169c46ff38eaf6095bb7283",
+      "title": "If IPv4 were land",
+      "url": "https://iptrust.co/blog/if-ipv4-were-land",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T12:19:00.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "5a2838ac9b8e01cfb21aff15",
       "title": "An Urgent Message on Artificial Intelligence from the Kogui People",
       "url": "https://sonidoselva.com/perspectiva-kogui",
@@ -25,6 +187,15 @@
       "source": "Hacker News",
       "sourceId": "hacker-news",
       "published": "2026-10-29T10:44:49.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ff1ebca6f559787f35b4f41f",
+      "title": "Chained PHP2Shell exploit roots 25 servers, including US Government servers",
+      "url": "https://dreamgroup.com/blog/chained-php2shell-exploit-roots-25-servers",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T10:42:41.000Z",
       "summary": "Comments"
     },
     {
@@ -133,6 +304,15 @@
       "source": "Hacker News",
       "sourceId": "hacker-news",
       "published": "2026-10-28T01:47:50.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e6f03986aae671eef798ff05",
+      "title": "Historical Scientific Instruments",
+      "url": "https://nealstephenson.substack.com/p/historical-scientific-instruments",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T23:32:35.000Z",
       "summary": "Comments"
     },
     {
@@ -443,7 +623,7 @@
     }
   ],
   "fetched": {
-    "smashing": "2026-10-29",
-    "hacker-news": "2026-10-29"
+    "smashing": "2026-10-30",
+    "hacker-news": "2026-10-30"
   }
 }

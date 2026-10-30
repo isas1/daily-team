@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "9cd35cc525b2b4ccb50f69d9a506efc8a5c00f90a01051b60b5c1bae2f8b16fa",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Dance choreographer.** Draw one panel and keep nothing else. The sheet rises from the bottom edge and holds the title. It carries no recipient grid, icons or screenshot detail.\n\n**Railway signaller.** Use one rule for emphasis: a single red bar under the title, set at the 8px step. A stepped ruler at 4, 8, 16 and 24px sits quietly in the sheet corner. No other gap appears on the cover.\n\n**Optical technician.** Draw the three close paths above the sheet as plain geometry: a swipe arc, a Close square and an Escape keycap. Their lines converge on the drag handle. The image is unusual, and every mark stays readable.\n\n**Satellite repair apprentice.** Method: test the same action twice before trusting it. Each of the three paths is drawn as a doubled stroke, two parallel lines, because each path was pressed twice. All three end at one point.\n\n**Lead's choice (Dance choreographer).**\n- **Composition:** A 1072px-wide sheet with 24px top corners, anchored to the bottom edge from y 248. The handle is 64×8px, 16px below the sheet top. Three doubled strokes descend from glyphs at the upper right into the handle. The date sits top-left on a 64px margin.\n- **Palette:** Navy #0E2A47 field, warm paper #F2EFE8 sheet, ink #111317 type, red #BE4D4D for the single rule and the converging strokes. Muted #5B616B is used for the descriptor and ruler.\n- **Type:** Cover Headline at 150px for \"Tight sheet\", leading 1, tracking −0.02em. Cover Text at 24px for the descriptor and 20px for the date, in paper on navy.",
+  "width": 1200,
+  "height": 630
+}

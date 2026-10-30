@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Link field for a media share sheet</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--r:var(--pack-radii-control);--g:var(--pack-spacing-gap);--p:var(--pack-spacing-padding);--d:var(--pack-motion-duration);--e:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.lf2-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;display:grid;place-items:center;box-sizing:border-box}
+.lf2-card{box-sizing:border-box;width:100%;max-height:100%;overflow:auto;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:var(--p);display:grid;gap:var(--g)}
+.lf2-title{margin:0;font-size:1em;font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+.lf2-lab{font-size:.87em;color:var(--mu);line-height:1.35}
+.lf2-wrap{position:relative;border-radius:var(--r)}
+.lf2-in{box-sizing:border-box;width:100%;min-height:44px;padding:0 var(--p);border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--ink);font:.93em/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-overflow:clip;transition:border-color var(--d) var(--e)}
+.lf2-in::selection{background:var(--acc);color:var(--sf)}
+.lf2-in:focus{outline:2px solid var(--acc);outline-offset:2px;border-color:var(--acc)}
+.lf2-f{position:absolute;top:1px;bottom:1px;width:24px;pointer-events:none;opacity:0;transition:opacity var(--d) var(--e)}
+.lf2-fl{left:1px;border-radius:var(--r) 0 0 var(--r);background:linear-gradient(90deg,var(--bg),transparent)}
+.lf2-fr{right:1px;border-radius:0 var(--r) var(--r) 0;background:linear-gradient(270deg,var(--bg),transparent)}
+.lf2-wrap.lf2-l .lf2-fl,.lf2-wrap.lf2-r .lf2-fr{opacity:1}
+.lf2-hint{margin:0;font-size:.87em;color:var(--mu);line-height:1.35}
+.lf2-row{display:flex;flex-wrap:wrap;gap:var(--g)}
+.lf2-chk{display:flex;align-items:center;gap:var(--g);min-height:44px;padding:0 var(--g);border:1px solid var(--bd);border-radius:var(--r);cursor:pointer;flex:1 1 auto;box-sizing:border-box}
+.lf2-chk input{width:16px;height:16px;margin:0;accent-color:var(--acc)}
+.lf2-chk input:focus-visible{outline:2px solid var(--acc);outline-offset:4px}
+.lf2-chk:has(input:checked){border-color:var(--acc);color:var(--acc)}
+.lf2-btn{min-height:44px;padding:0 var(--p);border:1px solid var(--bd);border-radius:var(--r);background:var(--sf);color:var(--ink);font:inherit;cursor:pointer;flex:1 1 auto;transition:transform 80ms var(--e),border-color var(--d) var(--e)}
+.lf2-btn:active{transform:translateY(1px)}
+.lf2-btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media (hover:hover){.lf2-btn:hover,.lf2-chk:hover{border-color:var(--acc)}}
+.lf2-st{margin:0;min-height:1.35em;font-size:.87em;line-height:1.35;color:var(--mu)}
+.lf2-st b{color:var(--acc);font-weight:600}
+@media (prefers-reduced-motion:reduce){.lf2-f,.lf2-in,.lf2-btn{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111317;--pack-surface:#1a1d23;--pack-text:#e8eaed;--pack-muted:#9aa0a8;--pack-accent:#6ea8fe;--pack-border:#2c313a}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181d;--pack-muted:#5b616b;--pack-accent:#2459c7;--pack-border:#d6d9df}</style></head><body>
+<div class="lf2-root" role="group" aria-label="Link field: check and select the share link">
+<div class="lf2-card">
+<p class="lf2-title" id="lf2-t">Harbour timelapse, north quay, full tide, 4K remaster</p>
+<label class="lf2-lab" for="lf2-in">Share link</label>
+<div class="lf2-wrap" id="lf2-w"><input class="lf2-in" id="lf2-in" type="text" readonly spellcheck="false" autocomplete="off" aria-describedby="lf2-h lf2-st"><span class="lf2-f lf2-fl"></span><span class="lf2-f lf2-fr"></span></div>
+<p class="lf2-hint" id="lf2-h"></p>
+<div class="lf2-row">
+<label class="lf2-chk"><input type="checkbox" id="lf2-c">Start at 01:42</label>
+<button class="lf2-btn" id="lf2-b" type="button">Select link</button>
+</div>
+<p class="lf2-st" id="lf2-st" role="status" aria-live="polite"></p>
+</div></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var $=function(i){return document.getElementById(i)};
+  var inp=$('lf2-in'),wrap=$('lf2-w'),chk=$('lf2-c'),btn=$('lf2-b'),st=$('lf2-st'),hint=$('lf2-h');
+  var mac=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent);
+  var key=mac?'Cmd+C':'Ctrl+C';
+  var state={clip:'h7k2q',slug:'harbour-timelapse-north-quay-full-tide-4k-remaster',startOn:false,startSec:102,msg:null};
+  function link(s){var u='https://share.forever.example/clips/'+s.clip+'/'+s.slug+'?plan=forever&from=library&folder=cat-pics-2';
+    return s.startOn&&s.startSec>0?u+'&t='+s.startSec:u}
+  hint.textContent='Tap to select all. Press '+key+' to copy.';
+  var raf=0,last=0,anim=null;
+  function step(dt){if(!anim)return false;anim.t+=dt*16.667;
+    var k=Math.min(anim.t/240,1),ez=1-Math.pow(1-k,3);
+    inp.scrollLeft=anim.a+(anim.b-anim.a)*ez;fade();
+    if(k>=1){anim=null;return false}return true}
+  function snapToTarget(){if(anim){inp.scrollLeft=anim.b;anim=null;fade()}}
+  function fade(){var m=inp.scrollWidth-inp.clientWidth,x=inp.scrollLeft;
+    wrap.classList.toggle('lf2-l',m>1&&x>1);wrap.classList.toggle('lf2-r',m>1&&x<m-1)}
+  function draw(){var v=link(state);if(inp.value!==v)inp.value=v;
+    while(st.firstChild)st.removeChild(st.firstChild);
+    if(state.msg){var b=document.createElement('b');b.textContent=state.msg[0];st.appendChild(b);
+      st.appendChild(document.createTextNode(' '+state.msg[1]))}
+    fade()}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);
+    raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function showEnd(){var b=Math.max(0,inp.scrollWidth-inp.clientWidth);
+    anim={a:inp.scrollLeft,b:b,t:0};if(reduce())snapToTarget();else kick()}
+  function selAll(){inp.setSelectionRange(0,inp.value.length,'forward');fade()}
+  var just=false;
+  inp.addEventListener('focus',function(){selAll();just=true});
+  inp.addEventListener('click',function(){if(just){just=false;selAll()}});
+  inp.addEventListener('blur',function(){just=false});
+  inp.addEventListener('scroll',fade);
+  inp.addEventListener('keyup',fade);
+  inp.addEventListener('keydown',function(e){if(e.key==='Escape'){
+    if(inp.selectionStart!==inp.selectionEnd){var p=inp.selectionEnd;inp.setSelectionRange(p,p)}else inp.blur();
+    e.preventDefault()}});
+  inp.addEventListener('copy',function(){state.msg=['Copied.','Paste it into the review thread.'];draw()});
+  chk.addEventListener('change',function(){state.startOn=chk.checked;
+    state.msg=chk.checked?['Updated.','Link now ends in &t=102.']:['Updated.','Start offset removed.'];
+    draw();showEnd()});
+  btn.addEventListener('click',function(){inp.focus();selAll();just=false;
+    state.msg=['Link selected.','Press '+key+' to copy.'];draw()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.activeElement!==inp&&document.activeElement){document.activeElement.blur()}});
+  if(window.ResizeObserver)new ResizeObserver(fade).observe(wrap);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(anim)kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>

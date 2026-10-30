@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Share sheet frame for a media clip share panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--ab1-g:var(--pack-spacing-gap);--ab1-p:var(--pack-spacing-padding);--ab1-r:var(--pack-radii-control);color-scheme:dark}
+[data-theme=light]{color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font:var(--pack-typography-size)/1.4 var(--pack-typography-family)}
+.ab1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr) auto auto;gap:var(--ab1-g);padding:var(--ab1-p);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--ab1-r)*2)}
+.ab1-post{position:relative;min-height:0;overflow:hidden;display:grid;place-items:center;background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--ab1-r)}
+.ab1-post svg{width:32px;height:32px;fill:var(--pack-muted)}
+.ab1-dur{position:absolute;right:var(--ab1-g);bottom:calc(var(--ab1-g)/2);font-size:.8em;color:var(--pack-muted);font-variant-numeric:tabular-nums}
+.ab1-info p{margin:0}
+.ab1-t{font-weight:600}
+.ab1-f,.ab1-note,.ab1-meta,.ab1-hint{color:var(--pack-muted);font-size:.85em;overflow-wrap:anywhere}
+.ab1-act{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ab1-g)}
+.ab1-note{margin:0;flex:1 1 9em}
+button{font:inherit;min-height:44px;min-width:44px;border-radius:var(--ab1-r);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform 100ms var(--pack-motion-easing),background-color var(--pack-motion-duration) var(--pack-motion-easing)}
+button:active{transform:translateY(1px)}
+.ab1-pri{display:inline-flex;align-items:center;justify-content:center;gap:var(--ab1-g);padding:0 var(--ab1-p);background:var(--pack-accent);color:var(--pack-bg);border:0;font-weight:600}
+.ab1-pri svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ab1-gh{padding:0 var(--ab1-p);background:transparent;color:var(--pack-text);border:1px solid var(--pack-border)}
+.ab1-gh:hover{border-color:var(--pack-muted)}
+:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ab1-scrim{position:absolute;inset:0;background:var(--pack-bg);opacity:0;pointer-events:none}
+.ab1-sheet{position:fixed;inset:auto;margin:0;padding:0;max-width:none;overflow:hidden;font:inherit;color:var(--pack-text);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--ab1-r)*2);box-shadow:0 -8px 24px rgba(0,0,0,.22)}
+.ab1-sheet[open]{display:flex;flex-direction:column}
+.ab1-sheet::backdrop{background:transparent}
+.ab1-grab{flex:none;padding:var(--ab1-g) var(--ab1-p) 0;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.ab1-grab:active{cursor:grabbing}
+.ab1-bar{display:block;width:40px;height:4px;margin:0 auto var(--ab1-g);border-radius:2px;background:var(--pack-muted)}
+.ab1-head{display:flex;align-items:center;justify-content:space-between;gap:var(--ab1-g)}
+.ab1-head h2{margin:0;font-size:1em}
+.ab1-body{display:grid;gap:var(--ab1-g);padding:var(--ab1-g) var(--ab1-p) var(--ab1-p);overflow:auto;overscroll-behavior:contain;min-height:0}
+.ab1-body p,.ab1-lab{margin:0}
+.ab1-lab{font-size:.85em;font-weight:600}
+.ab1-row{display:flex;flex-wrap:wrap;gap:var(--ab1-g)}
+.ab1-in{flex:1 1 8em;min-width:0;min-height:44px;padding:0 var(--ab1-g);font:inherit;font-size:.9em;color:var(--pack-text);background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--ab1-r)}
+.ab1-stk{display:inline-grid}
+.ab1-stk>span{grid-area:1/1;visibility:hidden;text-align:center}
+.ab1-stk>span.ab1-on{visibility:visible}
+.ab1-copy[aria-disabled=true]{opacity:.7;cursor:progress}
+.ab1-st{min-height:1.4em;font-size:.85em;color:var(--pack-muted)}
+.ab1-st.ab1-err{color:var(--pack-text);padding-left:var(--ab1-g);border-left:2px solid var(--pack-accent)}
+@media (max-width:300px),(max-height:300px){body{font-size:13px}.ab1-root{padding:var(--ab1-g)}.ab1-body,.ab1-grab{padding-left:var(--ab1-g);padding-right:var(--ab1-g)}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111317;--pack-surface:#1a1d23;--pack-text:#e8eaed;--pack-muted:#9aa0a8;--pack-accent:#6ea8fe;--pack-border:#2c313a}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181d;--pack-muted:#5b616b;--pack-accent:#2459c7;--pack-border:#d6d9df}</style></head><body>
+<div class="ab1-root" id="ab1-root" role="group" aria-label="Share sheet frame for a media clip">
+  <div class="ab1-post" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span class="ab1-dur">3:24</span></div>
+  <div class="ab1-info">
+    <p class="ab1-t">Harbor timelapse, full tide</p>
+    <p class="ab1-f">harbor-timelapse-final-final-2.mp4</p>
+  </div>
+  <div class="ab1-act">
+    <button class="ab1-pri" id="ab1-share" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7 9l5-5 5 5M5 14v5h14v-5"/></svg>Share</button>
+    <p class="ab1-note" id="ab1-note" role="status">Opens a bottom panel. Close it by swipe, Close or Esc.</p>
+  </div>
+  <div class="ab1-scrim" id="ab1-scrim"></div>
+</div>
+<dialog class="ab1-sheet" id="ab1-sheet" aria-labelledby="ab1-ttl">
+  <div class="ab1-grab" id="ab1-grab">
+    <span class="ab1-bar" aria-hidden="true"></span>
+    <div class="ab1-head"><h2 id="ab1-ttl">Share clip</h2><button class="ab1-gh" id="ab1-close" type="button">Close</button></div>
+  </div>
+  <div class="ab1-body">
+    <p class="ab1-meta">Harbor timelapse, full tide · 3:24 · Forever plan</p>
+    <label class="ab1-lab" for="ab1-link">Link</label>
+    <div class="ab1-row">
+      <input class="ab1-in" id="ab1-link" type="text" readonly value="https://forever.video/c/h7k2q">
+      <button class="ab1-pri ab1-copy" id="ab1-copy" type="button" autofocus><span class="ab1-stk" id="ab1-stk"><span data-s="idle" class="ab1-on">Copy link</span><span data-s="pending">Copying</span><span data-s="copied">Copied</span><span data-s="failed">Retry copy</span></span></button>
+    </div>
+    <p class="ab1-st" id="ab1-st" role="status"></p>
+    <p class="ab1-hint">Drag the bar down to close.</p>
+  </div>
+</dialog>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var root=$('ab1-root'),share=$('ab1-share'),note=$('ab1-note'),sheet=$('ab1-sheet'),grab=$('ab1-grab'),
+      closeB=$('ab1-close'),copyB=$('ab1-copy'),inp=$('ab1-link'),st=$('ab1-st'),scrim=$('ab1-scrim'),
+      labels=$('ab1-stk').children;
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var mac=/Mac|iP/.test(navigator.platform||'');
+  var raf=0,last=0,mode='closed',y=0,v=0,H=1,R=16,anim=null,how='';
+  var cs='idle',pendShown=false,tok=0,tPend=0,tDone=0;
+
+  function dur(){return parseFloat(getComputedStyle(root).getPropertyValue('--pack-motion-duration'))||200}
+
+  /* copy state, reset by every close path */
+  function renderCopy(){
+    var show=cs==='pending'&&!pendShown?'idle':cs;
+    for(var i=0;i<labels.length;i++)labels[i].classList.toggle('ab1-on',labels[i].getAttribute('data-s')===show);
+    copyB.setAttribute('aria-disabled',cs==='pending'?'true':'false');
+    st.classList.toggle('ab1-err',cs==='failed');
+    st.textContent=cs==='copied'?'Link copied.':cs==='failed'?'Copy blocked by the browser. Select the link and press '+(mac?'Cmd':'Ctrl')+'+C.':'';
+  }
+  function resetCopy(){tok++;clearTimeout(tPend);clearTimeout(tDone);cs='idle';pendShown=false;renderCopy()}
+  copyB.addEventListener('click',function(){
+    if(cs==='pending')return;
+    var my=++tok,p;clearTimeout(tPend);clearTimeout(tDone);cs='pending';pendShown=false;
+    tPend=setTimeout(function(){if(my===tok&&cs==='pending'){pendShown=true;renderCopy()}},150);
+    try{p=navigator.clipboard.writeText(inp.value)}catch(e){p=Promise.reject(e)}
+    Promise.resolve(p).then(function(){
+      if(my!==tok)return;clearTimeout(tPend);cs='copied';renderCopy();
+      tDone=setTimeout(function(){if(my===tok){cs='idle';renderCopy()}},2000);
+    },function(){if(my!==tok)return;clearTimeout(tPend);cs='failed';renderCopy()});
+    renderCopy();
+  });
+  inp.addEventListener('focus',function(){inp.select()});
+
+  /* geometry: sheet sits on the bottom edge of the frame */
+  function place(){
+    var r=root.getBoundingClientRect(),s=sheet.style;
+    s.left=r.left+'px';s.width=r.width+'px';s.top='auto';
+    s.bottom=(innerHeight-r.bottom)+'px';s.maxHeight=Math.round(r.height*.86)+'px';
+    H=sheet.offsetHeight||1;R=parseFloat(getComputedStyle(sheet).borderBottomLeftRadius)||0;
+  }
+
+  /* motion */
+  function tween(to,d,then){anim={k:'t',a:y,b:to,t:0,d:d,then:then};kick()}
+  function done(){var a=anim;anim=null;if(a&&a.then)a.then()}
+  function step(dt){
+    if(!anim)return false;
+    if(anim.k==='t'){
+      anim.t+=dt;var p=Math.min(1,anim.t/anim.d),e=1-Math.pow(1-p,3);
+      y=anim.a+(anim.b-anim.a)*e;if(p>=1){done();return false}return true;
+    }
+    var k=520,c=2*.72*Math.sqrt(k),n=Math.ceil(dt/4),h=dt/1000/n;
+    for(var i=0;i<n;i++){v+=(-k*y-c*v)*h;y+=v*h}
+    if(Math.abs(y)<.5&&Math.abs(v)<8){y=0;v=0;done();return false}
+    return true;
+  }
+  function snapToTarget(){if(!anim)return;y=anim.k==='t'?anim.b:0;v=0;done()}
+  function draw(){
+    if(mode==='closed'){scrim.style.opacity=0;return}
+    var yy=Math.max(-4,y);
+    sheet.style.transform='translateY('+yy.toFixed(2)+'px)';
+    sheet.style.clipPath='inset(0 0 '+Math.max(0,yy).toFixed(2)+'px 0 round 0 0 '+R+'px '+R+'px)';
+    scrim.style.opacity=(Math.max(0,Math.min(1,1-yy/H))*.7).toFixed(3);
+  }
+  function frame(now){var dt=last?Math.min(now-last,50):16.7;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(anim)kick()});
+
+  /* open and the one close routine */
+  function openSheet(){
+    if(mode!=='closed')return;
+    resetCopy();sheet.showModal();place();copyB.focus();
+    y=H;v=0;mode='opening';draw();
+    tween(0,dur()+40,function(){mode='open'});
+  }
+  function closeSheet(w,vel){
+    if(mode==='closed'||mode==='closing')return;
+    how=w;resetCopy();mode='closing';
+    var d=dur();if(vel>0)d=Math.max(120,Math.min(d,(H-y)/vel));
+    tween(H,d,finish);
+  }
+  function finish(){
+    mode='closed';anim=null;y=H;v=0;
+    if(sheet.open)sheet.close();
+    draw();note.textContent='Closed by '+how+'. Focus is back on Share.';share.focus();
+  }
+  share.addEventListener('click',openSheet);
+  closeB.addEventListener('click',function(){closeSheet('the Close button')});
+  sheet.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();closeSheet('Esc')}});
+  sheet.addEventListener('cancel',function(e){e.preventDefault();closeSheet('Esc')});
+  sheet.addEventListener('close',function(){if(mode!=='closed'){if(mode!=='closing')how='Esc';resetCopy();finish()}});
+
+  /* drag on the handle strip */
+  var pid=null,sy=0,so=0,ly=0,lt=0;
+  grab.addEventListener('pointerdown',function(e){
+    if(e.target.closest('button')||mode==='closed'||mode==='closing'||pid!==null)return;
+    pid=e.pointerId;grab.setPointerCapture(pid);anim=null;mode='dragging';
+    sy=e.clientY;so=Math.max(0,y);ly=so;lt=e.timeStamp;v=0;
+  });
+  grab.addEventListener('pointermove',function(e){
+    if(e.pointerId!==pid)return;
+    y=Math.max(0,so+e.clientY-sy);
+    var dt=e.timeStamp-lt;if(dt>0){v=v*.5+((y-ly)/dt)*.5;ly=y;lt=e.timeStamp}
+    draw();
+  });
+  function up(e){
+    if(e.pointerId!==pid)return;pid=null;
+    var vm=e.timeStamp-lt>100?0:v;
+    if(y>.3*H||vm>.5)closeSheet('swipe',vm);
+    else{mode='spring';v=vm*1000;anim={k:'s',then:function(){mode='open'}};kick()}
+  }
+  grab.addEventListener('pointerup',up);
+  grab.addEventListener('pointercancel',up);
+
+  function relayout(){if(mode!=='closed'){place();if(mode==='open')y=0;draw()}}
+  if(window.ResizeObserver)new ResizeObserver(relayout).observe(root);
+  addEventListener('resize',relayout);
+
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  renderCopy();draw();
+})();</script>
+</body></html>

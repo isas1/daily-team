@@ -18,6 +18,16 @@
 
 [Cover art direction](cover.json) · [Cover source](cover.html)
 
+## Feed evidence
+
+- smashing: fetched (9 items)
+- hacker-news: fetched (20 items)
+- codrops: disabled — 2026-10-27: endpoint returns HTTP 410; awaiting verified replacement
+- No feed article recorded as used; fetched items may have been considered without selection.
+- Chosen opportunity: request-isas1/web-components-45. It states the practical need directly and matches the brief. The team task's undo need fits inside it as the reversal row, so both needs are served without a second project.
+
+[Saved planning input](planning-input.json)
+
 ## Asset
 
 [Pack manifest](pack.json) · [Shared tokens](tokens.json) · [Planning input](planning-input.json)

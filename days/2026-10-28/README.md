@@ -18,6 +18,16 @@
 
 [Cover art direction](cover.json) · [Cover source](cover.html)
 
+## Feed evidence
+
+- smashing: fetched (9 items)
+- hacker-news: fetched (20 items)
+- codrops: disabled — 2026-10-27: endpoint returns HTTP 410; awaiting verified replacement
+- Used feed inspiration: Stop Treating CSS Container Queries Like Traditional Media Queries — https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/
+- Chosen opportunity: request-isas1/web-components-127. The eligible request carries the explicit brief plus guidance on realistic data, dusted palette and both themes. Feed items were weaker. The container-query article informs one layout rule without driving the project.
+
+[Saved planning input](planning-input.json)
+
 ## Asset
 
 [Pack manifest](pack.json) · [Shared tokens](tokens.json) · [Planning input](planning-input.json)

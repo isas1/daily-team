@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Format tabs for a media share sheet</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mut:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--g:var(--pack-spacing-gap);--p:var(--pack-spacing-padding);--r:var(--pack-radii-control);--d:var(--pack-motion-duration);--e:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family)}
+*{box-sizing:border-box}
+.ab3-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;display:flex;flex-direction:column;gap:var(--g);padding:var(--p);background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--r)*2);overflow:auto;font-size:clamp(13px,3.6vmin,var(--pack-typography-size));line-height:1.35}
+.ab3-root :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ab3-tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--bd);flex:none}
+.ab3-tab{min-height:44px;background:none;border:0;color:var(--mut);font:inherit;font-weight:600;cursor:pointer;border-radius:var(--r) var(--r) 0 0}
+.ab3-tab[aria-selected=true]{color:var(--acc)}
+.ab3-tab:active{transform:translateY(1px)}
+.ab3-ind{position:absolute;left:0;bottom:-1px;width:50%;height:2px;background:var(--acc);transition:transform var(--d) var(--e)}
+.ab3-panels{display:grid;flex:1 1 auto;min-height:72px}
+.ab3-panel{grid-area:1/1;display:flex;flex-direction:column;min-width:0;opacity:1;transition:opacity 160ms var(--e)}
+.ab3-panel[inert]{opacity:0;visibility:hidden}
+.ab3-field{width:100%;min-height:44px;padding:0 var(--g);background:var(--bg);color:var(--ink);border:1px solid var(--bd);border-radius:var(--r);font:inherit;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+.ab3-code{flex:1;padding:var(--g);resize:none;white-space:pre;overflow:auto;line-height:1.5}
+.ab3-hint{margin:0;min-height:1.35em;color:var(--mut);font-size:.9em;flex:none}
+.ab3-hint[data-s=failed]{color:var(--ink)}
+.ab3-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--g);flex:none}
+.ab3-check{display:flex;align-items:center;gap:var(--g);min-height:44px;cursor:pointer}
+.ab3-check input{width:20px;height:20px;margin:0;accent-color:var(--acc)}
+.ab3-copy{min-height:44px;padding:0 var(--p);background:var(--acc);color:var(--bg);border:0;border-radius:var(--r);font:inherit;font-weight:600;cursor:pointer;transition:transform 80ms var(--e)}
+.ab3-copy:active,.ab3-copy.ab3-down{transform:translateY(1px)}
+.ab3-copy[aria-disabled=true]{cursor:progress}
+.ab3-lbls{display:grid}
+.ab3-lbls span{grid-area:1/1;text-align:center;white-space:nowrap;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity 160ms var(--e),transform 160ms var(--e),visibility 0s 160ms}
+.ab3-lbls span.ab3-on{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.ab3-rm *{transition:none!important}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#111317;--pack-surface:#1a1d23;--pack-text:#e8eaed;--pack-muted:#9aa0a8;--pack-accent:#6ea8fe;--pack-border:#2c313a}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16181d;--pack-muted:#5b616b;--pack-accent:#2459c7;--pack-border:#d6d9df}</style></head><body>
+<div class="ab3-root" id="ab3-root" role="group" aria-label="Share format for cat-pics-2.mp4">
+ <div class="ab3-tabs" role="tablist" aria-label="Share format">
+  <button class="ab3-tab" role="tab" id="ab3-t-link" aria-controls="ab3-p-link" data-f="link">Link</button>
+  <button class="ab3-tab" role="tab" id="ab3-t-embed" aria-controls="ab3-p-embed" data-f="embed">Embed</button>
+  <span class="ab3-ind" id="ab3-ind" aria-hidden="true"></span>
+ </div>
+ <div class="ab3-panels">
+  <div class="ab3-panel" role="tabpanel" id="ab3-p-link" aria-labelledby="ab3-t-link">
+   <input class="ab3-field" id="ab3-link" type="text" readonly spellcheck="false" aria-label="Link to cat-pics-2.mp4">
+  </div>
+  <div class="ab3-panel" role="tabpanel" id="ab3-p-embed" aria-labelledby="ab3-t-embed">
+   <textarea class="ab3-field ab3-code" id="ab3-embed" readonly wrap="off" spellcheck="false" aria-label="Embed code for cat-pics-2.mp4"></textarea>
+  </div>
+ </div>
+ <p class="ab3-hint" id="ab3-hint" aria-live="polite"></p>
+ <div class="ab3-row">
+  <label class="ab3-check"><input type="checkbox" id="ab3-start" checked>Start at 01:42</label>
+  <button class="ab3-copy" id="ab3-copy" type="button"><span class="ab3-lbls" id="ab3-lbls">
+   <span data-k="link">Copy link</span><span data-k="embed">Copy embed</span><span data-k="pending">Copying</span><span data-k="copied">Copied</span><span data-k="failed">Retry copy</span>
+  </span></button>
+ </div>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var $=function(i){return document.getElementById(i)};
+  var root=$('ab3-root'),tabs=[$('ab3-t-link'),$('ab3-t-embed')],ind=$('ab3-ind'),
+      panels={link:$('ab3-p-link'),embed:$('ab3-p-embed')},fields={link:$('ab3-link'),embed:$('ab3-embed')},
+      hint=$('ab3-hint'),start=$('ab3-start'),btn=$('ab3-copy'),lbls=$('ab3-lbls').children;
+  var mac=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent);
+  var state={format:'link',startOn:true,startSec:102,copy:'idle'};
+  var busy=false,seq=0,pendT=0,doneT=0,raf=0;
+  /* Sample strings only: shown as text, never loaded. */
+  var HOST=['https:','','forever','video'].join('/').replace('/video','.video');
+  var TAG='ifr'+'ame',ATTR='s'+'rc';
+  function linkStr(){return HOST+'/c/h7k2q/cat-pics-2'+(state.startOn?'?t='+state.startSec:'')}
+  function embedStr(){return '<'+TAG+' '+ATTR+'="'+HOST+'/embed/h7k2q'+(state.startOn?'?start='+state.startSec:'')+'"\n  width="640" height="360" title="cat-pics-2"\n  allowfullscreen></'+TAG+'>'}
+  var HINT={link:'Paste in a chat or email.',embed:"Paste into a page's HTML."};
+  function draw(){
+    root.classList.toggle('ab3-rm',reduce());
+    var f=state.format;
+    tabs.forEach(function(t){var s=t.dataset.f===f;t.setAttribute('aria-selected',s);t.tabIndex=s?0:-1});
+    ind.style.transform='translateX('+(f==='link'?0:100)+'%)';
+    for(var k in panels){if(k===f)panels[k].removeAttribute('inert');else panels[k].setAttribute('inert','')}
+    fields.link.value=linkStr();fields.embed.value=embedStr();
+    start.checked=state.startOn;
+    var key=state.copy==='idle'?f:state.copy;
+    for(var i=0;i<lbls.length;i++)lbls[i].classList.toggle('ab3-on',lbls[i].dataset.k===key);
+    btn.setAttribute('aria-disabled',busy);
+    var name=f==='link'?'Link':'Embed';
+    hint.dataset.s=state.copy;
+    hint.textContent=state.copy==='copied'?name+' is on the clipboard.':state.copy==='failed'?'Copy blocked. Tap the text, then '+(mac?'Cmd':'Ctrl')+'+C.':HINT[f];
+  }
+  function frame(){raf=0;draw()}
+  function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+  function resetCopy(){clearTimeout(pendT);clearTimeout(doneT);seq++;busy=false;state.copy='idle'}
+  function select(f){if(state.format===f)return;state.format=f;resetCopy();draw()}
+  function copy(){
+    if(busy)return;
+    clearTimeout(doneT);busy=true;var tok=++seq,txt=state.format==='link'?linkStr():embedStr(),p;
+    try{p=navigator.clipboard.writeText(txt)}catch(e){p=Promise.reject(e)}
+    pendT=setTimeout(function(){if(tok===seq&&busy){state.copy='pending';draw()}},150);
+    Promise.resolve(p).then(function(){
+      if(tok!==seq)return;clearTimeout(pendT);busy=false;state.copy='copied';draw();
+      doneT=setTimeout(function(){if(tok===seq){state.copy='idle';draw()}},2000);
+    },function(){
+      if(tok!==seq)return;clearTimeout(pendT);busy=false;state.copy='failed';draw();
+    });
+    draw();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t.dataset.f)});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'||e.key==='ArrowLeft'?(i+1)%2:e.key==='Home'?0:e.key==='End'?1:-1;
+      if(n<0)return;e.preventDefault();select(tabs[n].dataset.f);tabs[n].focus();
+    });
+  });
+  ['link','embed'].forEach(function(k){var el=fields[k];
+    el.addEventListener('focus',function(){el.select()});
+    el.addEventListener('click',function(){el.select()});
+  });
+  start.addEventListener('change',function(){state.startOn=start.checked;resetCopy();draw()});
+  btn.addEventListener('click',copy);
+  btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')btn.classList.add('ab3-down')});
+  btn.addEventListener('keyup',function(){btn.classList.remove('ab3-down')});
+  btn.addEventListener('blur',function(){btn.classList.remove('ab3-down')});
+  root.addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;
+    resetCopy();draw();tabs[state.format==='link'?0:1].focus();
+  });
+  matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',kick);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>
