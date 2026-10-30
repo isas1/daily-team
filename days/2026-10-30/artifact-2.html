@@ -99,7 +99,7 @@ body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-
     if(!pend)arc.classList.remove('is-rm');
     txt.classList.toggle('is-hush',p==='hidden');
     line.textContent=c[0].replace('#',s.el);
-    note.textContent=c[1].replace('%',s.took.toFixed(1));
+    note.textContent=c[1].replace(/%/g,s.took.toFixed(1));
     btn.classList.toggle('pa2-ghost',!c[2]);
     btn.classList.toggle('is-quiet',!!c[3]);
     if(c[2])btn.textContent=c[2];
