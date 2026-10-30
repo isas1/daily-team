@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Retry scope · Broken Tile pipeline panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font:var(--pack-typography-size)/1.35 var(--pack-typography-family)}
+.rs5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;container-type:inline-size;background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2);padding:var(--pack-spacing-padding);overflow:auto;display:flex;flex-direction:column;gap:var(--pack-spacing-gap)}
+.rs5-hd h2{margin:0;font-size:1.15em;font-weight:650}
+.rs5-hd p{margin:2px 0 0;color:var(--pack-muted);font-size:.9em;overflow-wrap:anywhere}
+.rs5-col{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.rs5-col li{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;color:var(--pack-text)}
+.rs5-col svg{width:28px;height:28px;border-radius:4px;outline:2px dashed transparent;outline-offset:2px;transition:outline-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.rs5-col span{font-size:11px;color:var(--pack-muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rs5-col .rs5-hit svg{outline-color:var(--pack-accent)}
+.rs5-col .rs5-bad{color:var(--pack-accent)}
+.rs5-acts{display:grid;gap:var(--pack-spacing-gap)}
+@container (min-width:340px){.rs5-acts{grid-template-columns:1fr 1fr}}
+.rs5-btn{min-height:48px;padding:8px 12px;border-radius:var(--pack-radii-control);border:1px solid var(--pack-border);background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;touch-action:manipulation;transition:transform 90ms var(--pack-motion-easing),border-color var(--pack-motion-duration) var(--pack-motion-easing),opacity var(--pack-motion-duration) var(--pack-motion-easing)}
+.rs5-btn:hover:not(:disabled){border-color:var(--pack-accent)}
+.rs5-btn:active:not(:disabled){transform:scale(.97)}
+.rs5-pri{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-bg)}
+.rs5-btn:disabled{cursor:default;opacity:.5}
+.rs5-btn.rs5-on:disabled{opacity:1}
+.rs5-lab{display:grid}
+.rs5-a,.rs5-b{grid-area:1/1;transition:opacity var(--pack-motion-duration) var(--pack-motion-easing)}
+.rs5-a b{display:block;font-weight:650}
+.rs5-a small{display:block;font-size:.86em;opacity:.85}
+.rs5-b{opacity:0;align-self:center;font-weight:650}
+.rs5-on .rs5-a{opacity:0}.rs5-on .rs5-b{opacity:1}
+.rs5-st{display:flex;align-items:center;justify-content:space-between;gap:var(--pack-spacing-gap);min-height:44px;flex-wrap:wrap}
+.rs5-st p{margin:0;color:var(--pack-muted);flex:1 1 8em}
+.rs5-sm{min-height:44px;padding:0 14px}
+.rs5-log{display:flex;flex-direction:column;gap:6px}
+.rs5-log code{display:block;padding:8px 10px;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);font:12px/1.4 ui-monospace,monospace;white-space:nowrap;overflow-x:auto}
+.rs5-log select{min-height:44px;border-radius:var(--pack-radii-control);border:1px solid var(--pack-border);background:var(--pack-surface);color:inherit;font:inherit;padding:0 8px}
+.rs5-tg{display:flex;align-items:center;gap:10px;min-height:44px;color:var(--pack-muted);cursor:pointer}
+.rs5-tg input{width:20px;height:20px;margin:0;accent-color:var(--pack-accent)}
+.rs5-root button:focus-visible,.rs5-root select:focus-visible,.rs5-root input:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.rs5-root *{transition:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111418;--pack-surface:#1a1f26;--pack-text:#e8ecf1;--pack-muted:#9aa4b2;--pack-accent:#5b9be6;--pack-border:#2c3440}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#14181f;--pack-muted:#5b6573;--pack-accent:#1f5fbf;--pack-border:#d5dae1}</style></head><body>
+<div class="rs5-root" role="group" aria-label="Retry scope for the failed Test step">
+  <div class="rs5-hd"><h2 id="rs5-title">Test failed</h2><p>windows·node22 · exit 1 · run 418</p></div>
+  <ul class="rs5-col" id="rs5-col" aria-label="Steps on windows·node22"></ul>
+  <div class="rs5-acts" id="rs5-acts">
+    <button class="rs5-btn rs5-pri" id="rs5-tile" type="button"><span class="rs5-lab"><span class="rs5-a"><b>Retry tile</b><small id="rs5-ts"></small></span><span class="rs5-b">Retrying</span></span></button>
+    <button class="rs5-btn" id="rs5-target" type="button"><span class="rs5-lab"><span class="rs5-a"><b>Retry target</b><small id="rs5-gs"></small></span><span class="rs5-b">Retrying</span></span></button>
+  </div>
+  <div class="rs5-st"><p id="rs5-note" role="status" aria-live="polite"></p>
+    <button class="rs5-btn rs5-sm" id="rs5-cancel" type="button">Cancel</button>
+    <button class="rs5-btn rs5-sm" id="rs5-reset" type="button" hidden>Reset demo</button></div>
+  <div class="rs5-log" id="rs5-log"><select id="rs5-sel" aria-label="Attempt log" hidden></select><code id="rs5-code"></code></div>
+  <label class="rs5-tg"><input type="checkbox" id="rs5-fail">Next attempt fails</label>
+</div>
+<script>(function(){
+var $=function(i){return document.getElementById('rs5-'+i)};
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var NS='http://www.w3.org/2000/svg';
+var ST=['Install','Build','Test','Package'];
+var DEP={Install:[],Build:['Install'],Test:['Build'],Package:['Test']};
+var SEC={Install:41,Build:37,Test:38,Package:14};
+var MS=20,FAILED='Test';
+var LOG='line 41 · expected cat-pics-2/forever.png, got cat-pics-2\\forever.png';
+function down(s){var r=[s];ST.forEach(function(t){if(r.indexOf(t)<0&&DEP[t].some(function(d){return r.indexOf(d)>-1}))r.push(t)});return r}
+function fmt(n){return n>=60?Math.floor(n/60)+' m '+(n%60)+' s':n+' s'}
+var SCOPE={tile:down(FAILED),target:ST.slice()};
+function cost(k){var s=SCOPE[k],t=0;s.forEach(function(x){t+=SEC[x]});return 'reruns '+s.length+' · '+fmt(t)+' last run'}
+$('ts').textContent=cost('tile');$('gs').textContent=cost('target');
+function init(){return{cells:{Install:'passed',Build:'passed',Test:'failed',Package:'blocked'},logs:[LOG],attempt:1,note:'Attempt 1 failed',phase:'ready'}}
+var run=init(),snap=null,q=[],qi=0,el=0,ang=0,which=null,preview=null,raf=0,last=0;
+var tiles={},nOpts=0;
+ST.forEach(function(s){var li=document.createElement('li'),sv=document.createElementNS(NS,'svg'),sp=document.createElement('span');
+  sv.setAttribute('viewBox','0 0 24 24');sv.setAttribute('aria-hidden','true');sp.textContent=s;
+  li.appendChild(sv);li.appendChild(sp);$('col').appendChild(li);tiles[s]={li:li,sv:sv,st:'',arc:null}});
+function el2(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+function glyph(T,s){var sv=T.sv;while(sv.firstChild)sv.removeChild(sv.firstChild);T.arc=null;
+  var r={x:3,y:3,width:18,height:18,rx:2,fill:'none',stroke:'currentColor','stroke-width':2};
+  if(s==='passed'){r.fill='currentColor';r.stroke='none'}
+  if(s==='blocked')r['stroke-dasharray']='2 3';
+  sv.appendChild(el2('rect',r));
+  if(s==='failed')sv.appendChild(el2('path',{d:'M3 21L21 3V21Z',fill:'currentColor'}));
+  if(s==='running'){T.arc=el2('circle',{cx:12,cy:12,r:5,fill:'none',stroke:'currentColor','stroke-width':2,'stroke-dasharray':'14 32','stroke-linecap':'round'});sv.appendChild(T.arc)}
+  T.li.classList.toggle('rs5-bad',s==='failed'||s==='running');T.st=s}
+function txt(e,v){if(e.textContent!==v)e.textContent=v}
+function draw(){var ready=run.phase==='ready',busy=run.phase==='retrying',done=run.phase==='done';
+  ST.forEach(function(s){var T=tiles[s],c=run.cells[s];if(T.st!==c)glyph(T,c);
+    T.li.setAttribute('aria-label',s+': '+c);
+    T.li.classList.toggle('rs5-hit',ready&&!!preview&&SCOPE[preview].indexOf(s)>-1);
+    if(T.arc)T.arc.setAttribute('transform','rotate('+(reduce()?0:ang)+' 12 12)')});
+  txt($('title'),'Test '+run.cells.Test);
+  $('acts').hidden=done;
+  ['tile','target'].forEach(function(k){var b=$(k);b.disabled=!ready;b.classList.toggle('rs5-on',busy&&which===k)});
+  $('cancel').hidden=done;$('cancel').style.visibility=busy?'visible':'hidden';$('reset').hidden=!done;
+  txt($('note'),run.note);
+  $('log').hidden=done;
+  var sel=$('sel');if(nOpts!==run.logs.length){while(sel.firstChild)sel.removeChild(sel.firstChild);
+    run.logs.forEach(function(_,i){var o=document.createElement('option');o.value=i;o.textContent='Attempt '+(i+1)+' log';sel.appendChild(o)});
+    nOpts=run.logs.length;sel.value=nOpts-1}
+  sel.hidden=nOpts<2;txt($('code'),run.logs[+sel.value||0]||LOG)}
+function step(ms){if(run.phase!=='retrying')return false;el+=ms;if(!reduce())ang=(ang+ms*.36)%360;
+  var s=q[qi];if(el<SEC[s]*MS)return true;el=0;
+  if(s===FAILED&&$('fail').checked){run.cells[s]='failed';for(var j=qi+1;j<q.length;j++)run.cells[q[j]]='blocked';finish(false);return false}
+  run.cells[s]='passed';qi++;if(qi>=q.length){finish(true);return false}
+  run.cells[q[qi]]='running';return true}
+function finish(ok){run.attempt++;which=null;
+  if(ok){run.phase='done';run.note='All 4 steps passed on attempt '+run.attempt;draw();$('reset').focus()}
+  else{run.phase='ready';run.logs.push(LOG);run.note='Attempt '+run.attempt+' failed';nOpts=0;draw();$('tile').focus()}}
+function start(k){if(run.phase!=='ready')return;snap=structuredClone(run);which=k;q=SCOPE[k];qi=0;el=0;
+  q.forEach(function(s){run.cells[s]='queued'});run.cells[q[0]]='running';
+  run.phase='retrying';run.note='Retrying '+q.length+' steps';preview=null;draw();$('cancel').focus();kick()}
+function cancel(){if(run.phase!=='retrying')return;run=snap;run.note='Retry cancelled';which=null;nOpts=0;draw();$('tile').focus()}
+function frame(now){var ms=last?Math.min(now-last,50):16.667;last=now;
+  var moving=step(ms);draw();raf=moving?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+['tile','target'].forEach(function(k,i){var b=$(k);
+  b.addEventListener('click',function(){start(k)});
+  function on(){preview=k;draw()}function off(){if(preview===k){preview=null;draw()}}
+  b.addEventListener('pointerenter',on);b.addEventListener('focus',on);
+  b.addEventListener('pointerleave',off);b.addEventListener('blur',off);
+  b.addEventListener('keydown',function(e){if(/^Arrow/.test(e.key)){e.preventDefault();$(i?'tile':'target').focus()}})});
+$('cancel').addEventListener('click',cancel);
+$('reset').addEventListener('click',function(){run=init();nOpts=0;draw();$('tile').focus()});
+$('sel').addEventListener('change',draw);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&run.phase==='retrying'){e.preventDefault();cancel()}});
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(run.phase==='retrying')kick()});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+    document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+draw();
+})();</script>
+</body></html>

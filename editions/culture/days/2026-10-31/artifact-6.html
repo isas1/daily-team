@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Run verdict for a build pipeline panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mut:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing);--rad:var(--pack-radii-control);--gap:var(--pack-spacing-gap);--pad:var(--pack-spacing-padding)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.ab6-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--rad)*2);padding:max(10px,min(var(--pad),4.5vmin));overflow:auto;display:flex;flex-direction:column;gap:14px}
+.ab6-v{border-left:3px solid var(--acc);padding:2px 0 2px 12px;display:flex;flex-direction:column;gap:4px;transition:border-color var(--dur) var(--ease)}
+.ab6-v.ab6-ok{border-left:1px solid var(--bd);padding-left:14px}
+.ab6-eb,.ab6-meta,.ab6-th{color:var(--mut);font-size:.86em}
+.ab6-meta{font-variant-numeric:tabular-nums}
+.ab6-hd{margin:0;font-size:1.14em;font-weight:600;line-height:1.3}
+.ab6-dt{margin:0;line-height:1.4}
+.ab6-in{animation:ab6-in var(--dur) var(--ease)}
+@keyframes ab6-in{from{opacity:0;transform:translateY(4px)}}
+.ab6-link{align-self:flex-start;min-height:44px;padding:0;border:0;background:none;color:var(--acc);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.ab6-map{display:grid;grid-template-columns:auto repeat(6,minmax(0,28px));gap:4px 5px;align-items:center;justify-items:center;justify-content:start}
+.ab6-th{justify-self:start;padding-right:4px}
+.ab6-c{width:100%;aspect-ratio:1;box-sizing:border-box;border-radius:3px;position:relative;border:2px solid transparent;transition:background-color var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.ab6-passed{background:color-mix(in srgb,var(--mut) 55%,transparent)}
+.ab6-failed{border-color:var(--acc)}
+.ab6-failed::after{content:"";position:absolute;inset:0;background:var(--acc);clip-path:polygon(0 0,100% 0,0 100%)}
+.ab6-blocked{border:2px dotted var(--mut)}
+.ab6-queued,.ab6-running{border-color:var(--mut)}
+.ab6-c:focus{outline:2px solid var(--acc);outline-offset:2px}
+.ab6-ctl{display:flex;flex-wrap:wrap;gap:var(--gap);align-items:flex-end;margin-top:auto;border-top:1px solid var(--bd);padding-top:12px}
+.ab6-lb{display:flex;flex-direction:column;gap:4px;color:var(--mut);font-size:.86em;flex:1 1 9em}
+.ab6-sel,.ab6-b{min-height:44px;border:1px solid var(--bd);border-radius:var(--rad);background:var(--bg);color:var(--ink);font:inherit;font-size:var(--pack-typography-size)}
+.ab6-sel{padding:0 8px;width:100%}
+.ab6-b{padding:0 14px;font-weight:600;cursor:pointer;transition:transform 100ms var(--ease),opacity var(--dur)}
+.ab6-pri{background:var(--ink);color:var(--sf);border-color:var(--ink);min-width:8.5em}
+.ab6-b:active:not(:disabled){transform:scale(.97)}
+.ab6-b:disabled,.ab6-sel:disabled{opacity:.45;cursor:default}
+@media(hover:hover){.ab6-b:hover:not(:disabled){border-color:var(--mut)}}
+.ab6-b:focus-visible,.ab6-sel:focus-visible,.ab6-link:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ab6-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.ab6-in{animation:none}.ab6-c,.ab6-v,.ab6-b{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111418;--pack-surface:#1a1f26;--pack-text:#e8ecf1;--pack-muted:#9aa4b2;--pack-accent:#5b9be6;--pack-border:#2c3440}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#14181f;--pack-muted:#5b6573;--pack-accent:#1f5fbf;--pack-border:#d5dae1}</style></head><body>
+<div class="ab6-root" id="ab6-root" role="group" aria-label="Run verdict for build run 418">
+<div class="ab6-v" id="ab6-v">
+<span class="ab6-eb">forever-uploader · main</span>
+<p class="ab6-hd" id="ab6-hd"></p>
+<p class="ab6-dt" id="ab6-dt"></p>
+<span class="ab6-meta" id="ab6-meta"></span>
+<button class="ab6-link" id="ab6-show" type="button">Show failed tile</button>
+</div>
+<div class="ab6-map" id="ab6-map" role="group" aria-label="Run 418 steps, stages by target"></div>
+<div class="ab6-ctl">
+<label class="ab6-lb">Next attempt<select class="ab6-sel" id="ab6-sel"><option value="pass">Passes</option><option value="same">Fails, same lines</option><option value="new">Fails, new lines</option></select></label>
+<button class="ab6-b ab6-pri" id="ab6-run" type="button">Run attempt</button>
+<button class="ab6-b" id="ab6-reset" type="button">Reset</button>
+</div>
+<p class="ab6-sr" role="status" id="ab6-st"></p>
+</div>
+<script>(function(){
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var $=function(i){return document.getElementById('ab6-'+i)};
+var S=['Install','Build','Test','Package'],SA=['Ins','Bld','Tst','Pkg'];
+var T=['linux·node20','linux·node22','macos·node20','macos·node22','windows·node20','windows·node22'],TA=['l20','l22','m20','m22','w20','w22'];
+var FAIL='Test|windows·node22',BLK='Package|windows·node22';
+var SIG={A:{line:41,lines:['✕ saves cat-pics-2 to the Forever plan folder','Expected: "uploads/cat-pics-2.png"','Received: "uploads\\cat-pics-2.png"']},
+B:{line:52,lines:['✕ saves cat-pics-2 to the Forever plan folder','Timeout: 5000 ms exceeded','at upload (src/store.js:88)']}};
+function hash(a){var h=2166136261;a=a.join('\n');for(var i=0;i<a.length;i++){h^=a.charCodeAt(i);h=Math.imul(h,16777619)}return((h>>>0).toString(16)+'0000').slice(0,4)}
+for(var k in SIG)SIG[k].h=hash(SIG[k].lines);
+var run,running=false,snap=null,timers=[],note='',els={};
+function init(){run={cells:{},attempts:[{pass:false,sig:'A'}]};
+S.forEach(function(s){T.forEach(function(t){run.cells[s+'|'+t]='passed'})});
+run.cells[FAIL]='failed';run.cells[BLK]='blocked'}
+function build(){var m=$('map'),e=document.createElement('span');e.setAttribute('aria-hidden','true');m.appendChild(e);
+TA.forEach(function(t){var h=document.createElement('span');h.className='ab6-th';h.style.justifySelf='center';h.textContent=t;h.setAttribute('aria-hidden','true');m.appendChild(h)});
+S.forEach(function(s,i){var l=document.createElement('span');l.className='ab6-th';l.textContent=SA[i];l.setAttribute('aria-hidden','true');m.appendChild(l);
+T.forEach(function(t){var c=document.createElement('span');c.setAttribute('role','img');c.tabIndex=-1;els[s+'|'+t]=c;m.appendChild(c)})})}
+function counts(){var c={passed:0,failed:0,blocked:0,queued:0,running:0};for(var k in run.cells)c[run.cells[k]]++;return c}
+function lastFail(skipLast){var a=run.attempts,i=a.length-(skipLast?2:1);for(;i>=0;i--)if(!a[i].pass)return a[i];return null}
+function render(settled){
+for(var id in els){var st=run.cells[id],p=id.split('|');els[id].className='ab6-c ab6-'+st;els[id].setAttribute('aria-label',p[0]+', '+p[1]+', '+st);if(st!=='running')els[id].style.opacity=''}
+var c=counts(),a=run.attempts,n=a.length,cur=a[n-1],hd,dt,mt,ok=false;
+if(running){hd='Run 418 · Retrying 2 steps';dt='Test, then Package, on windows·node22';mt='Attempt '+(n+1)+' in progress · 52 s last run'}
+else if(!c.failed){ok=true;var pf=lastFail();hd='Run 418 · 24 passed';dt='Repaired by attempt '+n;mt='Attempt '+n+' cleared signature '+SIG[pf.sig].h}
+else{hd='Run 418 · '+c.passed+' passed · '+c.failed+' failed · '+c.blocked+' blocked';var s=SIG[cur.sig];
+if(n===1){dt="Test 'saves cat-pics-2' failed on windows·node22 at line "+s.line;mt='Attempt 1 · signature '+s.h}
+else{var pv=lastFail(true),ps=SIG[pv.sig],prevN=run.attempts.lastIndexOf(pv)+1;
+if(ps.h===s.h){dt='Failed again at line '+s.line+' · same '+s.lines.length+' lines · not flaky';mt='Attempt '+n+' · signature '+s.h+' matches attempt '+prevN}
+else{dt='Failed again at line '+s.line+' · different lines than attempt '+prevN;mt='Attempt '+n+' · signature '+s.h+' vs '+ps.h}}}
+if(note&&!running)mt=note+' · '+mt;
+$('hd').textContent=hd;$('dt').textContent=dt;$('meta').textContent=mt;
+var v=$('v');v.classList.toggle('ab6-ok',ok);
+$('show').style.visibility=(running||ok)?'hidden':'visible';
+var r=$('run');r.textContent=running?'Cancel':'Run attempt';r.disabled=ok&&!running;
+$('sel').disabled=running||ok;$('reset').disabled=running||(n===1&&!note);
+if(settled){v.classList.remove('ab6-in');void v.offsetWidth;v.classList.add('ab6-in');$('st').textContent=hd+'. '+dt+'.'}}
+function later(f,ms){timers.push(setTimeout(f,ms))}
+function start(){if(running||!counts().failed)return;
+var o=$('sel').value,lf=lastFail(),sig=o==='same'?lf.sig:(lf.sig==='A'?'B':'A');
+snap=structuredClone(run);running=true;note='';
+run.cells[FAIL]='running';run.cells[BLK]='queued';render(false);kick();
+later(function(){if(o==='pass'){run.cells[FAIL]='passed';run.cells[BLK]='running';render(false);kick();
+later(function(){run.cells[BLK]='passed';settle({pass:true})},600)}
+else{run.cells[FAIL]='failed';run.cells[BLK]='blocked';settle({pass:false,sig:sig})}},900)}
+function settle(a){timers=[];running=false;run.attempts.push(a);render(true)}
+function cancel(){if(!running)return;timers.forEach(clearTimeout);timers=[];run=snap;running=false;note='Retry cancelled';render(true)}
+function reset(){if(running)return;init();note='';render(true);$('run').focus()}
+$('run').addEventListener('click',function(){running?cancel():start()});
+$('reset').addEventListener('click',reset);
+$('show').addEventListener('click',function(){if(run.cells[FAIL]==='failed')els[FAIL].focus()});
+$('root').addEventListener('keydown',function(e){if(e.key!=='Escape')return;
+if(running){cancel();$('run').focus();e.preventDefault()}
+else if($('map').contains(document.activeElement)){$('show').focus();e.preventDefault()}});
+var raf=0;
+function step(){for(var k in run.cells)if(run.cells[k]==='running')return true;return false}
+function draw(now){for(var k in run.cells)if(run.cells[k]==='running')els[k].style.opacity=String(.35+.65*(.5+.5*Math.cos(now/260)))}
+function snapToTarget(){for(var k in els)els[k].style.opacity=''}
+function frame(now){var moving=reduce()?(snapToTarget(),false):step();if(moving)draw(now);
+raf=moving?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+document.addEventListener('visibilitychange',function(){if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+window.addEventListener('message',function(e){var m=e.data;
+if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))document.documentElement.setAttribute('data-theme',m.theme)});
+init();build();render(false);
+})();</script>
+</body></html>

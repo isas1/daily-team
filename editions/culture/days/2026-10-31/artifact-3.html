@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Failure inset · forever-cat-pics pipeline panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--r:var(--pack-radii-control);--g:var(--pack-spacing-gap);--d:var(--pack-motion-duration);--e:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.ab3-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;padding:min(var(--pack-spacing-padding),5%);background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--r)*2);overflow:auto;container-type:inline-size;display:flex;flex-direction:column;gap:var(--g)}
+.ab3-root:focus-visible,.ab3-root :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ab3-top{margin:0;line-height:1.35}
+.ab3-top b{font-weight:600}
+.ab3-hint{display:block;color:var(--mu);font-size:.86em}
+.ab3-grid{display:grid;grid-template-columns:auto repeat(6,minmax(0,52px));gap:4px;align-items:center;flex-shrink:0}
+.ab3-col{font-size:.72em;line-height:1.2;color:var(--mu);text-align:center;overflow:hidden}
+.ab3-col span{display:block}
+.ab3-n{display:none!important}
+.ab3-row{font-size:.82em;color:var(--mu);padding-right:6px}
+.ab3-t{aspect-ratio:1;width:100%;min-width:0;padding:0;margin:0;border:2px solid transparent;border-radius:5px;background:none;cursor:pointer;position:relative;transition:transform 100ms var(--e),border-color var(--d) var(--e)}
+.ab3-t::before,.ab3-t::after{content:"";position:absolute;inset:4px;border-radius:2px;box-sizing:border-box}
+.ab3-passed::before{background:var(--mu)}
+.ab3-failed::before{border:2px solid var(--acc)}
+.ab3-failed::after{background:var(--acc);clip-path:polygon(0 0,100% 0,0 100%)}
+.ab3-blocked::before{border:2px dotted var(--mu)}
+.ab3-t[aria-expanded="true"]{border-color:var(--ink)}
+.ab3-t:active{transform:scale(.92)}
+@media (hover:hover){.ab3-t:hover{border-color:var(--bd)}.ab3-t[aria-expanded="true"]:hover{border-color:var(--ink)}}
+.ab3-ins{grid-column:1/-1;position:relative;overflow:hidden;height:0;flex-shrink:0}
+.ab3-notch{position:absolute;top:3px;width:12px;height:12px;background:var(--bg);border-left:1px solid var(--bd);border-top:1px solid var(--bd);transform:translateX(-50%) rotate(45deg);z-index:1;transition:left var(--d) var(--e)}
+.ab3-in{margin-top:9px;padding:8px 10px 10px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);display:grid;gap:6px}
+.ab3-hr{display:flex;align-items:center;gap:var(--g)}
+.ab3-hd{margin:0;flex:1;min-width:0;line-height:1.35}
+.ab3-hd b{font-weight:600}
+.ab3-hd span{color:var(--mu)}
+.ab3-x{min-height:44px;min-width:44px;padding:0 12px;font:inherit;color:var(--ink);background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);cursor:pointer;white-space:nowrap;transition:transform 100ms var(--e),border-color var(--d) var(--e)}
+.ab3-x:active{transform:scale(.96)}
+@media (hover:hover){.ab3-x:hover{border-color:var(--mu)}}
+.ab3-sub{margin:0;color:var(--mu);font-size:.86em}
+.ab3-log{margin:0;padding:6px 0;overflow-x:auto;font:.8em/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;border-top:1px solid var(--bd)}
+.ab3-ln{display:block;padding:0 8px;border-left:2px solid var(--acc)}
+.ab3-ln i{font-style:normal;color:var(--mu);display:inline-block;width:3.5ch}
+@media (prefers-reduced-motion:reduce){.ab3-t,.ab3-x,.ab3-notch{transition:none}}
+@container (max-width:479px){
+.ab3-grid{grid-template-columns:auto repeat(6,minmax(0,1fr));gap:3px}
+.ab3-w{display:none!important}.ab3-n{display:block!important}
+.ab3-row{font-size:.72em;padding-right:3px}
+.ab3-notch{display:none}.ab3-in{margin-top:0}
+.ab3-t::before,.ab3-t::after{inset:3px}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111418;--pack-surface:#1a1f26;--pack-text:#e8ecf1;--pack-muted:#9aa4b2;--pack-accent:#5b9be6;--pack-border:#2c3440}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#14181f;--pack-muted:#5b6573;--pack-accent:#1f5fbf;--pack-border:#d5dae1}</style></head><body>
+<div class="ab3-root" id="ab3-root" role="group" aria-label="Failure inset for build run 418">
+<p class="ab3-top"><b>Run 418 · forever-cat-pics</b><span class="ab3-hint">Tap a step to open it. Esc closes.</span></p>
+<div class="ab3-grid" id="ab3-grid" role="group" aria-label="Steps by stage and target"></div>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0;
+  function dur(){var v=getComputedStyle(document.documentElement).getPropertyValue('--d').trim(),n=parseFloat(v);
+    if(isNaN(n))return 180;return /ms$/.test(v)?n:/s$/.test(v)?n*1000:n}
+  var S=['Install','Build','Test','Package'],T=[['linux','20','l20'],['linux','22','l22'],['macos','20','m20'],['macos','22','m22'],['windows','20','w20'],['windows','22','w22']];
+  var D=[[24,23,29,28,31,31],[41,40,47,46,52,52],[36,35,44,43,49,38],[12,12,13,13,14,0]];
+  var root=document.getElementById('ab3-root'),grid=document.getElementById('ab3-grid'),tiles=[];
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function st(s,t){return s===2&&t===5?'failed':s===3&&t===5?'blocked':'passed'}
+  function tn(t){return T[t][0]+'·node'+T[t][1]}
+  grid.appendChild(el('div'));
+  T.forEach(function(t){var c=el('div','ab3-col');c.setAttribute('aria-hidden','true');
+    c.appendChild(el('span','ab3-w',t[0]));c.appendChild(el('span','ab3-w','n'+t[1]));c.appendChild(el('span','ab3-n',t[2]));grid.appendChild(c)});
+  S.forEach(function(name,s){grid.appendChild(el('div','ab3-row',name));tiles[s]=[];
+    T.forEach(function(_,t){var b=el('button','ab3-t ab3-'+st(s,t));b.type='button';b.tabIndex=-1;
+      b.setAttribute('aria-label',name+', '+tn(t)+', '+st(s,t));b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','ab3-ins');
+      b.addEventListener('click',function(){if(open&&os===s&&ot===t)closeTile();else openTile(s,t,true)});
+      b.addEventListener('keydown',function(e){nav(e,s,t)});
+      b.addEventListener('focus',function(){rove(s,t)});
+      tiles[s][t]=b;grid.appendChild(b)})});
+  var ins=el('div','ab3-ins'),notch=el('div','ab3-notch'),inn=el('div','ab3-in');
+  ins.id='ab3-ins';ins.setAttribute('role','region');ins.setAttribute('aria-label','Step detail');
+  ins.appendChild(notch);ins.appendChild(inn);
+  var open=false,os=-1,ot=-1,fs=2,ft=5,narrow=false,anim=null,user=false,xBtn=null;
+  function rove(s,t){tiles[fs][ft].tabIndex=-1;fs=s;ft=t;tiles[s][t].tabIndex=0}
+  function nav(e,s,t){var k=e.key,n=[s,t];
+    if(k==='ArrowLeft')n[1]=Math.max(0,t-1);else if(k==='ArrowRight')n[1]=Math.min(5,t+1);
+    else if(k==='ArrowUp')n[0]=Math.max(0,s-1);else if(k==='ArrowDown')n[0]=Math.min(3,s+1);
+    else if(k==='Home')n=e.ctrlKey?[0,0]:[s,0];else if(k==='End')n=e.ctrlKey?[3,5]:[s,5];else return;
+    e.preventDefault();rove(n[0],n[1]);tiles[n[0]][n[1]].focus()}
+  function place(){if(narrow)grid.after(ins);else tiles[os][5].after(ins)}
+  function fill(){var s=os,t=ot,k=st(s,t);inn.replaceChildren();
+    var hr=el('div','ab3-hr'),hd=el('p','ab3-hd');hd.appendChild(el('b',null,S[s]+' · '+tn(t)));
+    hd.appendChild(el('span',null,k==='failed'?' · exit 1 · '+D[s][t]+' s':k==='blocked'?' · blocked · not run':' · passed · '+D[s][t]+' s'));
+    xBtn=el('button','ab3-x',narrow?'Back to grid':'Close');xBtn.type='button';
+    xBtn.addEventListener('click',function(){closeTile()});
+    hr.appendChild(hd);hr.appendChild(xBtn);inn.appendChild(hr);
+    if(k==='failed'){inn.appendChild(el('p','ab3-sub','3 lines differ from linux·node22'));
+      var pre=el('pre','ab3-log');pre.tabIndex=0;pre.setAttribute('aria-label','Differing log lines');
+      [[39,'path.sep is "\\"'],[41,'FAIL cat-pics-2 \u203a keeps upload path'],[44,'got "uploads\\cat-pics-2.png"']].forEach(function(l){
+        var ln=el('span','ab3-ln');ln.appendChild(el('i',null,String(l[0])));ln.appendChild(document.createTextNode(l[1]));pre.appendChild(ln)});
+      inn.appendChild(pre)}
+    else inn.appendChild(el('p','ab3-sub',k==='blocked'?'Waits on Test. Retry Test to run it.':'Exit 0. No log diff.'))}
+  function notchPos(){if(!open||narrow)return;var a=tiles[os][ot].getBoundingClientRect(),b=ins.getBoundingClientRect();notch.style.left=(a.left+a.width/2-b.left)+'px'}
+  function cur(){return ins.isConnected?ins.offsetHeight:0}
+  function go(to){anim={from:cur(),to:to,t0:0,h:cur(),d:dur()};ins.style.height=anim.from+'px';kick()}
+  function openTile(s,t,u){var keep=open&&os===s&&!narrow;
+    if(open)tiles[os][ot].setAttribute('aria-expanded','false');
+    var from=keep?cur():0;os=s;ot=t;open=true;user=u;
+    tiles[s][t].setAttribute('aria-expanded','true');place();fill();notchPos();
+    ins.style.height=from+'px';go(inn.offsetHeight+inn.offsetTop)}
+  function closeTile(){if(!open)return;open=false;user=false;
+    var b=tiles[os][ot];b.setAttribute('aria-expanded','false');rove(os,ot);b.focus();go(0)}
+  function finish(){var a=anim;anim=null;
+    if(a.to>0){ins.style.height='auto';if(user&&narrow)inn.scrollIntoView({block:'nearest'})}
+    else if(!open){ins.style.height='0px';ins.remove()}}
+  function step(now){if(!anim)return false;if(!anim.t0)anim.t0=now;
+    var p=anim.d>0?Math.min(1,(now-anim.t0)/anim.d):1,e=1-Math.pow(1-p,3);anim.h=anim.from+(anim.to-anim.from)*e;
+    if(p>=1){anim.h=anim.to;return false}return true}
+  function draw(){if(anim)ins.style.height=anim.h+'px'}
+  function snapToTarget(){if(anim)anim.h=anim.to}
+  function frame(now){var moving=reduce()?(snapToTarget(),false):step(now);draw();
+    if(!moving&&anim)finish();raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+  root.addEventListener('keydown',function(e){if(e.key==='Escape'&&open){e.preventDefault();closeTile()}});
+  new ResizeObserver(function(){var n=root.getBoundingClientRect().width<480;
+    if(n!==narrow){narrow=n;if(open){place();if(xBtn)xBtn.textContent=n?'Back to grid':'Close'}}notchPos()}).observe(root);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(anim)kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  narrow=root.getBoundingClientRect().width<480;
+  os=2;ot=5;open=true;tiles[2][5].setAttribute('aria-expanded','true');place();fill();ins.style.height='auto';notchPos();
+  rove(2,5);tiles[2][5].focus({preventScroll:true});
+})();</script>
+</body></html>
