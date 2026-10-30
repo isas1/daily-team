@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start point ticks for a clip share link</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--surf:var(--pack-surface);--ink:var(--pack-text);--mut:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);
+--s2:var(--pack-spacing-gap);--s1:calc(var(--pack-spacing-gap)/2);--s4:var(--pack-spacing-padding);--r:var(--pack-radii-control);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.st2-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;container-type:size;display:flex;flex-direction:column;justify-content:center;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2);overflow:auto}
+.st2-root>*{flex:none}
+.st2-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--s1) var(--s2);font-size:clamp(12px,4cqi,16px)}
+.st2-file{font-weight:600}
+.st2-dur,.st2-hint,.st2-scale,.st2-frame{color:var(--pack-muted)}
+.st2-strip{position:relative;height:44px;margin-top:var(--s2)}
+.st2-dashes{position:absolute;inset:0 var(--s2);display:flex;align-items:center;pointer-events:none}
+.st2-d{flex:1;height:4px;position:relative}
+.st2-d::before{content:"";position:absolute;left:0;top:0;width:50%;height:100%;border-radius:2px;background:var(--pack-muted);opacity:.4;transition:background var(--pack-motion-duration) var(--pack-motion-easing),opacity var(--pack-motion-duration) var(--pack-motion-easing)}
+.st2-d.st2-on::before{background:var(--pack-accent);opacity:1}
+.st2-m::after{content:"";position:absolute;left:0;top:-12px;width:2px;height:8px;border-radius:1px;background:var(--pack-muted)}
+.st2-range{-webkit-appearance:none;appearance:none;position:relative;width:100%;height:44px;margin:0;background:transparent;touch-action:pan-y;cursor:pointer}
+.st2-range::-webkit-slider-runnable-track{height:44px;background:transparent}
+.st2-range::-moz-range-track{height:44px;background:transparent}
+.st2-range::-webkit-slider-thumb{-webkit-appearance:none;box-sizing:border-box;width:16px;height:32px;margin-top:6px;border-radius:4px;background:var(--pack-accent);border:2px solid var(--pack-surface);transition:transform 120ms var(--ease),background var(--dur) var(--ease)}
+.st2-range::-moz-range-thumb{box-sizing:border-box;width:16px;height:32px;border-radius:4px;background:var(--pack-accent);border:2px solid var(--pack-surface);transition:transform 120ms var(--ease),background var(--dur) var(--ease)}
+.st2-range:active::-webkit-slider-thumb{transform:scaleY(1.12)}
+.st2-range:active::-moz-range-thumb{transform:scaleY(1.12)}
+.st2-range:focus-visible{outline:none}
+.st2-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px var(--pack-surface),0 0 0 4px var(--pack-accent)}
+.st2-range:focus-visible::-moz-range-thumb{box-shadow:0 0 0 2px var(--pack-surface),0 0 0 4px var(--pack-accent)}
+.st2-off .st2-range::-webkit-slider-thumb{background:var(--pack-muted)}
+.st2-off .st2-range::-moz-range-thumb{background:var(--pack-muted)}
+.st2-scale{position:relative;height:16px;margin:calc(var(--s1)*-1) var(--s2) 0;font-size:clamp(11px,3.4cqi,13px);font-variant-numeric:tabular-nums}
+.st2-scale span{position:absolute;top:0;transform:translateX(-50%)}
+.st2-scale span:first-child{transform:none}
+.st2-check{display:flex;align-items:center;gap:var(--s2);min-height:44px;cursor:pointer;font-size:clamp(13px,4.4cqi,18px)}
+.st2-check input{flex:none;width:20px;height:20px;margin:0 var(--s1) 0 0;accent-color:var(--pack-accent);cursor:pointer}
+.st2-check input:focus-visible{outline:2px solid var(--pack-accent);outline-offset:4px}
+.st2-check b{font-size:1.4em;font-variant-numeric:tabular-nums;color:var(--pack-accent);transition:color var(--dur) var(--ease)}
+.st2-off .st2-check b{color:var(--pack-muted)}
+.st2-link{margin:0;padding:var(--s2);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);font:clamp(11px,3.4cqi,14px)/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.st2-t{color:var(--pack-accent);font-weight:600}
+.st2-hint{margin:0;font-size:clamp(11px,3.2cqi,13px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:16px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#121416;--pack-surface:#1b1f23;--pack-text:#e9ecef;--pack-muted:#9aa3ab;--pack-accent:#7ea6d8;--pack-border:#2c3238}:root[data-theme="light"]{--pack-bg:#f6f7f8;--pack-surface:#ffffff;--pack-text:#16191c;--pack-muted:#5b6570;--pack-accent:#2f5f9e;--pack-border:#d6dbe0}</style></head><body>
+<div class="st2-root" id="st2-root" role="group" aria-label="Start point for a shared clip link">
+  <div class="st2-head"><span class="st2-file">cat-pics-2.mp4</span><span class="st2-dur">Forever plan · 3:12</span></div>
+  <div class="st2-strip"><div class="st2-dashes" id="st2-dashes"></div><input class="st2-range" id="st2-range" type="range" min="0" max="190" step="1" value="42" aria-label="Start time" aria-describedby="st2-hint"></div>
+  <div class="st2-scale" aria-hidden="true"><span style="left:0">0:00</span><span style="left:31.58%">1:00</span><span style="left:63.16%">2:00</span><span style="left:94.74%">3:00</span></div>
+  <label class="st2-check"><input id="st2-inc" type="checkbox" checked><span>Start at <b id="st2-time">0:42</b> <span class="st2-frame" id="st2-frame">· frame 1,008</span></span></label>
+  <p class="st2-link" id="st2-link"></p>
+  <p class="st2-hint" id="st2-hint">← → 5 s · Shift 1 s · Esc undo</p>
+</div>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var root=$('st2-root'),r=$('st2-range'),inc=$('st2-inc'),dash=$('st2-dashes'),link=$('st2-link');
+  var MAX=190,FPS=24,saved=42,ds=[];
+  for(var i=0;i<38;i++){var d=document.createElement('span');d.className='st2-d'+(i%12?'':' st2-m');dash.appendChild(d);ds.push(d)}
+  var base=document.createTextNode('https://forever.example/c/cat-pics-2'),tq=document.createElement('span');
+  tq.className='st2-t';link.appendChild(base);link.appendChild(tq);
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+  function step(dt){return false}
+  function draw(){
+    var v=+r.value,on=inc.checked,fr=(v*FPS).toLocaleString('en-US');
+    $('st2-time').textContent=fmt(v);
+    $('st2-frame').textContent='· frame '+fr;
+    r.setAttribute('aria-valuetext',fmt(v)+', frame '+fr);
+    root.classList.toggle('st2-off',!on);
+    for(var i=0;i<ds.length;i++)ds[i].classList.toggle('st2-on',on&&5*i+5>v);
+    tq.textContent=on?'?t='+v:'';
+  }
+  function snapToTarget(){}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  function set(v){r.value=Math.max(0,Math.min(MAX,v));draw()}
+  r.addEventListener('focus',function(){saved=+r.value});
+  r.addEventListener('pointerdown',function(){saved=+r.value});
+  r.addEventListener('input',kick);
+  inc.addEventListener('change',kick);
+  r.addEventListener('keydown',function(e){
+    var v=+r.value,k=e.key,n=null,m=v%5;
+    if(k==='ArrowLeft'||k==='ArrowDown')n=e.shiftKey?v-1:(m?v-m:v-5);
+    else if(k==='ArrowRight'||k==='ArrowUp')n=e.shiftKey?v+1:v-m+5;
+    else if(k==='Home')n=0;else if(k==='End')n=MAX;
+    else if(k==='PageUp')n=v+30;else if(k==='PageDown')n=v-30;
+    else if(k==='Escape')n=saved;
+    if(n!==null){e.preventDefault();set(n)}
+  });
+  inc.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();inc.checked=!inc.checked;draw()}});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>

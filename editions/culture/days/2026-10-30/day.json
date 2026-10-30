@@ -1,0 +1,442 @@
+{
+  "date": "2026-10-30",
+  "task": "Create a creative, useful component set informed specifically by Japanese sashiko repair craft. Visible repair and reinforcement stitching: repairable workflows, measured repeated marks and honest progress. Translate craft principles into distinct interactions, not decorative stereotypes. Use original work, avoid sacred imagery and claims of cultural authenticity. Cite https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko.",
+  "brief": null,
+  "team": "Team for 2026-10-30\nSeason: 2026-10-26\n\n1. Dance choreographer [new]\n   Method: Separate the sample state from the rendered view. [new]\n   Stance: Cuts until only the core is left.\n   Temperament: Asks what the user can do with it.\n2. Railway signaller [new]\n   Method: Use the same visual rule for every selected item. [new]\n   Stance: Defends the material.\n   Temperament: Notices uneven spacing before anyone else.\n3. Optical technician [new]\n   Method: Check which state needs a retry or a cancel action. [new]\n   Stance: Pushes toward the strange.\n   Temperament: Tests the longest label in the room.\n4. Satellite repair apprentice (future; invented) [guest] [new]\n   Method: Test the same action twice before trusting it.\n   Stance: Guards the feeling it leaves behind.\n   Temperament: Argues for fewer moving parts.\n\nConstraint: Use one consistent spacing scale.\nTask: Share sheet: a bottom panel for a media tool that copies a link, reports failure and closes with a swipe, button or key.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": true,
+  "edition": {
+    "lane": "culture",
+    "date": "2026-10-30",
+    "timezone": "Europe/Lisbon",
+    "culture": {
+      "id": "japanese",
+      "era": "living",
+      "name": "Japanese sashiko repair craft",
+      "url": "https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko",
+      "idea": "Visible repair and reinforcement stitching: repairable workflows, measured repeated marks and honest progress."
+    }
+  },
+  "packMode": true,
+  "requestedArtifacts": 6,
+  "planning": {
+    "inputHash": "7b79c0f1f1e14cb54afb27d65d8f0289a9e0ad044f9fff34982581f01f28a963",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [],
+    "selection": {
+      "id": "daily-task",
+      "rationale": "The explicit brief supplies the sashiko culture lane, and the team task supplies the share sheet. Visible repair maps directly onto clipboard failure, which share panels usually hide."
+    }
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "The team builds a share sheet for a clip editor where a visitor sets a start point and access, copies the link, and sees any clipboard failure stay visible until it is repaired by retry or manual selection.",
+  "concept": "Mended Share Sheet",
+  "plan": "## Pitch\n\n**Dance choreographer:** Strip it to one gesture. The sheet rises, you copy, it goes. Six parts at most: sheet frame, start-time picker, link field, copy button, failure line, close. What can the user do with each one? If a part has no answer, cut it. Keep the clip state in one object. The sheet only draws it.\n\n**Railway signaller:** Sashiko repair leaves the mend visible. The stitches are measured and repeated, and nobody hides them. So every copy attempt gets one mark on a single rule. Copied is a solid dash. Failed is an open gap with a cross. Repaired is a dash with an overstitch on top. Every mark follows the same unit of 8px dash and 8px gap. My set: sheet, start ticks, link field, copy button, repair notice, attempt ledger. And the spacing has to follow the scale. Somebody will try 12px. Don't.\n\n**Optical technician:** Make it strange. On failure the sheet's top edge tears, and a retry stitches it closed. My set: tearing frame, copy button, stitch-closed retry, a long-URL stress field, an expiry picker, and a \"mended\" badge. What about a URL with 140 characters? What about \"Team only · expires never\" in German? I want to know which state needs Retry and which needs Cancel, and I want the answer for every one of them.\n\n**Satellite repair apprentice:** Press it twice before you trust it. Copy, then copy again, and both times the result has to say the same true thing. After a failure the user should feel that the panel was mended. It shouldn't feel broken. Fewer moving parts. My set: sheet, copy button, retry with a manual-select fallback, a quiet repaired line, link options, close. No tearing edges.\n\n## Clash\n\n**Optical technician:** The tear is the point. Failure should look like damage.\n\n**Satellite repair apprentice:** A tearing sheet moves the whole frame on every failure. That's three animations for one blocked clipboard. The feeling it leaves is alarm.\n\n**Dance choreographer:** Agreed. And the ledger. Does a user need history for a copy button?\n\n**Railway signaller:** Yes. Change the expiry after copying and the link on your clipboard is stale. The ledger shows that mark struck through. That is the material. Don't cut it.\n\n**Optical technician:** Then the notice and the ledger overlap. Both say \"failed\".\n\n**Dance choreographer:** Split them. The notice holds the current attempt and offers Retry or Select link. The ledger holds the past and offers nothing but reading.\n\n**Satellite repair apprentice:** Then the second copy of the same link should say \"Copied again · same link\". Two presses, one honest answer.\n\n**Railway signaller:** And the start picker uses the same dash unit as the ledger, 5 seconds per tick. One rule for every mark.\n\n## Decision\n\nThe team builds a share sheet for a clip editor where a visitor sets a start point and access, copies the link, and sees any clipboard failure stay visible until it is repaired by retry or manual selection.\n\nConcept: Mended Share Sheet\n\nThe choreographer set the boundary: one sample state object (`clip`, `startSec`, `access`, `expiry`, `attempts[]`) and six views that render from it. The signaller brought the sashiko reference as a rule of measured, repeated, visible marks. That rule became a single 8px dash unit shared by the start ticks and the ledger, with no decorative patterns. The optical technician supplied the state audit: every failing state names its Retry or Cancel path, and the link field is tested with a 140-character URL. The apprentice supplied the double-press check and the manual-select fallback, and argued the tearing frame out.\n\nRejected direction: the torn-and-stitched sheet. It moved the frame on every failure and turned a clipboard error into spectacle. Its useful core survived as the repair notice's overstitched rule.\n\nReference: V&A Dundee, Stitch Style: Sashiko (https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko). The pack is informed by sashiko repair as a visible, repeated mark. It claims no cultural authenticity and uses no sacred imagery or traditional pattern motifs. No component_source was supplied. The bottom-sheet idea bank entry informed row 1 as an idea only. No code was copied.\n\nWhy six: each row answers a separate question. Where does the panel sit (1)? Where does playback start (2)? Who can open the link, and for how long (3)? Did the copy run (4)? What happened when it failed (5)? What has been copied so far (6)? Removing any row drops one of those answers. Adding a seventh, such as share targets, would duplicate row 4.\n\n```json\n{\n  \"schemaVersion\": 1,\n  \"categoryVersion\": 1,\n  \"id\": \"mended-share-sheet\",\n  \"name\": \"Mended Share Sheet\",\n  \"description\": \"A bottom share panel for a clip editor that sets a start point and access, copies a link, keeps clipboard failures visible until repaired and records each attempt as a measured mark.\",\n  \"project\": \"Share sheet for a media tool, informed by sashiko repair as visible, measured, repeated marks.\",\n  \"sizeRationale\": \"Six rows cover panel placement, start time, link options, the copy action, failure repair and attempt history. Each answers one visitor question, and none renames another.\",\n  \"opportunities\": [\n    {\n      \"id\": \"daily-task\",\n      \"need\": \"A share panel that copies a media link, reports clipboard failure honestly and closes by swipe, button or Escape.\",\n      \"use\": \"An editor shares a clip at 0:42 with a reviewer and knows whether the link on the clipboard is current.\",\n      \"interaction\": \"Visible repair: a failed copy stays on screen until retry or manual selection succeeds. Each attempt leaves one even mark.\",\n      \"similarity\": \"Near 2026-10-27 pipeline retry and 2026-10-29 cancel import. Those retried or rolled back jobs. This records a repaired user action and flags stale copies after option changes.\"\n    }\n  ],\n  \"selection\": {\n    \"id\": \"daily-task\",\n    \"rationale\": \"The explicit brief supplies the sashiko culture lane, and the team task supplies the share sheet. Visible repair maps directly onto clipboard failure, which share panels usually hide.\"\n  },\n  \"tokens\": {\n    \"colors\": {\n      \"dark\": { \"bg\": \"#121416\", \"surface\": \"#1b1f23\", \"text\": \"#e9ecef\", \"muted\": \"#9aa3ab\", \"accent\": \"#7ea6d8\", \"border\": \"#2c3238\" },\n      \"light\": { \"bg\": \"#f6f7f8\", \"surface\": \"#ffffff\", \"text\": \"#16191c\", \"muted\": \"#5b6570\", \"accent\": \"#2f5f9e\", \"border\": \"#d6dbe0\" }\n    },\n    \"typography\": { \"family\": \"system-ui, -apple-system, \\\"Segoe UI\\\", Roboto, sans-serif\", \"size\": \"16px\" },\n    \"spacing\": { \"gap\": \"8px\", \"padding\": \"16px\" },\n    \"radii\": { \"control\": \"8px\" },\n    \"motion\": { \"duration\": \"200ms\", \"easing\": \"ease-out\" }\n  },\n  \"components\": [\n    {\n      \"row\": 1,\n      \"id\": \"share-sheet-frame\",\n      \"file\": \"artifact-1.html\",\n      \"name\": \"Share sheet frame\",\n      \"description\": \"Bottom panel with half and full snap points that closes by swipe, Close button or Escape and returns focus to its trigger.\",\n      \"category\": \"Layout\",\n      \"tags\": [\"bottom-sheet\", \"dialog\", \"swipe\", \"snap-points\", \"focus-return\", \"escape-key\"],\n      \"purpose\": \"Hold the share controls at thumb height without leaving the editor.\",\n      \"use\": \"An editor taps Share under harbour-walk.mp4, expands the sheet to full, then swipes it down.\",\n      \"input\": \"Tap Share to open. Drag the handle or swipe down to close. Keyboard: the handle is a button where Enter or Space toggles half and full. Escape or the Close button closes.\",\n      \"outcome\": \"The sheet settles at 50% or 92% height, or closes. On close, focus returns to the Share trigger.\",\n      \"recovery\": \"A drag released under 30% travel at under 0.5 px/ms springs back to its snap point. Closing keeps the chosen options until the clip changes.\",\n      \"mechanism\": \"A native dialog opened with showModal. Pointer events with setPointerCapture translate the panel on Y only. Snap uses travel plus release velocity. The panel renders from the shared state object and owns no copy logic.\",\n      \"nearestAnalogue\": \"None in recent dates. The bottom-sheet idea bank entry is the ancestor; only its snap idea is kept.\",\n      \"usefulness\": \"Share is a short task inside editing, and a bottom panel keeps the timeline visible behind it.\",\n      \"creativeDifference\": \"Every drag path has a button or key twin, so no snap point is drag-only.\",\n      \"states\": [\n        \"closed: not rendered, reached on load and after close\",\n        \"half: 50% height, reached on open\",\n        \"full: 92% height, reached by dragging up or Enter on the handle\",\n        \"dragging: follows the pointer with no transition\",\n        \"closing: 200ms ease-out slide, reached by swipe, Close or Escape\",\n        \"narrow: at 320px width, controls stack in one column with 16px padding\",\n        \"reduced-motion: snaps without sliding\",\n        \"focus: 2px ring on the handle and Close\"\n      ],\n      \"sources\": [{ \"title\": \"ARIA Authoring Practices: Dialog (Modal)\", \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\" }]\n    },\n    {\n      \"row\": 2,\n      \"id\": \"start-point-ticks\",\n      \"file\": \"artifact-2.html\",\n      \"name\": \"Start point ticks\",\n      \"description\": \"Clip-length strip of 5-second ticks that sets where the shared link starts playing.\",\n      \"category\": \"Media\",\n      \"tags\": [\"media\", \"start-time\", \"slider\", \"ticks\", \"timestamp\"],\n      \"purpose\": \"Choose the moment the recipient sees first.\",\n      \"use\": \"An editor sets 0:42 so the reviewer lands on the harbour crossing.\",\n      \"input\": \"Click, tap or drag along the strip. Keyboard: Tab to the slider. Left and Right step 5 s, Shift with an arrow steps 1 s, Home and End jump to 0:00 and 3:10. A checkbox labelled Start at 0:42 includes or omits the time.\",\n      \"outcome\": \"The link gains t=42 and the label reads 'Start at 0:42 · frame 1,008'.\",\n      \"recovery\": \"Unchecking removes t from the link but keeps the chosen time, so checking again restores it.\",\n      \"mechanism\": \"A native input type=range with step=1 and a 5 s keyboard step. Ticks are drawn from one dash unit of 8px dash and 8px gap, one per 5 s, matching row 6.\",\n      \"nearestAnalogue\": \"2026-10-28 cursor chart snaps to measured samples. This snaps to fixed time units and writes the result into a URL.\",\n      \"usefulness\": \"Sending a 3:12 clip without a start point makes the reviewer hunt for the moment.\",\n      \"creativeDifference\": \"The ticks are the measured repeated mark, so the scale is readable without numbers.\",\n      \"states\": [\n        \"default: 0:00, checkbox off, reached on load\",\n        \"set: thumb on a tick with time label\",\n        \"included: checkbox on, link shows t\",\n        \"focus: 2px ring on the thumb\",\n        \"end-clamped: 3:10 maximum, reached by End\"\n      ],\n      \"sources\": [\n        { \"title\": \"ARIA Authoring Practices: Slider\", \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\" },\n        { \"title\": \"V&A Dundee: Stitch Style: Sashiko\", \"url\": \"https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko\" }\n      ]\n    },\n    {\n      \"row\": 3,\n      \"id\": \"link-options-field\",\n      \"file\": \"artifact-3.html\",\n      \"name\": \"Link options field\",\n      \"description\": \"Read-only link with access and expiry options that flags when the copied link no longer matches.\",\n      \"category\": \"Inputs\",\n      \"tags\": [\"link\", \"access\", \"expiry\", \"radio-group\", \"read-only\", \"stale-state\"],\n      \"purpose\": \"Set who can open the link and for how long.\",\n      \"use\": \"An editor switches from Anyone with link to Team only after copying and sees the note 'Link changed since last copy'.\",\n      \"input\": \"Tap a radio for Anyone with link or Team only, and choose an expiry of 1 day, 7 days or Never from a native select. Keyboard: arrows inside the radio group, Tab to the select. Focusing the link selects all text.\",\n      \"outcome\": \"The link regenerates from state, for example https://media.example/c/hw-31k?t=42&exp=7d.\",\n      \"recovery\": \"Reverting an option restores the earlier link and clears the stale note. The field never truncates. Long URLs wrap at a wbr after each slash, question mark and ampersand.\",\n      \"mechanism\": \"The link is derived from state, never edited directly. A linkVersion counter increments on each change and is compared with the version of the last successful copy.\",\n      \"nearestAnalogue\": \"2026-10-28 range selector reverts on cancel. This field tracks drift between the current value and what the clipboard holds.\",\n      \"usefulness\": \"A stale copied link is a common silent share error.\",\n      \"creativeDifference\": \"The field shows whether the clipboard still agrees with the screen.\",\n      \"states\": [\n        \"default: Anyone with link, 7 days\",\n        \"changed: new link version, reached by any option change\",\n        \"stale: 'Link changed since last copy', reached by a change after a copy\",\n        \"long: 140-character link wraps to three lines at 320px\",\n        \"focus: 2px ring and text selected\"\n      ],\n      \"sources\": [{ \"title\": \"ARIA Authoring Practices: Radio Group\", \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\" }]\n    },\n    {\n      \"row\": 4,\n      \"id\": \"copy-link-button\",\n      \"file\": \"artifact-4.html\",\n      \"name\": \"Copy link button\",\n      \"description\": \"Native button that copies the current link with a reserved-width label and an honest second-press result.\",\n      \"category\": \"Actions\",\n      \"tags\": [\"button\", \"clipboard\", \"copy\", \"pending\", \"dedupe\", \"timeout\"],\n      \"purpose\": \"Put the current link on the clipboard and say whether it worked.\",\n      \"use\": \"An editor copies, then copies again before pasting, and reads 'Copied again · same link'.\",\n      \"input\": \"Click or tap Copy link. Keyboard: Tab to it, Enter or Space.\",\n      \"outcome\": \"Success reads 'Copied'. A repeat with the same link version reads 'Copied again · same link'. A repeat after a change reads 'Copied · new link'.\",\n      \"recovery\": \"Presses while pending are ignored. A copy pending over 3000 ms counts as failed and hands off to row 5.\",\n      \"mechanism\": \"navigator.clipboard.writeText raced against a 3000 ms timeout. A demo toggle forces rejection. Labels swap inside a width reserved for the longest label, 'Copied again · same link'.\",\n      \"nearestAnalogue\": \"2026-10-28 pin pair swaps labels in a reserved width. This adds pending, timeout and version-aware repeat results.\",\n      \"usefulness\": \"This button is the core task of the sheet.\",\n      \"creativeDifference\": \"A second press reports whether the link changed, so pressing twice is a check rather than noise.\",\n      \"states\": [\n        \"idle: 'Copy link'\",\n        \"pressed: 1px sink, reached on pointer or key down\",\n        \"copying: disabled, 'Copying'\",\n        \"copied: 'Copied'\",\n        \"repeat: 'Copied again · same link' or 'Copied · new link'\",\n        \"failed: label returns to 'Copy link' and row 5 shows\",\n        \"focus: 2px ring\"\n      ],\n      \"sources\": [{ \"title\": \"ARIA Authoring Practices: Button\", \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\" }]\n    },\n    {\n      \"row\": 5,\n      \"id\": \"copy-repair-notice\",\n      \"file\": \"artifact-5.html\",\n      \"name\": \"Copy repair notice\",\n      \"description\": \"Failure notice that stays until repaired by retry or manual selection, then remains as a one-line repair record.\",\n      \"category\": \"Feedback\",\n      \"tags\": [\"error\", \"retry\", \"fallback\", \"live-region\", \"repair\", \"clipboard\"],\n      \"purpose\": \"Report a clipboard failure and keep it visible until it is fixed.\",\n      \"use\": \"Clipboard access is blocked in an embedded browser. The editor taps Select link, presses Ctrl+C, and reads 'Copy failed 14:02 · repaired by hand 14:03'.\",\n      \"input\": \"Tap Retry, Select link or Dismiss. Keyboard: Tab to each, Enter or Space. After Select link, Ctrl+C or Cmd+C in the field completes the repair.\",\n      \"outcome\": \"Failure shows 'Couldn't copy · clipboard blocked'. A repair replaces it with one line over a dashed rule, which gains an overstitched solid segment.\",\n      \"recovery\": \"Retry disables while pending. A second failure promotes Select link to the first button. Dismiss hides the notice and logs the attempt as failed in row 6.\",\n      \"mechanism\": \"role=alert on failure and a polite live region on repair. A copy event listener on the link field detects manual copies. The rule is two stacked SVG dash lines using the shared 8px unit.\",\n      \"nearestAnalogue\": \"2026-10-27 pipeline panel retry and 2026-10-28 load stages failure. Those retry jobs. This offers a manual path and keeps the repair visible.\",\n      \"usefulness\": \"Silent clipboard failure leads to pasting an old link.\",\n      \"creativeDifference\": \"The failure is mended in place. The repair stays as a record and is never erased.\",\n      \"states\": [\n        \"hidden: no failure this session\",\n        \"failed: message with Retry, Select link and Dismiss\",\n        \"retrying: Retry disabled, 'Retrying'\",\n        \"failed-again: '2nd attempt failed', Select link first\",\n        \"repaired-retry: 'repaired by retry' line\",\n        \"repaired-manual: 'repaired by hand' line\",\n        \"dismissed: hidden, attempt logged as failed\",\n        \"reduced-motion: overstitch appears without drawing\"\n      ],\n      \"sources\": [\n        { \"title\": \"ARIA Authoring Practices: Alert\", \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\" },\n        { \"title\": \"V&A Dundee: Stitch Style: Sashiko\", \"url\": \"https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko\" }\n      ]\n    },\n    {\n      \"row\": 6,\n      \"id\": \"share-attempt-ledger\",\n      \"file\": \"artifact-6.html\",\n      \"name\": \"Share attempt ledger\",\n      \"description\": \"Row of even marks, one per copy attempt, with a readable list of time, link version and result.\",\n      \"category\": \"Data\",\n      \"tags\": [\"ledger\", \"history\", \"attempts\", \"listbox\", \"non-color-state\", \"stale-state\"],\n      \"purpose\": \"Show what has been copied this session and whether it is still current.\",\n      \"use\": \"An editor reads '4 attempts · 3 copied · 1 repaired · 1 outdated' before pasting into chat.\",\n      \"input\": \"Click or tap a mark to show its detail. Keyboard: Tab into the list, Left and Right or Up and Down move, Home and End jump, Enter shows detail.\",\n      \"outcome\": \"Detail reads '14:03 · v3 · Team only, 7 days, t=42 · repaired by retry'.\",\n      \"recovery\": \"Clear ledger empties it and shows Undo for 5 s. Earlier marks beyond 12 collapse into '+n earlier'.\",\n      \"mechanism\": \"An append-only attempts array in shared state. Each mark uses one shape rule: solid dash for copied, gap with a cross for failed, dash with overstitch for repaired, and strike for outdated. Each mark pairs with a word. Roving tabindex listbox.\",\n      \"nearestAnalogue\": \"2026-10-26 log viewer event list. That list filters many event types. This one records one action's attempts against link versions.\",\n      \"usefulness\": \"It answers whether the clipboard still matches the screen, after the notice is gone.\",\n      \"creativeDifference\": \"Progress is counted as real attempts in one even rule. Nothing is estimated.\",\n      \"states\": [\n        \"empty: 'No copies yet'\",\n        \"copied: solid dash\",\n        \"failed: gap with cross\",\n        \"repaired: dash with overstitch\",\n        \"outdated: struck mark, reached by an option change after copy\",\n        \"selected: detail line shown\",\n        \"overflow: '+n earlier' after 12 marks\",\n        \"cleared: Undo available for 5 s\",\n        \"focus: 2px ring on the mark\"\n      ],\n      \"sources\": [\n        { \"title\": \"ARIA Authoring Practices: Listbox\", \"url\": \"https://www.w3.org/WAI/ARIA/apg/patterns/\" },\n        { \"title\": \"V&A Dundee: Stitch Style: Sashiko\", \"url\": \"https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko\" }\n      ]\n    }\n  ],\n  \"demo\": {\n    \"file\": \"piece.html\",\n    \"rows\": [1, 2, 3, 4, 5, 6],\n    \"sharedState\": \"One state object for harbour-walk.mp4 (3:12): startSec 42, includeStart, access, expiry, linkVersion and attempts[]. Row 1 renders the panel. Rows 2 and 3 write link fields and bump linkVersion. Row 4 reads the link and appends an attempt. Row 5 resolves failed attempts to repaired. Row 6 renders attempts and marks any copied version below the current linkVersion as outdated. A demo toggle forces clipboard rejection.\"\n  }\n}\n```\n\n## Build notes\n\n1. Use one spacing scale of 4, 8, 16, 24 and 32px. The 8px dash unit in rows 2, 5 and 6 comes from the same `--space-2` variable as the gap token.\n2. Put state in `state.js` with a `subscribe` function. Each artifact file mounts its own view against a local copy of the sample state, so it works alone, and `piece.html` passes one shared instance to all six.\n3. Test each action twice: copy, copy, change expiry, copy, force failure, retry, force failure twice, then Select link and Ctrl+C. Check labels at 320px using the 140-character URL and the label 'Copied again · same link'.",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "piece.html",
+      "kind": "piece",
+      "lead": 1,
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sha256": "9c5de769de74c8c8aeb777e4704087b15dd796021b3375155b7f073526f04802",
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-1.html",
+      "sha256": "bb736b19529e22d5e4609b40c9bb35d0eaec6509965dad9ffdc72b864d4baedf",
+      "componentId": "share-sheet-frame",
+      "lead": 1,
+      "row": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-2.html",
+      "sha256": "6750db8aeda8bf3e700aeec520e745d2c5e9025dd6dd76de89ae364e85a2c3ea",
+      "componentId": "start-point-ticks",
+      "lead": 2,
+      "row": 2,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-3.html",
+      "sha256": "14f357a58b5313709c0af78438376fea7ec045c7f55d2df711a89c09ad20220d",
+      "componentId": "link-options-field",
+      "lead": 3,
+      "row": 3,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-4.html",
+      "sha256": "72df03704ef832d8b9089b8dd8dfc3f1eef753283df96395c8c67606d0101edb",
+      "componentId": "copy-link-button",
+      "lead": 4,
+      "row": 4,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-5.html",
+      "sha256": "0f8cce5365b73e52727a9e468e677d1f1a3fd0c68c4fd524830f0b2a79009ac7",
+      "componentId": "copy-repair-notice",
+      "lead": 1,
+      "row": 5,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    },
+    {
+      "file": "artifact-6.html",
+      "sha256": "74f7826d443ec8c0a5be98ef9a2ccc498c70d7c3333b04adc0dfd2b5c869b16c",
+      "componentId": "share-attempt-ledger",
+      "lead": 2,
+      "row": 6,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "pack": {
+    "schemaVersion": 1,
+    "categoryVersion": 1,
+    "id": "mended-share-sheet",
+    "name": "Mended Share Sheet",
+    "description": "A bottom share panel for a clip editor that sets a start point and access, copies a link, keeps clipboard failures visible until repaired and records each attempt as a measured mark.",
+    "project": "Share sheet for a media tool, informed by sashiko repair as visible, measured, repeated marks.",
+    "sizeRationale": "Six rows cover panel placement, start time, link options, the copy action, failure repair and attempt history. Each answers one visitor question, and none renames another.",
+    "opportunities": [
+      {
+        "id": "daily-task",
+        "need": "A share panel that copies a media link, reports clipboard failure honestly and closes by swipe, button or Escape.",
+        "use": "An editor shares a clip at 0:42 with a reviewer and knows whether the link on the clipboard is current.",
+        "interaction": "Visible repair: a failed copy stays on screen until retry or manual selection succeeds. Each attempt leaves one even mark.",
+        "similarity": "Near 2026-10-27 pipeline retry and 2026-10-29 cancel import. Those retried or rolled back jobs. This records a repaired user action and flags stale copies after option changes."
+      }
+    ],
+    "selection": {
+      "id": "daily-task",
+      "rationale": "The explicit brief supplies the sashiko culture lane, and the team task supplies the share sheet. Visible repair maps directly onto clipboard failure, which share panels usually hide."
+    },
+    "tokens": {
+      "colors": {
+        "dark": {
+          "bg": "#121416",
+          "surface": "#1b1f23",
+          "text": "#e9ecef",
+          "muted": "#9aa3ab",
+          "accent": "#7ea6d8",
+          "border": "#2c3238"
+        },
+        "light": {
+          "bg": "#f6f7f8",
+          "surface": "#ffffff",
+          "text": "#16191c",
+          "muted": "#5b6570",
+          "accent": "#2f5f9e",
+          "border": "#d6dbe0"
+        }
+      },
+      "typography": {
+        "family": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "size": "16px"
+      },
+      "spacing": {
+        "gap": "8px",
+        "padding": "16px"
+      },
+      "radii": {
+        "control": "8px"
+      },
+      "motion": {
+        "duration": "200ms",
+        "easing": "ease-out"
+      }
+    },
+    "components": [
+      {
+        "row": 1,
+        "id": "share-sheet-frame",
+        "file": "artifact-1.html",
+        "name": "Share sheet frame",
+        "description": "Bottom panel with half and full snap points that closes by swipe, Close button or Escape and returns focus to its trigger.",
+        "category": "Layout",
+        "tags": [
+          "bottom-sheet",
+          "dialog",
+          "swipe",
+          "snap-points",
+          "focus-return",
+          "escape-key"
+        ],
+        "purpose": "Hold the share controls at thumb height without leaving the editor.",
+        "use": "An editor taps Share under harbour-walk.mp4, expands the sheet to full, then swipes it down.",
+        "input": "Tap Share to open. Drag the handle or swipe down to close. Keyboard: the handle is a button where Enter or Space toggles half and full. Escape or the Close button closes.",
+        "outcome": "The sheet settles at 50% or 92% height, or closes. On close, focus returns to the Share trigger.",
+        "recovery": "A drag released under 30% travel at under 0.5 px/ms springs back to its snap point. Closing keeps the chosen options until the clip changes.",
+        "mechanism": "A native dialog opened with showModal. Pointer events with setPointerCapture translate the panel on Y only. Snap uses travel plus release velocity. The panel renders from the shared state object and owns no copy logic.",
+        "nearestAnalogue": "None in recent dates. The bottom-sheet idea bank entry is the ancestor; only its snap idea is kept.",
+        "usefulness": "Share is a short task inside editing, and a bottom panel keeps the timeline visible behind it.",
+        "creativeDifference": "Every drag path has a button or key twin, so no snap point is drag-only.",
+        "states": [
+          "closed: not rendered, reached on load and after close",
+          "half: 50% height, reached on open",
+          "full: 92% height, reached by dragging up or Enter on the handle",
+          "dragging: follows the pointer with no transition",
+          "closing: 200ms ease-out slide, reached by swipe, Close or Escape",
+          "narrow: at 320px width, controls stack in one column with 16px padding",
+          "reduced-motion: snaps without sliding",
+          "focus: 2px ring on the handle and Close"
+        ],
+        "sources": [
+          {
+            "title": "ARIA Authoring Practices: Dialog (Modal)",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      },
+      {
+        "row": 2,
+        "id": "start-point-ticks",
+        "file": "artifact-2.html",
+        "name": "Start point ticks",
+        "description": "Clip-length strip of 5-second ticks that sets where the shared link starts playing.",
+        "category": "Media",
+        "tags": [
+          "media",
+          "start-time",
+          "slider",
+          "ticks",
+          "timestamp"
+        ],
+        "purpose": "Choose the moment the recipient sees first.",
+        "use": "An editor sets 0:42 so the reviewer lands on the harbour crossing.",
+        "input": "Click, tap or drag along the strip. Keyboard: Tab to the slider. Left and Right step 5 s, Shift with an arrow steps 1 s, Home and End jump to 0:00 and 3:10. A checkbox labelled Start at 0:42 includes or omits the time.",
+        "outcome": "The link gains t=42 and the label reads 'Start at 0:42 · frame 1,008'.",
+        "recovery": "Unchecking removes t from the link but keeps the chosen time, so checking again restores it.",
+        "mechanism": "A native input type=range with step=1 and a 5 s keyboard step. Ticks are drawn from one dash unit of 8px dash and 8px gap, one per 5 s, matching row 6.",
+        "nearestAnalogue": "2026-10-28 cursor chart snaps to measured samples. This snaps to fixed time units and writes the result into a URL.",
+        "usefulness": "Sending a 3:12 clip without a start point makes the reviewer hunt for the moment.",
+        "creativeDifference": "The ticks are the measured repeated mark, so the scale is readable without numbers.",
+        "states": [
+          "default: 0:00, checkbox off, reached on load",
+          "set: thumb on a tick with time label",
+          "included: checkbox on, link shows t",
+          "focus: 2px ring on the thumb",
+          "end-clamped: 3:10 maximum, reached by End"
+        ],
+        "sources": [
+          {
+            "title": "ARIA Authoring Practices: Slider",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          },
+          {
+            "title": "V&A Dundee: Stitch Style: Sashiko",
+            "url": "https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko"
+          }
+        ]
+      },
+      {
+        "row": 3,
+        "id": "link-options-field",
+        "file": "artifact-3.html",
+        "name": "Link options field",
+        "description": "Read-only link with access and expiry options that flags when the copied link no longer matches.",
+        "category": "Inputs",
+        "tags": [
+          "link",
+          "access",
+          "expiry",
+          "radio-group",
+          "read-only",
+          "stale-state"
+        ],
+        "purpose": "Set who can open the link and for how long.",
+        "use": "An editor switches from Anyone with link to Team only after copying and sees the note 'Link changed since last copy'.",
+        "input": "Tap a radio for Anyone with link or Team only, and choose an expiry of 1 day, 7 days or Never from a native select. Keyboard: arrows inside the radio group, Tab to the select. Focusing the link selects all text.",
+        "outcome": "The link regenerates from state, for example https://media.example/c/hw-31k?t=42&exp=7d.",
+        "recovery": "Reverting an option restores the earlier link and clears the stale note. The field never truncates. Long URLs wrap at a wbr after each slash, question mark and ampersand.",
+        "mechanism": "The link is derived from state, never edited directly. A linkVersion counter increments on each change and is compared with the version of the last successful copy.",
+        "nearestAnalogue": "2026-10-28 range selector reverts on cancel. This field tracks drift between the current value and what the clipboard holds.",
+        "usefulness": "A stale copied link is a common silent share error.",
+        "creativeDifference": "The field shows whether the clipboard still agrees with the screen.",
+        "states": [
+          "default: Anyone with link, 7 days",
+          "changed: new link version, reached by any option change",
+          "stale: 'Link changed since last copy', reached by a change after a copy",
+          "long: 140-character link wraps to three lines at 320px",
+          "focus: 2px ring and text selected"
+        ],
+        "sources": [
+          {
+            "title": "ARIA Authoring Practices: Radio Group",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      },
+      {
+        "row": 4,
+        "id": "copy-link-button",
+        "file": "artifact-4.html",
+        "name": "Copy link button",
+        "description": "Native button that copies the current link with a reserved-width label and an honest second-press result.",
+        "category": "Actions",
+        "tags": [
+          "button",
+          "clipboard",
+          "copy",
+          "pending",
+          "dedupe",
+          "timeout"
+        ],
+        "purpose": "Put the current link on the clipboard and say whether it worked.",
+        "use": "An editor copies, then copies again before pasting, and reads 'Copied again · same link'.",
+        "input": "Click or tap Copy link. Keyboard: Tab to it, Enter or Space.",
+        "outcome": "Success reads 'Copied'. A repeat with the same link version reads 'Copied again · same link'. A repeat after a change reads 'Copied · new link'.",
+        "recovery": "Presses while pending are ignored. A copy pending over 3000 ms counts as failed and hands off to row 5.",
+        "mechanism": "navigator.clipboard.writeText raced against a 3000 ms timeout. A demo toggle forces rejection. Labels swap inside a width reserved for the longest label, 'Copied again · same link'.",
+        "nearestAnalogue": "2026-10-28 pin pair swaps labels in a reserved width. This adds pending, timeout and version-aware repeat results.",
+        "usefulness": "This button is the core task of the sheet.",
+        "creativeDifference": "A second press reports whether the link changed, so pressing twice is a check rather than noise.",
+        "states": [
+          "idle: 'Copy link'",
+          "pressed: 1px sink, reached on pointer or key down",
+          "copying: disabled, 'Copying'",
+          "copied: 'Copied'",
+          "repeat: 'Copied again · same link' or 'Copied · new link'",
+          "failed: label returns to 'Copy link' and row 5 shows",
+          "focus: 2px ring"
+        ],
+        "sources": [
+          {
+            "title": "ARIA Authoring Practices: Button",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          }
+        ]
+      },
+      {
+        "row": 5,
+        "id": "copy-repair-notice",
+        "file": "artifact-5.html",
+        "name": "Copy repair notice",
+        "description": "Failure notice that stays until repaired by retry or manual selection, then remains as a one-line repair record.",
+        "category": "Feedback",
+        "tags": [
+          "error",
+          "retry",
+          "fallback",
+          "live-region",
+          "repair",
+          "clipboard"
+        ],
+        "purpose": "Report a clipboard failure and keep it visible until it is fixed.",
+        "use": "Clipboard access is blocked in an embedded browser. The editor taps Select link, presses Ctrl+C, and reads 'Copy failed 14:02 · repaired by hand 14:03'.",
+        "input": "Tap Retry, Select link or Dismiss. Keyboard: Tab to each, Enter or Space. After Select link, Ctrl+C or Cmd+C in the field completes the repair.",
+        "outcome": "Failure shows 'Couldn't copy · clipboard blocked'. A repair replaces it with one line over a dashed rule, which gains an overstitched solid segment.",
+        "recovery": "Retry disables while pending. A second failure promotes Select link to the first button. Dismiss hides the notice and logs the attempt as failed in row 6.",
+        "mechanism": "role=alert on failure and a polite live region on repair. A copy event listener on the link field detects manual copies. The rule is two stacked SVG dash lines using the shared 8px unit.",
+        "nearestAnalogue": "2026-10-27 pipeline panel retry and 2026-10-28 load stages failure. Those retry jobs. This offers a manual path and keeps the repair visible.",
+        "usefulness": "Silent clipboard failure leads to pasting an old link.",
+        "creativeDifference": "The failure is mended in place. The repair stays as a record and is never erased.",
+        "states": [
+          "hidden: no failure this session",
+          "failed: message with Retry, Select link and Dismiss",
+          "retrying: Retry disabled, 'Retrying'",
+          "failed-again: '2nd attempt failed', Select link first",
+          "repaired-retry: 'repaired by retry' line",
+          "repaired-manual: 'repaired by hand' line",
+          "dismissed: hidden, attempt logged as failed",
+          "reduced-motion: overstitch appears without drawing"
+        ],
+        "sources": [
+          {
+            "title": "ARIA Authoring Practices: Alert",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          },
+          {
+            "title": "V&A Dundee: Stitch Style: Sashiko",
+            "url": "https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko"
+          }
+        ]
+      },
+      {
+        "row": 6,
+        "id": "share-attempt-ledger",
+        "file": "artifact-6.html",
+        "name": "Share attempt ledger",
+        "description": "Row of even marks, one per copy attempt, with a readable list of time, link version and result.",
+        "category": "Data",
+        "tags": [
+          "ledger",
+          "history",
+          "attempts",
+          "listbox",
+          "non-color-state",
+          "stale-state"
+        ],
+        "purpose": "Show what has been copied this session and whether it is still current.",
+        "use": "An editor reads '4 attempts · 3 copied · 1 repaired · 1 outdated' before pasting into chat.",
+        "input": "Click or tap a mark to show its detail. Keyboard: Tab into the list, Left and Right or Up and Down move, Home and End jump, Enter shows detail.",
+        "outcome": "Detail reads '14:03 · v3 · Team only, 7 days, t=42 · repaired by retry'.",
+        "recovery": "Clear ledger empties it and shows Undo for 5 s. Earlier marks beyond 12 collapse into '+n earlier'.",
+        "mechanism": "An append-only attempts array in shared state. Each mark uses one shape rule: solid dash for copied, gap with a cross for failed, dash with overstitch for repaired, and strike for outdated. Each mark pairs with a word. Roving tabindex listbox.",
+        "nearestAnalogue": "2026-10-26 log viewer event list. That list filters many event types. This one records one action's attempts against link versions.",
+        "usefulness": "It answers whether the clipboard still matches the screen, after the notice is gone.",
+        "creativeDifference": "Progress is counted as real attempts in one even rule. Nothing is estimated.",
+        "states": [
+          "empty: 'No copies yet'",
+          "copied: solid dash",
+          "failed: gap with cross",
+          "repaired: dash with overstitch",
+          "outdated: struck mark, reached by an option change after copy",
+          "selected: detail line shown",
+          "overflow: '+n earlier' after 12 marks",
+          "cleared: Undo available for 5 s",
+          "focus: 2px ring on the mark"
+        ],
+        "sources": [
+          {
+            "title": "ARIA Authoring Practices: Listbox",
+            "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+          },
+          {
+            "title": "V&A Dundee: Stitch Style: Sashiko",
+            "url": "https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko"
+          }
+        ]
+      }
+    ],
+    "demo": {
+      "file": "piece.html",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sharedState": "One state object for harbour-walk.mp4 (3:12): startSec 42, includeStart, access, expiry, linkVersion and attempts[]. Row 1 renders the panel. Rows 2 and 3 write link fields and bump linkVersion. Row 4 reads the link and appends an attempt. Row 5 resolves failed attempts to repaired. Row 6 renders attempts and marks any copied version below the current linkVersion as outdated. A demo toggle forces clipboard rejection."
+    }
+  },
+  "packWarnings": []
+}

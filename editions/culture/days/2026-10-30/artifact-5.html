@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Copy repair notice · share sheet for a clip editor</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg)}
+*{box-sizing:border-box}
+.cr5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;overflow:auto;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--pack-surface);color:var(--pack-text);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);font-family:var(--pack-typography-family);font-size:clamp(13px,3.4vmin,var(--pack-typography-size));line-height:1.4}
+.cr5-root p{margin:0}
+.cr5-file b{font-weight:600}
+.cr5-file span,.cr5-lab,.cr5-sub{color:var(--pack-muted);font-size:.875em}
+.cr5-file span{display:block}
+.cr5-link{width:100%;resize:none;font:inherit;font-size:.875em;word-break:break-all;color:var(--pack-text);background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);padding:var(--pack-spacing-gap)}
+.cr5-row,.cr5-acts{display:flex;flex-wrap:wrap;gap:var(--pack-spacing-gap);align-items:center}
+.cr5-btn{min-height:44px;min-width:44px;padding:0 var(--pack-spacing-padding);font:inherit;font-weight:600;color:var(--pack-text);background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);cursor:pointer;transition:transform 80ms var(--pack-motion-easing),background var(--pack-motion-duration) var(--pack-motion-easing),opacity var(--pack-motion-duration) var(--pack-motion-easing);touch-action:manipulation}
+.cr5-btn.cr5-pri{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-surface)}
+.cr5-btn:active:not(:disabled){transform:translateY(1px)}
+.cr5-btn:disabled{opacity:.55;cursor:default}
+#cr5-copy{min-width:8em}
+#cr5-retry{min-width:6.5em}
+.cr5-chk{display:flex;align-items:center;gap:var(--pack-spacing-gap);min-height:44px;font-size:.875em;cursor:pointer}
+.cr5-chk input{width:20px;height:20px;margin:0;accent-color:var(--pack-accent)}
+.cr5-note{display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);transition:border-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.cr5-note.cr5-fail{border-color:var(--pack-text)}
+.cr5-msg{display:flex;gap:var(--pack-spacing-gap);align-items:flex-start}
+.cr5-x{flex:none;width:16px;height:16px;margin-top:3px;stroke:var(--pack-text);stroke-width:2;stroke-linecap:round;fill:none}
+.cr5-note:not(.cr5-fail) .cr5-x{display:none}
+#cr5-alert{font-weight:600}
+.cr5-rule{display:block;width:100%;height:8px;overflow:visible}
+.cr5-base{stroke:var(--pack-muted);stroke-width:2;stroke-dasharray:var(--pack-spacing-gap) var(--pack-spacing-gap)}
+.cr5-st{stroke:var(--pack-accent);stroke-width:2;transform-box:fill-box;transform-origin:0 50%;transform:scaleX(0)}
+.cr5-root :focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+@media (max-width:300px){.cr5-root,.cr5-note{padding:var(--pack-spacing-gap)}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:16px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#121416;--pack-surface:#1b1f23;--pack-text:#e9ecef;--pack-muted:#9aa3ab;--pack-accent:#7ea6d8;--pack-border:#2c3238}:root[data-theme="light"]{--pack-bg:#f6f7f8;--pack-surface:#ffffff;--pack-text:#16191c;--pack-muted:#5b6570;--pack-accent:#2f5f9e;--pack-border:#d6dbe0}</style></head><body>
+<main class="cr5-root" role="group" aria-label="Copy repair notice for a share link">
+<p class="cr5-file"><b>cat-pics-2.mp4</b><span>Forever plan · starts 0:42</span></p>
+<label class="cr5-lab" for="cr5-link">Share link</label>
+<textarea id="cr5-link" class="cr5-link" rows="2" readonly spellcheck="false">https://forever.example/c/cat-pics-2?t=42&amp;exp=7d</textarea>
+<div class="cr5-row"><button id="cr5-copy" class="cr5-btn" type="button">Copy link</button><label class="cr5-chk"><input id="cr5-block" type="checkbox" checked>Block clipboard</label></div>
+<section id="cr5-note" class="cr5-note">
+<div class="cr5-msg"><svg class="cr5-x" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg><div><p id="cr5-alert" role="alert"></p><p id="cr5-live" aria-live="polite"></p><p id="cr5-sub" class="cr5-sub"></p></div></div>
+<svg class="cr5-rule" aria-hidden="true"><line class="cr5-base" x1="0" y1="4" x2="100%" y2="4"/><line id="cr5-st" class="cr5-st" x1="0" y1="4" x2="100%" y2="4"/></svg>
+<div id="cr5-acts" class="cr5-acts"><button id="cr5-retry" class="cr5-btn cr5-pri" type="button">Retry</button><button id="cr5-sel" class="cr5-btn" type="button">Select link</button><button id="cr5-dis" class="cr5-btn" type="button">Dismiss</button></div>
+<p id="cr5-hint" class="cr5-sub" hidden>Link selected. Press Ctrl+C, ⌘C, or tap Copy.</p>
+</section></main>
+<script>(function(){
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var raf=0,last=0,p=0,target=0,lt=0;
+var q=function(i){return document.getElementById('cr5-'+i)};
+var root=document.querySelector('.cr5-root'),ta=q('link'),copyB=q('copy'),block=q('block'),note=q('note'),
+alertP=q('alert'),liveP=q('live'),sub=q('sub'),acts=q('acts'),retry=q('retry'),sel=q('sel'),dis=q('dis'),hint=q('hint'),st=q('st');
+var S={phase:'failed',fails:1,why:'clipboard blocked',at:new Date(Date.now()-6e4),fix:null,how:'',hint:false,pending:false,tok:0};
+function fmt(d){return d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+function ord(n){var s=n%100>10&&n%100<14?'th':['th','st','nd','rd'][n%10]||'th';return n+s}
+function open(){return S.phase==='failed'||S.phase==='retrying'}
+function render(){
+  var f=open(),two=S.fails>1;
+  note.classList.toggle('cr5-fail',f);
+  alertP.textContent=f?(two?ord(S.fails)+' attempt failed · ':"Couldn't copy · ")+S.why:'';
+  liveP.textContent=S.phase==='repaired'?'Copy failed '+fmt(S.at)+' · repaired by '+S.how+' '+fmt(S.fix):S.phase==='dismissed'?'Dismissed · logged as failed':'';
+  sub.textContent=f?'Copy failed '+fmt(S.at):S.phase==='dismissed'?'Copy link to try again':'';
+  acts.hidden=!f;
+  retry.disabled=S.pending;
+  retry.textContent=S.phase==='retrying'?'Retrying':'Retry';
+  if(two&&acts.firstElementChild!==sel)acts.insertBefore(sel,retry);
+  if(!two&&acts.firstElementChild!==retry)acts.insertBefore(retry,sel);
+  sel.classList.toggle('cr5-pri',two);retry.classList.toggle('cr5-pri',!two);
+  hint.hidden=!(f&&S.hint);
+  copyB.disabled=S.pending;
+}
+function attempt(){return new Promise(function(res,rej){
+  if(block.checked){setTimeout(function(){rej('clipboard blocked')},450);return}
+  var t=setTimeout(function(){rej("clipboard didn't answer")},3000);
+  var w=navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(ta.value):Promise.reject();
+  w.then(function(){clearTimeout(t);setTimeout(res,300)},function(){clearTimeout(t);rej('clipboard blocked')});
+})}
+function done(){S.pending=false;copyB.textContent='Copy link'}
+function keepFocus(){if(acts.contains(document.activeElement))copyB.focus()}
+function repair(how){S.tok++;done();S.phase='repaired';S.how=how;S.fix=new Date();S.hint=false;
+  p=0;target=1;render();keepFocus();draw();kick()}
+function run(isRetry){
+  if(S.pending)return;
+  S.pending=true;var tk=++S.tok;clearTimeout(lt);
+  if(isRetry)S.phase='retrying';else copyB.textContent='Copying';
+  render();
+  attempt().then(function(){if(tk!==S.tok)return;done();
+    copyB.textContent='Copied';lt=setTimeout(function(){if(!S.pending)copyB.textContent='Copy link'},1600);
+    if(open())repair('retry');else render()},
+  function(w){if(tk!==S.tok)return;done();S.why=w;
+    if(open())S.fails++;else{S.fails=1;S.at=new Date()}
+    S.phase='failed';S.hint=false;p=target=0;draw();render()});
+}
+function dismiss(){S.tok++;done();S.phase='dismissed';S.hint=false;keepFocus();render()}
+copyB.addEventListener('click',function(){run(false)});
+retry.addEventListener('click',function(){run(true)});
+dis.addEventListener('click',dismiss);
+sel.addEventListener('click',function(){ta.focus();ta.setSelectionRange(0,ta.value.length);S.hint=true;render()});
+ta.addEventListener('focus',function(){ta.setSelectionRange(0,ta.value.length)});
+ta.addEventListener('copy',function(){if(ta.selectionEnd>ta.selectionStart&&open())repair('hand')});
+root.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&open()){e.preventDefault();dismiss();return}
+  if((e.key==='ArrowRight'||e.key==='ArrowLeft')&&acts.contains(e.target)){
+    var b=[].filter.call(acts.children,function(n){return!n.disabled}),i=b.indexOf(e.target);
+    if(i<0)return;e.preventDefault();b[(i+(e.key==='ArrowRight'?1:b.length-1))%b.length].focus()}
+});
+function step(dt){if(p>=target){p=target;return false}p=Math.min(target,p+dt*16.667/240);return p<target}
+function draw(){var e=1-Math.pow(1-p,3);st.style.transform='scaleX('+e+')'}
+function snapToTarget(){p=target}
+function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+  var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+  raf=moving?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+    document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+render();draw();
+})();</script>
+</body></html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Link options field · Mended Share Sheet for a clip editor</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--g:var(--pack-spacing-gap);--p:var(--pack-spacing-padding);--r:var(--pack-radii-control);--d:var(--pack-motion-duration);--e:var(--pack-motion-easing)}
+html[data-theme=light]{color-scheme:light}html[data-theme=dark]{color-scheme:dark}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);font-family:var(--pack-typography-family)}
+.lo-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;display:flex;container-type:size}
+.lo-panel{flex:1;min-width:0;overflow:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--g);padding:var(--p);background:var(--sf);color:var(--ink);border:1px solid var(--bd);border-radius:var(--r);font-size:clamp(12px,4.2cqi,var(--pack-typography-size));line-height:1.35}
+@container (max-width:300px){.lo-panel{padding:var(--g)}}
+.lo-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--g);font-weight:600}
+.lo-ver{font-weight:400;color:var(--mu);font-variant-numeric:tabular-nums}
+.lo-field{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;padding:var(--g);background:var(--bg);border-radius:var(--r) var(--r) 0 0;overflow-wrap:anywhere;user-select:text;cursor:text}
+.lo-rule{position:relative;height:2px;margin-top:calc(var(--g)*-1)}
+.lo-dash,.lo-solid{position:absolute;inset:0}
+.lo-dash{background:repeating-linear-gradient(90deg,var(--mu) 0 var(--g),transparent var(--g) calc(var(--g)*2))}
+.lo-solid{background:var(--acc);transform-origin:left}
+.lo-status{margin:0;min-height:2.7em;color:var(--mu)}
+.lo-status.lo-stale{color:var(--ink);font-weight:600}
+.lo-set{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--g)}
+.lo-set legend{padding:0;margin-bottom:calc(var(--g)/2);color:var(--mu)}
+.lo-opt{flex:1 1 7.5em;min-height:44px;box-sizing:border-box;display:flex;align-items:center;gap:var(--g);padding:0 var(--g);border:1px solid var(--bd);border-radius:var(--r);cursor:pointer;transition:border-color var(--d) var(--e)}
+.lo-opt:has(input:checked){border-color:var(--acc)}
+.lo-opt input{margin:0;width:18px;height:18px;accent-color:var(--acc)}
+.lo-exp{display:flex;flex-wrap:wrap;align-items:center;gap:var(--g);color:var(--mu)}
+.lo-exp select{flex:1 1 6em;min-height:44px;padding:0 var(--g);font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--bd);border-radius:var(--r)}
+.lo-acts{display:flex;flex-wrap:wrap;gap:var(--g);margin-top:auto}
+.lo-btn{flex:1 1 auto;min-height:44px;padding:0 var(--p);font:inherit;font-weight:600;border-radius:var(--r);border:1px solid var(--acc);cursor:pointer;transition:transform 80ms var(--e),opacity var(--d) var(--e)}
+.lo-btn:active:not(:disabled){transform:translateY(1px)}
+.lo-pri{background:var(--acc);color:var(--bg)}
+.lo-sec{background:transparent;color:var(--ink);border-color:var(--bd)}
+.lo-btn:disabled{opacity:.5;cursor:default}
+.lo-lbls{display:inline-grid}.lo-lbls span{grid-area:1/1;visibility:hidden}.lo-lbls span.lo-on{visibility:visible}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:16px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:8px;--pack-motion-duration:200ms;--pack-motion-easing:ease-out;--pack-bg:#121416;--pack-surface:#1b1f23;--pack-text:#e9ecef;--pack-muted:#9aa3ab;--pack-accent:#7ea6d8;--pack-border:#2c3238}:root[data-theme="light"]{--pack-bg:#f6f7f8;--pack-surface:#ffffff;--pack-text:#16191c;--pack-muted:#5b6570;--pack-accent:#2f5f9e;--pack-border:#d6dbe0}</style></head><body>
+<div class="lo-root" role="group" aria-label="Link options for cat-pics-2.mp4">
+<div class="lo-panel">
+ <div class="lo-head"><span id="lo-lab">Link for cat-pics-2.mp4</span><span class="lo-ver" id="lo-ver">v1</span></div>
+ <div class="lo-field" id="lo-field" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-labelledby="lo-lab"></div>
+ <div class="lo-rule" aria-hidden="true"><div class="lo-dash"></div><div class="lo-solid" id="lo-solid"></div></div>
+ <p class="lo-status" id="lo-status" aria-live="polite"></p>
+ <fieldset class="lo-set"><legend>Who can open</legend>
+  <label class="lo-opt"><input type="radio" name="lo-acc" value="anyone" checked><span>Anyone with link</span></label>
+  <label class="lo-opt"><input type="radio" name="lo-acc" value="team"><span>Team only</span></label>
+ </fieldset>
+ <label class="lo-exp"><span>Expires</span><select id="lo-sel"><option value="1d">1 day</option><option value="7d" selected>7 days</option><option value="never">Never (Forever plan)</option></select></label>
+ <div class="lo-acts">
+  <button class="lo-btn lo-pri" id="lo-copy" type="button"><span class="lo-lbls"><span class="lo-on">Copy link</span><span>Copying</span><span>Copied</span></span></button>
+  <button class="lo-btn lo-sec" id="lo-rev" type="button">Revert</button>
+ </div>
+</div></div>
+<script>(function(){
+var $=function(i){return document.getElementById(i)};
+var field=$('lo-field'),solid=$('lo-solid'),stat=$('lo-status'),ver=$('lo-ver'),sel=$('lo-sel'),copyB=$('lo-copy'),revB=$('lo-rev'),root=document.querySelector('.lo-root');
+var radios=document.querySelectorAll('input[name=lo-acc]');
+var lbls=copyB.querySelectorAll('.lo-lbls span');
+var st={access:'anyone',expiry:'7d',copied:null,copiedOpts:null,failed:false,busy:false};
+var versions={},next=1,labelT=0;
+function link(o){o=o||st;return 'https://forever.example/c/cat-pics-2-final-FINAL?t=42&access='+o.access+'&exp='+o.expiry}
+function vOf(l){if(!versions[l])versions[l]=next++;return versions[l]}
+st.copied=link();st.copiedOpts={access:'anyone',expiry:'7d'};vOf(st.copied);
+function stale(){return link()!==st.copied}
+function setLabel(i){for(var k=0;k<lbls.length;k++)lbls[k].className=k===i?'lo-on':''}
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+var raf=0,last=0,fill=1;
+function target(){return stale()||st.failed?0:1}
+function step(dt){var t=target();fill+=(t-fill)*(1-Math.exp(-dt/60));if(Math.abs(t-fill)<.003){fill=t;return false}return true}
+function snapToTarget(){fill=target()}
+function draw(){solid.style.transform='scaleX('+fill.toFixed(3)+')'}
+function frame(now){var dt=last?Math.min(now-last,50):16.667;last=now;
+ var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+ raf=moving?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+function render(){
+ var l=link(),v=vOf(l),cv=versions[st.copied],s=stale();
+ while(field.firstChild)field.removeChild(field.firstChild);
+ var parts=l.split(/(?<=[\/?&])/);
+ parts.forEach(function(p,i){field.appendChild(document.createTextNode(p));if(i<parts.length-1)field.appendChild(document.createElement('wbr'))});
+ ver.textContent='v'+v;
+ stat.className='lo-status'+(s||st.failed?' lo-stale':'');
+ stat.textContent=st.failed?"Couldn't copy · press Ctrl+C or Cmd+C":s?'Link changed since last copy · clipboard has v'+cv:'Clipboard has this link · v'+v;
+ revB.disabled=!s;copyB.disabled=st.busy;
+ kick()}
+function selectField(){var r=document.createRange();r.selectNodeContents(field);var sl=getSelection();sl.removeAllRanges();sl.addRange(r)}
+function markCopied(){st.copied=link();st.copiedOpts={access:st.access,expiry:st.expiry};st.failed=false}
+function copy(){
+ if(st.busy)return;st.busy=true;clearTimeout(labelT);setLabel(1);render();
+ var l=link(),w;
+ try{w=navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(l):Promise.reject()}catch(e){w=Promise.reject()}
+ Promise.race([w,new Promise(function(_,rj){setTimeout(rj,3000)})]).then(function(){
+  st.busy=false;if(link()===l)markCopied();setLabel(2);render();
+  labelT=setTimeout(function(){setLabel(0)},1600)
+ },function(){
+  st.busy=false;st.failed=true;setLabel(0);render();field.focus();selectField()})}
+function syncInputs(){radios.forEach(function(r){r.checked=r.value===st.access});sel.value=st.expiry}
+function revert(){if(!stale())return;st.access=st.copiedOpts.access;st.expiry=st.copiedOpts.expiry;syncInputs();render()}
+radios.forEach(function(r){r.addEventListener('change',function(){if(r.checked){st.access=r.value;render()}})});
+sel.addEventListener('change',function(){st.expiry=sel.value;render()});
+copyB.addEventListener('click',copy);
+revB.addEventListener('click',function(){revert();sel.focus()});
+field.addEventListener('focus',function(){setTimeout(selectField,0)});
+field.addEventListener('pointerup',function(){selectField()});
+field.addEventListener('copy',function(){markCopied();setLabel(2);render();clearTimeout(labelT);labelT=setTimeout(function(){setLabel(0)},1600)});
+root.addEventListener('keydown',function(e){if(e.key==='Escape'&&stale()){e.preventDefault();revert()}});
+document.addEventListener('visibilitychange',function(){
+ if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+window.addEventListener('message',function(e){var m=e.data;
+ if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+  document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+render();draw();
+})();</script>
+</body></html>
