@@ -5,8 +5,13 @@ on:
     - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
+      mode:
+        description: Project prototype or explicit legacy component pack
+        type: choice
+        options: [project, components]
+        default: project
       artifacts:
-        description: Components 0 to 10 (empty is 6 plus connected demo for new packs; historical days keep 10)
+        description: Project 0 or 1 (empty 1); component pack 0 to 10 (empty 6)
         default: ''
       force:
         description: Replace today's results
@@ -65,12 +70,12 @@ jobs:
         if: steps.key.outputs.ok == 'true' && env.PROVIDER == 'claude'
         run: npm install --global @anthropic-ai/claude-code@2.1.288
       - name: Read component requests from both repositories
-        if: steps.key.outputs.ok == 'true'
+        if: steps.key.outputs.ok == 'true' && inputs.mode == 'components'
         env:
           GITHUB_TOKEN: ${{ secrets.COMPONENT_REQUESTS_TOKEN || github.token }}
         run: node github.mjs requests > "$RUNNER_TEMP/component-requests.json"
       - name: Read reviewed component bases from 00-components
-        if: steps.key.outputs.ok == 'true' && env.PROVIDER == 'claude'
+        if: steps.key.outputs.ok == 'true' && env.PROVIDER == 'claude' && inputs.mode == 'components'
         env:
           GITHUB_TOKEN: ${{ secrets.COMPONENT_REQUESTS_TOKEN || github.token }}
         run: node github.mjs component-sources > "$RUNNER_TEMP/component-sources.json"
@@ -82,12 +87,13 @@ jobs:
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           MODEL: ${{ vars.MODEL }}
           API_URL: ${{ vars.API_URL }}
-          ARTIFACTS: ${{ inputs.artifacts || vars.ARTIFACTS || '' }}
+          ARTIFACTS: ${{ inputs.artifacts }}
+          RUN_MODE: ${{ inputs.mode == 'components' && '--pack' || '--project' }}
           FORCE: ${{ inputs.force && '--force' || '' }}
-          COMPONENT_REQUESTS_FILE: ${{ runner.temp }}/component-requests.json
+          COMPONENT_REQUESTS_FILE: ${{ inputs.mode == 'components' && format('{0}/component-requests.json', runner.temp) || '' }}
           COMPONENT_FEED_CACHE: .cache/feed-backlog.json
-          COMPONENT_SOURCES_FILE: ${{ env.PROVIDER == 'claude' && format('{0}/component-sources.json', runner.temp) || '' }}
-        run: node run.mjs $FORCE
+          COMPONENT_SOURCES_FILE: ${{ inputs.mode == 'components' && env.PROVIDER == 'claude' && format('{0}/component-sources.json', runner.temp) || '' }}
+        run: node run.mjs $RUN_MODE $FORCE
       - name: Design daily project cover
         continue-on-error: true
         if: always() && steps.key.outputs.ok == 'true'

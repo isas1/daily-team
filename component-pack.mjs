@@ -93,7 +93,7 @@ export function recentPacks(daysDir, date) {
     && (Date.parse(date) - Date.parse(d)) / 86400000 > 0 && (Date.parse(date) - Date.parse(d)) / 86400000 <= 28)
     .sort().flatMap((d) => {
       try { const day = JSON.parse(readFileSync(join(daysDir, d, 'day.json'), 'utf8')); return day.status === 'failed' ? [] : [{ date: d,
-        task: day.task, components: day.pack?.components || [], usedSources: day.planning?.selectedSourceIds || [] }]; }
+        task: day.task, ...(day.project ? { project: day.project } : {}), components: day.pack?.components || [], usedSources: day.planning?.selectedSourceIds || [] }]; }
       catch { return []; }
     });
 }

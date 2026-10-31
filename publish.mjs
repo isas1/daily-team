@@ -17,6 +17,7 @@ import { listSeasons, readSeason } from './recruit.mjs';
 import { cardHtml, renderPng, titleCase } from './card.mjs';
 import { hasCover } from './cover.mjs';
 import { assertPackExport } from './component-pack.mjs';
+import { assertProjectExport } from './project-planning.mjs';
 import { markdownCell as cell } from './security.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -160,6 +161,7 @@ export function dayReadme(day, daysDir, pagesUrl) {
   const { constraint, season, suggestedBy } = parseTeam(day.team);
   const dir = join(daysDir, day.date);
   assertPackExport(day, dir);
+  assertProjectExport(day, dir);
   return [
     `# ${day.date}: ${title(day)}`, '',
     '[Today](../../README.md) · [Archive](../../ARCHIVE.md)', '',
@@ -385,12 +387,16 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
 }
 
 export function buildSite(siteDir, days, daysDir, repo, pagesUrl = '') {
-  for (const day of days) assertPackExport(day, join(daysDir, day.date));
+  for (const day of days) {
+    assertPackExport(day, join(daysDir, day.date));
+    assertProjectExport(day, join(daysDir, day.date));
+  }
   cpSync(join(HERE, 'brand'), join(siteDir, 'brand'), { recursive: true });
   for (const day of days) {
     const out = join(siteDir, day.date);
     mkdirSync(out, { recursive: true });
     for (const f of ['team.png', 'cover.png', 'cover.html', 'cover.json', ...day.artifacts.map(png),
+      ...(day.projectMode ? ['planning-input.json', ...day.artifacts.filter((a) => a.status !== 'failed').map((a) => a.file)] : []),
       ...(day.pack ? ['pack.json', 'tokens.json', 'planning-input.json', ...day.artifacts.filter((a) => a.status !== 'failed').map((a) => a.file)] : []),
       'comparison.html', 'comparison.png', 'comparison.mp4']) {
       if (existsSync(join(daysDir, day.date, f))) copyFileSync(join(daysDir, day.date, f), join(out, f));
@@ -414,7 +420,10 @@ export function seasonNumber(seasons, day) {
 export function publish(root, { pagesUrl = '', site = '', repo = '', suggestions = [], cards = false } = {}) {
   const daysDir = join(root, 'days');
   const days = loadDays(daysDir);
-  for (const day of days) assertPackExport(day, join(daysDir, day.date));
+  for (const day of days) {
+    assertPackExport(day, join(daysDir, day.date));
+    assertProjectExport(day, join(daysDir, day.date));
+  }
   const seasons = listSeasons(root);
   for (const day of days) {
     const card = join(daysDir, day.date, 'team.png');
