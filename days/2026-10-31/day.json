@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-31",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-10-31\nSeason: 2026-10-26\n\n1. Color grading specialist [new]\n   Method: Make two versions with different hierarchy and compare them. [new]\n   Stance: Insists it must be beautiful.\n   Temperament: Offers two small options before backing one.\n2. Wayfinding designer [new]\n   Method: Use one quiet surface to make the important edge clear. [new]\n   Stance: Wants it to last.\n   Temperament: Asks what a stranger would expect next.\n3. Camera operator [new]\n   Method: Find the smallest change that makes the result easier to read. [new]\n   Stance: Breaks the frame.\n   Temperament: Looks for the hidden cost in a simple idea.\n4. Amber crab (creature; invented) [guest] [new]\n   Method: Make side steps as clear as steps forward.\n   Stance: Speaks for the one who finds it.\n   Temperament: Keeps asking which action matters most.\n\nConstraint: The first frame shows the useful component.\nTask: Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "6fb65807f455f09d944e917731b953822ddc43b3e09988d466a8db2730c249a3",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "8d821849286ada42dbbaeffc",
+      "e32e9e5cb5666d607d79fa51"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "A protocol engineer or learner hand-delivers, drops, duplicates or delays packets between two toy handshake machines while advancing the clock by hand.",
+  "concept": "Handshake Bench",
+  "plan": "# Pitch\n\n**Color grading specialist:** Two small options. A: a protocol bench where you hold the clock and hand-deliver every packet. B: an error card that rewrites a terminal failure into plain steps. I back A. It can be beautiful because the subject has a real shape: two machines, one wire, packets in between. One accent for the moment things went wrong, and everything else in greys.\n\n**Wayfinding designer:** A third route. Equipment QR labels that open a fault card for a shared makerspace tool. It would last on a wall for years. But we have printed a checklist or planner on six days this month. I'll put my weight on the bench if the wire stays one quiet surface and the failure gets a single clear edge.\n\n**Camera operator:** The sans-IO post on HN is the hook. When the protocol state is separate from the sockets and the clock, a test can drive time. Nobody gets to see that. Auto-play is the hidden cost. If the clock runs by itself, cause and effect blur. So stop the frame. Nothing moves until you press.\n\n**Amber crab:** A packet that never arrives is also a step. Drop, duplicate and delay. Those are sideways moves, and they get the same size button as Deliver. And the person who just watched their handshake die wants to know one thing. Which press broke it.\n\n# Clash\n\n**Camera operator:** The pipeline panel task is sitting on the table. Expand the failed step, show the log, retry. We shipped that on the 27th.\n\n**Wayfinding designer:** Then keep the bones and change the body. A failed handshake step expands, its log is the event list, and retry restores the snapshot before it.\n\n**Color grading specialist:** Retry alone is flat. Show two runs. The original and your edited one, same rows, and color only the first row where they split.\n\n**Camera operator:** Two full columns of logs at 360 px wide won't read. The smallest change is to draw one line across the timeline at the split and dim the rows after it in run A.\n\n**Amber crab:** Which action matters most on the first frame?\n\n**Wayfinding designer:** Deliver. A stranger expects the packet on the wire to land. So the bench opens with message 1 in flight, Deliver focused, and the line \"Next: responder replies\".\n\n**Color grading specialist:** Then the side steps sit in a row beside it at equal weight, and I'll accept muted labels in place of a second color.\n\n**Amber crab:** Drop sits next to Deliver. And Retry names the step it goes back to, so the one who finds it knows where they are landing.\n\n# Decision\n\nA protocol engineer or learner hand-delivers, drops, duplicates or delays packets between two toy handshake machines while advancing the clock by hand. When the handshake fails, the panel expands the failing step, names the event that caused it in one sentence, and offers Retry from the last good snapshot. A second run is compared against the first, with a marker at the first event where they diverge.\n\nConcept: Handshake Bench\n\n- **Color grading specialist:** two-run comparison. Run A and run B share rows. One accent marks the divergence row, and runs stay greyscale otherwise.\n- **Wayfinding designer:** the wire is one quiet 1px-bordered surface. The failure edge is a single 2px line across the timeline. A \"Next:\" line states the expected event.\n- **Camera operator:** manual clock with \"+1 s\" and \"Jump to next timer\". The next timer's name and due time are always shown. No auto-play.\n- **Amber crab:** Drop, Duplicate and Delay match Deliver in size and keyboard reach: D, X, U, L. Retry labels its target, for example \"Retry from step 3\".\n\n# Build notes\n\n1. Write the protocol as a pure function in `bench.js`: `handle(state, event) -> {state, outputs}`. Events are `Tick(ms)` and `Packet(msg)`. The initiator resends after a 5 s timeout and gives up after 3 tries. The responder rejects replayed counters. Every step pushes `{event, stateBefore, stateAfter}` onto a log, which gives per-step snapshots for Retry.\n2. Build `index.html` as two machine columns with a wire queue between them. Each in-flight packet is a card carrying its own Deliver, Drop, Duplicate and Delay buttons. The first frame loads with message 1 on the wire and Deliver focused. Stack the columns vertically below 560 px. Reserve label widths so nothing shifts. Put status in a polite live region. Under reduced motion, cards move with no transition.\n3. Add failure handling. Detect \"gave up after 3 tries\" and \"replay rejected\", expand that log row with a one-line cause, and add a Retry button that restores the prior snapshot as run B. Diff run A and run B by event index, then draw the divergence line and dim A's later rows. Reset clears both runs to the opening frame.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Handshake Bench\",\"audience\":\"Engineers writing or learning network protocol code\",\"problem\":\"Timeout and replay failures are hard to reproduce and read\",\"interaction\":\"Deliver, drop, duplicate or delay packets and advance the clock by hand\",\"outcome\":\"Failed step expands with a one-line cause and a divergence marker between runs\",\"recovery\":\"Retry from any snapshot as a new run, or Reset to the opening frame\",\"mechanism\":\"Pure state machine fed hand-made events, with per-step snapshots and run diff\",\"difference\":\"Packet captures show what happened. This lets you replay it and change one event.\",\"whyNow\":\"HN sans-IO WireGuard post shows the testable shape. Dot post shows wish for readable errors. Titles only, no demand data.\",\"sourceIds\":[\"8d821849286ada42dbbaeffc\",\"e32e9e5cb5666d607d79fa51\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Handshake Bench\",\"need\":\"Reproduce and explain protocol failures\",\"mechanism\":\"Manual clock and per-packet deliver, drop, duplicate, delay\",\"rejection\":\"Selected: cross-domain, new to recent dates\"},{\"name\":\"Error Signpost\",\"need\":\"Plain next steps for a CLI error\",\"mechanism\":\"Paste error, get you-are-here sign with routes\",\"rejection\":\"Too close to the Dot feed entry and needs real parsing\"},{\"name\":\"Fault Tag Sheet\",\"need\":\"Report broken shared equipment\",\"mechanism\":\"QR label opens a printable fault card\",\"rejection\":\"Echoes the Avery label post and recent printables\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "19d06c470e4d4abe36aa1797b2d977c4d3a4cced8908d6d1bd1ca2f79e1786bc",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Handshake Bench",
+    "audience": "Engineers writing or learning network protocol code",
+    "problem": "Timeout and replay failures are hard to reproduce and read",
+    "interaction": "Deliver, drop, duplicate or delay packets and advance the clock by hand",
+    "outcome": "Failed step expands with a one-line cause and a divergence marker between runs",
+    "recovery": "Retry from any snapshot as a new run, or Reset to the opening frame",
+    "mechanism": "Pure state machine fed hand-made events, with per-step snapshots and run diff",
+    "difference": "Packet captures show what happened. This lets you replay it and change one event.",
+    "whyNow": "HN sans-IO WireGuard post shows the testable shape. Dot post shows wish for readable errors. Titles only, no demand data.",
+    "sourceIds": [
+      "8d821849286ada42dbbaeffc",
+      "e32e9e5cb5666d607d79fa51"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Handshake Bench",
+        "need": "Reproduce and explain protocol failures",
+        "mechanism": "Manual clock and per-packet deliver, drop, duplicate, delay",
+        "rejection": "Selected: cross-domain, new to recent dates"
+      },
+      {
+        "name": "Error Signpost",
+        "need": "Plain next steps for a CLI error",
+        "mechanism": "Paste error, get you-are-here sign with routes",
+        "rejection": "Too close to the Dot feed entry and needs real parsing"
+      },
+      {
+        "name": "Fault Tag Sheet",
+        "need": "Report broken shared equipment",
+        "mechanism": "QR label opens a printable fault card",
+        "rejection": "Echoes the Avery label post and recent printables"
+      }
+    ]
+  }
+}

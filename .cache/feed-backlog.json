@@ -1,6 +1,123 @@
 {
   "items": [
     {
+      "id": "6226e6968833251c6746264c",
+      "title": "On 12 Oct we asked here if anyone wanted a cozy weather garden app. It just passed 100 downloads",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk78gy/on_12_oct_we_asked_here_if_anyone_wanted_a_cozy/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T10:56:52.000Z",
+      "summary": ""
+    },
+    {
+      "id": "e32e9e5cb5666d607d79fa51",
+      "title": "Finishing up \"Dot\" — a terminal tool that actually fixes your CLI errors instead of just screaming at you. Thoughts?",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk726t/finishing_up_dot_a_terminal_tool_that_actually/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T10:46:53.000Z",
+      "summary": ""
+    },
+    {
+      "id": "2153b63f37fcc7ed25e823c7",
+      "title": "I built an app that prints batches of equipment QR labels onto standard Avery sheets",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk71qm/i_built_an_app_that_prints_batches_of_equipment/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T10:46:16.000Z",
+      "summary": ""
+    },
+    {
+      "id": "b6e5cad48d3572dbfda33e3d",
+      "title": "\"You're your own target audience\" - Ours Couple Organiser, now on Play Store",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk5yzf/youre_your_own_target_audience_ours_couple/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T09:41:11.000Z",
+      "summary": ""
+    },
+    {
+      "id": "6bf79ab90af6c3b9c9e2e8a6",
+      "title": "My word game got zero downloads on iOS, so I rebuilt it for the browser. Daily puzzle or friends mode first?",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk5tra/my_word_game_got_zero_downloads_on_ios_so_i/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T09:31:56.000Z",
+      "summary": ""
+    },
+    {
+      "id": "6d606995a3ad3bc2b0bb3d04",
+      "title": "I built a free map of every Bengaluru startup hiring right now (9,000+ roles).",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk5nn0/i_built_a_free_map_of_every_bengaluru_startup/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T09:21:12.000Z",
+      "summary": ""
+    },
+    {
+      "id": "c502d4e894605d12288cda3a",
+      "title": "4 months of building a phone lock app in the evenings: 100 downloads, 1 paying user, and TikTok gave me 0 views twice",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk5fng/4_months_of_building_a_phone_lock_app_in_the/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T09:07:23.000Z",
+      "summary": ""
+    },
+    {
+      "id": "93096037bba1c68c08063a87",
+      "title": "Amazon kicked my site out of its affiliate program for showing the best prices",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk58pm/amazon_kicked_my_site_out_of_its_affiliate/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T08:55:46.000Z",
+      "summary": ""
+    },
+    {
+      "id": "e350e502b0d88d1d32117a2d",
+      "title": "I run a music discovery website for emerging bands. I'd love brutally honest feedback on why someone would or wouldn't come back",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk4y5l/i_run_a_music_discovery_website_for_emerging/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T08:36:44.000Z",
+      "summary": ""
+    },
+    {
+      "id": "183a2eac73f2ddcd9698ea5b",
+      "title": "Halloween launch thread: what goes live before Monday?",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk3moa/halloween_launch_thread_what_goes_live_before/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T07:11:21.000Z",
+      "summary": ""
+    },
+    {
+      "id": "054a1426d861f57d6b3e88c6",
+      "title": "My SVG editor is live!",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk24mp/my_svg_editor_is_live/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T05:38:24.000Z",
+      "summary": ""
+    },
+    {
+      "id": "dd7f303300fee8160187d7ac",
+      "title": "i made a free image resizer for those annoying kb limits",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xk1wb3/i_made_a_free_image_resizer_for_those_annoying_kb/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T05:24:41.000Z",
+      "summary": ""
+    },
+    {
+      "id": "af287363a5e478bb0dfc18d4",
+      "title": "I got tired of scrolling down to read comments, so I built a Chrome extension that puts YouTube comments right next to the video",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xjzpo1/i_got_tired_of_scrolling_down_to_read_comments_so/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T03:24:17.000Z",
+      "summary": ""
+    },
+    {
       "id": "d289974c9974603b73c2c53f",
       "title": "OpenAI raises less than half of $30B target",
       "url": "https://www.wsj.com/tech/ai/openai-raises-less-than-half-of-30-billion-target-in-latest-round-91aecdc5",
@@ -19,6 +136,15 @@
       "summary": "Comments"
     },
     {
+      "id": "110c1e23346f0b3927d546b1",
+      "title": "Video chats, but with a \"talking stick\"",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xjywds/video_chats_but_with_a_talking_stick/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T02:42:11.000Z",
+      "summary": ""
+    },
+    {
       "id": "9a3ce4f2d771829b045984b5",
       "title": "Flock camera searches fell 95% after a dispatcher's misconduct was caught",
       "url": "https://www.wkyc.com/article/news/investigations/flock-camera-searches-fall-95-percent-highland-heights-dispatcher-misconduct-caught/95-94b18f33-60e2-4bc7-a00f-d71d1e1fdd5e",
@@ -26,6 +152,174 @@
       "sourceId": "hacker-news",
       "published": "2026-10-31T02:42:02.000Z",
       "summary": "Comments"
+    },
+    {
+      "id": "b8edc2e9dab4fbcb4cf81a24",
+      "title": "I made a site that turns a GitHub repo into a little galaxy of its source files",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xjy7vk/i_made_a_site_that_turns_a_github_repo_into_a/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T02:07:47.000Z",
+      "summary": ""
+    },
+    {
+      "id": "56ed6f5b1a23b5b5c199b408",
+      "title": "Nutlope/hallmark",
+      "url": "https://github.com/Nutlope/hallmark",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
+    },
+    {
+      "id": "9c15e014464735eb318029f4",
+      "title": "cloudflare/security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings"
+    },
+    {
+      "id": "4f795faf4eede06c1c10e4b0",
+      "title": "AgriciDaniel/claude-seo",
+      "url": "https://github.com/AgriciDaniel/claude-seo",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "Universal SEO skill for Claude Code. 26 sub-skills + 19 sub-agents covering technical SEO, E-E-A-T, schema, GEO/AEO, agent readiness (Lighthouse Agentic Browsing, WebMCP, llms.txt), backlinks, local SEO, e-commerce, international SEO, Google APIs, and PDF/Excel reporting. 9 optional extensions for live SEO data."
+    },
+    {
+      "id": "ec673bd7694d3a658bba5faa",
+      "title": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships."
+    },
+    {
+      "id": "8c6014a36ca90e3fbda99713",
+      "title": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "An agentic skills framework & software development methodology that works."
+    },
+    {
+      "id": "ca6e9330cc1b2a538d3772d7",
+      "title": "multica-ai/andrej-karpathy-skills",
+      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
+    },
+    {
+      "id": "626a5e4fcb233d8d7ffe545e",
+      "title": "TauricResearch/TradingAgents",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "TradingAgents: Multi-Agents LLM Financial Trading Framework"
+    },
+    {
+      "id": "c7f7c21cf16630e7e00262d2",
+      "title": "jakubkrehel/skills",
+      "url": "https://github.com/jakubkrehel/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "A collection of agent skills that help you build great interfaces."
+    },
+    {
+      "id": "291d5eb46511b79f06895f30",
+      "title": "Leonxlnx/taste-skill",
+      "url": "https://github.com/Leonxlnx/taste-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages"
+    },
+    {
+      "id": "553e1cc54ebc818266579b0a",
+      "title": "pingdotgg/t3code",
+      "url": "https://github.com/pingdotgg/t3code",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": ""
+    },
+    {
+      "id": "853c63f738f0cecf3b918959",
+      "title": "thedotmack/claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
+    },
+    {
+      "id": "82a901da1b9bedec6f38670b",
+      "title": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "Public repository for Agent Skills"
+    },
+    {
+      "id": "edb3a626875732de5c9b6881",
+      "title": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond."
+    },
+    {
+      "id": "bf0e69460c66388787dc6878",
+      "title": "YuJunZhiXue/dsh-purge",
+      "url": "https://github.com/YuJunZhiXue/dsh-purge",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "DeepSeek Harness 破甲：让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「小码酱」。Jailbreak for every model — swap prompts per model. 求 Star 收藏 ⭐ 如要二开，请查看署名要求部分"
+    },
+    {
+      "id": "78a5846a75cc0fbb0baa14fc",
+      "title": "AstrBotDevs/AstrBot",
+      "url": "https://github.com/AstrBotDevs/AstrBot",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-10-31T00:00:00.000Z",
+      "observed": true,
+      "summary": "AI Agent Assistant & development framework that integrates lots of IM platforms, LLMs, plugins and AI feature, and can be your openclaw alternative. ✨"
+    },
+    {
+      "id": "ed8316691b7d3e83d281d4ff",
+      "title": "Got bored during a lecture, ended up testing my head-tracking wallpaper",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xjvg1m/got_bored_during_a_lecture_ended_up_testing_my/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-30T23:59:12.000Z",
+      "summary": ""
     },
     {
       "id": "bba0da0d1585467e2ec3197c",
@@ -37,6 +331,24 @@
       "summary": "Comments"
     },
     {
+      "id": "618550330c8d63807acaaa7c",
+      "title": "I made my screen feel like a 3D window—with ~2% CPU usage",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xjtxbz/i_made_my_screen_feel_like_a_3d_windowwith_2_cpu/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-30T22:52:02.000Z",
+      "summary": ""
+    },
+    {
+      "id": "4d1f2f690fd8d45d71842c58",
+      "title": "Looking for feedback for a movie app",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xjt1w5/looking_for_feedback_for_a_movie_app/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-30T22:14:27.000Z",
+      "summary": ""
+    },
+    {
       "id": "8d821849286ada42dbbaeffc",
       "title": "sanstun: A sans-IO, parallel-friendly WireGuard implementation in Rust",
       "url": "https://www.firezone.dev/blog/introducing-sanstun",
@@ -44,6 +356,15 @@
       "sourceId": "hacker-news",
       "published": "2026-10-30T21:30:00.000Z",
       "summary": "Comments"
+    },
+    {
+      "id": "cea904e66fc9739cd6f15504",
+      "title": "I made a free, open-source phone app that debloats your TV over Wi-Fi: no PC, no root. Just hit 5,000 downloads",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xjrvhe/i_made_a_free_opensource_phone_app_that_debloats/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-30T21:25:10.000Z",
+      "summary": ""
     },
     {
       "id": "b65f6c56c4508fd784f83c36",
@@ -125,6 +446,15 @@
       "sourceId": "hacker-news",
       "published": "2026-10-30T12:50:01.000Z",
       "summary": "Comments"
+    },
+    {
+      "id": "4988faa1c9c67b72800ae449",
+      "title": "I found a way to save on my electric bill",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xjc50u/i_found_a_way_to_save_on_my_electric_bill/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-30T10:53:23.000Z",
+      "summary": ""
     },
     {
       "id": "a13f736d9894568550e2a3e1",
@@ -584,217 +914,12 @@
       "sourceId": "hacker-news",
       "published": "2026-10-27T13:02:02.000Z",
       "summary": "Comments"
-    },
-    {
-      "id": "39973e9d451dfefe58b4c20a",
-      "title": "Python's experimental JIT to be removed",
-      "url": "https://lwn.net/SubscriberLink/1102102/0c00e4d550f25f8c/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T11:17:57.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "919c9600e8a39d1cd7aa8824",
-      "title": "A new faster algorithm to compute 64-bit signed floor division",
-      "url": "https://www.benjoffe.com/fast-floordiv",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T09:13:12.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "2d7458168c2cc9a97201f661",
-      "title": "OpenAI's agents talked to each other through the CPU Cache",
-      "url": "https://the-decoder.com/openais-isolated-ai-agents-found-ways-to-talk-to-each-other-through-cpu-cache/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T21:24:18.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "eaf6a1a6f5667bb4f1cc66c9",
-      "title": "Muhammad Aqeel: Undo for Postgres, without losing the rest of your day",
-      "url": "https://www.pgedge.com/blog/undo-for-postgres-without-losing-the-rest-of-your-day",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T21:15:57.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "a901d569ec7749bb172f1569",
-      "title": "Getting debug access on a Brother printer over Telnet",
-      "url": "https://inventor7777.github.io/blog/2026/10/22/debug-access-on-brother/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T13:54:39.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e581fd59369e9fc8e0587cf4",
-      "title": "The Grid, a factory-scale robot in Massachusetts that builds PCBs on demand",
-      "url": "https://www.circuithub.com/post/unveiling-the-grid",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T13:13:31.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "61e512383f3ecddc813390d1",
-      "title": "Jokes for the ZX81",
-      "url": "https://spelk.press/gb/products/81-jokes-for-the-zx81",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T12:45:16.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e960639439fd0b270158fa78",
-      "title": "Treap (Cartesian Tree)",
-      "url": "https://cp-algorithms.com/data_structures/treap.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T11:19:31.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "8a53a55b3a1fd4ea0a7d7d4f",
-      "title": "Requests, Please",
-      "url": "https://morronel.github.io/requests_please/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T09:23:43.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "a657e4818f3f23e6634f5766",
-      "title": "SS United States to be sunk as largest artificial reef",
-      "url": "https://divemagazine.com/scuba-diving-news/ss-united-states-to-be-sunk-as-worlds-largest-artificial-reef-in-november",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T04:41:15.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "d5ac2c7b27ff800e48285768",
-      "title": "Closing the Sea: Lessons from Ancient Mediterranean Blockades",
-      "url": "https://maritime-executive.com/editorials/closing-the-sea-lessons-from-ancient-mediterranean-blockades",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-26T04:28:49.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "a35ae37c90a4ccbdc3cb7955",
-      "title": "Ink droplets in motion snag top prize in Nikon Small World contest",
-      "url": "https://arstechnica.com/science/2026/10/meet-the-2026-winner-of-nikons-small-world-photomicrography-contest/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-25T18:49:48.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "6edbfaf7649cfb413853e299",
-      "title": "Decompiling Fast Food Tycoon 2: Drawing the World",
-      "url": "https://healeycodes.com/decompiling-fast-food-tycoon-2-drawing-the-world",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-24T18:17:57.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "716d0a8110a4b987d5a1ead5",
-      "title": "The Colors of a Soap Film",
-      "url": "https://aseemrb.me/blog/colors-of-a-soap-film/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-24T03:46:00.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "8c285bd437575ecaa3031a6d",
-      "title": "Start Doing Graph Theory",
-      "url": "https://vertex.degree/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-23T13:49:50.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "b02e415c5f4a28873ac1c300",
-      "title": "Accordion Icons: Which Work Best?",
-      "url": "https://smashingmagazine.com/2026/10/accordion-icons-which-work-best/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-10-23T13:00:00.000Z",
-      "summary": "A closer look at accordion icons, why split menus are harmful, and why it’s better not to have icons and text labels link to different actions. Plus, why the caret is the safest icon choice. You’ll find more [useful guides](https://www.smashingmagazine.com/category/guides/) and [online workshops](https://smashingconf.com/online-workshops) here on S"
-    },
-    {
-      "id": "c15c1be0aad75fb41fbdb15d",
-      "title": "Embracing Playful Imperfection With The CSS `random()` Function",
-      "url": "https://smashingmagazine.com/2026/10/embracing-playful-imperfection-css-random-function/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-10-20T10:00:00.000Z",
-      "summary": "Design systems thrive on consistency, so where does randomness fit in? Through playful demos of organic typography, bouncing letters, and splayed cards, Brecht De Ruyte shows how the new CSS `random()` function brings a little imperfection to the web without JavaScript libraries or preprocessor loops that generate hundreds of lines of static CSS."
-    },
-    {
-      "id": "8b9be77adbdfad86b7899b47",
-      "title": "Is Your Organization Messing Up AI Adoption?",
-      "url": "https://smashingmagazine.com/2026/10/is-your-organization-messing-up-ai-adoption/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-10-16T10:00:00.000Z",
-      "summary": "What can digital transformation teach us about AI adoption? Paul Boag revisits his book Digital Adaptation to show how lessons from the past can help organizations navigate the challenges of AI today."
-    },
-    {
-      "id": "906c26c75ab309095d956d6f",
-      "title": "A Practical Guide To Naming Things",
-      "url": "https://smashingmagazine.com/2026/10/how-name-things/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-10-06T10:00:00.000Z",
-      "summary": "A practical guide to naming UI components, with useful resources, naming conventions, and structures. You’ll find more [useful guides](https://www.smashingmagazine.com/category/guides/) and [online workshops](https://smashingconf.com/online-workshops) here on Smashing Magazine, so make sure to browse and explore."
-    },
-    {
-      "id": "83b5297dec1e9cb2e15593c3",
-      "title": "Under Autumn’s Spell (October 2026 Wallpapers Edition)",
-      "url": "https://smashingmagazine.com/2026/09/desktop-wallpaper-calendars-october-2026/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-09-30T13:30:00.000Z",
-      "summary": "October is just around the corner, which means it’s time for some new desktop wallpapers! Designed by the community for the community, they’re here to brighten your screens, and maybe spark some creativity along the way."
-    },
-    {
-      "id": "5c9d13f97faabce46da9b702",
-      "title": "Stop Treating CSS Container Queries Like Traditional Media Queries",
-      "url": "https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-09-16T13:00:00.000Z",
-      "summary": "Despite broad browser support, container queries remain surprisingly underused and frequently misunderstood. Let’s look at how they differ from media queries, when to reach for each, and how container queries help reusable components respond naturally to the contexts in which they appear. - CSS - Tools - Techniques"
-    },
-    {
-      "id": "b008f772ace718d60f01070e",
-      "title": "Building A UX ROI Case That Survives The Boardroom",
-      "url": "https://smashingmagazine.com/2026/09/building-ux-roi-case-survives-boardroom/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-09-11T13:00:00.000Z",
-      "summary": "Strong UX ideas do not secure investment on their own. Through a worked example, Alex Williams breaks down how to define business value, calculate costs, test causality, and build a credible case for the return on a design initiative. - UX - Design - Business"
-    },
-    {
-      "id": "8f216ec363408e7c0935b0dd",
-      "title": "The Death Of The Button: Why The Best Interface Is No Interface",
-      "url": "https://smashingmagazine.com/2026/09/death-button-why-best-interface-is-no-interface/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-09-09T10:00:00.000Z",
-      "summary": "The web is evolving beyond menus, forms, and endless clicks toward experiences shaped around human intent. For UX designers, understanding this shift means re-evaluating their role, moving from designing visible interfaces to guiding transparent, intent-driven AI experiences."
     }
   ],
   "fetched": {
     "smashing": "2026-10-31",
-    "hacker-news": "2026-10-31"
+    "hacker-news": "2026-10-31",
+    "github-trending": "2026-10-31",
+    "reddit-sideproject": "2026-10-31"
   }
 }

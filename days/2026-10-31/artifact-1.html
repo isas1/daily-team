@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Handshake Bench · local protocol failure bench</title>
+<style>
+:root{
+  --bg:#f2f1ee;--surf:#fbfaf8;--card:#ffffff;--ink:#1c1e20;--mut:#55595e;
+  --line:#c4c1bb;--soft:#e4e2dd;--acc:#a3400c;--ghost:#5f6368;
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:10px 14px 40px}
+.mono,.t,.ptype,.sn,.tm{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+header.top{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;justify-content:space-between;padding:2px 0 10px}
+h1{font-size:1.12rem;margin:0;letter-spacing:.01em}
+.sub{margin:2px 0 0;color:var(--mut);font-size:.88rem;max-width:64ch}
+.tag{margin:0;font-size:.76rem;color:var(--mut);border:1px solid var(--line);padding:2px 8px;border-radius:999px;background:var(--surf);white-space:nowrap}
+.clock{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.lbl{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+.t{font-size:1.35rem;font-weight:600;font-variant-numeric:tabular-nums;display:inline-block;min-width:8.5ch}
+.clock-next{flex:1 1 210px;min-width:0;font-size:.9rem}
+.clock-btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-size:.88rem;min-height:44px;padding:0 12px;border:1px solid var(--ink);background:var(--surf);color:var(--ink);border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.btn:hover:not(:disabled){background:var(--soft)}
+.btn:active:not(:disabled){transform:translateY(1px)}
+.btn:disabled{border-color:var(--line);color:#74787d;background:transparent;cursor:not-allowed}
+.btn.primary{background:var(--ink);color:var(--surf)}
+.btn.primary:hover:not(:disabled){background:#383b3f}
+kbd{font:600 .68rem ui-monospace,Menlo,Consolas,monospace;border:1px solid currentColor;border-radius:3px;padding:0 4px;opacity:.75}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.btn.primary:focus-visible{outline-color:var(--acc)}
+.next{margin:10px 2px 2px;font-weight:600}
+.status{margin:0 2px 10px;color:var(--mut);font-size:.86rem;min-height:1.3em}
+.bench{display:grid;grid-template-columns:minmax(168px,1fr) minmax(0,2.1fr) minmax(168px,1fr);gap:12px;align-items:start}
+@media (max-width:560px){.bench{grid-template-columns:1fr}}
+.machine{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.machine h2{font-size:.92rem;margin:0 0 4px}
+.phase{margin:0 0 8px;font-weight:600;min-height:2.9em}
+.phase.bad{color:var(--acc)}
+.g{display:inline-block;width:1.1em}
+dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:0;font-size:.86rem}
+dt{color:var(--mut)}
+dd{margin:0;font-variant-numeric:tabular-nums}
+.rule{font-size:.78rem;color:var(--mut);margin:8px 0 0;border-top:1px solid var(--soft);padding-top:6px}
+.wire{border:1px solid var(--line);border-radius:8px;background:var(--surf);padding:10px}
+.wire-head{display:flex;justify-content:space-between;gap:4px 8px;flex-wrap:wrap;align-items:baseline;margin-bottom:8px}
+.wire h2{font-size:.92rem;margin:0}
+.wire-hint{font-size:.76rem;color:var(--mut)}
+.pkts{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.pkt{border:1px solid var(--line);border-left:3px solid transparent;border-radius:6px;padding:8px;background:var(--card)}
+.pkt.active{border-left-color:var(--ink)}
+.pkt-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
+.ptype{font-size:1.05rem;font-weight:700}
+.dir{font-size:.8rem;color:var(--mut)}
+.pmeta{font-size:.78rem;color:var(--mut);margin:2px 0 8px;min-height:1.2em}
+.pmeta .held{color:var(--ink);font-weight:600}
+.acts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+@media (max-width:440px){.acts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.acts .btn{padding:0 6px;font-size:.84rem}
+.empty{color:var(--mut);font-size:.88rem;padding:14px 4px;margin:0}
+.outcome{margin:14px 0}
+.outcome:empty{margin:6px 0}
+.banner{background:var(--surf);border:1px solid var(--line);border-top:2px solid var(--ink);border-radius:8px;padding:12px}
+.banner.fail{border-top-color:var(--acc)}
+.banner h2{font-size:1rem;margin:0 0 4px}
+.banner.fail h2{color:var(--acc)}
+.banner p{margin:4px 0}
+.banner .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.cause{font-weight:600}
+.state{color:var(--mut);font-size:.86rem}
+.log{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.log-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.log h2{font-size:.92rem;margin:0}
+.runlabel{font-size:.84rem;color:var(--mut)}
+.compare{font-size:.86rem;margin:8px 0;padding:8px 10px;border-left:2px solid var(--acc);background:var(--bg)}
+.compare p{margin:2px 0}
+.try{font-size:.84rem;color:var(--mut);margin:8px 0 4px;padding-left:1.1em}
+ol.tl{list-style:none;margin:6px 0 0;padding:0}
+.tl>li{border-top:1px solid var(--soft)}
+.rowbtn,.rowstatic{display:grid;grid-template-columns:2.4em 4.4em minmax(0,1fr) auto;gap:8px;width:100%;padding:8px 4px;font:inherit;font-size:.88rem;color:inherit;background:none;border:0;text-align:left;align-items:baseline}
+.rowbtn{cursor:pointer;min-height:40px}
+.rowbtn:hover{background:var(--bg)}
+.rowbtn:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.sn,.tm{color:var(--mut);font-variant-numeric:tabular-nums;font-size:.82rem}
+.mark{font-size:.72rem;font-weight:700;letter-spacing:.05em}
+.tl>li.failrow{box-shadow:inset 3px 0 0 var(--acc)}
+.tl>li.failrow .mark{color:var(--acc)}
+.tl>li.split{border-top:2px solid var(--acc);color:var(--acc);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 4px 2px}
+.tl>li.ghost{color:var(--ghost);font-size:.82rem;padding:4px 4px 6px calc(2.4em + 12px);border-top:1px dashed var(--soft)}
+.tl>li.ghost.gfail{box-shadow:inset 3px 0 0 var(--line)}
+.panel{padding:0 8px 10px calc(2.4em + 12px);font-size:.85rem}
+.panel ul{margin:2px 0 6px;padding-left:1.1em}
+footer{margin-top:20px;font-size:.82rem;color:var(--mut);display:grid;gap:12px}
+footer h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin:0 0 4px;color:var(--ink)}
+footer ul{margin:0;padding-left:1.1em}
+footer a{color:var(--ink)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:no-preference){
+  .pkt.enter{animation:pin .24s ease-out}
+  .pkt.enter.fromR{animation-name:pinR}
+  .flash{animation:fl .6s ease-out}
+}
+@keyframes pin{from{transform:translateX(-10px);opacity:.35}to{transform:none;opacity:1}}
+@keyframes pinR{from{transform:translateX(10px);opacity:.35}to{transform:none;opacity:1}}
+@keyframes fl{from{background:var(--soft)}to{background:var(--surf)}}
+.paused *{animation-play-state:paused}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>Handshake Bench</h1>
+    <p class="sub">Two toy handshake machines and one wire. You deliver, drop, duplicate or delay each packet. The clock moves only when you press.</p>
+  </div>
+  <p class="tag">Local demo · sample toy protocol · no network</p>
+</header>
+<main>
+  <section class="clock" id="clock" aria-label="Clock"></section>
+  <p class="next" id="next"></p>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <section class="bench" aria-label="Bench">
+    <article class="machine" id="m-init" aria-label="Initiator machine"></article>
+    <section class="wire" id="wire" aria-labelledby="wire-h"></section>
+    <article class="machine" id="m-resp" aria-label="Responder machine"></article>
+  </section>
+  <section class="outcome" id="outcome" aria-label="Outcome"></section>
+  <section class="log" aria-labelledby="log-h">
+    <div class="log-head"><h2 id="log-h">Step log</h2><span class="runlabel" id="runlabel"></span></div>
+    <div class="compare" id="compare" hidden></div>
+    <ol class="tl" id="timeline"></ol>
+  </section>
+</main>
+<footer>
+  <section aria-labelledby="keys-h">
+    <h2 id="keys-h">Keys</h2>
+    <p>D Deliver · X Drop · U Duplicate · L Delay · T Clock +1 s · J Jump to next timer · R Retry after a failure. Packet keys act on the packet with the dark left edge, or on the packet that holds focus.</p>
+  </section>
+  <section aria-labelledby="rules-h">
+    <h2 id="rules-h">Toy protocol</h2>
+    <ul>
+      <li>Initiator sends HELLO with a counter. With no matching REPLY in 5 s, it resends with the next counter. It gives up after 3 tries.</li>
+      <li>Responder answers a fresh HELLO with REPLY and waits 8 s for CONFIRM. It closes the session on any replayed counter.</li>
+      <li>The protocol is a pure function, handle(state, event), fed by your presses. Every step keeps a snapshot, so any step can be retried as a new run.</li>
+    </ul>
+  </section>
+  <section aria-labelledby="credits-h">
+    <h2 id="credits-h">Credits</h2>
+    <ul>
+      <li>Color grading specialist (lead): two-run comparison on shared rows, one amber accent for the split and the failure edge, greys elsewhere.</li>
+      <li>Wayfinding designer: the single quiet wire surface, the 2px failure edge and the Next line that states the expected event.</li>
+      <li>Camera operator: the manual clock with +1 s and Jump to next timer, the named next timer, and no auto-play.</li>
+      <li>Amber crab: Drop, Duplicate and Delay at the same size and key reach as Deliver, and Retry that names the step it returns to.</li>
+    </ul>
+  </section>
+  <section aria-labelledby="src-h">
+    <h2 id="src-h">Sources</h2>
+    <ul>
+      <li><a href="https://www.firezone.dev/blog/introducing-sanstun" rel="noopener noreferrer">sanstun: A sans-IO, parallel-friendly WireGuard implementation in Rust</a> (Hacker News)</li>
+      <li><a href="https://www.reddit.com/r/SideProject/comments/1xk726t/finishing_up_dot_a_terminal_tool_that_actually/" rel="noopener noreferrer">Finishing up "Dot", a terminal tool that actually fixes your CLI errors instead of just screaming at you</a> (Reddit r/SideProject)</li>
+    </ul>
+    <p>Links are attribution only. The bench loads nothing from them.</p>
+  </section>
+</footer>
+</div>
+<script>
+'use strict';
+/* ---------- bench.js: pure toy protocol ---------- */
+const TIMEOUT = 5000, RESP_WAIT = 8000, MAX_TRIES = 3, HOLD = 3000, WIRE_MAX = 8;
+const clone = o => JSON.parse(JSON.stringify(o));
+const fmt = ms => (ms / 1000).toFixed(1) + ' s';
+const who = x => x === 'I' ? 'Initiator' : 'Responder';
+const pk = p => p.type + ' c' + p.ctr;
+
+function initialProto() {
+  return {
+    now: 0,
+    init: { phase: 'await-reply', tries: 1, ctr: 1, due: TIMEOUT },
+    resp: { phase: 'listen', hiHello: 0, hiConfirm: 0, ctr: 0, due: null }
+  };
+}
+
+function protoTimers(s) {
+  const t = [];
+  if (s.init.phase === 'await-reply' && s.init.due != null) {
+    t.push({ who: 'I', due: s.init.due, name: s.init.tries < MAX_TRIES ? 'Initiator resend, try ' + (s.init.tries + 1) + ' of ' + MAX_TRIES : 'Initiator gives up' });
+  }
+  if (s.resp.phase === 'replied' && s.resp.due != null) {
+    t.push({ who: 'R', due: s.resp.due, name: 'Responder half-open limit' });
+  }
+  return t.sort((a, b) => a.due - b.due || (a.who === 'I' ? -1 : 1));
+}
+
+function fireTimer(s, w, out) {
+  if (w === 'I') {
+    const i = s.init;
+    if (i.tries < MAX_TRIES) {
+      i.tries++; i.ctr++; i.due = s.now + TIMEOUT;
+      out.push({ kind: 'note', text: 'Initiator timeout at ' + fmt(s.now) + '. It resends HELLO c' + i.ctr + ', try ' + i.tries + ' of ' + MAX_TRIES + '.' });
+      out.push({ kind: 'send', at: s.now, msg: { type: 'HELLO', ctr: i.ctr, from: 'I', to: 'R' } });
+    } else {
+      i.phase = 'gave-up'; i.due = null;
+      out.push({ kind: 'fail', code: 'gave-up', text: 'Initiator gave up after ' + MAX_TRIES + ' tries at ' + fmt(s.now) + '.' });
+    }
+  } else {
+    s.resp.phase = 'closed'; s.resp.due = null;
+    out.push({ kind: 'fail', code: 'half-open', text: 'Responder closed its half-open session at ' + fmt(s.now) + ' after 8 s without CONFIRM.' });
+  }
+}
+
+function respRecv(s, m, out) {
+  const r = s.resp;
+  if (r.phase === 'closed') { out.push({ kind: 'note', text: 'Responder is closed. ' + m.type + ' c' + m.ctr + ' is ignored.' }); return; }
+  if (m.type === 'HELLO') {
+    if (m.ctr <= r.hiHello) {
+      r.phase = 'closed'; r.due = null;
+      out.push({ kind: 'fail', code: 'replay', text: 'Responder saw HELLO c' + m.ctr + ' a second time and closed the session as a replay.' });
+      return;
+    }
+    if (r.phase === 'established') { r.hiHello = m.ctr; out.push({ kind: 'note', text: 'Responder is established. Late HELLO c' + m.ctr + ' is ignored.' }); return; }
+    r.hiHello = m.ctr; r.ctr = m.ctr; r.phase = 'replied'; r.due = s.now + RESP_WAIT;
+    out.push({ kind: 'note', text: 'Responder accepts HELLO c' + m.ctr + ' and replies with REPLY c' + m.ctr + '.' });
+    out.push({ kind: 'send', at: s.now, msg: { type: 'REPLY', ctr: m.ctr, from: 'R', to: 'I' } });
+    return;
+  }
+  if (m.type === 'CONFIRM') {
+    if (m.ctr <= r.hiConfirm) {
+      r.phase = 'closed'; r.due = null;
+      out.push({ kind: 'fail', code: 'replay', text: 'Responder saw CONFIRM c' + m.ctr + ' a second time and closed the session as a replay.' });
+      return;
+    }
+    if (r.phase === 'replied' && m.ctr === r.ctr) {
+      r.hiConfirm = m.ctr; r.phase = 'established'; r.due = null;
+      out.push({ kind: 'note', text: 'Responder accepts CONFIRM c' + m.ctr + ' and stops its half-open timer.' });
+      if (s.init.phase === 'established') out.push({ kind: 'done', text: 'Handshake established at ' + fmt(s.now) + ' on counter c' + m.ctr + '.' });
+      return;
+    }
+    if (r.phase === 'established') { out.push({ kind: 'note', text: 'Responder is established. CONFIRM c' + m.ctr + ' is ignored.' }); return; }
+    out.push({ kind: 'note', text: 'Responder expected CONFIRM c' + r.ctr + '. CONFIRM c' + m.ctr + ' is stale and ignored.' });
+  }
+}
+
+function initRecv(s, m, out) {
+  const i = s.init;
+  if (m.type !== 'REPLY') { out.push({ kind: 'note', text: 'Initiator ignores ' + m.type + '.' }); return; }
+  if (i.phase === 'await-reply' && m.ctr === i.ctr) {
+    i.phase = 'established'; i.due = null;
+    out.push({ kind: 'note', text: 'Initiator accepts REPLY c' + m.ctr + ', stops its resend timer and sends CONFIRM c' + m.ctr + '.' });
+    out.push({ kind: 'send', at: s.now, msg: { type: 'CONFIRM', ctr: m.ctr, from: 'I', to: 'R' } });
+  } else if (i.phase === 'await-reply') {
+    out.push({ kind: 'note', text: 'Initiator is waiting for REPLY c' + i.ctr + '. REPLY c' + m.ctr + ' is stale and ignored.' });
+  } else if (i.phase === 'established') {
+    out.push({ kind: 'note', text: 'Initiator is already established. Extra REPLY c' + m.ctr + ' is ignored.' });
+  } else {
+    out.push({ kind: 'note', text: 'Initiator has given up. REPLY c' + m.ctr + ' is ignored.' });
+  }
+}
+
+/* handle(state, event) -> { state, outputs }. Never mutates its input. */
+function handle(p, ev) {
+  const s = clone(p), out = [];
+  if (ev.type === 'tick') {
+    const target = s.now + ev.ms;
+    for (let guard = 0; guard < 20; guard++) {
+      const t = protoTimers(s)[0];
+      if (!t || t.due > target) break;
+      s.now = t.due;
+      fireTimer(s, t.who, out);
+    }
+    s.now = target;
+  } else if (ev.type === 'packet') {
+    if (ev.msg.to === 'R') respRecv(s, ev.msg, out); else initRecv(s, ev.msg, out);
+  }
+  return { state: s, outputs: out };
+}
+
+/* ---------- bench: wire, side steps and snapshots ---------- */
+function initialBench() {
+  return {
+    proto: initialProto(),
+    wire: [{ id: 1, type: 'HELLO', ctr: 1, from: 'I', to: 'R', sentAt: 0, holdUntil: 0, dupStep: null }],
+    nextId: 2, outcome: null, done: null
+  };
+}
+
+function nextEvent(b) {
+  const list = protoTimers(b.proto).map(t => ({ due: t.due, name: t.name }));
+  for (const p of b.wire) if (p.holdUntil > b.proto.now) list.push({ due: p.holdUntil, name: 'Hold ends on ' + pk(p) });
+  list.sort((a, c) => a.due - c.due);
+  return list[0] || null;
+}
+
+function apply(b, act, step) {
+  const n = clone(b), notes = [];
+  let fail = null, done = false, pkt = null, label = '';
+  const t0 = n.proto.now;
+  const feed = ev => {
+    const r = handle(n.proto, ev);
+    n.proto = r.state;
+    for (const o of r.outputs) {
+      if (o.kind === 'send') n.wire.push({ id: n.nextId++, type: o.msg.type, ctr: o.msg.ctr, from: o.msg.from, to: o.msg.to, sentAt: o.at, holdUntil: 0, dupStep: null });
+      else if (o.kind === 'note') notes.push(o.text);
+      else if (o.kind === 'fail') { notes.push(o.text); if (!fail) fail = { code: o.code, text: o.text }; }
+      else if (o.kind === 'done') { notes.push(o.text); done = true; }
+    }
+  };
+  const idx = act.id != null ? n.wire.findIndex(q => q.id === act.id) : -1;
+  const p = idx >= 0 ? n.wire[idx] : null;
+  if (p) pkt = clone(p);
+  switch (act.a) {
+    case 'deliver':
+      n.wire.splice(idx, 1);
+      label = 'Deliver ' + pk(p) + ' to ' + who(p.to);
+      feed({ type: 'packet', msg: { type: p.type, ctr: p.ctr, to: p.to } });
+      break;
+    case 'drop':
+      n.wire.splice(idx, 1);
+      label = 'Drop ' + pk(p);
+      notes.push(pk(p) + ' is lost. ' + who(p.to) + ' never sees it.');
+      break;
+    case 'dup': {
+      const c = clone(p); c.id = n.nextId++; c.dupStep = step;
+      n.wire.splice(idx + 1, 0, c);
+      label = 'Duplicate ' + pk(p);
+      notes.push('Two copies of ' + pk(p) + ' are now on the wire.');
+      break;
+    }
+    case 'delay':
+      p.holdUntil = Math.max(n.proto.now, p.holdUntil) + HOLD;
+      label = 'Delay ' + pk(p) + ' to ' + fmt(p.holdUntil);
+      notes.push(pk(p) + ' cannot be delivered before ' + fmt(p.holdUntil) + '.');
+      break;
+    case 'tick':
+    case 'jump': {
+      let ms = 1000, name = '';
+      if (act.a === 'jump') { const nx = nextEvent(n); ms = nx.due - t0; name = nx.name; }
+      feed({ type: 'tick', ms: ms });
+      label = act.a === 'tick' ? 'Clock +1 s to ' + fmt(n.proto.now) : 'Jump to ' + fmt(n.proto.now) + ': ' + name;
+      for (const q of n.wire) if (q.holdUntil > t0 && q.holdUntil <= n.proto.now) notes.push('Hold ends. ' + pk(q) + ' can be delivered.');
+      if (!notes.length) notes.push('No timer fired.');
+      break;
+    }
+  }
+  if (fail && !n.outcome) n.outcome = { code: fail.code, text: fail.text, step: step };
+  if (done && !n.done) n.done = { step: step };
+  return { bench: n, entry: { step: step, label: label, notes: notes, act: { a: act.a }, pkt: pkt, fail: fail, done: done, at: n.proto.now, after: n } };
+}
+
+function causeOf(run, idx) {
+  const log = run.log, f = log[idx], code = f.fail.code;
+  if (code === 'replay') {
+    let s = null;
+    if (f.pkt && f.pkt.dupStep) s = f.pkt.dupStep;
+    else if (f.pkt) {
+      for (let i = idx - 1; i >= 0; i--) {
+        const e = log[i];
+        if (e.act.a === 'deliver' && e.pkt && e.pkt.type === f.pkt.type && e.pkt.ctr === f.pkt.ctr && e.pkt.dupStep) { s = e.pkt.dupStep; break; }
+      }
+    }
+    if (s) return { step: s, text: 'Step ' + s + ' (' + log[s - 1].label + ') put a second ' + pk(f.pkt) + ' on the wire, and step ' + (idx + 1) + ' delivered it.' };
+    return { step: idx + 1, text: 'Step ' + (idx + 1) + ' delivered ' + (f.pkt ? pk(f.pkt) : 'a packet') + ' a second time.' };
+  }
+  const types = code === 'gave-up' ? ['HELLO', 'REPLY'] : ['CONFIRM'];
+  for (let i = idx - 1; i >= 0; i--) {
+    const e = log[i];
+    if ((e.act.a === 'drop' || e.act.a === 'delay') && e.pkt && types.indexOf(e.pkt.type) >= 0) {
+      if (e.act.a === 'drop') return { step: i + 1, text: 'Step ' + (i + 1) + ' dropped ' + pk(e.pkt) + ', so ' + (code === 'gave-up' ? 'no matching REPLY reached the initiator in time.' : 'the responder never got CONFIRM.') };
+      return { step: i + 1, text: 'Step ' + (i + 1) + ' held ' + pk(e.pkt) + ' past the ' + (code === 'gave-up' ? 'resend timeout.' : '8 s CONFIRM limit.') };
+    }
+  }
+  if (code === 'gave-up') return { step: idx + 1, text: 'No matching REPLY reached the initiator. Step ' + (idx + 1) + ' moved the clock past the third timeout.' };
+  return { step: idx + 1, text: 'No CONFIRM arrived within 8 s. Step ' + (idx + 1) + ' moved the clock past that limit.' };
+}
+
+const sig = e => e.label + '|' + e.notes.join('|');
+function divergence(a, b) {
+  const n = Math.max(a.log.length, b.log.length);
+  for (let i = 0; i < n; i++) if (!a.log[i] || !b.log[i] || sig(a.log[i]) !== sig(b.log[i])) return i;
+  return -1;
+}
+function snapshot(run, k) { return k === 0 ? run.start : run.log[k - 1].after; }
+const letter = i => i < 26 ? String.fromCharCode(65 + i) : 'R' + (i + 1);
+function endWord(r) {
+  const fi = r.log.findIndex(e => e.fail);
+  if (fi >= 0) return 'failed at step ' + (fi + 1);
+  const di = r.log.findIndex(e => e.done);
+  if (di >= 0) return 'established at step ' + (di + 1);
+  return 'is still running';
+}
+
+/* ---------- UI ---------- */
+const $ = s => document.querySelector(s);
+function h(tag, attrs) {
+  const el = document.createElement(tag);
+  if (attrs) for (const k of Object.keys(attrs)) {
+    const v = attrs[k];
+    if (v == null || v === false) continue;
+    if (k === 'class') el.className = v;
+    else if (k === 'text') el.textContent = v;
+    else if (k.slice(0, 2) === 'on') el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  const kids = Array.prototype.slice.call(arguments, 2).flat(3);
+  for (const c of kids) { if (c == null || c === false) continue; el.append(c.nodeType ? c : String(c)); }
+  return el;
+}
+
+const PI = { 'await-reply': 'Waiting for REPLY', 'established': 'Established', 'gave-up': 'Gave up' };
+const GI = { 'await-reply': '\u25CB', 'established': '\u25CF', 'gave-up': '\u2298' };
+const PR = { 'listen': 'Listening', 'replied': 'Replied, waiting for CONFIRM', 'established': 'Established', 'closed': 'Closed' };
+const GR = { 'listen': '\u25CB', 'replied': '\u25D0', 'established': '\u25CF', 'closed': '\u2298' };
+
+let runs, cur, bench, expanded, selectedId, seen, lastPhases;
+
+function doReset(focusFirst) {
+  runs = [{ name: 'A', start: initialBench(), log: [], parent: -1, branchAt: 0 }];
+  cur = 0;
+  bench = clone(runs[0].start);
+  expanded = new Set();
+  selectedId = 1;
+  seen = new Set();
+  lastPhases = { I: bench.proto.init.phase, R: bench.proto.resp.phase };
+  say('Opening frame. HELLO c1 is on the wire and the clock reads 0.0 s.');
+  render();
+  if (focusFirst !== false) { const d = $('[data-k="deliver-1"]'); if (d) d.focus(); }
+}
+
+function say(t) { $('#status').textContent = t; }
+
+function activePacket() {
+  const ae = document.activeElement;
+  const c = ae && ae.closest ? ae.closest('[data-pid]') : null;
+  if (c) { const p = bench.wire.find(x => x.id === Number(c.getAttribute('data-pid'))); if (p) return p; }
+  return bench.wire.find(x => x.id === selectedId) || bench.wire.find(x => x.holdUntil <= bench.proto.now) || bench.wire[0] || null;
+}
+
+function failRetryK() {
+  if (!bench.outcome) return 0;
+  return causeOf(runs[cur], bench.outcome.step - 1).step - 1;
+}
+
+function act(action) {
+  if (bench.outcome) { say('This run has failed. Retry or reset to continue.'); return; }
+  const run = runs[cur];
+  const step = run.log.length + 1;
+  const r = apply(bench, action, step);
+  run.log.push(r.entry);
+  bench = r.bench;
+  if (action.id != null && !bench.wire.some(p => p.id === action.id)) selectedId = null;
+  else if (action.id != null) selectedId = action.id;
+  if (r.entry.fail) expanded.add(cur + ':' + (step - 1));
+  say('Step ' + step + ': ' + r.entry.label + '. ' + r.entry.notes[0]);
+  render(!!r.entry.fail);
+}
+
+function tryPacket(kind, p) {
+  if (bench.outcome) { say('This run has failed. Retry or reset to continue.'); return; }
+  if (kind === 'deliver' && p.holdUntil > bench.proto.now) { say(pk(p) + ' is held until ' + fmt(p.holdUntil) + '. Advance the clock first.'); return; }
+  if (kind === 'dup' && bench.wire.length >= WIRE_MAX) { say('The wire holds at most ' + WIRE_MAX + ' packets.'); return; }
+  act({ a: kind, id: p.id });
+}
+
+function retry(k) {
+  const run = runs[cur];
+  if (k < 0 || k > run.log.length) return;
+  const nr = { name: letter(runs.length), start: run.start, log: run.log.slice(0, k), parent: cur, branchAt: k };
+  runs.push(nr);
+  cur = runs.length - 1;
+  bench = clone(snapshot(nr, k));
+  expanded = new Set();
+  selectedId = null;
+  say('Run ' + nr.name + ' starts ' + (k === 0 ? 'from the opening frame' : 'after step ' + k) + ' at ' + fmt(bench.proto.now) + '. Step ' + (k + 1) + ' is yours to change.');
+  render();
+  const p = activePacket();
+  let el = p ? $('[data-pid="' + p.id + '"] button:not(:disabled)') : null;
+  if (!el) el = $('[data-k="tick"]');
+  if (el) el.focus();
+}
+
+function render(newFail) {
+  const ae = document.activeElement;
+  const hadFocus = ae && ae !== document.body;
+  const fk = ae && ae.getAttribute ? ae.getAttribute('data-k') : null;
+  const prevCard = ae && ae.closest ? ae.closest('[data-pid]') : null;
+  const prevPid = prevCard ? prevCard.getAttribute('data-pid') : null;
+  const ap = activePacket();
+
+  renderClock();
+  $('#next').textContent = nextHint(ap);
+  renderMachine($('#m-init'), 'I');
+  renderMachine($('#m-resp'), 'R');
+  renderWire(ap);
+  renderOutcome();
+  renderLog();
+
+  if (hadFocus || newFail) {
+    let el = fk ? $('[data-k="' + fk + '"]') : null;
+    if (newFail) el = $('[data-k="retry-main"]');
+    if (!el || el.disabled) {
+      if (bench.outcome) el = $('[data-k="retry-main"]');
+      else {
+        el = null;
+        if (prevPid) el = $('[data-pid="' + prevPid + '"] button:not(:disabled)');
+        if (!el) { const p = activePacket(); if (p) el = $('[data-pid="' + p.id + '"] button:not(:disabled)'); }
+        if (!el) el = $('[data-k="tick"]:not(:disabled)');
+      }
+    }
+    if (el) el.focus({ preventScroll: !newFail });
+  }
+}
+
+function renderClock() {
+  const b = bench, failed = !!b.outcome, nx = nextEvent(b);
+  $('#clock').replaceChildren(
+    h('div', { class: 'clock-read' }, h('span', { class: 'lbl', text: 'Bench clock' }), h('span', { class: 't', text: 't = ' + fmt(b.proto.now) })),
+    h('div', { class: 'clock-next' }, h('span', { class: 'lbl', text: 'Next timer' }),
+      h('span', { text: nx ? nx.name + ' at ' + fmt(nx.due) + ' (in ' + fmt(nx.due - b.proto.now) + ')' : 'None pending' })),
+    h('div', { class: 'clock-btns' },
+      h('button', { type: 'button', class: 'btn', 'data-k': 'tick', disabled: failed, onclick: () => act({ a: 'tick' }) }, '+1 s ', h('kbd', { text: 'T' })),
+      h('button', { type: 'button', class: 'btn', 'data-k': 'jump', disabled: failed || !nx, onclick: () => act({ a: 'jump' }) }, 'Jump to next timer ', h('kbd', { text: 'J' })),
+      h('button', { type: 'button', class: 'btn', 'data-k': 'reset', onclick: () => doReset() }, 'Reset'))
+  );
+}
+
+function nextHint(ap) {
+  const b = bench;
+  if (b.outcome) { const k = failRetryK(); return 'Next: ' + (k === 0 ? 'retry from start' : 'retry from step ' + k) + ', or reset.'; }
+  const p = (ap && ap.holdUntil <= b.proto.now) ? ap : b.wire.find(q => q.holdUntil <= b.proto.now);
+  if (p) { const r = apply(b, { a: 'deliver', id: p.id }, 0); return 'Next: deliver ' + pk(p) + '. ' + r.entry.notes[0]; }
+  const nx = nextEvent(b);
+  if (nx) return 'Next: advance the clock. ' + nx.name + ' at ' + fmt(nx.due) + '.';
+  return b.done ? 'Next: nothing is pending. The handshake holds. Reset to start again.' : 'Next: nothing is pending.';
+}
+
+function dlRow(k, v) { return [h('dt', { text: k }), h('dd', { text: v })]; }
+
+function renderMachine(el, w) {
+  const s = bench.proto;
+  let phase, glyph, bad, rows, rule, title;
+  if (w === 'I') {
+    const i = s.init; title = 'Initiator';
+    phase = PI[i.phase]; glyph = GI[i.phase]; bad = i.phase === 'gave-up';
+    rows = [dlRow('Counter', 'c' + i.ctr), dlRow('Tries', i.tries + ' of ' + MAX_TRIES), dlRow('Resend timer', i.phase === 'await-reply' ? 'due ' + fmt(i.due) : 'stopped')];
+    rule = 'Sends HELLO. Resends after 5 s with the next counter. Gives up after 3 tries.';
+  } else {
+    const r = s.resp; title = 'Responder';
+    phase = PR[r.phase]; glyph = GR[r.phase]; bad = r.phase === 'closed';
+    rows = [dlRow('Last HELLO', r.hiHello ? 'c' + r.hiHello : 'none'), dlRow('Last CONFIRM', r.hiConfirm ? 'c' + r.hiConfirm : 'none'), dlRow('Half-open timer', r.phase === 'replied' ? 'due ' + fmt(r.due) : 'stopped')];
+    rule = 'Replies to a fresh HELLO. Waits 8 s for CONFIRM. Closes on any replayed counter.';
+  }
+  const now = w === 'I' ? s.init.phase : s.resp.phase;
+  const changed = lastPhases && lastPhases[w] !== now;
+  if (lastPhases) lastPhases[w] = now;
+  el.className = 'machine' + (changed ? ' flash' : '');
+  el.replaceChildren(
+    h('h2', { text: title }),
+    h('p', { class: 'phase' + (bad ? ' bad' : '') }, h('span', { class: 'g', 'aria-hidden': 'true', text: glyph }), phase),
+    h('dl', {}, rows),
+    h('p', { class: 'rule', text: rule })
+  );
+}
+
+function renderWire(ap) {
+  const b = bench, failed = !!b.outcome, full = b.wire.length >= WIRE_MAX;
+  const head = h('div', { class: 'wire-head' },
+    h('h2', { id: 'wire-h', text: 'Wire · ' + b.wire.length + (b.wire.length === 1 ? ' packet' : ' packets') }),
+    h('span', { class: 'wire-hint', text: 'Keys D X U L act on the marked packet.' }));
+  let body;
+  if (!b.wire.length) {
+    body = h('p', { class: 'empty', text: failed ? 'Wire is empty.' : 'Wire is empty. Nothing in flight.' });
+  } else {
+    const activeId = ap ? ap.id : null;
+    body = h('ul', { class: 'pkts' }, b.wire.map(p => {
+      const held = p.holdUntil > b.proto.now;
+      const isNew = !seen.has(p.id); seen.add(p.id);
+      const meta = ['sent ' + fmt(p.sentAt)];
+      if (p.dupStep) meta.push('copy made at step ' + p.dupStep);
+      return h('li', {
+        class: 'pkt' + (p.id === activeId ? ' active' : '') + (isNew ? ' enter' : '') + (p.from === 'R' ? ' fromR' : ''),
+        'data-pid': String(p.id),
+        onclick: () => { if (selectedId !== p.id) { selectedId = p.id; markActive(); } }
+      },
+        h('div', { class: 'pkt-top' },
+          h('span', { class: 'ptype', text: p.type }),
+          h('span', { class: 'mono', text: 'c' + p.ctr }),
+          h('span', { class: 'dir', text: p.from === 'I' ? 'Initiator \u2192 Responder' : 'Initiator \u2190 Responder' })),
+        h('p', { class: 'pmeta' }, meta.join(' · '), held ? h('span', { class: 'held', text: ' · held until ' + fmt(p.holdUntil) }) : null),
+        h('div', { class: 'acts', role: 'group', 'aria-label': 'Actions for ' + pk(p) },
+          h('button', { type: 'button', class: 'btn', 'data-k': 'deliver-' + p.id, 'aria-label': 'Deliver ' + pk(p), disabled: failed || held, onclick: () => tryPacket('deliver', p) }, 'Deliver ', h('kbd', { 'aria-hidden': 'true', text: 'D' })),
+          h('button', { type: 'button', class: 'btn', 'data-k': 'drop-' + p.id, 'aria-label': 'Drop ' + pk(p), disabled: failed, onclick: () => tryPacket('drop', p) }, 'Drop ', h('kbd', { 'aria-hidden': 'true', text: 'X' })),
+          h('button', { type: 'button', class: 'btn', 'data-k': 'dup-' + p.id, 'aria-label': 'Duplicate ' + pk(p), disabled: failed || full, onclick: () => tryPacket('dup', p) }, 'Duplicate ', h('kbd', { 'aria-hidden': 'true', text: 'U' })),
+          h('button', { type: 'button', class: 'btn', 'data-k': 'delay-' + p.id, 'aria-label': 'Delay ' + pk(p) + ' by 3 seconds', disabled: failed, onclick: () => tryPacket('delay', p) }, 'Delay 3 s ', h('kbd', { 'aria-hidden': 'true', text: 'L' })))
+      );
+    }));
+  }
+  $('#wire').replaceChildren(head, body);
+}
+
+function markActive() {
+  const ap = activePacket();
+  document.querySelectorAll('.pkt').forEach(c => c.classList.toggle('active', !!ap && c.getAttribute('data-pid') === String(ap.id)));
+  $('#next').textContent = nextHint(ap);
+}
+
+function renderOutcome() {
+  const run = runs[cur], b = bench, el = $('#outcome');
+  if (b.outcome) {
+    const i = b.outcome.step - 1, c = causeOf(run, i), k = c.step - 1;
+    el.replaceChildren(h('div', { class: 'banner fail', role: 'group', 'aria-labelledby': 'out-h' },
+      h('h2', { id: 'out-h', text: 'Handshake failed at step ' + (i + 1) + ' · ' + fmt(run.log[i].at) }),
+      h('p', { text: b.outcome.text }),
+      h('p', { class: 'cause', text: 'Cause: ' + c.text }),
+      h('p', { class: 'state', text: k === 0 ? 'Retry restores the opening frame as Run ' + letter(runs.length) + '.' : 'Retry restores the state after step ' + k + ' as Run ' + letter(runs.length) + '. Step ' + (k + 1) + ' is yours to change.' }),
+      h('div', { class: 'row' },
+        h('button', { type: 'button', class: 'btn primary', 'data-k': 'retry-main', onclick: () => retry(k) }, k === 0 ? 'Retry from start ' : 'Retry from step ' + k + ' ', h('kbd', { text: 'R' })),
+        h('button', { type: 'button', class: 'btn', 'data-k': 'reset2', onclick: () => doReset() }, 'Reset bench'))
+    ));
+  } else if (b.done) {
+    const e = run.log[b.done.step - 1];
+    el.replaceChildren(h('div', { class: 'banner', role: 'group', 'aria-labelledby': 'out-h' },
+      h('h2', { id: 'out-h', text: 'Handshake established at step ' + b.done.step + ' · ' + fmt(e.at) }),
+      h('p', { text: 'Both machines hold counter c' + b.proto.resp.ctr + '.' + (b.wire.length ? ' Packets still on the wire can be delivered to test a late replay.' : '') })
+    ));
+  } else {
+    el.replaceChildren();
+  }
+}
+
+function renderLog() {
+  const run = runs[cur], par = run.parent >= 0 ? runs[run.parent] : null;
+  $('#runlabel').textContent = par ? 'Run ' + run.name + ' · branched from Run ' + par.name + ' after step ' + run.branchAt : 'Run ' + run.name;
+  const d = par ? divergence(par, run) : -1;
+  const cmp = $('#compare');
+  if (par) {
+    const l1 = d < 0 ? 'Run ' + run.name + ' matches Run ' + par.name + ' so far.'
+      : 'Split at step ' + (d + 1) + '. ' + par.name + ': ' + (par.log[d] ? par.log[d].label : 'no step') + '. ' + run.name + ': ' + (run.log[d] ? run.log[d].label : 'not played yet') + '.';
+    cmp.hidden = false;
+    cmp.replaceChildren(
+      h('p', {}, h('strong', { text: 'Run ' + par.name + ' vs Run ' + run.name })),
+      h('p', { text: l1 }),
+      h('p', { text: 'Run ' + par.name + ' ' + endWord(par) + '. Run ' + run.name + ' ' + endWord(run) + '.' }));
+  } else {
+    cmp.hidden = true; cmp.replaceChildren();
+  }
+  const items = [h('li', {}, h('div', { class: 'rowstatic' },
+    h('span', { class: 'sn', text: '0' }), h('span', { class: 'tm', text: '0.0 s' }),
+    h('span', { text: 'Opening frame. Initiator sends HELLO c1. Its resend timer is due at 5.0 s.' }), h('span', {})))];
+  const N = Math.max(run.log.length, par && d >= 0 ? par.log.length : 0);
+  for (let i = 0; i < N; i++) {
+    if (par && i === d) items.push(h('li', { class: 'split', text: 'Runs split here · step ' + (i + 1) }));
+    if (run.log[i]) items.push(rowEl(run, i));
+    if (par && d >= 0 && i >= d && par.log[i]) {
+      const e = par.log[i];
+      items.push(h('li', { class: 'ghost' + (e.fail ? ' gfail' : ''), text: 'Run ' + par.name + ' · step ' + e.step + ' · ' + fmt(e.at) + ' · ' + e.label + (e.fail ? ' · failed' : '') }));
+    }
+  }
+  $('#timeline').replaceChildren.apply($('#timeline'), items);
+  const tryBox = $('#trylist');
+  if (tryBox) tryBox.remove();
+  if (!run.log.length && !par) {
+    $('#timeline').after(h('ul', { class: 'try', id: 'trylist' },
+      h('li', { text: 'Clean run: deliver HELLO, REPLY and CONFIRM in order.' }),
+      h('li', { text: 'Replay: duplicate HELLO c1, then deliver both copies.' }),
+      h('li', { text: 'Lost packets: drop HELLO c1, then jump to the next timer three times.' })));
+  }
+}
+
+function rowEl(run, i) {
+  const e = run.log[i], key = cur + ':' + i, open = expanded.has(key), pid = 'pn-' + cur + '-' + i;
+  const summary = b => {
+    const s = b.proto;
+    return 'After: Initiator ' + PI[s.init.phase].toLowerCase() + ', c' + s.init.ctr + ', try ' + s.init.tries + ' of 3. Responder ' + PR[s.resp.phase].toLowerCase() + '. ' + b.wire.length + ' on the wire.';
+  };
+  return h('li', { class: e.fail ? 'failrow' : '' },
+    h('button', {
+      type: 'button', class: 'rowbtn', 'aria-expanded': String(open), 'aria-controls': pid, 'data-k': 'row-' + i,
+      onclick: () => { if (open) expanded.delete(key); else expanded.add(key); render(); }
+    },
+      h('span', { class: 'sn', text: String(e.step) }),
+      h('span', { class: 'tm', text: fmt(e.at) }),
+      h('span', { text: e.label }),
+      h('span', { class: 'mark', text: e.fail ? 'FAILED' : e.done ? 'ESTABLISHED' : '' })),
+    h('div', { class: 'panel', id: pid, hidden: !open },
+      h('ul', {}, e.notes.map(t => h('li', { text: t }))),
+      h('p', { class: 'state', text: summary(e.after) }),
+      e.fail ? h('p', { class: 'cause', text: 'Cause: ' + causeOf(run, i).text }) : null,
+      !e.after.outcome ? h('button', { type: 'button', class: 'btn', 'data-k': 'retry-' + i, onclick: () => retry(i + 1) }, 'Retry from step ' + (i + 1)) : null)
+  );
+}
+
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+  const k = (e.key || '').toLowerCase();
+  const map = { d: 'deliver', x: 'drop', u: 'dup', l: 'delay' };
+  if (map[k]) {
+    e.preventDefault();
+    const p = activePacket();
+    if (!p) { say('No packet on the wire.'); return; }
+    tryPacket(map[k], p);
+  } else if (k === 't') {
+    e.preventDefault();
+    act({ a: 'tick' });
+  } else if (k === 'j') {
+    e.preventDefault();
+    if (bench.outcome) { say('This run has failed. Retry or reset to continue.'); return; }
+    if (!nextEvent(bench)) { say('No timer is pending.'); return; }
+    act({ a: 'jump' });
+  } else if (k === 'r' && bench.outcome) {
+    e.preventDefault();
+    retry(failRetryK());
+  }
+});
+
+$('#wire').addEventListener('focusin', e => {
+  const c = e.target.closest('[data-pid]');
+  if (c) { selectedId = Number(c.getAttribute('data-pid')); markActive(); }
+});
+
+document.addEventListener('visibilitychange', () => {
+  document.documentElement.classList.toggle('paused', document.hidden);
+});
+
+doReset(true);
+</script>
+</body>
+</html>
