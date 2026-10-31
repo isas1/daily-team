@@ -55,6 +55,8 @@ jobs:
   run:
     needs: gate
     if: needs.gate.outputs.due == 'true'
+    outputs:
+      pages: ${{ steps.pages_artifact.outcome == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 110
     permissions:
@@ -89,6 +91,7 @@ jobs:
         if: always()
         run: sh shot.sh "editions/$LANE/days" || true
       - name: Publish normal and extra editions
+        id: publish
         if: always()
         env:
           PAGES_URL: https://isas1.github.io/daily-team/
@@ -109,12 +112,13 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        if: always() && vars.PAGES == 'true'
+        id: pages_artifact
+        if: always() && steps.publish.outcome == 'success' && vars.PAGES == 'true'
         with:
           path: _site
   pages:
     needs: run
-    if: always() && needs.run.result != 'skipped' && vars.PAGES == 'true'
+    if: always() && needs.run.outputs.pages == 'true'
     runs-on: ubuntu-latest
     permissions:
       pages: write
