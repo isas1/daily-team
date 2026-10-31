@@ -55,10 +55,10 @@ export function parseFeed(xml, source, date) {
 }
 
 async function fetchFeed(source, fetcher) {
-  const res = await fetcher(source.url, { headers: { 'User-Agent': 'DailyTeam/1.0 feed-reader', Accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml' }, signal: AbortSignal.timeout(8000), redirect: 'error' });
+  const res = await fetcher(source.url, { headers: { 'User-Agent': 'DailyTeam/1.0 feed-reader', Accept: source.format === 'trending' ? 'text/html' : 'application/rss+xml, application/atom+xml, application/xml, text/xml' }, signal: AbortSignal.timeout(8000), redirect: 'error' });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const type = res.headers.get('content-type') || '';
-  if (!/xml|rss|atom/i.test(type)) throw new Error('unexpected feed content type');
+  if (!(source.format === 'trending' ? /text\/html/i : /xml|rss|atom/i).test(type)) throw new Error('unexpected feed content type');
   if (Number(res.headers.get('content-length')) > MAX_BYTES) throw new Error('oversized feed');
   const reader = res.body.getReader(); let bytes = 0, chunks = [];
   try { while (true) { const { done, value } = await reader.read(); if (done) break;
@@ -77,8 +77,9 @@ export async function discover({ date, cacheFile, recent = [], fetcher = fetch, 
     const age = Date.parse(date) - Date.parse(cache.fetched[source.id]);
     if (offline || (age >= 0 && age < 86400000)) { status.push({ source: source.id, status: offline ? 'offline' : 'cached' }); continue; }
     try {
-      const found = parseFeed(await fetchFeed(source, fetcher), source, date);
-      items.push(...found); cache.fetched[source.id] = date;
+      const body = await fetchFeed(source, fetcher);
+      const found = source.format === 'trending' ? parseTrending(body, source, date) : parseFeed(body, source, date);
+      items.unshift(...found); cache.fetched[source.id] = date;
       status.push({ source: source.id, status: 'fetched', count: found.length });
     } catch (e) { status.push({ source: source.id, status: 'failed', reason: e.message.slice(0, 150) }); }
   }
@@ -101,6 +102,26 @@ export async function discover({ date, cacheFile, recent = [], fetcher = fetch, 
     if (group[n] && balanced.length < MAX_ITEMS) balanced.push(group[n]);
   }
   return { items: balanced, status };
+}
+
+// GitHub has no official Trending RSS. Read bounded repository cards only; never
+// fetch repository code. Timestamp means observed on this date, not created then.
+export function parseTrending(html, source, date) {
+  if (Buffer.byteLength(html) > MAX_BYTES) throw new Error('oversized trending page');
+  const items = [], seen = new Set();
+  for (const [, card] of html.matchAll(/<article\b[^>]*class=["'][^"']*Box-row[^"']*["'][^>]*>([\s\S]*?)<\/article>/gi)) {
+    const heading = card.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/i)?.[1] || '';
+    const path = heading.match(/href=["']\/([\w.-]+\/[\w.-]+)["']/)?.[1];
+    if (!path || seen.has(path)) continue;
+    seen.add(path);
+    const link = `https://github.com/${path}`;
+    items.push({ id: hash(link).slice(0, 24), title: path, url: link, source: source.name,
+      sourceId: source.id, published: new Date(date).toISOString(), observed: true,
+      summary: clean(card.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i)?.[1] || '') });
+    if (items.length === MAX_ITEMS) break;
+  }
+  if (!items.length) throw new Error('no GitHub Trending repository cards; markup may have changed');
+  return items;
 }
 function textItem(i) { return i && typeof i.id === 'string' && typeof i.title === 'string' && i.title.length <= 180
   && typeof i.summary === 'string' && i.summary.length <= 350 && typeof i.source === 'string' && safeUrl(i.url) && Number.isFinite(Date.parse(i.published)); }
