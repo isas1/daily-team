@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Run status: pipeline run panel for run 418</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size);line-height:1.4}
+.rs5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;display:flex;flex-direction:column;gap:calc(var(--pack-spacing-gap)*1.5);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2);overflow:auto}
+@media (max-width:300px){.rs5-root{padding:10px;gap:var(--pack-spacing-gap)}}
+.rs5-head{display:flex;flex-wrap:wrap;gap:0 var(--pack-spacing-gap);align-items:baseline}
+.rs5-run{font-weight:600}
+.rs5-ctx{color:var(--pack-muted);font-size:.86em;overflow-wrap:anywhere}
+.rs5-line{display:flex;gap:10px;align-items:flex-start;border-radius:var(--pack-radii-control);min-height:2.9em;font-size:1.22em;font-weight:600;font-variant-numeric:tabular-nums;outline:none}
+.rs5-line:focus{outline:2px solid var(--pack-accent);outline-offset:4px}
+.rs5-g{flex:none;width:20px;height:20px;margin-top:.12em;display:flex;flex-direction:column;align-items:center}
+.rs5-g svg{width:20px;height:20px;display:block}
+.rs5-pop{animation:rs5-pop var(--pack-motion-duration) var(--pack-motion-easing)}
+@keyframes rs5-pop{from{transform:scale(.6);opacity:.2}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.rs5-pop{animation:none}}
+.rs5-word{font-size:11px;font-weight:500;color:var(--pack-accent);margin-top:2px;display:none}
+.rs5-txt{overflow-wrap:anywhere}
+.rs5-strip{display:flex;gap:6px;color:var(--pack-muted)}
+.rs5-strip svg{width:16px;height:16px;display:block;transition:color var(--pack-motion-duration) var(--pack-motion-easing)}
+.rs5-count{color:var(--pack-muted);font-variant-numeric:tabular-nums}
+.rs5-ok{color:var(--pack-accent)}.rs5-bad{color:var(--pack-text)}.rs5-off{color:var(--pack-muted)}
+.rs5-foot{margin-top:auto;border-top:1px solid var(--pack-border);padding-top:var(--pack-spacing-gap);display:flex;flex-direction:column;gap:var(--pack-spacing-gap)}
+.rs5-lab{color:var(--pack-muted);font-size:.8em}
+.rs5-row{display:flex;flex-wrap:wrap;gap:var(--pack-spacing-gap)}
+.rs5-btn{font:inherit;min-height:44px;padding:0 14px;border-radius:var(--pack-radii-control);border:1px solid var(--pack-border);background:transparent;color:var(--pack-text);cursor:pointer;transition:background-color var(--pack-motion-duration) var(--pack-motion-easing),transform 80ms var(--pack-motion-easing)}
+.rs5-btn:active:not(:disabled){transform:translateY(1px)}
+.rs5-btn:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.rs5-pri{flex:1 1 9em;background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-surface);font-weight:600}
+.rs5-pri:disabled{background:transparent;border-color:var(--pack-border);color:var(--pack-muted);cursor:default}
+.rs5-sw{display:flex;align-items:center;gap:8px;flex:1 1 10em}
+.rs5-tr{flex:none;width:28px;height:16px;border-radius:8px;border:1px solid var(--pack-muted);position:relative;box-sizing:border-box}
+.rs5-tr::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:var(--pack-muted);transition:transform var(--pack-motion-duration) var(--pack-motion-easing)}
+.rs5-sw[aria-checked=true] .rs5-tr{border-color:var(--pack-accent)}
+.rs5-sw[aria-checked=true] .rs5-tr::after{transform:translateX(12px);background:var(--pack-accent)}
+.rs5-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e6e8eb;--pack-muted:#9aa1aa;--pack-accent:#6ea8fe;--pack-border:#2c3138}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16191d;--pack-muted:#5b636d;--pack-accent:#1f5fbf;--pack-border:#d5d9df}</style></head><body>
+<div class="rs5-root" id="rs5-root" role="group" aria-label="Run status for run 418">
+  <div class="rs5-head"><span class="rs5-run">Run 418</span><span class="rs5-ctx">forever-web · main · “fix cat-pics-2”</span></div>
+  <div class="rs5-line" id="rs5-line" tabindex="-1"><span class="rs5-g" id="rs5-g"></span><span class="rs5-txt" id="rs5-txt"></span></div>
+  <div class="rs5-strip" id="rs5-strip" aria-hidden="true"></div>
+  <div class="rs5-count" id="rs5-count"></div>
+  <div class="rs5-sr" id="rs5-live" role="status" aria-live="polite"></div>
+  <div class="rs5-foot">
+    <span class="rs5-lab">Demo controls · R retries, Esc resets</span>
+    <div class="rs5-row">
+      <button class="rs5-btn rs5-pri" id="rs5-retry" type="button"></button>
+      <button class="rs5-btn" id="rs5-reset" type="button">Reset</button>
+    </div>
+    <button class="rs5-btn rs5-sw" id="rs5-sw" type="button" role="switch" aria-checked="true"><span class="rs5-tr" aria-hidden="true"></span><span id="rs5-swt"></span></button>
+  </div>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var NAMES={'install-deps':'Install deps','lint-code':'Lint code','compile-web':'Compile web','test-api':'Test api','bundle-assets':'Bundle assets','deploy-preview':'Deploy preview'};
+  function nameOf(id){return NAMES[id]}
+  var DUR=[22,9,16,6,4,5];
+  var $=function(i){return document.getElementById('rs5-'+i)};
+  var root=$('root'),line=$('line'),gl=$('g'),txt=$('txt'),strip=$('strip'),count=$('count'),live=$('live'),bRetry=$('retry'),bReset=$('reset'),sw=$('sw'),swt=$('swt');
+  var S,R,tok=0,timer=0,nextPass=true,raf=0,arc=null,word=null,lastPhase='';
+  function init(){
+    S=[['install-deps','passed'],['lint-code','passed'],['compile-web','passed'],['test-api','failed'],['bundle-assets','skipped'],['deploy-preview','skipped']].map(function(a){return{id:a[0],state:a[1]}});
+    R={phase:'failed',attempt:1,idx:3,t0:0,total:109};
+  }
+  function fmt(s){return s<60?s+' s':Math.floor(s/60)+' m '+(s%60<10?'0':'')+s%60+' s'}
+  function sec(){return Math.floor((performance.now()-R.t0)/1000)}
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e}
+  function glyph(st,big){
+    var s=el('svg',{viewBox:'0 0 16 16',fill:'none',stroke:'currentColor','stroke-width':'1.6','stroke-linecap':'round'});
+    if(st==='passed'){if(big){s.appendChild(el('circle',{cx:8,cy:8,r:6.5}));s.appendChild(el('path',{d:'M5 8.2l2 2 4-4.2'}))}else s.appendChild(el('circle',{cx:8,cy:8,r:5,fill:'currentColor',stroke:'none'}))}
+    else if(st==='failed'){s.appendChild(el('circle',{cx:8,cy:8,r:6.5}));s.appendChild(el('path',{d:'M5.6 5.6l4.8 4.8M10.4 5.6l-4.8 4.8'}))}
+    else if(st==='skipped')s.appendChild(el('rect',{x:3,y:6.5,width:10,height:3,rx:1.5}));
+    else if(st==='queued')s.appendChild(el('circle',{cx:8,cy:8,r:5}));
+    else{s.appendChild(el('circle',{cx:8,cy:8,r:6,opacity:.25}));s.appendChild(el('path',{d:'M8 2a6 6 0 0 1 6 6'}))}
+    s.setAttribute('class',st==='passed'||st==='running'?'rs5-ok':st==='failed'?'rs5-bad':'rs5-off');
+    return s;
+  }
+  function lineText(){
+    var nm=nameOf(S[R.idx].id);
+    if(R.phase==='running')return R.idx===3?'Retrying '+nm+' · '+sec()+' s':'Running '+nm+' · '+(R.idx+1)+' of 6 · '+sec()+' s';
+    if(R.phase==='passed')return 'Passed · 6 of 6 · '+fmt(R.total);
+    return R.attempt===1?'Run 418 · failed at '+nm:'Failed at '+nm+' · attempt '+R.attempt;
+  }
+  function announce(){
+    var nm=nameOf(S[R.idx].id);
+    live.textContent=R.phase!=='running'?lineText():R.idx===3?'Retrying '+nm:'Running '+nm+' · '+(R.idx+1)+' of 6';
+  }
+  function render(){
+    var ph=R.phase;
+    if(ph!==lastPhase){
+      gl.replaceChildren();var g=glyph(ph,true);gl.appendChild(g);
+      word=document.createElement('span');word.className='rs5-word';word.textContent='running';gl.appendChild(word);
+      arc=ph==='running'?g:null;gl.classList.remove('rs5-pop');void gl.offsetWidth;gl.classList.add('rs5-pop');lastPhase=ph;
+    }
+    txt.textContent=lineText();
+    strip.replaceChildren();S.forEach(function(s){strip.appendChild(glyph(s.state))});
+    var p=S.filter(function(s){return s.state==='passed'}).length,k=S.filter(function(s){return s.state==='skipped'}).length;
+    count.textContent=p+' of 6 passed'+(k?' · '+k+' skipped':'')+(R.phase==='failed'?' · '+fmt(R.total):'');
+    var tn=nameOf(S[3].id);
+    bRetry.disabled=R.phase!=='failed';
+    bRetry.textContent=R.phase==='running'?'Retrying '+tn:R.phase==='passed'?'Nothing to retry':R.attempt===1?'Retry '+tn:'Retry '+tn+' again';
+    swt.textContent=nextPass?'Next retry passes':'Next retry fails';
+    sw.setAttribute('aria-checked',String(nextPass));
+  }
+  function done(){announce();render();line.focus({preventScroll:true})}
+  function runIdx(i,my){
+    R.idx=i;S[i].state='running';R.t0=performance.now();announce();render();kick();
+    timer=setTimeout(function(){if(my!==tok)return;S[i].state='passed';R.total+=DUR[i];
+      if(i<5)runIdx(i+1,my);else{R.phase='passed';done()}},DUR[i]*1000);
+  }
+  function retry(){
+    if(R.phase!=='failed')return;
+    var my=++tok,pass=nextPass;R.attempt++;R.phase='running';R.idx=3;S[3].state='running';R.t0=performance.now();
+    announce();render();kick();
+    timer=setTimeout(function(){if(my!==tok)return;R.total+=DUR[3];
+      if(pass){S[3].state='passed';S[4].state=S[5].state='queued';runIdx(4,my)}
+      else{S[3].state='failed';R.phase='failed';done()}},DUR[3]*1000);
+  }
+  function reset(){tok++;clearTimeout(timer);init();render();live.textContent='Reset to run 418 · failed at '+nameOf(S[3].id)}
+  function toggle(){nextPass=!nextPass;render()}
+  function frame(now){
+    var moving=R.phase==='running',rm=reduce();
+    if(arc)arc.style.transform=rm?'none':'rotate('+((now*0.4)%360)+'deg)';
+    if(word)word.style.display=moving&&rm?'block':'none';
+    if(moving)txt.textContent=lineText();
+    raf=moving&&!document.hidden?requestAnimationFrame(frame):0;
+  }
+  function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+  bRetry.addEventListener('click',retry);
+  bReset.addEventListener('click',reset);
+  sw.addEventListener('click',toggle);
+  sw.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();toggle()}});
+  root.addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='r'||e.key==='R'){e.preventDefault();retry()}
+    else if(e.key==='Escape'){e.preventDefault();reset();bRetry.focus()}
+  });
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(R.phase==='running'){render();kick()}});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))document.documentElement.setAttribute('data-theme',m.theme)});
+  init();render();
+})();</script>
+</body></html>

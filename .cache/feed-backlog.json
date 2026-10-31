@@ -1,6 +1,141 @@
 {
   "items": [
     {
+      "id": "d289974c9974603b73c2c53f",
+      "title": "OpenAI raises less than half of $30B target",
+      "url": "https://www.wsj.com/tech/ai/openai-raises-less-than-half-of-30-billion-target-in-latest-round-91aecdc5",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T03:22:44.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "3ab4a2ac04ee9b820838882d",
+      "title": "Tell HN: Scribd Breached",
+      "url": "https://news.ycombinator.com/item?id=50312756",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T02:46:36.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "9a3ce4f2d771829b045984b5",
+      "title": "Flock camera searches fell 95% after a dispatcher's misconduct was caught",
+      "url": "https://www.wkyc.com/article/news/investigations/flock-camera-searches-fall-95-percent-highland-heights-dispatcher-misconduct-caught/95-94b18f33-60e2-4bc7-a00f-d71d1e1fdd5e",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T02:42:02.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "bba0da0d1585467e2ec3197c",
+      "title": "Show HN: To Honor Sir Patrick Stewart, Enjoy the TNG Episode Guessing Game",
+      "url": "https://tng.episodle.com/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T23:51:24.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "8d821849286ada42dbbaeffc",
+      "title": "sanstun: A sans-IO, parallel-friendly WireGuard implementation in Rust",
+      "url": "https://www.firezone.dev/blog/introducing-sanstun",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T21:30:00.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "b65f6c56c4508fd784f83c36",
+      "title": "Jules Verne's Lost Novel",
+      "url": "https://blue-continuum.com/verne-paris",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T19:55:10.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6e1d64b93982139388a267b8",
+      "title": "The oldest ice disappears and the Stone Age emerges from it",
+      "url": "https://www.sciencenorway.no/archaeology-climate-culture/the-oldest-ice-is-disappearing-the-stone-age-is-emerging-from-the-melting-ice/2713921",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T19:51:33.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "43d219ce1d28bc8d40f4b30c",
+      "title": "Infinite Mac: BeOS",
+      "url": "https://blog.persistent.info/2026/10/infinite-mac-beos.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T19:30:09.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "2557b27e65604b5679c53d46",
+      "title": "My favourite PowerMac is a Nintendo Wii",
+      "url": "https://virtuallyfun.com/2026/10/29/my-favourite-powermac-is-a-nintendo-wii/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T17:25:15.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "44da56d320b41406002b94df",
+      "title": "Show HN: A working Nintendo in ~1GB of Qwen weights",
+      "url": "https://github.com/dbreunig/nesformer",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T16:40:22.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "67e05e526744384fb88e29b3",
+      "title": "Florilegium: Procedural Flowers in LaTeX",
+      "url": "https://github.com/kevinraymond/florilegium",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T15:48:12.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6055dc2671b073d019eb2674",
+      "title": "The federated code forge",
+      "url": "https://tangled.org/blog/forge/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T15:44:29.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6e8e173b6a4b63c4e85a698c",
+      "title": "Northflank Breached",
+      "url": "https://status.northflank.com/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T15:10:31.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e0174682f4170dd9dd738848",
+      "title": "The $6.3B Binance hack was pulled off in just 20 minutes",
+      "url": "https://www.wired.com/story/the-dollar63-billion-binance-hack-was-pulled-off-in-just-20-minutes/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T12:50:01.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a13f736d9894568550e2a3e1",
+      "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+      "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T07:09:12.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "cfee38c25797a9a1dea16d5f",
       "title": "Show HN: I Turned DOOM into a Transformer",
       "url": "https://github.com/mottopanikeiku/doomformer",
@@ -145,6 +280,15 @@
       "summary": "Comments"
     },
     {
+      "id": "7e137b0467999a02460a5782",
+      "title": "Brief History of PDP Computers",
+      "url": "https://entropicthoughts.com/history-of-pdp-computers",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-29T13:53:33.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "e4af34a2153ac44b0ad60877",
       "title": "DoorDash to acquire Instacart",
       "url": "https://about.doordash.com/en-us/news/doordash-to-acquire-instacart",
@@ -262,12 +406,39 @@
       "summary": "Comments"
     },
     {
+      "id": "dc4cca89ce0bf93fed1bb19b",
+      "title": "Cloudflare Turnstile solver library (no headless browser required)",
+      "url": "https://github.com/chris124567/cfsolve",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-28T17:29:23.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "50d36c1a28126eb5fd357003",
       "title": "Why is this fingerprinting script creating bioweapons?",
       "url": "https://nullpt.rs/fingerprinting-bioweapons",
       "source": "Hacker News",
       "sourceId": "hacker-news",
       "published": "2026-10-28T17:13:29.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "93ccbc1a917e5817f9ffe370",
+      "title": "Double Buffering with Cloudflare Queues",
+      "url": "https://bellone.com/technical/double-buffering-with-cloudflare-queues",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-28T16:48:23.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "d415d3e609a9966e5de8645c",
+      "title": "Longitudinal Changes InWearable-Captured PhysiologyBefore Sudden Cardiac Death",
+      "url": "https://www.jacc.org/doi/epdf/10.1016/j.jaccas.2026.110397",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-28T15:04:12.000Z",
       "summary": "Comments"
     },
     {
@@ -358,6 +529,15 @@
       "source": "Hacker News",
       "sourceId": "hacker-news",
       "published": "2026-10-27T19:55:06.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6e7c64a3d75c3d9e3cac4502",
+      "title": "Breaking the open web won't stop the bad bots",
+      "url": "https://www.techpolicy.press/breaking-the-open-web-wont-stop-the-bad-bots/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-27T18:42:55.000Z",
       "summary": "Comments"
     },
     {
@@ -611,19 +791,10 @@
       "sourceId": "smashing",
       "published": "2026-09-09T10:00:00.000Z",
       "summary": "The web is evolving beyond menus, forms, and endless clicks toward experiences shaped around human intent. For UX designers, understanding this shift means re-evaluating their role, moving from designing visible interfaces to guiding transparent, intent-driven AI experiences."
-    },
-    {
-      "id": "234692c6daccbe4c55e4b542",
-      "title": "The Many Faces Of September (2026 Wallpapers Edition)",
-      "url": "https://smashingmagazine.com/2026/08/desktop-wallpaper-calendars-september-2026/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-08-31T11:00:00.000Z",
-      "summary": "Could there be a better way to welcome the new month than with a new collection of desktop wallpapers? Whether you’re holding tightly onto summer or eagerly awaiting autumn, we’ve got some eye-catching designs to make your September just a bit more colorful. Enjoy!"
     }
   ],
   "fetched": {
-    "smashing": "2026-10-30",
-    "hacker-news": "2026-10-30"
+    "smashing": "2026-10-31",
+    "hacker-news": "2026-10-31"
   }
 }

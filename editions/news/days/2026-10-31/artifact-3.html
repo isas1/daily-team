@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step log · Pipeline run panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{color-scheme:dark}
+[data-theme=light]{color-scheme:light}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+.sl-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2);overflow:auto;container-type:inline-size}
+@media (max-width:300px){.sl-root{padding:var(--pack-spacing-gap)}}
+.sl-hd,.sl-tb,.sl-at{display:flex;align-items:center;gap:6px}
+.sl-tb{flex-wrap:wrap}
+.sl-sel{flex:1;min-width:0;min-height:44px;padding:0 8px;font:inherit;font-weight:600;color:var(--pack-text);background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.sl-atl{color:var(--pack-muted);font-size:12px;margin-right:2px}
+.sl-b{min-width:44px;min-height:44px;padding:0 10px;font:inherit;color:var(--pack-text);background:transparent;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);cursor:pointer;transition:background-color var(--pack-motion-duration) var(--pack-motion-easing),color var(--pack-motion-duration) var(--pack-motion-easing),transform 80ms var(--pack-motion-easing)}
+.sl-b[aria-pressed=true]{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-bg)}
+.sl-b:active:not(:disabled){transform:translateY(1px)}
+.sl-b:disabled{opacity:.38;cursor:default}
+.sl-ar{font-size:16px;padding:0}
+.sl-wr{margin-left:auto}
+:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.sl-meta{margin:0;font-size:12px;color:var(--pack-muted);font-variant-numeric:tabular-nums;line-height:1.4}
+.sl-meta b{color:var(--pack-text)}
+.sl-ct{min-width:6.5em;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
+.sl-lw{flex:1;min-height:96px;position:relative;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:var(--pack-bg);overflow:hidden}
+.sl-log{position:absolute;inset:0;overflow:auto;overscroll-behavior:contain;font:12px/18px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;scrollbar-width:thin;scrollbar-color:var(--pack-border) transparent}
+.sl-log:focus-visible{outline-offset:-2px}
+.sl-in{width:max-content;min-width:100%;padding:4px 0}
+.sl-w .sl-in{width:auto}
+.sl-ch{content-visibility:auto}
+.sl-ln{display:flex;counter-increment:ln;padding-right:12px;background:var(--pack-bg);transition:box-shadow var(--pack-motion-duration) var(--pack-motion-easing)}
+.sl-ln::before{content:counter(ln);position:sticky;left:0;flex:none;width:3ch;padding:0 1ch 0 .75ch;text-align:right;color:var(--pack-muted);background:inherit;user-select:none;-webkit-user-select:none;transition:inherit}
+.sl-t{white-space:pre}
+.sl-w .sl-t{white-space:pre-wrap;overflow-wrap:anywhere;min-width:0}
+.sl-e{background:color-mix(in srgb,var(--pack-accent) 15%,var(--pack-bg))}
+.sl-mk{color:var(--pack-accent);font-weight:700}
+.sl-cur{box-shadow:inset 0 0 0 2px var(--pack-accent)}
+.sl-cur::before{background:var(--pack-accent);color:var(--pack-bg)}
+.sl-emp{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:12px;text-align:center;color:var(--pack-muted)}
+.sl-emp b{color:var(--pack-text)}
+.sl-pill{position:absolute;right:8px;bottom:8px;min-height:44px;padding:0 14px;font:inherit;font-size:13px;color:var(--pack-bg);background:var(--pack-accent);border:0;border-radius:22px;cursor:pointer}
+[hidden]{display:none!important}
+.sl-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@container (max-width:300px){.sl-atl{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e6e8eb;--pack-muted:#9aa1aa;--pack-accent:#6ea8fe;--pack-border:#2c3138}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16191d;--pack-muted:#5b636d;--pack-accent:#1f5fbf;--pack-border:#d5d9df}</style></head><body>
+<div class="sl-root" id="sl-root" role="group" aria-label="Step log for run 418">
+<div class="sl-hd">
+<label class="sl-sr" for="sl-sel">Step</label>
+<select class="sl-sel" id="sl-sel"></select>
+<div class="sl-at" id="sl-at" role="group" aria-label="Attempt"><span class="sl-atl">Attempt</span><button class="sl-b" id="sl-a1" type="button">1</button><button class="sl-b" id="sl-a2" type="button">Retry</button></div>
+</div>
+<p class="sl-meta" id="sl-meta"></p>
+<div class="sl-tb">
+<button class="sl-b sl-ar" id="sl-pv" type="button" aria-label="Previous error" title="Previous error (Shift+N)">↑</button>
+<span class="sl-ct" id="sl-ct" aria-live="polite"></span>
+<button class="sl-b sl-ar" id="sl-nx" type="button" aria-label="Next error" title="Next error (N)">↓</button>
+<button class="sl-b sl-wr" id="sl-wr" type="button" aria-pressed="false" title="Wrap lines (W)">Wrap</button>
+</div>
+<div class="sl-lw">
+<div class="sl-log" id="sl-log" role="region" aria-label="Log output" tabindex="0"><div class="sl-in" id="sl-in"></div></div>
+<div class="sl-emp" id="sl-emp" hidden><b>Did not run</b><span id="sl-why"></span></div>
+<button class="sl-pill" id="sl-pill" type="button" hidden>Paused · Latest ↓</button>
+</div>
+<span class="sl-sr" id="sl-say" aria-live="polite"></span>
+</div>
+<script>(function(){
+var D=document,reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+function g(i){return D.getElementById('sl-'+i)}
+function $(t,c,x){var e=D.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+var N={'install-deps':'Install deps','lint-code':'Lint code','compile-web':'Compile web','test-api':'Test api','bundle-assets':'Bundle assets','deploy-preview':'Deploy preview'};
+function nameOf(id){return N[id]}
+var F=['users','uploads','billing','sessions','cats','health'],
+T=['returns 200 on Monday','saves cat-pics-2','rejects empty Emotional baggage','keeps Forever plan active','deletes a draft','handles Cancel','pages 50 items','trims whitespace'];
+function suite(n,cmd,end){var a=[{t:cmd}];for(var i=1;i<n-2;i++)a.push({t:i%24==1?'PASS api/'+F[(i/24|0)%6]+'.test.ts ('+(300+i*7%500)+' ms)':'  ✓ '+T[i%8]+' ('+(2+i*7%40)+' ms)'});return a.concat(end)}
+function plain(n,cmd,v,done){var a=[{t:cmd}];for(var i=1;i<n-1;i++)a.push({t:'  '+v+' src/'+F[i%6]+'-'+i+'.ts'});a.push({t:done});return a}
+var A1=suite(412,'$ forever test api --ci',[{t:'Tests:       3 failed, 209 passed, 212 total'},{t:'Exit code 1'}]);
+function blk(at,head,msg,f,ln,a,b){[{t:'FAIL api/'+f+'.test.ts'},{t:'  ● '+head},{t:msg,e:1},{t:'      '+(ln-1)+' |   '+a},{t:'    > '+ln+' |   '+b},{t:'    at Object.<anonymous> (api/'+f+'.test.ts:'+ln+':24)'}].forEach(function(o,i){A1[at-3+i]=o})}
+blk(214,'auth › refresh › rejects expired Forever plan token','Expected status 401, received 200 for token "forever-plan-expired"','auth',88,'const res = await refresh(expiredToken);','expect(res.status).toBe(401);');
+blk(301,'uploads › album › stays under the size limit','Expected "cat-pics-2.zip" under 50 MB, received 812 MB · body {"album":"cat-pics-2","files":14203,"compress":false,"note":"every one is a good cat"}','uploads',41,'const res = await upload(album);','expect(res.size).toBeLessThan(LIMIT);');
+blk(356,'sessions › weigh-in › finishes in time','Timeout: "Emotional baggage" weigh-in took 5,000 ms, limit 2,000 ms (212 pounds)','sessions',17,'const w = await weighIn(bag);','expect(w.ms).toBeLessThan(2000);');
+var A2=suite(96,'$ forever test api --ci   # attempt 2',[{t:'Tests:       212 passed, 212 total'},{t:'Exit code 0'}]);
+var S={'install-deps':{a:[plain(58,'$ forever install','fetched','Done in 9.2 s · exit 0')]},'lint-code':{a:[plain(96,'$ forever lint','checked','No problems · exit 0')]},'compile-web':{a:[plain(140,'$ forever build web','compiled','Built in 22 s · exit 0')]},'test-api':{a:[A1]},'bundle-assets':{skip:1},'deploy-preview':{skip:1}};
+var ROOT=g('root'),SEL=g('sel'),AT=g('at'),B1=g('a1'),B2=g('a2'),META=g('meta'),PV=g('pv'),NX=g('nx'),CT=g('ct'),WR=g('wr'),LOG=g('log'),IN=g('in'),EMP=g('emp'),WHY=g('why'),PILL=g('pill'),SAY=g('say');
+var sel='test-api',att=0,cur=-1,errs=[],els=[],pos={},wrap=false,live=false,follow=true,anim=null,raf=0,ch=null,cn=0;
+function key(){return sel+':'+att}
+function streamView(){return live&&sel=='test-api'&&att==1}
+function say(t){SAY.textContent=t}
+function add(o){if(!ch||cn==64){ch=$('div','sl-ch');ch.style.counterReset='ln '+els.length;IN.append(ch);cn=0}
+var d=$('div','sl-ln'+(o.e?' sl-e':'')),t=$('span','sl-t');if(o.e)t.append($('span','sl-mk','✕ error '));t.append(o.t);d.append(t);ch.append(d);
+if(o.e)errs.push(els.length);els.push(d);cn++;ch.style.containIntrinsicHeight='auto '+cn*18+'px'}
+function save(){if(!LOG.hidden)pos[key()]={top:LOG.scrollTop,left:LOG.scrollLeft,cur:cur}}
+function meta(){var s=S[sel],L=s.skip?null:s.a[att],n=errs.length;
+META.replaceChildren($('b',0,nameOf(sel)),L?' · attempt '+(att+1)+' · '+L.length+' lines'+(streamView()?' · streaming':''):' · did not run');
+CT.textContent=!L?'No log':!n?(streamView()?'No errors yet':'No errors'):cur<0?n+' errors':'Error '+(cur+1)+' of '+n;
+PV.disabled=cur<=0;NX.disabled=!n||cur>=n-1;WR.disabled=!L;
+var a=D.activeElement;if(a&&a.disabled)LOG.hidden?SEL.focus():LOG.focus()}
+function render(){var s=S[sel],L=s.skip?null:s.a[att],p=pos[key()]||{top:0,left:0,cur:-1},two=s.a&&s.a.length>1;
+IN.replaceChildren();ch=null;els=[];errs=[];anim=null;
+AT.style.visibility=sel=='test-api'?'':'hidden';
+B1.setAttribute('aria-pressed',att==0);B2.textContent=two?'2':'Retry';
+if(two)B2.setAttribute('aria-pressed',att==1);else B2.removeAttribute('aria-pressed');
+LOG.hidden=!L;EMP.hidden=!!L;PILL.hidden=true;follow=true;cur=-1;
+if(L){L.forEach(add);cur=p.cur;if(cur>=0)els[errs[cur]].classList.add('sl-cur');LOG.scrollTop=p.top;LOG.scrollLeft=p.left;if(streamView())LOG.scrollTop=LOG.scrollHeight}
+else WHY.textContent='Skipped because '+nameOf('test-api')+' failed';
+meta()}
+function tgt(el){var r=el.getBoundingClientRect(),q=LOG.getBoundingClientRect();
+return Math.max(0,Math.min(LOG.scrollHeight-LOG.clientHeight,LOG.scrollTop+r.top-q.top-(LOG.clientHeight-r.height)/2))}
+function go(k,now){if(k<0||k>=errs.length)return;if(cur>=0)els[errs[cur]].classList.remove('sl-cur');
+cur=k;var el=els[errs[k]];el.classList.add('sl-cur');LOG.scrollLeft=0;
+anim={f:LOG.scrollTop,s:performance.now(),el:el};if(now)snap();else kick();save();meta()}
+function clear(){if(cur>=0)els[errs[cur]].classList.remove('sl-cur');cur=-1;save();meta();if(!LOG.hidden)LOG.focus()}
+function toggle(){if(LOG.hidden)return;wrap=!wrap;LOG.classList.toggle('sl-w',wrap);WR.setAttribute('aria-pressed',wrap);
+if(cur>=0){anim={el:els[errs[cur]]};snap()}else if(streamView()&&follow)LOG.scrollTop=LOG.scrollHeight}
+function step(){if(!anim)return false;var p=Math.min(1,(performance.now()-anim.s)/240),e=1-Math.pow(1-p,3);
+LOG.scrollTop=anim.f+(tgt(anim.el)-anim.f)*e;if(p>=1)anim=null;return!!anim}
+function snap(){if(anim){LOG.scrollTop=tgt(anim.el);anim=null}}
+function frame(){var m=reduce()?(snap(),false):step();raf=m?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!D.hidden)raf=requestAnimationFrame(frame)}
+function retry(){var s=S['test-api'];if(live||s.a.length>1)return;s.a.push([]);live=true;save();att=1;render();
+say(nameOf('test-api')+' attempt 2 started');var i=0;
+(function tick(){var L=s.a[1],v=streamView();for(var j=0;j<3&&i<A2.length;j++,i++){L.push(A2[i]);if(v)add(A2[i])}
+if(v&&follow)LOG.scrollTop=LOG.scrollHeight;
+if(i>=A2.length){live=false;PILL.hidden=true;say(nameOf('test-api')+' attempt 2 passed · '+L.length+' lines')}else setTimeout(tick,110);
+if(v||!live)meta()})()}
+Object.keys(N).forEach(function(id){var o=$('option',0,nameOf(id));o.value=id;SEL.append(o)});SEL.value=sel;
+SEL.addEventListener('change',function(){save();sel=SEL.value;var s=S[sel];att=s.skip?0:s.a.length-1;render()});
+B1.addEventListener('click',function(){save();att=0;render()});
+B2.addEventListener('click',function(){if(S['test-api'].a.length<2)retry();else{save();att=1;render()}});
+PV.addEventListener('click',function(){go(cur-1)});
+NX.addEventListener('click',function(){go(cur+1)});
+WR.addEventListener('click',toggle);
+PILL.addEventListener('click',function(){follow=true;PILL.hidden=true;LOG.scrollTop=LOG.scrollHeight;LOG.focus()});
+LOG.addEventListener('scroll',function(){save();if(streamView()){follow=LOG.scrollHeight-LOG.scrollTop-LOG.clientHeight<24;PILL.hidden=follow}},{passive:true});
+['wheel','touchstart'].forEach(function(t){LOG.addEventListener(t,function(){anim=null},{passive:true})});
+ROOT.addEventListener('keydown',function(e){if(e.target==SEL||e.ctrlKey||e.metaKey||e.altKey)return;var k=e.key;
+if(k=='n'||k=='N'){e.preventDefault();go(e.shiftKey?cur-1:cur+1)}
+else if(k=='w'||k=='W'){e.preventDefault();toggle()}
+else if(k=='Escape')clear();
+else if(/Arrow|Page|Home|End/.test(k))anim=null});
+D.addEventListener('visibilitychange',function(){if(D.hidden){cancelAnimationFrame(raf);raf=0}else if(anim)kick()});
+addEventListener('message',function(e){var m=e.data;
+if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))D.documentElement.setAttribute('data-theme',m.theme)});
+render();go(0,true);
+})();</script>
+</body></html>

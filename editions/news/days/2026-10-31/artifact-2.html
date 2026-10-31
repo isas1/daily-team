@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Failure summary · Pipeline run panel, run 418</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--gap:var(--pack-spacing-gap);--pad:var(--pack-spacing-padding);--rad:var(--pack-radii-control);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size)}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit}
+.fs2-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);overflow:auto;line-height:1.4}
+:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.fs2-steps{display:flex;flex-wrap:wrap;gap:4px}
+.fs2-seg{min-height:44px;padding:0 12px;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);background:transparent;color:var(--pack-muted);cursor:pointer;display:flex;align-items:center;gap:6px;flex:1 1 auto;justify-content:center;transition:background var(--pack-motion-duration) var(--pack-motion-easing),color var(--pack-motion-duration) var(--pack-motion-easing)}
+.fs2-seg[aria-checked=true]{background:var(--pack-surface);color:var(--pack-text);border-color:var(--pack-accent)}
+.fs2-seg:active,.fs2-btn:active,.fs2-link:active{transform:translateY(1px)}
+.fs2-card{background:var(--pack-surface);border-radius:var(--pack-radii-control);border-left:2px solid var(--pack-border)}
+.fs2-card.fs2-fail{border-left-color:var(--pack-accent)}
+.fs2-head{width:100%;min-height:44px;display:flex;align-items:center;gap:var(--pack-spacing-gap);padding:10px 12px;background:none;border:0;border-radius:var(--pack-radii-control);cursor:pointer;text-align:left}
+.fs2-name{font-weight:600}
+.fs2-word,.fs2-meta,.fs2-mu{color:var(--pack-muted)}
+.fs2-meta{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap;opacity:0;transition:opacity var(--pack-motion-duration) var(--pack-motion-easing)}
+.fs2-closed .fs2-meta{opacity:1}
+.fs2-chev{width:8px;height:8px;border-right:2px solid var(--pack-muted);border-bottom:2px solid var(--pack-muted);transform:rotate(45deg);flex:none;margin:0 2px 4px 8px;transition:transform var(--pack-motion-duration) var(--pack-motion-easing)}
+.fs2-closed .fs2-chev{transform:rotate(-45deg);margin-bottom:0}
+.fs2-g{width:12px;height:12px;flex:none;border-radius:50%;position:relative}
+.fs2-g-passed{background:var(--pack-muted)}
+.fs2-g-skipped{border-radius:2px;height:2px;background:var(--pack-muted)}
+.fs2-g-failed{border:1.5px solid var(--pack-accent)}
+.fs2-g-failed::before,.fs2-g-failed::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:1.5px;background:var(--pack-accent);transform:translate(-50%,-50%) rotate(45deg)}
+.fs2-g-failed::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.fs2-wrap{overflow:hidden}
+.fs2-body{padding:0 12px 12px 32px;display:flex;flex-direction:column;gap:4px}
+.fs2-body p{margin:0}
+.fs2-sub{margin-top:8px!important;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--pack-muted)}
+code,.fs2-log{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+.fs2-link{align-self:flex-start;min-height:44px;padding:0;border:0;background:none;color:var(--pack-accent);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.fs2-log{margin-top:2px;border-radius:var(--pack-radii-control);background:var(--pack-bg);padding:6px 0;overflow-x:auto;opacity:0;transform:translateY(-4px);transition:opacity var(--pack-motion-duration) var(--pack-motion-easing),transform var(--pack-motion-duration) var(--pack-motion-easing)}
+.fs2-log.fs2-in{opacity:1;transform:none}
+.fs2-ln{display:flex;gap:10px;padding:1px 8px;white-space:pre}
+.fs2-ln span:first-child{color:var(--pack-muted);user-select:none;font-variant-numeric:tabular-nums;min-width:3ch;text-align:right}
+.fs2-hit{box-shadow:inset 2px 0 0 var(--pack-accent)}
+.fs2-hit:focus{outline:2px solid var(--pack-accent);outline-offset:-2px}
+.fs2-err{color:var(--pack-accent);font-weight:600}
+.fs2-demo{margin-top:auto;display:flex;align-items:center;gap:var(--pack-spacing-gap);flex-wrap:wrap}
+.fs2-btn{min-height:44px;padding:0 14px;border-radius:var(--pack-radii-control);border:1px solid var(--pack-border);background:var(--pack-surface);color:var(--pack-text);cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;--pack-typography-size:14px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111316;--pack-surface:#1a1d21;--pack-text:#e6e8eb;--pack-muted:#9aa1aa;--pack-accent:#6ea8fe;--pack-border:#2c3138}:root[data-theme="light"]{--pack-bg:#f6f7f9;--pack-surface:#ffffff;--pack-text:#16191d;--pack-muted:#5b636d;--pack-accent:#1f5fbf;--pack-border:#d5d9df}</style></head><body>
+<div class="fs2-root" role="group" aria-label="Failure summary for run 418">
+<div class="fs2-steps" role="radiogroup" aria-label="Sample step" id="fs2-steps"></div>
+<div class="fs2-card" id="fs2-card"></div>
+<div class="fs2-demo"><button class="fs2-btn" id="fs2-demo" type="button"></button></div>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var N={'compile-web':'Compile web','test-api':'Test api','bundle-assets':'Bundle assets'};
+  function nameOf(id){return N[id]}
+  var order=['compile-web','test-api','bundle-assets'];
+  var S={'compile-web':{state:'passed',dur:'31 s'},
+    'test-api':{state:'failed',attempts:[{exit:1,failed:3,total:212,file:'api/auth.test.ts:88',line:214}]},
+    'bundle-assets':{state:'skipped',needs:'test-api'}};
+  var log=[[213,'  ● renews Forever plan session'],[214,'error  expected 200, received 401'],[215,'  token for cat-pics-2 expired 3 naps ago']];
+  var sel='test-api',open=true;
+  var $=function(i){return document.getElementById(i)};
+  var steps=$('fs2-steps'),card=$('fs2-card'),demo=$('fs2-demo');
+  var wrap,head,anim=null,raf=0;
+  function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e}
+  function status(id){var s=S[id];
+    if(s.state==='failed')return s.attempts.length>1?'recovered':'failed';return s.state}
+  function glyph(st){return el('span','fs2-g fs2-g-'+(st==='recovered'?'passed':st),null)}
+  function word(st){return {failed:'failed',passed:'passed',recovered:'passed',skipped:'skipped'}[st]}
+  function failBlock(a,parent){
+    parent.appendChild(el('p',null,'exit '+a.exit+' · '+a.failed+' of '+a.total+' tests failed'));
+    var p=el('p',null,'First at ');p.appendChild(el('code',null,a.file));parent.appendChild(p);
+    var j=el('button','fs2-link','Jump to line '+a.line);j.type='button';parent.appendChild(j);
+    var lg=el('div','fs2-log');lg.hidden=true;lg.setAttribute('role','region');lg.setAttribute('aria-label','Log of '+nameOf('test-api')+', attempt 1');
+    var hit;
+    log.forEach(function(l){var r=el('div','fs2-ln');r.appendChild(el('span',null,String(l[0])));
+      r.appendChild(el('span',l[0]===a.line?'fs2-err':null,l[1]));
+      if(l[0]===a.line){r.classList.add('fs2-hit');r.tabIndex=-1;hit=r}lg.appendChild(r)});
+    parent.appendChild(lg);
+    j.addEventListener('click',function(){
+      lg.hidden=false;wrap.style.height='';
+      requestAnimationFrame(function(){lg.classList.add('fs2-in');hit.focus({preventScroll:true});
+        hit.scrollIntoView({block:'nearest',behavior:reduce()?'auto':'smooth'})})});
+    hit.addEventListener('keydown',function(e){if(e.key==='Escape'){e.stopPropagation();lg.classList.remove('fs2-in');lg.hidden=true;j.focus()}});
+  }
+  function body(){
+    var b=el('div','fs2-body'),s=S[sel],st=status(sel);
+    if(st==='failed')failBlock(s.attempts[0],b);
+    else if(st==='recovered'){
+      b.appendChild(el('p',null,'Passed on attempt 2 · '+s.attempts[1].dur));
+      b.appendChild(el('p','fs2-sub','Attempt 1'));failBlock(s.attempts[0],b)}
+    else if(st==='passed')b.appendChild(el('p',null,'Passed in '+s.dur));
+    else{b.appendChild(el('p',null,'Did not run'));
+      b.appendChild(el('p','fs2-mu',status(s.needs)==='recovered'?'Queued after '+nameOf(s.needs):'Skipped because '+nameOf(s.needs)+' failed'))}
+    return b}
+  function meta(){var s=S[sel],st=status(sel);
+    return st==='failed'?'exit 1 · '+s.attempts[0].failed+' failed':st==='recovered'?'attempt 2':st==='passed'?s.dur:'did not run'}
+  function renderSteps(){
+    while(steps.firstChild)steps.removeChild(steps.firstChild);
+    order.forEach(function(id){var b=el('button','fs2-seg');b.type='button';b.setAttribute('role','radio');
+      b.setAttribute('aria-checked',String(id===sel));b.tabIndex=id===sel?0:-1;b.dataset.id=id;
+      b.appendChild(glyph(status(id)));b.appendChild(el('span',null,nameOf(id)));
+      b.addEventListener('click',function(){pick(id,false)});steps.appendChild(b)})}
+  function renderCard(){
+    var st=status(sel);
+    while(card.firstChild)card.removeChild(card.firstChild);
+    card.className='fs2-card'+(st==='failed'?' fs2-fail':'')+(open?'':' fs2-closed');
+    head=el('button','fs2-head');head.type='button';head.id='fs2-head';
+    head.setAttribute('aria-expanded',String(open));head.setAttribute('aria-controls','fs2-region');
+    head.appendChild(glyph(st));head.appendChild(el('span','fs2-name',nameOf(sel)));
+    head.appendChild(el('span','fs2-word',word(st)));head.appendChild(el('span','fs2-meta',meta()));
+    head.appendChild(el('span','fs2-chev'));
+    head.addEventListener('click',toggle);
+    wrap=el('div','fs2-wrap');wrap.id='fs2-region';wrap.setAttribute('role','region');
+    wrap.setAttribute('aria-labelledby','fs2-head');wrap.appendChild(body());
+    if(!open){wrap.hidden=true;wrap.style.height='0px'}
+    card.appendChild(head);card.appendChild(wrap);anim=null;
+    demo.textContent=S['test-api'].attempts.length>1?'Reset to attempt 1':'Demo: pass attempt 2'}
+  function pick(id,focus){sel=id;open=true;renderSteps();renderCard();
+    if(focus)steps.querySelector('[data-id="'+id+'"]').focus()}
+  function dur(){var v=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pack-motion-duration'));return v>0?v:180}
+  function toggle(){
+    open=!open;head.setAttribute('aria-expanded',String(open));card.classList.toggle('fs2-closed',!open);
+    var from=wrap.hidden?0:wrap.offsetHeight;wrap.hidden=false;
+    var to=open?wrap.scrollHeight:0;
+    anim={from:from,to:to,t0:0,d:dur()};kick()}
+  function step(now){
+    if(!anim)return false;if(!anim.t0)anim.t0=now;
+    var k=Math.min(1,(now-anim.t0)/anim.d),e=1-Math.pow(1-k,3);
+    wrap.style.height=(anim.from+(anim.to-anim.from)*e)+'px';
+    if(k>=1){snapToTarget();return false}return true}
+  function snapToTarget(){if(!anim)return;anim=null;
+    if(open)wrap.style.height='';else{wrap.style.height='0px';wrap.hidden=true}}
+  function frame(now){var moving=reduce()?(snapToTarget(),false):step(now);raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden)raf=requestAnimationFrame(frame)}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0;snapToTarget()}else kick()});
+  steps.addEventListener('keydown',function(e){
+    var i=order.indexOf(sel),n=order.length,k=e.key;
+    if(k==='ArrowRight'||k==='ArrowDown')i=(i+1)%n;else if(k==='ArrowLeft'||k==='ArrowUp')i=(i+n-1)%n;
+    else if(k==='Home')i=0;else if(k==='End')i=n-1;else return;
+    e.preventDefault();pick(order[i],true)});
+  card.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&open){e.preventDefault();toggle();head.focus()}});
+  demo.addEventListener('click',function(){
+    var a=S['test-api'].attempts;
+    if(a.length>1)a.pop();else a.push({pass:true,dur:'34 s'});
+    pick('test-api',false);demo.focus()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark'))
+      document.documentElement.setAttribute('data-theme',m.theme)});
+  renderSteps();renderCard();
+})();</script>
+</body></html>

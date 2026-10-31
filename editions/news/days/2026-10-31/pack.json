@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "categoryVersion": 1,
+  "id": "2026-10-31-news-pipeline-run-panel",
+  "name": "Pipeline run panel",
+  "description": "A status panel for a build tool that opens on the failed step, explains it, shows its log, and retries it in a local demo. One step name is used on every surface.",
+  "project": "Run 418 on branch main of a sample web repo. Six steps: Install deps, Lint code, Compile web, Test api, Bundle assets, Deploy preview. Test api failed, and the last two steps were skipped.",
+  "sizeRationale": "Six rows cover the developer's sequence: choose a step, read the cause, read the log, retry, follow status, and hold the layout on small screens. A history strip was cut because it answers a later question and has no action.",
+  "opportunities": [
+    {
+      "id": "906c26c75ab309095d956d6f",
+      "need": "Build steps are often named inconsistently between the step list, the log header and the action buttons, so a developer cannot tell which step a retry targets.",
+      "use": "A developer reads 'Retry Test api' and knows it reruns only that step, using the same words shown in the list and the log header.",
+      "interaction": "A single names table with verb-object step names feeds the list, summary, log header, retry label and status line.",
+      "similarity": "The article covers naming UI components. This pack applies its conventions to runtime labels. 2026-10-27 recorded the same task with no components, so this is the first build of it."
+    },
+    {
+      "id": "c15c1be0aad75fb41fbdb15d",
+      "need": "No clear need. Randomness could stagger glyph entry or jitter retry timing.",
+      "use": "Decorative variance on status glyphs.",
+      "interaction": "CSS random() on delays.",
+      "similarity": "Random visual variance conflicts with a status panel, where position and timing must stay stable. Weak fit."
+    },
+    {
+      "id": "b008f772ace718d60f01070e",
+      "need": "Showing the time cost of failed runs.",
+      "use": "A wasted-minutes counter.",
+      "interaction": "Aggregated cost display.",
+      "similarity": "This is a reporting concern outside a single run panel. It would need invented data. Weak fit."
+    }
+  ],
+  "selection": {
+    "id": "906c26c75ab309095d956d6f",
+    "rationale": "Naming is the practical gap in pipeline panels. Applying verb-object names consistently across six surfaces makes the target of each action unambiguous. The other two candidates add decoration or invented data."
+  },
+  "tokens": {
+    "colors": {
+      "dark": {
+        "bg": "#111316",
+        "surface": "#1a1d21",
+        "text": "#e6e8eb",
+        "muted": "#9aa1aa",
+        "accent": "#6ea8fe",
+        "border": "#2c3138"
+      },
+      "light": {
+        "bg": "#f6f7f9",
+        "surface": "#ffffff",
+        "text": "#16191d",
+        "muted": "#5b636d",
+        "accent": "#1f5fbf",
+        "border": "#d5d9df"
+      }
+    },
+    "typography": {
+      "family": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+      "size": "14px"
+    },
+    "spacing": {
+      "gap": "8px",
+      "padding": "16px"
+    },
+    "radii": {
+      "control": "6px"
+    },
+    "motion": {
+      "duration": "180ms",
+      "easing": "ease-out"
+    }
+  },
+  "components": [
+    {
+      "row": 1,
+      "id": "2026-10-31-news-pipeline-run-panel-step-list",
+      "file": "artifact-1.html",
+      "name": "Step list",
+      "description": "Listbox of pipeline steps with shape glyphs and fixed-width durations. The first failed step is selected on load.",
+      "category": "Navigation",
+      "tags": [
+        "listbox",
+        "pipeline",
+        "steps",
+        "status-glyph",
+        "roving-tabindex",
+        "first-frame"
+      ],
+      "purpose": "Choose which step the panel describes, starting on the failure.",
+      "use": "A developer opens run 418 and finds Test api already selected. They press Down to read why Bundle assets was skipped.",
+      "input": "Click or tap a row. Keyboard: Tab into the list, Up and Down move, Home and End jump, F moves to the next failed step, Enter selects.",
+      "outcome": "The selected step drives rows 2 to 4. A skipped step reads 'Skipped because Test api failed'.",
+      "recovery": "Selecting another step changes nothing in the run. After a retry, the selection stays on the retried step.",
+      "mechanism": "Listbox with roving tabindex. Rows are built from the shared names table and the step-state array. Glyphs: filled dot for passed, ringed cross for failed, hollow dash for skipped, hollow ring for queued, 12px arc for running. Each glyph has a visible word. Durations use tabular-nums in a column reserved from '1 m 59 s'.",
+      "nearestAnalogue": "2026-10-30 source tabs showed request state in a fixed glyph slot across three sources. This list orders dependent steps and states why a step did not run.",
+      "usefulness": "It puts the failure in the first frame and makes each step one keypress away.",
+      "creativeDifference": "Skipped steps are selectable and give their cause, so the side step is as legible as the failure.",
+      "states": [
+        "loaded: Test api selected, reached on load",
+        "selected: 2px accent left edge, reached by click or Enter",
+        "focus: 2px ring, reached by Tab or arrows",
+        "skipped-selected: reason line shown, reached by selecting Bundle assets or Deploy preview",
+        "running: arc glyph on the retried step, reached by row 4",
+        "all-passed: F does nothing and the hint reads 'No failed steps'"
+      ],
+      "sources": [
+        {
+          "title": "CI pipeline oscilloscope (creative-sites-vault)",
+          "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/devtools-delivery/ci-oscilloscope/ci-pipeline-oscilloscope.html"
+        },
+        {
+          "title": "A Practical Guide To Naming Things",
+          "url": "https://smashingmagazine.com/2026/10/how-name-things/"
+        },
+        {
+          "title": "ARIA Authoring Practices: Listbox",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-31-news-pipeline-run-panel",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "ea37ab221c7b95a3d1e6d49ce4f72b6c3e184835cf4b8398d1145e27c187b1a1"
+    },
+    {
+      "row": 2,
+      "id": "2026-10-31-news-pipeline-run-panel-failure-summary",
+      "file": "artifact-2.html",
+      "name": "Failure summary",
+      "description": "Disclosure card stating the failed step, exit code, failing count and first error location, with a link into the log.",
+      "category": "Content",
+      "tags": [
+        "disclosure",
+        "error",
+        "summary",
+        "exit-code",
+        "deep-link"
+      ],
+      "purpose": "Say why the step failed in two lines before any log reading.",
+      "use": "A developer reads 'Test api · exit 1 · 3 of 212 tests failed · first at api/auth.test.ts:88' and jumps to it.",
+      "input": "Click or tap the header to collapse or expand, and tap 'Jump to line 214'. Keyboard: Tab to the header, Enter or Space toggles. Tab to the link, Enter jumps.",
+      "outcome": "The summary is open by default for failed steps. The jump scrolls row 3 to the line and focuses it.",
+      "recovery": "Collapsing keeps a one-line header. Selecting a passed step replaces the card with 'Passed in 31 s'. After a successful retry, the card reads 'Passed on attempt 2' and the earlier failure stays under 'Attempt 1'.",
+      "mechanism": "A button with aria-expanded controls a region. Content is derived from the step record: name, exit code, counts and the first error line index. One quiet surface carries a single 2px border edge on the failure side. No other border is used.",
+      "nearestAnalogue": "2026-10-30 failure plate laid a cause over stale content. This card summarises a build failure and links to the exact log line.",
+      "usefulness": "Most developers need only the first error location to start a fix.",
+      "creativeDifference": "Attempts stack as named history inside one card, so a retry never erases the earlier failure.",
+      "states": [
+        "open: shown for a failed step on load",
+        "collapsed: header only, reached by toggle",
+        "passed: one-line duration, reached by selecting a passed step",
+        "skipped: 'Did not run', reached by selecting a skipped step",
+        "recovered: 'Passed on attempt 2' with attempt 1 kept, reached by a successful retry",
+        "focus: 2px ring on header or link"
+      ],
+      "sources": [
+        {
+          "title": "CI pipeline oscilloscope (creative-sites-vault)",
+          "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/devtools-delivery/ci-oscilloscope/ci-pipeline-oscilloscope.html"
+        },
+        {
+          "title": "ARIA Authoring Practices: Disclosure",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-31-news-pipeline-run-panel",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "839f12b3c6d7eee3231549d2ab1ffd8532c8253c8182b9dfde593ce364b6f990"
+    },
+    {
+      "row": 3,
+      "id": "2026-10-31-news-pipeline-run-panel-step-log",
+      "file": "artifact-3.html",
+      "name": "Step log",
+      "description": "Monospace log for one step with line numbers, horizontal scroll, a wrap toggle and next and previous error jumps.",
+      "category": "Data",
+      "tags": [
+        "log",
+        "monospace",
+        "line-numbers",
+        "error-jump",
+        "horizontal-scroll",
+        "wrap-toggle"
+      ],
+      "purpose": "Show the raw output of the selected step and move between its errors.",
+      "use": "A developer reads 'Error 2 of 3' at line 301 and copies the stack trace without line numbers.",
+      "input": "Scroll or swipe the log, and tap Previous error, Next error or Wrap. Keyboard: Tab into the log region, arrow keys scroll, N and Shift+N jump between errors, W toggles wrap.",
+      "outcome": "The current error line is outlined and the counter updates. The header names the step and attempt: 'Test api · attempt 1 · 412 lines'.",
+      "recovery": "The buttons disable at the first and last error. A step with no errors reads 'No errors · 96 lines'. Switching attempts keeps each attempt's scroll position.",
+      "mechanism": "Lines render from an array in a focusable region. Line numbers come from a CSS counter in a gutter with user-select none, so copied text excludes them. Error lines carry a glyph and the word 'error'. Long lines scroll horizontally unless Wrap is on. Rows use content-visibility to keep 412 lines cheap.",
+      "nearestAnalogue": "2026-10-26 log viewer filtered sample events by severity across a stream. This log reads one step's raw output and navigates by error.",
+      "usefulness": "The log is the evidence. Error jumps and clean copy save the scrolling a developer would otherwise do.",
+      "creativeDifference": "The header carries the shared step name and the attempt number, so a reader never confuses two runs of the same step.",
+      "states": [
+        "error-focused: line 214 outlined, reached on load or by the row 2 jump",
+        "browsing: free scroll, reached by scroll or arrows",
+        "wrapped: lines wrap, reached by W or the Wrap toggle",
+        "no-errors: counter hidden with 'No errors', reached by selecting a passed step",
+        "empty: 'Did not run', reached by selecting a skipped step",
+        "streaming: lines append during a retry with auto-follow, paused when the reader scrolls up",
+        "focus: 2px ring on the region"
+      ],
+      "sources": [
+        {
+          "title": "Rolling log band (creative-sites-vault)",
+          "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/monitors-logs/forever/rolling-log-band/rolling-log-band.html"
+        },
+        {
+          "title": "ARIA Authoring Practices patterns",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-31-news-pipeline-run-panel",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "a54660417a544dccfdc99b47e4075db7aeb117388ecb3a4707ff54da56abbf57"
+    },
+    {
+      "row": 4,
+      "id": "2026-10-31-news-pipeline-run-panel-retry-step",
+      "file": "artifact-4.html",
+      "name": "Retry step",
+      "description": "Native button labelled with the step name that reruns one step and re-queues the steps it blocked.",
+      "category": "Actions",
+      "tags": [
+        "retry",
+        "button",
+        "label-swap",
+        "re-queue",
+        "dedupe",
+        "attempt-count"
+      ],
+      "purpose": "Rerun only the failed step and what depended on it.",
+      "use": "A developer presses 'Retry Test api'. Attempt 2 passes, and Bundle assets and Deploy preview then run.",
+      "input": "Click or tap the button. Keyboard: Tab to it, Enter or Space, or R while the panel has focus.",
+      "outcome": "The label reads 'Retrying Test api' and the button disables. On pass, skipped dependants move to queued and run in order. On failure, the label reads 'Retry Test api again'.",
+      "recovery": "Presses while running are ignored. A second failure adds attempt 2 to row 2 and keeps the button ready. A demo switch outside the component sets the next outcome to pass or fail.",
+      "mechanism": "The label comes from the names table. Width is reserved from the longest label, 'Retry Test api again'. An attempt id increments per press, and results with an older id are dropped. Dependants are found from a needs array on each step.",
+      "nearestAnalogue": "2026-10-30 retry guard retried a content request with a double-press guard. This retry targets one named step in a dependency graph and re-queues its dependants.",
+      "usefulness": "Rerunning a whole pipeline for one flaky test wastes minutes. A scoped retry does not.",
+      "creativeDifference": "The button states its target in words, so the scope of the action is visible before the press.",
+      "states": [
+        "ready: 'Retry Test api', reached on load",
+        "pressed: 1px sink on pointer down or key down",
+        "running: disabled 'Retrying Test api', reached on press",
+        "passed: hidden, with focus moved to the row 5 status, reached by success",
+        "failed-again: 'Retry Test api again', reached by a forced failure",
+        "unavailable: hidden when the selected step passed or was skipped",
+        "focus: 2px ring"
+      ],
+      "sources": [
+        {
+          "title": "Riffle label button (creative-sites-vault)",
+          "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/buttons/splitflap/01-riffle-label-button.html"
+        },
+        {
+          "title": "ARIA Authoring Practices: Button",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-31-news-pipeline-run-panel",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "0c58df02972ecb5d2702b934f6e520a12c6686a6474149e7746ec5e814d95bb8"
+    },
+    {
+      "row": 5,
+      "id": "2026-10-31-news-pipeline-run-panel-run-status",
+      "file": "artifact-5.html",
+      "name": "Run status",
+      "description": "Header status line that names the run outcome, the active step and real elapsed time, with no percentage.",
+      "category": "Feedback",
+      "tags": [
+        "status",
+        "live-region",
+        "elapsed-time",
+        "spinner",
+        "reduced-motion"
+      ],
+      "purpose": "State what the run is doing now and how it ended.",
+      "use": "A developer glances up and reads 'Running Bundle assets · 4 of 6 · 9 s' while scrolling the log.",
+      "input": "Display only. Keyboard: skipped in tab order. Screen readers hear it through a polite live region. It receives focus with tabindex=-1 when a retry completes.",
+      "outcome": "The line moves from 'Run 418 · failed at Test api' to 'Retrying Test api · 6 s' to 'Passed · 6 of 6 · 2 m 07 s'.",
+      "recovery": "A second failure reads 'Failed at Test api · attempt 2'. The elapsed time freezes at the stop point.",
+      "mechanism": "Text is derived from the step-state array and a demo clock. The live region announces only state changes, never each second. A 12px arc shows while a step runs. Under reduced motion it becomes a static arc with the word 'running'. The step count is the only progress measure.",
+      "nearestAnalogue": "2026-10-28 load stages reported fixed data-load stages. This line follows a dependency run and names the step through the shared table.",
+      "usefulness": "The developer keeps the outcome in view while reading a long log.",
+      "creativeDifference": "The status speaks the same step names as every other surface, so the announced name matches the label pressed.",
+      "states": [
+        "failed: 'Run 418 · failed at Test api', reached on load",
+        "running: arc, step name and seconds, reached by retry",
+        "passed: summary with total time, reached when all steps pass",
+        "failed-again: names the attempt, reached by a forced failure",
+        "reduced-motion: static arc and the word 'running'"
+      ],
+      "sources": [
+        {
+          "title": "Minimalist arc spinner (creative-sites-vault)",
+          "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/loaders/05-dash-orbital-ring/var-1-arc-spinner.html"
+        },
+        {
+          "title": "ARIA Authoring Practices patterns",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-31-news-pipeline-run-panel",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "bbbf9812031a381bdeacaa4069f9ebcbedf8014daae54815174e4da7f523a731"
+    },
+    {
+      "row": 6,
+      "id": "2026-10-31-news-pipeline-run-panel-run-panel-frame",
+      "file": "artifact-6.html",
+      "name": "Run panel frame",
+      "description": "Container-query frame that uses two panes when wide and, when narrow, folds passed and skipped neighbours around the selected step.",
+      "category": "Layout",
+      "tags": [
+        "container-query",
+        "split-pane",
+        "fold",
+        "first-frame",
+        "reserved-height"
+      ],
+      "purpose": "Keep the failed step, its summary and the retry inside the first screen at any width.",
+      "use": "On a 360px phone, a developer sees '3 passed · 47 s', then Test api with its summary, then '2 skipped', all without scrolling.",
+      "input": "Tap a fold row to expand it. Keyboard: Tab to a fold row, Enter or Space toggles.",
+      "outcome": "At 640px and wider, the list is a 240px left pane and the detail is on the right. Below 640px, the panel stacks and neighbours fold into counted rows.",
+      "recovery": "An expanded fold stays open until toggled. If a resize folds the focused step, focus moves to its fold row. The log keeps a reserved height of 240px to 50vh, so the retry and its result never shift the page.",
+      "mechanism": "A container query on the panel switches the grid. A fold groups contiguous steps that share a state and lie on either side of the selection, and gets its count and total time from the step array. A ResizeObserver handles only the focus hand-off.",
+      "nearestAnalogue": "2026-10-28 percentile tiles turned into a chip row below 480px. This frame folds content by state around the selection.",
+      "usefulness": "On a phone, the failure would otherwise sit below three healthy rows.",
+      "creativeDifference": "The fold is computed from run state, so the frame centres the problem rather than the top of the list.",
+      "states": [
+        "wide: two panes, reached at 640px container width and above",
+        "narrow-folded: counted fold rows, reached below 640px",
+        "fold-open: grouped steps listed, reached by toggle",
+        "refold: folds recompute after a retry changes states",
+        "focus-handoff: fold row focused, reached when a resize hides the focused step",
+        "focus: 2px ring on fold rows"
+      ],
+      "sources": [
+        {
+          "title": "Stop Treating CSS Container Queries Like Traditional Media Queries",
+          "url": "https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/"
+        },
+        {
+          "title": "ARIA Authoring Practices: Disclosure",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-10-31-news-pipeline-run-panel",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "7f8a6c6c6fabb636e402565babb92506b6f6adbf38bf53be9fd1d959018aa199"
+    }
+  ],
+  "demo": {
+    "file": "piece.html",
+    "rows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "sharedState": "One run record holds a names table and six steps with id, name, state, duration, needs, attempts[] and log lines. Test api is failed with attempt 1 (exit 1, 3 of 212, first error at line 214). Bundle assets and Deploy preview are skipped. Row 1 selection sets selectedId, which rows 2, 3 and 4 read. Row 4 appends an attempt, sets the step to running and streams lines into row 3. On pass it re-queues the dependants, which row 5 reports and row 6 refolds. A labelled demo switch sets the next outcome to pass or fail.",
+    "generationStatus": "ok"
+  },
+  "edition": {
+    "lane": "news",
+    "date": "2026-10-31",
+    "timezone": "Europe/Lisbon"
+  },
+  "date": "2026-10-31",
+  "reviewStatus": "needs-review",
+  "inputHash": "8fa8864e6fe72e02e069d8aeade517ed5f032effaf85b8b4b7c611a390f1e280",
+  "warnings": []
+}
