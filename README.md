@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-10-30: Holding Panel
+### 2026-10-31: Handshake Bench
 
-<a href="days/2026-10-30/"><img src="days/2026-10-30/team.png" alt="Team for 2026-10-30: Dance choreographer · Railway signaller · Optical technician · Satellite repair apprentice" width="100%"></a>
+<a href="days/2026-10-31/"><img src="days/2026-10-31/team.png" alt="Team for 2026-10-31: Color grading specialist · Wayfinding designer · Camera operator · Amber crab" width="100%"></a>
 
-**Task:** Request loader: a loader for a content panel that moves from pending to loaded or failed, with a retry action and stable layout.
+**Task:** Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.
 
-**Decision:** The team builds a reading-list panel that loads three sample sources and holds its layout through every state.
+**Decision:** A protocol engineer or learner hand-delivers, drops, duplicates or delays packets between two toy handshake machines while advancing the clock by hand.
 
-<a href="days/2026-10-30/"><img src="days/2026-10-30/cover.png" alt="Designed cover for Holding Panel" width="100%"></a>
+<a href="days/2026-10-31/"><img src="days/2026-10-31/cover.png" alt="Designed cover for Handshake Bench" width="100%"></a>
 
-[Open the day](days/2026-10-30/) · [Use it](https://isas1.github.io/daily-team/2026-10-30/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-10-31/) · [Use it](https://isas1.github.io/daily-team/2026-10-31/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
-| [2026-10-30](days/2026-10-30/) | <a href="days/2026-10-30/"><img src="days/2026-10-30/cover.png" alt="Holding Panel" width="160"></a> | Holding Panel | Dance choreographer · Railway signaller · Optical technician · Satellite repair apprentice |
+| [2026-10-31](days/2026-10-31/) | <a href="days/2026-10-31/"><img src="days/2026-10-31/cover.png" alt="Handshake Bench" width="160"></a> | Handshake Bench | Color grading specialist · Wayfinding designer · Camera operator · Amber crab |
+| [2026-10-30](days/2026-10-30/) | <a href="days/2026-10-30/"><img src="days/2026-10-30/piece.png" alt="Holding Panel" width="160"></a> | Holding Panel | Dance choreographer · Railway signaller · Optical technician · Satellite repair apprentice |
 | [2026-10-29](days/2026-10-29/) | <a href="days/2026-10-29/"><img src="days/2026-10-29/cover.png" alt="Brand kit import" width="160"></a> | Brand kit import | Puppet maker · Control room operator · Foley artist · Velvet beetle |
 | [2026-10-28](days/2026-10-28/) | <a href="days/2026-10-28/"><img src="days/2026-10-28/cover.png" alt="Breach Reader" width="160"></a> | Breach Reader | Precision machinist · Air traffic controller · Furniture designer · Asteroid workshop tutor |
 | [2026-10-27](days/2026-10-27/) | <a href="days/2026-10-27/"><img src="days/2026-10-27/cover.png" alt="Lit Case" width="160"></a> | Lit Case | Exhibit light technician · Medical illustrator · Interface designer · Impatient commuter |
 | [2026-10-26](days/2026-10-26/) | <a href="days/2026-10-26/"><img src="days/2026-10-26/piece.png" alt="Bracket and Ledger" width="160"></a> | Bracket and Ledger | Type designer · Motion director · Motion engineer · Lunar archivist |
 | [2026-10-25](days/2026-10-25/) | <a href="days/2026-10-25/"><img src="days/2026-10-25/piece.png" alt="the way back up" width="160"></a> | the way back up | Window dresser · Sign painter · Textile designer · Katsushika Hokusai |
-| [2026-10-24](days/2026-10-24/) | <a href="days/2026-10-24/"><img src="days/2026-10-24/piece.png" alt="Low Water Set" width="160"></a> | Low Water Set | Museum curator · Urban planner · Comic artist · Arachne |
 
-[All 28 days](ARCHIVE.md)
+[All 29 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

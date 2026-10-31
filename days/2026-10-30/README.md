@@ -14,10 +14,6 @@
 
 **Decision:** The team builds a reading-list panel that loads three sample sources and holds its layout through every state.
 
-<img src="cover.png" alt="Designed cover for Holding Panel" width="100%">
-
-[Cover art direction](cover.json) · [Cover source](cover.html)
-
 ## Feed evidence
 
 - smashing: cached
