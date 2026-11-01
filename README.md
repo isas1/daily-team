@@ -81,6 +81,12 @@ From 2026-10-27, packs contain distinct standalone components, shared tokens and
 
 [Pack guide](docs/component-packs.md) covers size, custom packs, saved-input replay, offline mode, category mappings, exports and human library outcomes. Generated candidates always require review. Try `node pack-sample.mjs` for a deterministic sample with no live model calls.
 
+## The studio
+
+On studio days the team plays the day as four separate agents in a small animated studio. Each member thinks, talks, walks between stations, pitches, blocks, votes and builds, round by round. The day page links to a replay with speech bubbles, private thoughts, a timeline of turning points and short interviews after the day. Turn it on for one run with `SIM=1`, or list dates in the `SIM_DAYS` variable.
+
+[Studio guide](docs/studio.md) covers the world, costs, the replay page, live mode and safety.
+
 ## Run your own
 
 Fork the repo, then add one secret:
