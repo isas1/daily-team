@@ -1,6 +1,463 @@
 {
   "items": [
     {
+      "id": "627964a285c64a728de2884a",
+      "title": "​I built a simple budgeting app that lets you upload bank statements (OFX/CSV) to track expenses in seconds",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xl1cna/i_built_a_simple_budgeting_app_that_lets_you/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T12:02:21.000Z",
+      "summary": ""
+    },
+    {
+      "id": "d94b0b768d9b1f9603cd3a8b",
+      "title": "iKnowMyDisplay - a Mac menu bar app that explains what’s wrong with your external monitor and adds the display controls macOS hides",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xl1c5y/iknowmydisplay_a_mac_menu_bar_app_that_explains/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T12:01:43.000Z",
+      "summary": ""
+    },
+    {
+      "id": "8bca0da1193d37e1c571b89c",
+      "title": "I built a presentation tool with no slides: you talk and it draws them while you speak (open source)",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xl148l/i_built_a_presentation_tool_with_no_slides_you/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T11:50:09.000Z",
+      "summary": ""
+    },
+    {
+      "id": "9b65a0366487796b67a1148b",
+      "title": "I built an AI assistant that troubleshoots Cisco Packet Tracer and GNS3 labs",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xl0un9/i_built_an_ai_assistant_that_troubleshoots_cisco/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T11:34:17.000Z",
+      "summary": ""
+    },
+    {
+      "id": "e7f95c7037b7c4f17dbb7e9d",
+      "title": "A file tree that shows what Claude Code is doing to your repo",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xl0u9n/a_file_tree_that_shows_what_claude_code_is_doing/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T11:33:39.000Z",
+      "summary": ""
+    },
+    {
+      "id": "2f9733a3c9f7e328b50ca0ce",
+      "title": "Aurora Launcher for TCL Android TV (Tested on TCL G10)",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xl0rdi/aurora_launcher_for_tcl_android_tv_tested_on_tcl/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T11:28:54.000Z",
+      "summary": ""
+    },
+    {
+      "id": "5e93c0db25f9b0ea231d834d",
+      "title": "I built a free app to split cabin/ski trip costs between families (kids pay half, one transfer per family)",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xl0mw6/i_built_a_free_app_to_split_cabinski_trip_costs/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T11:21:30.000Z",
+      "summary": ""
+    },
+    {
+      "id": "c30d8e4f1f61a7b1eeb63a2a",
+      "title": "I got tired of opening dashboards to check one number, so I built an iPhone widget you can curl",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xl0ee4/i_got_tired_of_opening_dashboards_to_check_one/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T11:07:24.000Z",
+      "summary": ""
+    },
+    {
+      "id": "d6ba8a3f25c046f749f27059",
+      "title": "Norway makes shithouses great again",
+      "url": "https://www.visitnorway.com/plan-your-trip/travel-tips-a-z/norwegian-scenic-routes/worlds-best-toilets/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-01T10:47:58.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "902369e96d611611e95aa408",
+      "title": "A tiny Pacific country rolls out universal basic income",
+      "url": "https://www.economist.com/asia/2026/10/29/a-tiny-pacific-country-rolls-out-universal-basic-income",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-01T10:05:09.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "661f896f15141388c06782b1",
+      "title": "I built a 3D car customizer that turns builds into realistic videos",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xkyszq/i_built_a_3d_car_customizer_that_turns_builds/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T09:28:52.000Z",
+      "summary": ""
+    },
+    {
+      "id": "0163c6c14678ecb160cb3fe5",
+      "title": "Launched my first Shopify app 9 days ago. Got 1 install and a pile of offers to buy fake reviews",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xkyh99/launched_my_first_shopify_app_9_days_ago_got_1/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T09:07:47.000Z",
+      "summary": ""
+    },
+    {
+      "id": "599b96a90105d0ce442113e1",
+      "title": "I built an app that writes “I built an app that” posts 🚀",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xky79x/i_built_an_app_that_writes_i_built_an_app_that/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T08:50:12.000Z",
+      "summary": ""
+    },
+    {
+      "id": "02ae7af4a01ca47c5b903283",
+      "title": "I made an app that converts files just by dragging and tapping shift",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xky6b5/i_made_an_app_that_converts_files_just_by/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T08:48:20.000Z",
+      "summary": ""
+    },
+    {
+      "id": "71553b6854d5d6fdeef939d7",
+      "title": "LibreHold – an open-source, persistent browser strategy game",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xkx8cu/librehold_an_opensource_persistent_browser/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T07:47:08.000Z",
+      "summary": ""
+    },
+    {
+      "id": "7e9f318174ec7dbc8579d38d",
+      "title": "The AI cost of JavaScript frameworks",
+      "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-01T06:06:19.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "0b77b1f4da87e559982ad1a7",
+      "title": "I made an infinite driving game",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xktedk/i_made_an_infinite_driving_game/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T03:52:00.000Z",
+      "summary": ""
+    },
+    {
+      "id": "7d8ddecda8ce4c791e3b2f91",
+      "title": "What I learned in my first month after launching (real numbers, no wins to brag about)",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xkt8jf/what_i_learned_in_my_first_month_after_launching/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T03:42:36.000Z",
+      "summary": ""
+    },
+    {
+      "id": "0e356c09eb849e6e67cab0ec",
+      "title": "Brazilian Court Sanctions Lawyers for Prompt Injection in Court Filing",
+      "url": "https://jetstream.security/insights/brazilian-court-sanctions-prompt-injection-filing/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-01T02:19:53.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "39ee96f3b35f3b96f1c52dc3",
+      "title": "Leaking Secrets from Air-Gap Computers by Spelling Radio Signals from RAM (2024)",
+      "url": "https://arxiv.org/abs/2409.02292",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-01T01:46:29.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "374ee227a7815d40f762c6aa",
+      "title": "Made Opus the principal dev and DeepSeek its team. 63% fewer Opus tokens",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xkpkb3/made_opus_the_principal_dev_and_deepseek_its_team/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-01T00:23:24.000Z",
+      "summary": ""
+    },
+    {
+      "id": "56ed6f5b1a23b5b5c199b408",
+      "title": "Nutlope/hallmark",
+      "url": "https://github.com/Nutlope/hallmark",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
+    },
+    {
+      "id": "ec673bd7694d3a658bba5faa",
+      "title": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships."
+    },
+    {
+      "id": "4f795faf4eede06c1c10e4b0",
+      "title": "AgriciDaniel/claude-seo",
+      "url": "https://github.com/AgriciDaniel/claude-seo",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "Universal SEO skill for Claude Code. 26 sub-skills + 19 sub-agents covering technical SEO, E-E-A-T, schema, GEO/AEO, agent readiness (Lighthouse Agentic Browsing, WebMCP, llms.txt), backlinks, local SEO, e-commerce, international SEO, Google APIs, and PDF/Excel reporting. 9 optional extensions for live SEO data."
+    },
+    {
+      "id": "853c63f738f0cecf3b918959",
+      "title": "thedotmack/claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
+    },
+    {
+      "id": "9c15e014464735eb318029f4",
+      "title": "cloudflare/security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings"
+    },
+    {
+      "id": "8c6014a36ca90e3fbda99713",
+      "title": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "An agentic skills framework & software development methodology that works."
+    },
+    {
+      "id": "0acf196572ceb07e1cf2a260",
+      "title": "JetBrains/thinkrail",
+      "url": "https://github.com/JetBrains/thinkrail",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "Vibe code with pi in a lightweight, real IDE that customises itself around the way you work — The Vibe You Need"
+    },
+    {
+      "id": "553e1cc54ebc818266579b0a",
+      "title": "pingdotgg/t3code",
+      "url": "https://github.com/pingdotgg/t3code",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": ""
+    },
+    {
+      "id": "ca6e9330cc1b2a538d3772d7",
+      "title": "multica-ai/andrej-karpathy-skills",
+      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
+    },
+    {
+      "id": "c7f7c21cf16630e7e00262d2",
+      "title": "jakubkrehel/skills",
+      "url": "https://github.com/jakubkrehel/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "A collection of agent skills that help you build great interfaces."
+    },
+    {
+      "id": "626a5e4fcb233d8d7ffe545e",
+      "title": "TauricResearch/TradingAgents",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "TradingAgents: Multi-Agents LLM Financial Trading Framework"
+    },
+    {
+      "id": "291d5eb46511b79f06895f30",
+      "title": "Leonxlnx/taste-skill",
+      "url": "https://github.com/Leonxlnx/taste-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages"
+    },
+    {
+      "id": "82a901da1b9bedec6f38670b",
+      "title": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "Public repository for Agent Skills"
+    },
+    {
+      "id": "edb3a626875732de5c9b6881",
+      "title": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond."
+    },
+    {
+      "id": "bf0e69460c66388787dc6878",
+      "title": "YuJunZhiXue/dsh-purge",
+      "url": "https://github.com/YuJunZhiXue/dsh-purge",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "DeepSeek Harness 破甲：让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「小码酱」。Jailbreak for every model — swap prompts per model. 求 Star 收藏 ⭐ 如要二开，请查看署名要求部分"
+    },
+    {
+      "id": "03dc7a9cfb878de8b10b5400",
+      "title": "ghostty-org/ghostty",
+      "url": "https://github.com/ghostty-org/ghostty",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-01T00:00:00.000Z",
+      "observed": true,
+      "summary": "👻 Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration."
+    },
+    {
+      "id": "03ef0338d3a520b67fa27068",
+      "title": "Altoids Project",
+      "url": "https://uvdn7.github.io/altoids-project/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T22:54:55.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6725a773cbcfd0fd913bcc42",
+      "title": "Memdoor: A team of 5 Qwen3.8-27B models beats Fable 5 on LiveCodeBench Hard",
+      "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T22:46:12.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "4c6605822260484c20634a22",
+      "title": "An Italian farmer found some unknown seeds in his attic and planted them",
+      "url": "https://www.smithsonianmag.com/science-nature/italian-farmer-found-unknown-seeds-attic-with-nothing-lose-planted-them-result-biblical-180989644/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T22:41:06.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "2f8f2a14b01c9a219b8ccc1c",
+      "title": "HackerTube: YouTube built from videos recommended by HN",
+      "url": "https://karpathy.bearblog.dev/hacker-tube/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T19:56:53.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "5545fe355a55d4d0a42c2aa8",
+      "title": "TCP Use-After-Free: CVE-2026-98432 / CVSS 9.8",
+      "url": "https://atlasum.net/blog/cve-2026-98432-linux-ipv4-tcp-uaf",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T19:16:30.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "1245dd8d0d204a591c6bbb38",
+      "title": "Electrification Could Cut Global Energy Use in Half",
+      "url": "https://fullycharged.show/podcasts/podcast-361-why-electrification-could-cut-global-energy-use-in-half/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T19:13:34.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "9b7d40749660cd189e97e90e",
+      "title": "Update on my planet engine: the surface is now built from plate tectonics and climate",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xkiaum/update_on_my_planet_engine_the_surface_is_now/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T18:56:18.000Z",
+      "summary": ""
+    },
+    {
+      "id": "2d723420b66b1e2c35dcbee7",
+      "title": "It's the memory latency, stupid",
+      "url": "https://pivotlake.io/blog/its-the-memory-latency-stupid/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T18:38:16.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "59ed95c85bc7cac75f85421a",
+      "title": "I've earned 40K from bank signup bonuses, so I spent a year building a tool to make the hobby less time-consuming",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xkfg5o/ive_earned_40k_from_bank_signup_bonuses_so_i/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T17:02:25.000Z",
+      "summary": ""
+    },
+    {
+      "id": "154593e2b5e04db047345470",
+      "title": "I built a focus app that doesn’t try to make you more productive. It just helps you slow down.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xke4h5/i_built_a_focus_app_that_doesnt_try_to_make_you/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T16:09:07.000Z",
+      "summary": ""
+    },
+    {
+      "id": "ca153a5d261a1ac61cd28375",
+      "title": "The Ocean 'Was the Color of Chocolate.' Mexico Declares War on Seaweed.",
+      "url": "https://www.nytimes.com/2026/10/28/world/americas/mexico-seaweed-navy.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-31T13:41:18.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "8f58ac52ab9eb1a069313b69",
+      "title": "I made a free and interactive game where you try to cut a country’s population in half with one line",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xkaewr/i_made_a_free_and_interactive_game_where_you_try/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-10-31T13:35:56.000Z",
+      "summary": ""
+    },
+    {
       "id": "6226e6968833251c6746264c",
       "title": "On 12 Oct we asked here if anyone wanted a cozy weather garden app. It just passed 100 downloads",
       "url": "https://www.reddit.com/r/SideProject/comments/1xk78gy/on_12_oct_we_asked_here_if_anyone_wanted_a_cozy/",
@@ -80,6 +537,15 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-10-31T08:36:44.000Z",
       "summary": ""
+    },
+    {
+      "id": "17b11f98699dd6891e917f51",
+      "title": "A Spark Of Color In November’s Gray (2026 Wallpapers Edition)",
+      "url": "https://smashingmagazine.com/2026/10/desktop-wallpaper-calendars-november-2026/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-10-31T08:00:00.000Z",
+      "summary": "Let’s kick of November with a new collection of desktop wallpapers! Designed by creatives from across the globe, the wallpapers come in a variety of screen resolutions and can be downloaded for free. Enjoy!"
     },
     {
       "id": "183a2eac73f2ddcd9698ea5b",
@@ -163,146 +629,6 @@
       "summary": ""
     },
     {
-      "id": "56ed6f5b1a23b5b5c199b408",
-      "title": "Nutlope/hallmark",
-      "url": "https://github.com/Nutlope/hallmark",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
-    },
-    {
-      "id": "9c15e014464735eb318029f4",
-      "title": "cloudflare/security-audit-skill",
-      "url": "https://github.com/cloudflare/security-audit-skill",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings"
-    },
-    {
-      "id": "4f795faf4eede06c1c10e4b0",
-      "title": "AgriciDaniel/claude-seo",
-      "url": "https://github.com/AgriciDaniel/claude-seo",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "Universal SEO skill for Claude Code. 26 sub-skills + 19 sub-agents covering technical SEO, E-E-A-T, schema, GEO/AEO, agent readiness (Lighthouse Agentic Browsing, WebMCP, llms.txt), backlinks, local SEO, e-commerce, international SEO, Google APIs, and PDF/Excel reporting. 9 optional extensions for live SEO data."
-    },
-    {
-      "id": "ec673bd7694d3a658bba5faa",
-      "title": "pbakaus/impeccable",
-      "url": "https://github.com/pbakaus/impeccable",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships."
-    },
-    {
-      "id": "8c6014a36ca90e3fbda99713",
-      "title": "obra/superpowers",
-      "url": "https://github.com/obra/superpowers",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "An agentic skills framework & software development methodology that works."
-    },
-    {
-      "id": "ca6e9330cc1b2a538d3772d7",
-      "title": "multica-ai/andrej-karpathy-skills",
-      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
-    },
-    {
-      "id": "626a5e4fcb233d8d7ffe545e",
-      "title": "TauricResearch/TradingAgents",
-      "url": "https://github.com/TauricResearch/TradingAgents",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "TradingAgents: Multi-Agents LLM Financial Trading Framework"
-    },
-    {
-      "id": "c7f7c21cf16630e7e00262d2",
-      "title": "jakubkrehel/skills",
-      "url": "https://github.com/jakubkrehel/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "A collection of agent skills that help you build great interfaces."
-    },
-    {
-      "id": "291d5eb46511b79f06895f30",
-      "title": "Leonxlnx/taste-skill",
-      "url": "https://github.com/Leonxlnx/taste-skill",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages"
-    },
-    {
-      "id": "553e1cc54ebc818266579b0a",
-      "title": "pingdotgg/t3code",
-      "url": "https://github.com/pingdotgg/t3code",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": ""
-    },
-    {
-      "id": "853c63f738f0cecf3b918959",
-      "title": "thedotmack/claude-mem",
-      "url": "https://github.com/thedotmack/claude-mem",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
-    },
-    {
-      "id": "82a901da1b9bedec6f38670b",
-      "title": "anthropics/skills",
-      "url": "https://github.com/anthropics/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "Public repository for Agent Skills"
-    },
-    {
-      "id": "edb3a626875732de5c9b6881",
-      "title": "affaan-m/ECC",
-      "url": "https://github.com/affaan-m/ECC",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond."
-    },
-    {
-      "id": "bf0e69460c66388787dc6878",
-      "title": "YuJunZhiXue/dsh-purge",
-      "url": "https://github.com/YuJunZhiXue/dsh-purge",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-10-31T00:00:00.000Z",
-      "observed": true,
-      "summary": "DeepSeek Harness 破甲：让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「小码酱」。Jailbreak for every model — swap prompts per model. 求 Star 收藏 ⭐ 如要二开，请查看署名要求部分"
-    },
-    {
       "id": "78a5846a75cc0fbb0baa14fc",
       "title": "AstrBotDevs/AstrBot",
       "url": "https://github.com/AstrBotDevs/AstrBot",
@@ -340,6 +666,15 @@
       "summary": ""
     },
     {
+      "id": "163ddc8ca0284d5aea60132b",
+      "title": "Zinc creep in cable spelter sockets brought down the Arecibo telescope in 2020",
+      "url": "https://maketecheasier.com/arecibo-zinc-creep-collapse/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T22:41:03.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "4d1f2f690fd8d45d71842c58",
       "title": "Looking for feedback for a movie app",
       "url": "https://www.reddit.com/r/SideProject/comments/1xjt1w5/looking_for_feedback_for_a_movie_app/",
@@ -365,6 +700,15 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-10-30T21:25:10.000Z",
       "summary": ""
+    },
+    {
+      "id": "e81663e12d4a32761b0f44a4",
+      "title": "Understanding Email Encryption",
+      "url": "https://www.fastmail.com/blog/email-encryption/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T20:55:56.000Z",
+      "summary": "Comments"
     },
     {
       "id": "b65f6c56c4508fd784f83c36",
@@ -436,6 +780,24 @@
       "source": "Hacker News",
       "sourceId": "hacker-news",
       "published": "2026-10-30T15:10:31.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "7cc697fb67ca8ce35a08b77d",
+      "title": "A 1580 Map Shows Why Data Visualization Is Never Neutral",
+      "url": "https://thereader.mitpress.mit.edu/a-1580-map-shows-why-data-visualization-is-never-neutral/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T14:46:16.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "c5f8a030d1d766b65f932f27",
+      "title": "Running a bootstrapped SaaS for 20 years with my brother",
+      "url": "https://blog.zamzar.com/2026/10/30/20-years-766-million-files-two-chameleons/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-10-30T13:58:42.000Z",
       "summary": "Comments"
     },
     {
@@ -554,372 +916,12 @@
       "sourceId": "hacker-news",
       "published": "2026-10-29T19:41:39.000Z",
       "summary": "Comments"
-    },
-    {
-      "id": "519a776207ed3493f80c56db",
-      "title": "Show HN: Auto Dismiss Mac OS \"Allow to find devices on local networks?\"",
-      "url": "https://github.com/johncassil/dontallow",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T19:27:44.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "2086ec152456586631a89823",
-      "title": "IgE disruptor for food allergy with Claude-enabled antibody design [pdf]",
-      "url": "https://divergencelabs.com/publications/ige-preprint.pdf",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T19:25:48.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "700f3e4bbfb43c82f28d7ce5",
-      "title": "Launch HN: Simantic (YC F26) – Firmware Simulation for AI Agents",
-      "url": "https://news.ycombinator.com/item?id=50291116",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T15:56:32.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e812e22ff0c3b6d70fddc922",
-      "title": "H.264 Is Magic (2016)",
-      "url": "https://sidbala.com/h-264-is-magic/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T15:53:03.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "815e9f76383a90122a5efa26",
-      "title": "LLM Voice",
-      "url": "https://martinfowler.com/bliki/LLM-Voice.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T14:57:55.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "bd03e4a483646b8532a8be38",
-      "title": "We're releasing the weights of Mistral Large 4",
-      "url": "https://mistral.ai/news/mistral-large-4-oss/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T14:13:21.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "7e137b0467999a02460a5782",
-      "title": "Brief History of PDP Computers",
-      "url": "https://entropicthoughts.com/history-of-pdp-computers",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T13:53:33.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e4af34a2153ac44b0ad60877",
-      "title": "DoorDash to acquire Instacart",
-      "url": "https://about.doordash.com/en-us/news/doordash-to-acquire-instacart",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T12:33:05.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "2169c46ff38eaf6095bb7283",
-      "title": "If IPv4 were land",
-      "url": "https://iptrust.co/blog/if-ipv4-were-land",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T12:19:00.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "5a2838ac9b8e01cfb21aff15",
-      "title": "An Urgent Message on Artificial Intelligence from the Kogui People",
-      "url": "https://sonidoselva.com/perspectiva-kogui",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T11:29:49.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "6a3ccd1ab0126cfcb123812f",
-      "title": "Show HN: UK Farming Simulator",
-      "url": "https://butterbean.farm/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T11:15:59.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "1317db1f3d0b587d0adea27d",
-      "title": "The US added a record 20.2 GWh of battery storage in just 3 months",
-      "url": "https://electrek.co/2026/08/31/the-us-added-a-record-20-2-gwh-of-battery-storage-in-just-3-months/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T10:44:49.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "ff1ebca6f559787f35b4f41f",
-      "title": "Chained PHP2Shell exploit roots 25 servers, including US Government servers",
-      "url": "https://dreamgroup.com/blog/chained-php2shell-exploit-roots-25-servers",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T10:42:41.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "be45563be2308845bee024a8",
-      "title": "Zero click, silent, remote Android DoS",
-      "url": "https://smsofdeath.com/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T07:08:50.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "2688c3b06e0a47974bc6151b",
-      "title": "Forging a Microsoft Edge Full Chain with Logic Bugs Only",
-      "url": "https://blog.orange.tw/posts/2026-10-the-last-proof-of-human-craft-browser-full-chain/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T06:47:28.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "94430ceaa839cbc65bd3beb5",
-      "title": "Claude Code regularly sends each background agent’s transcript to its model",
-      "url": "https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T03:33:42.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "871d193932e074981dd0de78",
-      "title": "Qwenputer: A functioning, deterministic RISC-V CPU inside Qwen3.5",
-      "url": "https://divagr.com/blog/qwenputer",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-29T00:25:45.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "fd6c7c6c47f5d5049702ca08",
-      "title": "GitLab Security Incident: Attempted Exploitation of CVE-2026-97229",
-      "url": "https://alpinelinux.org/posts/GitLab-security-incident-CVE-2026-97229.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T23:45:46.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "5d2a2027ecbb796f35d42b42",
-      "title": "StackOverflow now gets fewer than 1000 questions a month",
-      "url": "https://data.stackexchange.com/stackoverflow/query/1926661",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T23:35:02.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "8b78d1798ec7fdf38841fe20",
-      "title": "A Health Update",
-      "url": "https://furbo.org/2026/10/28/a-health-update/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T21:13:21.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "dc4cca89ce0bf93fed1bb19b",
-      "title": "Cloudflare Turnstile solver library (no headless browser required)",
-      "url": "https://github.com/chris124567/cfsolve",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T17:29:23.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "50d36c1a28126eb5fd357003",
-      "title": "Why is this fingerprinting script creating bioweapons?",
-      "url": "https://nullpt.rs/fingerprinting-bioweapons",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T17:13:29.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "93ccbc1a917e5817f9ffe370",
-      "title": "Double Buffering with Cloudflare Queues",
-      "url": "https://bellone.com/technical/double-buffering-with-cloudflare-queues",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T16:48:23.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "d415d3e609a9966e5de8645c",
-      "title": "Longitudinal Changes InWearable-Captured PhysiologyBefore Sudden Cardiac Death",
-      "url": "https://www.jacc.org/doi/epdf/10.1016/j.jaccas.2026.110397",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T15:04:12.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "259ceb96db43afe3fa70c0eb",
-      "title": "CNC Stone Carving",
-      "url": "https://carmelitegothic.com/cnc-stone-carving/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T14:38:22.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "a47fefdfcbeeae76e48fe45c",
-      "title": "Ten days later, Git on macOS still trusts the compromised eMudhra certificates",
-      "url": "https://emudhra.we-have-a-problem.com/apple.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T11:03:40.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "05bc0d7f4074116b92cd25ad",
-      "title": "Barcelona unrest: how to fabricate a protest in the age of TikTok",
-      "url": "https://theconversation.com/barcelona-unrest-how-to-fabricate-a-protest-in-the-age-of-tiktok-295263",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T10:41:27.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "001b60c8250b041f8f6baaaa",
-      "title": "Git for the US Code",
-      "url": "https://lexifina.com/blog/git-for-the-us-code",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-28T01:47:50.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e6f03986aae671eef798ff05",
-      "title": "Historical Scientific Instruments",
-      "url": "https://nealstephenson.substack.com/p/historical-scientific-instruments",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T23:32:35.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "dcad83d827337ce853e769bf",
-      "title": "Early progress on accelerating drug development with Claude",
-      "url": "https://www.anthropic.com/research/early-progress-drug-development",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T20:50:42.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "5c06ba9ffd4d24cad72bc41a",
-      "title": "Raspberry Pi Zero 3W and Pi 4 Model A spotted in device trees",
-      "url": "https://bret.dk/raspberry-pi-zero-3-w-pi-4-model-a/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T20:48:49.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "041404daf6ce6d0bf2812f42",
-      "title": "Code-execution flaw in UEFI firmware threatens most servers on planet Earth",
-      "url": "https://arstechnica.com/security/2026/10/code-execution-flaw-in-uefi-firmware-threatens-most-servers-on-planet-earth/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T20:35:09.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "ebfe71ec9852c66d306e05a1",
-      "title": "Tailscale SSH: Investigation and remediation update",
-      "url": "https://tailscale.com/ssh-investigation-update",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T19:55:21.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "b9b5de18e9156d548c9e56f0",
-      "title": "Survival LLM: AI assistant and emergency library that runs on your own computer",
-      "url": "https://www.brangus.io/survival-llm",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T19:55:06.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "6e7c64a3d75c3d9e3cac4502",
-      "title": "Breaking the open web won't stop the bad bots",
-      "url": "https://www.techpolicy.press/breaking-the-open-web-wont-stop-the-bad-bots/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T18:42:55.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "89bdc41236fdfe55d838a313",
-      "title": "Ghostty 1.4",
-      "url": "https://ghostty.org/docs/install/release-notes/1-4-0",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T16:51:22.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "6bbc36fbd0cd5b77ebe4a065",
-      "title": "New 14‑inch MacBook Pro with M6",
-      "url": "https://www.apple.com/in/newsroom/2026/10/apple-introduces-the-new-14-inch-macbook-pro-with-m6/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T16:08:32.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "393575ee7d83ff0a65d333d8",
-      "title": "Genie 4",
-      "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T16:06:01.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "fbe3a7a1daf8c0ead6051031",
-      "title": "MiniLake Is a Local Databricks API Emulator with SQL, Delta Lake and Spark",
-      "url": "https://dmux.github.io/minilake/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T14:12:59.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "1cec09ed32b2c8fbc1d5f285",
-      "title": "New iMac with M6",
-      "url": "https://www.apple.com/imac/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-10-27T13:02:02.000Z",
-      "summary": "Comments"
     }
   ],
   "fetched": {
-    "smashing": "2026-10-31",
-    "hacker-news": "2026-10-31",
-    "github-trending": "2026-10-31",
-    "reddit-sideproject": "2026-10-31"
+    "smashing": "2026-11-01",
+    "hacker-news": "2026-11-01",
+    "github-trending": "2026-11-01",
+    "reddit-sideproject": "2026-11-01"
   }
 }

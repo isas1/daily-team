@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 29 days recorded.
+Every daily team and the asset it made, newest first. 30 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-11-01](days/2026-11-01/) | Filing Loupe | Lens grinder · Kinetic sculptor · Game interface designer · Floating market clerk | Every action works without a mouse. | <a href="days/2026-11-01/"><img src="days/2026-11-01/cover.png" alt="Filing Loupe" width="160"></a> [asset, needs review](days/2026-11-01/artifact-1.html) |
 | [2026-10-31](days/2026-10-31/) | Handshake Bench | Color grading specialist · Wayfinding designer · Camera operator · Amber crab | The first frame shows the useful component. | <a href="days/2026-10-31/"><img src="days/2026-10-31/cover.png" alt="Handshake Bench" width="160"></a> [asset](days/2026-10-31/artifact-1.html) |
 | [2026-10-30](days/2026-10-30/) | Holding Panel | Dance choreographer · Railway signaller · Optical technician · Satellite repair apprentice | Use one consistent spacing scale. | [asset](days/2026-10-30/piece.html) |
 | [2026-10-29](days/2026-10-29/) | Brand kit import | Puppet maker · Control room operator · Foley artist · Velvet beetle | An empty state offers one clear action. | <a href="days/2026-10-29/"><img src="days/2026-10-29/cover.png" alt="Brand kit import" width="160"></a> [asset](days/2026-10-29/piece.html) |
