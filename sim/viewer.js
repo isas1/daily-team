@@ -21,7 +21,7 @@
     workbench: { x: 790, y: 525, label: [790, 610] },
     kitchen: { x: 210, y: 530, label: [210, 610] },
   };
-  var OFFSETS = [[-80, 0], [80, 0], [-35, 48], [35, 48], [0, -36]];
+  var OFFSETS = [[-115, 0], [115, 0], [-45, 62], [45, 62], [0, -40]];
   var SIZE = 1.3;
 
   var look = data.look || { set: {}, members: [] };

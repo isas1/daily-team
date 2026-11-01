@@ -56,6 +56,8 @@ export function colourProblem(hex, ground = false) {
   const ch = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
   // Neon: a channel at full and another near zero, outside the saffron and amber hues.
   if (s > 0.9 && Math.max(...ch) >= 0xf0 && Math.min(...ch) <= 0x20 && !(h > 20 && h < 60)) return 'neon';
+  if (h >= 262 && h <= 300 && s > 0.45 && l > 0.3 && l < 0.75) return 'bright purple';
+  if (h >= 212 && h <= 242 && s > 0.6 && l > 0.38 && l < 0.68) return 'electric blue';
   if (ground && h >= 25 && h <= 55 && s >= 0.15 && l >= 0.7 && l < 0.97) return 'beige or cream ground';
   return '';
 }
@@ -163,7 +165,10 @@ export function normalizeLook(raw, members, date) {
     const d = base.members[i];
     const x = list.find((y) => String(y?.label ?? '').toLowerCase() === m.label.toLowerCase()) ?? {};
     const pal = (Array.isArray(x.palette) ? x.palette : []).filter(isHex).slice(0, 3);
-    const main = pal[0] && contrast(pal[0], floor) >= 1.8 && !colourProblem(pal[0]) ? pal[0] : d.palette[0];
+    // Fallback accent: the light or dark form of the default, whichever reads on this floor.
+    const pair = ACCENTS.find((x) => x.includes(d.palette[0])) ?? [d.palette[0]];
+    const fallback = [...pair].sort((x, y) => contrast(y, floor) - contrast(x, floor))[0];
+    const main = pal[0] && contrast(pal[0], floor) >= 1.8 && !colourProblem(pal[0]) ? pal[0] : fallback;
     return {
       label: m.label,
       body: pick(x.body, BODIES, d.body),

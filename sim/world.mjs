@@ -86,7 +86,7 @@ export function createWorld({ date, members, task, constraint, rounds = DEFAULT_
     n: i + 1, label: m.role, method: m.method, stance: m.stance, temperament: m.temperament || '',
     guest: m.guest, historical: m.guest?.kind === 'historical',
     station: 'door', energy: MAX_ENERGY, mood: 'curious', notes: [], pitched: false, vote: null,
-    trust: {}, idle: 0, present: true, memory: memory[m.role] ?? [],
+    trust: {}, idle: 0, present: true, memory: memory[m.role] ?? [], said: [], proposed: false,
   }));
   for (const m of cast) for (const o of cast) if (o !== m) m.trust[o.label] = 0;
   const r = rivals(date, cast.length);
@@ -124,12 +124,16 @@ export function startRound(world) {
   // Disagreement floor: halfway through the Clash, nobody has blocked yet.
   const clash = phaseEnds(world.rounds).find(([p]) => p === 'clash')[1];
   const pitchEnd = phaseEnds(world.rounds).find(([p]) => p === 'pitch')[1];
-  if (!world.nudged && world.phase === 'clash' && world.blocks === 0 && world.round >= Math.ceil((pitchEnd + clash) / 2)) {
-    const lead = leadingItem(world);
-    const m = lead && world.members.find((x) => x.rival === lead.by && x.label !== lead.by);
+  const lead = leadingItem(world);
+  const pileOn = lead && lead.support.size >= 3;
+  if (!world.nudged && world.phase === 'clash' && lead && (pileOn || world.blocks === 0)
+    && world.round >= (pileOn ? pitchEnd + 1 : Math.ceil((pitchEnd + clash) / 2))) {
+    // The member who backs the leader least, else the leader's rival, hears the doubt.
+    const m = world.members.find((x) => x.label !== lead.by && !lead.support.has(x.label))
+      ?? world.members.find((x) => x.rival === lead.by && x.label !== lead.by);
     if (m) {
       world.nudged = true;
-      m.nudge = `${lead.id} "${lead.concept}" is leading, and it breaks what you push for. Say so if you believe it.`;
+      m.nudge = `${lead.id} "${lead.concept}" is leading${pileOn ? ' and everyone is piling on' : ''}, and it breaks what you push for. Say what it breaks if you believe it.`;
     }
   }
   if (world.phase === 'build' && !world.keyboard && !world.keyboardBroken) {
@@ -161,6 +165,8 @@ export function perceive(world, m) {
     `Your trust: ${Object.entries(m.trust).map(([k, v]) => `${k} ${v > 0 ? '+' : ''}${v}`).join('; ')}.`,
     `Keep an eye on ${m.rival}: what they push for threatens what you push for.`,
     `Board: ${board.length ? board.join(' | ') : 'empty'}.`,
+    `Your own board items (you cannot back them): ${world.board.filter((b) => b.by === m.label).map((b) => b.id).join(', ') || 'none'}.${m.proposed ? ' You have used your one proposal.' : ''}`,
+    ...(m.said.length ? [`What you already said (do not repeat it): ${m.said.join(' / ')}`] : []),
     `Keyboard: ${world.keyboardBroken ? 'not working this round' : world.keyboard ? `held by ${world.keyboard}` : 'free'}.${world.phase === 'build' ? ` Build progress: ${world.progress}.` : ''}`,
     ...(world.result ? [`The vote chose ${world.result.id} "${world.result.concept}" by ${world.result.by}.`] : []),
     ...(news.length ? [`News: ${news.join(' ')}`] : []),
@@ -204,10 +210,12 @@ export function applyTurn(world, m, turn) {
       log({ type: 'act', act, target: b.id, concept: b.concept });
     }
   } else if (act === 'propose') {
-    if (world.phase !== 'clash') refuse('proposals happen during Clash');
+    if (m.proposed) refuse('you already proposed today');
+    else if (world.phase !== 'clash') refuse('proposals happen during Clash');
     else if (world.board.length >= BOARD_SLOTS) refuse('the board is full');
     else {
       const b = addItem(world, m, turn.concept, turn.say?.text, 'propose');
+      m.proposed = true;
       log({ type: 'act', act, target: b.id, concept: b.concept });
       beats.push({ type: 'beat', why: 'proposal', who: m.label, text: `${m.label} proposes ${b.concept}` });
     }
@@ -245,6 +253,7 @@ export function applyTurn(world, m, turn) {
     log({ type: 'act', act, energy: m.energy });
   }
   if (turn.say?.text) {
+    m.said.push(turn.say.text); if (m.said.length > 3) m.said.shift();
     const to = turn.say.to && byLabel(world, turn.say.to) ? byLabel(world, turn.say.to).label : 'all';
     log({ type: 'say', to, station: m.station, text: turn.say.text, act });
   }

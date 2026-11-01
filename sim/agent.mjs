@@ -3,6 +3,17 @@
 import { ACTS, MOVES } from './world.mjs';
 
 export const LIMITS = { thought: 40, say: 40, note: 20 };
+// Share of the shorter line's words that the other line also uses.
+export function overlap(a, b) {
+  const w = (s) => new Set(String(s).toLowerCase().match(/[a-z0-9]+/g) ?? []);
+  const [x, y] = [w(a), w(b)];
+  const n = Math.min(x.size, y.size);
+  if (!n) return 0;
+  let k = 0;
+  for (const t of x) if (y.has(t)) k++;
+  return k / n;
+}
+
 const words = (s) => String(s ?? '').split(/\s+/).filter(Boolean).length;
 // First-person claims of a historical figure's own life. Historical guests play the method only.
 const LIFE = /\b(i was born|i died|my (life|lifetime|wife|husband|century|era|voyages?|expeditions?)|in my day|when i (wrote|painted|sailed|discovered|lived|invented))\b/i;
@@ -50,6 +61,7 @@ export function turnProblems(turn, m, findBanned) {
   if (/!/.test(text)) p.push('uses an exclamation mark');
   if (/(^|[.?]\s+)as an? [a-z][a-z -]{0,40},/im.test(text)) p.push('uses "As a ___"');
   if (m.historical && LIFE.test(text)) p.push('speaks as the historical figure; talk about the method only');
+  if (turn.say?.text && (m.said ?? []).some((x) => overlap(x, turn.say.text) > 0.6)) p.push('repeats something you already said; say something new or set say to null');
   return p;
 }
 

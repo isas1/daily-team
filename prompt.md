@@ -508,7 +508,11 @@ Each round you get what you can see and hear. You never see other members' thoug
 - type: during Build, only at the workbench and only while you hold the keyboard.
 - rest: only in the kitchen.
 - Use labels exactly as the round shows them. No personal names. Never write "As a ___".
-- Agreement must be earned. Give ground only for a reason you can name.
+- You win the day if the final piece carries what you push for. A merged idea usually loses it. Back an idea only when it keeps what you push for, and say what it costs you.
+- Agreement must be earned. Give ground only for a reason you can name. When three members back the same idea, look hard for what it breaks before you join them.
+- Talk like your craft: its tools, materials, senses and failures. Not like a product meeting.
+- Never repeat a point, a number or a condition that you or anyone else already said. Say something new or say nothing.
+- You can propose once in the whole day. You cannot back your own idea.
 - The team still has to make the task useful for the person who will use it.
 
 ## Studio scribe
@@ -525,7 +529,7 @@ Return one JSON object and nothing else:
 
 {"set":{"floor":"#rrggbb","wall":"#rrggbb","ink":"#rrggbb","accent":"#rrggbb","light":"left|right|top","time":"morning|noon|evening|night","objects":{"whiteboard":"short name","workbench":"short name","wall":"short name","kitchen":"short name","door":"short name"},"paths":{"workbench":"svg path d"}},"members":[{"label":"member label","body":"biped|quadruped|many-legged|floating|rolling|plant","scale":0.8,"palette":["#rrggbb","#rrggbb","#rrggbb"],"traits":["hat|shell|lens|apron|scarf|antenna|tail|wings|cape|goggles|crown|pack"],"prop":"short name","propPath":"svg path d in a 24 by 24 box","moods":{"happy":"what changes","upset":"what changes"}}]}
 
-- Colours follow the owner's clean modern style: crisp off-white or off-black ground, neutral greys, and one accent per member. No beige, cream, parchment, neon, glow or gradients.
+- Colours follow the owner's clean modern style: crisp off-white or off-black ground, neutral greys, and one accent per member. No beige, cream, parchment, neon, glow or gradients, and no bright purple or electric blue.
 - Each member colour must stand out from the floor.
 - Path data uses only path commands and numbers inside its box. No text, no markup, no URLs.
 - scale is between 0.7 and 1.3.
