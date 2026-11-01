@@ -15,6 +15,9 @@
 //        COMPONENT_SOURCES_FILE  temporary HTML source snapshot (or --sources), Claude only
 //        COMPONENTS_DIR      local 00-components folder, when no snapshot is supplied
 //        STUDIO              1 turns on the studio tier for any date (see STUDIO_DAYS)
+//        SIM                 1 runs the watchable studio sim for any date (see sim/run-sim.mjs SIM_DAYS)
+//        SIM_DAYS            extra sim dates, comma-separated
+//        SIM_MODEL, SIM_ROUNDS, SIM_CONCURRENCY, SIM_MAX_USD, SIM_INTERVIEWS=0, SIM_REVIEW=1
 // A brief from --brief or a brief.md file replaces today's task.
 import { execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -29,6 +32,8 @@ import { discover, planningInput, readSnapshot } from './feed-planning.mjs';
 import { chooseSource, localSources, sourceContext } from './component-source.mjs';
 import { markupText, redactCredentials } from './security.mjs';
 import { PROJECTS_FROM, PROJECT_SOURCES, projectInput, parseProject, projectProblems } from './project-planning.mjs';
+import { simPlan } from './sim/adapter.mjs';
+import { isSimDay, reviewDraft, appendTo, readLog } from './sim/run-sim.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const API_URL = process.env.API_URL || 'https://openrouter.ai/api/v1/chat/completions';
@@ -404,7 +409,7 @@ export function completeClaude(messages, _maxTokens, model = process.env.CLAUDE_
         return reject(new Error(`claude: ${redactCredentials(body.result || stderr || `exit ${code}`).slice(0, 300)}`));
       }
       const actualModel = Object.keys(body.modelUsage || {})[0] || model;
-      resolve({ text: body.result, model: actualModel });
+      resolve({ text: body.result, model: actualModel, costUsd: Number(body.total_cost_usd) || 0 });
     });
     child.stdin.end(prompt);
   });
@@ -563,7 +568,7 @@ async function main() {
   };
   // A forced run replaces the day, so old assets and screenshots must not linger.
   if (existsSync(dir)) {
-    for (const f of readdirSync(dir)) if (((packMode || projectMode) && /^(pack|tokens)\.json$/.test(f)) || /^(artifact-\d+|piece)\.(html|png)$/.test(f)
+    for (const f of readdirSync(dir)) if (((packMode || projectMode) && /^(pack|tokens)\.json$/.test(f)) || /^(artifact-\d+|piece)\.(html|png)$/.test(f) || /^(draft-\d+\.html|sim\.jsonl|look\.json)$/.test(f)
       || /^compare-(opus|sonnet|haiku)-\d+\.html$/.test(f)
       || /^comparison(?:-qa|-preview)?\.(html|json|png|mp4)$/.test(f)) rmSync(join(dir, f));
   }
@@ -577,14 +582,32 @@ async function main() {
   };
 
   // A failed day is still recorded, so the archive has no silent gaps.
+  const planTokens = packMode ? 14000 : projectMode || component ? 5000 : 3000;
+  const checkPlan = (t) => {
+    const problems = findBanned(t).map((w) => `uses the word "${w}"`);
+    if (packMode) { try { const pack = parsePack(t); problems.push(...packProblems(pack, packCount), ...packInputProblems(pack, input, Boolean(custom))); } catch (e) { problems.push(e.message); } }
+    if (projectMode) { try { problems.push(...projectProblems(parseProject(t), input)); } catch (e) { problems.push(e.message); } }
+    return problems;
+  };
   let plan;
+  let sim = null;
+  // Studio days: four member agents play the day; the single plan call is the fallback.
+  if (isSimDay(date) && !custom) {
+    try {
+      sim = await simPlan({ complete, completeChecked, date, team, parseTeam, sections: s, findBanned, system,
+        context: `${context}${packContext}${projectContext}`, work, check: checkPlan, maxTokens: planTokens, dir, daysDir: opts.out });
+      plan = sim;
+      day.sim = sim.summary;
+      console.log(`sim: ${sim.summary.rounds} rounds, ${sim.summary.calls} calls, $${sim.summary.costUsd}, ${sim.summary.idle} idle`);
+    } catch (e) {
+      console.error(`sim failed, using the single plan call: ${e.message}`);
+      day.sim = { status: 'fallback', error: redactCredentials(e.message).slice(0, 300) };
+      rmSync(join(dir, 'sim.jsonl'), { force: true });
+      sim = null;
+    }
+  }
   try {
-    plan = await completeChecked(complete, planMessages, packMode ? 14000 : projectMode || component ? 5000 : 3000, (t) => {
-      const problems = findBanned(t).map((w) => `uses the word "${w}"`);
-      if (packMode) { try { const pack = parsePack(t); problems.push(...packProblems(pack, packCount), ...packInputProblems(pack, input, Boolean(custom))); } catch (e) { problems.push(e.message); } }
-      if (projectMode) { try { problems.push(...projectProblems(parseProject(t), input)); } catch (e) { problems.push(e.message); } }
-      return problems;
-    });
+    if (!plan) plan = await completeChecked(complete, planMessages, planTokens, checkPlan);
   } catch (e) {
     Object.assign(day, { status: 'failed', error: e.message });
     save();
@@ -641,8 +664,27 @@ async function main() {
         const html = extractHtml(t);
         return html ? [...checkArtifact(html, mode), ...(packMode ? packArtifactProblems(html) : [])] : ['no HTML code block'];
       });
-      const html = extractHtml(out.text);
+      let html = extractHtml(out.text);
       if (!html) throw new Error(`${out.model} returned no HTML`);
+      // Studio review: the team reads the draft and the lead builds the final once more.
+      if (sim && n === 1 && !component && process.env.SIM_REVIEW === '1') {
+        try {
+          writeFileSync(join(dir, 'draft-1.html'), `${addCsp(studio ? inlineVendor(html) : html)}\n`);
+          const emit = appendTo(sim.logPath, sim.events);
+          const changes = await reviewDraft({ ask: sim.ask, world: sim.world, html, problems: out.problems, sections: s, findBanned, emit });
+          if (changes.length) {
+            const again = await completeChecked(complete, [...buildMessages(planText, n), { role: 'assistant', content: out.text },
+              { role: 'user', content: `The team reviewed your draft. Apply these changes where they help the person who uses it, and return the full file again:\n- ${changes.join('\n- ')}` }], 16000,
+            (t) => { const h = extractHtml(t); return h ? checkArtifact(h, mode) : ['no HTML code block']; });
+            const final = extractHtml(again.text);
+            if (final && again.problems.length <= out.problems.length) { html = final; out.problems = again.problems; out.model = again.model; }
+            emit({ r: sim.world.rounds, phase: 'review', seq: sim.world.seq++, type: 'build', who: sim.world.members[0].label, text: 'The lead builds the final.', final: file });
+          }
+          day.sim.review = changes.length;
+        } catch (e) {
+          console.error(`review skipped: ${e.message}`);
+        }
+      }
       const output = `${addCsp(packMode ? applyTokens(html, activePack.tokens) : studio ? inlineVendor(html) : html)}\n`;
       writeFileSync(join(dir, file), output);
       day.artifacts.push({ file, ...(projectMode ? { sha256: hash(output) } : {}), ...(packMode ? { sha256: hash(output), componentId: activePack.components[n - 1].id } : {}), lead: component ? rowLead(n) : n, ...(component ? { row: n } : {}), model: out.model, status: out.problems.length ? 'needs review' : 'ok', problems: out.problems });

@@ -21,6 +21,8 @@ if [ "$status" -eq 0 ]; then
 fi
 # Cover runs separately: same saved cast and plan, no artifact regeneration.
 PROVIDER=${PROVIDER:-claude} node cover.mjs "$@" || status=$?
+# The studio look runs only on sim days and never changes day.json.
+PROVIDER=${PROVIDER:-claude} node sim/look.mjs || true
 sh shot.sh days || true
 repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
 GITHUB_TOKEN=$(gh auth token) GITHUB_REPOSITORY=$repo node github.mjs suggestions > "${TMPDIR:-/tmp}/daily-team-suggestions.json" \

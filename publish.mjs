@@ -20,6 +20,8 @@ import { assertPackExport } from './component-pack.mjs';
 import { assertProjectExport } from './project-planning.mjs';
 import { markdownCell as cell } from './security.mjs';
 
+import { hasSim, highlights, watchHtml, WATCH_FILE } from './sim-view.mjs';
+
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RECENT_DAYS = 7;
 const MIN_SCREENSHOT_BYTES = 8000;
@@ -182,12 +184,33 @@ export function dayReadme(day, daysDir, pagesUrl) {
       ...(existsSync(join(dir, 'comparison.mp4')) ? ['[Watch square comparison video](comparison.mp4)', ''] : []),
     ] : []),
     ...assetLines(day, { dir, href: '' }, pagesUrl),
+    ...studioMarkdown(day, dir, pagesUrl),
     ...(session(day) ? sessionMarkdown(session(day))
       : day.plan ? ['## Team plan', '', day.plan.replace(/^(#{1,5}) /gm, '#$1 '), ''] : []),
     ...guestNote(day),
     '## Team', '', '```text', day.team, '```', '',
     `Provider: ${day.provider}. Model: ${day.model ?? 'none'}.`, '',
   ].join('\n');
+}
+
+// The studio sim, when the day ran one: a link to the replay and the turning points as text.
+function studioMarkdown(day, dir, pagesUrl) {
+  if (!hasSim(day, dir)) return [];
+  const h = highlights(day, dir);
+  return [
+    '## The studio', '',
+    ...(pagesUrl ? [`[Watch the day](${pagesUrl}${day.date}/${WATCH_FILE}): the team as four agents in an animated studio.`, ''] : []),
+    ...(h.beats.length ? ['Turning points:', '', ...h.beats.map((b) => `- ${b}`), ''] : []),
+    ...(h.members.length ? [...h.members.map((m) => `- ${m}`), ''] : []),
+    ...(h.interviews.length ? ['After the day:', '', ...h.interviews.map((x) => `- ${x}`), ''] : []),
+  ];
+}
+
+function studioHtml(day, dir, imagePrefix) {
+  if (!hasSim(day, dir)) return '';
+  const h = highlights(day, dir);
+  return `<h2>The studio</h2>\n<p><a href="${imagePrefix}${WATCH_FILE}">Watch the day</a>: the team as four agents in an animated studio.</p>`
+    + (h.beats.length ? `\n<ul>${h.beats.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>` : '');
 }
 
 export function todayBlock(day, daysDir, pagesUrl) {
@@ -211,6 +234,7 @@ export function todayBlock(day, daysDir, pagesUrl) {
   } else if (!a) lines.push(day.error ? `No asset today. ${day.error}` : 'No asset today.', '');
   const links = [`[Open the day](${base})`];
   if (pagesUrl && a) links.push(`[Use it](${pagesUrl}${day.date}/)`);
+  if (pagesUrl && hasSim(day, join(daysDir, day.date))) links.push(`[Watch the day](${pagesUrl}${day.date}/${WATCH_FILE})`);
   links.push('[Archive](ARCHIVE.md)');
   lines.push(links.join(' · '));
   return lines.join('\n');
@@ -377,6 +401,7 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
     day.request ? `<p>Request source: <a href="https://github.com/${esc(day.request.repository)}/issues/${Number(day.request.number)}">${esc(day.request.repository)} #${Number(day.request.number)}</a> · Local prototype</p>` : '',
     `<img class="card" src="${imagePrefix}team.png" alt="Team for ${day.date}: ${esc(roles(day))}">`,
     day.decision ? `<p><strong>Decision:</strong> ${esc(day.decision)}</p>` : '',
+    ...(hasSim(day, join(daysDir, day.date)) ? [studioHtml(day, join(daysDir, day.date), imagePrefix)] : []),
     hasCover(day, daysDir) ? `<img src="${imagePrefix}cover.png" alt="Designed cover for ${esc(title(day))}">` : '',
     comparison,
     ...(feedEvidence(day, daysDir).length ? ['<h2>Feed evidence</h2>', `<ul>${feedEvidence(day, daysDir).map(line => `<li>${esc(line)}</li>`).join('')}</ul>`] : []),
@@ -402,6 +427,7 @@ export function buildSite(siteDir, days, daysDir, repo, pagesUrl = '') {
       if (existsSync(join(daysDir, day.date, f))) copyFileSync(join(daysDir, day.date, f), join(out, f));
     }
     writeFileSync(join(out, 'index.html'), dayPage(day, daysDir, repo, grid(days, '../', daysDir), { root: '../', pagesUrl, imagePrefix: '' }));
+    if (hasSim(day, join(daysDir, day.date))) writeFileSync(join(out, WATCH_FILE), watchHtml(day, join(daysDir, day.date), { csp: SITE_CSP }));
   }
   const latest = days.at(-1);
   writeFileSync(join(siteDir, 'index.html'), latest
