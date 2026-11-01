@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project card trigger for a project board details panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{color-scheme:dark;--bg:var(--pack-bg);--sf:var(--pack-surface);--tx:var(--pack-text);--mu:var(--pack-muted);--ac:var(--pack-accent);--bd:var(--pack-border);--gap:var(--pack-spacing-gap);--pad:var(--pack-spacing-padding);--rad:var(--pack-radii-control);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing)}
+[data-theme=light]{color-scheme:light}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg)}
+.f1-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--gap);padding:var(--pad);background:var(--sf);color:var(--tx);border:1px solid var(--bd);border-radius:calc(var(--rad)*2);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size);line-height:1.35;overflow:hidden}
+.f1-head{margin:0;font-size:13px;font-weight:600;color:var(--mu);letter-spacing:.02em;border-radius:4px}
+.f1-head:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.f1-grid{list-style:none;margin:0;padding:3px;flex:1;min-height:0;overflow:auto;display:grid;gap:var(--gap);align-content:start}
+.f1-card{position:relative;width:100%;min-height:64px;box-sizing:border-box;display:grid;grid-template-columns:1fr 10px;column-gap:8px;row-gap:4px;align-items:start;text-align:start;padding:10px 12px;margin:0;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:var(--rad);cursor:pointer;overflow:hidden;transition:border-color var(--dur) var(--ease)}
+.f1-card::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:2px;background:var(--ac);transform:scaleY(0);transition:transform var(--dur) var(--ease)}
+.f1-card[aria-expanded=true]{border-color:var(--ac)}
+.f1-card[aria-expanded=true]::before{transform:scaleY(1)}
+.f1-card:active{background:var(--sf)}
+.f1-card:focus-visible,.f1-btn:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.f1-title{font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.f1-glyph{width:10px;height:10px;margin-top:5px;box-sizing:border-box;border:1.5px solid var(--tx);border-radius:1px;opacity:0;transition:opacity var(--dur) var(--ease)}
+.f1-draft .f1-glyph{opacity:1}
+.f1-meta{grid-column:1/-1;font-size:12px;color:var(--mu);font-variant-numeric:tabular-nums}
+.f1-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.f1-panel{border-top:1px solid var(--bd);padding-top:var(--gap);display:flex;flex-direction:column;gap:6px}
+.f1-status{margin:0;font-size:13px;color:var(--mu);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
+.f1-status b{color:var(--tx);font-weight:600}
+.f1-acts{display:flex;flex-wrap:wrap;gap:6px}
+.f1-acts.f1-off{visibility:hidden}
+.f1-btn{min-height:44px;min-width:44px;padding:0 14px;font:inherit;font-size:14px;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:var(--rad);cursor:pointer}
+.f1-btn:active{transform:translateY(1px)}
+.f1-btn[aria-pressed=true]{border-color:var(--ac);color:var(--ac)}
+.f1-btn.f1-main{background:var(--ac);border-color:var(--ac);color:var(--sf)}
+@media (prefers-reduced-motion:reduce){.f1-card,.f1-card::before,.f1-glyph{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111416;--pack-surface:#1a1f22;--pack-text:#e8ecee;--pack-muted:#9aa4a9;--pack-accent:#4fb3bf;--pack-border:#2c3438}:root[data-theme="light"]{--pack-bg:#f6f7f7;--pack-surface:#ffffff;--pack-text:#15191b;--pack-muted:#5a6469;--pack-accent:#1f7a85;--pack-border:#d5dadc}</style></head><body>
+<div class="f1-root" role="group" aria-label="Project board cards. Open a card to see its details.">
+<h2 class="f1-head" id="f1-head" tabindex="-1">Monday sprint · Forever plan</h2>
+<ul class="f1-grid" id="f1-grid" aria-labelledby="f1-head"></ul>
+<div class="f1-panel" id="f1-panel" role="region" aria-label="Opened card">
+<p class="f1-status" id="f1-status" aria-live="polite"></p>
+<div class="f1-acts f1-off" id="f1-acts"></div>
+</div>
+</div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0,t=1,anim={};
+  var cards=[
+    {id:'c-1',t:'Billing export',a:'Migrate billing exports to the new warehouse schema',v:4,due:'Due Monday'},
+    {id:'c-2',t:'Cat-pics-2 cleanup',a:'Archive cat-pics-2 (again)',v:2,due:'Due Friday'},
+    {id:'c-3',t:'Forever plan pricing page',a:'Pricing page for the Forever plan',v:7,due:'Due whenever',d:true},
+    {id:'c-4',t:'Delete old staging logs',a:'Logs: delete the staging ones',v:1,due:'Due Tuesday'},
+    {id:'c-5',t:'Emotional baggage audit',a:'Unpack emotional baggage, part 2',v:3,due:'Due never'},
+    {id:'c-6',t:'Monday standup notes',a:'Standup notes for Monday',v:5,due:'Due Monday'}];
+  var by={},els={},order=[],cols=1,activeId='c-1',openId=null;
+  var grid=document.getElementById('f1-grid'),head=document.getElementById('f1-head'),
+      status=document.getElementById('f1-status'),acts=document.getElementById('f1-acts');
+  function mk(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;return e}
+  function say(bold,rest){status.textContent='';if(bold)status.appendChild(mk('b','',bold));if(rest)status.appendChild(document.createTextNode(rest))}
+  function sortIds(){return cards.slice().sort(function(x,y){return x.t.localeCompare(y.t,'en',{sensitivity:'base'})}).map(function(c){return c.id})}
+
+  cards.forEach(function(c){
+    by[c.id]=c;
+    var li=mk('li'),b=mk('button','f1-card');
+    b.type='button';b.setAttribute('data-card-id',c.id);b.setAttribute('aria-controls','f1-panel');
+    var ti=mk('span','f1-title'),gl=mk('span','f1-glyph'),sr=mk('span','f1-sr'),me=mk('span','f1-meta');
+    gl.setAttribute('aria-hidden','true');
+    b.appendChild(ti);b.appendChild(gl);b.appendChild(sr);b.appendChild(me);li.appendChild(b);
+    b.addEventListener('click',function(){open(c.id)});
+    b.addEventListener('focus',function(){if(activeId!==c.id){activeId=c.id;render()}});
+    b.addEventListener('keydown',function(e){nav(e,c.id)});
+    els[c.id]={li:li,b:b,ti:ti,sr:sr,me:me};
+  });
+
+  var bRen=mk('button','f1-btn f1-main','Rename'),bDr=mk('button','f1-btn','Draft'),bCl=mk('button','f1-btn','Close');
+  [bRen,bDr,bCl].forEach(function(b){b.type='button';acts.appendChild(b)});
+  bDr.setAttribute('aria-pressed','false');
+  bRen.addEventListener('click',rename);
+  bDr.addEventListener('click',function(){var c=by[openId];if(!c)return;c.d=!c.d;render();
+    say(c.d?'Draft marked':'Draft cleared',c.d?' · the card shows a hollow square.':' · card matches the saved title.')});
+  bCl.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&openId){e.preventDefault();close()}});
+
+  function render(){
+    cards.forEach(function(c){var x=els[c.id];
+      x.ti.textContent=c.t;x.me.textContent='v'+c.v+' · '+c.due;
+      x.sr.textContent=c.d?', unsaved draft':'';
+      x.b.classList.toggle('f1-draft',!!c.d);
+      x.b.setAttribute('aria-expanded',openId===c.id?'true':'false');
+      x.b.tabIndex=activeId===c.id?0:-1;});
+    acts.classList.toggle('f1-off',!openId);
+    if(openId)bDr.setAttribute('aria-pressed',by[openId].d?'true':'false');
+  }
+  function place(flip){
+    var before={};
+    if(flip)order.forEach(function(id){before[id]=els[id].li.getBoundingClientRect()});
+    order=sortIds();
+    order.forEach(function(id){grid.appendChild(els[id].li)});
+    if(!flip)return;
+    anim={};
+    order.forEach(function(id){var li=els[id].li;li.style.transform='';
+      var r=li.getBoundingClientRect(),o=before[id];
+      if(o&&(o.left!==r.left||o.top!==r.top))anim[id]={dx:o.left-r.left,dy:o.top-r.top}});
+    t=0;draw();kick();
+  }
+  function nav(e,id){
+    var i=order.indexOf(id),n=order.length,r=i-i%cols,j=null;
+    switch(e.key){
+      case 'ArrowRight':if(cols>1&&i+1<n&&i+1<r+cols)j=i+1;break;
+      case 'ArrowLeft':if(cols>1&&i>r)j=i-1;break;
+      case 'ArrowDown':if(i+cols<n)j=i+cols;break;
+      case 'ArrowUp':if(i-cols>=0)j=i-cols;break;
+      case 'Home':j=e.ctrlKey?0:r;break;
+      case 'End':j=e.ctrlKey?n-1:Math.min(r+cols,n)-1;break;
+      default:return;}
+    e.preventDefault();
+    if(j===null||j===i)return;
+    activeId=order[j];render();els[activeId].b.focus();
+  }
+  function open(id){
+    openId=id;activeId=id;render();
+    say('Open · '+by[id].t,'');
+    bRen.focus();
+  }
+  function close(){
+    var id=openId;if(!id)return;
+    openId=null;render();
+    var el=document.querySelector('[data-card-id="'+id+'"]');
+    if(el){el.focus();say('Closed',' · focus back on '+by[id].t+'.')}
+    else{head.focus();say('Card no longer exists','')}
+  }
+  function rename(){
+    var c=by[openId];if(!c)return;
+    var o=c.t;c.t=c.a;c.a=o;c.v++;c.d=false;
+    place(true);render();
+    say('Saved · '+c.t,' · now card '+(order.indexOf(c.id)+1)+' of '+order.length+'. Close returns here.');
+  }
+
+  function ease(p){return 1-Math.pow(1-p,3)}
+  function step(ms){t=Math.min(1,t+ms/220);return t<1}
+  function draw(){var k=1-ease(t);
+    for(var id in anim){var a=anim[id];
+      els[id].li.style.transform=k?'translate('+(a.dx*k).toFixed(2)+'px,'+(a.dy*k).toFixed(2)+'px)':''}
+    if(t>=1)anim={};
+  }
+  function snapToTarget(){t=1}
+  function frame(now){var ms=last?Math.min(now-last,50):16.667;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(ms);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(t<1)kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+  new ResizeObserver(function(){
+    var w=grid.clientWidth,c=w<480?1:Math.max(1,Math.floor((w+8)/(176+8)));
+    if(c!==cols){cols=c;grid.style.gridTemplateColumns='repeat('+c+',minmax(0,1fr))'}
+  }).observe(grid);
+
+  place(false);render();
+  say('Pick a card to open it.',' Arrow keys move, Enter opens, Esc closes.');
+  draw();
+})();</script>
+</body></html>

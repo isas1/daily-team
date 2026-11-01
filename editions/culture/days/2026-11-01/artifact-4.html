@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Card fit preview for a project board title</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{color-scheme:dark}
+html[data-theme=light]{color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font:var(--pack-typography-size)/1.4 var(--pack-typography-family)}
+.fp4-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;overflow:auto;display:flex;flex-direction:column;gap:calc(var(--pack-spacing-gap)*1.5);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2)}
+.fp4-lab{display:block;margin:0 0 4px;padding:0;font-size:13px;font-weight:600;color:var(--pack-muted)}
+.fp4-in{width:100%;min-height:44px;padding:0 12px;font:inherit;color:inherit;background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.fp4-in:focus-visible{outline:2px solid var(--pack-accent);outline-offset:1px}
+.fp4-fs{border:0;margin:0;padding:0;min-width:0}
+.fp4-seg{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:3px;background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.fp4-seg label{position:relative;display:flex}
+.fp4-seg input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.fp4-seg span{flex:1;min-height:44px;display:grid;place-items:center;padding:2px 6px;text-align:center;font-size:13px;line-height:1.2;color:var(--pack-muted);border-radius:calc(var(--pack-radii-control) - 2px);transition:background-color var(--pack-motion-duration) var(--pack-motion-easing),color var(--pack-motion-duration) var(--pack-motion-easing)}
+.fp4-seg input:checked+span{background:var(--pack-surface);color:var(--pack-text);font-weight:600;box-shadow:inset 0 0 0 1px var(--pack-border)}
+.fp4-seg input:focus-visible+span{outline:2px solid var(--pack-accent);outline-offset:-2px}
+.fp4-stage{position:relative;overflow:clip;flex:none}
+.fp4-fit{position:absolute;top:0;transform-origin:0 0}
+.fp4-card{position:relative;padding:12px;border-radius:var(--pack-radii-control)}
+.fp4-frame{position:absolute;inset:0;background:var(--pack-bg);border:1px solid var(--pack-border);border-inline-start:2px solid var(--pack-accent);border-radius:inherit;transform-origin:50% 50%}
+.fp4-meta{position:relative;margin:0 0 4px;font-size:12px;color:var(--pack-muted)}
+.fp4-card-title{position:relative;margin:0;font-size:var(--pack-typography-size);line-height:1.4;font-weight:600;overflow-wrap:break-word}
+.fp4-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.8em}
+.fp4-empty{color:var(--pack-muted);font-weight:400}
+.fp4-measure{position:absolute;left:-9999px;top:0;visibility:hidden;pointer-events:none}
+.fp4-st{display:flex;flex-direction:column;gap:2px;min-height:3em;padding-inline-start:10px;border-inline-start:2px solid var(--pack-border);transition:border-color var(--pack-motion-duration) var(--pack-motion-easing)}
+.fp4-st[data-s=clipped]{border-color:var(--pack-accent)}
+.fp4-sm{font-weight:600}
+.fp4-sh{font-size:13px;color:var(--pack-muted)}
+.fp4-sh:empty{display:none}
+.fp4-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111416;--pack-surface:#1a1f22;--pack-text:#e8ecee;--pack-muted:#9aa4a9;--pack-accent:#4fb3bf;--pack-border:#2c3438}:root[data-theme="light"]{--pack-bg:#f6f7f7;--pack-surface:#ffffff;--pack-text:#15191b;--pack-muted:#5a6469;--pack-accent:#1f7a85;--pack-border:#d5dadc}</style></head><body>
+<div class="fp4-root" id="fp4-root" role="group" aria-label="Card fit preview for a project board title">
+  <div>
+    <label class="fp4-lab" for="fp4-title">Card title</label>
+    <input class="fp4-in" id="fp4-title" type="text" autocomplete="off" spellcheck="true" value="Migrate billing exports to the new warehouse schema">
+  </div>
+  <fieldset class="fp4-fs">
+    <legend class="fp4-lab">Preview width</legend>
+    <div class="fp4-seg">
+      <label><input type="radio" name="fp4-w" value="232"><span>Desktop 232px</span></label>
+      <label><input type="radio" name="fp4-w" value="180" checked><span>Phone 180px</span></label>
+    </div>
+  </fieldset>
+  <div class="fp4-stage" id="fp4-stage" aria-hidden="true">
+    <div class="fp4-fit" id="fp4-fit">
+      <div class="fp4-card" id="fp4-card">
+        <div class="fp4-frame" id="fp4-frame"></div>
+        <p class="fp4-meta">Forever plan · Monday</p>
+        <p class="fp4-card-title fp4-clamp" id="fp4-ct"></p>
+      </div>
+    </div>
+  </div>
+  <div class="fp4-st" id="fp4-st">
+    <span class="fp4-sm" id="fp4-sm"></span>
+    <span class="fp4-sh" id="fp4-sh"></span>
+  </div>
+  <div class="fp4-card fp4-measure" id="fp4-mc" aria-hidden="true">
+    <p class="fp4-meta">Forever plan · Monday</p>
+    <p class="fp4-card-title" id="fp4-mt"></p>
+  </div>
+  <div class="fp4-vh" id="fp4-live" role="status" aria-live="polite"></div>
+</div>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var root=$('fp4-root'),inp=$('fp4-title'),stage=$('fp4-stage'),fit=$('fp4-fit'),card=$('fp4-card'),
+      frameEl=$('fp4-frame'),ct=$('fp4-ct'),mc=$('fp4-mc'),mt=$('fp4-mt'),st=$('fp4-st'),
+      sm=$('fp4-sm'),sh=$('fp4-sh'),live=$('fp4-live');
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0,W=180,dirty=true,lastKey=null,tw={t:1,from:1};
+  function dur(){var d=parseFloat(getComputedStyle(root).getPropertyValue('--pack-motion-duration'));return d>0?d:180}
+  function lh(){return parseFloat(getComputedStyle(mt).lineHeight)||21}
+  function fits(t){mt.textContent=t;return mt.scrollHeight<=2*lh()+1}
+  function measure(){
+    var text=inp.value.trim().replace(/\s+/g,' '),name=W===232?'desktop':'phone',key,main,sub='';
+    mc.style.width=W+'px';
+    if(!text){key='empty';main='Empty title shows as \u201cUntitled\u201d'}
+    else{
+      mt.textContent=text;var h=mt.scrollHeight,L=lh();
+      if(h<=2*L+1){var n=Math.max(1,Math.round(h/L));key='fits';
+        main='Fits in '+n+(n>1?' lines':' line')+' at '+name+' width'}
+      else{
+        var w=text.split(' '),lo=0,hi=w.length-1;
+        while(lo<hi){var mid=(lo+hi+1)>>1;if(fits(w.slice(0,mid).join(' ')+'\u2026'))lo=mid;else hi=mid-1}
+        key='clipped';
+        main=lo?'Clipped after \u201c'+w[lo-1]+'\u201d at '+name+' width':'First word is too long for '+name+' width';
+        sub='Hidden: '+w.slice(lo).join(' ')}
+    }
+    ct.textContent=text||'Untitled';
+    ct.classList.toggle('fp4-empty',!text);
+    st.setAttribute('data-s',key);sm.textContent=main;sh.textContent=sub;
+    if(lastKey!==null&&key!==lastKey)live.textContent=main+(sub?'. '+sub:'');
+    lastKey=key;
+  }
+  function fitScale(){
+    fit.style.width=W+'px';
+    var a=stage.clientWidth||W,s=Math.min(1,a/W);
+    fit.style.transform='scale('+s+')';
+    fit.style.left=Math.max(0,(a-W*s)/2)+'px';
+    stage.style.height=Math.ceil(card.offsetHeight*s)+'px';
+  }
+  function ease(t){return 1-Math.pow(1-t,3)}
+  function step(dt){if(tw.t>=1)return false;tw.t=Math.min(1,tw.t+dt*16.667/dur());return tw.t<1}
+  function draw(){
+    if(dirty){measure();fitScale();dirty=false}
+    var e=ease(tw.t);
+    frameEl.style.transform=tw.t<1?'scaleX('+(tw.from+(1-tw.from)*e)+')':'';
+    ct.style.opacity=tw.t<1?(.55+.45*e):'';
+  }
+  function snapToTarget(){tw.t=1}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  inp.addEventListener('input',function(){dirty=true;kick()});
+  root.addEventListener('change',function(e){
+    var t=e.target;if(t.name!=='fp4-w')return;
+    var nw=+t.value;if(nw===W)return;
+    tw={t:0,from:W/nw};W=nw;dirty=true;kick();
+  });
+  new ResizeObserver(function(){fitScale()}).observe(root);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>

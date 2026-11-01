@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unsaved close guard for a card details panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg)}
+.fg6-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;overflow:hidden;container-type:inline-size;background:var(--pack-bg);color:var(--pack-text);font:var(--pack-typography-size)/1.4 var(--pack-typography-family);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.fg6-board{height:100%;overflow:auto;padding:var(--pack-spacing-padding);display:flex;flex-direction:column;gap:var(--pack-spacing-gap)}
+.fg6-cap,.fg6-lbl,.fg6-meta,.fg6-hint,.fg6-tg{font-size:13px;color:var(--pack-muted);margin:0}
+.fg6-card{width:min(100%,208px);min-height:64px;padding:12px;display:grid;gap:4px;text-align:left;font:inherit;color:inherit;background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);cursor:pointer;transition:box-shadow var(--pack-motion-duration) var(--pack-motion-easing)}
+.fg6-card[aria-expanded=true]{box-shadow:inset 2px 0 0 var(--pack-accent)}
+.fg6-ct{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:600}
+.fg6-status{margin:0;font-size:13px;min-height:1.4em}
+.fg6-panel{position:absolute;top:0;bottom:0;right:0;left:max(0px,calc(100% - 400px));display:flex;flex-direction:column;overflow-y:auto;background:var(--pack-surface);border-left:1px solid var(--pack-border);box-shadow:-8px 0 24px rgba(0,0,0,.16)}
+.fg6-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:var(--pack-spacing-gap);padding:6px 6px 6px var(--pack-spacing-padding);background:var(--pack-surface);border-bottom:1px solid var(--pack-border)}
+.fg6-head h2{margin:0;font-size:1em;font-weight:600}
+.fg6-body{flex:1;display:grid;align-content:start;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding)}
+.fg6-in{width:100%;min-height:44px;padding:0 12px;font:inherit;color:var(--pack-text);background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.fg6-in.fg6-dirty{border-bottom:1px dashed var(--pack-accent)}
+.fg6-stage{display:flex;align-items:center;gap:6px;margin:0;font-size:13px}
+.fg6-sq{flex:none;width:10px;height:10px;border:1.5px solid currentColor;background:currentColor}
+.fg6-dirty+.fg6-stage .fg6-sq{background:transparent}
+.fg6-foot{display:grid;gap:var(--pack-spacing-gap);padding:12px var(--pack-spacing-padding) var(--pack-spacing-padding);border-top:1px solid var(--pack-border)}
+.fg6-guard{display:grid;gap:var(--pack-spacing-gap);padding:12px;background:var(--pack-bg);border:1px solid var(--pack-accent);border-radius:var(--pack-radii-control)}
+.fg6-msg{margin:0;overflow-wrap:anywhere}
+.fg6-q{font-weight:600}
+.fg6-err{display:block;color:var(--pack-accent);font-weight:600}
+.fg6-row{display:flex;flex-wrap:wrap;gap:var(--pack-spacing-gap)}
+.fg6-row .fg6-btn{flex:1 1 7.5em}
+.fg6-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--pack-spacing-gap)}
+.fg6-btn{min-height:44px;padding:0 14px;font:inherit;color:var(--pack-text);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);cursor:pointer;transition:border-color var(--pack-motion-duration) var(--pack-motion-easing),transform 90ms var(--pack-motion-easing)}
+.fg6-btn:active:not([aria-disabled=true]){transform:scale(.97)}
+.fg6-btn[aria-disabled=true]{opacity:.5;cursor:default}
+.fg6-pri{background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-bg);font-weight:600}
+.fg6-out{border-color:var(--pack-accent);color:var(--pack-accent)}
+.fg6-save{min-width:min(100%,10.5em)}
+.fg6-tg{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+.fg6-tg input{width:18px;height:18px;margin:0;accent-color:var(--pack-accent)}
+@media (hover:hover){.fg6-btn:hover:not([aria-disabled=true]),.fg6-card:hover{border-color:var(--pack-accent)}}
+.fg6-root :focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.fg6-root [hidden]{display:none!important}
+@container (max-width:300px){.fg6-body,.fg6-foot,.fg6-board{padding:12px}.fg6-head{padding-left:12px}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111416;--pack-surface:#1a1f22;--pack-text:#e8ecee;--pack-muted:#9aa4a9;--pack-accent:#4fb3bf;--pack-border:#2c3438}:root[data-theme="light"]{--pack-bg:#f6f7f7;--pack-surface:#ffffff;--pack-text:#15191b;--pack-muted:#5a6469;--pack-accent:#1f7a85;--pack-border:#d5dadc}</style></head><body>
+<div class="fg6-root" id="fg6-root" role="group" aria-label="Unsaved close guard in a card details panel">
+<div class="fg6-board" id="fg6-board">
+<p class="fg6-cap">Forever board</p>
+<button class="fg6-card" id="fg6-card" data-card-id="c-3" aria-expanded="true" aria-controls="fg6-panel"><span class="fg6-ct" id="fg6-ct">Billing export</span><span class="fg6-meta">Forever plan · Monday</span></button>
+<p class="fg6-status" id="fg6-status" role="status"></p>
+</div>
+<section class="fg6-panel" id="fg6-panel" role="dialog" aria-modal="true" aria-labelledby="fg6-h">
+<div class="fg6-head"><h2 id="fg6-h">Card details</h2><button class="fg6-btn" id="fg6-close" type="button">Close</button></div>
+<div class="fg6-body">
+<label class="fg6-lbl" for="fg6-in">Title</label>
+<input class="fg6-in" id="fg6-in" autocomplete="off" value="Migrate billing exports to the new warehouse schema">
+<p class="fg6-stage"><span class="fg6-sq" aria-hidden="true"></span><span id="fg6-stw"></span></p>
+<p class="fg6-hint">Esc or Close checks for unsaved text.</p>
+<button class="fg6-btn fg6-out" id="fg6-restore" type="button" hidden>Restore discarded draft</button>
+</div>
+<div class="fg6-foot">
+<div class="fg6-guard" id="fg6-guard" role="alert" hidden>
+<p class="fg6-msg"><span>Unsaved title · </span><span class="fg6-q" id="fg6-q"></span><span class="fg6-err" id="fg6-err"></span></p>
+<div class="fg6-row" id="fg6-row">
+<button class="fg6-btn fg6-out" id="fg6-gsave" type="button">Save and close</button>
+<button class="fg6-btn" id="fg6-disc" type="button">Discard</button>
+<button class="fg6-btn fg6-pri" id="fg6-keep" type="button">Keep editing</button>
+</div></div>
+<div class="fg6-bar"><label class="fg6-tg"><input type="checkbox" id="fg6-fail">Fail next save</label><button class="fg6-btn fg6-pri fg6-save" id="fg6-save" type="button">Save</button></div>
+</div>
+</section>
+</div>
+<script>(function(){
+var $=function(i){return document.getElementById(i)};
+var root=$('fg6-root'),board=$('fg6-board'),panel=$('fg6-panel'),inp=$('fg6-in'),guard=$('fg6-guard'),sv=$('fg6-save'),gs=$('fg6-gsave'),st=$('fg6-status'),card=$('fg6-card'),keepB=$('fg6-keep'),discB=$('fg6-disc'),restB=$('fg6-restore'),errE=$('fg6-err'),qE=$('fg6-q'),stw=$('fg6-stw'),failB=$('fg6-fail'),rowE=$('fg6-row');
+var saved='Billing export',buf=null,saving=false,open=true,gOn=false;
+var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+function dur(){var s=getComputedStyle(root).getPropertyValue('--pack-motion-duration').trim(),n=parseFloat(s);
+  if(!n)return 180;return /ms$/.test(s)?n:/s$/.test(s)?n*1000:n}
+var tw={p:{v:1,to:1},g:{v:0,to:0}},raf=0,last=0;
+function settle(){if(tw.p.v===0)panel.hidden=true;if(tw.g.v===0&&!gOn)guard.hidden=true}
+function step(ms){var m=false,d=ms/dur();for(var k in tw){var o=tw[k];if(o.v!==o.to){o.v=o.v<o.to?Math.min(o.to,o.v+d):Math.max(o.to,o.v-d);if(o.v!==o.to)m=true}}
+  if(!m)settle();return m}
+function snapToTarget(){for(var k in tw)tw[k].v=tw[k].to;settle()}
+var ease=function(v){return 1-Math.pow(1-v,3)};
+function draw(){var p=ease(tw.p.v),g=ease(tw.g.v);
+  panel.style.transform=p<1?'translateX('+((1-p)*100).toFixed(2)+'%)':'';
+  guard.style.opacity=g;guard.style.transform=g<1?'translateY('+((1-g)*8).toFixed(2)+'px)':''}
+function frame(now){var ms=last?Math.min(now-last,50):16.7;last=now;
+  var moving=reduce()?(snapToTarget(),false):step(ms);draw();
+  raf=moving?requestAnimationFrame(frame):0}
+function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);raf=0;snapToTarget();draw()}else kick()});
+window.addEventListener('message',function(e){var m=e.data;
+  if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+    document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+
+function trimmed(){return inp.value.trim()}
+function dirty(){return inp.value!==saved}
+function valid(){var n=trimmed().length;return n>0&&n<=80}
+function dis(b,x){b.setAttribute('aria-disabled',x?'true':'false')}
+function off(b){return b.getAttribute('aria-disabled')==='true'}
+function quote(){var q=trimmed();if(!q)return 'empty';if(q.length>32)q=q.slice(0,30).trim()+'…';return '"'+q+'"'}
+function update(){var d=dirty(),t=trimmed();
+  inp.classList.toggle('fg6-dirty',d);
+  stw.textContent=!d?'Saved':!t?'Draft · title needed':t.length>80?'Draft · shorten by '+(t.length-80):'Draft · not saved';
+  dis(sv,saving||!d||!valid());dis(gs,saving||!valid());dis(discB,saving);dis(keepB,saving);
+  if(gOn)qE.textContent=quote()}
+function caretEnd(){inp.focus();var n=inp.value.length;inp.setSelectionRange(n,n)}
+function showGuard(){gOn=true;guard.hidden=false;guard.inert=false;errE.textContent='';update();
+  tw.g.to=1;kick();sv.hidden=true;keepB.focus();guard.scrollIntoView({block:'nearest'})}
+function hideGuard(){gOn=false;guard.inert=true;tw.g.to=0;sv.hidden=false;kick()}
+function doClose(){open=false;gOn=false;tw.g.v=tw.g.to=0;guard.hidden=true;sv.hidden=false;
+  panel.inert=true;board.inert=false;tw.p.to=0;
+  var c=document.querySelector('[data-card-id="c-3"]');c.setAttribute('aria-expanded','false');c.focus();kick();draw()}
+function doOpen(){open=true;panel.hidden=false;panel.inert=false;board.inert=true;st.textContent='';
+  card.setAttribute('aria-expanded','true');restB.hidden=!buf;sv.textContent='Save';
+  tw.p.to=1;kick();update();caretEnd()}
+function requestClose(){if(saving)return;if(dirty()){if(gOn)keepB.focus();else showGuard();return}doClose()}
+function stamp(){var d=new Date(),h=d.getHours()%12||12;return h+':'+String(d.getMinutes()).padStart(2,'0')}
+function save(close){if(saving||!valid()||(!close&&!dirty()))return;saving=true;errE.textContent='';
+  sv.textContent='Saving';gs.textContent='Saving';update();
+  setTimeout(function(){saving=false;
+    if(failB.checked){failB.checked=false;sv.textContent='Not saved · Retry';gs.textContent='Retry save and close';
+      if(gOn){errE.textContent='Not saved. Your draft is kept.';update();gs.focus()}else update();return}
+    saved=trimmed();inp.value=saved;$('fg6-ct').textContent=saved;var tm='Saved '+stamp();
+    sv.textContent=tm;gs.textContent='Save and close';update();st.textContent=tm;if(close)doClose()},700)}
+function discard(){if(saving)return;buf=inp.value;inp.value=saved;update();doClose();
+  st.textContent='Draft discarded. Open the card to restore it.'}
+function keep(){if(saving)return;hideGuard();caretEnd()}
+
+card.addEventListener('click',function(){if(!open)doOpen()});
+$('fg6-close').addEventListener('click',requestClose);
+gs.addEventListener('click',function(){if(!off(gs))save(true)});
+sv.addEventListener('click',function(){if(!off(sv))save(false)});
+discB.addEventListener('click',discard);
+keepB.addEventListener('click',keep);
+restB.addEventListener('click',function(){inp.value=buf;buf=null;restB.hidden=true;update();caretEnd()});
+inp.addEventListener('input',function(){if(sv.textContent!=='Save'&&!saving)sv.textContent='Save';update()});
+inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.ctrlKey&&!e.metaKey){e.preventDefault();save(false)}});
+document.addEventListener('keydown',function(e){if(!open)return;
+  if(e.key==='Escape'){e.preventDefault();if(gOn)keep();else requestClose();return}
+  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();save(gOn);return}
+  var bs=[].slice.call(rowE.children),i=bs.indexOf(document.activeElement);
+  if(i>-1&&/^Arrow/.test(e.key)){e.preventDefault();var n=/Right|Down/.test(e.key)?1:-1;bs[(i+n+bs.length)%bs.length].focus();return}
+  if(e.key==='Tab'){var f=[].filter.call(panel.querySelectorAll('button,input'),function(el){return el.offsetParent&&!el.closest('[inert]')});
+    if(!f.length)return;var a=f[0],z=f[f.length-1];
+    if(e.shiftKey&&(document.activeElement===a||!panel.contains(document.activeElement))){e.preventDefault();z.focus()}
+    else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
+board.inert=true;guard.inert=true;update();draw();
+})();</script>
+</body></html>

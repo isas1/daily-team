@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Save title button for a project card details panel</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--gap:var(--pack-spacing-gap);--pad:var(--pack-spacing-padding);--rad:var(--pack-radii-control);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing);color-scheme:dark}
+[data-theme=light]{color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg);color:var(--pack-text);font-family:var(--pack-typography-family)}
+.ft5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;position:relative;display:grid;place-items:center;font-size:min(var(--pack-typography-size),max(12px,3.6vmin));line-height:1.35}
+.ft5-p{width:100%;max-width:27em;max-height:100%;overflow:auto;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:var(--pack-spacing-padding);background:var(--pack-surface);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2)}
+.ft5-card{display:flex;gap:var(--pack-spacing-gap);align-items:baseline;padding:6px 10px;border:1px solid var(--pack-border);border-inline-start:2px solid var(--pack-accent);border-radius:var(--pack-radii-control)}
+.ft5-ct{flex:1;min-width:0;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ft5-v,.ft5-k,.ft5-cnt,.ft5-st,.ft5-d span{color:var(--pack-muted);font-size:.85em;font-variant-numeric:tabular-nums}
+.ft5-k{font-weight:600}
+.ft5-in{font:inherit;color:var(--pack-text);background:var(--pack-bg);border:1px solid var(--pack-border);border-radius:var(--pack-radii-control);min-height:44px;padding:0 10px;width:100%;text-decoration:none}
+.ft5-in.ft5-dr{text-decoration:underline dashed 1px;text-underline-offset:4px}
+.ft5-sg{display:flex;align-items:center;gap:6px;font-size:.9em}
+.ft5-g{width:10px;height:10px;border:1.5px solid currentColor;position:relative;flex:none}
+.ft5-g.ft5-c::after{content:"";position:absolute;inset:0 50% 0 0;background:currentColor}
+.ft5-g.ft5-s{background:currentColor}
+.ft5-cnt{margin-inline-start:auto;min-width:7ch;text-align:end}
+button{font:inherit;min-height:44px;border-radius:var(--pack-radii-control);cursor:pointer;color:var(--pack-text);background:transparent;border:1px solid var(--pack-border);padding:0 12px;transition:transform 90ms var(--pack-motion-easing),background-color var(--pack-motion-duration) var(--pack-motion-easing)}
+button:active{transform:scale(.97)}
+:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.ft5-save{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--pack-accent);border-color:var(--pack-accent);color:var(--pack-bg);font-weight:600}
+.ft5-save:hover{filter:brightness(1.08)}
+.ft5-save[aria-disabled=true]{background:transparent;color:var(--pack-muted);border-color:var(--pack-border);filter:none;cursor:default}
+.ft5-save[aria-disabled=true]:active{transform:none}
+.ft5-save.ft5-ok{background:transparent;color:var(--pack-text);border-color:var(--pack-accent)}
+.ft5-save.ft5-er{background:var(--pack-surface);color:var(--pack-text);border:1.5px dashed var(--pack-text)}
+.ft5-sl{width:14px;height:14px;flex:none;opacity:0}
+.ft5-sl.ft5-on{opacity:1}
+.ft5-lw{display:grid}
+.ft5-lw>*{grid-area:1/1;text-align:center;white-space:nowrap}
+.ft5-sz{visibility:hidden}
+.ft5-l{transition:transform 160ms var(--pack-motion-easing),opacity 160ms var(--pack-motion-easing)}
+.ft5-l.ft5-x{transform:translateY(5px);opacity:0;transition:none}
+.ft5-st{margin:0;min-height:2.7em}
+.ft5-cf{display:flex;gap:var(--pack-spacing-gap)}
+.ft5-cf button{flex:1}
+.ft5-cf button:first-child{border-color:var(--pack-accent)}
+.ft5-d{display:flex;flex-wrap:wrap;align-items:center;gap:6px;border-top:1px solid var(--pack-border);padding-top:var(--pack-spacing-gap)}
+.ft5-d button{font-size:.85em;flex:1 1 auto}
+.ft5-d button[aria-pressed=true]{border-color:var(--pack-accent);color:var(--pack-accent)}
+[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.ft5-l,button{transition:none}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#111416;--pack-surface:#1a1f22;--pack-text:#e8ecee;--pack-muted:#9aa4a9;--pack-accent:#4fb3bf;--pack-border:#2c3438}:root[data-theme="light"]{--pack-bg:#f6f7f7;--pack-surface:#ffffff;--pack-text:#15191b;--pack-muted:#5a6469;--pack-accent:#1f7a85;--pack-border:#d5dadc}</style></head><body>
+<div class="ft5-root" role="group" aria-label="Save title button for a project card">
+<form class="ft5-p" id="ft5-f" novalidate>
+<div class="ft5-card"><span class="ft5-k">Card</span><span class="ft5-ct" id="ft5-ct">Billing export</span><span class="ft5-v" id="ft5-cv">v4</span></div>
+<label class="ft5-k" for="ft5-in">Title</label>
+<input class="ft5-in" id="ft5-in" autocomplete="off" value="Migrate billing exports to the new warehouse schema">
+<div class="ft5-sg"><i class="ft5-g" id="ft5-g" aria-hidden="true"></i><span id="ft5-sw">Checked</span><span class="ft5-cnt" id="ft5-cnt">51 / 80</span></div>
+<button type="submit" class="ft5-save" id="ft5-sv"><svg class="ft5-sl" id="ft5-sp" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="20 18" stroke-linecap="round"/></svg><span class="ft5-lw"><span class="ft5-sz" aria-hidden="true">Not saved · Retry</span><span class="ft5-l" id="ft5-l">Save</span></span></button>
+<p class="ft5-st" id="ft5-st" role="status">Enter or Ctrl+Enter saves.</p>
+<div class="ft5-cf" id="ft5-cf" hidden><button type="button" id="ft5-mine">Use mine</button><button type="button" id="ft5-th">Keep theirs</button></div>
+<div class="ft5-d"><span>Test</span><button type="button" id="ft5-fl" aria-pressed="false">Fail next save</button><button type="button" id="ft5-rn">Teammate renames</button></div>
+</form></div>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var root=document.querySelector('.ft5-root'),f=$('ft5-f'),inp=$('ft5-in'),sv=$('ft5-sv'),lb=$('ft5-l'),sp=$('ft5-sp'),st=$('ft5-st'),cf=$('ft5-cf'),mine=$('ft5-mine'),th=$('ft5-th'),fl=$('ft5-fl');
+  var S={title:'Billing export',ver:4,by:''},base=4,stage='checked',note='',state='idle',busy=false,failNext=false,ren=0,tChk=0,saveTime='',ang=0;
+  var names=['Billing exports','Billing export (final)','cat-pics-2 export'];
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var now=function(){return new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})};
+  function check(){var t=inp.value.trim();note='';
+    if(t===S.title){stage='saved';return}
+    if(!t)note='Title needed';else if(t.length>80)note='Shorten by '+(t.length-80);
+    stage=note?'draft':'checked'}
+  function say(m){st.textContent=m}
+  function setLabel(t){if(lb.textContent===t)return;lb.classList.add('ft5-x');lb.textContent=t;void lb.offsetWidth;lb.classList.remove('ft5-x')}
+  function render(){
+    var g=$('ft5-g');g.className='ft5-g'+(stage==='checked'?' ft5-c':stage==='saved'?' ft5-s':'');
+    $('ft5-sw').textContent=stage==='saved'?(state==='saved'?'Saved':'Saved · same as card'):stage==='checked'?'Checked':(note||'Draft');
+    $('ft5-cnt').textContent=inp.value.trim().length+' / 80';
+    inp.classList.toggle('ft5-dr',stage!=='saved');
+    var off=busy||state==='conflict'||stage!=='checked';
+    sv.setAttribute('aria-disabled',String(off||state==='saved'));
+    sv.classList.toggle('ft5-ok',state==='saved');sv.classList.toggle('ft5-er',state==='failed');
+    setLabel(state==='saving'?'Saving':state==='saved'?'Saved '+saveTime:state==='failed'?'Not saved · Retry':state==='conflict'?'Not saved':'Save');
+    sp.classList.toggle('ft5-on',busy);
+    $('ft5-ct').textContent=S.title;$('ft5-cv').textContent='v'+S.ver+(S.by?' · '+S.by:'');
+    cf.hidden=state!=='conflict'}
+  function trySave(){
+    if(busy||state==='conflict')return;
+    clearTimeout(tChk);check();
+    if(stage!=='checked'){if(state!=='saved')say(note||'Edit the title to save.');render();return}
+    busy=true;state='saving';say('Saving to the board.');render();kick();
+    setTimeout(resolve,700)}
+  function resolve(){busy=false;
+    if(failNext){failNext=false;fl.setAttribute('aria-pressed','false');state='failed';
+      say('Connection dropped. Your title is kept. Press Retry.');render();return}
+    if(S.ver!==base){state='conflict';
+      say('Renamed by teammate at '+S.at+' to “'+S.title+'”. Pick one.');render();mine.focus();return}
+    S.title=inp.value.trim();S.ver++;base=S.ver;S.by='you';saveTime=now();
+    stage='saved';state='saved';say('Card is now v'+S.ver+'.');render()}
+  function endConflict(m){state='idle';say(m);render()}
+  f.addEventListener('submit',function(e){e.preventDefault();trySave()});
+  inp.addEventListener('input',function(){
+    if(!busy&&state!=='conflict')state='idle';
+    stage='draft';note='';clearTimeout(tChk);
+    if(inp.value.trim()===S.title)check();else tChk=setTimeout(function(){check();render()},600);
+    render()});
+  mine.addEventListener('click',function(){base=S.ver;endConflict('');sv.focus();trySave()});
+  th.addEventListener('click',function(){inp.value=S.title;base=S.ver;stage='saved';endConflict('Kept teammate’s title.');inp.focus()});
+  fl.addEventListener('click',function(){failNext=!failNext;fl.setAttribute('aria-pressed',String(failNext))});
+  $('ft5-rn').addEventListener('click',function(){
+    var wasSaved=stage==='saved'&&!busy;
+    S.ver++;S.title=names[ren++%3];S.by='teammate';S.at=now();
+    if(wasSaved){inp.value=S.title;base=S.ver;say('Teammate renamed the card. Field synced.')}
+    else{check();say('Teammate renamed the card.')}
+    render()});
+  root.addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();trySave();return}
+    if(e.key==='Escape'){
+      if(state==='conflict'){e.preventDefault();endConflict('Draft kept. Save when ready.');sv.focus()}
+      else if(state==='failed'){e.preventDefault();endConflict('Draft kept.')}
+      return}
+    if(state==='conflict'&&/^Arrow/.test(e.key)&&(e.target===mine||e.target===th)){
+      e.preventDefault();(e.target===mine?th:mine).focus()}});
+  var raf=0,last=0;
+  function step(dt){if(!busy)return false;ang=(ang+dt*7)%360;return true}
+  function draw(){sp.style.transform='rotate('+ang+'deg)'}
+  function snapToTarget(){ang=0}
+  function frame(t){var dt=last?Math.min(t-last,50)/16.667:1;last=t;
+    var moving=reduce()?(snapToTarget(),busy):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  check();render();draw();
+})();</script>
+</body></html>
