@@ -24,9 +24,14 @@ Phases for 16 rounds: arrive 1 to 2, pitch 3 to 5, clash 6 to 10, decide 11 to 1
 
 What keeps it honest: each member has a private stance and a rival it watches, the board has six
 slots, energy drops every four rounds, one Clash event and one Build event arrive from a pool
-seeded by the date (`sim/events.txt`), and if nobody blocks by the middle of the Clash the
-director tells one member that the leading idea breaks what it pushes for. A tied vote goes to
-the lead.
+seeded by the date (`sim/events.txt`), each member may propose once and is refused when it
+repeats a line, and when three members pile onto one idea (or nobody blocks by the middle of the
+Clash) the director tells a member who has not backed it that it breaks what it pushes for. A
+tied vote goes to the lead.
+
+First spikes, 2026-10-31 cast, 12 rounds on Haiku: before these rules, 2 blocks and a 4-0 vote by
+round 9; after, 10 blocks, 3 trust swings and a four-way split broken by the lead. Each run cost
+about $0.05 and took about 3 minutes.
 
 ## Turning it on
 
