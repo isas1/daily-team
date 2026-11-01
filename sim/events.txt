@@ -1,0 +1,19 @@
+# Studio events. One per line: phase | kind | text
+# The director picks one Clash event and one Build event per day, seeded by the date.
+# Kinds: client (a note at the door), wall (a new reference), tired (one member loses energy),
+# break (the keyboard stops for one round). "late" is added by the director when member 4 is a guest.
+clash | client | The person who will use it writes: they will use it with one hand, on a phone, on a train.
+clash | client | The person who will use it writes: they have never seen this kind of tool and will give it ten seconds.
+clash | client | The person who will use it writes: they need to show the result to someone else afterwards.
+clash | client | The person who will use it writes: they will come back to it every week, so it must remember nothing private.
+clash | client | The person who will use it writes: they make mistakes when they are tired and need a way back.
+clash | wall | A note is pinned to the wall: the last three projects all opened with a list.
+clash | wall | A note is pinned to the wall: someone tried a similar idea last month and nobody understood the first screen.
+clash | wall | A note is pinned to the wall: the best day this month was the one with the smallest idea.
+clash | tired | The heating fails. Everyone loses one energy.
+clash | tired | A long phone call at the door. One member loses two energy.
+build | break | The keyboard stops answering for a round.
+build | client | The person who will use it writes: please make the first screen work without reading.
+build | client | The person who will use it writes: it has to work with a keyboard only.
+build | wall | A note is pinned to the wall: the person who will use it prefers plain words over icons.
+build | tired | The coffee runs out. Everyone loses one energy.
