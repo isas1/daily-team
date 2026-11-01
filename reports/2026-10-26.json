@@ -1,0 +1,1273 @@
+{
+  "facts": {
+    "week": {
+      "start": "2026-10-26",
+      "end": "2026-11-01"
+    },
+    "repository": "isas1/daily-team",
+    "changes": {
+      "commits": [
+        {
+          "sha": "dc494cc",
+          "date": "2026-10-26",
+          "subject": "Refresh daily teams for useful, polished UI components (#32)",
+          "area": "Seasons and suggestions"
+        },
+        {
+          "sha": "3ce7d61",
+          "date": "2026-10-26",
+          "subject": "fix: adds wall safe-space rules to component workflow (#34)",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "c19d216",
+          "date": "2026-10-27",
+          "subject": "feat: adds team-designed daily project covers (#35)",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "9fd2526",
+          "date": "2026-10-27",
+          "subject": "fix: hardens text rendering and credential error handling (#36)",
+          "area": "Automation"
+        },
+        {
+          "sha": "d33d9ba",
+          "date": "2026-10-28",
+          "subject": "feat: adds component packs, feed planning and model comparisons",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "f11bdcc",
+          "date": "2026-10-30",
+          "subject": "feat: adds overnight editions, daily culture rotation and feed evidence (#38)",
+          "area": "Automation"
+        },
+        {
+          "sha": "1d01b0b",
+          "date": "2026-10-30",
+          "subject": "feat: adds 2026-10-30 news edition",
+          "area": "Other"
+        },
+        {
+          "sha": "27fb8da",
+          "date": "2026-10-30",
+          "subject": "feat: adds 2026-10-30 popular edition",
+          "area": "Other"
+        },
+        {
+          "sha": "3601d90",
+          "date": "2026-10-30",
+          "subject": "feat: adds 2026-10-30 culture edition",
+          "area": "Other"
+        },
+        {
+          "sha": "91cbaa4",
+          "date": "2026-10-30",
+          "subject": "Potential fix for code scanning alert no. 27: Incomplete string escaping or encoding (#39)",
+          "area": "Records"
+        },
+        {
+          "sha": "634440d",
+          "date": "2026-10-30",
+          "subject": "feat: adds 2026-10-31 culture edition",
+          "area": "Other"
+        },
+        {
+          "sha": "b3d085c",
+          "date": "2026-10-30",
+          "subject": "feat: adds 2026-10-31 popular edition",
+          "area": "Other"
+        },
+        {
+          "sha": "946ad47",
+          "date": "2026-10-31",
+          "subject": "feat: adds trend-inspired projects and preserves component studio (#40)",
+          "area": "Automation"
+        },
+        {
+          "sha": "9bd2317",
+          "date": "2026-10-31",
+          "subject": "feat: adds 2026-10-31 news edition",
+          "area": "Other"
+        },
+        {
+          "sha": "872cc37",
+          "date": "2026-10-31",
+          "subject": "fix: updates export receipts and gates pages deployment",
+          "area": "Automation"
+        },
+        {
+          "sha": "f98c92b",
+          "date": "2026-11-01",
+          "subject": "The studio: a watchable sim of each day's team (#42)",
+          "area": "Team and sessions"
+        },
+        {
+          "sha": "6b0a2a8",
+          "date": "2026-11-01",
+          "subject": "feat: adds 2026-11-01 culture edition",
+          "area": "Other"
+        }
+      ],
+      "testsAtStart": 74,
+      "testsAtEnd": 83
+    },
+    "days": [
+      {
+        "date": "2026-10-26",
+        "status": "ok",
+        "task": "Log viewer",
+        "concept": "Bracket and Ledger",
+        "decision": "The page is a compact log panel for a developer tool: the visitor filters sample events by severity, selects one with mouse, touch or keyboard, and opens its details beside or below the list.",
+        "constraint": "Every selected item has a non-color state marker.",
+        "roles": [
+          "Type designer",
+          "Motion director",
+          "Motion engineer"
+        ],
+        "guest": {
+          "name": "Lunar archivist",
+          "kind": "future"
+        },
+        "temperaments": [
+          "Changes their mind after a useful demonstration.",
+          "Rejects a claim until the state can be shown.",
+          "Offers two small options before backing one.",
+          "Asks for the exact moment the motion should stop."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [
+          "session is 1372 words, more than 1200"
+        ],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 24706
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11397
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10001
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12740
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12155
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10608
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12684
+          },
+          {
+            "file": "artifact-7.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11039
+          },
+          {
+            "file": "artifact-8.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 13652
+          },
+          {
+            "file": "artifact-9.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 14099
+          },
+          {
+            "file": "artifact-10.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11408
+          }
+        ]
+      },
+      {
+        "date": "2026-10-27",
+        "status": "ok",
+        "task": "Pipeline panel",
+        "concept": "Lit Case",
+        "decision": "The page is a phone-width pipeline panel: the visitor opens the failed build step, reads the log line that stopped it, and retries the step in a local demo.",
+        "constraint": "The component fits a narrow phone frame.",
+        "roles": [
+          "Exhibit light technician",
+          "Medical illustrator",
+          "Interface designer"
+        ],
+        "guest": {
+          "name": "Impatient commuter",
+          "kind": "archetype"
+        },
+        "temperaments": [
+          "Asks what a stranger would expect next.",
+          "Interrupts with a counterexample, then listens.",
+          "Prefers a clear label to a clever one.",
+          "Looks for the hidden cost in a simple idea."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 9,
+        "planProblems": [
+          "session is 1308 words, more than 1200"
+        ],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 28810
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11751
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12853
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 13620
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10266
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9798
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 13037
+          },
+          {
+            "file": "artifact-7.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11342
+          },
+          {
+            "file": "artifact-8.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12031
+          },
+          {
+            "file": "artifact-9.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10658
+          },
+          {
+            "file": "artifact-10.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 14393
+          }
+        ]
+      },
+      {
+        "date": "2026-10-28",
+        "status": "ok",
+        "task": "Latency chart",
+        "concept": "Breach Reader",
+        "decision": "The team builds a single latency card for checkout-api where a visitor picks a range, watches named load stages, chooses a percentile, reads any point, steps between SLO breaches, and pins two points to get a delta.",
+        "constraint": "Repeated input cannot queue duplicate work.",
+        "roles": [
+          "Precision machinist",
+          "Air traffic controller",
+          "Furniture designer"
+        ],
+        "guest": {
+          "name": "Asteroid workshop tutor",
+          "kind": "future"
+        },
+        "temperaments": [
+          "Questions every effect with no useful result.",
+          "Checks the small screen before agreeing.",
+          "Asks how a person gets back after a mistake.",
+          "Pushes for one more pass on the weakest state."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 8,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 37813
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9954
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11092
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9398
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12830
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12058
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 13459
+          }
+        ]
+      },
+      {
+        "date": "2026-10-29",
+        "status": "ok",
+        "task": "Import progress",
+        "concept": "Brand kit import",
+        "decision": "The team builds an import panel for a canvas editor, and a visitor can bring 14 files into a poster, see each named stage with real counts, cancel at any point, read a clear completion summary, and undo the import with the replaced layer...",
+        "constraint": "An empty state offers one clear action.",
+        "roles": [
+          "Puppet maker",
+          "Control room operator",
+          "Foley artist"
+        ],
+        "guest": {
+          "name": "Velvet beetle",
+          "kind": "creature"
+        },
+        "temperaments": [
+          "Shows a working sample before making a claim.",
+          "Insists on trying it with keys only.",
+          "Wants to see the resting frame first.",
+          "Defends a familiar pattern when it helps."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 8,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 42610
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10065
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10686
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12438
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11139
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 12675
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10316
+          }
+        ]
+      },
+      {
+        "date": "2026-10-30",
+        "status": "ok",
+        "task": "Request loader",
+        "concept": "Holding Panel",
+        "decision": "The team builds a reading-list panel that loads three sample sources and holds its layout through every state.",
+        "constraint": "Use one consistent spacing scale.",
+        "roles": [
+          "Dance choreographer",
+          "Railway signaller",
+          "Optical technician"
+        ],
+        "guest": {
+          "name": "Satellite repair apprentice",
+          "kind": "future"
+        },
+        "temperaments": [
+          "Asks what the user can do with it.",
+          "Notices uneven spacing before anyone else.",
+          "Tests the longest label in the room.",
+          "Argues for fewer moving parts."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 9,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "piece.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 30506
+          },
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11171
+          },
+          {
+            "file": "artifact-2.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10828
+          },
+          {
+            "file": "artifact-3.html",
+            "lead": 3,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10674
+          },
+          {
+            "file": "artifact-4.html",
+            "lead": 4,
+            "status": "ok",
+            "problems": [],
+            "bytes": 9493
+          },
+          {
+            "file": "artifact-5.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 10550
+          },
+          {
+            "file": "artifact-6.html",
+            "lead": 2,
+            "status": "ok",
+            "problems": [],
+            "bytes": 11502
+          }
+        ]
+      },
+      {
+        "date": "2026-10-31",
+        "status": "ok",
+        "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+        "concept": "Handshake Bench",
+        "decision": "A protocol engineer or learner hand-delivers, drops, duplicates or delays packets between two toy handshake machines while advancing the clock by hand.",
+        "constraint": "The first frame shows the useful component.",
+        "roles": [
+          "Color grading specialist",
+          "Wayfinding designer",
+          "Camera operator"
+        ],
+        "guest": {
+          "name": "Amber crab",
+          "kind": "creature"
+        },
+        "temperaments": [
+          "Offers two small options before backing one.",
+          "Asks what a stranger would expect next.",
+          "Looks for the hidden cost in a simple idea.",
+          "Keeps asking which action matters most."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 8,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "ok",
+            "problems": [],
+            "bytes": 38492
+          }
+        ]
+      },
+      {
+        "date": "2026-11-01",
+        "status": "needs review",
+        "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+        "concept": "Filing Loupe",
+        "decision": "A paralegal or court clerk pastes or opens a filing before it goes to an AI summarizer.",
+        "constraint": "Every action works without a mouse.",
+        "roles": [
+          "Lens grinder",
+          "Kinetic sculptor",
+          "Game interface designer"
+        ],
+        "guest": {
+          "name": "Floating market clerk",
+          "kind": "future"
+        },
+        "temperaments": [
+          "Interrupts with a counterexample, then listens.",
+          "Tracks the unresolved point until someone answers.",
+          "Changes their mind after a useful demonstration.",
+          "Asks the quietest member to try it first."
+        ],
+        "format": "current",
+        "deadlock": false,
+        "referee": false,
+        "clashLines": 10,
+        "planProblems": [],
+        "artifacts": [
+          {
+            "file": "artifact-1.html",
+            "lead": 1,
+            "status": "needs review",
+            "problems": [
+              "loads an external resource"
+            ],
+            "bytes": 44714
+          }
+        ]
+      }
+    ],
+    "seasons": [
+      {
+        "start": "2026-10-26",
+        "when": "started this week",
+        "addedCounts": {
+          "roles": 48,
+          "methods": 48,
+          "stances": 0,
+          "constraints": 42,
+          "tasks": 40,
+          "guests": 36,
+          "temperaments": 24
+        },
+        "retiredCounts": {
+          "roles": 48,
+          "methods": 48,
+          "stances": 0,
+          "constraints": 42,
+          "tasks": 40,
+          "guests": 36,
+          "temperaments": 24
+        },
+        "added": {
+          "roles": [
+            "Interface designer",
+            "Motion director",
+            "Interaction engineer",
+            "Type designer",
+            "Accessibility specialist",
+            "Human factors engineer",
+            "Icon designer",
+            "Design systems engineer",
+            "Mobile interface designer",
+            "Data interface designer",
+            "Usability researcher",
+            "Interaction prototyper",
+            "Visual designer",
+            "Motion engineer",
+            "Interface copywriter",
+            "Quality engineer",
+            "Cabinet maker",
+            "Watch restorer",
+            "Instrument maker",
+            "Exhibit light technician",
+            "Architectural model maker",
+            "Technical illustrator",
+            "Medical illustrator",
+            "Scientific illustrator",
+            "Foley artist",
+            "Color grading specialist",
+            "Dance choreographer",
+            "Puppet maker",
+            "Stage illusion builder",
+            "Camera operator",
+            "Furniture designer",
+            "Ergonomist",
+            "Railway signaller",
+            "Control room operator",
+            "Air traffic controller",
+            "Flight deck designer",
+            "Game interface designer",
+            "Technical writer",
+            "Cartographic designer",
+            "Wayfinding designer",
+            "Precision machinist",
+            "Optical technician",
+            "Lens grinder",
+            "Instrument tuner",
+            "Kinetic sculptor",
+            "Letter cutter",
+            "Silversmith",
+            "Furniture restorer"
+          ],
+          "methods": [
+            "List each state before drawing the first frame.",
+            "Build the useful action before adding any motion.",
+            "Reserve space for the longest label in every state.",
+            "Compare the resting state with the state after an error.",
+            "Try every action twice before calling it finished.",
+            "Work through the whole control without touching a mouse.",
+            "Test with a long name and an empty value.",
+            "Make the main action clear before adding a hint.",
+            "Remove any effect that hides the result.",
+            "Give one transition a clear start, middle and end.",
+            "Interrupt each transition halfway and keep the state correct.",
+            "Check the edge alignment before adding shadows.",
+            "Choose one spacing unit and use it throughout.",
+            "Draw focus and pressed states beside the resting state.",
+            "Show what changes when the main action succeeds.",
+            "Make failure easy to spot and easy to recover from.",
+            "Test the smallest frame before the largest one.",
+            "Compare light and dark with the same content.",
+            "Keep the label still while the icon changes.",
+            "Replace one vague label with a clear action verb.",
+            "Name the useful result before naming the concept.",
+            "Find one familiar pattern and improve its weakest state.",
+            "Count the steps between intent and result, then remove one.",
+            "Check the control with motion turned off.",
+            "Make a still frame that explains the same action as the animation.",
+            "Use one quiet surface to make the important edge clear.",
+            "Compare two easing curves at the same duration.",
+            "Keep the moving part inside a steady layout.",
+            "Match icon weight to the weight of nearby text.",
+            "Make a narrow version with the same useful content.",
+            "Check which state needs a retry or a cancel action.",
+            "Make the active state clear without relying on color.",
+            "Replace a fake percentage with an honest pending state.",
+            "Put useful sample data in place before adjusting type.",
+            "Try a second click before the first action finishes.",
+            "Use the same visual rule for every selected item.",
+            "Check the quiet parts before adding another accent.",
+            "Give every moving part a reason to stop.",
+            "Keep the user's last choice when a panel closes.",
+            "Test the action with one thumb and no hover.",
+            "Write one sentence naming what a builder can reuse.",
+            "Separate the sample state from the rendered view.",
+            "Keep a clear path back from the most expanded state.",
+            "Find the smallest change that makes the result easier to read.",
+            "Make two versions with different hierarchy and compare them.",
+            "Check the border and surface at the smallest size.",
+            "Keep the animation speed stable across frame rates.",
+            "Use the last pass to remove visual and code clutter."
+          ],
+          "stances": [],
+          "constraints": [
+            "Every action works without a mouse.",
+            "Tap targets are at least 44 pixels tall.",
+            "Text stays legible at 200 percent zoom.",
+            "Every action gives immediate visible feedback.",
+            "Changing labels never shift the main control.",
+            "Reduced motion keeps every state usable.",
+            "Focus stays visible on both light and dark surfaces.",
+            "A failed action always offers a useful next step.",
+            "No information relies only on color.",
+            "Every drag action has a button or key alternative.",
+            "A pending action can finish without a layout jump.",
+            "An empty state offers one clear action.",
+            "A panel returns focus to its trigger on close.",
+            "Use one consistent spacing scale.",
+            "Long labels wrap without hiding the action.",
+            "The first frame shows the useful component.",
+            "Every selected item has a non-color state marker.",
+            "Repeated input cannot queue duplicate work.",
+            "The component fits a narrow phone frame.",
+            "Light and dark modes keep equal visual hierarchy.",
+            "Use one accent only for state or action.",
+            "Icons have a consistent stroke weight.",
+            "No motion delays access to content.",
+            "The component remains useful with sound off.",
+            "A completed action can be tried again.",
+            "Every field keeps its label visible.",
+            "Disabled controls explain their reason when needed.",
+            "Error text stays beside the relevant action.",
+            "The useful result stays visible after motion stops.",
+            "A loading state preserves the final content size.",
+            "An open overlay closes with the escape key.",
+            "Space and enter trigger focused buttons.",
+            "Keyboard focus follows the visible reading order.",
+            "Use realistic short sample content.",
+            "Hidden pages stop all animation work.",
+            "Idle components stop their render loop.",
+            "The main action uses a clear verb.",
+            "Borders and shadows share one visual weight.",
+            "The state remains correct during rapid input.",
+            "Use tabular figures where values change.",
+            "No control depends on hover alone.",
+            "The component has a clear reset or reverse action."
+          ],
+          "tasks": [
+            "Feature details: an accordion for a product page that expands one feature and keeps the other summaries easy to scan.",
+            "Preview zoom: a slider for an image editor that changes magnification while keeping the selected area in view.",
+            "Save notice: a toast for a project editor that confirms a save and then clears without blocking the work.",
+            "Item quantity: a stepper for a shopping cart that changes item count and updates the total.",
+            "Product rating: a rating control for a shop that lets someone select a score and change it before saving.",
+            "Workspace search: a search field for a team app that filters project names and shows when nothing matches.",
+            "Booking date: a date picker for an appointment prototype that selects an available day and shows the choice.",
+            "Upload progress: a progress ring for a media tool that shows how much of a file has uploaded and when it finishes.",
+            "Result pages: pagination for a content library that moves through results and marks the current page.",
+            "Folder trail: breadcrumbs for a file browser that show the current folder and let someone return to a parent.",
+            "Copy invite: a copy button for a team app that copies an invite link and confirms success.",
+            "Password reveal: a password field for a signup prototype that switches between hidden and visible text without losing input.",
+            "Content tags: a tag input for a publishing tool that adds, edits, and removes labels from a draft.",
+            "Brand color: a color picker for a site builder that changes the accent color in a live preview.",
+            "Loading preview: a skeleton for a project gallery that holds the card layout while sample content loads.",
+            "First project: an empty state for a workspace that explains the next action and lets someone create a first project.",
+            "Launch countdown: a countdown for a product launch page that shows time remaining and changes state when the launch arrives.",
+            "View switch: a segmented control for a project library that switches between list, grid, and compact views.",
+            "Task selection: a checkbox for a task list that selects one task or shows a partly selected group.",
+            "Board order: a reorder list for a planning board that moves tasks and makes their new order clear.",
+            "Team members: an avatar stack for a project header that shows collaborators and reveals the people hidden in the count.",
+            "Unread count: a badge for an inbox that updates when messages arrive or someone marks them read.",
+            "Activity trend: a sparkline for a product dashboard that shows a short activity history and reveals a selected value.",
+            "Undo edit: an undo control for a canvas editor that restores the previous change and shows what came back.",
+            "Save button: an action button for an editor that shows pending work, confirms success and offers retry after a sample failure.",
+            "Download button: a button for a file panel that shows preparation, completion and a repeat action in a local demo.",
+            "Destructive action: a delete button for a project card that asks for confirmation and offers undo after removal.",
+            "Split action: a split button for a publishing tool that offers save, schedule and draft choices with clear state feedback.",
+            "Request loader: a loader for a content panel that moves from pending to loaded or failed, with retry and stable layout.",
+            "Import stages: a loader for a file tool that shows named stages, allows cancel and ends in a clear completion state.",
+            "Details panel: a side panel for a project tool that opens from a card, edits a title and returns focus when closed.",
+            "Share sheet: a bottom panel for a media tool that copies a link, reports failure and closes with a swipe, button or key.",
+            "Filter panel: a panel for a library that applies and clears filters while showing the resulting item count.",
+            "Project card: a card for a workspace that opens useful details and lets someone pin or archive the sample project.",
+            "Metric card: a card for a service dashboard that changes time range and reveals the selected metric value.",
+            "Plan card: a card for a pricing page that changes billing period and clearly marks the selected plan.",
+            "Latency chart: a chart card for a service dashboard that selects a time range and reveals latency at a chosen point.",
+            "Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo.",
+            "Log viewer: a panel for a developer tool that filters sample events by severity and opens the chosen event details.",
+            "Data table: a compact table for a project tool that sorts rows, selects an item and shows a useful empty state."
+          ],
+          "guests": [
+            "archetype | First-time visitor | Find the main action without reading a guide. | invented",
+            "archetype | Impatient commuter | Complete the action with one thumb in a short pause. | invented",
+            "archetype | Keyboard regular | Reach every state without moving a pointer. | invented",
+            "archetype | Night shift operator | Keep status clear without bright light or constant motion. | invented",
+            "archetype | Careful reviewer | Compare the result with the original before agreeing. | invented",
+            "archetype | Busy shop owner | Show the next useful action beside the result. | invented",
+            "future | Orbital mechanic | Keep controls clear while the whole frame moves. | invented",
+            "future | Deep space dispatcher | Show pending work honestly when replies take a long time. | invented",
+            "future | Lunar archivist | Make every saved choice easy to find and reverse. | invented",
+            "future | Ocean station keeper | Use a quiet signal that stays clear at a glance. | invented",
+            "future | Remote habitat gardener | Show slow progress without pretending it is complete. | invented",
+            "future | Cloud city inspector | Check the weakest edge before adding another layer. | invented",
+            "creature | Glass moth | Find the useful edge without flying toward decoration. | invented",
+            "creature | Copper snail | Keep the path clear even when the action takes time. | invented",
+            "creature | Paper fox | Fold away detail while keeping the main action visible. | invented",
+            "creature | Pocket octopus | Give each action its own clear reach and feedback. | invented",
+            "creature | Ink wren | Use a small mark to show exactly what changed. | invented",
+            "creature | Slate tortoise | Keep a steady shell while the state inside changes. | invented",
+            "archetype | Cautious beginner | Make the first action safe and easy to reverse. | invented",
+            "archetype | Screen reader user | Name each state and result without relying on its shape. | invented",
+            "archetype | Returning collaborator | Keep the last useful choice when the view opens again. | invented",
+            "archetype | One-handed maker | Place related actions within one easy reach. | invented",
+            "archetype | Detail collector | Reveal a useful detail without losing the overview. | invented",
+            "archetype | Deadline editor | Keep feedback immediate and recovery short. | invented",
+            "future | Mars relay technician | Separate queued work from work that has actually started. | invented",
+            "future | Polar city navigator | Keep the route back visible in every expanded view. | invented",
+            "future | Asteroid workshop tutor | Teach the action through its first useful result. | invented",
+            "future | Tidal library custodian | Let detail appear and recede without moving the main label. | invented",
+            "future | Floating market clerk | Keep changing totals aligned and easy to compare. | invented",
+            "future | Satellite repair apprentice | Test the same action twice before trusting it. | invented",
+            "creature | Velvet beetle | Use quiet depth to make the pressed state feel clear. | invented",
+            "creature | Porcelain hare | Land a quick move without a second bounce. | invented",
+            "creature | Silver heron | Move only the part that helps someone see the change. | invented",
+            "creature | Thread lizard | Keep a visible connection between trigger and result. | invented",
+            "creature | Amber crab | Make side steps as clear as steps forward. | invented",
+            "creature | Stone swallow | Return to a steady resting frame after every move. | invented"
+          ],
+          "temperaments": [
+            "Asks what the user can do with it.",
+            "Pushes for one more pass on the weakest state.",
+            "Shows a working sample before making a claim.",
+            "Checks the small screen before agreeing.",
+            "Argues for fewer moving parts.",
+            "Questions every effect with no useful result.",
+            "Asks how a person gets back after a mistake.",
+            "Notices uneven spacing before anyone else.",
+            "Insists on trying it with keys only.",
+            "Defends a familiar pattern when it helps.",
+            "Wants to see the resting frame first.",
+            "Tests the longest label in the room.",
+            "Interrupts with a counterexample, then listens.",
+            "Keeps asking which action matters most.",
+            "Rejects a claim until the state can be shown.",
+            "Asks for the exact moment the motion should stop.",
+            "Prefers a clear label to a clever one.",
+            "Offers two small options before backing one.",
+            "Looks for the hidden cost in a simple idea.",
+            "Names what improved before asking for more.",
+            "Asks the quietest member to try it first.",
+            "Tracks the unresolved point until someone answers.",
+            "Changes their mind after a useful demonstration.",
+            "Asks what a stranger would expect next."
+          ]
+        },
+        "retired": {
+          "roles": [
+            "Playwright",
+            "Stand-up comedian",
+            "Radio producer",
+            "Documentary director",
+            "Animator",
+            "Comic artist",
+            "Printmaker",
+            "Ceramicist",
+            "Textile designer",
+            "Bookbinder",
+            "Sign painter",
+            "Exhibition designer",
+            "Museum curator",
+            "Front-end engineer",
+            "Creative coder",
+            "Data journalist",
+            "Brand strategist",
+            "Packaging designer",
+            "Chef",
+            "Perfumer",
+            "Window dresser",
+            "Urban planner",
+            "Teacher",
+            "Librarian",
+            "Taxidermist",
+            "Locksmith",
+            "Upholsterer",
+            "Glassblower",
+            "Calligrapher",
+            "Blacksmith",
+            "Tailor",
+            "Beekeeper",
+            "Luthier",
+            "Stonemason",
+            "Clockmaker",
+            "Weaver",
+            "Florist",
+            "Cobbler",
+            "Translator",
+            "Sculptor",
+            "Wheelwright",
+            "Gilder",
+            "Thatcher",
+            "Lacemaker",
+            "Rope maker",
+            "Bell founder",
+            "Organ builder",
+            "Stage manager"
+          ],
+          "methods": [
+            "Use found material only.",
+            "Show it to someone at 10 percent done.",
+            "Repeat one motif with variation.",
+            "Design for the slowest device and connection first.",
+            "Count words, clicks, and seconds, then reduce each.",
+            "Find what the audience already does and build on it.",
+            "Interview someone who dislikes the category.",
+            "Collect references, then put them away and work from memory.",
+            "Make the ending first.",
+            "Try it ten times larger and ten times smaller.",
+            "Invert the default and see what still works.",
+            "Write down what it must never do.",
+            "Structure it in three acts.",
+            "Reduce it to one sentence before making anything.",
+            "Build a kit of parts, then assemble.",
+            "Design for one sense alone.",
+            "Use real content only, no placeholders.",
+            "Test it in the place where it will be used.",
+            "Set one rule, follow it strictly, and note where it fails.",
+            "Rework only the weakest part.",
+            "Time-box to one hour and keep the result.",
+            "Replace every adjective in the brief with a measurable target.",
+            "Name the audience as one specific person.",
+            "Remove the feature everyone assumes is required.",
+            "Work in silence for the first ten minutes before any music or talk.",
+            "Swap your draft with someone else's and finish theirs.",
+            "List every material you cannot use, then start.",
+            "Design for the most frustrated possible user first.",
+            "Ask a child to explain what it is for.",
+            "Set a budget of zero and see what still works.",
+            "Translate the brief into a question, then answer only the question.",
+            "Choose the constraint you like least and keep it.",
+            "Write the instructions for a stranger, then follow them exactly yourself.",
+            "Find the most expensive possible mistake and design it out first.",
+            "Do the task by hand three times before automating any of it.",
+            "Ask what the user does just before and just after, and design for both.",
+            "Label every part with its purpose, then delete the parts with no label.",
+            "Finish one complete rough pass before polishing any single part.",
+            "Sort each decision into reversible and permanent, and slow down only on the permanent ones.",
+            "Write the help text, then change the design until the help text is not needed.",
+            "Name every part before arranging any of them.",
+            "Find the slowest step, make it visible, and speed up only that step.",
+            "Build two versions that disagree and keep what both share.",
+            "Stop each session mid-sentence so the next one starts easily.",
+            "Trace one piece of input from entry to exit and note every stop.",
+            "Decide what gets thrown away before deciding what stays.",
+            "Make the worst version on purpose, then list what makes it bad.",
+            "Write the rule for when to stop before you start."
+          ],
+          "stances": [],
+          "constraints": [
+            "Usable with one thumb on a phone.",
+            "No animation.",
+            "Readable from 2 metres on a laptop screen.",
+            "Explainable in one sentence at the top of the page.",
+            "Built for people over 70.",
+            "Built for a 10-year-old.",
+            "Meaning never depends on color alone.",
+            "Everything fits on one screen without scrolling.",
+            "Under 30 KB in total.",
+            "Prints on one A4 page.",
+            "Lowercase only.",
+            "Three-column grid only.",
+            "Prints clearly on a black-and-white printer.",
+            "Uses sound as well as sight.",
+            "Usable with the keyboard alone.",
+            "Learnable in 30 seconds.",
+            "System fonts only.",
+            "The user does exactly one thing on the page.",
+            "Has a dark mode that follows the system setting.",
+            "Still makes sense in 10 years: no trends.",
+            "No buttons.",
+            "Fits in a postcard-sized area.",
+            "Made only of lines.",
+            "Saves the input in the browser and restores it on reload.",
+            "Something is already happening when the page opens.",
+            "No words until the visitor acts.",
+            "Uses a single accent color.",
+            "All text at 18 px or larger.",
+            "One column only.",
+            "Every visit ends differently.",
+            "Monospace typeface only.",
+            "Has a beginning, a middle, and an end.",
+            "Built from one shape repeated.",
+            "Every change can be undone.",
+            "Touch targets at least 48 px.",
+            "Hides one thing for the curious to find.",
+            "Works fully offline after the first load.",
+            "No more than two levels of heading.",
+            "Uses no more than two font sizes.",
+            "Changes with the time of day.",
+            "Text still reads clearly at 200 percent zoom.",
+            "No more than seven elements visible at once."
+          ],
+          "tasks": [
+            "Toggle in risograph: two ink layers slip out of register as it flips, then lock back into one clean print.",
+            "Slider in sediment: each step lays down a stratum, and dragging back scrapes the layers away.",
+            "Button in letterpress: the press bites into paper, and the deboss stays as proof it was pressed.",
+            "Loader in phosphor: a trace writes the wait across a dark screen, and the glow fades behind the beam.",
+            "Progress ring in phyllotaxis: seeds spiral out from the center until the head is full.",
+            "Dial in cymatics: turning changes the tone, and sand gathers on the nodal lines when it locks.",
+            "Stepper in split flap: each count clatters through the flaps and settles on the new number.",
+            "Rating in thermal: a press leaves a warm print that cools to the score that was given.",
+            "Countdown in marbled ink: rings of ink spread on water and close in as the moment nears.",
+            "Tooltip in frost: a hint crystallizes where the hand pauses and melts when it moves on.",
+            "Tabs in folded paper: panels crease and refold so the one in front always lies flat.",
+            "Accordion in bellows: a section draws breath as it opens, and the last one breathes out.",
+            "Toast in smoke: a notice rises, holds its shape long enough to read, and drifts apart.",
+            "Segmented control in iron filings: a magnet slides between three choices and the filings follow.",
+            "Checkbox in embroidery: a stitch crosses the box, can be unpicked, or stops halfway as a half state.",
+            "Search field in a sieve: letters shake a mesh, and only the matching words stay on top.",
+            "Date picker in tide: drag the tide line along a shore of days, and it leaves one day wet.",
+            "Copy button in carbon paper: one tap presses a copy through, and the second sheet shows it worked.",
+            "Password field in crystal growth: each character feeds a crystal that grows larger and more ordered.",
+            "Tag input in beads: each word becomes a bead on a thread, and a tap slips one off the end.",
+            "Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
+            "Skeleton in graphite rubbing: the shape of the content appears as if rubbed over a hidden relief.",
+            "Empty state in tide pool: an empty list is a still pool with one small creature waiting.",
+            "Reorder list in rope: items hang on a rope, and lifting one moves the slack along the line.",
+            "Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.",
+            "Key hint in ripples: each key on screen sends one ring across still water when it is pressed.",
+            "Character counter in sand: grains drain as text is typed, showing how much room is left.",
+            "Theme switch in eclipse: light and dark trade places as one disc slides across another.",
+            "File drop in a well: a dropped file falls, rings spread, and the echo confirms it arrived.",
+            "Scroll progress in a wick: a thin flame burns along the edge as the page is read.",
+            "Split view in surface tension: two pools share one edge that the hand can drag.",
+            "Carousel in a zoetrope: cards spin past a slit and stop one at a time, by swipe or key.",
+            "Status dot in fireflies: one light pulses slowly when away, steadily when online, and fast when busy.",
+            "Command menu in magnetism: typing pulls the matching actions up out of a scattered field.",
+            "Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.",
+            "Sparkline in seismograph: a needle draws the numbers inside a sentence and settles at rest.",
+            "Initials stack in shadow play: a few figures overlap behind a screen, and the rest are a count.",
+            "Pagination in flipbook: pages riffle under the thumb and stop with the number in view.",
+            "Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.",
+            "Slider in pendulum: a weighted bob swings to the value and slowly comes to rest."
+          ],
+          "guests": [
+            "historical | Leonardo da Vinci | Sketch the subject many times before deciding anything. | died 1519",
+            "historical | Benjamin Franklin | List the pros and cons, weigh them, and cross out equals. | died 1790",
+            "historical | Katsushika Hokusai | Show the same subject from many viewpoints. | died 1849",
+            "historical | Ada Lovelace | Imagine what the machine could do beyond its first job. | died 1852",
+            "historical | Charles Darwin | Write down the facts that disagree with you first. | died 1882",
+            "historical | Florence Nightingale | Turn the numbers into a picture that forces a decision. | died 1910",
+            "myth | Cassandra | Name the failure nobody wants to hear. | Greek myth",
+            "myth | Daedalus | Design the way out of whatever you build. | Greek myth",
+            "myth | Odysseus | Go around what you cannot beat head-on. | Greek myth",
+            "myth | Penelope | Undo what is not ready and buy time to get it right. | Greek myth",
+            "myth | Sisyphus | Make the task that will repeat lighter. | Greek myth",
+            "myth | Janus | Look back and forward at every threshold. | Roman myth",
+            "myth | Arachne | Make the craft so precise it challenges the masters. | Greek myth",
+            "myth | Scheherazade | End each part with a reason to come back. | folk tale collection",
+            "literary | Don Quixote | Attempt the impossible version first and keep what survives. | Cervantes, died 1616",
+            "literary | Alice | Follow the strange path and ask why the rules are what they are. | Lewis Carroll, died 1898",
+            "literary | Robinson Crusoe | Build only from what washed up. | Daniel Defoe, died 1731",
+            "literary | Gulliver | Change the scale until something looks absurd. | Jonathan Swift, died 1745",
+            "literary | Ebenezer Scrooge | Weigh what a choice costs in the past, present, and future. | Charles Dickens, died 1870",
+            "literary | Captain Ahab | Chase one goal and count what it costs. | Herman Melville, died 1891",
+            "archetype | The Fool | Ask the question everyone stopped asking. | archetype",
+            "archetype | The Trickster | Break one rule to see if it was ever needed. | archetype",
+            "archetype | The Outsider | Use it like someone who has never seen one. | archetype",
+            "archetype | The Null | Assume the number means nothing until shown otherwise. | archetype",
+            "archetype | Entropy | Find what breaks first as it wears down. | personified force",
+            "archetype | Time | Show what this looks like in ten years. | personified force",
+            "future | Repair technician from 2140 | Make every part fixable with one common tool. | invented",
+            "future | Archivist from 2300 | Keep it readable after the software that made it is gone. | invented",
+            "future | Settler on Mars in 2090 | Build for scarce supplies and long delays. | invented",
+            "creature | Phoenix | Burn the old version and rebuild from what is left. | myth and folklore",
+            "creature | Hydra | For every problem you cut, check what grows back. | Greek myth",
+            "creature | Glass fox | Show everything it does and hide nothing. | invented",
+            "historical | Mary Anning | Search the same ground again after every storm. | died 1847",
+            "creature | Clockwork beetle | Wind it once and watch how far it runs without help. | invented",
+            "myth | Ariadne | Leave a thread so you can always find the way back. | Greek myth",
+            "literary | Phileas Fogg | Set a fixed deadline and plan every stop against it. | Jules Verne, died 1905"
+          ],
+          "temperaments": [
+            "Speaks rarely, and only in short verdicts.",
+            "Gets louder the more sure they are.",
+            "Concedes small points to win the big one.",
+            "Asks for a demonstration before any opinion.",
+            "Turns every disagreement into a wager.",
+            "Defends the first idea in the room.",
+            "Distrusts anything that came too easily.",
+            "Answers questions with sketches and numbers.",
+            "Keeps score of every point won and lost.",
+            "Praises an idea, then takes it apart.",
+            "Changes their mind out loud, mid-argument.",
+            "Will not go on until a word is defined.",
+            "Tells a story from the workshop instead of arguing.",
+            "Sides with whoever is losing.",
+            "Wants everything decided before lunch.",
+            "Treats every rule as a challenge.",
+            "Measures twice and says so.",
+            "Laughs at the problem first, then takes it apart.",
+            "Insists on hearing from the quietest person.",
+            "Will not accept a plan they cannot draw.",
+            "Repeats the other side's point before answering it.",
+            "Goes quiet, then returns with a written list.",
+            "Asks what would change their mind, then waits.",
+            "Brings up the budget whenever the talk gets abstract."
+          ]
+        },
+        "accepted": []
+      }
+    ],
+    "github": {
+      "suggestionsOpenedThisWeekCount": 0,
+      "issuesOpenedCount": 0,
+      "issuesClosedCount": 0,
+      "issuesOpenedAndClosedCount": 0,
+      "issuesOpened": [],
+      "issuesClosed": [],
+      "prsMerged": [
+        {
+          "number": 42,
+          "title": "The studio: a watchable sim of each day's team"
+        },
+        {
+          "number": 41,
+          "title": "fix: updates export receipts and gates pages deployment"
+        },
+        {
+          "number": 40,
+          "title": "feat: adds trend-inspired projects and preserves component studio"
+        },
+        {
+          "number": 39,
+          "title": "Potential fix for code scanning alert no. 27: Incomplete string escaping or encoding"
+        },
+        {
+          "number": 38,
+          "title": "feat: adds overnight editions, daily culture rotation and feed evidence"
+        },
+        {
+          "number": 37,
+          "title": "feat: adds component packs, feed planning and model comparisons"
+        },
+        {
+          "number": 36,
+          "title": "fix: hardens text rendering and credential error handling"
+        },
+        {
+          "number": 35,
+          "title": "feat: adds team-designed daily project covers"
+        },
+        {
+          "number": 34,
+          "title": "fix: reserves wall chrome space in component briefs"
+        },
+        {
+          "number": 32,
+          "title": "Refresh daily teams for useful, polished UI components"
+        }
+      ],
+      "openSuggestionsNow": []
+    },
+    "metrics": {
+      "days": 7,
+      "failed": 1,
+      "flagged": 3,
+      "deadlocks": 0,
+      "refereed": 0,
+      "meanClashLines": 8.9,
+      "artifacts": 45,
+      "meanArtifactKB": 14.9,
+      "guestKinds": {
+        "future": 4,
+        "archetype": 1,
+        "creature": 2
+      },
+      "commits": 17,
+      "commitsByArea": {
+        "Seasons and suggestions": 1,
+        "Team and sessions": 4,
+        "Automation": 4,
+        "Other": 7,
+        "Records": 1
+      },
+      "testsAtEnd": 83
+    },
+    "trend": {
+      "days": 0,
+      "failed": 1,
+      "flagged": 3,
+      "deadlocks": 0,
+      "refereed": 0,
+      "meanClashLines": -0.7,
+      "artifacts": -15,
+      "meanArtifactKB": 3.7,
+      "commits": 11,
+      "testsAtEnd": 9
+    }
+  },
+  "model": "claude-sonnet-5-5",
+  "status": "flagged",
+  "problems": [
+    "\"1 day\" does not match the facts (7)"
+  ]
+}
