@@ -25,7 +25,7 @@ on:
       compare:
         description: Build Opus, Sonnet, and Haiku comparison plus square MP4 (Claude provider)
         type: boolean
-        default: true
+        default: false
       sim:
         description: Run the watchable studio sim today (four member agents and a replay page)
         type: boolean
@@ -130,7 +130,7 @@ jobs:
         run: sh shot.sh days || true
       - name: Build three-model comparison
         id: comparison
-        if: success() && steps.key.outputs.ok == 'true' && env.PROVIDER == 'claude' && (github.event_name != 'workflow_dispatch' || inputs.compare)
+        if: success() && steps.key.outputs.ok == 'true' && env.PROVIDER == 'claude' && (github.event_name == 'workflow_dispatch' && inputs.compare)
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           COMPARE_OPUS_MODEL: ${{ vars.COMPARE_OPUS_MODEL }}

@@ -1,10 +1,8 @@
 name: Report
 
-# Writes the weekly report each Sunday evening, after that day's team has run. The facts come
-# from git, the day records, and the GitHub API; one model call writes the summary on top.
+# Manual weekly report. Facts come from git, day records, and the GitHub API;
+# one model call writes the summary on top.
 on:
-  schedule:
-    - cron: '0 20 * * 0'
   workflow_dispatch:
     inputs:
       week:

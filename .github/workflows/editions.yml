@@ -1,10 +1,7 @@
 name: Extra editions
 
+# Manual only; Daily is the sole scheduled workflow.
 on:
-  schedule:
-    - cron: '30 0 * * *'
-    - cron: '30 2 * * *'
-    - cron: '30 4 * * *'
   workflow_dispatch:
     inputs:
       lane:
