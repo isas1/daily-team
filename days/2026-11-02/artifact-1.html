@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tide-mark download · local demo</title>
+<style>
+:root{
+  --paper:#f2f0eb;
+  --card:#ffffff;
+  --ink:#1c2330;
+  --muted:#4d5664;
+  --line:#c3bdb0;
+  --track:#e8eef0;
+  --tide:#2d6a80;
+  --tide-deep:#173f4e;
+  --slack:#8a5512;
+  --focus:#a8430f;
+  --cover-a:#d8d2c5;
+  --cover-b:#c6bfb0;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#151a21;
+    --card:#1e252e;
+    --ink:#e9ecef;
+    --muted:#a9b2bd;
+    --line:#46505c;
+    --track:#24313a;
+    --tide:#4f9ab4;
+    --tide-deep:#9fd4e6;
+    --slack:#e0a24a;
+    --focus:#f08a4b;
+    --cover-a:#3a4250;
+    --cover-b:#2e3540;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+main{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:22px;line-height:1.2;margin:2px 0 8px}
+h2{font-size:15px;margin:0}
+p{margin:0 0 8px}
+a{color:var(--tide-deep)}
+.eyebrow{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0}
+.lede{color:var(--muted);max-width:46ch}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+
+section{margin-top:20px}
+.panel{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:visible;
+}
+.panel-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  padding:12px 16px 8px;border-bottom:1px solid var(--line);
+}
+.panel-head span{font-size:12px;color:var(--muted)}
+.rows{list-style:none;margin:0;padding:4px 0}
+
+/* Fixed slots: 96 label, 8 gap, download face, 8 gap, 44 repeat */
+.row{
+  display:grid;
+  grid-template-columns:96px minmax(88px,1fr) 44px;
+  column-gap:8px;
+  align-items:center;
+  padding:8px 16px;
+}
+.row + .row{border-top:1px solid var(--track)}
+.slot{width:96px;overflow:hidden}
+.slot .name{display:block;font-size:13px;font-weight:600;line-height:18px;white-space:nowrap}
+.slot .bytes{display:block;font-size:12px;line-height:16px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.dl{
+  position:relative;
+  display:grid;
+  grid-template-rows:20px 24px;
+  height:44px;
+  min-width:88px;
+  padding:0;margin:0;border:0;
+  border-radius:6px;
+  background:var(--card);
+  color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line);
+  overflow:hidden;
+  font:inherit;
+  text-align:center;
+  cursor:pointer;
+}
+button.dl:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+.word{
+  position:relative;
+  display:block;
+  font-size:13px;font-weight:600;line-height:20px;
+  white-space:nowrap;
+}
+.track{position:relative;display:block;background:var(--track);margin:0 1px 1px;border-radius:0 0 5px 5px;overflow:hidden}
+.fill{
+  position:absolute;left:0;right:0;bottom:0;
+  height:calc(var(--f,0) * 100%);
+  background:var(--tide);
+  border-top:2px solid var(--tide-deep);
+  transition:height .14s ease-out,opacity .2s ease-out;
+  display:none;
+}
+[data-state="preparing"] .fill,
+[data-state="receiving"] .fill,
+[data-state="waiting"] .fill,
+[data-state="ready"] .fill{display:block}
+[data-state="waiting"] .fill{border-top:2px dashed var(--slack)}
+[data-state="ready"] .fill{opacity:.5}
+
+.covered .word::after{
+  content:"";
+  position:absolute;inset:3px 8%;
+  border-radius:2px;
+  background:repeating-linear-gradient(45deg,var(--cover-a) 0 4px,var(--cover-b) 4px 8px);
+}
+
+.rep{
+  width:44px;height:44px;
+  display:grid;place-items:center;
+  padding:0;margin:0;border:0;border-radius:6px;
+  background:var(--card);color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line);
+  cursor:pointer;
+}
+.rep:hover:not(:disabled){box-shadow:inset 0 0 0 1px var(--ink)}
+.rep:disabled{opacity:.4;cursor:not-allowed}
+.rep svg{width:20px;height:20px}
+
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+button:focus:not(:focus-visible){outline:none}
+
+.note{min-height:20px;margin:0;padding:4px 16px 0;font-size:13px;color:var(--muted)}
+.hint{font-size:12px;color:var(--muted);padding:4px 16px 12px;margin:0}
+
+fieldset{border:0;margin:8px 0 0;padding:0}
+legend{font-size:13px;font-weight:600;padding:0;margin-bottom:4px}
+.opt{display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px}
+.opt input{width:20px;height:20px;margin:0;accent-color:var(--tide)}
+.opt small{color:var(--muted);font-size:12px;display:block}
+.btn{
+  min-height:44px;padding:0 16px;
+  border:0;border-radius:6px;
+  background:var(--card);color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--ink);
+  font:inherit;font-weight:600;cursor:pointer;
+}
+.controls p{font-size:13px;color:var(--muted)}
+
+.board{display:grid;gap:12px;margin-top:10px}
+.frame{width:320px;max-width:100%;margin:0;background:var(--card);border:1px solid var(--line);border-radius:6px}
+.frame .row{padding:8px 16px}
+.frame figcaption{font-size:12px;color:var(--muted);padding:0 16px 8px}
+.frame .ring{outline:2px solid var(--focus);outline-offset:2px}
+.key{margin:10px 0 0;padding:0;display:grid;grid-template-columns:auto 1fr;gap:6px 10px;font-size:13px;align-items:center}
+.key dt{width:40px;height:12px;position:relative;background:var(--track);border-radius:2px}
+.key dt i{position:absolute;left:0;right:0;bottom:0;background:var(--tide);border-top:2px solid var(--tide-deep)}
+.key dd{margin:0;color:var(--muted)}
+
+.list{list-style:none;margin:8px 0 0;padding:0;font-size:13px}
+.list li{padding:6px 0;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.list time{color:var(--muted);margin-right:8px}
+.empty{color:var(--muted);font-size:13px;margin-top:8px}
+.geo{font-size:12px;color:var(--muted);margin-top:6px}
+
+footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+footer h2{font-size:13px;color:var(--ink);margin-bottom:6px}
+footer ul{margin:0 0 10px;padding-left:18px}
+footer li{margin-bottom:4px}
+
+@media (prefers-reduced-motion:reduce){
+  .fill{transition:none}
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Local demo · sample files · no network</p>
+    <h1>Tide-mark download</h1>
+    <p class="lede">The word on each button names the state: Preparing, Waiting or Ready. The line under the word rises only when demo bytes arrive. When bytes stop for 1.5 s, the line holds flat and the word changes to Waiting.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="files-h" id="panel">
+    <div class="panel-head">
+      <h2 id="files-h">November wallpapers</h2>
+      <span>4 sample files · generated locally</span>
+    </div>
+    <ul class="rows" id="rows"></ul>
+    <p class="note" id="note"></p>
+    <p class="hint">Tab reaches Download, then its repeat button. Enter or Space fires each one.</p>
+  </section>
+
+  <section class="controls" aria-labelledby="demo-h">
+    <h2 id="demo-h">Demo network</h2>
+    <p>Applies to the next transfer you start. Bytes come from a local stepped generator.</p>
+    <fieldset>
+      <legend>Transfers behave</legend>
+      <label class="opt"><input type="radio" name="net" value="steady" checked><span>Steady<small>A chunk every 0.2 to 0.5 s</small></span></label>
+      <label class="opt"><input type="radio" name="net" value="stall"><span>Stalls<small>Pauses 4.2 s near 40%, then resumes</small></span></label>
+      <label class="opt"><input type="radio" name="net" value="stop"><span>Stops<small>Goes silent near 55%. Use repeat.</small></span></label>
+    </fieldset>
+    <fieldset>
+      <legend>Test</legend>
+      <label class="opt"><input type="checkbox" id="cover"><span>Cover the state word<small>Read the line alone, on the panel and the board</small></span></label>
+    </fieldset>
+    <button type="button" class="btn" id="reset">Reset sample</button>
+  </section>
+
+  <section aria-labelledby="board-h">
+    <h2 id="board-h">Frame board at 320 px</h2>
+    <p class="lede">Static frames drawn with the same parts as the panel. Turn on Cover the state word to check each frame by its line.</p>
+    <div class="board" id="board"></div>
+    <dl class="key">
+      <dt><i style="height:0"></i></dt><dd>Solid line on the floor: preparing, 0 bytes yet</dd>
+      <dt><i style="height:6px"></i></dt><dd>Solid top edge: bytes arriving</dd>
+      <dt><i style="height:6px;border-top-style:dashed;border-top-color:var(--slack)"></i></dt><dd>Dashed top edge: halted, no bytes for 1.5 s</dd>
+      <dt><i style="height:12px;opacity:.5"></i></dt><dd>Pale and full: ready</dd>
+    </dl>
+    <p class="geo" id="geo"></p>
+  </section>
+
+  <section aria-labelledby="recv-h">
+    <h2 id="recv-h">Received</h2>
+    <p class="empty" id="recv-empty">Nothing received yet.</p>
+    <ul class="list" id="recv"></ul>
+  </section>
+
+  <section aria-labelledby="log-h">
+    <h2 id="log-h">Transfer log</h2>
+    <p class="empty" id="log-empty">No transfers yet.</p>
+    <ul class="list" id="log"></ul>
+  </section>
+
+  <footer>
+    <h2>Credits</h2>
+    <ul>
+      <li>Flight deck designer (lead): the fixed 96 px label slot, the state word kept on the 44 px face, the same 44 px height in every state, and the plain words Preparing, Waiting, Ready.</li>
+      <li>Cartographic designer: the 320 px frame board, the 44 px height measured after each word swap, and the 2 px focus outline drawn outside the repeat tap.</li>
+      <li>Ergonomist: the stop rule (no bytes for 1.5 s, the line halts, the word flips to Waiting, nothing pulses), the 8 px gap, the Tab order, and one spoken announcement per halt.</li>
+      <li>Tidal library custodian: word over tide, bytes as the only driver of the line, repeat as its own 44 px tap, and the covered-word test.</li>
+    </ul>
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://smashingmagazine.com/2026/10/desktop-wallpaper-calendars-november-2026/">A Spark Of Color In November’s Gray (2026 Wallpapers Edition), Smashing Magazine</a></li>
+      <li><a href="https://github.com/Nutlope/hallmark">Nutlope/hallmark, GitHub</a></li>
+    </ul>
+    <p>File names and sizes are sample data. No file leaves or enters this page.</p>
+  </footer>
+
+  <div class="sr" id="live" aria-live="polite"></div>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  var FILES = [
+    {name:"1280×720",  file:"november-2026-1280x720.png",  mb:3.2},
+    {name:"1920×1080", file:"november-2026-1920x1080.png", mb:8.4},
+    {name:"2560×1440", file:"november-2026-2560x1440.png", mb:13.7},
+    {name:"3840×2160", file:"november-2026-3840x2160.png", mb:21.6}
+  ];
+  var WORDS = {idle:"Download", preparing:"Preparing", receiving:"Preparing", waiting:"Waiting", ready:"Ready"};
+  var STALL_MS = 1500;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var rowsEl = $("rows"), noteEl = $("note"), liveEl = $("live");
+  var logEl = $("log"), logEmpty = $("log-empty");
+  var recvEl = $("recv"), recvEmpty = $("recv-empty");
+  var geoEl = $("geo"), coverEl = $("cover");
+
+  function el(tag, cls, text){
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function svgRepeat(){
+    var NS = "http://www.w3.org/2000/svg";
+    var s = document.createElementNS(NS, "svg");
+    s.setAttribute("viewBox", "0 0 24 24");
+    s.setAttribute("aria-hidden", "true");
+    s.setAttribute("focusable", "false");
+    var p = document.createElementNS(NS, "path");
+    p.setAttribute("d", "M19 12a7 7 0 1 1-2.05-4.95M19 4v4h-4");
+    p.setAttribute("fill", "none");
+    p.setAttribute("stroke", "currentColor");
+    p.setAttribute("stroke-width", "2");
+    p.setAttribute("stroke-linecap", "round");
+    p.setAttribute("stroke-linejoin", "round");
+    s.appendChild(p);
+    return s;
+  }
+  function mb(bytes){ return (bytes / 1e6).toFixed(1); }
+  function clock(){
+    var d = new Date();
+    return [d.getHours(), d.getMinutes(), d.getSeconds()].map(function(n){ return String(n).padStart(2, "0"); }).join(":");
+  }
+  function mulberry(a){
+    return function(){
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  /* Face: 20 px word row over a 24 px tide track */
+  function makeFace(tag, wordText){
+    var face = el(tag, "dl");
+    var word = el("span", "word", wordText);
+    var track = el("span", "track");
+    track.setAttribute("aria-hidden", "true");
+    var fill = el("span", "fill");
+    track.appendChild(fill);
+    face.appendChild(word);
+    face.appendChild(track);
+    return {face:face, word:word, fill:fill};
+  }
+
+  /* ---------- panel rows ---------- */
+  var rows = [];
+  FILES.forEach(function(f, i){
+    var li = el("li", "row");
+    li.dataset.state = "idle";
+    var slot = el("div", "slot");
+    var name = el("span", "name", f.name);
+    name.title = f.file;
+    var bytes = el("span", "bytes", f.mb.toFixed(1) + " MB");
+    bytes.id = "bytes-" + i;
+    slot.appendChild(name);
+    slot.appendChild(bytes);
+
+    var parts = makeFace("button", "Download");
+    var dl = parts.face;
+    dl.type = "button";
+    dl.setAttribute("aria-describedby", bytes.id);
+    var srName = el("span", "sr", " " + f.file);
+    dl.insertBefore(srName, parts.word.nextSibling);
+
+    var rep = el("button", "rep");
+    rep.type = "button";
+    rep.disabled = true;
+    rep.setAttribute("aria-label", "Run download again: " + f.file);
+    rep.appendChild(svgRepeat());
+
+    li.appendChild(slot);
+    li.appendChild(dl);
+    li.appendChild(rep);
+    rowsEl.appendChild(li);
+
+    var r = {idx:i, f:f, total:Math.round(f.mb * 1e6), li:li, dl:dl, word:parts.word, fill:parts.fill, bytes:bytes, rep:rep, state:"idle", got:0, current:null};
+    rows.push(r);
+    dl.addEventListener("click", function(){ pressDownload(r); });
+    rep.addEventListener("click", function(){ pressRepeat(r); });
+  });
+
+  /* ---------- geometry check ---------- */
+  var checks = 0, off = 0;
+  function measure(r){
+    requestAnimationFrame(function(){
+      var h1 = r.dl.getBoundingClientRect().height;
+      var h2 = r.rep.getBoundingClientRect().height;
+      checks++;
+      if (Math.abs(h1 - 44) > 0.5 || Math.abs(h2 - 44) > 0.5) off++;
+      geoEl.textContent = "Height check in this browser: " + checks + " word swap" + (checks === 1 ? "" : "s") + " measured, " +
+        (off === 0 ? "all 44 px tall." : off + " not 44 px tall.");
+    });
+  }
+
+  function setState(r, s){
+    var changedWord = WORDS[r.state] !== WORDS[s];
+    r.state = s;
+    r.li.dataset.state = s;
+    r.word.textContent = WORDS[s];
+    renderBytes(r);
+    if (changedWord) measure(r);
+  }
+  function renderBytes(r){
+    if (r.state === "idle") r.bytes.textContent = r.f.mb.toFixed(1) + " MB";
+    else r.bytes.textContent = mb(r.got) + "/" + r.f.mb.toFixed(1) + " MB";
+  }
+  function setFill(r){
+    r.fill.style.setProperty("--f", String(Math.min(1, r.got / r.total)));
+  }
+
+  /* ---------- announcements and log ---------- */
+  var liveTimer = null;
+  function announce(text){
+    liveEl.textContent = "";
+    clearTimeout(liveTimer);
+    liveTimer = setTimeout(function(){ liveEl.textContent = text; }, 60);
+  }
+  function log(text){
+    logEmpty.hidden = true;
+    var li = el("li");
+    li.appendChild(el("time", null, clock()));
+    li.appendChild(document.createTextNode(text));
+    logEl.insertBefore(li, logEl.firstChild);
+    while (logEl.children.length > 40) logEl.removeChild(logEl.lastChild);
+  }
+  function note(text){ noteEl.textContent = text; }
+
+  /* ---------- demo transfer generator ---------- */
+  function mode(){
+    var c = document.querySelector('input[name="net"]:checked');
+    return c ? c.value : "steady";
+  }
+  function* chunks(total, m, seed){
+    var rnd = mulberry(seed);
+    var n = 14 + Math.floor(rnd() * 6);
+    var sent = 0, stalled = false, first = true;
+    while (sent < total){
+      if (m === "stop" && sent >= total * 0.55) return;
+      var size = Math.round(total / n * (0.7 + rnd() * 0.6));
+      if (sent + size > total || total - sent - size < total / n * 0.4) size = total - sent;
+      var delay = first ? 900 : 200 + Math.round(rnd() * 300);
+      if (m === "stall" && !stalled && sent >= total * 0.4){ delay = 4200; stalled = true; }
+      first = false;
+      sent += size;
+      yield {delay:delay, bytes:size};
+    }
+  }
+
+  /* ---------- clock: demo time only advances while the page is visible ---------- */
+  var transfers = [], seq = 0, demoNow = 0, lastReal = 0, timer = null;
+  function ensureClock(){
+    if (timer || document.hidden || !transfers.length) return;
+    lastReal = performance.now();
+    timer = setInterval(tick, 50);
+  }
+  function stopClock(){ clearInterval(timer); timer = null; }
+
+  function tick(){
+    var now = performance.now();
+    demoNow += Math.min(now - lastReal, 200);
+    lastReal = now;
+    transfers.slice().forEach(step);
+    if (!transfers.length) stopClock();
+  }
+  function drop(t){
+    var i = transfers.indexOf(t);
+    if (i >= 0) transfers.splice(i, 1);
+  }
+  function step(t){
+    var r = t.row;
+    if (t.nextAt <= demoNow){
+      if (t.stale){
+        log("Dropped a late reply from #" + t.id + " (" + r.f.name + "). #" + r.current.id + " is current.");
+        drop(t);
+        return;
+      }
+      t.got += t.pending;
+      r.got = t.got;
+      t.lastByteAt = demoNow;
+      setFill(r);
+      if (r.state === "waiting"){
+        log("#" + t.id + " bytes resumed at " + mb(r.got) + " MB.");
+        note("");
+      }
+      if (r.state !== "receiving") setState(r, "receiving"); else renderBytes(r);
+      var n = t.gen.next();
+      if (n.done){
+        if (t.got >= r.total) complete(t);
+        else t.nextAt = Infinity;
+      } else {
+        t.pending = n.value.bytes;
+        t.nextAt = demoNow + n.value.delay;
+      }
+      return;
+    }
+    if (!t.stale && r.state !== "waiting" && demoNow - t.lastByteAt >= STALL_MS){
+      setState(r, "waiting");
+      var msg = "Waiting · " + mb(r.got) + " of " + r.f.mb.toFixed(1) + " MB · " + r.f.name;
+      announce(msg);
+      log("#" + t.id + " halted at " + mb(r.got) + " MB. No bytes for 1.5 s.");
+    }
+  }
+  function complete(t){
+    var r = t.row;
+    drop(t);
+    r.current = null;
+    setState(r, "ready");
+    announce("Ready · " + r.f.mb.toFixed(1) + " MB · " + r.f.name);
+    log("#" + t.id + " ready. " + r.f.mb.toFixed(1) + " MB received.");
+    recvEmpty.hidden = true;
+    var li = el("li");
+    li.appendChild(el("time", null, clock()));
+    li.appendChild(document.createTextNode(r.f.file + " · " + r.f.mb.toFixed(1) + " MB · transfer #" + t.id));
+    recvEl.insertBefore(li, recvEl.firstChild);
+  }
+
+  function start(r, why){
+    var m = mode();
+    var t = {id:++seq, row:r, gen:null, got:0, pending:0, nextAt:0, lastByteAt:demoNow, stale:false};
+    t.gen = chunks(r.total, m, t.id * 977 + r.idx * 31);
+    var first = t.gen.next().value;
+    t.pending = first.bytes;
+    t.nextAt = demoNow + first.delay;
+    r.current = t;
+    r.got = 0;
+    setFill(r);
+    setState(r, "preparing");
+    r.rep.disabled = false;
+    transfers.push(t);
+    log("#" + t.id + " " + why + " " + r.f.name + " (" + m + " network).");
+    ensureClock();
+  }
+
+  function pressDownload(r){
+    if (r.state === "idle"){ note(""); start(r, "started"); return; }
+    if (r.state === "ready"){
+      note(r.f.name + " is already received. Use its repeat button to run it again.");
+      return;
+    }
+    note(r.f.name + " is already " + WORDS[r.state].toLowerCase() + ". One press runs one transfer. Repeat restarts it.");
+  }
+  function pressRepeat(r){
+    note("");
+    var old = r.current;
+    if (old){
+      old.stale = true;
+      if (old.nextAt === Infinity){
+        drop(old);
+        log("#" + old.id + " closed. It had no reply pending.");
+      }
+    }
+    start(r, old ? "replaces #" + old.id + " for" : "repeats");
+  }
+
+  /* ---------- board ---------- */
+  function boardFrame(state, got, total, caption, ringRepeat){
+    var fig = el("figure", "frame");
+    var row = el("div", "row");
+    row.dataset.state = state;
+    row.setAttribute("aria-hidden", "true");
+    var slot = el("div", "slot");
+    slot.appendChild(el("span", "name", "1920×1080"));
+    slot.appendChild(el("span", "bytes", state === "idle" ? "8.4 MB" : mb(got) + "/8.4 MB"));
+    var parts = makeFace("span", WORDS[state]);
+    parts.fill.style.setProperty("--f", String(got / total));
+    var rep = el("span", "rep" + (ringRepeat ? " ring" : ""));
+    rep.appendChild(svgRepeat());
+    row.appendChild(slot);
+    row.appendChild(parts.face);
+    row.appendChild(rep);
+    fig.appendChild(row);
+    fig.appendChild(el("figcaption", null, caption));
+    return fig;
+  }
+  var board = $("board");
+  var T = 8.4e6;
+  board.appendChild(boardFrame("preparing", 0, T, "Preparing at 0 bytes: solid line on the floor of the track."));
+  board.appendChild(boardFrame("waiting", 3.4e6, T, "Waiting at 3.4 MB: line held flat, top edge dashed. Nothing moves."));
+  board.appendChild(boardFrame("ready", T, T, "Ready: full and pale. Solid top edge."));
+  board.appendChild(boardFrame("preparing", 0, T, "Repeat, focused: line drained to 0 and a new transfer begins.", true));
+
+  /* ---------- controls ---------- */
+  function applyCover(){
+    document.body.classList.toggle("covered", coverEl.checked);
+  }
+  function save(){
+    try {
+      localStorage.setItem("tidemark-demo", JSON.stringify({net:mode(), cover:coverEl.checked}));
+    } catch (e) {}
+  }
+  function load(){
+    try {
+      var s = JSON.parse(localStorage.getItem("tidemark-demo") || "null");
+      if (!s) return;
+      var radio = document.querySelector('input[name="net"][value="' + s.net + '"]');
+      if (radio) radio.checked = true;
+      coverEl.checked = !!s.cover;
+    } catch (e) {}
+  }
+  document.querySelectorAll('input[name="net"]').forEach(function(n){
+    n.addEventListener("change", save);
+  });
+  coverEl.addEventListener("change", function(){ applyCover(); save(); });
+
+  $("reset").addEventListener("click", function(){
+    transfers.length = 0;
+    stopClock();
+    rows.forEach(function(r){
+      r.current = null;
+      r.got = 0;
+      setFill(r);
+      setState(r, "idle");
+      r.rep.disabled = true;
+    });
+    while (recvEl.firstChild) recvEl.removeChild(recvEl.firstChild);
+    while (logEl.firstChild) logEl.removeChild(logEl.firstChild);
+    recvEmpty.hidden = false;
+    document.querySelector('input[name="net"][value="steady"]').checked = true;
+    coverEl.checked = false;
+    applyCover();
+    save();
+    note("Sample reset. All four files are back to Download.");
+    log("Sample reset. Network set to steady.");
+    liveEl.textContent = "";
+  });
+
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) stopClock(); else ensureClock();
+  });
+
+  load();
+  applyCover();
+})();
+</script>
+</body>
+</html>

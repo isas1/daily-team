@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "model": "claude-sonnet-5-5",
+  "problems": [],
+  "look": {
+    "set": {
+      "floor": "#F4F5F5",
+      "wall": "#D9DCDE",
+      "ink": "#0E2A47",
+      "accent": "#1E5B66",
+      "light": "left",
+      "time": "morning",
+      "objects": {
+        "whiteboard": "byte count grid",
+        "workbench": "stepped tide gauge",
+        "wall": "sea wall courses",
+        "kitchen": "kettle and two cups",
+        "door": "repeat tap door"
+      },
+      "paths": {}
+    },
+    "members": [
+      {
+        "label": "Flight deck designer",
+        "body": "biped",
+        "scale": 1.1,
+        "palette": [
+          "#0E2A47",
+          "#5C6B77",
+          "#BE4D4D"
+        ],
+        "traits": [
+          "hat",
+          "goggles",
+          "cape"
+        ],
+        "prop": "signal paddle",
+        "propPath": "M12 2 L20 8 L12 14 L4 8 Z M12 14 V22",
+        "moods": {
+          "happy": "Stands straight and raises the paddle level. The goggles lif",
+          "upset": "Lowers the paddle and crosses it over the chest. The shoulde"
+        }
+      },
+      {
+        "label": "Cartographic designer",
+        "body": "many-legged",
+        "scale": 0.85,
+        "palette": [
+          "#3A4750",
+          "#8A949C",
+          "#1E5B66"
+        ],
+        "traits": [
+          "shell",
+          "lens",
+          "antenna"
+        ],
+        "prop": "brass dividers",
+        "propPath": "M12 2 V6 M12 6 L5 22 M12 6 L19 22 M8 15 H16",
+        "moods": {
+          "happy": "Side steps along the bench edge. The lens stays fixed on the",
+          "upset": "Pulls the legs under the shell. One eye stalk tilts toward t"
+        }
+      },
+      {
+        "label": "Ergonomist",
+        "body": "rolling",
+        "scale": 1,
+        "palette": [
+          "#2B3238",
+          "#A3ABB1",
+          "#BE4D4D"
+        ],
+        "traits": [
+          "pack",
+          "scarf"
+        ],
+        "prop": "pending hourglass",
+        "propPath": "M6 2 H18 M6 22 H18 M7 2 L7 6 L12 12 L7 18 L7 22 M17 2 L17 6 L12 12 L17 18 L17 22",
+        "moods": {
+          "happy": "Rolls in slow even laps. The scarf trails flat behind.",
+          "upset": "Stops rolling and holds still. The pack tips forward 10 degr"
+        }
+      },
+      {
+        "label": "Tidal library custodian",
+        "body": "floating",
+        "scale": 1.25,
+        "palette": [
+          "#1E5B66",
+          "#6E8A90",
+          "#0E2A47"
+        ],
+        "traits": [
+          "wings",
+          "crown",
+          "tail"
+        ],
+        "prop": "tide ledger",
+        "propPath": "M4 5 H11 V20 H4 Z M13 5 H20 V20 H13 Z M2 22 H22",
+        "moods": {
+          "happy": "Drifts up 12 px. The wings open and the ledger pages turn on",
+          "upset": "Sinks to floor level. The wings fold and the tail curls unde"
+        }
+      }
+    ]
+  }
+}

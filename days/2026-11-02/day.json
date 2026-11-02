@@ -1,0 +1,107 @@
+{
+  "date": "2026-11-02",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-02\nSeason: 2026-10-26\n\n1. Flight deck designer [new]\n   Method: Check the quiet parts before adding another accent. [new]\n   Stance: Speaks for the one who finds it.\n   Temperament: Prefers a clear label to a clever one.\n2. Cartographic designer [new]\n   Method: Check the border and surface at the smallest size. [new]\n   Stance: Breaks the frame.\n   Temperament: Names what improved before asking for more.\n3. Ergonomist [new]\n   Method: Replace a fake percentage with an honest pending state. [new]\n   Stance: Wants it to last.\n   Temperament: Asks for the exact moment the motion should stop.\n4. Tidal library custodian (future; invented) [guest] [new]\n   Method: Let detail appear and recede without moving the main label.\n   Stance: Insists it must be beautiful.\n   Temperament: Rejects a claim until the state can be shown.\n\nConstraint: Tap targets are at least 44 pixels tall.\nTask: Download button: a button for a file panel that shows preparation, completion and a repeat action in a local demo.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "95d6709ded4fdd197f9b5ea88172b4a625a689e54630bba7735ef0995280cd56",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "17b11f98699dd6891e917f51",
+      "56ed6f5b1a23b5b5c199b408"
+    ]
+  },
+  "status": "needs review",
+  "error": null,
+  "decision": "A person on a file panel presses Download, or tabs to it and presses Enter.",
+  "concept": "Tide-mark download",
+  "plan": "## Pitch\n\n**Flight deck designer: Three-state label row with fixed slots**\nPitch: one row, three fixed slots.\nPreparing shows a spinner.\nDone shows a check and Ready.\nRepeat shows a circular arrow and Run again.\nLabel sits left of the 44 px target, never inside it.\nState word reads first.\n\n**Cartographic designer: Edge tab**\nPitch: an edge tab.\nThe button straddles the panel's bottom border, 44 px tall, cut into the frame like a map tab.\nPreparing, done and repeat all change inside that one strip.\nLabel stays inside the border at 320 px.\n\n**Ergonomist: Honest pending button**\nPitch: a pending state, not a percentage.\nPreparation shows a held spinner at the 44 pixel frame, completion holds the check for 600 ms, repeat is a plain second tap.\nName the frame where the motion stops.\n\n**Tidal library custodian: Tide-mark button**\nTide-mark.\nThe fill rises like a line on a sea wall.\nPreparing: the line climbs, slow.\nDone: it holds, pale.\nRepeat: it drains and refills.\nNever under 44 pixels tall.\n\n## Clash\n\n**Flight deck designer:** Backing P3 if pending keeps the state word first and the 96 px label slot. Pale fill with no word still reads finished. Fixed slots stay in the row or I drop it.\n\n**Cartographic designer:** Sum holds: 164 px of slots leaves 156 px for the strip at 320 px. The tab still cuts into the bottom border. Backing P1. Cost: one row only, so the strip stays a single 44 px line.\n\n**Ergonomist:** Block P4. Inside a 44 px frame the tide line is about 3 px tall. A stall reads as a frozen stroke, not a held state. Motion runs the whole transfer and never stops at a frame we can name.\n\n**Tidal library custodian:** Your 44 px target is all the height. Word above, fill below: how many pixels does the line climb? Word takes 20 px, climb is 24. Stalled and waiting look the same. Blocking until the climb is drawn.\n\n**Ergonomist:** Backing P1 on one condition: the word carries pending, not a percentage. Fill stops at the 44 px frame and holds there. Waiting gets its own word, so a stalled line never has to pose as progress.\n\n**Flight deck designer:** Block P2. An edge tab puts the state word off the 44 px face, so the button reads finished while it prepares. Cartographic, where does the word sit? P5 I can back if the 96 px label slot stays fixed.\n\n**Cartographic designer:** Blocking P5. Stacked words break the single strip I backed P1 on. 20 and 24 fill the 44 px frame to the pixel, so the edge tab has nowhere to sit.\n\n**Ergonomist:** Backing P5. 24 px tide, you're right, I had it at 3. Stop rule: fill halts at the 24 px top when bytes stop, stall holds flat, no pulse. Where does repeat sit inside the 44 px?\n\n**Tidal library custodian:** P1 holds waiting flat, same as stuck. Only the word separates them, and a word can be missed. Draw stalled at 320 px with the word covered, and I back it.\n\n**Tidal library custodian:** Repeat sits outside the 44 px frame, as its own 44 px tap to the right. Blocking P3 until a 320 px drawing shows pending apart from stuck.\n\n## Decision\n\nA person on a file panel presses Download, or tabs to it and presses Enter. The word on the button names the state: Preparing, Waiting or Ready. Under the word, a tide line rises only when bytes arrive. When bytes stop, the line halts flat and the word changes to Waiting. When the file is ready, the line holds pale under Ready. A second 44 px tap to the right runs the download again. A screen reader announces the byte count once, at the halt.\n\nConcept: Tide-mark download\n\nP5 \"Word over tide, 44 px\" won with 2 votes. P1 got 1 and P6 got 1. P2, P3 and P4 got none.\n\nThe Cartographic designer lost the argument over the strip. They backed P1 because its slots used 164 px at 320 px and left 156 px spare. They blocked P5 because the 20 px word and 24 px tide fill the 44 px frame exactly, which leaves the edge tab nowhere to sit. They voted P1 in both rounds. Their own P2 edge tab drew blocks from the Flight deck designer, who said it moved the state word off the button face, and from the Tidal library custodian, who said a tide on the screen edge has no frame to hold it.\n\nThe Tidal library custodian lost the first version of the idea. P4 was blocked by the Flight deck designer and the Ergonomist. A climbing fill read as percent done, and nothing defined where its motion stopped. The custodian answered with P5. The word moved on top, bytes drove the line instead of a timer, and a stall held flat. The custodian then voted P6 and not their own P5. They wanted the Ergonomist's word-slot merge tested against the same covered-word drawing at 320 px.\n\nContributions:\n- Flight deck designer: the fixed 96 px label slot, the rule that the state word stays on the 44 px face, and the row tally at 320 px: 96, 8, 44, 8, 44, 16, totalling 216 px. Also the rule that the preparing frame keeps the same 44 px height as done, so the row does not jump.\n- Cartographic designer: the 1x and 2x check at 320 px, the 44 px height measured before each label swap, and a 2 px focus outline outside the repeat tap, drawn inside the spare width.\n- Ergonomist: the stop rule. Bytes stop, the bar halts, the word flips to Waiting, and nothing pulses. Also the 8 px gap between download and repeat, the Tab order download then repeat with Enter on each, and a live region that speaks once at halt.\n- Tidal library custodian: word over tide, with bytes as the driver and not a timer. Repeat as its own 44 px tap to the right. The demand that the tide be drawn at the instant Enter fires, with the word covered, before it counts as a state.\n\n## Build notes\n\n1. Build the row at 320 px as fixed slots: a 96 px label slot, 8 px, the 44 px download button, 8 px, the 44 px repeat button, and 16 px of margin. Inside the download face, place a 20 px word row above a 24 px tide track. Set `height: 44px` on both buttons and reserve the label width from the longest word, Preparing. Then measure the box at 1x and 2x before and after each swap between Preparing, Waiting and Ready.\n2. Drive the tide from a local demo transfer that emits byte chunks from a stepped generator, including a demo stall toggle. The tide's height equals bytes received divided by total, applied per chunk. No interpolation or timer fills the gap. If no chunk arrives within 1.5 s, the word becomes Waiting and the line holds flat. At completion, the line holds at 0.5 opacity under Ready. Repeat drains the line to 0 and starts a new transfer id, and replies from older ids are dropped. Under reduced motion, the tide steps without a transition.\n3. Make it work with the keyboard only. Tab reaches download, then repeat. Enter and Space fire each one. Each button gets a 2px focus ring that stays still when the tide halts. Add one `aria-live=\"polite\"` region that announces \"Waiting · 3.1 of 8.4 MB\" or \"Ready · 8.4 MB\" at each halt, and never per chunk. Before any other code, commit three frames to the board at 320 px with the word covered: preparing at 0 bytes, done, and repeat. The Cartographic designer still owes the right-edge and outline drawing, and the custodian reads that strip first.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Tide-mark download\",\"audience\":\"People downloading large files from a file panel\",\"problem\":\"Fill bars fake progress and hide a stalled transfer\",\"interaction\":\"Press or Enter Download, then repeat with its own 44 px tap\",\"outcome\":\"Word names Preparing, Waiting or Ready over a byte-driven tide\",\"recovery\":\"Repeat drains and restarts; stale replies dropped\",\"mechanism\":\"Bytes move the line, a stall halts it flat and flips the word\",\"difference\":\"Timed fills climb over a waiting file. This halts on real bytes\",\"whyNow\":\"Smashing wallpaper post offers many file sizes. Hallmark trend targets sloppy UI. Titles only, no demand data\",\"sourceIds\":[\"17b11f98699dd6891e917f51\",\"56ed6f5b1a23b5b5c199b408\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Word over tide\",\"need\":\"Tell a stalled download from a finished one\",\"mechanism\":\"20 px word over 24 px byte-driven tide\",\"rejection\":\"Selected: won the vote 2 of 4\"},{\"name\":\"Fixed-slot label row\",\"need\":\"Read state before tapping\",\"mechanism\":\"Label left of a 44 px target with spinner, check, arrow\",\"rejection\":\"Waiting and stuck look alike without the word\"},{\"name\":\"Edge tab\",\"need\":\"Keep the button inside a narrow panel border\",\"mechanism\":\"44 px tab cut into the panel's bottom edge\",\"rejection\":\"State word leaves the face; no votes\"}]}\n```",
+  "planProblems": [
+    "session is 1314 words, more than 1200"
+  ],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "d9e4b6c0fa6f676bc85606e11571d31d2469c6617ca7be79b2428f9ddc7875cd",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "sim": {
+    "log": "sim.jsonl",
+    "rounds": 16,
+    "model": "claude-haiku-5-5",
+    "calls": 77,
+    "costUsd": 1.4137,
+    "scribeCostUsd": 0.289,
+    "idle": 1,
+    "beats": 15,
+    "result": {
+      "id": "P5",
+      "concept": "Word over tide, 44 px",
+      "by": "Tidal library custodian",
+      "votes": 2,
+      "tie": false,
+      "tally": {
+        "P1": 1,
+        "P2": 0,
+        "P3": 0,
+        "P4": 0,
+        "P5": 2,
+        "P6": 1
+      }
+    },
+    "events": [
+      "Tidal library custodian arrives late.",
+      "A note is pinned to the wall: the last three projects all opened with a list.",
+      "The person who will use it writes: it has to work with a keyboard only."
+    ],
+    "interviews": 4
+  },
+  "project": {
+    "schemaVersion": 1,
+    "name": "Tide-mark download",
+    "audience": "People downloading large files from a file panel",
+    "problem": "Fill bars fake progress and hide a stalled transfer",
+    "interaction": "Press or Enter Download, then repeat with its own 44 px tap",
+    "outcome": "Word names Preparing, Waiting or Ready over a byte-driven tide",
+    "recovery": "Repeat drains and restarts; stale replies dropped",
+    "mechanism": "Bytes move the line, a stall halts it flat and flips the word",
+    "difference": "Timed fills climb over a waiting file. This halts on real bytes",
+    "whyNow": "Smashing wallpaper post offers many file sizes. Hallmark trend targets sloppy UI. Titles only, no demand data",
+    "sourceIds": [
+      "17b11f98699dd6891e917f51",
+      "56ed6f5b1a23b5b5c199b408"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Word over tide",
+        "need": "Tell a stalled download from a finished one",
+        "mechanism": "20 px word over 24 px byte-driven tide",
+        "rejection": "Selected: won the vote 2 of 4"
+      },
+      {
+        "name": "Fixed-slot label row",
+        "need": "Read state before tapping",
+        "mechanism": "Label left of a 44 px target with spinner, check, arrow",
+        "rejection": "Waiting and stuck look alike without the word"
+      },
+      {
+        "name": "Edge tab",
+        "need": "Keep the button inside a narrow panel border",
+        "mechanism": "44 px tab cut into the panel's bottom edge",
+        "rejection": "State word leaves the face; no votes"
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "Flight deck designer": [
+    {
+      "date": "2026-11-02",
+      "note": "Wrap: credit given. Label ships only after the 320 px frame."
+    }
+  ],
+  "Cartographic designer": [
+    {
+      "date": "2026-11-02",
+      "note": "Closing credit given. 320 px right-edge draw still owed."
+    }
+  ],
+  "Ergonomist": [
+    {
+      "date": "2026-11-02",
+      "note": "Wrap: credit split by who drew, measured, and kept the stop."
+    }
+  ],
+  "Tidal library custodian": [
+    {
+      "date": "2026-11-02",
+      "note": "Wrap: credit P5 split, Ergonomist keyboard, Flight deck fixed slots. Tide still undrawn."
+    }
+  ]
+}
