@@ -1,0 +1,1763 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-02",
+  "task": "Create a creative, useful component set informed specifically by Yoruba adire resist-dye craft. Interpret resist dyeing as reversible masks, selective reveal and grouped editing; do not copy named symbolic motifs. Translate craft principles into distinct interactions, not decorative stereotypes. Use original work, avoid sacred imagery and claims of cultural authenticity. Cite https://www.vam.ac.uk/articles/cloth-of-a-continent-africa-fashion.",
+  "request": null,
+  "sources": [
+    {
+      "source": "all",
+      "status": "culture-brief"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "daily-task",
+      "kind": "task",
+      "task": "Create a creative, useful component set informed specifically by Yoruba adire resist-dye craft. Interpret resist dyeing as reversible masks, selective reveal and grouped editing; do not copy named symbolic motifs. Translate craft principles into distinct interactions, not decorative stereotypes. Use original work, avoid sacred imagery and claims of cultural authenticity. Cite https://www.vam.ac.uk/articles/cloth-of-a-continent-africa-fashion."
+    }
+  ],
+  "recent": [
+    {
+      "date": "2026-10-05",
+      "task": "CV checklist: 15 checks with a score, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-06",
+      "task": "Water tracker: a daily goal the user sets and a tap-to-add log that resets each day.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-07",
+      "task": "Stretch sequence timer: the user lists stretches and hold times, and the timer runs through them.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-08",
+      "task": "Weekly workout planner: days, exercises, sets, and reps, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-09",
+      "task": "Goal tracker: one goal with milestones, dates, and percent done.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-10",
+      "task": "Camping checklist grouped by shelter, cooking, clothing, and safety, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-11",
+      "task": "Daily routine builder: morning and evening steps with times, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-12",
+      "task": "Output style: a Claude Code voice that changes how every answer sounds.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-13",
+      "task": "Plugin: a bundle of Claude Code mods that arrives like a traveller with a full pack.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-14",
+      "task": "Long task: a Claude Code job that runs for hours while no one watches.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-15",
+      "task": "Loop: Claude Code waking on a schedule to check on something again and again.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-16",
+      "task": "Session log: the trail a Claude Code session leaves behind it.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-17",
+      "task": "Mod workshop: a place to build a Claude Code mod from parts.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-18",
+      "task": "Companion: a Claude Code mod that keeps someone company while they work.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-19",
+      "task": "Scroll progress: a thin line that shows how much of a page is read.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-20",
+      "task": "Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-21",
+      "task": "Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-22",
+      "task": "Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-23",
+      "task": "File drop in a well: a dropped file falls, rings spread, and the echo confirms it arrived.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-24",
+      "task": "Empty state in tide pool: an empty list is a still pool with one small creature waiting.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-25",
+      "task": "Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-26",
+      "task": "Log viewer: a compact panel for a developer tool that filters sample events by severity and opens the selected event details.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-27",
+      "task": "Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-28",
+      "task": "Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point.",
+      "components": [
+        {
+          "row": 1,
+          "id": "range-selector",
+          "file": "artifact-1.html",
+          "name": "Range selector",
+          "description": "Segmented radio group for 1h, 6h, 24h and 7d with fixed label widths.",
+          "category": "Inputs",
+          "tags": [
+            "time-range",
+            "radio-group",
+            "segmented",
+            "dashboard",
+            "dedupe"
+          ],
+          "purpose": "Choose the time window the card reads.",
+          "use": "Engineer widens from 6h to 24h to see whether a spike repeats daily.",
+          "input": "Click or tap a segment. Keyboard: Tab into the group, arrow keys move and select, Home and End jump to the ends.",
+          "outcome": "Range commits and emits one load request. Selecting the active range emits nothing.",
+          "recovery": "If the load is cancelled or fails, the selection reverts to the last range that loaded.",
+          "mechanism": "Native radio inputs styled as segments. A generation counter tags each request. Older generations are ignored on arrival.",
+          "nearestAnalogue": "2026-10-26 log viewer severity filter. That filter narrows a list. This control replaces the whole data window and must abort prior work.",
+          "usefulness": "Every latency question starts with a window. Without dedupe, rapid clicks queue several loads.",
+          "creativeDifference": "Revert-on-cancel keeps control and chart in agreement, which a plain segmented control does not handle.",
+          "states": [
+            "idle: one range checked, reached on load",
+            "focus: visible ring on checked segment, reached by Tab",
+            "pending: checked segment shows a 2px underline while its load runs, reached by selecting a new range",
+            "reverted: previous range re-checked with status text 'Kept 6h', reached by cancel or failure",
+            "no-op: active range pressed again, nothing changes"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices: Radio Group",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "load-stages",
+          "file": "artifact-2.html",
+          "name": "Load stages",
+          "description": "Status line that names three load stages, allows cancel and ends in a clear complete or failed state.",
+          "category": "Feedback",
+          "tags": [
+            "loader",
+            "stages",
+            "cancel",
+            "retry",
+            "status",
+            "live-region"
+          ],
+          "purpose": "Show what the card is doing while data loads, and how it ended.",
+          "use": "Engineer sees 'Aggregating 864 samples' and decides to wait or cancel.",
+          "input": "Click or tap Cancel or Retry. Keyboard: Tab to the button, Enter or Space.",
+          "outcome": "Stages Fetch, Aggregate and Draw tick in order. Completion reads 'Loaded 24h · 288 points · 14:52'.",
+          "recovery": "Cancel keeps the previous chart. Failure names the stage that failed and offers one Retry that disables while pending.",
+          "mechanism": "A single job object with an AbortController and stage index. Starting a job aborts the current one. Status text sits in a polite live region. No percentage is shown, because stage count is the honest measure.",
+          "nearestAnalogue": "2026-10-27 pipeline panel retry. That panel retries a build step. This one reports a data load with cancel and never shows invented progress.",
+          "usefulness": "Engineers need to know whether a flat line means low latency or no data yet.",
+          "creativeDifference": "Named stages with sample counts replace a spinner, so the wait carries information.",
+          "states": [
+            "idle: hidden status, reached when no load is running",
+            "fetching: 'Fetching 24h', reached by range change",
+            "aggregating: 'Aggregating 864 samples', reached after fetch resolves",
+            "drawing: 'Drawing p99', reached after aggregate",
+            "complete: summary line with timestamp, reached after draw",
+            "cancelled: 'Cancelled · kept 6h', reached by Cancel",
+            "failed: 'Aggregate failed · kept 6h' with Retry, reached by demo failure toggle",
+            "reduced-motion: stage ticks without transition"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices patterns",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "percentile-tiles",
+          "file": "artifact-3.html",
+          "name": "Percentile tiles",
+          "description": "Four tiles for p50, p95, p99 and error rate. The selected tile expands while neighbours yield track space.",
+          "category": "Layout",
+          "tags": [
+            "bento",
+            "metric-tiles",
+            "percentile",
+            "grid-tracks",
+            "spring",
+            "container-query"
+          ],
+          "purpose": "Pick which series the chart plots and show current values for all four.",
+          "use": "Engineer switches from p99 to p50 to check whether the median moved too.",
+          "input": "Click or tap a tile. Keyboard: Tab to a tile, Enter or Space selects.",
+          "outcome": "Selected tile expands to show its detail. The chart redraws in that series.",
+          "recovery": "Selecting another tile reverses the change. Nothing is lost.",
+          "mechanism": "rAF loop eases CSS fr track variables with k = 1 - (1 - 0.14)^dt, dt capped at 50 ms. The loop stops when the summed error drops below 0.002. Below 480 px container width, tiles become a chip row with no track animation.",
+          "nearestAnalogue": "None in recent dates. Source c16 magnetic bento is the direct ancestor.",
+          "usefulness": "Percentile choice changes what a spike means. Current values for all four stay visible.",
+          "creativeDifference": "Track yielding ties layout to selection, while values stay readable during resize.",
+          "states": [
+            "default: p99 selected, reached on load",
+            "selected: expanded track with detail and accent border, reached by click or Enter",
+            "focus: outline ring, reached by Tab",
+            "settled: loop stopped, reached about 400 ms after selection",
+            "compact: chip row under 480 px container width",
+            "reduced-motion: tracks set directly"
+          ],
+          "sources": [
+            {
+              "title": "c16 magnetic bento (creative-sites-vault)",
+              "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/cards/c16-magnetic-bento.html"
+            },
+            {
+              "title": "Stop Treating CSS Container Queries Like Traditional Media Queries",
+              "url": "https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/"
+            },
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "cursor-chart",
+          "file": "artifact-4.html",
+          "name": "Cursor chart",
+          "description": "SVG line chart with an SLO line and a cursor that snaps to measured samples and reveals the value at that point.",
+          "category": "Data",
+          "tags": [
+            "line-chart",
+            "crosshair",
+            "latency",
+            "slo",
+            "svg",
+            "keyboard-chart"
+          ],
+          "purpose": "Reveal request latency at a chosen point.",
+          "use": "Engineer drags across the deploy and reads '14:35 · p99 640 ms · +340 over SLO'.",
+          "input": "Pointer move or touch drag over the plot. Keyboard: focus the plot, Left and Right step one sample, Page Up and Page Down step 12, Home and End jump to the ends.",
+          "outcome": "Readout above the plot shows time, value and offset from SLO. Cursor snaps to the nearest real sample.",
+          "recovery": "Escape returns the cursor to the worst breach. Leaving the plot keeps the last cursor position.",
+          "mechanism": "Nearest-index lookup from x position against sample timestamps. Readout has fixed width from the longest sample label. Plot is a focusable element with role group and an aria-live readout.",
+          "nearestAnalogue": "None in recent dates. 2026-10-19 scroll progress maps position to value in one dimension, with no data points.",
+          "usefulness": "This component answers the core need. Snapping prevents reading interpolated values that were never measured.",
+          "creativeDifference": "The readout states distance from SLO, which reframes the number as a decision.",
+          "states": [
+            "initial: cursor on worst breach, reached on load",
+            "tracking: cursor follows pointer, reached by pointer or touch",
+            "focus: plot outline and key hint, reached by Tab",
+            "breach: readout marked over SLO, reached when value exceeds 300 ms",
+            "stale: dimmed plot while a new range loads",
+            "empty: 'No samples in range', reached when a range returns zero points"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices patterns",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "breach-stepper",
+          "file": "artifact-5.html",
+          "name": "Breach stepper",
+          "description": "Previous and next controls that move the chart cursor between SLO breaches, with a count.",
+          "category": "Navigation",
+          "tags": [
+            "stepper",
+            "breach",
+            "slo",
+            "pager",
+            "jump"
+          ],
+          "purpose": "Move directly between moments where latency crossed the SLO.",
+          "use": "Engineer steps 'Breach 2 of 4' to 'Breach 3 of 4' to see whether the second spike followed a deploy.",
+          "input": "Click or tap Previous or Next. Keyboard: Tab to the buttons, Enter or Space. Held keys move one step per keydown.",
+          "outcome": "Cursor jumps to the peak sample of the next breach. Count updates.",
+          "recovery": "The buttons disable at the ends, and the count reads 'Breach 4 of 4'. Escape in the chart returns to the worst breach.",
+          "mechanism": "Breaches are contiguous runs above SLO, computed once per load. Each run is stored by its peak index. A step sets the cursor index directly and replaces any running transition.",
+          "nearestAnalogue": "2026-10-25 breadcrumb in footprints moves through a path. This moves through computed events in data.",
+          "usefulness": "Finding breaches by dragging across 288 points is slow on a phone.",
+          "creativeDifference": "Navigation targets come from the data itself, not from pages or sections.",
+          "states": [
+            "default: 'Breach 1 of 4', reached on load",
+            "middle: both buttons enabled",
+            "start or end: one button disabled with count at bound",
+            "none: 'No breaches in 1h' with both disabled, reached when range has none",
+            "focus: visible ring"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices patterns",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "pin-pair",
+          "file": "artifact-6.html",
+          "name": "Pin pair",
+          "description": "Button that pins the cursor point. Two pins produce a delta line.",
+          "category": "Actions",
+          "tags": [
+            "pin",
+            "compare",
+            "delta",
+            "button",
+            "dedupe"
+          ],
+          "purpose": "Keep two moments and compare them.",
+          "use": "Engineer pins 14:15 and 14:35 and reads '+412 ms p99 over 20 min'.",
+          "input": "Click or tap Pin. Keyboard: Tab to Pin, Enter or Space. P while the chart has focus. Each pin chip has a remove button.",
+          "outcome": "First pin shows a marker. Second pin shows the delta line. A third pin replaces the oldest.",
+          "recovery": "Remove any pin with its x button or Delete on the focused chip. Pinning an already pinned point does nothing.",
+          "mechanism": "A two-slot array keyed by sample index. The label swaps in a reserved width: Pin, Pinned, Replace oldest.",
+          "nearestAnalogue": "2026-10-20 undo in rewind deals with reversal of an action. This keeps two references and computes between them.",
+          "usefulness": "Before and after a deploy is the comparison on-call engineers report.",
+          "creativeDifference": "The delta is the action's result, so no separate compare panel is needed.",
+          "states": [
+            "empty: 'Pin this point'",
+            "one pinned: marker on chart, label 'Pin second point'",
+            "pair: delta line shown",
+            "full: label 'Replace oldest'",
+            "duplicate: label 'Already pinned', no change",
+            "cleared: pins removed on range change, with status note"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        }
+      ],
+      "usedSources": [
+        "5c9d13f97faabce46da9b702"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "task": "Import progress: a loader for a file tool that shows named stages, lets someone cancel and ends with a clear completion state.",
+      "components": [
+        {
+          "row": 1,
+          "id": "choose-files-empty",
+          "file": "artifact-1.html",
+          "name": "Choose files empty state",
+          "description": "Empty import zone with one action and a drop target.",
+          "category": "Inputs",
+          "tags": [
+            "empty-state",
+            "file-input",
+            "drop-zone",
+            "single-action"
+          ],
+          "purpose": "Start an import when nothing is chosen.",
+          "use": "A designer opens Import and picks brand-kit.zip.",
+          "input": "Click or tap Choose files, or drop files onto the zone. Keyboard: Tab to the button, then Enter or Space opens the native file picker.",
+          "outcome": "The chosen files are counted ('14 files · 3.2 MB') and the import starts.",
+          "recovery": "Closing the picker without a choice leaves the empty state unchanged. A drop with zero files reads 'Nothing dropped' and keeps the button focused.",
+          "mechanism": "A native input type=file sits behind a visible button. Drop is handled by dragover and drop listeners on the zone. Pointer is not required, because the button covers every path.",
+          "nearestAnalogue": "2026-10-24 empty state in tide pool and 2026-10-23 file drop in a well. Both are animated scenes. This is a static zone with one labelled action.",
+          "usefulness": "It gives one obvious way in and meets the one-action constraint.",
+          "creativeDifference": "The drop target and the button are the same element, so touch users without drag lose nothing.",
+          "states": [
+            "empty: button 'Choose files', reached on load and after a cancel with nothing placed",
+            "drag-over: dashed border turns solid with text 'Drop to import', reached by dragging files over the zone",
+            "focus: 2px ring on the button, reached by Tab",
+            "nothing-dropped: note under the button, reached by an empty drop"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "import-stage-track",
+          "file": "artifact-2.html",
+          "name": "Import stage track",
+          "description": "Four named stages with real file counts and a small arc on the active stage only.",
+          "category": "Feedback",
+          "tags": [
+            "loader",
+            "stages",
+            "live-region",
+            "spinner",
+            "reduced-motion"
+          ],
+          "purpose": "Show which stage is running and how many files it has handled.",
+          "use": "A designer reads 'Convert · 7 of 13' and decides to wait.",
+          "input": "Display only. Keyboard: the track is skipped in tab order, and its live region is announced by screen readers.",
+          "outcome": "Read, Check, Convert and Place advance in order. Each completed stage shows a tick glyph and its final count.",
+          "recovery": "On cancel or failure, the track freezes at the stage reached and names it ('Stopped at Convert').",
+          "mechanism": "A job object holds the stage index and per-stage counters. The source's rotating top-border arc is drawn at 14px on the active stage. Glyphs and text change on each tick, and the live region throttles announcements to stage changes plus every fifth file. No percentage is shown.",
+          "nearestAnalogue": "2026-10-28 load stages. That row has three fixed stages with sample counts. This row counts discrete files per stage and records where a cancel happened.",
+          "usefulness": "File counts are the honest measure of an import, so the wait carries information.",
+          "creativeDifference": "State is shown by glyph shape and bold text, so it survives greyscale. The arc is the only motion.",
+          "states": [
+            "idle: hidden, reached before any files are chosen",
+            "reading: 'Read · 14 files', reached when files are chosen",
+            "checking: 'Check · 1 unsupported', reached after read",
+            "converting: 'Convert · n of 13', reached after check",
+            "placing: 'Place · n of 12', reached after convert",
+            "complete: all ticks, reached after place",
+            "stopped: hollow glyph and 'Stopped at <stage>', reached by Cancel or demo failure",
+            "reduced-motion: static arc and the word 'running'"
+          ],
+          "sources": [
+            {
+              "title": "Minimalist arc spinner (creative-sites-vault)",
+              "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/loaders/05-dash-orbital-ring/var-1-arc-spinner.html"
+            },
+            {
+              "title": "Loader tile variety pack (library content)",
+              "url": "https://github.com/isas1/web-components/issues/45"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "cancel-import",
+          "file": "artifact-3.html",
+          "name": "Cancel import",
+          "description": "A thumb-height cancel button that stops the job and rolls back any placed files.",
+          "category": "Actions",
+          "tags": [
+            "cancel",
+            "abort",
+            "rollback",
+            "button",
+            "escape-key"
+          ],
+          "purpose": "Stop an import in flight and leave the canvas as it was.",
+          "use": "A designer sees the wrong zip in the read count and cancels.",
+          "input": "Click or tap Cancel import (44px tall, full width at the panel's foot). Keyboard: Tab to it and press Enter or Space, or press Escape anywhere in the panel.",
+          "outcome": "The job aborts. Any layers placed in this run are removed, and replaced layers return.",
+          "recovery": "After cancelling, the panel returns to the row 1 empty state. A repeated press while cancelling is ignored.",
+          "mechanism": "An AbortController is passed to every stage. A placed-layer list is kept for the run and reversed on abort. The label swaps within a reserved width: Cancel import, Cancelling, Cancelled.",
+          "nearestAnalogue": "2026-10-28 load stages cancel, which kept the previous chart. This cancel also rolls back partial canvas changes.",
+          "usefulness": "Imports change user work, so stopping halfway must not leave half a kit on the canvas.",
+          "creativeDifference": "Escape and a bottom-edge target give the same reach to keyboard and thumb.",
+          "states": [
+            "ready: enabled during any running stage",
+            "pressed: sinks 1px with a reduced shadow, reached on pointer down or key down",
+            "cancelling: disabled with label 'Cancelling', reached on press",
+            "cancelled: 'Cancelled at Convert · canvas unchanged', reached after rollback",
+            "hidden: not rendered when idle or complete",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "file-manifest",
+          "file": "artifact-4.html",
+          "name": "File manifest",
+          "description": "Per-file list showing each file's state with shape glyphs and a short reason.",
+          "category": "Data",
+          "tags": [
+            "file-list",
+            "manifest",
+            "listbox",
+            "non-color-state",
+            "skip-reason"
+          ],
+          "purpose": "Show what happened to each file.",
+          "use": "A designer finds that ad-banner.psd was skipped as an unsupported type.",
+          "input": "Click or tap a row to expand its reason. Keyboard: Tab into the list, Up and Down move between rows, Home and End jump, Enter expands.",
+          "outcome": "The expanded row shows type, size and reason ('Unsupported type .psd', 'Replaces layer hero-photo').",
+          "recovery": "Collapsing a row with Enter or a second tap returns it to one line. Selection persists across stage updates.",
+          "mechanism": "A listbox with roving tabindex. Rows update in place by file id, so the order never jumps. Glyphs are a hollow circle (queued), a filled circle (placed), a slashed circle (skipped) and a double ring (replaced), each paired with a word.",
+          "nearestAnalogue": "2026-10-26 log viewer event list. That list filters past events. This one updates live per file and carries outcome reasons.",
+          "usefulness": "A summary count alone hides which file failed and why.",
+          "creativeDifference": "Each state has its own shape and word, so the list reads in greyscale.",
+          "states": [
+            "queued: hollow glyph, reached on read",
+            "working: bold row text, reached when the file's stage runs",
+            "placed: filled glyph",
+            "replaced: double ring with the layer name",
+            "skipped: slashed glyph with reason",
+            "expanded: detail line, reached by Enter or tap",
+            "focus: row ring, reached by arrows"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Listbox",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "import-summary",
+          "file": "artifact-5.html",
+          "name": "Import summary",
+          "description": "Completion card with grouped counts, skip reasons and one next action.",
+          "category": "Content",
+          "tags": [
+            "completion",
+            "summary",
+            "result",
+            "status"
+          ],
+          "purpose": "End the import with a clear statement of what landed.",
+          "use": "A designer reads 'Imported 12 of 14 · 3 replaced · 2 skipped · 14:52'.",
+          "input": "Click or tap Show skipped to jump to the manifest rows. Keyboard: Tab to the link and press Enter. Focus moves to the summary heading on completion.",
+          "outcome": "The counts are grouped by placed, replaced and skipped. The placed files settle into the canvas tray once at 180ms ease-out.",
+          "recovery": "If nothing was placed, the card reads 'Nothing imported' and offers a single 'Choose other files' action.",
+          "mechanism": "The summary is rendered once from the final job record. Focus moves to an h2 with tabindex=-1. The tray settle is one transform transition and is skipped under reduced motion.",
+          "nearestAnalogue": "2026-10-28 load stages completion line. That was one line. This row groups outcomes and links to the skipped files.",
+          "usefulness": "It gives the visitor a definite end, with no ambiguity between done and stuck.",
+          "creativeDifference": "The landing motion carries the Puppet maker's frame break into the editor once, then stops.",
+          "states": [
+            "complete: all files placed",
+            "complete-with-skips: counts plus a Show skipped link",
+            "nothing-imported: one action 'Choose other files'",
+            "undone: struck summary with 'Undone at 14:53', reached by row 6",
+            "reduced-motion: no tray settle"
+          ],
+          "sources": [
+            {
+              "title": "Loader tile variety pack (library content)",
+              "url": "https://github.com/isas1/web-components/issues/45"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "undo-import",
+          "file": "artifact-6.html",
+          "name": "Undo import",
+          "description": "Undo button that reverses a finished import and names the layers that came back.",
+          "category": "Actions",
+          "tags": [
+            "undo",
+            "restore",
+            "history",
+            "ctrl-z",
+            "button"
+          ],
+          "purpose": "Reverse a completed import and show what was restored.",
+          "use": "A designer undoes the import and reads 'Restored logo-mark, hero-photo, headline · removed 12'.",
+          "input": "Click or tap Undo import. Keyboard: Tab to it and press Enter or Space, or press Ctrl+Z (Cmd+Z on macOS) while the editor has focus.",
+          "outcome": "Imported layers are removed and the 3 replaced layers return in their original order. The restored names are listed and briefly outlined on the canvas.",
+          "recovery": "Redo import (Ctrl+Shift+Z) reapplies the same import. A second undo with an empty history does nothing and reads 'Nothing to undo'.",
+          "mechanism": "One history entry per import stores the removed layer snapshots and the added layer ids. Undo swaps them as one operation. The label swaps within a reserved width: Undo import, Undone, Redo import.",
+          "nearestAnalogue": "2026-10-20 undo in rewind, which animated a mistake playing backward. This undo is instant and names what returned.",
+          "usefulness": "An import that silently replaces layers needs a way back that says what it restored.",
+          "creativeDifference": "The result is a named list of what came back. Restoration is reported, not implied.",
+          "states": [
+            "available: enabled after complete",
+            "pressed: 1px sink with a reduced shadow",
+            "undone: restored names listed and the label set to 'Redo import'",
+            "redone: summary returns to complete",
+            "empty-history: disabled with 'Nothing to undo'",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        }
+      ],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-30",
+      "task": "Request loader: a loader for a content panel that moves from pending to loaded or failed, with a retry action and stable layout.",
+      "components": [
+        {
+          "row": 1,
+          "id": "source-tabs",
+          "file": "artifact-1.html",
+          "name": "Source tabs",
+          "description": "Tablist of three sources, each tab carrying a request-state glyph in a fixed 24px slot.",
+          "category": "Navigation",
+          "tags": [
+            "tabs",
+            "tablist",
+            "request-state",
+            "glyph",
+            "fixed-width"
+          ],
+          "purpose": "Switch between content sources and see each source's request state at a glance.",
+          "use": "A reader sees a slashed glyph on Archive, leaves it, reads Inbox, then returns.",
+          "input": "Click or tap a tab. Keyboard: Tab into the list, Left and Right move, Home and End jump, Enter or Space activates.",
+          "outcome": "The panel shows the chosen source. Each source keeps its own request, so switching never restarts or cancels another load.",
+          "recovery": "Returning to a failed tab shows its failure plate with Retry. Nothing is lost by switching.",
+          "mechanism": "ARIA tabs with roving tabindex and manual activation. Each tab reads status from a per-source store. Glyphs: hollow ring for pending, filled dot for loaded, dash for empty, slashed ring for failed, each with a visually hidden word. Selection is a 2px accent left bar, shared with row 6.",
+          "nearestAnalogue": "2026-10-28 range selector. That control replaced one data window and aborted prior work. These tabs keep three requests alive in parallel.",
+          "usefulness": "Readers move between sources while one is slow, so per-source state must be visible before they arrive.",
+          "creativeDifference": "Tabs act as a signal board. Request state shows by shape in a fixed slot, so the labels never shift.",
+          "states": [
+            "default: Inbox selected, reached on load",
+            "pending glyph: hollow ring, reached while that source loads",
+            "loaded glyph: filled dot, reached on success",
+            "empty glyph: dash, reached when Shared returns zero items",
+            "failed glyph: slashed ring, reached on Archive attempt 1 timeout",
+            "focus: 2px ring, reached by Tab or arrows"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Tabs",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "pending-arc",
+          "file": "artifact-2.html",
+          "name": "Pending arc",
+          "description": "Delayed arc with an elapsed-seconds line that escalates to Still waiting and Cancel after 8 s.",
+          "category": "Feedback",
+          "tags": [
+            "loader",
+            "spinner",
+            "elapsed-time",
+            "cancel",
+            "live-region",
+            "reduced-motion"
+          ],
+          "purpose": "Say that a request is running and for how long, without inventing progress.",
+          "use": "A reader sees 'Still waiting · 9 s' on Archive and cancels.",
+          "input": "Display until 8 s. Then click or tap Cancel. Keyboard: Tab to Cancel, Enter or Space, or Escape while the panel has focus.",
+          "outcome": "The arc appears after 400 ms with 'Waiting · n s'. At 8 s the line reads 'Still waiting' and Cancel appears in a reserved slot. Cancel aborts the request.",
+          "recovery": "Cancel leaves the source in a cancelled state with Retry on row 4 and keeps any last-good list from row 5.",
+          "mechanism": "The source's rotating top-border arc is kept on a 20px ring in accent. A setTimeout of 400 ms prevents a flash on fast loads. A 1 s interval updates text, and the live region announces only at 0 s and 8 s. An AbortController is tied to Cancel. The component unmounts on loaded or failed.",
+          "nearestAnalogue": "2026-10-29 import stage track used the same arc on its active stage. That row counted files per stage. This row counts elapsed time on a single request and adds a cancel threshold.",
+          "usefulness": "Elapsed seconds are the honest measure for a request with no known size.",
+          "creativeDifference": "The wait escalates once at a fixed threshold. The visitor gets an exit only when it matters.",
+          "states": [
+            "hidden: first 400 ms of a request, or no request running",
+            "waiting: arc and 'Waiting · n s', reached after 400 ms",
+            "still-waiting: 'Still waiting · n s' with Cancel, reached at 8 s",
+            "cancelling: Cancel disabled with label 'Cancelling', reached on press",
+            "reduced-motion: static three-quarter arc with the word 'Waiting'"
+          ],
+          "sources": [
+            {
+              "title": "Minimalist arc spinner (creative-sites-vault)",
+              "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/loaders/05-dash-orbital-ring/var-1-arc-spinner.html"
+            },
+            {
+              "title": "Loader tile variety pack (library content)",
+              "url": "https://github.com/isas1/web-components/issues/45"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "reserved-skeleton",
+          "file": "artifact-3.html",
+          "name": "Reserved skeleton",
+          "description": "Static placeholder rows at the exact height and column structure of loaded rows.",
+          "category": "Layout",
+          "tags": [
+            "skeleton",
+            "placeholder",
+            "layout-shift",
+            "fixed-height",
+            "static"
+          ],
+          "purpose": "Hold the panel's geometry while content is pending so nothing moves on arrival.",
+          "use": "A reader starts reading Inbox the moment it loads, with the first title where the first bar sat.",
+          "input": "Display only. Skipped in tab order. The panel sets aria-busy=true while it renders.",
+          "outcome": "Five 56px rows render, each with a 40px thumb box, a title bar and a meta bar. Loaded rows replace them one for one.",
+          "recovery": "On failure or cancel, the skeleton is replaced by the failure plate at the same panel height.",
+          "mechanism": "Rows share the grid template of row 6 through one CSS class. Bar widths are fixed percentages: 72, 64, 80, 58 and 68. There is no shimmer and no randomness. The panel min-height equals five rows plus 4 gaps of 8px.",
+          "nearestAnalogue": "None in recent dates. 2026-10-28 cursor chart dimmed a stale plot, which is a different job.",
+          "usefulness": "Layout shift during loading makes readers lose their place and mis-tap.",
+          "creativeDifference": "The skeleton and the list use one grid template, so the match is structural.",
+          "states": [
+            "pending: five static rows, reached when a request starts with no last-good data",
+            "short-list: rows beyond the loaded count collapse after load, reached when fewer than five items return",
+            "hidden: removed on loaded, empty or failed"
+          ],
+          "sources": [
+            {
+              "title": "Loader tile variety pack (library content)",
+              "url": "https://github.com/isas1/web-components/issues/45"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "retry-guard",
+          "file": "artifact-4.html",
+          "name": "Retry guard",
+          "description": "Retry button with a reserved label width, attempt count and a double-press guard.",
+          "category": "Actions",
+          "tags": [
+            "retry",
+            "button",
+            "dedupe",
+            "attempt-count",
+            "label-swap"
+          ],
+          "purpose": "Start one new attempt for a failed or cancelled source.",
+          "use": "A reader presses Retry on Archive twice by accident, and one request runs.",
+          "input": "Click or tap Retry. Keyboard: Tab to it, Enter or Space, or R while the panel has focus.",
+          "outcome": "Attempt n+1 starts. The label reads 'Retrying' and the button disables until the request settles.",
+          "recovery": "If attempt 2 also fails, the label returns to 'Retry' with 'Attempt 2 failed'. Focus returns to the button.",
+          "mechanism": "A request id increments per attempt. Presses while a request is in flight are ignored. Replies with an older id are dropped. Label width is reserved from the longest label, 'Retrying'.",
+          "nearestAnalogue": "2026-10-27 pipeline panel retried a build step. This retry adds a double-press guard and stale-reply dropping for a content request.",
+          "usefulness": "Double taps on slow networks are common, and duplicate requests cause flicker and wrong content.",
+          "creativeDifference": "The button reports the attempt number, so a second failure reads as new information.",
+          "states": [
+            "ready: 'Retry', reached on failed or cancelled",
+            "retrying: disabled 'Retrying', reached on press",
+            "ignored: second press during retrying, no change",
+            "failed-again: 'Retry' with 'Attempt 2 failed', reached by a second failure",
+            "hidden: not rendered when loaded or empty",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "failure-plate",
+          "file": "artifact-5.html",
+          "name": "Failure plate",
+          "description": "Failure notice naming the cause, laid over a dimmed last-good list stamped with its time.",
+          "category": "Content",
+          "tags": [
+            "error",
+            "failure",
+            "last-good",
+            "stale-content",
+            "disclosure"
+          ],
+          "purpose": "Explain why the load failed and keep previous content readable.",
+          "use": "A reader sees 'Timed out after 6 s · showing copy from 14:02' and keeps reading the old list.",
+          "input": "Click or tap Details to expand the cause. Keyboard: Tab to Details, Enter or Space toggles.",
+          "outcome": "The plate states the cause and the last-good time. Details show the sample source, the attempt and the elapsed time.",
+          "recovery": "Retry in row 4 sits inside the plate. With no last-good data, the plate reads 'Nothing loaded yet' at the same height.",
+          "mechanism": "The plate is a disclosure button and region. The last-good list renders at 0.55 opacity with inert set. The plate width is sized from the longest message, and text wraps on narrow widths without truncation.",
+          "nearestAnalogue": "2026-10-28 load stages reported 'Aggregate failed · kept 6h' in one line. This plate keeps the old content readable and gives it a timestamp.",
+          "usefulness": "A blank panel on failure throws away content the reader already had.",
+          "creativeDifference": "Failure shows as a layer over still-readable old content, so the panel keeps its height and its use.",
+          "states": [
+            "timed-out: 'Timed out after 6 s', reached on Archive attempt 1",
+            "cancelled: 'Cancelled at 9 s', reached by row 2 Cancel",
+            "with-last-good: dimmed list plus timestamp",
+            "no-last-good: 'Nothing loaded yet'",
+            "details-open: cause, attempt and elapsed time shown",
+            "focus: 2px ring on Details"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Disclosure",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "loaded-list",
+          "file": "artifact-6.html",
+          "name": "Loaded list",
+          "description": "Article list with a single selection rule, a loaded-at line and an empty result.",
+          "category": "Data",
+          "tags": [
+            "listbox",
+            "article-list",
+            "selection",
+            "empty-state",
+            "timestamp"
+          ],
+          "purpose": "Show the loaded items and let the reader pick one.",
+          "use": "A reader opens 'Field notes on rail signalling' from Inbox.",
+          "input": "Click or tap a row. Keyboard: Tab into the list, Up and Down move, Home and End jump, Enter selects.",
+          "outcome": "The selected row gets the 2px accent left bar. The footer reads 'Loaded 12 · 14:06'. Focus moves to the list heading after load only if the reader triggered the load.",
+          "recovery": "Selection survives a reload when the item id still exists. Otherwise it clears with 'Selection no longer in list'.",
+          "mechanism": "A listbox with roving tabindex. Rows reuse the row 3 grid template at 56px. Titles clamp to 2 lines and the full title sits in a title attribute and the accessible name. Shared returns zero items and renders 'No shared articles' at row height.",
+          "nearestAnalogue": "2026-10-26 log viewer event list filtered events by severity. This list is the arrival point of a request and keeps selection across reloads.",
+          "usefulness": "This list is the reason the panel exists.",
+          "creativeDifference": "The selection mark is shared with the source tabs, so one visual rule reads across the panel.",
+          "states": [
+            "loaded: rows with footer count and time",
+            "selected: 2px accent left bar, reached by click or Enter",
+            "focus: row ring, reached by arrows",
+            "empty: 'No shared articles', reached on Shared",
+            "selection-cleared: note shown, reached when a reload drops the selected id",
+            "long-title: two-line clamp with full accessible name"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Listbox",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        }
+      ],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-31",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Handshake Bench",
+        "audience": "Engineers writing or learning network protocol code",
+        "problem": "Timeout and replay failures are hard to reproduce and read",
+        "interaction": "Deliver, drop, duplicate or delay packets and advance the clock by hand",
+        "outcome": "Failed step expands with a one-line cause and a divergence marker between runs",
+        "recovery": "Retry from any snapshot as a new run, or Reset to the opening frame",
+        "mechanism": "Pure state machine fed hand-made events, with per-step snapshots and run diff",
+        "difference": "Packet captures show what happened. This lets you replay it and change one event.",
+        "whyNow": "HN sans-IO WireGuard post shows the testable shape. Dot post shows wish for readable errors. Titles only, no demand data.",
+        "sourceIds": [
+          "8d821849286ada42dbbaeffc",
+          "e32e9e5cb5666d607d79fa51"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Handshake Bench",
+            "need": "Reproduce and explain protocol failures",
+            "mechanism": "Manual clock and per-packet deliver, drop, duplicate, delay",
+            "rejection": "Selected: cross-domain, new to recent dates"
+          },
+          {
+            "name": "Error Signpost",
+            "need": "Plain next steps for a CLI error",
+            "mechanism": "Paste error, get you-are-here sign with routes",
+            "rejection": "Too close to the Dot feed entry and needs real parsing"
+          },
+          {
+            "name": "Fault Tag Sheet",
+            "need": "Report broken shared equipment",
+            "mechanism": "QR label opens a printable fault card",
+            "rejection": "Echoes the Avery label post and recent printables"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "8d821849286ada42dbbaeffc",
+        "e32e9e5cb5666d607d79fa51"
+      ]
+    },
+    {
+      "date": "2026-11-01",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Filing Loupe",
+        "audience": "Court clerks and paralegals screening filings",
+        "problem": "Hidden text in filings reaches AI summarizers unseen",
+        "interaction": "Step a keyboard loupe through hidden passages and name each",
+        "outcome": "Decoded hidden text plus seen vs read word tally and report",
+        "recovery": "Mark Not hidden, undo edits, Clear or Restore sample",
+        "mechanism": "Inert parse flags style and Unicode hiding, lens snaps per finding",
+        "difference": "Format marks miss styled hiding. This shows both readings and the gap",
+        "whyNow": "HN title on court sanction for prompt injection. claude-mem trend observed. Titles only",
+        "sourceIds": [
+          "0e356c09eb849e6e67cab0ec",
+          "853c63f738f0cecf3b918959"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Filing Loupe",
+            "need": "See hidden instructions in filings",
+            "mechanism": "Keyboard loupe steps findings, tally compares readings",
+            "rejection": "Selected: cross-domain, new to recent dates"
+          },
+          {
+            "name": "Cabin Tally",
+            "need": "Split trip costs between families",
+            "mechanism": "Market-clerk aligned running tallies per family",
+            "rejection": "Too close to the cabin split feed entry"
+          },
+          {
+            "name": "Island Payout Sim",
+            "need": "Explain how a basic income is funded",
+            "mechanism": "Households and tax sliders with live balance",
+            "rejection": "Needs fiscal data the sources do not give"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "0e356c09eb849e6e67cab0ec",
+        "853c63f738f0cecf3b918959"
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "task": "Create a creative, useful component set informed specifically by Japanese sashiko repair craft. Visible repair and reinforcement stitching: repairable workflows, measured repeated marks and honest progress. Translate craft principles into distinct interactions, not decorative stereotypes. Use original work, avoid sacred imagery and claims of cultural authenticity. Cite https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko.",
+      "components": [
+        {
+          "row": 1,
+          "id": "share-sheet-frame",
+          "file": "artifact-1.html",
+          "name": "Share sheet frame",
+          "description": "Bottom panel with half and full snap points that closes by swipe, Close button or Escape and returns focus to its trigger.",
+          "category": "Layout",
+          "tags": [
+            "bottom-sheet",
+            "dialog",
+            "swipe",
+            "snap-points",
+            "focus-return",
+            "escape-key"
+          ],
+          "purpose": "Hold the share controls at thumb height without leaving the editor.",
+          "use": "An editor taps Share under harbour-walk.mp4, expands the sheet to full, then swipes it down.",
+          "input": "Tap Share to open. Drag the handle or swipe down to close. Keyboard: the handle is a button where Enter or Space toggles half and full. Escape or the Close button closes.",
+          "outcome": "The sheet settles at 50% or 92% height, or closes. On close, focus returns to the Share trigger.",
+          "recovery": "A drag released under 30% travel at under 0.5 px/ms springs back to its snap point. Closing keeps the chosen options until the clip changes.",
+          "mechanism": "A native dialog opened with showModal. Pointer events with setPointerCapture translate the panel on Y only. Snap uses travel plus release velocity. The panel renders from the shared state object and owns no copy logic.",
+          "nearestAnalogue": "None in recent dates. The bottom-sheet idea bank entry is the ancestor; only its snap idea is kept.",
+          "usefulness": "Share is a short task inside editing, and a bottom panel keeps the timeline visible behind it.",
+          "creativeDifference": "Every drag path has a button or key twin, so no snap point is drag-only.",
+          "states": [
+            "closed: not rendered, reached on load and after close",
+            "half: 50% height, reached on open",
+            "full: 92% height, reached by dragging up or Enter on the handle",
+            "dragging: follows the pointer with no transition",
+            "closing: 200ms ease-out slide, reached by swipe, Close or Escape",
+            "narrow: at 320px width, controls stack in one column with 16px padding",
+            "reduced-motion: snaps without sliding",
+            "focus: 2px ring on the handle and Close"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Dialog (Modal)",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "start-point-ticks",
+          "file": "artifact-2.html",
+          "name": "Start point ticks",
+          "description": "Clip-length strip of 5-second ticks that sets where the shared link starts playing.",
+          "category": "Media",
+          "tags": [
+            "media",
+            "start-time",
+            "slider",
+            "ticks",
+            "timestamp"
+          ],
+          "purpose": "Choose the moment the recipient sees first.",
+          "use": "An editor sets 0:42 so the reviewer lands on the harbour crossing.",
+          "input": "Click, tap or drag along the strip. Keyboard: Tab to the slider. Left and Right step 5 s, Shift with an arrow steps 1 s, Home and End jump to 0:00 and 3:10. A checkbox labelled Start at 0:42 includes or omits the time.",
+          "outcome": "The link gains t=42 and the label reads 'Start at 0:42 · frame 1,008'.",
+          "recovery": "Unchecking removes t from the link but keeps the chosen time, so checking again restores it.",
+          "mechanism": "A native input type=range with step=1 and a 5 s keyboard step. Ticks are drawn from one dash unit of 8px dash and 8px gap, one per 5 s, matching row 6.",
+          "nearestAnalogue": "2026-10-28 cursor chart snaps to measured samples. This snaps to fixed time units and writes the result into a URL.",
+          "usefulness": "Sending a 3:12 clip without a start point makes the reviewer hunt for the moment.",
+          "creativeDifference": "The ticks are the measured repeated mark, so the scale is readable without numbers.",
+          "states": [
+            "default: 0:00, checkbox off, reached on load",
+            "set: thumb on a tick with time label",
+            "included: checkbox on, link shows t",
+            "focus: 2px ring on the thumb",
+            "end-clamped: 3:10 maximum, reached by End"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Slider",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "V&A Dundee: Stitch Style: Sashiko",
+              "url": "https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "link-options-field",
+          "file": "artifact-3.html",
+          "name": "Link options field",
+          "description": "Read-only link with access and expiry options that flags when the copied link no longer matches.",
+          "category": "Inputs",
+          "tags": [
+            "link",
+            "access",
+            "expiry",
+            "radio-group",
+            "read-only",
+            "stale-state"
+          ],
+          "purpose": "Set who can open the link and for how long.",
+          "use": "An editor switches from Anyone with link to Team only after copying and sees the note 'Link changed since last copy'.",
+          "input": "Tap a radio for Anyone with link or Team only, and choose an expiry of 1 day, 7 days or Never from a native select. Keyboard: arrows inside the radio group, Tab to the select. Focusing the link selects all text.",
+          "outcome": "The link regenerates from state, for example https://media.example/c/hw-31k?t=42&exp=7d.",
+          "recovery": "Reverting an option restores the earlier link and clears the stale note. The field never truncates. Long URLs wrap at a wbr after each slash, question mark and ampersand.",
+          "mechanism": "The link is derived from state, never edited directly. A linkVersion counter increments on each change and is compared with the version of the last successful copy.",
+          "nearestAnalogue": "2026-10-28 range selector reverts on cancel. This field tracks drift between the current value and what the clipboard holds.",
+          "usefulness": "A stale copied link is a common silent share error.",
+          "creativeDifference": "The field shows whether the clipboard still agrees with the screen.",
+          "states": [
+            "default: Anyone with link, 7 days",
+            "changed: new link version, reached by any option change",
+            "stale: 'Link changed since last copy', reached by a change after a copy",
+            "long: 140-character link wraps to three lines at 320px",
+            "focus: 2px ring and text selected"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Radio Group",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "copy-link-button",
+          "file": "artifact-4.html",
+          "name": "Copy link button",
+          "description": "Native button that copies the current link with a reserved-width label and an honest second-press result.",
+          "category": "Actions",
+          "tags": [
+            "button",
+            "clipboard",
+            "copy",
+            "pending",
+            "dedupe",
+            "timeout"
+          ],
+          "purpose": "Put the current link on the clipboard and say whether it worked.",
+          "use": "An editor copies, then copies again before pasting, and reads 'Copied again · same link'.",
+          "input": "Click or tap Copy link. Keyboard: Tab to it, Enter or Space.",
+          "outcome": "Success reads 'Copied'. A repeat with the same link version reads 'Copied again · same link'. A repeat after a change reads 'Copied · new link'.",
+          "recovery": "Presses while pending are ignored. A copy pending over 3000 ms counts as failed and hands off to row 5.",
+          "mechanism": "navigator.clipboard.writeText raced against a 3000 ms timeout. A demo toggle forces rejection. Labels swap inside a width reserved for the longest label, 'Copied again · same link'.",
+          "nearestAnalogue": "2026-10-28 pin pair swaps labels in a reserved width. This adds pending, timeout and version-aware repeat results.",
+          "usefulness": "This button is the core task of the sheet.",
+          "creativeDifference": "A second press reports whether the link changed, so pressing twice is a check rather than noise.",
+          "states": [
+            "idle: 'Copy link'",
+            "pressed: 1px sink, reached on pointer or key down",
+            "copying: disabled, 'Copying'",
+            "copied: 'Copied'",
+            "repeat: 'Copied again · same link' or 'Copied · new link'",
+            "failed: label returns to 'Copy link' and row 5 shows",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "copy-repair-notice",
+          "file": "artifact-5.html",
+          "name": "Copy repair notice",
+          "description": "Failure notice that stays until repaired by retry or manual selection, then remains as a one-line repair record.",
+          "category": "Feedback",
+          "tags": [
+            "error",
+            "retry",
+            "fallback",
+            "live-region",
+            "repair",
+            "clipboard"
+          ],
+          "purpose": "Report a clipboard failure and keep it visible until it is fixed.",
+          "use": "Clipboard access is blocked in an embedded browser. The editor taps Select link, presses Ctrl+C, and reads 'Copy failed 14:02 · repaired by hand 14:03'.",
+          "input": "Tap Retry, Select link or Dismiss. Keyboard: Tab to each, Enter or Space. After Select link, Ctrl+C or Cmd+C in the field completes the repair.",
+          "outcome": "Failure shows 'Couldn't copy · clipboard blocked'. A repair replaces it with one line over a dashed rule, which gains an overstitched solid segment.",
+          "recovery": "Retry disables while pending. A second failure promotes Select link to the first button. Dismiss hides the notice and logs the attempt as failed in row 6.",
+          "mechanism": "role=alert on failure and a polite live region on repair. A copy event listener on the link field detects manual copies. The rule is two stacked SVG dash lines using the shared 8px unit.",
+          "nearestAnalogue": "2026-10-27 pipeline panel retry and 2026-10-28 load stages failure. Those retry jobs. This offers a manual path and keeps the repair visible.",
+          "usefulness": "Silent clipboard failure leads to pasting an old link.",
+          "creativeDifference": "The failure is mended in place. The repair stays as a record and is never erased.",
+          "states": [
+            "hidden: no failure this session",
+            "failed: message with Retry, Select link and Dismiss",
+            "retrying: Retry disabled, 'Retrying'",
+            "failed-again: '2nd attempt failed', Select link first",
+            "repaired-retry: 'repaired by retry' line",
+            "repaired-manual: 'repaired by hand' line",
+            "dismissed: hidden, attempt logged as failed",
+            "reduced-motion: overstitch appears without drawing"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Alert",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "V&A Dundee: Stitch Style: Sashiko",
+              "url": "https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "share-attempt-ledger",
+          "file": "artifact-6.html",
+          "name": "Share attempt ledger",
+          "description": "Row of even marks, one per copy attempt, with a readable list of time, link version and result.",
+          "category": "Data",
+          "tags": [
+            "ledger",
+            "history",
+            "attempts",
+            "listbox",
+            "non-color-state",
+            "stale-state"
+          ],
+          "purpose": "Show what has been copied this session and whether it is still current.",
+          "use": "An editor reads '4 attempts · 3 copied · 1 repaired · 1 outdated' before pasting into chat.",
+          "input": "Click or tap a mark to show its detail. Keyboard: Tab into the list, Left and Right or Up and Down move, Home and End jump, Enter shows detail.",
+          "outcome": "Detail reads '14:03 · v3 · Team only, 7 days, t=42 · repaired by retry'.",
+          "recovery": "Clear ledger empties it and shows Undo for 5 s. Earlier marks beyond 12 collapse into '+n earlier'.",
+          "mechanism": "An append-only attempts array in shared state. Each mark uses one shape rule: solid dash for copied, gap with a cross for failed, dash with overstitch for repaired, and strike for outdated. Each mark pairs with a word. Roving tabindex listbox.",
+          "nearestAnalogue": "2026-10-26 log viewer event list. That list filters many event types. This one records one action's attempts against link versions.",
+          "usefulness": "It answers whether the clipboard still matches the screen, after the notice is gone.",
+          "creativeDifference": "Progress is counted as real attempts in one even rule. Nothing is estimated.",
+          "states": [
+            "empty: 'No copies yet'",
+            "copied: solid dash",
+            "failed: gap with cross",
+            "repaired: dash with overstitch",
+            "outdated: struck mark, reached by an option change after copy",
+            "selected: detail line shown",
+            "overflow: '+n earlier' after 12 marks",
+            "cleared: Undo available for 5 s",
+            "focus: 2px ring on the mark"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Listbox",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "V&A Dundee: Stitch Style: Sashiko",
+              "url": "https://www.vam.ac.uk/dundee/whatson/events/stitch-style-sashiko"
+            }
+          ]
+        }
+      ],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-31",
+      "task": "Create a creative, useful component set informed specifically by Portuguese azulejo pattern craft. Modular pattern construction: repetition, rotation, borders and local changes forming one coherent whole. Translate craft principles into distinct interactions, not decorative stereotypes. Use original work, avoid sacred imagery and claims of cultural authenticity. Cite https://estudoautonomo.dge.mec.pt/recurso/padroes-e-uma-visita-ao-museu-nacional-do-azulejo.",
+      "components": [
+        {
+          "row": 1,
+          "id": "run-tile-matrix",
+          "file": "artifact-1.html",
+          "name": "Run tile matrix",
+          "description": "Grid of 24 square step tiles, with stages as rows and targets as columns, plus a Rotate control that transposes the axes.",
+          "category": "Data",
+          "tags": [
+            "pipeline",
+            "matrix",
+            "grid",
+            "status-glyph",
+            "transpose",
+            "non-color-state"
+          ],
+          "purpose": "Show every step of the run as one pattern so the failed tile stands out by shape.",
+          "use": "A developer sees one split tile at Test × windows·node22 and a dotted tile below it.",
+          "input": "Click or tap a tile to open it. Click or tap Rotate to swap the axes. Keyboard: Tab into the grid. Left and Right move to the same stage on another target, Up and Down move between stages, Home and End jump to row ends, and Ctrl+Home and Ctrl+End jump to the corners. Enter opens the tile. Tab to Rotate, then Enter or Space.",
+          "outcome": "The opened tile shows the row 3 inset. Rotate swaps the grid and keeps focus on the same cell id.",
+          "recovery": "Rotating again restores the original layout. Opening another tile closes the current inset, and nothing is lost.",
+          "mechanism": "ARIA grid with roving tabindex. Each tile is a 40px module with one glyph: filled square for passed, hollow square for queued, diagonal split for failed, dotted square for blocked. Each glyph is paired with its word in the accessible name. Transpose swaps grid-template-rows and grid-template-columns and recomputes positions from a stage-target id map.",
+          "nearestAnalogue": "2026-10-30 source tabs used status glyphs in a fixed slot for 3 sources. This places 24 glyphs in a two-axis grid with transpose.",
+          "usefulness": "A run with many targets is hard to scan as a list. The grid shows which step and which target at the same time.",
+          "creativeDifference": "Repetition makes the pattern, and the failure reads as a broken tile. Rotation is a real view change that keeps focus.",
+          "states": [
+            "default: stages as rows, failed tile focused and open, reached on load",
+            "rotated: targets as rows, reached by Rotate",
+            "focus: 2px accent ring on the tile, reached by Tab or arrows",
+            "queued: hollow glyphs, reached on retry",
+            "narrow: under 480px container width, tiles shrink to 32px and the target labels abbreviate to w22 and similar"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Grid",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "Padrões e uma visita ao Museu Nacional do Azulejo",
+              "url": "https://estudoautonomo.dge.mec.pt/recurso/padroes-e-uma-visita-ao-museu-nacional-do-azulejo"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "stage-border",
+          "file": "artifact-2.html",
+          "name": "Stage border",
+          "description": "A narrow frame along the matrix edge with one segment per stage and its counts. Only the failing stage's edge is weighted.",
+          "category": "Navigation",
+          "tags": [
+            "stage",
+            "border",
+            "jump",
+            "wayfinding",
+            "aria-current"
+          ],
+          "purpose": "Name each stage's result and jump to that stage.",
+          "use": "A developer reads 'Test · 5 of 6 · 1 failed' on the border and jumps there.",
+          "input": "Click or tap a segment. Keyboard: Tab to the border, Up and Down (Left and Right when rotated) move between segments, Enter or Space jumps.",
+          "outcome": "Focus moves to the first failed tile in that stage, or to its first tile if none failed.",
+          "recovery": "Jumping never changes run state. Escape in the grid returns focus to the border segment last used.",
+          "mechanism": "A nav element containing four buttons. The segment holding the focused tile gets aria-current. The failing segment has a 3px solid edge and all others a 1px hairline. The border moves from the left edge to the top edge when row 1 rotates.",
+          "nearestAnalogue": "2026-10-28 breach stepper jumped between computed events. This frames fixed groups and stays visible as a summary.",
+          "usefulness": "With 40 targets the grid scrolls, and the border keeps stage results in view.",
+          "creativeDifference": "One quiet surface carries one weighted edge, so the break is found without a legend.",
+          "states": [
+            "default: Test edge weighted, reached on load",
+            "current: aria-current on the stage of the focused tile",
+            "repaired: Test edge returns to hairline, reached when the retry passes",
+            "rotated: border on the top edge",
+            "focus: 2px ring on the segment"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Landmarks",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "Padrões e uma visita ao Museu Nacional do Azulejo",
+              "url": "https://estudoautonomo.dge.mec.pt/recurso/padroes-e-uma-visita-ao-museu-nacional-do-azulejo"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "failure-inset",
+          "file": "artifact-3.html",
+          "name": "Failure inset",
+          "description": "Full-width detail row inserted under the opened tile's row, with a notch pointing at its column.",
+          "category": "Layout",
+          "tags": [
+            "disclosure",
+            "inset",
+            "grid-row",
+            "focus-return",
+            "expand"
+          ],
+          "purpose": "Expand the failed step in place without moving any tile out of order.",
+          "use": "A developer reads 'Test · windows·node22 · exit 1 · 38 s' directly under the broken tile.",
+          "input": "Click or tap the tile or Close. Keyboard: Enter on the tile toggles the inset, and Escape closes it.",
+          "outcome": "The inset holds the step header plus rows 4 and 5. Tiles keep their order.",
+          "recovery": "On close, focus returns to the tile. Only one inset is open at a time.",
+          "mechanism": "An element with grid-column 1 / -1 is inserted after the last cell of the opened tile's row. The notch is offset by column index. Height transitions over 180ms ease-out and is instant under reduced motion. Under 480px container width the inset renders below the grid with a Back to grid button.",
+          "nearestAnalogue": "2026-10-28 percentile tiles expanded a tile while its neighbours yielded space. This inserts a row and leaves tile sizes untouched.",
+          "usefulness": "The first frame shows the useful content: the failure is already open on load.",
+          "creativeDifference": "The detail breaks out of the grid frame once and stays anchored to its tile.",
+          "states": [
+            "open-on-load: failed tile expanded, reached on load",
+            "closed: grid only, reached by Close or Escape",
+            "passed-tile: header with duration and no log diff, reached by opening a passed tile",
+            "narrow: inset below the grid with Back to grid",
+            "reduced-motion: no height transition"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Disclosure",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "sibling-log",
+          "file": "artifact-4.html",
+          "name": "Sibling log",
+          "description": "Step log with line numbers in which lines shared with a passing sibling target are muted and lines that differ are marked.",
+          "category": "Content",
+          "tags": [
+            "log",
+            "diff",
+            "line-numbers",
+            "compare",
+            "horizontal-scroll"
+          ],
+          "purpose": "Show why the step failed by isolating what differs from the same step on a passing target.",
+          "use": "A developer reads '3 of 212 lines differ from linux·node22' and finds a backslash path in the assertion at line 41.",
+          "input": "Choose a sibling from a native select. Click or tap Next difference or Previous difference. Keyboard: Tab to each control, Enter or Space. The log is a focusable region that scrolls with arrows.",
+          "outcome": "Differing lines show at full text with a 2px left bar. Shared lines show in muted text. The count line updates.",
+          "recovery": "Choosing None shows the plain log. Text stays selectable for copying.",
+          "mechanism": "Lines are normalized by stripping timestamps and millisecond durations, then diffed with LCS against the sibling's normalized lines. The sample logs are bundled locally. Line numbers sit in a sticky 4ch gutter. A pre element scrolls horizontally with no wrapping.",
+          "nearestAnalogue": "2026-10-26 log viewer filtered events by severity. This filters by difference from a passing twin.",
+          "usefulness": "Failed logs are long, and a passing sibling separates the real change from setup noise.",
+          "creativeDifference": "Repetition across targets becomes the diagnostic, and the local change is what is left.",
+          "states": [
+            "compared: linux·node22 selected by default, reached on load",
+            "plain: no sibling, reached by choosing None",
+            "no-difference: 'Same lines as sibling', reached when logs match",
+            "attempt-2: log of the retried run, reached after row 5",
+            "focus: 2px ring on the log region and controls"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Landmarks",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "Padrões e uma visita ao Museu Nacional do Azulejo",
+              "url": "https://estudoautonomo.dge.mec.pt/recurso/padroes-e-uma-visita-ao-museu-nacional-do-azulejo"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "retry-scope",
+          "file": "artifact-5.html",
+          "name": "Retry scope",
+          "description": "Two retry buttons, one for the tile and one for the target column, each labelled with how many steps rerun and their last recorded duration.",
+          "category": "Actions",
+          "tags": [
+            "retry",
+            "scope",
+            "downstream",
+            "cancel",
+            "label-swap",
+            "button"
+          ],
+          "purpose": "Rerun the smallest set of steps that can repair the run, and state the cost first.",
+          "use": "A developer presses 'Retry tile · reruns 2 · 52 s last run' instead of rerunning the whole target.",
+          "input": "Click or tap Retry tile or Retry target. Cancel appears while the retry runs. Keyboard: Tab to each button, Enter or Space.",
+          "outcome": "The affected tiles turn to queued glyphs and run in order. The button reads 'Retrying' and is disabled.",
+          "recovery": "Cancel restores the previous tile states and logs. Presses during a retry are ignored. A second failure keeps the attempt 1 log in an attempt selector.",
+          "mechanism": "The downstream set is computed from a stage dependency list. The label count and the duration come from recorded sample durations, and no progress percentage is shown. A snapshot of cell states is taken before the run and restored on cancel. Label width is reserved for the longest label.",
+          "nearestAnalogue": "2026-10-30 retry guard deduped a single content request. This adds scope choice, downstream count and snapshot restore.",
+          "usefulness": "Rerunning a whole pipeline for one flaky test wastes minutes, and rerunning too little leaves blocked steps.",
+          "creativeDifference": "Retry replaces one tile and keeps the pattern. The cost is read before the press.",
+          "states": [
+            "ready: both buttons enabled, reached on a failed tile",
+            "retrying: disabled 'Retrying' with Cancel, reached on press",
+            "cancelled: previous states restored with note 'Retry cancelled', reached by Cancel",
+            "failed-again: 'Retry tile' with 'Attempt 2 failed', reached by the demo toggle",
+            "hidden: not rendered when the run has no failure",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "run-verdict",
+          "file": "artifact-6.html",
+          "name": "Run verdict",
+          "description": "Status line stating the run's counts and, after a retry, whether the pattern was repaired or failed the same way again.",
+          "category": "Feedback",
+          "tags": [
+            "status",
+            "live-region",
+            "verdict",
+            "flaky",
+            "summary"
+          ],
+          "purpose": "Say whether the run is whole, and whether a repeat failure looks flaky or real.",
+          "use": "A developer reads 'Failed again at line 41 · same 3 lines · not flaky' and stops retrying.",
+          "input": "Display only. Click or tap Show failed tile to focus it. Keyboard: Tab to that link, then Enter.",
+          "outcome": "The line reads 'Run 418 · 22 passed · 1 failed · 1 blocked'. After a passing retry it reads 'Run 418 · 24 passed · repaired by attempt 2'.",
+          "recovery": "The verdict is derived from the current state, so cancelling a retry restores the earlier line.",
+          "mechanism": "role=status with polite announcements on settled states only. The counts come from the cell map. Flakiness compares a hash of the differing lines between attempts: the same hash reads as not flaky, and a different hash reads as changed failure.",
+          "nearestAnalogue": "2026-10-29 import summary grouped outcome counts. This also compares failure signatures across attempts.",
+          "usefulness": "Repeating retries on a real bug costs time, and the verdict ends that loop.",
+          "creativeDifference": "Coherence of the whole pattern is the measure. The run is done only when every tile matches.",
+          "states": [
+            "failed: counts with Show failed tile, reached on load",
+            "running: 'Retrying 2 steps', reached by row 5",
+            "repaired: all passed with attempt number",
+            "same-failure: 'not flaky' line",
+            "changed-failure: 'different lines than attempt 1'"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Alert and status",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        }
+      ],
+      "usedSources": []
+    },
+    {
+      "date": "2026-11-01",
+      "task": "Create a creative, useful component set informed specifically by Ancient Egyptian faience craft. Interpret material transformation as staged previews and finished states; use original abstract forms, not funerary symbols. Translate craft principles into distinct interactions, not decorative stereotypes. Use original work, avoid sacred imagery and claims of cultural authenticity. Cite https://australian.museum/learn/cultures/international-collection/ancient-egyptian/egyptian-faience/.",
+      "components": [
+        {
+          "row": 1,
+          "id": "project-card-trigger",
+          "file": "artifact-1.html",
+          "name": "Project card trigger",
+          "description": "Grid of task cards. Each card is a button that opens its details and shows a draft glyph when an unsaved title exists.",
+          "category": "Navigation",
+          "tags": [
+            "card",
+            "grid",
+            "roving-tabindex",
+            "trigger",
+            "aria-expanded",
+            "draft-marker"
+          ],
+          "purpose": "Reach any card and open its details from the keyboard or by pointer.",
+          "use": "A lead arrows to 'Billing export' and presses Enter.",
+          "input": "Click or tap a card. Keyboard: Tab into the grid, arrow keys move between cards by row and column, Home and End jump to row ends, Enter or Space opens.",
+          "outcome": "The panel opens for that card. The card gets aria-expanded=true and a 2px accent inline-start edge.",
+          "recovery": "On panel close, focus returns to this card. The card is found by id, so a rename that re-sorts the grid does not misplace focus.",
+          "mechanism": "Native buttons in a list with roving tabindex. Column count comes from a ResizeObserver on the grid. The draft glyph is a hollow 10px square read from the shared draft store, paired with the visually hidden word 'unsaved draft'.",
+          "nearestAnalogue": "2026-10-30 loaded list was a listbox with single selection. These cards are triggers in two dimensions and carry draft state for another surface.",
+          "usefulness": "Without arrow movement, reaching card 6 takes six Tab presses, and the draft glyph shows unfinished work before the panel opens.",
+          "creativeDifference": "The card shows the raw-state glyph from row 3, so a draft is visible from the board.",
+          "states": [
+            "default: no card expanded, reached on load",
+            "focus: 2px ring, reached by Tab or arrows",
+            "expanded: accent edge and aria-expanded=true, reached by Enter, Space or click",
+            "draft: hollow square glyph, reached when a dirty draft exists for that card",
+            "reordered: card moves in alphabetical sort after a save and keeps focus return by id",
+            "narrow: one column under 480px, Up and Down only"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Grid",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "details-side-panel",
+          "file": "artifact-2.html",
+          "name": "Details side panel",
+          "description": "Inline-end modal panel, 400px wide, with sticky header and footer. It closes by Escape or Close and returns focus to the opening card.",
+          "category": "Layout",
+          "tags": [
+            "side-panel",
+            "dialog",
+            "focus-return",
+            "escape-key",
+            "sticky-footer",
+            "responsive"
+          ],
+          "purpose": "Hold the card's details beside the board and manage focus in and out.",
+          "use": "A lead opens the panel, edits, presses Escape and lands back on the card.",
+          "input": "Open from row 1. Click or tap Close. Keyboard: Escape or Enter on Close. Tab cycles within the panel.",
+          "outcome": "On open, focus moves to the title field. On close, focus returns to the card by id.",
+          "recovery": "If the draft is dirty, close is routed to row 6 instead of closing. If the card was deleted while open, focus moves to the grid heading with the note 'Card no longer exists'.",
+          "mechanism": "Native dialog opened with showModal, which makes the board inert. The panel uses translateX over 180ms ease-out and stops on transitionend. The body scrolls between the sticky header and footer. A cancel event handler intercepts Escape for the dirty check.",
+          "nearestAnalogue": "2026-10-30 share sheet frame. That sheet snapped by drag at the bottom edge. This panel has no drag, sits at the inline end and returns focus by id.",
+          "usefulness": "Focus return is the task's explicit requirement and the most common failure in side panels.",
+          "creativeDifference": "Every close path passes one dirty-check gate, so no exit silently drops text.",
+          "states": [
+            "closed: not rendered, reached on load and after close",
+            "opening: 180ms slide, then still",
+            "open: focus in title field",
+            "close-blocked: held open while row 6 shows, reached by Escape or Close with a dirty draft",
+            "narrow: full width under 640px with 16px padding",
+            "reduced-motion: appears without slide",
+            "focus: 2px ring on Close"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Dialog (Modal)",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "title-draft-field",
+          "file": "artifact-3.html",
+          "name": "Title draft field",
+          "description": "Labelled title input with a stage glyph and word for Draft, Checked or Saved, a tabular count and a revert action.",
+          "category": "Inputs",
+          "tags": [
+            "text-input",
+            "draft",
+            "validation",
+            "stage-glyph",
+            "character-count",
+            "revert"
+          ],
+          "purpose": "Edit the title and always show whether the text on screen is draft, checked or saved.",
+          "use": "A lead types a long title and reads 'Checked · 52 / 80' before saving.",
+          "input": "Type in the field by keyboard or on-screen keyboard. Click, tap or press Enter on Revert to saved, which appears when the draft is dirty.",
+          "outcome": "The stage moves to Checked 600ms after the last keystroke when the trimmed title is 1 to 80 characters and differs from saved. Row 5 sets Saved.",
+          "recovery": "Revert to saved restores the saved title and the Saved stage. Native Ctrl+Z works in the field.",
+          "mechanism": "The draft is stored per card id in the shared store. Validation trims whitespace. Glyphs are 10px squares at a 1.5px stroke to match 15px text: hollow for Draft, half-filled for Checked, filled for Saved. Each glyph pairs with its word. The draft has a 1px dashed underline, and the saved title has none. The count uses tabular-nums in a 7ch slot.",
+          "nearestAnalogue": "2026-10-30 link options field flagged drift between the screen and the clipboard. This field flags drift between the draft and the saved title.",
+          "usefulness": "Visitors often close panels believing a typed title saved itself.",
+          "creativeDifference": "Text moves through raw, checked and finished stages, each with its own shape.",
+          "states": [
+            "saved: filled square, reached on open and after save",
+            "draft: hollow square and dashed underline, reached on typing",
+            "checked: half square, reached 600ms after a valid edit",
+            "empty: 'Title needed', reached when trimmed text is empty",
+            "over-limit: count reads '84 / 80' with 'Shorten by 4'",
+            "unchanged: 'Same as saved', reached when the draft equals saved",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices patterns",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "Australian Museum: Egyptian faience",
+              "url": "https://australian.museum/learn/cultures/international-collection/ancient-egyptian/egyptian-faience/"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "card-fit-preview",
+          "file": "artifact-4.html",
+          "name": "Card fit preview",
+          "description": "Live render of the draft title inside the card's real width and two-line clamp, reporting fit or the last visible word.",
+          "category": "Content",
+          "tags": [
+            "preview",
+            "truncation",
+            "line-clamp",
+            "measurement",
+            "responsive",
+            "live-region"
+          ],
+          "purpose": "Show how the title will read on the board before it is saved.",
+          "use": "A lead sees 'Clipped after \"new\" at phone width' and shortens the title.",
+          "input": "Display follows the field. Choose Desktop 232px or Phone 180px with a two-option radio group. Keyboard: Tab into the group, arrow keys select.",
+          "outcome": "The preview reads 'Fits in 2 lines' or 'Clipped after \"new\"' at the chosen width.",
+          "recovery": "Editing the field updates the preview on the next frame. Switching width never changes the draft.",
+          "mechanism": "A hidden measuring card uses the same CSS class as row 1, at the chosen width. Overflow is detected by comparing scrollHeight with two line-heights. The cut word is found by binary search over the word count. The live region announces only when the fit state changes.",
+          "nearestAnalogue": "None in recent dates. 2026-10-30 reserved skeleton matched loaded geometry, but it held layout and did not measure text.",
+          "usefulness": "A title that saves fine but clips on the card hides its key word from teammates.",
+          "creativeDifference": "The preview is a staged view of the finished card, made from the same rule that renders it.",
+          "states": [
+            "fits: 'Fits in 2 lines', reached when text fits",
+            "clipped: ellipsis with the last visible word named",
+            "phone: 180px measurement, reached by the Phone radio",
+            "empty: preview shows 'Untitled' in muted text",
+            "focus: 2px ring on the radio group"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Radio Group",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "Australian Museum: Egyptian faience",
+              "url": "https://australian.museum/learn/cultures/international-collection/ancient-egyptian/egyptian-faience/"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "save-title-button",
+          "file": "artifact-5.html",
+          "name": "Save title button",
+          "description": "Native submit button with a reserved-width label covering idle, saving, saved, failed and conflict outcomes.",
+          "category": "Actions",
+          "tags": [
+            "button",
+            "submit",
+            "pending",
+            "retry",
+            "conflict",
+            "label-swap"
+          ],
+          "purpose": "Commit a checked title and state exactly what happened.",
+          "use": "A lead saves, and a teammate's earlier rename surfaces as 'Renamed by Ana 14:05'.",
+          "input": "Click or tap Save. Keyboard: Enter in the field, Ctrl+Enter or Cmd+Enter anywhere in the panel, or Tab to the button and press Space.",
+          "outcome": "The label swaps Save, Saving, then 'Saved 14:06'. The card title updates and row 3 shows Saved.",
+          "recovery": "On failure, the label reads 'Not saved · Retry' and the draft is kept. On conflict, two buttons appear: Use mine and Keep theirs. Presses while saving are ignored.",
+          "mechanism": "The form submit handler compares the stored version with the baseline captured at open. A local store resolves after 700ms. Demo toggles force a failure or a conflict. The label width is reserved for 'Not saved · Retry'. The button is disabled unless the stage is Checked.",
+          "nearestAnalogue": "2026-10-30 copy link button and 2026-10-30 retry guard. Those copied or refetched. This save writes user text and detects a teammate's overwrite.",
+          "usefulness": "Silent overwrites and lost failures are the two save errors that cost work.",
+          "creativeDifference": "The saved state is the finished surface. The button only accepts text that has passed the checked stage.",
+          "states": [
+            "disabled: stage is Draft or invalid",
+            "idle: 'Save', reached at Checked",
+            "saving: disabled 'Saving'",
+            "saved: 'Saved 14:06'",
+            "failed: 'Not saved · Retry', reached by demo toggle",
+            "conflict: Use mine and Keep theirs, reached by version mismatch",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            },
+            {
+              "title": "Australian Museum: Egyptian faience",
+              "url": "https://australian.museum/learn/cultures/international-collection/ancient-egyptian/egyptian-faience/"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "unsaved-close-guard",
+          "file": "artifact-6.html",
+          "name": "Unsaved close guard",
+          "description": "Inline alert in the panel footer that intercepts a dirty close with three choices, with Keep editing focused first.",
+          "category": "Feedback",
+          "tags": [
+            "alert",
+            "unsaved-changes",
+            "escape-key",
+            "discard",
+            "restore",
+            "focus-management"
+          ],
+          "purpose": "Stop a close from dropping typed text, and let the visitor choose.",
+          "use": "A lead presses Escape mid-edit and reads 'Unsaved title · \"Migrate billing exports\"'.",
+          "input": "Click or tap Save and close, Discard or Keep editing. Keyboard: focus lands on Keep editing. Tab and Shift+Tab move between the three, Enter or Space activates, and Escape again means Keep editing.",
+          "outcome": "Save and close runs row 5, then closes. Discard closes and keeps the draft in a one-slot buffer. Keep editing returns focus to the field with the caret at the end.",
+          "recovery": "Reopening the same card in the session offers 'Restore discarded draft'. If Save and close fails, the panel stays open with row 5's failure state.",
+          "mechanism": "Triggered from the dialog cancel event, the Close button and row 1 opening another card. The alert uses role=alert and is inline, so no second dialog stacks. The discard buffer holds one draft per session.",
+          "nearestAnalogue": "None direct. 2026-10-30 copy repair notice kept a failure visible until fixed. This guard prevents the loss before it happens.",
+          "usefulness": "An Escape press that silently discards a sentence breaks trust in the panel.",
+          "creativeDifference": "The safest choice gets focus first, and Escape can never discard.",
+          "states": [
+            "hidden: draft clean",
+            "shown: three choices with the draft quoted, reached by a dirty close",
+            "saving: Save and close disabled while row 5 runs",
+            "discarded: panel closed, buffer filled",
+            "restorable: 'Restore discarded draft' on reopen",
+            "focus: 2px ring on each choice"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Alert",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        }
+      ],
+      "usedSources": []
+    }
+  ],
+  "inventory": null,
+  "requiredKind": "task",
+  "edition": {
+    "lane": "culture",
+    "date": "2026-11-02",
+    "timezone": "Europe/Lisbon",
+    "culture": {
+      "id": "yoruba",
+      "era": "living",
+      "name": "Yoruba adire resist-dye craft",
+      "url": "https://www.vam.ac.uk/articles/cloth-of-a-continent-africa-fashion",
+      "idea": "Interpret resist dyeing as reversible masks, selective reveal and grouped editing; do not copy named symbolic motifs."
+    }
+  }
+}

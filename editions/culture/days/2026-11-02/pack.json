@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "categoryVersion": 1,
+  "id": "2026-11-02-culture-resist-export",
+  "name": "Resist Export",
+  "description": "A file panel that masks files and groups out of a download bundle, previews what will be packed, prepares it with counted progress and reports whether a repeat download matches the current masks.",
+  "project": "Download panel for a 23-file design project, spring-catalogue, 41.2 MB, running as a local demo.",
+  "sizeRationale": "Six rows each answer one question: which files are in, which groups are out, what will arrive, whether the frame holds at 320px, the download itself, and whether the download still matches. A preset picker was cut because it duplicated group rules.",
+  "opportunities": [
+    {
+      "id": "daily-task",
+      "need": "Download a chosen subset of project files and know afterwards exactly what the bundle holds.",
+      "use": "A designer sends a client handoff without drafts or licensed fonts, then repeats the download after one change.",
+      "interaction": "Layered reversible masks on files and groups, a fixed-label reveal of masked files, a counted prepare state and a mask-aware repeat.",
+      "similarity": "10-28 load stages and 10-29 import stage track counted pending work. 10-30 link options flagged drift. This set adds selective exclusion before the job and restores masks after it. Tradeoff: more input surface than a single download button."
+    }
+  ],
+  "selection": {
+    "id": "daily-task",
+    "rationale": "It is the only candidate and the explicit edition brief. Resist dyeing maps onto masking files from a download, which serves the download-button task directly."
+  },
+  "tokens": {
+    "colors": {
+      "dark": {
+        "bg": "#121417",
+        "surface": "#1b1e23",
+        "text": "#e8eaed",
+        "muted": "#9aa1ab",
+        "accent": "#7d9be6",
+        "border": "#2e333a"
+      },
+      "light": {
+        "bg": "#f6f7f8",
+        "surface": "#ffffff",
+        "text": "#1a1d21",
+        "muted": "#5c636d",
+        "accent": "#2f4fa8",
+        "border": "#d9dde2"
+      }
+    },
+    "typography": {
+      "family": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+      "size": "15px"
+    },
+    "spacing": {
+      "gap": "8px",
+      "padding": "16px"
+    },
+    "radii": {
+      "control": "6px"
+    },
+    "motion": {
+      "duration": "180ms",
+      "easing": "ease-out"
+    }
+  },
+  "components": [
+    {
+      "row": 1,
+      "id": "2026-11-02-culture-resist-export-mask-file-tree",
+      "file": "artifact-1.html",
+      "name": "Mask file tree",
+      "description": "File tree with an Include checkbox per file, tri-state folders and a mask-source mark per row.",
+      "category": "Data",
+      "tags": [
+        "tree",
+        "checkbox",
+        "tri-state",
+        "mask",
+        "exclude",
+        "non-color-state"
+      ],
+      "purpose": "Choose which single files go into the download and see why each excluded file is out.",
+      "use": "A designer unchecks layouts/cover-v1.indd and sees it marked 'masked by hand'.",
+      "input": "Click or tap a checkbox or a folder disclosure. Keyboard: Tab into the tree, Up and Down move, Right and Left expand and collapse, Space toggles Include, Home and End jump.",
+      "outcome": "The file's include state changes, its folder updates to checked, mixed or unchecked, and the bundle count in row 3 updates.",
+      "recovery": "Checking a file again lifts its hand mask. Checking a file masked by a rule adds an exception, labelled 'kept despite Drafts'.",
+      "mechanism": "APG treeview with roving tabindex. Included is computed as not hand-masked and not (rule-masked without an exception). Rule masks show a 1px dashed edge, and hand masks show a 3px solid bar. Each mark is paired with its word.",
+      "nearestAnalogue": "2026-10-29 file manifest listed per-file outcomes after an import. This tree sets inclusion before the job and names the mask layer.",
+      "usefulness": "A bundle builder that hides why a file is missing causes resend requests.",
+      "creativeDifference": "Each excluded row names its resist layer, so hand and group masks never blur together.",
+      "states": [
+        "default: all 23 included, reached on load",
+        "hand-masked: solid bar and 'masked by hand', reached by unchecking",
+        "rule-masked: dashed edge and rule name, reached by row 2",
+        "exception: 'kept despite <rule>', reached by checking a rule-masked file",
+        "mixed folder: aria-checked=mixed",
+        "focus: 2px ring on the row"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Tree View",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        },
+        {
+          "title": "V&A: Cloth of a continent, Africa Fashion",
+          "url": "https://www.vam.ac.uk/articles/cloth-of-a-continent-africa-fashion"
+        }
+      ],
+      "packId": "2026-11-02-culture-resist-export",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "25de7700c4b5d3b9e87352d3994bb6a8942353f0b25748fe8b39a549b1807f1d"
+    },
+    {
+      "row": 2,
+      "id": "2026-11-02-culture-resist-export-group-resist-rules",
+      "file": "artifact-2.html",
+      "name": "Group resist rules",
+      "description": "Three toggle buttons that mask a whole group of files as one layer, each showing how many files it covers.",
+      "category": "Inputs",
+      "tags": [
+        "toggle-button",
+        "group-edit",
+        "mask",
+        "layer",
+        "aria-pressed"
+      ],
+      "purpose": "Exclude a group by type in one action, and lift it without touching hand masks.",
+      "use": "A designer turns on 'Drafts · 4' and 'Fonts · 2' for a client handoff.",
+      "input": "Click or tap a rule. Keyboard: Tab to each button, Enter or Space toggles.",
+      "outcome": "The covered files become rule-masked, and the label reads 'Masking 6 files'.",
+      "recovery": "Turning a rule off lifts only that layer. Hand masks and exceptions stay as they were.",
+      "mechanism": "Native buttons with aria-pressed. Each rule is a predicate over file tags, stored as its own layer. Counts come from the predicate, so overlap between rules is counted once in the total.",
+      "nearestAnalogue": "2026-10-26 log viewer severity filter narrowed a view. These rules change the output and stack as separate layers.",
+      "usefulness": "Unchecking four drafts across three folders by hand is slow, and it is easy to miss one.",
+      "creativeDifference": "Group edits are reversible layers, so lifting one never undoes another.",
+      "states": [
+        "off: no fill, reached on load",
+        "on: aria-pressed=true with an accent edge",
+        "overlap: total reads 'Masking 6 files · 1 in two rules'",
+        "empty rule: disabled with 'none in project'",
+        "focus: 2px ring"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Button",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        },
+        {
+          "title": "V&A: Cloth of a continent, Africa Fashion",
+          "url": "https://www.vam.ac.uk/articles/cloth-of-a-continent-africa-fashion"
+        }
+      ],
+      "packId": "2026-11-02-culture-resist-export",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "d44d1fc9ae0841169edc05256c12c91cb3a4afc8b147f433ed68419d680bc96c"
+    },
+    {
+      "row": 3,
+      "id": "2026-11-02-culture-resist-export-bundle-reveal-preview",
+      "file": "artifact-3.html",
+      "name": "Bundle reveal preview",
+      "description": "Read-only view of the bundle as packed, with a Show resisted toggle that reveals masked files in place under a fixed count label.",
+      "category": "Content",
+      "tags": [
+        "preview",
+        "reveal",
+        "manifest",
+        "fixed-label",
+        "disclosure"
+      ],
+      "purpose": "Show exactly what will arrive, and on request what was left out.",
+      "use": "A designer reads '17 files · 33.8 MB · 6 resisted', reveals them and spots a font they meant to keep.",
+      "input": "Click or tap Show resisted. Keyboard: Tab to it, Enter or Space toggles.",
+      "outcome": "Resisted rows appear at their tree positions, dimmed and struck, each with its mask word.",
+      "recovery": "Toggling off hides them again. The preview never edits masks.",
+      "mechanism": "Rendered from the computed include set. The count label sits in a fixed-height header with tabular numerals in a reserved width. Revealed rows fade in over 180ms and appear instantly under reduced motion.",
+      "nearestAnalogue": "2026-11-01 card fit preview rendered a draft in its finished form. This renders the finished bundle and its gaps.",
+      "usefulness": "The visitor sees the result before packing.",
+      "creativeDifference": "Detail appears and recedes while the main label holds still.",
+      "states": [
+        "packed view: included files only, reached on load",
+        "revealed: resisted rows shown, aria-pressed=true",
+        "nothing resisted: toggle disabled with 'Nothing resisted'",
+        "empty bundle: 'No files to download'",
+        "focus: 2px ring"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Button",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        },
+        {
+          "title": "V&A: Cloth of a continent, Africa Fashion",
+          "url": "https://www.vam.ac.uk/articles/cloth-of-a-continent-africa-fashion"
+        }
+      ],
+      "packId": "2026-11-02-culture-resist-export",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "6c1ca3f3bbbbdbbe01437787cc63bfa5cbfea46a56fa52b070ce1d1b7326db59"
+    },
+    {
+      "row": 4,
+      "id": "2026-11-02-culture-resist-export-export-panel-frame",
+      "file": "artifact-4.html",
+      "name": "Export panel frame",
+      "description": "Two-pane file panel with a pinned action foot that collapses to one column with a preview disclosure under 480px.",
+      "category": "Layout",
+      "tags": [
+        "panel",
+        "container-query",
+        "sticky-footer",
+        "responsive",
+        "disclosure"
+      ],
+      "purpose": "Keep the tree, the preview and the download button usable at every width.",
+      "use": "A designer on a 320px phone keeps the Download button in reach while scrolling 23 files.",
+      "input": "Click or tap Preview bundle at narrow widths. Keyboard: Tab to it, Enter or Space toggles.",
+      "outcome": "The panel shows two panes at 480px and above. Below that it shows one column with the preview behind a disclosure.",
+      "recovery": "Widening the container restores two panes and keeps the disclosure state for the next narrow view.",
+      "mechanism": "CSS container query on the panel. The body scrolls between a sticky header and a sticky foot. The foot holds row 5 at a minimum height of 44px and full width when narrow. Long file names wrap and are never truncated.",
+      "nearestAnalogue": "2026-11-01 details side panel managed focus in a dialog. This frame manages space and keeps the action reachable without a dialog.",
+      "usefulness": "A download button that scrolls away on a phone stops the task.",
+      "creativeDifference": "The narrow layout trades the preview pane for a disclosure, and the button stays fixed in the foot.",
+      "states": [
+        "wide: two panes, reached at container width 480px and above",
+        "narrow: one column with a Preview bundle disclosure",
+        "preview-open: disclosure expanded, aria-expanded=true",
+        "320px: 16px padding and a full-width foot button",
+        "focus: 2px ring on the disclosure"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Disclosure",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-11-02-culture-resist-export",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "59961ba036345647dd6cbcd9def07d20249a717c33aad20c730128d1d2e04260"
+    },
+    {
+      "row": 5,
+      "id": "2026-11-02-culture-resist-export-download-bundle-button",
+      "file": "artifact-5.html",
+      "name": "Download bundle button",
+      "description": "Native button that prepares, completes and repeats a download, counting real packed files and reusing a cached bundle when the masks match.",
+      "category": "Actions",
+      "tags": [
+        "button",
+        "download",
+        "pending",
+        "repeat",
+        "cache",
+        "label-swap"
+      ],
+      "purpose": "Prepare and save the bundle, and make the repeat action say whether it is the same bundle.",
+      "use": "A designer downloads, unmasks one font, and the button reads 'Prepare new bundle · 1 change'.",
+      "input": "Click or tap the button, minimum 44px tall. Keyboard: Tab to it, Enter or Space. Escape stops a preparation in progress.",
+      "outcome": "The label moves from 'Download 17 files · 33.8 MB' to 'Preparing · 7 of 17' to 'Downloaded'. It then holds at 'Download again · same bundle'.",
+      "recovery": "Presses while preparing are ignored. Escape stops the preparation and returns the label to idle with 'Stopped at 7 of 17'. A demo failure reads 'Not prepared · Retry'.",
+      "mechanism": "A packing loop over the included files, 60ms per file, increments the shown count. No percentage is shown. The result is a local JSON manifest Blob saved through an object URL and an anchor with a download attribute. The bundle id is a short hash of the sorted included ids. A repeat with a matching id reuses the cached Blob. Label width is reserved for the longest label.",
+      "nearestAnalogue": "2026-10-30 copy link button reported version-aware repeats. This adds counted preparation and a cached file for the repeat.",
+      "usefulness": "This button is the core task.",
+      "creativeDifference": "The repeat label states whether the masks changed before the press.",
+      "states": [
+        "idle: count and size, reached on load",
+        "pressed: 1px sink on pointer or key down",
+        "preparing: disabled with 'Preparing · n of N'",
+        "complete: 'Downloaded' for 1.2s, then settled",
+        "repeat-same: 'Download again · same bundle'",
+        "repeat-changed: 'Prepare new bundle · n changes'",
+        "stopped: via Escape",
+        "failed: 'Not prepared · Retry'",
+        "empty: disabled, reached when the bundle is empty",
+        "focus: 2px ring",
+        "reduced-motion: label swaps without transition"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Button",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        }
+      ],
+      "packId": "2026-11-02-culture-resist-export",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "eaf3d027eb36e1b4e92914d50c58a8dd5b368ba89933bd8c4cd15a0380b79788"
+    },
+    {
+      "row": 6,
+      "id": "2026-11-02-culture-resist-export-bundle-drift-receipt",
+      "file": "artifact-6.html",
+      "name": "Bundle drift receipt",
+      "description": "Status receipt naming the downloaded bundle, which flags drift when masks change and can restore the downloaded mask set.",
+      "category": "Feedback",
+      "tags": [
+        "status",
+        "receipt",
+        "drift",
+        "restore",
+        "live-region",
+        "undo"
+      ],
+      "purpose": "Record what was downloaded and say when the screen no longer matches it.",
+      "use": "A designer reads 'Bundle a3f9 out of date · 1 file added since' and presses Restore masks.",
+      "input": "Click or tap Show changes or Restore masks. Keyboard: Tab to each, Enter or Space.",
+      "outcome": "The receipt reads 'spring-catalogue · 17 files · 33.8 MB · 14:06 · bundle a3f9'. On drift it lists the added and removed files.",
+      "recovery": "Restore masks sets hand masks, rules and exceptions back to the a3f9 snapshot. An Undo restore option is offered for 5s.",
+      "mechanism": "role=status, with polite announcements on completion and on the first drift only. The mask snapshot is stored with the bundle id. Drift is a set difference between the snapshot include set and the current include set.",
+      "nearestAnalogue": "2026-10-30 link options field flagged clipboard drift. This receipt also restores the earlier masks.",
+      "usefulness": "It shows which files the downloaded copy holds after the button has reset.",
+      "creativeDifference": "The mask can be reapplied exactly from the record.",
+      "states": [
+        "hidden: before the first download",
+        "current: receipt line",
+        "drifted: 'out of date' with change counts",
+        "changes-shown: list of added and removed files",
+        "restored: 'Masks restored to a3f9' with Undo",
+        "focus: 2px ring"
+      ],
+      "sources": [
+        {
+          "title": "ARIA Authoring Practices: Alert and status",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        },
+        {
+          "title": "V&A: Cloth of a continent, Africa Fashion",
+          "url": "https://www.vam.ac.uk/articles/cloth-of-a-continent-africa-fashion"
+        }
+      ],
+      "packId": "2026-11-02-culture-resist-export",
+      "reviewStatus": "needs-review",
+      "libraryAcceptance": "unreviewed",
+      "generationStatus": "ok",
+      "problems": [],
+      "sha256": "856a345b4de480fbd16157d06bd365d455907eb75f43c34b676a220baa711b86"
+    }
+  ],
+  "demo": {
+    "file": "piece.html",
+    "rows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "sharedState": "One store holds the 23 spring-catalogue files with tags and sizes, handMasks, active rules, exceptions and the last bundle {id, snapshot, blob, time}. Rows 1 and 2 write masks. Row 3 reads the computed include set. Row 4 frames all rows. Row 5 packs the include set and writes the bundle. Row 6 compares the bundle snapshot with the current set and can write the snapshot back.",
+    "generationStatus": "ok"
+  },
+  "edition": {
+    "lane": "culture",
+    "date": "2026-11-02",
+    "timezone": "Europe/Lisbon",
+    "culture": {
+      "id": "yoruba",
+      "era": "living",
+      "name": "Yoruba adire resist-dye craft",
+      "url": "https://www.vam.ac.uk/articles/cloth-of-a-continent-africa-fashion",
+      "idea": "Interpret resist dyeing as reversible masks, selective reveal and grouped editing; do not copy named symbolic motifs."
+    }
+  },
+  "date": "2026-11-02",
+  "reviewStatus": "needs-review",
+  "inputHash": "300bc9924ef87a65109dc27dca7feb4a94184d65484c568af10dac15bc1604e1",
+  "warnings": []
+}

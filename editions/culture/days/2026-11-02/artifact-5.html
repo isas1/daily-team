@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Download bundle button · spring-catalogue export</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--gap:var(--pack-spacing-gap);--pad:var(--pack-spacing-padding);--rad:var(--pack-radii-control);--dur:var(--pack-motion-duration);--ease:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--pack-bg)}
+.rx5-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--pack-spacing-gap);padding:min(var(--pack-spacing-padding),4vmin);background:var(--pack-surface);color:var(--pack-text);border:1px solid var(--pack-border);border-radius:calc(var(--pack-radii-control)*2);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size);line-height:1.3;overflow:auto;container-type:inline-size}
+.rx5-head{display:flex;align-items:center;justify-content:space-between;gap:var(--pack-spacing-gap);flex-wrap:wrap}
+.rx5-title{font-weight:600}
+.rx5-fail{display:flex;align-items:center;gap:6px;min-height:44px;color:var(--pack-muted);font-size:13px;cursor:pointer}
+.rx5-list{flex:1;min-height:88px;overflow:auto;margin:0;padding:0;list-style:none;border:1px solid var(--pack-border);border-radius:var(--pack-radii-control)}
+.rx5-list li+li{border-top:1px solid var(--pack-border)}
+.rx5-row{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 10px;box-sizing:border-box;cursor:pointer}
+.rx5-row:has(:focus-visible),.rx5-fail:has(:focus-visible){outline:2px solid var(--pack-accent);outline-offset:-2px;border-radius:var(--pack-radii-control)}
+.rx5-row input,.rx5-fail input{width:18px;height:18px;margin:0;accent-color:var(--pack-accent);flex:none}
+.rx5-name{flex:1;overflow-wrap:anywhere}
+.rx5-mb{color:var(--pack-muted);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rx5-row:has(input:not(:checked)) .rx5-name{color:var(--pack-muted);text-decoration:line-through}
+fieldset{border:0;margin:0;padding:0;min-width:0;display:contents}
+.rx5-btn{position:relative;width:100%;min-height:44px;padding:11px 12px 13px;border:1px solid var(--pack-accent);border-radius:var(--pack-radii-control);background:var(--pack-accent);color:var(--pack-bg);font:inherit;font-weight:600;font-variant-numeric:tabular-nums;cursor:pointer;overflow:hidden;transition:transform 80ms var(--pack-motion-easing),background var(--pack-motion-duration) var(--pack-motion-easing),color var(--pack-motion-duration) var(--pack-motion-easing)}
+.rx5-btn:active,.rx5-btn.rx5-down{transform:translateY(1px)}
+.rx5-btn:focus-visible{outline:2px solid var(--pack-accent);outline-offset:2px}
+.rx5-btn[data-k=same]{background:transparent;color:var(--pack-accent)}
+.rx5-btn[data-k=empty]{background:transparent;color:var(--pack-muted);border-color:var(--pack-border);cursor:not-allowed}
+.rx5-btn[data-k=prep]{cursor:progress}
+.rx5-btn[aria-disabled=true]:active{transform:none}
+.rx5-stack{display:grid}
+.rx5-stack span{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity var(--pack-motion-duration) var(--pack-motion-easing),visibility 0s var(--pack-motion-duration)}
+.rx5-stack span.rx5-on{opacity:1;visibility:visible;transition:opacity var(--pack-motion-duration) var(--pack-motion-easing)}
+.rx5-ticks{position:absolute;left:12px;right:12px;bottom:6px;display:flex;gap:3px;height:3px;opacity:0;transition:opacity var(--pack-motion-duration) var(--pack-motion-easing)}
+.rx5-btn[data-k=prep] .rx5-ticks{opacity:1}
+.rx5-ticks i{flex:1;background:currentColor;opacity:.3;border-radius:2px}
+.rx5-ticks i.rx5-on{opacity:1}
+.rx5-note{margin:0;min-height:2.6em;color:var(--pack-muted);font-size:13px;font-variant-numeric:tabular-nums}
+.rx5-rm *{transition:none!important}
+@media (prefers-reduced-motion:reduce){.rx5-root *{transition:none!important}}
+@container (max-width:260px){.rx5-note{min-height:1.3em}.rx5-title{font-size:13px}.rx5-list{min-height:66px}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#121417;--pack-surface:#1b1e23;--pack-text:#e8eaed;--pack-muted:#9aa1ab;--pack-accent:#7d9be6;--pack-border:#2e333a}:root[data-theme="light"]{--pack-bg:#f6f7f8;--pack-surface:#ffffff;--pack-text:#1a1d21;--pack-muted:#5c636d;--pack-accent:#2f4fa8;--pack-border:#d9dde2}</style></head><body>
+<div class="rx5-root" role="group" aria-label="Download bundle button for the spring-catalogue file panel">
+<div class="rx5-head"><span class="rx5-title">spring-catalogue</span>
+<label class="rx5-fail"><input type="checkbox" id="rx5-fail">Fail next run</label></div>
+<fieldset id="rx5-fs"><ul class="rx5-list" id="rx5-list" aria-label="Files in bundle"></ul></fieldset>
+<button class="rx5-btn" id="rx5-btn" type="button"><span class="rx5-stack" id="rx5-stack"></span><span class="rx5-ticks" id="rx5-ticks" aria-hidden="true"></span></button>
+<p class="rx5-note" id="rx5-note" aria-live="polite"></p>
+</div>
+<script>(function(){
+  var F=[['forever-plan-cover.indd',6.2],['emotional-baggage.psd',14.6],['cat-pics-2.zip',3.1],['cover-v1-client-revision-final.indd',4.9],['price-list-final-final.pdf',1.8],['logo-forever.svg',0.4],['monday-notes.txt',0.1],['delete-me-later.tmp',0.3]];
+  var inc=F.map(function(_,i){return i!==7});
+  var $=function(i){return document.getElementById(i)};
+  var root=document.querySelector('.rx5-root'),list=$('rx5-list'),btn=$('rx5-btn'),stack=$('rx5-stack'),ticks=$('rx5-ticks'),note=$('rx5-note'),fail=$('rx5-fail'),fs=$('rx5-fs');
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var mode='ready',packed=0,acc=0,prep=[],willFail=false,flash=0,bundle=null,msg='';
+  var K=['idle','prep','done','same','chg','fail','empty'],L={};
+  K.forEach(function(k){var s=document.createElement('span');L[k]=s;stack.appendChild(s)});
+  F.forEach(function(f,i){var li=document.createElement('li'),lb=document.createElement('label'),cb=document.createElement('input'),n=document.createElement('span'),m=document.createElement('span');
+    lb.className='rx5-row';cb.type='checkbox';cb.checked=inc[i];n.className='rx5-name';n.textContent=f[0];m.className='rx5-mb';m.textContent=f[1].toFixed(1)+' MB';
+    cb.addEventListener('change',function(){inc[i]=cb.checked;msg='';if(mode==='failed')mode='ready';render()});
+    lb.appendChild(cb);lb.appendChild(n);lb.appendChild(m);li.appendChild(lb);list.appendChild(li)});
+  list.addEventListener('keydown',function(e){var b=[].slice.call(list.querySelectorAll('input')),i=b.indexOf(document.activeElement);if(i<0)return;
+    var j=e.key==='ArrowDown'?i+1:e.key==='ArrowUp'?i-1:e.key==='Home'?0:e.key==='End'?b.length-1:-2;if(j===-2)return;e.preventDefault();b[Math.max(0,Math.min(b.length-1,j))].focus()});
+  function cur(){var r=[];inc.forEach(function(v,i){if(v)r.push(i)});return r}
+  function hash(ids){var h=0x811c9dc5,s=ids.map(function(i){return F[i][0]}).sort().join('|');for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return('0000'+h.toString(16)).slice(-4)}
+  function mb(ids){return ids.reduce(function(a,i){return a+F[i][1]},0).toFixed(1)}
+  function files(n){return n+(n===1?' file':' files')}
+  function cost(i){return 60+60*F[i][1]}
+  function save(b){var u=URL.createObjectURL(b.blob),a=document.createElement('a');a.href=u;a.download='spring-catalogue-'+b.id+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},1000)}
+  function press(){if(btn.getAttribute('aria-disabled')==='true'||mode==='prep'||mode==='done')return;
+    var ids=cur();if(!ids.length)return;var k=hash(ids);msg='';
+    if(bundle&&bundle.id===k){save(bundle);mode='done';flash=1200;msg='Saved cached bundle '+k+'.';}
+    else{prep=ids;packed=0;acc=0;willFail=fail.checked;mode='prep';
+      while(ticks.firstChild)ticks.removeChild(ticks.firstChild);
+      ids.forEach(function(){ticks.appendChild(document.createElement('i'))});}
+    render();kick()}
+  function stop(){if(mode!=='prep')return;mode='ready';msg='Stopped at '+packed+' of '+prep.length+'. Nothing saved.';render()}
+  function step(ms){
+    if(mode==='prep'){acc+=ms;
+      while(packed<prep.length&&acc>=cost(prep[packed])){
+        if(willFail&&packed===Math.floor(prep.length/2)){mode='failed';fail.checked=false;msg='Demo failure at '+(packed+1)+' of '+prep.length+'. Nothing saved.';return false}
+        acc-=cost(prep[packed]);packed++}
+      if(packed===prep.length){var id=hash(prep),t=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+        var data={project:'spring-catalogue',bundle:id,files:prep.map(function(i){return{name:F[i][0],mb:F[i][1]}}),totalMB:+mb(prep)};
+        bundle={id:id,ids:prep.slice(),time:t,blob:new Blob([JSON.stringify(data,null,2)],{type:'application/json'})};
+        save(bundle);mode='done';flash=1200;msg='Saved spring-catalogue-'+id+'.json at '+t+'.'}
+      return true}
+    if(mode==='done'){flash-=ms;if(flash<=0){mode='ready';return false}return true}
+    return false}
+  function render(){var ids=cur(),n=ids.length,k=hash(ids),c=0;
+    if(bundle){var s={};bundle.ids.forEach(function(i){s[i]=1});ids.forEach(function(i){if(s[i])delete s[i];else c++});c+=Object.keys(s).length}
+    L.idle.textContent='Download '+files(n)+' · '+mb(ids)+' MB';
+    var pn=mode==='prep'?prep.length:n;L.prep.textContent='Preparing · '+(mode==='prep'?packed:pn)+' of '+pn;
+    L.done.textContent='Downloaded';L.same.textContent='Download again · same bundle';
+    L.chg.textContent='Prepare new bundle · '+c+(c===1?' change':' changes');
+    L.fail.textContent='Not prepared · Retry';L.empty.textContent='No files selected';
+    var key=mode==='prep'?'prep':mode==='done'?'done':mode==='failed'?'fail':!n?'empty':bundle?(bundle.id===k?'same':'chg'):'idle';
+    K.forEach(function(x){L[x].classList.toggle('rx5-on',x===key)});
+    btn.setAttribute('data-k',key);btn.setAttribute('aria-disabled',key==='prep'||key==='empty'?'true':'false');
+    [].forEach.call(ticks.children,function(t,i){t.classList.toggle('rx5-on',i<packed)});
+    fs.disabled=fail.disabled=mode==='prep';
+    var t=mode==='prep'?'Packing files. Press Esc to stop.':msg?msg:!n?'Check at least one file.':bundle?(bundle.id===k?'Bundle '+bundle.id+' · saved '+bundle.time+'.':'Bundle '+bundle.id+' no longer matches these files.'):'Uncheck files to leave them out.';
+    if(note.textContent!==t)note.textContent=t}
+  btn.addEventListener('click',press);
+  btn.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter')btn.classList.add('rx5-down')});
+  btn.addEventListener('keyup',function(){btn.classList.remove('rx5-down')});
+  btn.addEventListener('blur',function(){btn.classList.remove('rx5-down')});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')stop()});
+  var raf=0,last=0;
+  function frame(now){var ms=last?Math.min(now-last,250):16;last=now;root.classList.toggle('rx5-rm',reduce());
+    var moving=step(ms);render();raf=moving?requestAnimationFrame(frame):0}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  document.addEventListener('visibilitychange',function(){if(document.hidden){cancelAnimationFrame(raf);raf=0}else kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){document.documentElement.setAttribute('data-theme',m.theme);render()}});
+  root.classList.toggle('rx5-rm',reduce());render();
+})();</script>
+</body></html>

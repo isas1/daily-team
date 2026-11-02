@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "9dce25ce971bea127397c3f79bb05e04123fa3f8da1a505a24322b0d4d832d32",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Flight deck designer.** Keep the quiet parts quiet. Resisted strips stay pale and unaccented. The single red mark goes to the one hand mask, so the eye lands where a person made a choice.\n\n**Cartographic designer.** Check the cover at 160px. The title sets in two lines at 132px against a flat ground. The strip field reads as one block of dyed and undyed bands at thumbnail size.\n\n**Ergonomist.** No fake figures. The poster prints no counts, sizes or percentages. The strips show packed and resisted files as states only.\n\n**Tidal library custodian.** The recorded method applies: detail appears and recedes without moving the main label. The title block holds still on the left. The variation stays in the strip field on the right.\n\n**Lead's choice.**\n- Composition: Title left. A column of 23 horizontal strips on the right. Each strip is one file in the project. Dyed strips are packed. Six strips are left as undyed cloth. Five of those carry a dashed indigo edge for a rule mask. One carries a solid red bar for a hand mask. The strips are plain rectangles with no motifs.\n- Palette: Undyed ground #EDE6D8. Indigo dye #1F2E5C. Title in Sam Creates navy #0E2A47. Red #BE4D4D is used twice, on the hand-mask bar and a 48px rule above the date.\n- Type: `Cover Headline` at 132px for \"Resist Export\", set in two lines. `Cover Text` at 26px for the descriptor and 20px with tabular figures for the date.",
+  "width": 1200,
+  "height": 630
+}

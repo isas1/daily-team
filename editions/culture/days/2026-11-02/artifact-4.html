@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Export panel frame · spring-catalogue download</title>
+<script>(function(){var t=new URLSearchParams(location.search).get('theme');
+if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)})()</script>
+<style>
+:root{--bg:var(--pack-bg);--sf:var(--pack-surface);--ink:var(--pack-text);--mu:var(--pack-muted);--acc:var(--pack-accent);--bd:var(--pack-border);--g:var(--pack-spacing-gap);--p:var(--pack-spacing-padding);--r:var(--pack-radii-control);--d:var(--pack-motion-duration);--e:var(--pack-motion-easing)}
+html,body{margin:0;height:100%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:var(--pack-typography-family);font-size:var(--pack-typography-size);line-height:1.35}
+.rx-root{width:clamp(180px,92vmin,640px);aspect-ratio:1;display:grid;grid-template-rows:minmax(0,1fr);justify-items:center;container:frame/inline-size}
+.rx-panel{container:panel/inline-size;width:100%;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:var(--sf);border:1px solid var(--bd);border-radius:calc(var(--r)*2);overflow:hidden;transition:width var(--d) var(--e)}
+.rx-phone .rx-panel{width:min(100%,320px)}
+.rx-hd{display:flex;align-items:center;justify-content:space-between;gap:var(--g);min-height:40px;padding:2px 4px 2px var(--p);border-bottom:1px solid var(--bd)}
+.rx-t{font-weight:600;min-width:0;overflow-wrap:anywhere}
+button{font:inherit;color:inherit;cursor:pointer}
+.rx-tg{min-height:44px;padding:0 12px;border:1px solid var(--bd);border-radius:var(--r);background:transparent;white-space:nowrap}
+.rx-tg[aria-pressed=true]{border-color:var(--acc);color:var(--acc)}
+@container frame (max-width:479px){.rx-tg{display:none}}
+.rx-bd{min-height:0;overflow:auto;display:flex;flex-direction:column}
+.rx-pv{border-bottom:1px solid var(--bd)}
+.rx-dis{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:0 var(--p);border:0;background:transparent;text-align:left;font-weight:600}
+.rx-cv{width:7px;height:7px;border-right:2px solid var(--mu);border-bottom:2px solid var(--mu);transform:translateY(-2px) rotate(45deg);transition:transform var(--d) var(--e)}
+.rx-dis[aria-expanded=true] .rx-cv{transform:translateY(2px) rotate(-135deg)}
+.rx-c{margin-left:auto;color:var(--mu);font-weight:400;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rx-pvh,.rx-h{position:sticky;top:0;z-index:1;display:none;align-items:center;gap:var(--g);min-height:36px;padding:0 var(--p);background:var(--sf);border-bottom:1px solid var(--bd);font-size:13px;color:var(--mu)}
+.rx-h{display:flex}
+.rx-pl:not([hidden]){animation:rx-in var(--d) var(--e)}
+@keyframes rx-in{from{opacity:0;transform:translateY(-6px)}}
+.rx-row,.rx-pr{display:flex;align-items:center;gap:10px;padding:4px var(--p);border-bottom:1px solid var(--bd)}
+.rx-row{min-height:44px;box-sizing:border-box;cursor:pointer}
+.rx-pr{min-height:30px;font-size:13px}
+.rx-row input{width:18px;height:18px;margin:0;flex:none;accent-color:var(--acc)}
+.rx-nm{min-width:0;overflow-wrap:anywhere}
+.rx-dir{color:var(--mu)}
+.rx-sz{margin-left:auto;padding-left:6px;color:var(--mu);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rx-off .rx-nm{color:var(--mu);text-decoration:line-through}
+.rx-em{margin:0;padding:12px var(--p);color:var(--mu);font-size:13px}
+.rx-ft{display:flex;justify-content:flex-end;padding:var(--g) var(--p);border-top:1px solid var(--bd);background:var(--sf)}
+.rx-go{display:grid;width:100%;min-height:44px;padding:6px 16px;border:1px solid var(--acc);border-radius:var(--r);background:var(--acc);color:var(--sf);font-weight:600;transition:background var(--d) var(--e),color var(--d) var(--e),transform 80ms var(--e)}
+.rx-go>span{grid-area:1/1;align-self:center;text-align:center}
+.rx-gh{visibility:hidden}
+.rx-go:active:not([aria-disabled=true]):not(:disabled){transform:translateY(1px)}
+.rx-go[data-s=prep],.rx-go[data-s=stop]{background:transparent;color:var(--acc)}
+.rx-go[data-s=err]{background:transparent;color:var(--ink);border-style:dashed}
+.rx-go[aria-disabled=true]{cursor:progress}
+.rx-go:disabled{opacity:.45;cursor:default}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.rx-dis:focus-visible{outline-offset:-2px}
+.rx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}
+@container panel (min-width:480px){
+.rx-bd{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);overflow:hidden}
+.rx-fl{grid-column:1;grid-row:1;overflow:auto;min-height:0}
+.rx-pv{grid-column:2;grid-row:1;overflow:auto;min-height:0;border-bottom:0;border-left:1px solid var(--bd)}
+.rx-dis{display:none}.rx-pvh{display:flex}
+.rx-pl[hidden]{display:block}.rx-pl{animation:none!important}
+.rx-go{width:auto}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style><style data-pack-tokens>:root{--pack-typography-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--pack-typography-size:15px;--pack-spacing-gap:8px;--pack-spacing-padding:16px;--pack-radii-control:6px;--pack-motion-duration:180ms;--pack-motion-easing:ease-out;--pack-bg:#121417;--pack-surface:#1b1e23;--pack-text:#e8eaed;--pack-muted:#9aa1ab;--pack-accent:#7d9be6;--pack-border:#2e333a}:root[data-theme="light"]{--pack-bg:#f6f7f8;--pack-surface:#ffffff;--pack-text:#1a1d21;--pack-muted:#5c636d;--pack-accent:#2f4fa8;--pack-border:#d9dde2}</style></head><body>
+<div class="rx-root" role="group" aria-label="Export panel for spring-catalogue">
+<div class="rx-panel">
+<div class="rx-hd"><span class="rx-t">spring-catalogue</span><button class="rx-tg" type="button" aria-pressed="false">Phone width</button></div>
+<div class="rx-bd">
+<section class="rx-pv" aria-label="Bundle preview">
+<button class="rx-dis" type="button" aria-expanded="false" aria-controls="rx-pl"><span>Preview bundle</span><span class="rx-c rx-n"></span><i class="rx-cv" aria-hidden="true"></i></button>
+<div class="rx-pvh"><span>In the bundle</span><span class="rx-c rx-n"></span></div>
+<div class="rx-pl" id="rx-pl" hidden></div>
+</section>
+<div class="rx-fl" role="group" aria-labelledby="rx-fh"><div class="rx-h" id="rx-fh">Files to include</div><div class="rx-ls"></div></div>
+</div>
+<div class="rx-ft"><button class="rx-go" type="button"><span class="rx-gl"></span><span class="rx-gh" aria-hidden="true">Stopped at 23 of 23 · Restart</span></button></div>
+<p class="rx-sr" role="status"></p>
+</div></div>
+<script>(function(){
+  var reduce=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var raf=0,last=0;
+  function q(s){return document.querySelector(s)}
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  var root=q('.rx-root'),ls=q('.rx-ls'),pl=q('.rx-pl'),dis=q('.rx-dis'),go=q('.rx-go'),gl=q('.rx-gl'),sr=q('.rx-sr'),tg=q('.rx-tg'),ns=document.querySelectorAll('.rx-n');
+  var D='layouts/cover-v1-client-revision-final.indd 46 0|layouts/cover-forever-plan.indd 42|layouts/spread-monday.indd 34|layouts/spread-tuesday.indd 31|layouts/back-cover.indd 19|images/emotional-baggage.psd 68|images/cat-pics-2.jpg 24|images/cat-pics-2-final-actually.jpg 23 0|images/hero-forever.jpg 22|images/product-01.jpg 12|images/product-02.jpg 11|images/product-03.jpg 10|images/logo-forever.svg 5|fonts/forever-sans-regular.otf 4 0|fonts/forever-sans-bold.otf 4 0|copy/prices-monday.txt 1|copy/captions.docx 3|copy/legal-small-print.pdf 5|copy/readme-forever.txt 1|copy/swatches.ase 2|drafts/cover-sketch.png 10 0|drafts/do-not-send.png 9 0|exports/catalogue-preview.pdf 26';
+  var F=D.split('|').map(function(s,i){var a=s.split(' ');return{p:a[0],s:+a[1],on:a[2]!=='0',i:i}});
+  function mb(t){return (t/10).toFixed(1)+' MB'}
+  var st='idle',k=0,N=0,t=0,lastKey='',blob=null,tm=0;
+  F.forEach(function(f){
+    var row=el('label','rx-row'),cb=el('input'),j=f.p.lastIndexOf('/')+1,nm=el('span','rx-nm');
+    cb.type='checkbox';cb.checked=f.on;
+    cb.onchange=function(){f.on=cb.checked;if(st==='stop'||st==='err')st='idle';draw()};
+    nm.appendChild(el('span','rx-dir',f.p.slice(0,j)));nm.appendChild(document.createTextNode(f.p.slice(j)));
+    row.append(cb,nm,el('span','rx-sz',mb(f.s)));ls.appendChild(row);
+    var pr=el('div','rx-pr');pr.append(nm.cloneNode(true),el('span','rx-sz',mb(f.s)));pl.appendChild(pr);
+    f.cb=cb;f.row=row;f.pr=pr});
+  var em=el('p','rx-em','No files to download');pl.appendChild(em);
+  function inc(){return F.filter(function(f){return f.on})}
+  function keyOf(I){return I.map(function(f){return f.i}).join(',')}
+  function draw(){
+    var I=inc(),n=I.length,sum=0;I.forEach(function(f){sum+=f.s});
+    F.forEach(function(f){f.pr.hidden=!f.on;f.row.classList.toggle('rx-off',!f.on);f.cb.disabled=st==='prep'});
+    em.hidden=n>0;
+    var c=n+' file'+(n===1?'':'s')+' · '+mb(sum);
+    ns.forEach(function(e){e.textContent=c});
+    if(st==='again'&&keyOf(I)!==lastKey)st='idle';
+    gl.textContent={idle:n?'Download '+c:'No files selected',prep:'Preparing · '+k+' of '+N,done:'Downloaded',again:'Download again',stop:'Stopped at '+k+' of '+N+' · Restart',err:'Not saved · Retry'}[st];
+    go.dataset.s=st;go.disabled=!n&&st!=='prep';
+    go.setAttribute('aria-disabled',st==='prep'?'true':'false')}
+  function save(b){var u=URL.createObjectURL(b),a=el('a');a.href=u;a.download='spring-catalogue-bundle.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},1000)}
+  function settle(){clearTimeout(tm);st='done';tm=setTimeout(function(){st='again';draw()},1200)}
+  function finish(){var I=inc();lastKey=keyOf(I);
+    try{blob=new Blob([JSON.stringify({project:'spring-catalogue',plan:'Forever plan',files:I.map(function(f){return f.p})},null,2)],{type:'application/json'});save(blob);settle();sr.textContent='Downloaded '+N+' files'}
+    catch(e){st='err';sr.textContent='Not saved. Retry.'}}
+  function step(dt){if(st!=='prep')return false;t+=dt*16.667;k=Math.min(N,Math.floor(t/60));if(k>=N)finish();return st==='prep'}
+  function snapToTarget(){if(st==='prep'){k=N;finish()}}
+  function frame(now){var dt=last?Math.min(now-last,50)/16.667:1;last=now;
+    var moving=reduce()?(snapToTarget(),false):step(dt);draw();
+    raf=moving?requestAnimationFrame(frame):0;}
+  function kick(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(frame)}}
+  go.onclick=function(){var n=inc().length;
+    if(st==='prep'||st==='done'||!n)return;
+    if(st==='again'&&blob){save(blob);settle();sr.textContent='Downloaded again';draw();return}
+    N=n;k=0;t=0;st='prep';sr.textContent='';draw();kick()};
+  function setOpen(o){dis.setAttribute('aria-expanded',String(o));pl.hidden=!o}
+  dis.onclick=function(){setOpen(dis.getAttribute('aria-expanded')!=='true')};
+  tg.onclick=function(){var p=tg.getAttribute('aria-pressed')!=='true';tg.setAttribute('aria-pressed',String(p));root.classList.toggle('rx-phone',p)};
+  ls.addEventListener('keydown',function(e){var c=F.map(function(f){return f.cb}),i=c.indexOf(document.activeElement),j=i;
+    if(i<0)return;
+    if(e.key==='ArrowDown')j=Math.min(c.length-1,i+1);else if(e.key==='ArrowUp')j=Math.max(0,i-1);
+    else if(e.key==='Home')j=0;else if(e.key==='End')j=c.length-1;
+    else if(e.key==='Enter'){e.preventDefault();c[i].click();return}else return;
+    e.preventDefault();c[j].focus()});
+  document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;
+    if(st==='prep'){st='stop';sr.textContent='Stopped at '+k+' of '+N;draw()}
+    else if(dis.offsetParent&&dis.getAttribute('aria-expanded')==='true'){setOpen(false);dis.focus()}});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){cancelAnimationFrame(raf);raf=0}else if(st==='prep')kick()});
+  window.addEventListener('message',function(e){var m=e.data;
+    if(m&&m.type==='forever:theme'&&(m.theme==='light'||m.theme==='dark')){
+      document.documentElement.setAttribute('data-theme',m.theme);draw()}});
+  draw();
+})();</script>
+</body></html>
