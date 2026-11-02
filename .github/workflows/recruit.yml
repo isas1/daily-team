@@ -1,8 +1,7 @@
 name: Recruit
 
+# Manual only; Daily is the sole scheduled workflow.
 on:
-  schedule:
-    - cron: '0 5 * * 1'
   workflow_dispatch:
     inputs:
       provider:
