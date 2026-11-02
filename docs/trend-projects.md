@@ -46,7 +46,9 @@ issues; browser and human review still judge generated work.
 One self-contained `artifact-1.html` supplies the entire useful workflow, with
 sample data, input, result and recovery. No network requests, dependencies or
 pretend live service integrations. Projects can scroll and use multiple controls;
-the component tile size and word limits do not apply. Normal runs no longer pay
+component tile sizing does not apply. Apply [minimum-copy rules](component-copy.md)
+per compact panel: target 12 rendered words, up to 24 for necessary task data,
+with no project-wide word cap. Keep optional help and credits collapsed. Normal runs no longer pay
 for component model comparisons. Their cover and archive stages continue.
 
 ## Run and replay
