@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zero Hour Rehearsal · countdown state desk</title>
+<style>
+:root{
+  --paper:#f3f1ea;--panel:#fbfaf6;--ink:#1c1f24;--muted:#555a63;--line:#cbc6b8;--field:#7a7f88;
+  --accent:#9b3f1c;--focus:#1d5ccc;--ok:#2d6a37;--bad:#a1271d;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#111316;--panel:#1a1d21;--ink:#e8e9eb;--muted:#a6abb3;--line:#343940;--field:#7d838c;
+  --accent:#ee8c5a;--focus:#86b4ff;--ok:#82c690;--bad:#ff8f84}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.top{max-width:1200px;margin:0 auto;padding:24px 16px 16px;border-bottom:1px solid var(--line)}
+h1{font-size:24px;line-height:32px;margin:0 0 4px;letter-spacing:-0.01em}
+.top p{margin:0 0 4px;max-width:68ch}
+.sample{font-size:14px;color:var(--muted)}
+h2{font-size:13px;line-height:20px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px;color:var(--muted)}
+.desk{max-width:1200px;margin:0 auto;padding:16px;display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:960px){
+  .desk{grid-template-columns:320px minmax(0,1fr);grid-template-areas:"setup stage" "setup ship"}
+  .setup{grid-area:setup;align-self:start}.stage{grid-area:stage}.ship{grid-area:ship}
+}
+.block{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.field{margin:0 0 16px}
+.field>label,.lab{display:block;font-size:14px;font-weight:600;margin:0 0 4px}
+input[type=text],input[type=url],input[type=datetime-local],select,textarea{
+  width:100%;min-height:44px;padding:8px 12px;font:inherit;color:var(--ink);background:var(--paper);
+  border:1px solid var(--field);border-radius:6px}
+textarea{font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-height:160px;resize:vertical}
+input[aria-invalid=true]{border:2px solid var(--bad)}
+.hint{font-size:13px;color:var(--muted);margin:4px 0 0}
+.err{font-size:13px;color:var(--bad);margin:4px 0 0;font-weight:600}
+.err:empty,.hint:empty{display:none}
+.btn{min-height:44px;padding:0 16px;font:inherit;font-weight:600;color:var(--ink);background:transparent;
+  border:1px solid var(--ink);border-radius:6px;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--panel)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{min-height:44px;padding:0 12px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.hold{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;margin:0 0 16px}
+#holdPanel{margin-top:12px}
+details.labels{margin:0 0 16px}
+details.labels summary{min-height:44px;display:flex;align-items:center;font-weight:600;cursor:pointer}
+details.labels .field{margin-bottom:8px}
+.chk{display:flex;gap:8px;align-items:center;min-height:44px;font-size:14px;cursor:pointer}
+.chk input{width:20px;height:20px;margin:0}
+fieldset{border:0;padding:0;margin:0 0 16px;min-width:0}
+legend{font-size:14px;font-weight:600;padding:0;margin:0 0 8px}
+.legend-note{font-weight:400;color:var(--muted)}
+.opt{position:relative;display:block;cursor:pointer}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.box{display:flex;flex-direction:column;justify-content:center;min-height:56px;padding:8px 12px;
+  border:1px solid var(--field);border-radius:6px;background:var(--paper)}
+.box b{font-size:15px;font-variant-numeric:tabular-nums;line-height:20px}
+.box small{font-size:12px;line-height:16px;color:var(--muted)}
+.opt input:checked+.box{border:2px solid var(--ink);padding:7px 11px;box-shadow:inset 0 -4px 0 var(--accent)}
+.opt input:focus-visible+.box{outline:2px solid var(--focus);outline-offset:2px}
+.cue-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (min-width:720px){.cue-grid{grid-template-columns:repeat(8,minmax(0,1fr))}}
+.cue-grid .box{padding-left:8px;padding-right:8px}
+.opt input:checked+.box{padding-left:7px;padding-right:7px}
+.zone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg .box{min-height:44px;min-width:76px;align-items:center}
+.clockbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:0 0 16px;padding:8px 12px;
+  border-left:4px solid var(--ink);background:var(--paper);border-radius:0 6px 6px 0}
+.clockbar p{margin:0;font-size:14px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.panes{display:flex;flex-wrap:wrap;gap:16px;--pw:320px;margin:0 0 8px}
+.pfig{margin:0;width:var(--pw);max-width:100%}
+.pfig figcaption{font-size:13px;color:var(--muted);margin:0 0 4px}
+/* Panes: shared hierarchy tokens. 40 / 16 / 14 px in both modes. */
+.pane{width:100%;padding:16px;border:1px solid;border-left-width:4px;border-radius:8px;overflow:hidden}
+.p-body{opacity:1}
+.p-label{margin:0;font-size:16px;line-height:24px;font-weight:400;min-height:24px}
+.p-label.is-link{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.p-count{margin:4px 0;font-size:40px;line-height:48px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.p-local{margin:0;font-size:14px;line-height:20px}
+.pane.light{background:#fbfaf6;border-color:#d6d2c6}
+.pane.light .p-label{color:#3b3f46}.pane.light .p-count{color:#16181c}.pane.light .p-local{color:#5b6068}
+.pane.dark{background:#17191d;border-color:#30343b}
+.pane.dark .p-label{color:#c9ccd1}.pane.dark .p-count{color:#f1f2f3}.pane.dark .p-local{color:#a3a8b0}
+.pane.light[data-state=final-minute],.pane.light[data-state=zero-rest],.pane.light[data-state=live]{border-left-color:#a8431d}
+.pane.dark[data-state=final-minute],.pane.dark[data-state=zero-rest],.pane.dark[data-state=live]{border-left-color:#ef8f5c}
+.pane[data-state=held]{border-left-style:dashed}
+.light[data-state=held]{border-left-color:#5b6068}.dark[data-state=held]{border-left-color:#a3a8b0}
+.checks{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px}
+.checks li{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start;font-size:14px}
+.tag{display:inline-block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.04em;padding:2px 0;
+  border:1px solid var(--ok);color:var(--ok);border-radius:4px}
+.tag.fail{background:var(--bad);border-color:var(--bad);color:var(--panel)}
+#checkSummary{font-weight:600;margin:0 0 12px}
+footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;font-size:13px;color:var(--muted)}
+footer h2{margin-top:16px}
+footer ul{margin:0;padding-left:18px}
+footer li{margin:0 0 4px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Zero Hour Rehearsal</h1>
+  <p>Type one launch time. Press each cue from T-7d to T+1d. Read the countdown in light and dark for viewers in five zones. Copy a snippet that carries every state.</p>
+  <p class="sample">Sample launch: Fieldnote 2.0, a made-up product, 10 Nov 2026 16:00 UTC. Local sample data only. Nothing here connects to a live service, an account or the URL you enter.</p>
+</header>
+
+<main class="desk">
+  <section class="block setup" aria-labelledby="h-setup">
+    <h2 id="h-setup">1 · Launch</h2>
+    <div class="field">
+      <label for="nameIn">Product name</label>
+      <input id="nameIn" type="text" maxlength="40" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="launchIn">Launch date and time</label>
+      <input id="launchIn" type="datetime-local" step="60" aria-describedby="launchHint launchErr">
+      <p class="hint" id="launchHint">Read as wall-clock time in the launch zone.</p>
+      <p class="err" id="launchErr"></p>
+    </div>
+    <div class="field">
+      <label for="zoneSel">Launch zone</label>
+      <select id="zoneSel">
+        <option value="UTC">UTC</option>
+        <option value="America/Los_Angeles">Los Angeles</option>
+        <option value="America/New_York">New York</option>
+        <option value="Europe/London">London</option>
+        <option value="Europe/Berlin">Berlin</option>
+        <option value="Asia/Tokyo">Tokyo</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="urlIn">Live URL</label>
+      <input id="urlIn" type="url" inputmode="url" autocomplete="off" maxlength="200" aria-describedby="urlHint">
+      <p class="hint" id="urlHint">Becomes the link in the Live and After states. Never opened here.</p>
+    </div>
+
+    <div class="hold">
+      <button class="btn" id="holdBtn" type="button" aria-expanded="false" aria-controls="holdPanel">Hold the launch</button>
+      <p class="hint" id="holdStatus">No hold.</p>
+      <div id="holdPanel" hidden>
+        <label class="lab" for="holdIn">Held launch time, same zone</label>
+        <input id="holdIn" type="datetime-local" step="60" aria-describedby="holdErr">
+        <p class="err" id="holdErr"></p>
+        <div class="row">
+          <button class="btn primary" id="holdApply" type="button">Apply hold</button>
+          <button class="btn" id="holdRelease" type="button" disabled>Release hold</button>
+        </div>
+      </div>
+    </div>
+
+    <details class="labels">
+      <summary>Label strings (7)</summary>
+      <div class="field"><label for="lab-scheduled">Scheduled prefix</label><input id="lab-scheduled" type="text" maxlength="40" placeholder="Launches in"></div>
+      <div class="field"><label for="lab-finalDay">Final day</label><input id="lab-finalDay" type="text" maxlength="40" placeholder="Final day"></div>
+      <div class="field"><label for="lab-finalMinute">Final minute</label><input id="lab-finalMinute" type="text" maxlength="40" placeholder="Final minute"></div>
+      <div class="field"><label for="lab-zero">Zero rest</label><input id="lab-zero" type="text" maxlength="40" placeholder="Zero hour"></div>
+      <div class="field"><label for="lab-live">Live word, shown at 40 px</label><input id="lab-live" type="text" maxlength="40" placeholder="Live"></div>
+      <div class="field"><label for="lab-held">Held</label><input id="lab-held" type="text" maxlength="40" placeholder="Held"></div>
+      <div class="field"><label for="lab-after">After word, shown at 40 px</label><input id="lab-after" type="text" maxlength="40" placeholder="Launched"></div>
+      <p class="hint">Empty fields fall back to the grey default.</p>
+    </details>
+
+    <label class="chk"><input type="checkbox" id="saveChk"> Save settings in this browser</label>
+    <div class="row"><button class="btn" id="resetBtn" type="button">Reset to sample</button></div>
+    <p class="hint" id="setupStatus"></p>
+  </section>
+
+  <section class="block stage" aria-labelledby="h-stage">
+    <h2 id="h-stage">2 · Rehearse</h2>
+    <fieldset id="cueSet">
+      <legend>Cue <span class="legend-note">· arrow keys move, Home and End jump</span></legend>
+      <div class="cue-grid">
+        <label class="opt"><input type="radio" name="cue" value="real"><span class="box"><b>Real clock</b><small data-cue="real">…</small></span></label>
+        <label class="opt"><input type="radio" name="cue" value="-7d" checked><span class="box"><b>T-7d</b><small data-cue="-7d">…</small></span></label>
+        <label class="opt"><input type="radio" name="cue" value="-1d"><span class="box"><b>T-1d</b><small data-cue="-1d">…</small></span></label>
+        <label class="opt"><input type="radio" name="cue" value="-1h"><span class="box"><b>T-1h</b><small data-cue="-1h">…</small></span></label>
+        <label class="opt"><input type="radio" name="cue" value="-60s"><span class="box"><b>T-60s</b><small data-cue="-60s">…</small></span></label>
+        <label class="opt"><input type="radio" name="cue" value="0"><span class="box"><b>T-0</b><small data-cue="0">…</small></span></label>
+        <label class="opt"><input type="radio" name="cue" value="+1h"><span class="box"><b>T+1h</b><small data-cue="+1h">…</small></span></label>
+        <label class="opt"><input type="radio" name="cue" value="+1d"><span class="box"><b>T+1d</b><small data-cue="+1d">…</small></span></label>
+      </div>
+      <p class="hint">Press T-60s and wait. The count reaches 00:00:00, rests for 1 s, then turns Live.</p>
+    </fieldset>
+
+    <div class="clockbar">
+      <p id="clockOut" class="mono"></p>
+      <p id="stateOut"></p>
+      <button class="btn small" id="pauseBtn" type="button" aria-pressed="false">Pause clock</button>
+    </div>
+
+    <fieldset id="widthSet">
+      <legend>Pane width</legend>
+      <div class="seg">
+        <label class="opt"><input type="radio" name="pw" value="320" checked><span class="box"><b>320 px</b></span></label>
+        <label class="opt"><input type="radio" name="pw" value="360"><span class="box"><b>360 px</b></span></label>
+        <label class="opt"><input type="radio" name="pw" value="480"><span class="box"><b>480 px</b></span></label>
+      </div>
+    </fieldset>
+
+    <p class="hint" id="viewerNote"></p>
+    <div class="panes" id="panes">
+      <figure class="pfig" id="figL"><figcaption>Light · prefers-color-scheme: light</figcaption></figure>
+      <figure class="pfig" id="figD"><figcaption>Dark · prefers-color-scheme: dark</figcaption></figure>
+    </div>
+    <p class="hint" id="widthOut"></p>
+
+    <fieldset id="zoneSet">
+      <legend>Viewer zone <span class="legend-note">· launch time as each city sees it</span></legend>
+      <div class="zone-grid">
+        <label class="opt"><input type="radio" name="viewer" value="America/Los_Angeles" checked><span class="box"><b>Los Angeles</b><small data-zone="America/Los_Angeles">…</small></span></label>
+        <label class="opt"><input type="radio" name="viewer" value="America/New_York"><span class="box"><b>New York</b><small data-zone="America/New_York">…</small></span></label>
+        <label class="opt"><input type="radio" name="viewer" value="Europe/London"><span class="box"><b>London</b><small data-zone="Europe/London">…</small></span></label>
+        <label class="opt"><input type="radio" name="viewer" value="Europe/Berlin"><span class="box"><b>Berlin</b><small data-zone="Europe/Berlin">…</small></span></label>
+        <label class="opt"><input type="radio" name="viewer" value="Asia/Tokyo"><span class="box"><b>Tokyo</b><small data-zone="Asia/Tokyo">…</small></span></label>
+      </div>
+    </fieldset>
+  </section>
+
+  <section class="block ship" aria-labelledby="h-ship">
+    <h2 id="h-ship">3 · Check and ship</h2>
+    <p id="checkSummary"></p>
+    <ul class="checks" id="checkList"></ul>
+    <div class="row">
+      <button class="btn primary" id="copyBtn" type="button" disabled aria-describedby="checkSummary">Copy snippet</button>
+      <span id="bytesOut" class="mono"></span>
+    </div>
+    <p class="hint" id="copyStatus"></p>
+    <label class="lab" for="snippetOut">Snippet: one style block, one div, one script</label>
+    <textarea id="snippetOut" readonly rows="8" spellcheck="false"></textarea>
+    <p class="hint">The snippet uses the visitor's own clock and zone. It switches colors with prefers-color-scheme and never prints a negative count.</p>
+  </section>
+</main>
+
+<footer>
+  <h2>Credits</h2>
+  <ul>
+    <li>Design systems engineer (lead): one state object feeding both panes, shared 40 / 16 / 14 px tokens, contrast order check, longest-label stress at 365 days.</li>
+    <li>Technical illustrator: 320 px first layout, seconds dropped below 360 px when a day or more remains, no flip, glow or confetti.</li>
+    <li>Motion director: broadcast cue rail from T-7d to T+1d, Hold that moves the launch and says so, 1 s rest at 00:00:00 before Live, 4 px edge grid.</li>
+    <li>Porcelain hare (invented guest): only the seconds tick, one 160 ms opacity swap with no overshoot, tabular figures in system type.</li>
+  </ul>
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="https://www.reddit.com/r/SideProject/comments/1xms205/lots_of_praise_almost_nobody_pastes_in_their_own/" rel="noopener noreferrer">lots of praise, almost nobody pastes in their own data. How do you read that? (Reddit r/SideProject)</a></li>
+    <li><a href="https://github.com/pbakaus/impeccable" rel="noopener noreferrer">pbakaus/impeccable (GitHub Trending)</a></li>
+  </ul>
+  <p>Titles only. These sources suggested the need; they are not demand data.</p>
+</footer>
+
+<div id="harness" aria-hidden="true" style="position:absolute;left:-10000px;top:0;visibility:hidden"></div>
+<p id="live" class="vh" aria-live="polite"></p>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const SEC = 1000, MIN = 60 * SEC, HOUR = 60 * MIN, DAY = 24 * HOUR;
+const ZONES = ['UTC','America/Los_Angeles','America/New_York','Europe/London','Europe/Berlin','Asia/Tokyo'];
+const VIEWERS = ZONES.slice(1);
+const CITY = {'UTC':'UTC','America/Los_Angeles':'Los Angeles','America/New_York':'New York','Europe/London':'London','Europe/Berlin':'Berlin','Asia/Tokyo':'Tokyo'};
+const CUES = {'real':null,'-7d':-7*DAY,'-1d':-DAY,'-1h':-HOUR,'-60s':-MIN,'0':0,'+1h':HOUR,'+1d':DAY};
+const CUE_NAMES = {'real':'Real clock','-7d':'T-7d','-1d':'T-1d','-1h':'T-1h','-60s':'T-60s','0':'T-0','+1h':'T+1h','+1d':'T+1d'};
+const LABEL_KEYS = ['scheduled','finalDay','finalMinute','zero','live','held','after'];
+const DEFAULT_LABELS = {scheduled:'Launches in',finalDay:'Final day',finalMinute:'Final minute',zero:'Zero hour',live:'Live',held:'Held',after:'Launched'};
+const STATE_NAMES = {'scheduled':'Scheduled','final-day':'Final day','final-minute':'Final minute','zero-rest':'Zero rest','live':'Live','held':'Held','after':'After'};
+const STORE_KEY = 'zero-hour-rehearsal-v1';
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+function sampleCfg() {
+  return {launch: Date.UTC(2026, 10, 10, 16, 0), hold: null, zone: 'UTC', name: 'Fieldnote 2.0',
+    url: 'https://example.com/launch', labels: Object.assign({}, DEFAULT_LABELS),
+    viewer: 'America/Los_Angeles', width: 320};
+}
+let cfg = sampleCfg();
+
+/* ---------- time zone helpers ---------- */
+const pad = n => String(n).padStart(2, '0');
+const partFmt = new Map();
+function parts(ms, tz) {
+  let f = partFmt.get(tz);
+  if (!f) {
+    f = new Intl.DateTimeFormat('en-US', {timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit',
+      day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'});
+    partFmt.set(tz, f);
+  }
+  const o = {};
+  for (const p of f.formatToParts(ms)) o[p.type] = p.value;
+  return {y: +o.year, mo: +o.month, d: +o.day, h: (+o.hour) % 24, mi: +o.minute, s: +o.second};
+}
+function offset(ms, tz) {
+  const p = parts(ms, tz);
+  return Date.UTC(p.y, p.mo - 1, p.d, p.h, p.mi, p.s) - (ms - (ms % 1000));
+}
+function zonedToUtc(str, tz) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(str || '');
+  if (!m) return null;
+  const y = +m[1], mo = +m[2], d = +m[3], h = +m[4], mi = +m[5];
+  if (y < 2000 || y > 2100 || mo < 1 || mo > 12 || h > 23 || mi > 59) return null;
+  const g = Date.UTC(y, mo - 1, d, h, mi);
+  if (isNaN(g) || new Date(g).getUTCDate() !== d) return null;
+  let u = g - offset(g, tz);
+  u = g - offset(u, tz);
+  return u;
+}
+function toLocalInput(ms, tz) {
+  const p = parts(ms, tz);
+  return p.y + '-' + pad(p.mo) + '-' + pad(p.d) + 'T' + pad(p.h) + ':' + pad(p.mi);
+}
+function dayIndex(ms, tz) { const p = parts(ms, tz); return Date.UTC(p.y, p.mo - 1, p.d) / DAY; }
+const fmtCache = new Map();
+function fmt(ms, tz, key) {
+  const k = tz + '|' + key;
+  let f = fmtCache.get(k);
+  if (!f) {
+    const o = {timeZone: tz};
+    let loc = 'en-GB';
+    if (key === 'day') Object.assign(o, {weekday: 'short', day: 'numeric', month: 'short'});
+    else if (key === 'time') Object.assign(o, {hour: '2-digit', minute: '2-digit', hourCycle: 'h23'});
+    else if (key === 'clock') Object.assign(o, {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'});
+    else { loc = 'en-US'; Object.assign(o, {timeZoneName: 'short', hour: 'numeric'}); }
+    f = new Intl.DateTimeFormat(loc, o);
+    fmtCache.set(k, f);
+  }
+  if (key === 'abbr') {
+    const p = f.formatToParts(ms).find(x => x.type === 'timeZoneName');
+    return p ? p.value : tz;
+  }
+  return f.format(ms);
+}
+function describe(ms, tz) {
+  tz = tz || cfg.zone;
+  return fmt(ms, tz, 'day') + ' ' + fmt(ms, tz, 'time') + ' ' + fmt(ms, tz, 'abbr');
+}
+
+/* ---------- state model ---------- */
+function stateAt(now, launch, hold) {
+  const at = hold != null ? hold : launch, d = at - now;
+  let state;
+  if (d > 0) state = d <= MIN ? 'final-minute' : hold != null ? 'held' : d <= DAY ? 'final-day' : 'scheduled';
+  else if (d > -SEC) state = 'zero-rest';
+  else state = -d < DAY ? 'live' : 'after';
+  return {state, d, at};
+}
+function lab(k, c) {
+  const v = ((c || cfg).labels[k] || '').trim();
+  return v || DEFAULT_LABELS[k];
+}
+function shortWhen(ms, tz, ref) {
+  return dayIndex(ms, tz) === dayIndex(ref, tz) ? fmt(ms, tz, 'time') : fmt(ms, tz, 'day') + ' ' + fmt(ms, tz, 'time');
+}
+function validUrl(s) {
+  s = (s || '').trim();
+  if (!s) return false;
+  try { const u = new URL(s); return u.protocol === 'https:' || u.protocol === 'http:'; } catch (e) { return false; }
+}
+function model(now, c, tz, width) {
+  const r = stateAt(now, c.launch, c.hold);
+  const m = {state: r.state, label: '', count: '', local: '', link: false, secondsHidden: false};
+  const name = c.name.trim() || 'the launch';
+  if (r.d > 0) {
+    const s = Math.ceil(r.d / SEC), days = Math.floor(s / 86400);
+    const hh = pad(Math.floor(s % 86400 / 3600)), mm = pad(Math.floor(s % 3600 / 60)), ss = pad(s % 60);
+    if (days) { m.secondsHidden = width < 360; m.count = days + 'd ' + hh + ':' + mm + (m.secondsHidden ? '' : ':' + ss); }
+    else m.count = hh + ':' + mm + ':' + ss;
+    if (r.state === 'final-minute') m.label = lab('finalMinute', c);
+    else if (r.state === 'held') m.label = lab('held', c) + ' · moved to ' + shortWhen(c.hold, tz, c.launch) + ' · was ' + shortWhen(c.launch, tz, c.hold);
+    else if (r.state === 'final-day') m.label = lab('finalDay', c);
+    else m.label = lab('scheduled', c) + ' ' + days + (days === 1 ? ' day' : ' days');
+  } else if (r.state === 'zero-rest') {
+    m.label = lab('zero', c); m.count = '00:00:00';
+  } else {
+    m.count = r.state === 'live' ? lab('live', c) : lab('after', c);
+    if (validUrl(c.url)) { m.link = true; m.label = 'Open ' + name; }
+    else m.label = name + ' is out';
+  }
+  m.local = (r.d > 0 ? 'Your time: ' : 'Launched ') + fmt(r.at, tz, 'day') + ', ' + fmt(r.at, tz, 'time') + ' ' + fmt(r.at, tz, 'abbr');
+  if (r.state === 'live') {
+    const ago = -r.d;
+    m.local += ' · ' + (ago < HOUR ? Math.max(1, Math.floor(ago / MIN)) + ' min ago' : Math.floor(ago / HOUR) + ' h ago');
+  }
+  return m;
+}
+
+/* ---------- panes ---------- */
+function makePane(mode) {
+  const s = document.createElement('div');
+  s.className = 'pane ' + mode;
+  s.setAttribute('role', 'group');
+  s.setAttribute('aria-label', (mode === 'light' ? 'Light' : 'Dark') + ' mode preview');
+  const b = document.createElement('div'); b.className = 'p-body';
+  const l = document.createElement('p'); l.className = 'p-label';
+  const c = document.createElement('p'); c.className = 'p-count';
+  const t = document.createElement('p'); t.className = 'p-local';
+  b.append(l, c, t); s.append(b);
+  return s;
+}
+function renderPane(el, m) {
+  el.dataset.state = m.state;
+  const kids = el.firstChild.children;
+  kids[0].textContent = m.label;
+  kids[0].classList.toggle('is-link', m.link);
+  kids[1].textContent = m.count;
+  kids[2].textContent = m.local;
+}
+const paneL = makePane('light'), paneD = makePane('dark');
+$('figL').append(paneL); $('figD').append(paneD);
+
+/* ---------- rehearsal clock ---------- */
+const S = {cue: '-7d', paused: false, base: 0, perf: 0, frozen: 0};
+const eff = () => cfg.hold != null ? cfg.hold : cfg.launch;
+function anchor() {
+  if (S.cue === 'real') return;
+  S.base = eff() + CUES[S.cue];
+  S.perf = performance.now();
+  S.frozen = S.base;
+}
+function rnow() {
+  if (S.cue === 'real') return Date.now();
+  if (S.paused) return S.frozen;
+  return S.base + (performance.now() - S.perf);
+}
+
+const liveEl = $('live');
+function announce(msg) {
+  liveEl.textContent = '';
+  setTimeout(() => { liveEl.textContent = msg; }, 40);
+}
+function fade() {
+  if (reduce.matches) return;
+  for (const p of [paneL, paneD]) {
+    const b = p.firstChild;
+    b.style.transition = 'none';
+    b.style.opacity = '0';
+    void b.offsetWidth;
+    b.style.transition = 'opacity 160ms linear';
+    b.style.opacity = '1';
+  }
+}
+
+let lastState = null, timer = 0;
+function render() {
+  const now = rnow();
+  const w = paneL.offsetWidth || cfg.width;
+  const m = model(now, cfg, cfg.viewer, w);
+  renderPane(paneL, m);
+  renderPane(paneD, m);
+  if (lastState !== null && m.state !== lastState) {
+    if (m.state !== 'zero-rest') fade();
+    announce('State: ' + STATE_NAMES[m.state] + '. ' + m.label + '.');
+  }
+  lastState = m.state;
+  const clockText = (S.cue === 'real' ? 'Real clock · ' : 'Rehearsal clock · ') +
+    fmt(now, 'UTC', 'day') + ' ' + fmt(now, 'UTC', 'clock') + ' UTC';
+  let extra = '';
+  if (S.cue !== 'real') {
+    const since = Math.floor((now - S.base) / SEC);
+    extra = ' · ' + CUE_NAMES[S.cue] + (since > 0 ? ' + ' + since + ' s' : '') + (S.paused ? ' · paused' : '');
+  }
+  $('clockOut').textContent = clockText + extra;
+  $('stateOut').textContent = 'State: ' + STATE_NAMES[m.state] + ' (' + m.state + ')';
+  $('widthOut').textContent = 'Panes render at ' + w + ' px.' + (m.secondsHidden ? ' Seconds hidden: under 360 px with a day or more left.' : '');
+  for (const el of document.querySelectorAll('[data-cue]')) {
+    const k = el.dataset.cue;
+    const t = k === 'real' ? Date.now() : eff() + CUES[k];
+    el.textContent = STATE_NAMES[stateAt(t, cfg.launch, cfg.hold).state];
+  }
+}
+function schedule() {
+  clearTimeout(timer);
+  if (document.hidden) return;
+  if (S.paused && S.cue !== 'real') return;
+  const now = rnow();
+  const wait = SEC - (((now % SEC) + SEC) % SEC) + 5;
+  timer = setTimeout(() => { render(); schedule(); }, wait);
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) clearTimeout(timer);
+  else { render(); schedule(); }
+});
+if ('ResizeObserver' in window) new ResizeObserver(() => render()).observe(paneL);
+else window.addEventListener('resize', render);
+
+/* ---------- zone rail + hold status ---------- */
+function updateZones() {
+  const at = eff();
+  const ref = dayIndex(at, cfg.zone);
+  for (const el of document.querySelectorAll('[data-zone]')) {
+    const tz = el.dataset.zone;
+    const diff = dayIndex(at, tz) - ref;
+    el.textContent = fmt(at, tz, 'day') + ' · ' + fmt(at, tz, 'time') + (diff ? ' · ' + (diff > 0 ? '+' : '−') + Math.abs(diff) + ' day' : '');
+  }
+  $('viewerNote').textContent = 'Both panes show what a viewer in ' + CITY[cfg.viewer] + ' sees.';
+}
+function updateHold() {
+  $('holdStatus').textContent = cfg.hold != null
+    ? 'Hold on: moved to ' + describe(cfg.hold) + ' · was ' + describe(cfg.launch) + '.'
+    : 'No hold.';
+  $('holdRelease').disabled = cfg.hold == null;
+}
+
+/* ---------- snippet ---------- */
+const SN_CSS = '<style>#zh{font:16px/1.4 system-ui,sans-serif;padding:16px;border-radius:8px;background:#fbfaf6;color:#3b3f46}#zh b{display:block;margin:4px 0;font-size:40px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;color:#16181c}#zh small{display:block;font-size:14px;color:#5b6068}#zh a{color:inherit}@media(prefers-color-scheme:dark){#zh{background:#17191d;color:#c9ccd1}#zh b{color:#f1f2f3}#zh small{color:#a3a8b0}}</style>';
+const SN_DIV = '<div id="zh"><div></div><b></b><small></small></div>';
+function buildSnippet() {
+  const Z = {t: cfg.launch, h: cfg.hold, u: validUrl(cfg.url) ? cfg.url.trim() : '',
+    n: cfg.name.trim() || 'the launch', l: LABEL_KEYS.map(k => lab(k))};
+  const J = JSON.stringify(Z).replace(/</g, '\\u003c');
+  const js = [
+    '(()=>{const Z=', J,
+    ',r=document.getElementById("zh"),[l,c,t]=r.children,D=864e5,p=n=>String(n).padStart(2,"0"),f=(x,o)=>new Date(x).toLocaleString([],o),o={hour:"2-digit",minute:"2-digit"};let T;',
+    'function s(){clearTimeout(T);if(document.hidden)return;const A=Z.h||Z.t,d=A-Date.now(),L=Z.l;let a,b,w;',
+    'if(d>0){const q=Math.ceil(d/1e3),y=q/864e2|0,h=p(q%864e2/3600|0),m=p(q%3600/60|0),e=p(q%60);',
+    'b=y?y+"d "+h+":"+m+(r.clientWidth<360?"":":"+e):h+":"+m+":"+e;',
+    'a=d<=6e4?L[2]:Z.h?L[5]+" · moved to "+f(Z.h,o)+" · was "+f(Z.t,o):d<=D?L[1]:L[0]+" "+y+(y>1?" days":" day")}',
+    'else if(d>-1e3){a=L[3];b="00:00:00"}else{b=d>-D?L[4]:L[6];w=Z.u;a=w?"Open "+Z.n:Z.n+" is out"}',
+    'l.textContent=a;if(w){const x=document.createElement("a");x.href=w;x.textContent=a;l.replaceChildren(x)}',
+    'c.textContent=b;t.textContent=(d>0?"Your time: ":"Launched ")+f(A,{...o,weekday:"short",day:"numeric",month:"short",timeZoneName:"short"});',
+    'T=setTimeout(s,1e3-Date.now()%1e3)}',
+    'document.addEventListener("visibilitychange",s);s()})()'
+  ].join('');
+  return SN_CSS + '\n' + SN_DIV + '\n<script>' + js + '<\/script>';
+}
+
+/* ---------- automated check ---------- */
+const hL = makePane('light'), hD = makePane('dark');
+hL.style.width = hD.style.width = '320px';
+$('harness').append(hL, hD);
+function rgb(s) { const n = (s.match(/[\d.]+/g) || [0, 0, 0]).map(Number); return n.slice(0, 3); }
+function lum(c) {
+  const v = c.map(x => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); });
+  return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
+}
+function ratio(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+function overflows(p) {
+  if (p.scrollWidth > p.clientWidth + 1) return true;
+  for (const e of p.firstChild.children) if (e.scrollWidth > e.clientWidth + 1) return true;
+  return false;
+}
+let checkPassed = false, snippet = '', bytes = 0;
+function item(ok, text) {
+  const li = document.createElement('li');
+  const tag = document.createElement('span');
+  tag.className = 'tag' + (ok ? '' : ' fail');
+  tag.textContent = ok ? 'Pass' : 'Fail';
+  const tx = document.createElement('span');
+  tx.textContent = text;
+  li.append(tag, tx);
+  return li;
+}
+function runCheck() {
+  const tz = cfg.viewer, L = cfg.launch, H = cfg.hold != null ? cfg.hold : L + 2 * HOUR;
+  const base = Object.assign({}, cfg, {hold: null});
+  const held = Object.assign({}, cfg, {hold: H});
+  const scen = [
+    ['Scheduled at 365 days', base, L - 365 * DAY], ['Final day', base, L - DAY + SEC],
+    ['Final minute', base, L - MIN], ['Zero rest', base, L], ['Live', base, L + HOUR],
+    ['Held', held, H - 2 * DAY], ['After', base, L + 2 * DAY]
+  ];
+  const over = [], neg = [];
+  let sizesOk = true, sizes = null, cr = null;
+  for (const [name, c, now] of scen) {
+    const m = model(now, c, tz, 320);
+    renderPane(hL, m); renderPane(hD, m);
+    if (/^\s*-/.test(m.count)) neg.push(name);
+    const bad = [];
+    if (overflows(hL)) bad.push('light');
+    if (overflows(hD)) bad.push('dark');
+    if (bad.length) over.push(name + ' (' + bad.join(', ') + ')');
+    const sz = [hL, hD].map(p => Array.from(p.firstChild.children, e => parseFloat(getComputedStyle(e).fontSize)));
+    const order = [sz[0][1], sz[0][0], sz[0][2]];
+    if (sz[0].join() !== sz[1].join() || !(order[0] > order[1] && order[1] > order[2])) sizesOk = false;
+    sizes = order;
+    if (!cr) cr = [hL, hD].map(p => {
+      const bg = rgb(getComputedStyle(p).backgroundColor);
+      const k = p.firstChild.children;
+      return [k[1], k[0], k[2]].map(e => ratio(rgb(getComputedStyle(e).color), bg));
+    });
+  }
+  const crOk = cr.every(r => r[0] >= r[1] && r[1] >= r[2] && r[2] >= 4.5);
+  const fmtR = r => r.map(x => x.toFixed(1)).join(' / ');
+  snippet = buildSnippet();
+  bytes = new TextEncoder().encode(snippet).length;
+  const sizeOk = bytes <= 2048;
+  const urlRaw = cfg.url.trim();
+  const urlOk = !urlRaw || validUrl(urlRaw);
+  const items = [
+    item(!over.length, over.length ? 'Overflow at 320 px: ' + over.join('; ') + '. Shorten the label or word.'
+      : 'All 7 states fit 320 px in light and dark, including "' + lab('scheduled') + ' 365 days".'),
+    item(sizesOk, sizesOk ? 'Type order count > label > local at ' + sizes.join(' / ') + ' px, same in both modes.'
+      : 'Type sizes differ between modes or lose their order.'),
+    item(crOk, 'Contrast order count ≥ label ≥ local, all at least 4.5:1. Light ' + fmtR(cr[0]) + ' · Dark ' + fmtR(cr[1]) + '.'),
+    item(!neg.length, neg.length ? 'Negative count in ' + neg.join(', ') + '.' : 'No state prints a negative count.'),
+    item(urlOk, !urlRaw ? 'No live URL. Live and After show plain text.' : urlOk ? 'Live URL is a full address.'
+      : 'Live URL is not a full http(s) address. Fix it or clear it.'),
+    item(sizeOk, 'Snippet is ' + bytes + ' of 2048 bytes.')
+  ];
+  $('checkList').replaceChildren(...items);
+  const fails = [!over.length, sizesOk, crOk, !neg.length, urlOk, sizeOk].filter(x => !x).length;
+  checkPassed = fails === 0;
+  $('checkSummary').textContent = checkPassed
+    ? 'All checks pass. 14 renders at 320 px, viewer zone ' + CITY[tz] + '.'
+    : 'Copy is off until ' + fails + (fails === 1 ? ' check passes.' : ' checks pass.');
+  $('copyBtn').disabled = !checkPassed;
+  $('bytesOut').textContent = (bytes / 1024).toFixed(2) + ' KB';
+  $('snippetOut').value = snippet;
+}
+let checkTimer = 0;
+function scheduleCheck() { clearTimeout(checkTimer); checkTimer = setTimeout(runCheck, 120); }
+
+/* ---------- storage (optional) ---------- */
+function persist() {
+  if (!$('saveChk').checked) return;
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(cfg)); } catch (e) { /* storage unavailable */ }
+}
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return false;
+    const o = JSON.parse(raw);
+    const c = sampleCfg();
+    if (typeof o.launch === 'number' && isFinite(o.launch)) c.launch = o.launch;
+    if (typeof o.hold === 'number' && o.hold > c.launch) c.hold = o.hold;
+    if (ZONES.includes(o.zone)) c.zone = o.zone;
+    if (VIEWERS.includes(o.viewer)) c.viewer = o.viewer;
+    if ([320, 360, 480].includes(o.width)) c.width = o.width;
+    if (typeof o.name === 'string') c.name = o.name.slice(0, 40);
+    if (typeof o.url === 'string') c.url = o.url.slice(0, 200);
+    if (o.labels && typeof o.labels === 'object')
+      for (const k of LABEL_KEYS) if (typeof o.labels[k] === 'string') c.labels[k] = o.labels[k].slice(0, 40);
+    cfg = c;
+    return true;
+  } catch (e) { return false; }
+}
+
+/* ---------- inputs ---------- */
+function syncInputs() {
+  $('nameIn').value = cfg.name;
+  $('urlIn').value = cfg.url;
+  $('zoneSel').value = cfg.zone;
+  $('launchIn').value = toLocalInput(cfg.launch, cfg.zone);
+  $('launchIn').removeAttribute('aria-invalid');
+  $('launchErr').textContent = '';
+  for (const k of LABEL_KEYS) $('lab-' + k).value = cfg.labels[k] === DEFAULT_LABELS[k] ? '' : cfg.labels[k];
+  for (const r of document.querySelectorAll('input[name=viewer]')) r.checked = r.value === cfg.viewer;
+  for (const r of document.querySelectorAll('input[name=pw]')) r.checked = +r.value === cfg.width;
+  $('panes').style.setProperty('--pw', cfg.width + 'px');
+}
+function onConfig(reanchor) {
+  if (reanchor) anchor();
+  updateZones();
+  updateHold();
+  render();
+  schedule();
+  scheduleCheck();
+  persist();
+}
+function readLaunch() {
+  const zone = $('zoneSel').value;
+  const v = zonedToUtc($('launchIn').value, zone);
+  if (v == null) {
+    $('zoneSel').value = cfg.zone;
+    $('launchErr').textContent = 'Enter a full date and time, years 2000 to 2100. Kept ' + describe(cfg.launch) + '.';
+    $('launchIn').setAttribute('aria-invalid', 'true');
+    announce($('launchErr').textContent);
+    return;
+  }
+  $('launchIn').removeAttribute('aria-invalid');
+  $('launchErr').textContent = '';
+  cfg.launch = v; cfg.zone = zone;
+  if (cfg.hold != null && cfg.hold <= v) {
+    cfg.hold = null;
+    $('setupStatus').textContent = 'Hold cleared: the new launch is at or after the held time.';
+  } else {
+    $('setupStatus').textContent = 'Launch set: ' + describe(v) + '.';
+  }
+  announce($('setupStatus').textContent);
+  onConfig(true);
+}
+$('launchIn').addEventListener('change', readLaunch);
+$('zoneSel').addEventListener('change', readLaunch);
+$('nameIn').addEventListener('input', e => { cfg.name = e.target.value; onConfig(false); });
+$('urlIn').addEventListener('input', e => { cfg.url = e.target.value; onConfig(false); });
+for (const k of LABEL_KEYS) {
+  $('lab-' + k).addEventListener('input', e => { cfg.labels[k] = e.target.value || DEFAULT_LABELS[k]; onConfig(false); });
+}
+
+/* hold */
+$('holdBtn').addEventListener('click', () => {
+  const panel = $('holdPanel');
+  const open = panel.hidden;
+  panel.hidden = !open;
+  $('holdBtn').setAttribute('aria-expanded', String(open));
+  if (open) {
+    $('holdIn').value = toLocalInput(cfg.hold != null ? cfg.hold : cfg.launch + 2 * HOUR, cfg.zone);
+    $('holdErr').textContent = '';
+    $('holdIn').focus();
+  }
+});
+$('holdApply').addEventListener('click', () => {
+  const v = zonedToUtc($('holdIn').value, cfg.zone);
+  const err = $('holdErr');
+  if (v == null) {
+    err.textContent = 'Enter a full date and time for the hold.';
+    $('holdIn').setAttribute('aria-invalid', 'true');
+    announce(err.textContent); return;
+  }
+  if (v <= cfg.launch) {
+    err.textContent = 'A hold moves the launch later. Pick a time after ' + describe(cfg.launch) + '.';
+    $('holdIn').setAttribute('aria-invalid', 'true');
+    announce(err.textContent); return;
+  }
+  err.textContent = '';
+  $('holdIn').removeAttribute('aria-invalid');
+  cfg.hold = v;
+  onConfig(true);
+  announce('Hold on. Moved to ' + describe(v) + ', was ' + describe(cfg.launch) + '.');
+});
+$('holdRelease').addEventListener('click', () => {
+  cfg.hold = null;
+  onConfig(true);
+  announce('Hold released. Launch is ' + describe(cfg.launch) + '.');
+  $('holdBtn').focus();
+});
+
+/* rails: Home and End jump */
+function homeEnd(set) {
+  set.addEventListener('keydown', e => {
+    if (e.key !== 'Home' && e.key !== 'End') return;
+    const rs = Array.from(set.querySelectorAll('input[type=radio]'));
+    const r = e.key === 'Home' ? rs[0] : rs[rs.length - 1];
+    e.preventDefault();
+    r.checked = true; r.focus();
+    r.dispatchEvent(new Event('change', {bubbles: true}));
+  });
+}
+['cueSet', 'zoneSet', 'widthSet'].forEach(id => homeEnd($(id)));
+
+$('cueSet').addEventListener('change', e => {
+  if (e.target.name !== 'cue') return;
+  S.cue = e.target.value;
+  S.paused = false;
+  $('pauseBtn').setAttribute('aria-pressed', 'false');
+  $('pauseBtn').textContent = 'Pause clock';
+  $('pauseBtn').disabled = S.cue === 'real';
+  anchor();
+  const prev = lastState;
+  lastState = null;
+  render();
+  if (prev !== lastState && prev !== null && lastState !== 'zero-rest') fade();
+  announce('Cue ' + CUE_NAMES[S.cue] + ': ' + STATE_NAMES[lastState] + '.');
+  schedule();
+});
+$('pauseBtn').addEventListener('click', () => {
+  if (S.cue === 'real') return;
+  if (S.paused) { S.base = S.frozen; S.perf = performance.now(); S.paused = false; }
+  else { S.frozen = rnow(); S.paused = true; }
+  $('pauseBtn').setAttribute('aria-pressed', String(S.paused));
+  $('pauseBtn').textContent = S.paused ? 'Run clock' : 'Pause clock';
+  render(); schedule();
+});
+$('zoneSet').addEventListener('change', e => {
+  if (e.target.name !== 'viewer') return;
+  cfg.viewer = e.target.value;
+  onConfig(false);
+  announce('Viewer zone: ' + CITY[cfg.viewer] + '.');
+});
+$('widthSet').addEventListener('change', e => {
+  if (e.target.name !== 'pw') return;
+  cfg.width = +e.target.value;
+  $('panes').style.setProperty('--pw', cfg.width + 'px');
+  onConfig(false);
+});
+
+/* save + reset */
+$('saveChk').addEventListener('change', e => {
+  if (e.target.checked) { persist(); $('setupStatus').textContent = 'Settings saved in this browser.'; }
+  else {
+    try { localStorage.removeItem(STORE_KEY); } catch (err) { /* ignore */ }
+    $('setupStatus').textContent = 'Saved settings removed.';
+  }
+});
+$('resetBtn').addEventListener('click', () => {
+  cfg = sampleCfg();
+  S.cue = '-7d'; S.paused = false;
+  for (const r of document.querySelectorAll('input[name=cue]')) r.checked = r.value === '-7d';
+  $('pauseBtn').disabled = false;
+  $('pauseBtn').setAttribute('aria-pressed', 'false');
+  $('pauseBtn').textContent = 'Pause clock';
+  $('holdPanel').hidden = true;
+  $('holdBtn').setAttribute('aria-expanded', 'false');
+  $('holdErr').textContent = '';
+  $('holdIn').removeAttribute('aria-invalid');
+  syncInputs();
+  lastState = null;
+  onConfig(true);
+  $('setupStatus').textContent = 'Reset to the sample launch: ' + describe(cfg.launch) + '.';
+  announce($('setupStatus').textContent);
+});
+
+/* copy */
+$('copyBtn').addEventListener('click', async () => {
+  if (!checkPassed) return;
+  const out = $('snippetOut');
+  let ok = false;
+  try {
+    if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(snippet); ok = true; }
+  } catch (e) { ok = false; }
+  if (!ok) {
+    try { out.focus(); out.select(); ok = document.execCommand('copy'); } catch (e) { ok = false; }
+  }
+  const msg = ok ? 'Copied ' + bytes + ' bytes. Paste it into the launch page.'
+    : 'Copy was blocked. The snippet is selected: press Ctrl+C or Cmd+C.';
+  if (!ok) { out.focus(); out.select(); }
+  $('copyStatus').textContent = msg;
+  announce(msg);
+});
+
+/* ---------- init ---------- */
+if (loadSaved()) {
+  $('saveChk').checked = true;
+  $('setupStatus').textContent = 'Loaded saved settings from this browser.';
+}
+syncInputs();
+anchor();
+updateZones();
+updateHold();
+render();
+schedule();
+runCheck();
+})();
+</script>
+</body>
+</html>
