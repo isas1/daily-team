@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-04",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-04\nSeason: 2026-10-26\n\n1. Human factors engineer [new]\n   Method: Make failure easy to spot and easy to recover from. [new]\n   Stance: Breaks the frame.\n   Temperament: Defends a familiar pattern when it helps.\n2. Data interface designer [new]\n   Method: List each state before drawing the first frame. [new]\n   Stance: Wants it to last.\n   Temperament: Asks how a person gets back after a mistake.\n3. Interface designer [new]\n   Method: Compare the resting state with the state after an error. [new]\n   Stance: Speaks for the one who finds it.\n   Temperament: Shows a working sample before making a claim.\n4. One-handed maker (archetype; invented) [guest] [new]\n   Method: Place related actions within one easy reach.\n   Stance: Insists it must be beautiful.\n   Temperament: Pushes for one more pass on the weakest state.\n\nConstraint: Focus stays visible on both light and dark surfaces.\nTask: Save notice: a toast for a project editor that confirms a save and then clears without blocking the work.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "7b243ae97b713b99d853c4be8c61acf95a01676c81a2a3e1a1187f260d20990f",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "65db66769efd1b895ea5c3f0",
+      "d2a13eb5e04b724bc066229f"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "An engineer types an UPDATE or DELETE against a sample production database.",
+  "concept": "Write Time-Out",
+  "plan": "## Pitch\n\n**Human factors engineer:** An \"Are you sure?\" dialog teaches people to click Yes. Surgery solved a version of this problem with the time-out: before the first cut, the team reads the patient, the site and the procedure out loud. I want that for a SQL write against production. You type an UPDATE. A card reads it back as target table, rows hit out of total, columns changed, and three rows before and after. You tick each line. Then Commit. Then a toast says what happened and offers Undo without taking the cursor. The toast is the familiar part, and I want it kept. People already know where to look for Undo.\n\n**Data interface designer:** I listed the states before drawing anything. My direction is a worktree ledger for people who run parallel coding agents in git worktrees. One row per worktree, a save mark each time a file lands, and a conflict preview when two worktrees touch the same file. The pull is real. The problem is that it needs a live repo to mean anything, and a fake repo shows nothing a person can use. For your idea I have a question. What does the person do after the toast is gone?\n\n**Interface designer:** Mine is an apt source check. A sysadmin pastes `sources.list`, and each line gets marked for transport and key binding. I built a sample, and it does not hold up. Without knowing what the advisory actually covers, every flag I draw is a guess, and a wrong flag is worse than none. Better to speak for the person who finds the write card at 2 a.m. They need to see the number of rows before anything else.\n\n**One-handed maker:** I work with one hand. The three ticks, Commit and the toast's Undo should sit in one column, close to where the thumb or mouse already is. And it has to look calm. A card that shouts gets ignored by the third use.\n\n## Clash\n\n**Data interface designer:** Ten seconds of toast. Then what. The person notices the wrong count at second eleven.\n\n**Human factors engineer:** Then the write goes into a history list, and Restore lives there. The toast stays the fast path. I won't swap it for a modal.\n\n**One-handed maker:** The history row is the weakest state. Give it one more pass. Same wording as the toast, same button place, so nobody has to hunt for it.\n\n**Interface designer:** And if someone edits the query after ticking? The ticks are now lying.\n\n**Human factors engineer:** Clear them. Say \"Query changed · re-check 3 lines.\" The card never vouches for text it hasn't read.\n\n**Data interface designer:** No WHERE clause. That's the case that wipes a table.\n\n**Interface designer:** Show it. \"120 of 120 rows · no WHERE.\" Then the Commit field asks for the table name typed out. Here, the sample does that already.\n\n**One-handed maker:** Typing a name with one hand is slow. Fine. That case should be slow.\n\n**Interface designer:** Focus ring has to survive the dark theme. A single blue ring vanishes on navy.\n\n**Human factors engineer:** Two rings. Dark inner, light outer. Readable on either surface.\n\n## Decision\n\nAn engineer types an UPDATE or DELETE against a sample production database. A time-out card reads the statement back as target, rows hit out of total, columns changed and three before-and-after rows. The engineer ticks each line and commits. A toast confirms \"Updated 14 rows in orders · 14:52\" with Undo and clears after 10 s without moving focus. The write stays restorable from a history list.\n\nConcept: Write Time-Out\n\nThe surgical time-out replaces the generic confirm dialog. The card makes the reader name what they are about to change. It does not ask whether they are sure.\n\n- **Human factors engineer:** the time-out card with three readback lines and per-line ticks, plus the toast. The toast keeps focus in the editor, pauses on hover or focus, and is announced in a polite live region.\n- **Data interface designer:** the state list that drives the build. It covers drafting, parsed, unparsed, checked, changed-after-check, no-WHERE, committed, toast-visible, toast-cleared, undone and restored. It also adds the history list, so recovery outlasts the toast.\n- **Interface designer:** the no-WHERE path that requires the table name typed exactly. It also covers the comparison between the resting card and the card after a parse error, which keeps the same height and names the token it stopped at.\n- **One-handed maker:** a single right-aligned column holding ticks, Commit, toast Undo and history Restore within a 280 px vertical span, each at least 44 px tall. It also covers the second pass on the history row, which uses the toast's wording and button position.\n\nThe double focus ring is a 2px #0b1220 inner ring and a 2px #f5f7fb outer ring. It applies to every control in the light and dark themes.\n\n## Build notes\n\n1. Build an in-memory sample database in one `index.html`, with `customers` at 40 rows and `orders` at 120 rows. Add a small parser for `UPDATE t SET c = v[, ...] WHERE ...` and `DELETE FROM t WHERE ...` that supports `=`, `<>`, `<`, `>` and `AND`. On unsupported input, show \"Stopped at `<token>`\" at the card's fixed height. Before each commit, snapshot the affected rows by id.\n2. Render the time-out card from the parse result: target, rows hit \"14 of 120\", columns changed, and a 3-row before-and-after table. Add three tick checkboxes. Clear all ticks on any edit after a tick, with \"Query changed · re-check 3 lines\". Enable Commit only when all ticks are set. With no WHERE, also require the table name typed exactly. Add a light/dark toggle, and apply the double focus ring through `:focus-visible` in both themes.\n3. Add the toast: `role=\"status\"`, a 10 s timer that pauses on hover and focus-within, and Undo that restores the snapshot and reads \"Restored 14 rows in orders\". Focus never moves to the toast. On clear, append the entry to the history list, which keeps the same wording and a Restore button in the same column position. Restore on an entry whose rows have changed since then reads \"Rows changed since 14:52 · restore skipped 2\". Reset sample restores both tables and empties history.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Write Time-Out\",\"audience\":\"Engineers running ad hoc SQL writes on production\",\"problem\":\"Confirm dialogs get clicked through and name no rows\",\"interaction\":\"Type a write, tick three readback lines, commit\",\"outcome\":\"Row count, before/after rows, then toast with Undo\",\"recovery\":\"Toast Undo, history Restore, Reset sample\",\"mechanism\":\"Surgical time-out readback; edits clear ticks; no WHERE needs typed name\",\"difference\":\"Are-you-sure modals and read-only modes; this shows rows hit and undoes\",\"whyNow\":\"NiceDB post: prod read-only by default. Worktrunk: parallel agent edits. Titles only, no demand data\",\"sourceIds\":[\"65db66769efd1b895ea5c3f0\",\"d2a13eb5e04b724bc066229f\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Write Time-Out\",\"need\":\"Know what a prod write will change\",\"mechanism\":\"Readback card with per-line ticks and undo toast\",\"rejection\":\"Selected: works offline, cross-domain, new to recent dates\"},{\"name\":\"Worktree Ledger\",\"need\":\"See which agent worktree saved which file\",\"mechanism\":\"Per-worktree save marks and conflict preview\",\"rejection\":\"Needs a live repo to be useful\"},{\"name\":\"Apt Source Check\",\"need\":\"Spot weak entries in sources.list\",\"mechanism\":\"Paste file, mark each line by transport and key\",\"rejection\":\"Advisory details unknown; flags would be guesses\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "a00f34285c08bf6b30e88061854ca164248ff66ed2a71e607189fea251f06d50",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Write Time-Out",
+    "audience": "Engineers running ad hoc SQL writes on production",
+    "problem": "Confirm dialogs get clicked through and name no rows",
+    "interaction": "Type a write, tick three readback lines, commit",
+    "outcome": "Row count, before/after rows, then toast with Undo",
+    "recovery": "Toast Undo, history Restore, Reset sample",
+    "mechanism": "Surgical time-out readback; edits clear ticks; no WHERE needs typed name",
+    "difference": "Are-you-sure modals and read-only modes; this shows rows hit and undoes",
+    "whyNow": "NiceDB post: prod read-only by default. Worktrunk: parallel agent edits. Titles only, no demand data",
+    "sourceIds": [
+      "65db66769efd1b895ea5c3f0",
+      "d2a13eb5e04b724bc066229f"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Write Time-Out",
+        "need": "Know what a prod write will change",
+        "mechanism": "Readback card with per-line ticks and undo toast",
+        "rejection": "Selected: works offline, cross-domain, new to recent dates"
+      },
+      {
+        "name": "Worktree Ledger",
+        "need": "See which agent worktree saved which file",
+        "mechanism": "Per-worktree save marks and conflict preview",
+        "rejection": "Needs a live repo to be useful"
+      },
+      {
+        "name": "Apt Source Check",
+        "need": "Spot weak entries in sources.list",
+        "mechanism": "Paste file, mark each line by transport and key",
+        "rejection": "Advisory details unknown; flags would be guesses"
+      }
+    ]
+  }
+}

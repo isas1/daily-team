@@ -31,7 +31,7 @@ import { PACKS_FROM, DEFAULT_PACK_SIZE, CATEGORIES, parsePack, packProblems, pac
 import { discover, planningInput, readSnapshot } from './feed-planning.mjs';
 import { chooseSource, localSources, sourceContext } from './component-source.mjs';
 import { markupText, redactCredentials } from './security.mjs';
-import { PROJECTS_FROM, PROJECT_SOURCES, projectInput, parseProject, projectProblems } from './project-planning.mjs';
+import { PROJECTS_FROM, projectSource, projectInput, parseProject, projectProblems } from './project-planning.mjs';
 import { simPlan } from './sim/adapter.mjs';
 import { isSimDay, reviewDraft, appendTo, readLog } from './sim/run-sim.mjs';
 
@@ -503,13 +503,15 @@ async function main() {
       task = input.task; request = input.request;
     } else {
       const recent = recentPacks(opts.out, date);
+      const sourceForDay = projectMode && !custom ? projectSource(date) : null;
       const discovery = custom ? { items: [], status: [{ source: 'all', status: 'custom-brief' }] }
-        : await discover({ date, cacheFile: opts.feedCache, recent, ...(projectMode ? { sources: PROJECT_SOURCES } : {}), offline: opts.offline || opts.dryRun });
+        : await discover({ date, cacheFile: opts.feedCache, recent, ...(projectMode ? { sources: [sourceForDay], restrictToSources: true } : {}), offline: opts.offline || opts.dryRun });
       let inventory = null;
       if (opts.inventory) inventory = JSON.parse(readFileSync(opts.inventory, 'utf8'));
-      input = projectMode ? projectInput({ date, discovery, recent, brief: custom })
+      input = projectMode ? projectInput({ date, discovery, recent, brief: custom, source: sourceForDay })
         : planningInput({ date, task: custom || task, request, discovery, recent, inventory });
       if (projectMode) task = input.task;
+      if (sourceForDay && !opts.dryRun && !input.candidates.some(c => c.kind === 'feed')) die(`No fresh unused item from ${sourceForDay.name}; retry when available or provide a brief.`);
     }
     if (!opts.dryRun) { mkdirSync(dir, { recursive: true }); writeFileSync(inputPath, `${JSON.stringify(input, null, 2)}\n`); }
   }

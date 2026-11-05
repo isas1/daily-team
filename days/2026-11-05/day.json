@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-05",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-05\nSeason: 2026-10-26\n\n1. Quality engineer [new]\n   Method: Check the control with motion turned off. [new]\n   Stance: Pushes toward the strange.\n   Temperament: Insists on trying it with keys only.\n2. Visual designer [new]\n   Method: Keep the label still while the icon changes. [new]\n   Stance: Cuts until only the core is left.\n   Temperament: Notices uneven spacing before anyone else.\n3. Mobile interface designer [new]\n   Method: Remove any effect that hides the result. [new]\n   Stance: Guards the feeling it leaves behind.\n   Temperament: Checks the small screen before agreeing.\n4. Stone swallow (creature; invented) [guest] [new]\n   Method: Return to a steady resting frame after every move.\n   Stance: Defends the material.\n   Temperament: Asks what the user can do with it.\n\nConstraint: Long labels wrap without hiding the action.\nTask: Result pages: pagination for a content library that moves through results and marks the current page.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "48704ffe8419d0158750730535ce23a6f041615eb18e9c56cc260ee17851fa80",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "aeba5bf756bb149e5d922f04",
+      "82a901da1b9bedec6f38670b"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "A maintainer of a curated link list pastes the markdown, reads it one eight-entry shelf at a time, and marks each entry Keep, Stale or Move.",
+  "concept": "Shelf Read",
+  "plan": "## Pitch\n\n**Stone swallow:** The list is the material. A curated link list, an awesome-list, 600 lines of markdown. Maintainers stop reading it. Entries go stale while their links still resolve. So treat the list the way a librarian treats a stack: read one shelf at a time. Mark each entry Keep, Stale or Move. The page rail records which shelves are read. Come back tomorrow and the place is still marked. What can the maintainer do with it? Export a pruned file.\n\n**Quality engineer:** Turn Pager. Long LLM chat transcripts, paged by turn, for people on keyboards and screen readers. J and K jump between turns. A rail shows Turn 14 of 52. Try it with keys only and it either works or it doesn't. The Smashing piece on chat accessibility is today's signal.\n\n**Mobile interface designer:** Discount Ledger. A shopper pastes the prices they saw over a few weeks. The ledger pages through dates and shows whether the \"was\" price ever existed. One thumb, one column, 320 px. The feeling it should leave behind: you were not fooled.\n\n**Visual designer:** I back the shelf. Cut it to three marks, one rail, one export. Anything else goes.\n\n## Clash\n\n**Quality engineer:** Shelf Read with motion off. What moves? If the page change slides, I turn it off and check the focus still lands somewhere sane.\n\n**Stone swallow:** Nothing slides. After every move it returns to a resting frame. Focus goes to the first unmarked entry on the new shelf. The rail stops.\n\n**Mobile interface designer:** Eight page numbers in a row at 320 px won't fit. And a section label like \"Command-line tools for container orchestration\" will push the Next button off the edge.\n\n**Visual designer:** Then the label wraps and the buttons keep their own column. Fixed 44 px column on the right. The section text gets the rest. I already see the gap between rail items drifting from 8 to 6 px in your sketch.\n\n**Quality engineer:** My Turn Pager is closer to the task. It's literally pagination through results.\n\n**Stone swallow:** It reads a transcript. It changes nothing. The shelf changes the list, and the user leaves with a file.\n\n**Mobile interface designer:** Discount Ledger needs price history nobody has offline. I drop it. But on the shelf rail, the read mark has to change without the number moving.\n\n**Visual designer:** Number stays still. Icon beside it changes: empty ring, half ring, filled ring. Width reserved for the widest state.\n\n**Quality engineer:** Fine. One condition. Every action has a key, and I test it without a mouse before anyone says done.\n\n## Decision\n\nA maintainer of a curated link list pastes the markdown, reads it one eight-entry shelf at a time, and marks each entry Keep, Stale or Move. The rail shows which shelves are read. The result is a tally (\"Read 5 of 8 shelves · 41 keep · 9 stale · 3 move\") and an exported markdown file with stale entries moved to an Archive section, plus a list of what changed.\n\nConcept: Shelf Read\n\nThe nearest usual approach is a CI link checker. It flags dead URLs, but live links to abandoned projects pass. Editing a 600-line file by hand loses the reader's place. Shelf Read adds a human judgment pass with a place that survives between sessions. The cross-domain mechanism is library shelf-reading: staff check one range of a stack at a time and log which ranges are done.\n\nSignals: the HN title \"Awesome repositories are no longer awesome\" suggests curated lists decay. GitHub Trending observed anthropics/skills, a public collection repository. Both are titles only. That is an observation, not a publication date, and it is not demand data.\n\nContributions:\n- Stone swallow: the shelf model and the resting frame. After each mark or page change, focus returns to the first unmarked entry and nothing animates.\n- Quality engineer: full keyboard map. J and K move between entries. 1, 2 and 3 mark Keep, Stale and Move. [ and ] change shelf. U undoes. Every path is tested with motion off and without a pointer.\n- Visual designer: a still number with a changing read icon in a reserved 20 px slot. Three marks only. One 8 px gap token across the rail.\n- Mobile interface designer: below 480 px the rail collapses to \"Shelf 3 of 8\" with 44 px Prev and Next buttons and a jump select. Long section labels wrap in a flexible column, and the action column stays fixed at the right.\n\n## Build notes\n\n1. Parse pasted markdown into entries keyed by line number. Each entry records its section heading, link text, URL host and description. Split the entries into shelves of 8. Include a 64-entry sample list. Store the marks and the current shelf in localStorage. An invalid paste reads \"No links found\" and keeps the previous list.\n2. Build the rail as a `nav` with buttons. The current shelf gets `aria-current=\"page\"`. Each number sits beside a 20 px icon slot: empty ring for unread, half ring for partly marked, filled ring for all marked. The visually hidden words are \"unread\", \"partly read\" and \"read\". Prev and Next disable at the ends. Entry rows use a two-column grid, `1fr 132px`. The label column wraps and the mark buttons never shrink.\n3. Write the export. Keep and Move entries stay in their sections. Moved entries go under a chosen heading. Stale entries go to `## Archive`. Show a change list with the line numbers. Provide a Copy button and a .md download. Undo reverses the last mark, with a stack of 50. Reset restores the sample after a confirm line that names the mark count lost.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Shelf Read\",\"audience\":\"Maintainers of curated link lists\",\"problem\":\"Stale but live links pile up; place is lost\",\"interaction\":\"Page 8-entry shelves, mark Keep, Stale or Move\",\"outcome\":\"Read-shelf rail, tally, pruned markdown and change list\",\"recovery\":\"Undo last mark, bad paste keeps list, Reset sample\",\"mechanism\":\"Library shelf-reading: per-shelf read marks persist\",\"difference\":\"Link checkers miss live abandoned links; this adds judged pass\",\"whyNow\":\"HN title on awesome lists decaying; skills repo observed trending. Titles only\",\"sourceIds\":[\"aeba5bf756bb149e5d922f04\",\"82a901da1b9bedec6f38670b\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Shelf Read\",\"need\":\"Prune a long curated list over sessions\",\"mechanism\":\"Shelf pages with read marks and keyed triage\",\"rejection\":\"Selected: offline, cross-domain, leaves a file\"},{\"name\":\"Turn Pager\",\"need\":\"Move through long chat transcripts by keys\",\"mechanism\":\"Turn rail with J/K jumps and turn count\",\"rejection\":\"Reads only, drifts toward a chat wrapper\"},{\"name\":\"Discount Ledger\",\"need\":\"Check if a was price existed\",\"mechanism\":\"Paste seen prices, page dates against claim\",\"rejection\":\"Echoes feed entry, needs real price data\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "d3c24557644829c0c572149131c6bd0bfc7e52c408a09e6200d45f30c8d8d0c8",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Shelf Read",
+    "audience": "Maintainers of curated link lists",
+    "problem": "Stale but live links pile up; place is lost",
+    "interaction": "Page 8-entry shelves, mark Keep, Stale or Move",
+    "outcome": "Read-shelf rail, tally, pruned markdown and change list",
+    "recovery": "Undo last mark, bad paste keeps list, Reset sample",
+    "mechanism": "Library shelf-reading: per-shelf read marks persist",
+    "difference": "Link checkers miss live abandoned links; this adds judged pass",
+    "whyNow": "HN title on awesome lists decaying; skills repo observed trending. Titles only",
+    "sourceIds": [
+      "aeba5bf756bb149e5d922f04",
+      "82a901da1b9bedec6f38670b"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Shelf Read",
+        "need": "Prune a long curated list over sessions",
+        "mechanism": "Shelf pages with read marks and keyed triage",
+        "rejection": "Selected: offline, cross-domain, leaves a file"
+      },
+      {
+        "name": "Turn Pager",
+        "need": "Move through long chat transcripts by keys",
+        "mechanism": "Turn rail with J/K jumps and turn count",
+        "rejection": "Reads only, drifts toward a chat wrapper"
+      },
+      {
+        "name": "Discount Ledger",
+        "need": "Check if a was price existed",
+        "mechanism": "Paste seen prices, page dates against claim",
+        "rejection": "Echoes feed entry, needs real price data"
+      }
+    ]
+  }
+}

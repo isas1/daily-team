@@ -67,7 +67,7 @@ async function fetchFeed(source, fetcher) {
   return Buffer.concat(chunks).toString('utf8');
 }
 
-export async function discover({ date, cacheFile, recent = [], fetcher = fetch, sources = FEED_SOURCES, offline = false }) {
+export async function discover({ date, cacheFile, recent = [], fetcher = fetch, sources = FEED_SOURCES, offline = false, restrictToSources = false }) {
   let cache = { items: [], fetched: {} };
   try { cache = JSON.parse(readFileSync(cacheFile, 'utf8')); if (!Array.isArray(cache.items) || !cache.fetched || typeof cache.fetched !== 'object') throw new Error('invalid cache'); }
   catch { cache = { items: [], fetched: {} }; }
@@ -95,7 +95,8 @@ export async function discover({ date, cacheFile, recent = [], fetcher = fetch, 
     } catch (e) { status.push({ source: 'cache', status: 'write-failed', reason: e.message.slice(0, 150) }); }
   }
   const used = new Set(recent.flatMap((d) => d.usedSources));
-  const available = cache.items.filter((i) => !used.has(i.id));
+  const sourceIds = new Set(sources.filter((s) => s.enabled).map((s) => s.id));
+  const available = cache.items.filter((i) => !used.has(i.id) && (!restrictToSources || sourceIds.has(i.sourceId)));
   const groups = [...new Set(available.map((i) => i.sourceId))].map((id) => available.filter((i) => i.sourceId === id));
   const balanced = [];
   for (let n = 0; n < MAX_ITEMS && balanced.length < MAX_ITEMS; n++) for (const group of groups) {

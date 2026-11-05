@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "82ad5bc39795e1b976093e37e569cbe79ca0e0e4845934177dda61862f81f0d7",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Human factors engineer:** The poster uses the surgical time-out board instead of a confirm dialog. It shows three readback lines, and each one gets its own tick. The draining toast bar stays as the familiar recovery cue.\n\n**Data interface designer:** The poster shows one state change: three lines checked, then a timer that runs out. Nothing on it implies a live database.\n\n**Interface designer:** The double focus ring is the proof object. It sits across the seam between a navy surface and a paper surface, and it stays readable on both.\n\n**One-handed maker:** The ticks stack in one right-aligned column at even spacing. The layout stays calm, with one red accent and no alarm colors.\n\n**Lead's choice.** The canvas splits into two surfaces: navy #0E2A47 on the left and paper #F5F7FB on the right. The title \"Write Time-Out\" is set in Cover Headline at 128 px on the navy side. The right side holds three ruled readback lines: Target, Rows hit, Columns changed. Each line has a 44 px tick box in a single column. A double ring, 2 px #0B1220 inner and 2 px #F5F7FB outer, scaled up as a motif, straddles the seam and contains a tick. A thin bar under the readback lines drains in red #BE4D4D to stand for the 10 s toast. The descriptor and the date are set in Cover Text at 24 px and 20 px.",
+  "width": 1200,
+  "height": 630
+}

@@ -23,11 +23,7 @@ on:
         options: ['', openrouter, claude]
         default: ''
       compare:
-        description: Build Opus, Sonnet, and Haiku comparison plus square MP4 (Claude provider)
-        type: boolean
-        default: false
-      sim:
-        description: Run the watchable studio sim today (four member agents and a replay page)
+        description: Build Opus, Sonnet, and Haiku comparison (Claude provider)
         type: boolean
         default: false
 
@@ -97,11 +93,6 @@ jobs:
           COMPONENT_REQUESTS_FILE: ${{ inputs.mode == 'components' && format('{0}/component-requests.json', runner.temp) || '' }}
           COMPONENT_FEED_CACHE: .cache/feed-backlog.json
           COMPONENT_SOURCES_FILE: ${{ inputs.mode == 'components' && env.PROVIDER == 'claude' && format('{0}/component-sources.json', runner.temp) || '' }}
-          SIM: ${{ inputs.sim && '1' || '' }}
-          SIM_DAYS: ${{ vars.SIM_DAYS }}
-          SIM_MODEL: ${{ vars.SIM_MODEL }}
-          SIM_MAX_USD: ${{ vars.SIM_MAX_USD || '3' }}
-          SIM_REVIEW: ${{ vars.SIM_REVIEW }}
         run: node run.mjs $RUN_MODE $FORCE
       - name: Design daily project cover
         continue-on-error: true
@@ -114,17 +105,6 @@ jobs:
           API_URL: ${{ vars.API_URL }}
           FORCE: ${{ inputs.force && '--force' || '' }}
         run: node cover.mjs $FORCE
-      - name: Design the studio look
-        continue-on-error: true
-        if: always() && steps.key.outputs.ok == 'true'
-        env:
-          OPENROUTER_API_KEY: ${{ env.PROVIDER != 'claude' && secrets.OPENROUTER_API_KEY || '' }}
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ env.PROVIDER == 'claude' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
-          LOOK_MODEL: ${{ vars.LOOK_MODEL }}
-          MODEL: ${{ vars.MODEL }}
-          API_URL: ${{ vars.API_URL }}
-          FORCE: ${{ inputs.force && '--force' || '' }}
-        run: node sim/look.mjs $FORCE
       - name: Screenshot new artifacts
         if: always() && steps.key.outputs.ok == 'true'
         run: sh shot.sh days || true
@@ -142,16 +122,6 @@ jobs:
             node compare.mjs --date "$day"
             echo "ready=true" >> "$GITHUB_OUTPUT"
           fi
-      - name: Install video renderer
-        if: success() && steps.comparison.outputs.ready == 'true'
-        run: |
-          npm install --no-save --package-lock=false playwright@1.63.0
-          npx playwright install --with-deps chromium
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-      - name: Record square comparison video
-        if: success() && steps.comparison.outputs.ready == 'true'
-        run: node render-comparison.mjs --date "$(date +%Y-%m-%d)"
       - name: Read suggestions for the vote table
         if: always() && steps.key.outputs.ok == 'true'
         env:
