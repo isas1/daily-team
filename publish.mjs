@@ -255,12 +255,12 @@ export function archive(days, daysDir = join(HERE, 'days')) {
     const a = firstAsset(d);
     const asset = a ? `[${a.status === 'ok' ? 'asset' : 'asset, needs review'}](days/${d.date}/${a.file})` : 'no asset';
     const cover = hasCover(d, daysDir) ? `<a href="days/${d.date}/"><img src="days/${d.date}/cover.png" alt="${esc(title(d))}" width="160"></a> ` : '';
-    return `| [${d.date}](days/${d.date}/) | ${cell(title(d))} | ${cell(roles(d))} | ${cell(parseTeam(d.team).constraint)} | ${cover}${asset} |`;
+    return `| [${d.date}](days/${d.date}/) | ${cell(title(d))} | ${cover}${asset} |`;
   });
   return [
     '# Archive', '', `Every daily team and the asset it made, newest first. ${plural(days.length, 'day')} recorded.`, '',
     '[Today](README.md)', '',
-    '| Date | Task | Team | Constraint | Asset |', '|---|---|---|---|---|', ...rows, '',
+    '| Date | Project | Open |', '|---|---|---|', ...rows, '',
   ].join('\n');
 }
 
@@ -342,6 +342,8 @@ h2 { font-family: var(--font-headline); font-weight: 700; font-size: 24px; margi
 .muted { color: var(--text-muted); }
 img { max-width: 100%; height: auto; }
 .card { border-radius: var(--radius-lg); box-shadow: var(--shadow-frame); }
+summary { cursor: pointer; font-weight: 700; }
+details { margin-top: var(--space-7); }
 iframe { width: 100%; height: 80vh; border: 1px solid var(--border-line); border-radius: var(--radius-lg);
   box-shadow: var(--shadow-frame); background: var(--sc-white); }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4); padding: 0; list-style: none; }
@@ -370,10 +372,10 @@ ${body}
 }
 
 function grid(days, prefix, daysDir) {
-  return `<h2>All days</h2>\n<ul class="grid">\n${[...days].reverse().map((d) => {
+  return `<h2>Past projects</h2>\n<ul class="grid">\n${[...days].reverse().map((d) => {
     const image = preview(d, daysDir);
     const img = image ? `<img src="${prefix}${d.date}/${image}" alt="" loading="lazy">` : `<img src="${prefix}${d.date}/team.png" alt="" loading="lazy">`;
-    return `<li><a href="${prefix}${d.date}/">${img}<strong>${d.date}</strong><br>${esc(title(d))}</a></li>`;
+    return `<li><a href="${prefix}${d.date}/">${img}<strong>${esc(title(d))}</strong><br>${d.date}${d.projectMode && d.decision ? `<br>${esc(d.decision)}` : ''}</a></li>`;
   }).join('\n')}\n</ul>`;
 }
 
@@ -387,27 +389,28 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix 
     const note = a.status === 'ok' ? '' : ` <span class="muted">(${esc(a.status)}: ${esc(a.problems.join('; '))})</span>`;
     const lead = parseTeam(day.team).members[a.lead - 1]?.role ?? '';
     const component = day.pack?.components.find((c) => c.row === a.row);
-    const heading = a.kind === 'piece' ? 'The piece' : component ? `${component.name} · ${component.category}`
-      : a.row ? `Component ${a.row}${lead ? ` · ${lead}` : ''}` : 'The tool';
-    return `<h2>${esc(heading)}${note}</h2>\n<iframe sandbox="${SANDBOX}" title="${esc(a.file)}" srcdoc="${esc(html)}"></iframe>`;
+    const heading = a.kind === 'piece' ? 'Try it' : component ? component.name
+      : a.row ? `Component ${a.row}${lead ? ` · ${lead}` : ''}` : 'Try it';
+    return `<h2>${esc(heading)}${note}</h2>\n<iframe sandbox="${SANDBOX}" title="${esc(heading)}" srcdoc="${esc(html)}"></iframe>`;
   });
   const s = session(day);
   const plan = repo ? `<p><a href="https://github.com/${esc(repo)}/tree/main/${day.edition ? `editions/${encodeURIComponent(day.edition.lane)}/` : ''}days/${day.date}">${s ? 'Source' : 'Team plan and source'}</a></p>` : '';
   return page(`${day.date}: ${title(day)}`, [
-    `<div class="kicker">Daily team · ${day.date}</div>`,
-    ...(!day.edition ? [`<p><a href="${root}editions/">Extra editions</a></p>`] : []),
+    `<p class="muted">Daily Team · ${day.date}</p>`,
     `<h1>${esc(titleCase(title(day)))}</h1>`,
-    `<p class="muted">${esc(day.brief || day.task)}</p>`,
+    `<p>${esc(day.decision || day.brief || day.task)}</p>`,
+    ...(frames.length ? frames : [`<p>No project available. ${esc(day.error || '')}</p>`]),
+    archiveHtml,
+    '<details><summary>About this project</summary>',
+    ...(!day.edition ? [`<p><a href="${root}editions/">Extra editions</a></p>`] : []),
     day.request ? `<p>Request source: <a href="https://github.com/${esc(day.request.repository)}/issues/${Number(day.request.number)}">${esc(day.request.repository)} #${Number(day.request.number)}</a> · Local prototype</p>` : '',
     `<img class="card" src="${imagePrefix}team.png" alt="Team for ${day.date}: ${esc(roles(day))}">`,
-    day.decision ? `<p><strong>Decision:</strong> ${esc(day.decision)}</p>` : '',
     ...(hasSim(day, join(daysDir, day.date)) ? [studioHtml(day, join(daysDir, day.date), imagePrefix)] : []),
     hasCover(day, daysDir) ? `<img src="${imagePrefix}cover.png" alt="Designed cover for ${esc(title(day))}">` : '',
     comparison,
     ...(feedEvidence(day, daysDir).length ? ['<h2>Feed evidence</h2>', `<ul>${feedEvidence(day, daysDir).map(line => `<li>${esc(line)}</li>`).join('')}</ul>`] : []),
     ...(day.pack ? [`<p>Generated pack candidates await human review. <a href="${imagePrefix}pack.json">Pack manifest</a> · <a href="${imagePrefix}tokens.json">Shared tokens</a> · <a href="${imagePrefix}planning-input.json">Saved input</a></p>`] : []),
-    ...(frames.length ? frames : [`<p>No asset. ${esc(day.error || '')}</p>`]),
-    s ? sessionHtml(s) : '', plan, archiveHtml,
+    s ? sessionHtml(s) : '', plan, '</details>',
   ].join('\n'), { root, image: pagesUrl ? `${pagesUrl}${day.date}/${hasCover(day, daysDir) ? 'cover.png' : 'team.png'}` : '' });
 }
 

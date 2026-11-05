@@ -46,7 +46,10 @@ issues; browser and human review still judge generated work.
 One self-contained `artifact-1.html` supplies the entire useful workflow, with
 sample data, input, result and recovery. No network requests, dependencies or
 pretend live service integrations. Projects can scroll and use multiple controls;
-the component tile size and word limits do not apply. Normal runs no longer pay
+the component tile size does not apply. Aim for at most 40 visible words across
+the initial project, including labels and sample data. Allow more when essential
+for clarity or the task. Use a plain title and, if needed, one short action-and-result
+sentence. Keep optional help and credits collapsed. Normal runs no longer pay
 for component model comparisons. Their cover and archive stages continue.
 
 ## Run and replay
