@@ -830,7 +830,7 @@ test('publish writes the day pages, team cards, archive, and README blocks', () 
 
   const arch = readFileSync(join(root, 'ARCHIVE.md'), 'utf8');
   assert.match(arch, /3 days recorded/);
-  assert.match(arch, /\| \[2026-10-02\]\(days\/2026-10-02\/\) \| Tip splitter \| .+ · .+ \| .+ \| \[asset, needs review\]/);
+  assert.match(arch, /\| \[2026-10-02\]\(days\/2026-10-02\/\) \| Tip splitter \| \[asset, needs review\]/);
   assert.match(arch, /\| \[2026-10-03\]\(days\/2026-10-03\/\) .* \| no asset \|/);
 
   const page = readFileSync(join(days, '2026-10-02', 'README.md'), 'utf8');

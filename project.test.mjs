@@ -116,6 +116,11 @@ test('actual default CLI builds one project, preserves citations, exports eviden
     const target = join(days, date); assertProjectExport(day, target);
     assert.match(dayReadme(day, days, ''), /Used feed inspiration/);
     const site = join(dir, 'site'); buildSite(site, [day], days, 'isas1/daily-team');
+    const page = readFileSync(join(site, date, 'index.html'), 'utf8');
+    assert.ok(page.indexOf(day.decision) < page.indexOf('<iframe'));
+    assert.ok(page.indexOf('<iframe') < page.indexOf('<h2>Past projects</h2>'));
+    assert.ok(page.indexOf('<h2>Past projects</h2>') < page.indexOf('<details><summary>About this project</summary>'));
+    assert.match(calls[1].messages[1].content, /at most 40 visible words across the entire initial project/);
     assert.ok(existsSync(join(site, date, 'planning-input.json'))); assert.ok(existsSync(join(site, date, 'artifact-1.html')));
     assert.deepEqual(recentPacks(days, '2026-11-01')[0].project, project());
     writeFileSync(join(target, 'artifact-1.html'), 'changed');
