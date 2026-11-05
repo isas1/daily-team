@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 33 days recorded.
+Every daily team and the asset it made, newest first. 34 days recorded.
 
 [Today](README.md)
 
 | Date | Task | Team | Constraint | Asset |
 |---|---|---|---|---|
+| [2026-11-05](days/2026-11-05/) | Shelf Read | Quality engineer · Visual designer · Mobile interface designer · Stone swallow | Long labels wrap without hiding the action. | <a href="days/2026-11-05/"><img src="days/2026-11-05/cover.png" alt="Shelf Read" width="160"></a> [asset](days/2026-11-05/artifact-1.html) |
 | [2026-11-04](days/2026-11-04/) | Write Time-Out | Human factors engineer · Data interface designer · Interface designer · One-handed maker | Focus stays visible on both light and dark surfaces. | <a href="days/2026-11-04/"><img src="days/2026-11-04/cover.png" alt="Write Time-Out" width="160"></a> [asset](days/2026-11-04/artifact-1.html) |
 | [2026-11-03](days/2026-11-03/) | Zero Hour Rehearsal | Design systems engineer · Technical illustrator · Motion director · Porcelain hare | Light and dark modes keep equal visual hierarchy. | <a href="days/2026-11-03/"><img src="days/2026-11-03/cover.png" alt="Zero Hour Rehearsal" width="160"></a> [asset](days/2026-11-03/artifact-1.html) |
 | [2026-11-02](days/2026-11-02/) | Tide-mark download | Flight deck designer · Cartographic designer · Ergonomist · Tidal library custodian | Tap targets are at least 44 pixels tall. | <a href="days/2026-11-02/"><img src="days/2026-11-02/cover.png" alt="Tide-mark download" width="160"></a> [asset](days/2026-11-02/artifact-1.html) |

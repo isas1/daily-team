@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-04: Write Time-Out
+### 2026-11-05: Shelf Read
 
-<a href="days/2026-11-04/"><img src="days/2026-11-04/team.png" alt="Team for 2026-11-04: Human factors engineer · Data interface designer · Interface designer · One-handed maker" width="100%"></a>
+<a href="days/2026-11-05/"><img src="days/2026-11-05/team.png" alt="Team for 2026-11-05: Quality engineer · Visual designer · Mobile interface designer · Stone swallow" width="100%"></a>
 
 **Task:** Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.
 
-**Decision:** An engineer types an UPDATE or DELETE against a sample production database.
+**Decision:** A maintainer of a curated link list pastes the markdown, reads it one eight-entry shelf at a time, and marks each entry Keep, Stale or Move.
 
-<a href="days/2026-11-04/"><img src="days/2026-11-04/cover.png" alt="Designed cover for Write Time-Out" width="100%"></a>
+<a href="days/2026-11-05/"><img src="days/2026-11-05/cover.png" alt="Designed cover for Shelf Read" width="100%"></a>
 
-[Open the day](days/2026-11-04/) · [Use it](https://isas1.github.io/daily-team/2026-11-04/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-05/) · [Use it](https://isas1.github.io/daily-team/2026-11-05/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-05](days/2026-11-05/) | <a href="days/2026-11-05/"><img src="days/2026-11-05/cover.png" alt="Shelf Read" width="160"></a> | Shelf Read | Quality engineer · Visual designer · Mobile interface designer · Stone swallow |
 | [2026-11-04](days/2026-11-04/) | <a href="days/2026-11-04/"><img src="days/2026-11-04/cover.png" alt="Write Time-Out" width="160"></a> | Write Time-Out | Human factors engineer · Data interface designer · Interface designer · One-handed maker |
 | [2026-11-03](days/2026-11-03/) | <a href="days/2026-11-03/"><img src="days/2026-11-03/cover.png" alt="Zero Hour Rehearsal" width="160"></a> | Zero Hour Rehearsal | Design systems engineer · Technical illustrator · Motion director · Porcelain hare |
 | [2026-11-02](days/2026-11-02/) | <a href="days/2026-11-02/"><img src="days/2026-11-02/cover.png" alt="Tide-mark download" width="160"></a> | Tide-mark download | Flight deck designer · Cartographic designer · Ergonomist · Tidal library custodian |
 | [2026-11-01](days/2026-11-01/) | <a href="days/2026-11-01/"><img src="days/2026-11-01/cover.png" alt="Filing Loupe" width="160"></a> | Filing Loupe | Lens grinder · Kinetic sculptor · Game interface designer · Floating market clerk |
 | [2026-10-31](days/2026-10-31/) | <a href="days/2026-10-31/"><img src="days/2026-10-31/cover.png" alt="Handshake Bench" width="160"></a> | Handshake Bench | Color grading specialist · Wayfinding designer · Camera operator · Amber crab |
 | [2026-10-30](days/2026-10-30/) | <a href="days/2026-10-30/"><img src="days/2026-10-30/piece.png" alt="Holding Panel" width="160"></a> | Holding Panel | Dance choreographer · Railway signaller · Optical technician · Satellite repair apprentice |
-| [2026-10-29](days/2026-10-29/) | <a href="days/2026-10-29/"><img src="days/2026-10-29/cover.png" alt="Brand kit import" width="160"></a> | Brand kit import | Puppet maker · Control room operator · Foley artist · Velvet beetle |
 
-[All 33 days](ARCHIVE.md)
+[All 34 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

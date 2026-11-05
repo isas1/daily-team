@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shelf Read · prune a curated link list one shelf at a time</title>
+<style>
+:root{
+  --bg:#f3f0e8;--panel:#fbfaf6;--ink:#1d2226;--muted:#545b61;--line:#cbc4b3;
+  --acc:#2c5a5e;--keep:#2c5a5e;--stale:#8a3a1c;--move:#6b520f;--soft:#e9e4d7;
+  --gap:8px;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#15181a;--panel:#1d2124;--ink:#ebe8e1;--muted:#a8adb1;--line:#3b4145;
+  --acc:#86bec2;--keep:#86bec2;--stale:#e8a185;--move:#dbbb6a;--soft:#262b2e}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:16px 14px 40px}
+header h1{font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.tag{display:inline-block;margin-top:8px;padding:2px 8px;border:1px solid var(--line);font-size:12px;color:var(--muted);background:var(--panel)}
+.layout{display:grid;gap:16px;margin-top:16px}
+@media (min-width:900px){.layout{grid-template-columns:minmax(0,1fr) 340px;align-items:start}}
+section,.panel{background:var(--panel);border:1px solid var(--line)}
+.panel{padding:12px}
+.panel h2,.shelf-head h2{font-size:15px;margin:0 0 8px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:var(--panel);border:1px solid var(--line);min-height:44px;padding:0 12px}
+button:disabled{cursor:default;opacity:.45}
+button:not(:disabled):hover{background:var(--soft)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* rail */
+.rail{display:flex;align-items:center;gap:var(--gap);padding:8px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.rail-nums{display:flex;flex-wrap:wrap;gap:var(--gap);list-style:none;margin:0;padding:0;flex:1}
+.rail-nums button{display:inline-flex;align-items:center;gap:var(--gap);padding:0 10px;font-variant-numeric:tabular-nums}
+.rail-nums .num{min-width:2.2ch;text-align:right}
+.rail-nums button[aria-current="page"]{border:2px solid var(--acc);font-weight:700;padding:0 9px}
+.ico{width:20px;height:20px;flex:0 0 20px;color:var(--acc)}
+.ico *{transition:fill .16s ease}
+.rail-compact{display:none;flex:1;justify-content:center;font-weight:700;font-variant-numeric:tabular-nums;align-items:center;gap:var(--gap)}
+.jump{display:none;padding:0 8px 8px;gap:var(--gap);align-items:center}
+.jump select{min-height:44px;flex:1;background:var(--panel);border:1px solid var(--line);padding:0 8px}
+.pn{width:auto;min-width:44px}
+@media (max-width:479px){
+  .rail-nums{display:none}.rail-compact{display:flex}.jump{display:flex}
+  .rail{flex-wrap:nowrap}
+}
+/* shelf */
+.shelf-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--gap);padding:12px;border-bottom:1px solid var(--line)}
+.shelf-head p{margin:0;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.shelf-head .count{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);align-self:start;white-space:nowrap}
+.shelf{list-style:none;margin:0;padding:0}
+.sec h3{margin:0;padding:10px 12px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);overflow-wrap:anywhere;border-top:1px solid var(--line)}
+.sec:first-child h3{border-top:0}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 132px;gap:var(--gap);padding:10px 8px 10px 10px;border-left:4px solid transparent;transition:background-color .16s ease}
+.row.active{background:var(--soft)}
+.row[data-m="keep"]{border-left-color:var(--keep)}
+.row[data-m="stale"]{border-left-color:var(--stale)}
+.row[data-m="move"]{border-left-color:var(--move)}
+.row:focus-visible{outline-offset:-3px}
+.lab{min-width:0}
+.top{display:flex;flex-wrap:wrap;gap:4px var(--gap);align-items:baseline}
+.ln{font:12px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.ttl{font-weight:650;overflow-wrap:anywhere}
+.row[data-m="stale"] .ttl{text-decoration:line-through;text-decoration-thickness:1px}
+.state{font-size:12px;font-weight:700}
+.row[data-m="keep"] .state{color:var(--keep)}
+.row[data-m="stale"] .state{color:var(--stale)}
+.row[data-m="move"] .state{color:var(--move)}
+.host{font:12px var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.desc{margin:2px 0 0;font-size:14px;overflow-wrap:anywhere}
+.acts{display:grid;grid-template-columns:repeat(3,44px);align-self:start}
+.acts button{padding:0;font-size:12px;font-weight:600;border-radius:0;margin-left:-1px}
+.acts button:first-child{margin-left:0}
+.acts button[aria-pressed="true"]{color:var(--panel);font-weight:800}
+.acts .b-keep[aria-pressed="true"]{background:var(--keep);border-color:var(--keep)}
+.acts .b-stale[aria-pressed="true"]{background:var(--stale);border-color:var(--stale)}
+.acts .b-move[aria-pressed="true"]{background:var(--move);border-color:var(--move)}
+.foot{display:flex;flex-wrap:wrap;gap:var(--gap);align-items:center;padding:10px 12px;border-top:1px solid var(--line);font-size:14px}
+.status{padding:8px 12px;border-top:1px solid var(--line);font-size:14px;min-height:38px;color:var(--ink)}
+.empty{padding:16px 12px;color:var(--muted)}
+/* side */
+.side{display:grid;gap:16px}
+.tally{font-variant-numeric:tabular-nums;font-weight:650;margin:0}
+.tally-sub{margin:4px 0 0;color:var(--muted);font-size:13px}
+.meter{display:flex;height:10px;margin-top:8px;border:1px solid var(--line);background:var(--bg)}
+.meter span{display:block;height:100%}
+label{display:block;font-size:13px;font-weight:600;margin:8px 0 4px}
+.side select{width:100%;min-height:44px;background:var(--panel);border:1px solid var(--line);padding:0 8px}
+textarea{width:100%;border:1px solid var(--line);background:var(--bg);padding:8px;font:12px/1.4 var(--mono);resize:vertical}
+.btns{display:flex;flex-wrap:wrap;gap:var(--gap);margin-top:8px}
+.changes{margin:8px 0 0;padding:0 0 0 0;list-style:none;max-height:200px;overflow:auto;font-size:13px;border-top:1px solid var(--line)}
+.changes li{padding:4px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.changes .ln{margin-right:6px}
+.note{font-size:13px;color:var(--muted);margin:6px 0 0}
+.err{color:var(--stale);font-weight:600}
+.confirm{margin-top:8px;padding:8px;border:1px solid var(--stale);font-size:14px}
+kbd{font:12px var(--mono);border:1px solid var(--line);border-bottom-width:2px;padding:0 4px;background:var(--bg)}
+.keys{margin:0;padding:0;list-style:none;font-size:13px;display:grid;gap:4px}
+footer{margin-top:24px;font-size:13px;color:var(--muted)}
+footer h2{font-size:13px;margin:12px 0 4px;color:var(--ink)}
+footer ul{margin:0;padding-left:18px}
+footer a{color:var(--acc)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Shelf Read</h1>
+  <p>Read a curated link list one shelf of 8 entries at a time. Mark each entry Keep, Stale or Move. The rail records which shelves are read, and your place is kept for next time. Export a pruned markdown file with a list of changes.</p>
+  <span class="tag" id="srcTag">Sample list · local and fictional · no link is fetched</span>
+</header>
+
+<div class="layout">
+  <section aria-labelledby="shelfTitle">
+    <nav class="rail" aria-label="Shelves">
+      <button type="button" class="pn" id="prev">Prev</button>
+      <ol class="rail-nums" id="railNums"></ol>
+      <div class="rail-compact" id="railCompact" aria-hidden="true"></div>
+      <button type="button" class="pn" id="next">Next</button>
+    </nav>
+    <div class="jump">
+      <label for="jump" class="sr">Jump to shelf</label>
+      <select id="jump"></select>
+    </div>
+    <div class="shelf-head">
+      <div>
+        <h2 id="shelfTitle">Shelf</h2>
+        <p id="shelfSecs"></p>
+      </div>
+      <span class="count" id="shelfCount"></span>
+    </div>
+    <ul class="shelf" id="shelf" aria-labelledby="shelfTitle"></ul>
+    <div class="foot" id="shelfFoot" hidden></div>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+  </section>
+
+  <div class="side">
+    <div class="panel" aria-labelledby="tallyH">
+      <h2 id="tallyH">Tally</h2>
+      <p class="tally" id="tally"></p>
+      <p class="tally-sub" id="tallySub"></p>
+      <div class="meter" id="meter" aria-hidden="true"></div>
+    </div>
+
+    <div class="panel" aria-labelledby="keysH">
+      <h2 id="keysH">Keys</h2>
+      <ul class="keys">
+        <li><kbd>J</kbd> <kbd>K</kbd> next or previous entry (arrows inside the shelf)</li>
+        <li><kbd>1</kbd> Keep · <kbd>2</kbd> Stale · <kbd>3</kbd> Move</li>
+        <li><kbd>[</kbd> <kbd>]</kbd> previous or next shelf</li>
+        <li><kbd>U</kbd> undo last mark (up to 50)</li>
+      </ul>
+      <p class="note">Pressing the same mark again clears it. After each mark, focus rests on the first unmarked entry of the shelf.</p>
+    </div>
+
+    <div class="panel" aria-labelledby="expH">
+      <h2 id="expH">Export</h2>
+      <label for="dest">Move marked entries to</label>
+      <select id="dest"></select>
+      <p class="note">Stale entries go to <code>## Archive</code> at the end of the file.</p>
+      <label for="out">Pruned markdown</label>
+      <textarea id="out" rows="9" readonly></textarea>
+      <div class="btns">
+        <button type="button" id="copy">Copy</button>
+        <button type="button" id="dl">Download .md</button>
+      </div>
+      <h2 style="margin-top:12px" id="chH">Changes</h2>
+      <ol class="changes" id="changes" aria-labelledby="chH"></ol>
+    </div>
+
+    <div class="panel" aria-labelledby="loadH">
+      <h2 id="loadH">Your list</h2>
+      <label for="paste">Paste markdown with <code>- [name](url) - description</code> lines</label>
+      <textarea id="paste" rows="5" placeholder="## Section&#10;- [Project](https://example.org/) - What it does."></textarea>
+      <label for="file">Or open a .md file from this device</label>
+      <input type="file" id="file" accept=".md,.markdown,.txt,text/markdown,text/plain">
+      <div class="btns">
+        <button type="button" id="load">Load list</button>
+        <button type="button" id="reset">Reset to sample</button>
+      </div>
+      <p class="note" id="loadMsg"></p>
+      <div class="confirm" id="confirm" hidden>
+        <p style="margin:0 0 8px" id="confirmText"></p>
+        <div class="btns" style="margin:0">
+          <button type="button" id="confirmYes">Confirm reset</button>
+          <button type="button" id="confirmNo">Keep working</button>
+        </div>
+      </div>
+      <p class="note">Marks and place are saved in this browser when storage is available. Nothing leaves the page.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <h2>Credits</h2>
+  <ul>
+    <li>Quality engineer (lead): the key map J, K, 1, 2, 3, [, ] and U, with every path checked with motion off and without a pointer.</li>
+    <li>Stone swallow (guest): the shelf model, the exported file, and the resting frame where focus returns to the first unmarked entry.</li>
+    <li>Visual designer: a still shelf number beside a changing ring in a reserved 20 px slot, three marks only, one 8 px gap token.</li>
+    <li>Mobile interface designer: under 480 px the rail becomes Shelf n of N with 44 px Prev and Next and a jump select. Labels wrap and the 132 px mark column stays fixed.</li>
+  </ul>
+  <h2>Signals (titles only, not demand data)</h2>
+  <ul>
+    <li><a href="https://erikgahner.github.io/posts/2026/awesome-repositories-are-no-longer-awesome/">Awesome repositories are no longer awesome</a> · Hacker News</li>
+    <li><a href="https://github.com/anthropics/skills">anthropics/skills</a> · GitHub Trending, observed</li>
+  </ul>
+  <p>Library shelf-reading is the borrowed method: staff check one range of a stack at a time and log which ranges are done.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const SAMPLE = [
+"# Awesome Offline Field Kit",
+"",
+"Sample list for Shelf Read. Fictional projects on reserved .example hosts. No links are fetched.",
+"",
+"## Map data",
+"",
+"- [Tilemaker Lite](https://tilemaker-lite.example/) - Builds vector tiles from regional extracts. Release 2026-08.",
+"- [Contour Press](https://contour.example/press) - Hillshade and contour export. Repository archived in 2021.",
+"- [Gridref](https://gridref.example/) - Converts grid references to latitude and longitude offline.",
+"- [PaperAtlas](https://paperatlas.example/) - Print-ready map sheets at fixed scales. Last commit 2019.",
+"- [Trailpack](https://trailpack.example/) - Bundles GPX routes with the tiles they cross.",
+"- [OSM Clip](https://osmclip.example/) - Clips extracts by polygon. Readme says use Tilemaker Lite instead.",
+"- [Basemap Kit](https://basemap-kit.example/) - Five offline basemap styles. Docs only since 2022.",
+"- [Waypoint Ledger](https://waypoint-ledger.example/) - Field waypoint log with photo links.",
+"- [Shoreline Diff](https://shoreline-diff.example/) - Compares coastline extracts between dates. Belongs under Testing.",
+"",
+"## Command-line tools for container orchestration and cluster maintenance",
+"",
+"- [podlog](https://podlog.example/) - Tails logs from every pod in a namespace.",
+"- [kubequiet](https://kubequiet.example/) - Silences noisy events during drains. Last release 2020.",
+"- [nodeprune](https://nodeprune.example/) - Removes unused images from worker nodes.",
+"- [helmdiff-lite](https://helmdiff-lite.example/) - Shows chart diffs before upgrade. Fork of an archived tool.",
+"- [ctxswap](https://ctxswap.example/) - Switches cluster contexts from a fuzzy list.",
+"- [drainplan](https://drainplan.example/) - Prints the order nodes will drain in.",
+"- [yamlsort](https://yamlsort.example/) - Sorts manifest keys. Not specific to containers.",
+"- [quota-peek](https://quota-peek.example/) - Reads namespace quotas as a table.",
+"- [clusterbak](https://clusterbak.example/) - Snapshots resources to disk. Belongs under Sync and backup.",
+"- [podwhisper](https://podwhisper.example/) - Domain now parks an unrelated page.",
+"",
+"## Notebooks and field logs",
+"",
+"- [Fieldbook](https://fieldbook.example/) - Plain-text field notes with dated entries.",
+"- [Logline](https://logline.example/) - One-line observations with tags and GPS.",
+"- [Sketchpad Offline](https://sketchpad-offline.example/) - Drawing pad that saves to local files. Last release 2018.",
+"- [Tally Sheet](https://tally-sheet.example/) - Counts species or items per transect.",
+"- [Weatherbook](https://weatherbook.example/) - Manual weather log with printable sheets.",
+"- [Notecrate](https://notecrate.example/) - Markdown notes in a single folder. Maintainer stepped down in 2023.",
+"- [Specimen Card](https://specimen-card.example/) - Printable labels for collected samples.",
+"",
+"## Static site generators",
+"",
+"- [Leafpress](https://leafpress.example/) - Builds a site from a folder of markdown.",
+"- [Quire](https://quire.example/) - Book-style sites with print CSS.",
+"- [Stilt](https://stilt.example/) - Zero-config generator. Last commit 2017.",
+"- [Pagewright](https://pagewright.example/) - Templates in plain HTML with includes.",
+"- [Inkwell SSG](https://inkwell-ssg.example/) - Blog generator. Install script fails on current Node.",
+"- [Folio](https://folio.example/) - Photo galleries from EXIF data.",
+"- [Slate Docs](https://slate-docs.example/) - API docs from a single markdown file.",
+"- [Burrow](https://burrow.example/) - Gopher and web output from one source.",
+"",
+"## Fonts and type",
+"",
+"- [Glyphbook](https://glyphbook.example/) - Browses installed fonts offline.",
+"- [Subset Kit](https://subset-kit.example/) - Cuts font files to the characters a page uses.",
+"- [Kernlab](https://kernlab.example/) - Kerning test pages. Hosted demo removed.",
+"- [Specimen Sheet](https://specimen-sheet.example/) - Prints a type specimen from any font.",
+"- [Fontmeta](https://fontmeta.example/) - Reads licence fields from font files.",
+"- [Typeshelf](https://typeshelf.example/) - Font manager. Windows build only, last in 2016.",
+"",
+"## Audio capture",
+"",
+"- [Wavecrate](https://wavecrate.example/) - Records long sessions with split files.",
+"- [Hydro Tap](https://hydrotap.example/) - Hydrophone capture presets.",
+"- [Clipnote](https://clipnote.example/) - Adds spoken notes to recordings.",
+"- [Levelmeter](https://levelmeter.example/) - Peak meter for field recorders. Last release 2019.",
+"- [Batlist](https://batlist.example/) - Lists ultrasonic files by time and peak frequency.",
+"- [Room Tone](https://roomtone.example/) - Captures and labels ambience beds.",
+"- [Sonar Sketch](https://sonarsketch.example/) - Spectrogram viewer. Belongs under Notebooks and field logs.",
+"- [Taperoll](https://taperoll.example/) - Cassette digitising notes. Domain expired.",
+"",
+"## Testing",
+"",
+"- [Checkpoint](https://checkpoint.example/) - Snapshot tests for CLI output.",
+"- [Flakeboard](https://flakeboard.example/) - Tracks flaky tests across runs.",
+"- [Assertless](https://assertless.example/) - Property tests from examples. Last release 2020.",
+"- [Fixture Shelf](https://fixture-shelf.example/) - Stores shared test fixtures by version.",
+"- [Timewarp](https://timewarp.example/) - Fakes the system clock in tests.",
+"- [Netjam](https://netjam.example/) - Injects latency and drops into local sockets.",
+"- [Diffpatch](https://diffpatch.example/) - Readable diffs for failing assertions.",
+"- [Golden Path](https://golden-path.example/) - Golden file runner. Merged into Checkpoint.",
+"- [Lintlist](https://lintlist.example/) - Checks link lists for broken URLs only.",
+"",
+"## Sync and backup",
+"",
+"- [Copyjar](https://copyjar.example/) - Versioned folder copies to a second disk.",
+"- [Mirrorbox](https://mirrorbox.example/) - Two-way folder sync over a local network.",
+"- [Snapcard](https://snapcard.example/) - Backs up camera cards on insert.",
+"- [Rsync Wrap](https://rsync-wrap.example/) - Friendly wrapper. Last commit 2018.",
+"- [Hashlog](https://hashlog.example/) - Records file hashes to detect silent corruption.",
+"- [Cold Store](https://coldstore.example/) - Plans tape rotation schedules.",
+"- [Driftcheck](https://driftcheck.example/) - Compares two backups and lists differences.",
+"",
+"## Contributing",
+"",
+"Open a pull request with one entry per line.",
+""
+].join("\n");
+
+const KEY = "shelfread.v1";
+const SIZE = 8;
+const MARKS = {keep:"Keep", stale:"Stale", move:"Move"};
+const KEYMARK = {"1":"keep","2":"stale","3":"move"};
+
+let state = {src:SAMPLE, marks:{}, shelf:0, dest:"__new", sample:true};
+let entries = [], headings = [], undoStack = [], cur = 0;
+
+const $ = id => document.getElementById(id);
+const els = {
+  prev:$("prev"), next:$("next"), railNums:$("railNums"), railCompact:$("railCompact"), jump:$("jump"),
+  title:$("shelfTitle"), secs:$("shelfSecs"), count:$("shelfCount"), shelf:$("shelf"), foot:$("shelfFoot"),
+  status:$("status"), tally:$("tally"), tallySub:$("tallySub"), meter:$("meter"),
+  dest:$("dest"), out:$("out"), copy:$("copy"), dl:$("dl"), changes:$("changes"),
+  paste:$("paste"), file:$("file"), load:$("load"), reset:$("reset"), loadMsg:$("loadMsg"),
+  confirm:$("confirm"), confirmText:$("confirmText"), yes:$("confirmYes"), no:$("confirmNo"), srcTag:$("srcTag")
+};
+
+function h(tag, props){
+  const n = document.createElement(tag);
+  if (props) for (const k in props){
+    const v = props[k];
+    if (v == null || v === false) continue;
+    if (k === "class") n.className = v;
+    else if (k === "text") n.textContent = v;
+    else if (k.slice(0,2) === "on") n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v === true ? "" : String(v));
+  }
+  for (let i = 2; i < arguments.length; i++){
+    const c = arguments[i];
+    if (c == null || c === false) continue;
+    n.append(typeof c === "string" ? document.createTextNode(c) : c);
+  }
+  return n;
+}
+const SVGNS = "http://www.w3.org/2000/svg";
+function svg(tag, attrs){ const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; }
+function ringIcon(st){
+  const s = svg("svg", {viewBox:"0 0 20 20", class:"ico", "aria-hidden":"true", focusable:"false"});
+  s.append(svg("circle", {cx:10, cy:10, r:7, fill: st === "read" ? "currentColor" : "transparent", stroke:"currentColor", "stroke-width":2}));
+  if (st === "partly") s.append(svg("path", {d:"M10 3 A7 7 0 0 1 10 17 Z", fill:"currentColor"}));
+  return s;
+}
+
+/* storage */
+function save(){
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+}
+function restore(){
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return;
+    const s = JSON.parse(raw);
+    if (s && typeof s.src === "string" && s.marks && typeof s.marks === "object"){
+      state = {src:s.src, marks:s.marks, shelf:+s.shelf || 0, dest:typeof s.dest === "string" ? s.dest : "__new", sample:!!s.sample};
+    }
+  } catch (e) {}
+}
+
+/* parsing */
+const RE_H = /^(#{1,6})\s+(.+?)\s*#*\s*$/;
+const RE_E = /^\s*[-*+]\s+\[([^\]]+)\]\(\s*([^)\s]+)[^)]*\)\s*(?:[-\u2013\u2014:]\s*)?(.*)$/;
+function parse(src){
+  const lines = src.replace(/\r\n?/g, "\n").split("\n");
+  const es = [], hs = [];
+  let sec = null;
+  lines.forEach((ln, i) => {
+    const hm = ln.match(RE_H);
+    if (hm){ sec = {line:i, level:hm[1].length, title:hm[2].trim()}; hs.push(sec); return; }
+    const em = ln.match(RE_E);
+    if (em){
+      let host = em[2];
+      try { host = new URL(em[2]).host || em[2]; } catch (e) {}
+      es.push({line:i, n:i+1, title:em[1].trim(), url:em[2], host:host, desc:em[3].trim(),
+        section: sec ? sec.title : "(no heading)", sectionLine: sec ? sec.line : -1});
+    }
+  });
+  return {entries:es, headings:hs};
+}
+function adopt(){
+  const p = parse(state.src);
+  entries = p.entries; headings = p.headings;
+  const valid = new Set(entries.map(e => String(e.n)));
+  for (const k of Object.keys(state.marks)) if (!valid.has(k) || !MARKS[state.marks[k]]) delete state.marks[k];
+  state.shelf = Math.max(0, Math.min(state.shelf, shelfCount() - 1));
+}
+
+/* shelf helpers */
+function shelfCount(){ return Math.max(1, Math.ceil(entries.length / SIZE)); }
+function range(s){ const a = s * SIZE; return [a, Math.min(entries.length, a + SIZE)]; }
+function markOf(i){ return state.marks[entries[i].n]; }
+function shelfState(s){
+  const [a, b] = range(s); let m = 0;
+  for (let i = a; i < b; i++) if (markOf(i)) m++;
+  return m === 0 ? "unread" : (m === b - a ? "read" : "partly");
+}
+const WORD = {unread:"unread", partly:"partly read", read:"read"};
+function firstUnmarked(s){
+  const [a, b] = range(s);
+  for (let i = a; i < b; i++) if (!markOf(i)) return i;
+  return -1;
+}
+function say(t){ els.status.textContent = t; }
+
+/* render */
+function renderRail(){
+  const n = shelfCount();
+  els.railNums.replaceChildren();
+  els.jump.replaceChildren();
+  for (let s = 0; s < n; s++){
+    const st = shelfState(s);
+    const b = h("button", {type:"button", "aria-current": s === state.shelf ? "page" : null,
+      onclick:() => goShelf(s)},
+      h("span", {class:"sr", text:"Shelf "}),
+      h("span", {class:"num", text:String(s + 1)}),
+      ringIcon(st),
+      h("span", {class:"sr", text:", " + WORD[st]}));
+    els.railNums.append(h("li", null, b));
+    els.jump.append(h("option", {value:s, selected: s === state.shelf, text:"Shelf " + (s + 1) + " · " + WORD[st]}));
+  }
+  els.railCompact.replaceChildren(ringIcon(shelfState(state.shelf)), h("span", {text:"Shelf " + (state.shelf + 1) + " of " + n}));
+  els.prev.disabled = state.shelf <= 0;
+  els.next.disabled = state.shelf >= n - 1;
+  els.prev.setAttribute("aria-label", "Previous shelf");
+  els.next.setAttribute("aria-label", "Next shelf");
+}
+
+function renderShelf(){
+  const n = shelfCount();
+  const [a, b] = range(state.shelf);
+  els.title.textContent = "Shelf " + (state.shelf + 1) + " of " + n;
+  els.shelf.replaceChildren();
+  if (!entries.length){
+    els.secs.textContent = "";
+    els.count.textContent = "";
+    els.shelf.append(h("li", {class:"empty", text:"No entries."}));
+    els.foot.hidden = true;
+    return;
+  }
+  const secs = [];
+  for (let i = a; i < b; i++) if (secs.indexOf(entries[i].section) < 0) secs.push(entries[i].section);
+  els.secs.textContent = "Entries " + (a + 1) + "\u2013" + b + " · lines " + entries[a].n + "\u2013" + entries[b - 1].n + " · " + secs.join(" · ");
+  let marked = 0;
+  if (cur < a || cur >= b) cur = a;
+  let lastSec = null;
+  for (let i = a; i < b; i++){
+    const e = entries[i], m = markOf(i);
+    if (m) marked++;
+    if (e.section !== lastSec){
+      lastSec = e.section;
+      els.shelf.append(h("li", {class:"sec"}, h("h3", {text:e.section})));
+    }
+    const active = i === cur;
+    const ti = active ? "0" : "-1";
+    const acts = h("div", {class:"acts", role:"group", "aria-label":"Mark " + e.title});
+    ["keep","stale","move"].forEach((k, j) => {
+      acts.append(h("button", {type:"button", class:"b-" + k, tabindex:ti, "aria-pressed": m === k ? "true" : "false",
+        "aria-label": MARKS[k] + " " + e.title + " (key " + (j + 1) + ")", text:MARKS[k],
+        onclick:() => mark(i, k)}));
+    });
+    const li = h("li", {class:"row" + (active ? " active" : ""), tabindex:ti, "data-k":i, "data-m":m || null,
+      "aria-label":"Line " + e.n + ", " + e.title + ", " + e.host + ", " + (m ? MARKS[m] : "unmarked") + ". " + e.desc},
+      h("div", {class:"lab"},
+        h("div", {class:"top"},
+          h("span", {class:"ln", text:"L" + e.n}),
+          h("span", {class:"ttl", text:e.title}),
+          m ? h("span", {class:"state", text:MARKS[m]}) : null),
+        h("div", {class:"host", text:e.host}),
+        e.desc ? h("p", {class:"desc", text:e.desc}) : null),
+      acts);
+    els.shelf.append(li);
+  }
+  els.count.textContent = marked + " of " + (b - a) + " marked";
+  els.foot.replaceChildren();
+  if (marked === b - a){
+    els.foot.hidden = false;
+    if (state.shelf < n - 1){
+      els.foot.append(h("span", {text:"Shelf read."}),
+        h("button", {type:"button", onclick:() => goShelf(state.shelf + 1), text:"Open shelf " + (state.shelf + 2)}));
+    } else {
+      const left = firstUnmarkedAny();
+      els.foot.append(h("span", {text: left < 0 ? "Last shelf read. Every entry is marked. The export is ready." : "Last shelf read."}));
+      if (left >= 0) els.foot.append(h("button", {type:"button", onclick:() => goShelf(Math.floor(left / SIZE)), text:"Go to shelf " + (Math.floor(left / SIZE) + 1) + " (unmarked left)"}));
+    }
+  } else els.foot.hidden = true;
+}
+function firstUnmarkedAny(){ for (let i = 0; i < entries.length; i++) if (!markOf(i)) return i; return -1; }
+
+function renderTally(){
+  const n = shelfCount();
+  let read = 0;
+  for (let s = 0; s < n; s++) if (entries.length && shelfState(s) === "read") read++;
+  const c = {keep:0, stale:0, move:0};
+  entries.forEach((e, i) => { const m = markOf(i); if (m) c[m]++; });
+  const un = entries.length - c.keep - c.stale - c.move;
+  els.tally.textContent = "Read " + read + " of " + n + " shelves · " + c.keep + " keep · " + c.stale + " stale · " + c.move + " move";
+  els.tallySub.textContent = entries.length + " entries · " + un + " unmarked · undo holds " + undoStack.length;
+  els.meter.replaceChildren();
+  const tot = entries.length || 1;
+  [["keep","var(--keep)"],["stale","var(--stale)"],["move","var(--move)"]].forEach(p => {
+    if (c[p[0]]) els.meter.append(h("span", {style:"width:" + (c[p[0]] / tot * 100) + "%;background:" + p[1]}));
+  });
+  els.srcTag.textContent = state.sample ? "Sample list · local and fictional · no link is fetched" : "Your pasted list · " + entries.length + " entries · no link is fetched";
+}
+
+function renderDest(){
+  els.dest.replaceChildren();
+  els.dest.append(h("option", {value:"__new", text:"New heading: To sort"}));
+  let found = state.dest === "__new";
+  headings.forEach(hd => {
+    if (/^archive$/i.test(hd.title)) return;
+    if (!entries.some(e => e.sectionLine === hd.line)) return;
+    const v = String(hd.line);
+    if (v === state.dest) found = true;
+    els.dest.append(h("option", {value:v, text:hd.title}));
+  });
+  if (!found) state.dest = "__new";
+  els.dest.value = state.dest;
+}
+
+function buildExport(){
+  const lines = state.src.replace(/\r\n?/g, "\n").split("\n");
+  const byLine = new Map(entries.map(e => [e.line, e]));
+  const destH = state.dest === "__new" ? null : headings.find(x => String(x.line) === state.dest) || null;
+  const destName = destH ? destH.title : "To sort";
+  const out = [], moved = [], archived = [], changes = [];
+  for (let i = 0; i < lines.length; i++){
+    const e = byLine.get(i), m = e && state.marks[e.n];
+    if (m === "stale"){ archived.push(lines[i]); changes.push({n:e.n, t:e.title + " · stale, moved to Archive"}); continue; }
+    if (m === "move"){
+      if (destH && e.sectionLine === destH.line){ changes.push({n:e.n, t:e.title + " · Move kept in place, already under " + destName}); }
+      else { moved.push(lines[i]); changes.push({n:e.n, t:e.title + " · moved from " + e.section + " to " + destName}); continue; }
+    }
+    out.push(lines[i]);
+  }
+  function insertUnder(title, level, items){
+    if (!items.length) return true;
+    let at = -1;
+    for (let i = 0; i < out.length; i++){
+      const m = out[i].match(RE_H);
+      if (m && m[2].trim() === title && m[1].length === level){ at = i; break; }
+    }
+    if (at < 0) return false;
+    let end = out.length;
+    for (let i = at + 1; i < out.length; i++){
+      const m = out[i].match(RE_H);
+      if (m && m[1].length <= level){ end = i; break; }
+    }
+    let p = end;
+    while (p > at + 1 && out[p - 1].trim() === "") p--;
+    if (p === at + 1){ out.splice(p, 0, "", ...items); }
+    else out.splice(p, 0, ...items);
+    return true;
+  }
+  function append(title, items){
+    if (!items.length) return;
+    while (out.length && out[out.length - 1].trim() === "") out.pop();
+    out.push("", "## " + title, "", ...items);
+  }
+  if (destH){ if (!insertUnder(destH.title, destH.level, moved)) append(destName, moved); }
+  else append("To sort", moved);
+  const arch = headings.find(x => /^archive$/i.test(x.title));
+  if (!(arch && insertUnder(arch.title, arch.level, archived))) append("Archive", archived);
+  while (out.length && out[out.length - 1].trim() === "") out.pop();
+  changes.sort((x, y) => x.n - y.n);
+  return {text: out.join("\n") + "\n", changes};
+}
+function renderExport(){
+  const r = buildExport();
+  els.out.value = r.text;
+  els.changes.replaceChildren();
+  if (!r.changes.length) els.changes.append(h("li", {text:"No changes yet. Keep marks leave entries in place."}));
+  r.changes.forEach(c => els.changes.append(h("li", null, h("span", {class:"ln", text:"L" + c.n}), c.t)));
+}
+
+function render(){ renderRail(); renderShelf(); renderTally(); renderExport(); }
+function focusRow(i){
+  const li = els.shelf.querySelector('li.row[data-k="' + i + '"]');
+  if (li) li.focus();
+}
+
+/* actions */
+function goShelf(s, msg){
+  const n = shelfCount();
+  if (s < 0 || s >= n){ say(s < 0 ? "Already on shelf 1." : "Already on the last shelf, " + n + "."); return; }
+  state.shelf = s;
+  const f = firstUnmarked(s);
+  cur = f >= 0 ? f : range(s)[0];
+  save(); render(); focusRow(cur);
+  const [a, b] = range(s);
+  let un = 0; for (let i = a; i < b; i++) if (!markOf(i)) un++;
+  say(msg || ("Shelf " + (s + 1) + " of " + n + " · " + (un ? un + " unmarked" : "read")));
+}
+function mark(i, k){
+  const e = entries[i]; if (!e) return;
+  const prev = state.marks[e.n];
+  const next = prev === k ? undefined : k;
+  undoStack.push({n:e.n, i:i, prev:prev, next:next});
+  if (undoStack.length > 50) undoStack.shift();
+  if (next) state.marks[e.n] = next; else delete state.marks[e.n];
+  const f = firstUnmarked(state.shelf);
+  cur = f >= 0 ? f : i;
+  save(); render(); focusRow(cur);
+  let t = "L" + e.n + " " + e.title + ": " + (next ? MARKS[next] : "mark cleared") + ".";
+  if (shelfState(state.shelf) === "read") t += state.shelf < shelfCount() - 1 ? " Shelf " + (state.shelf + 1) + " read. Press ] for the next shelf." : " Last shelf read.";
+  say(t);
+}
+function doUndo(){
+  const u = undoStack.pop();
+  if (!u){ say("Nothing to undo."); return; }
+  const i = entries.findIndex(e => e.n === u.n);
+  if (u.prev) state.marks[u.n] = u.prev; else delete state.marks[u.n];
+  if (i >= 0){ state.shelf = Math.floor(i / SIZE); cur = i; }
+  save(); render(); if (i >= 0) focusRow(i);
+  say("Undid L" + u.n + " · now " + (u.prev ? MARKS[u.prev] : "unmarked") + ".");
+}
+function moveCur(d){
+  const [a, b] = range(state.shelf);
+  const t = cur + d;
+  if (t < a){ say("Top of shelf. Press [ for the previous shelf."); return; }
+  if (t >= b){ say("End of shelf. Press ] for the next shelf."); return; }
+  setCur(t); focusRow(t);
+}
+function setCur(t){
+  cur = t;
+  els.shelf.querySelectorAll("li.row").forEach(li => {
+    const on = +li.dataset.k === t;
+    li.classList.toggle("active", on);
+    li.tabIndex = on ? 0 : -1;
+    li.querySelectorAll("button").forEach(b => b.tabIndex = on ? 0 : -1);
+  });
+}
+
+els.shelf.addEventListener("focusin", ev => {
+  const li = ev.target.closest("li.row");
+  if (li && +li.dataset.k !== cur) setCur(+li.dataset.k);
+});
+els.prev.addEventListener("click", () => goShelf(state.shelf - 1));
+els.next.addEventListener("click", () => goShelf(state.shelf + 1));
+els.jump.addEventListener("change", () => goShelf(+els.jump.value));
+els.dest.addEventListener("change", () => { state.dest = els.dest.value; save(); renderExport();
+  say("Moved entries will go under " + els.dest.options[els.dest.selectedIndex].text.replace("New heading: ", "") + "."); });
+
+document.addEventListener("keydown", ev => {
+  if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+  const t = ev.target;
+  if (t && t.closest && t.closest("textarea,input,select")) return;
+  if (!entries.length) return;
+  const inList = els.shelf.contains(t);
+  const k = ev.key;
+  const [a, b] = range(state.shelf);
+  if (k === "j" || k === "J" || (inList && k === "ArrowDown")) moveCur(1);
+  else if (k === "k" || k === "K" || (inList && k === "ArrowUp")) moveCur(-1);
+  else if (inList && k === "Home"){ setCur(a); focusRow(a); }
+  else if (inList && k === "End"){ setCur(b - 1); focusRow(b - 1); }
+  else if (KEYMARK[k]){
+    const li = t && t.closest ? t.closest("li.row") : null;
+    mark(li ? +li.dataset.k : cur, KEYMARK[k]);
+  }
+  else if (k === "[") goShelf(state.shelf - 1);
+  else if (k === "]") goShelf(state.shelf + 1);
+  else if (k === "u" || k === "U") doUndo();
+  else if (k === "Escape" && !els.confirm.hidden){ hideConfirm(); els.reset.focus(); }
+  else return;
+  ev.preventDefault();
+});
+
+/* export buttons */
+els.copy.addEventListener("click", () => {
+  const txt = els.out.value;
+  const fallback = () => {
+    els.out.focus(); els.out.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+    say(ok ? "Copied the pruned file." : "Copy is blocked here. The text is selected; copy it by hand.");
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(() => say("Copied the pruned file · " + txt.split("\n").length + " lines."), fallback);
+  } else fallback();
+});
+els.dl.addEventListener("click", () => {
+  try {
+    const blob = new Blob([els.out.value], {type:"text/markdown"});
+    const url = URL.createObjectURL(blob);
+    const a = h("a", {href:url, download:"pruned-list.md"});
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    say("Saved pruned-list.md.");
+  } catch (e) { say("Download is blocked here. Use Copy instead."); }
+});
+
+/* loading */
+function loadText(text){
+  const p = parse(text || "");
+  if (!p.entries.length){
+    els.loadMsg.className = "note err";
+    els.loadMsg.textContent = "No links found · kept the previous list.";
+    say("No links found · kept the previous list.");
+    return;
+  }
+  const lost = Object.keys(state.marks).length;
+  state = {src:text, marks:{}, shelf:0, dest:"__new", sample:false};
+  undoStack = []; cur = 0;
+  adopt(); renderDest(); save(); render();
+  els.loadMsg.className = "note";
+  const msg = "Loaded " + entries.length + " entries in " + shelfCount() + " shelves" + (lost ? " · cleared " + lost + " marks" : "") + ".";
+  els.loadMsg.textContent = msg;
+  goShelf(0, msg);
+}
+els.load.addEventListener("click", () => loadText(els.paste.value));
+els.file.addEventListener("change", () => {
+  const f = els.file.files && els.file.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { els.paste.value = String(r.result || ""); loadText(els.paste.value); };
+  r.onerror = () => { els.loadMsg.className = "note err"; els.loadMsg.textContent = "Could not read " + f.name + " · kept the previous list."; };
+  r.readAsText(f);
+});
+function hideConfirm(){ els.confirm.hidden = true; }
+els.reset.addEventListener("click", () => {
+  const n = Object.keys(state.marks).length;
+  els.confirmText.textContent = "Reset clears " + n + " mark" + (n === 1 ? "" : "s") + (state.sample ? "" : " and your pasted list") + ", then restores the sample.";
+  els.confirm.hidden = false;
+  els.yes.focus();
+});
+els.no.addEventListener("click", () => { hideConfirm(); els.reset.focus(); say("Reset cancelled. Marks kept."); });
+els.yes.addEventListener("click", () => {
+  hideConfirm();
+  state = {src:SAMPLE, marks:{}, shelf:0, dest:"__new", sample:true};
+  undoStack = []; cur = 0;
+  adopt(); renderDest(); save(); render();
+  els.loadMsg.className = "note"; els.loadMsg.textContent = "Sample restored.";
+  goShelf(0, "Sample restored · 64 entries in 8 shelves.");
+});
+
+/* start */
+restore();
+adopt();
+if (!entries.length){ state = {src:SAMPLE, marks:{}, shelf:0, dest:"__new", sample:true}; adopt(); }
+renderDest();
+const f0 = firstUnmarked(state.shelf);
+cur = f0 >= 0 ? f0 : range(state.shelf)[0];
+render();
+say("Shelf " + (state.shelf + 1) + " of " + shelfCount() + " · " + Object.keys(state.marks).length + " marks kept from last time. Tab into the shelf, or press J.");
+})();
+</script>
+</body>
+</html>

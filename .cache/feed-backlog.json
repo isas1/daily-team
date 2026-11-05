@@ -1,6 +1,508 @@
 {
   "items": [
     {
+      "id": "0807d3001fb10dda52e55e23",
+      "title": "I built a free iOS app using RT-DETR and OSNet for real-time people counting and tracking",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoiwox/i_built_a_free_ios_app_using_rtdetr_and_osnet_for/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T13:40:37.000Z",
+      "summary": ""
+    },
+    {
+      "id": "9e2da1485772a81fd0ab7c39",
+      "title": "I built a history podcast generator you can interrupt. Ask it any topic and start learning",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoio0f/i_built_a_history_podcast_generator_you_can/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T13:29:39.000Z",
+      "summary": ""
+    },
+    {
+      "id": "28f75214d18925c65b1307c9",
+      "title": "Built a free AliExpress price tracker (with AI help) because I got tired of fake discounts",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoikzp/built_a_free_aliexpress_price_tracker_with_ai/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T13:25:42.000Z",
+      "summary": ""
+    },
+    {
+      "id": "bdaaf797088a75018023854d",
+      "title": "I built an iPhone app where you swipe on real job openings and it fills the application for you. You only pay when the employer's site confirms it.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoi4dw/i_built_an_iphone_app_where_you_swipe_on_real_job/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T13:04:04.000Z",
+      "summary": ""
+    },
+    {
+      "id": "a77e9bd8e049d2a849ad0780",
+      "title": "I got tired of YouTube’s algorithm, so I built a site where you control both the video pool and the recommendation algorithm",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoi3yg/i_got_tired_of_youtubes_algorithm_so_i_built_a/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T13:03:29.000Z",
+      "summary": ""
+    },
+    {
+      "id": "d2e1dde966c93221d87261d6",
+      "title": "Making Immersive LLM Chat Experiences More Accessible",
+      "url": "https://smashingmagazine.com/2026/11/making-immersive-llm-chat-experiences-more-accessible/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-11-05T13:00:00.000Z",
+      "summary": "As LLM chat patterns become more widespread, making them accessible is essential to ensuring everyone can access the information, tools, and opportunities they offer. Drawing on his work improving these interfaces, Eric Bailey shares practical ways to make chat-based experiences on the web more accessible and usable for people who rely on assistive"
+    },
+    {
+      "id": "ba4537136fdde50a58ecbdb3",
+      "title": "Hi! I launched my Thai learning app with every lesson free, then had to change that.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xohlo5/hi_i_launched_my_thai_learning_app_with_every/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T12:38:32.000Z",
+      "summary": ""
+    },
+    {
+      "id": "8b3ecb280cd9a9f756fb7840",
+      "title": "Sshole",
+      "url": "https://sshhole.com/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T12:19:02.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "efa8cc4b68328f48a6a8a3ca",
+      "title": "I built a self-hosted store in plain PHP. No Composer, no bundler, takes Bitcoin / Paypal / Stripe",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoh5er/i_built_a_selfhosted_store_in_plain_php_no/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T12:14:59.000Z",
+      "summary": ""
+    },
+    {
+      "id": "21b5afad9f85a781b5762390",
+      "title": "I’m a product manager, started vibe coding six months ago, and just released my first app",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoh1bk/im_a_product_manager_started_vibe_coding_six/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T12:08:55.000Z",
+      "summary": ""
+    },
+    {
+      "id": "cdf816ac1d7ed3960ddfce26",
+      "title": "I built a task manager that highlight what's next and fade the rest",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xogz12/i_built_a_task_manager_that_highlight_whats_next/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T12:05:26.000Z",
+      "summary": ""
+    },
+    {
+      "id": "5d96aa2229458f32a137eda6",
+      "title": "I built a free, interactive atlas mapping the history of human innovation across time and geography - would love your feedback!",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xogk7z/i_built_a_free_interactive_atlas_mapping_the/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T11:43:55.000Z",
+      "summary": ""
+    },
+    {
+      "id": "61a019d1886f401bca774030",
+      "title": "OpenSSH 10.6p2 Critical workaround for alpine without PAM",
+      "url": "https://www.openssh.org/releasenotes.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T11:40:30.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "2dbdf371188c85807b181fb0",
+      "title": "I built a free guide to the best supermarket wines in Ireland",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xogfkp/i_built_a_free_guide_to_the_best_supermarket/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T11:36:19.000Z",
+      "summary": ""
+    },
+    {
+      "id": "aeba5bf756bb149e5d922f04",
+      "title": "Awesome repositories are no longer awesome",
+      "url": "https://erikgahner.github.io/posts/2026/awesome-repositories-are-no-longer-awesome/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T11:16:51.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ff1e96c650542034389ebc57",
+      "title": "How did you get your first few people to actually talk to you before building?",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoeyf3/how_did_you_get_your_first_few_people_to_actually/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T10:06:50.000Z",
+      "summary": ""
+    },
+    {
+      "id": "5cacd2f820ca01e98f89ac24",
+      "title": "OpenSSH 10.6p2 has been released with a workaround for a critical vulnerability",
+      "url": "https://hachyderm.io/@damienmiller/117563026759098135",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T09:46:17.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "43b40d97b2172d2998afb9d2",
+      "title": "Baidu released ERNIE 5.5 Flash Base",
+      "url": "https://ernie.baidu.com/release/ernie-5-5-flash-base/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T09:29:12.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "d0123c70c3b18c4768821ebb",
+      "title": "Right click to convert or compress almost any file",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xoe9mu/right_click_to_convert_or_compress_almost_any_file/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T09:21:09.000Z",
+      "summary": ""
+    },
+    {
+      "id": "703997f4f5b76ba81848c178",
+      "title": "For those building an app, how long did it take before you felt it was actually ready?",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xods7s/for_those_building_an_app_how_long_did_it_take/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T08:49:21.000Z",
+      "summary": ""
+    },
+    {
+      "id": "9313768f28d960b6b3e8a313",
+      "title": "Every medication app I tried wanted a subscription. Mine is free, with a one-time (optional) Pro.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xodhxa/every_medication_app_i_tried_wanted_a/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T08:29:29.000Z",
+      "summary": ""
+    },
+    {
+      "id": "070d7829470a6ad0e975b14a",
+      "title": "I made a free Windows folder-organising tool called All-Tidy!, would love your feedback!",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xodarn/i_made_a_free_windows_folderorganising_tool/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-05T08:16:00.000Z",
+      "summary": ""
+    },
+    {
+      "id": "88ab2eaf1c2eac1e0cf1b66d",
+      "title": "GPT-6 Astra covertly underperforms on safety research",
+      "url": "https://alignment.openai.com/misalignment-reports/covert-underperformance-on-safety-research-tasks/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T07:44:30.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "7c6c81b8ef712d4f9f7a0779",
+      "title": "Being a kid making games in the early 2000s",
+      "url": "https://jaytholen.net/teengamedev/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T05:53:53.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "127879fff6f025cff3af27af",
+      "title": "Altera Announces Agilex 2X, a Complete FPGA and SoC Portfolio",
+      "url": "https://www.altera.com/newsroom/agilex-2x",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T05:47:14.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "9be9d650a7db49c3659ca44e",
+      "title": "Lemmings CSS Animation",
+      "url": "https://markblah.github.io/lemmings/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-05T04:54:10.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "853c63f738f0cecf3b918959",
+      "title": "thedotmack/claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
+    },
+    {
+      "id": "56ed6f5b1a23b5b5c199b408",
+      "title": "Nutlope/hallmark",
+      "url": "https://github.com/Nutlope/hallmark",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
+    },
+    {
+      "id": "553e1cc54ebc818266579b0a",
+      "title": "pingdotgg/t3code",
+      "url": "https://github.com/pingdotgg/t3code",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": ""
+    },
+    {
+      "id": "82a901da1b9bedec6f38670b",
+      "title": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "Public repository for Agent Skills"
+    },
+    {
+      "id": "e622970364717202be2f5925",
+      "title": "HKUDS/DeepTutor",
+      "url": "https://github.com/HKUDS/DeepTutor",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/ ."
+    },
+    {
+      "id": "d2a13eb5e04b724bc066229f",
+      "title": "max-sixty/worktrunk",
+      "url": "https://github.com/max-sixty/worktrunk",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows"
+    },
+    {
+      "id": "7366786c561f97cd051ac4ba",
+      "title": "milind-soni/OpenMausBot",
+      "url": "https://github.com/milind-soni/OpenMausBot",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "Open-source Grok Bot alternative with a virtual machine that bots can use"
+    },
+    {
+      "id": "8c6014a36ca90e3fbda99713",
+      "title": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "An agentic skills framework & software development methodology that works."
+    },
+    {
+      "id": "ec673bd7694d3a658bba5faa",
+      "title": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships."
+    },
+    {
+      "id": "e86f271c7e6b1a182df550d6",
+      "title": "hyprwm/Hyprland",
+      "url": "https://github.com/hyprwm/Hyprland",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks."
+    },
+    {
+      "id": "c7f7c21cf16630e7e00262d2",
+      "title": "jakubkrehel/skills",
+      "url": "https://github.com/jakubkrehel/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "A collection of agent skills that help you build great interfaces."
+    },
+    {
+      "id": "6d3bd03b499863301fb73ea1",
+      "title": "calesthio/OpenMontage",
+      "url": "https://github.com/calesthio/OpenMontage",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video production studio."
+    },
+    {
+      "id": "ca6e9330cc1b2a538d3772d7",
+      "title": "multica-ai/andrej-karpathy-skills",
+      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
+    },
+    {
+      "id": "03dc7a9cfb878de8b10b5400",
+      "title": "ghostty-org/ghostty",
+      "url": "https://github.com/ghostty-org/ghostty",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "👻 Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration."
+    },
+    {
+      "id": "291d5eb46511b79f06895f30",
+      "title": "Leonxlnx/taste-skill",
+      "url": "https://github.com/Leonxlnx/taste-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages"
+    },
+    {
+      "id": "19c1fb556084b78651bb8337",
+      "title": "The-PR-Agent/pr-agent",
+      "url": "https://github.com/The-PR-Agent/pr-agent",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-05T00:00:00.000Z",
+      "observed": true,
+      "summary": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier."
+    },
+    {
+      "id": "9e49ad7916ca6612b9dfa6e7",
+      "title": "Images 2.6",
+      "url": "https://openai.com/index/introducing-images-2-6/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-04T23:35:44.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "86d5c720b5bd89c83e644ef4",
+      "title": "A thousand fewer paths to root",
+      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-04T23:33:14.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "0200b1483000570a478aefa7",
+      "title": "A free browser game that teaches you to sew real clothes",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xo2ih9/a_free_browser_game_that_teaches_you_to_sew_real/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-04T22:52:02.000Z",
+      "summary": ""
+    },
+    {
+      "id": "6b097a287e2a565e2b170c9e",
+      "title": "Residential proxies detected on White House network",
+      "url": "https://layer3intel.com/blog/residential-proxies-white-house-network",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-04T20:45:18.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "b6a6340ff31bca12eae41bbc",
+      "title": "Insects don't swarm at LED lights",
+      "url": "https://www.birdsoutsidemywindow.org/2026/11/03/insects-dont-swarm-at-led-lights/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-04T19:50:23.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ec1ed320460eb3894b70b1e4",
+      "title": "Quitting my job to start a Lego store in The Netherlands and help autistic people",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xnx1fi/quitting_my_job_to_start_a_lego_store_in_the/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-04T19:14:17.000Z",
+      "summary": ""
+    },
+    {
+      "id": "dfa876a54a2df16b901af7d5",
+      "title": "Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding",
+      "url": "https://www.ricursive.com/ripple",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-04T18:53:29.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "5b79bb8ef6bb1a64a5b84a99",
+      "title": "After months of job rejections, I spent 2 years building a database GUI. It just got added to Microsoft's Azure docs.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xnvrlr/after_months_of_job_rejections_i_spent_2_years/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-04T18:25:19.000Z",
+      "summary": ""
+    },
+    {
+      "id": "c69a4026f5b4f206efbb3eb8",
+      "title": "A new Go API for JSON",
+      "url": "https://go.dev/blog/jsonv2",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-04T17:52:11.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "5a58dc2a9b35c4f268d35289",
+      "title": "I made a Mac app that turns your desktop into a living pond",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xnsilp/i_made_a_mac_app_that_turns_your_desktop_into_a/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-04T16:23:44.000Z",
+      "summary": ""
+    },
+    {
+      "id": "f4a904d03d800a16a7770eb4",
+      "title": "Kimi K3.1 Pro model weights are out",
+      "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-04T15:30:30.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "d7d9a2a25df6ba5386fde18a",
+      "title": "Ask HN: What's your current AI agentic setup?",
+      "url": "https://news.ycombinator.com/item?id=50366117",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-04T14:37:22.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "3bf31632facfd60952714f30",
       "title": "I built an analytics library for Android and Flutter, then AI helped me port it to iOS and React Native",
       "url": "https://www.reddit.com/r/SideProject/comments/1xnoa9g/i_built_an_analytics_library_for_android_and/",
@@ -271,86 +773,6 @@
       "summary": "Comments"
     },
     {
-      "id": "853c63f738f0cecf3b918959",
-      "title": "thedotmack/claude-mem",
-      "url": "https://github.com/thedotmack/claude-mem",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
-    },
-    {
-      "id": "56ed6f5b1a23b5b5c199b408",
-      "title": "Nutlope/hallmark",
-      "url": "https://github.com/Nutlope/hallmark",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
-    },
-    {
-      "id": "553e1cc54ebc818266579b0a",
-      "title": "pingdotgg/t3code",
-      "url": "https://github.com/pingdotgg/t3code",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": ""
-    },
-    {
-      "id": "ec673bd7694d3a658bba5faa",
-      "title": "pbakaus/impeccable",
-      "url": "https://github.com/pbakaus/impeccable",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships."
-    },
-    {
-      "id": "8c6014a36ca90e3fbda99713",
-      "title": "obra/superpowers",
-      "url": "https://github.com/obra/superpowers",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "An agentic skills framework & software development methodology that works."
-    },
-    {
-      "id": "82a901da1b9bedec6f38670b",
-      "title": "anthropics/skills",
-      "url": "https://github.com/anthropics/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "Public repository for Agent Skills"
-    },
-    {
-      "id": "d2a13eb5e04b724bc066229f",
-      "title": "max-sixty/worktrunk",
-      "url": "https://github.com/max-sixty/worktrunk",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows"
-    },
-    {
-      "id": "c7f7c21cf16630e7e00262d2",
-      "title": "jakubkrehel/skills",
-      "url": "https://github.com/jakubkrehel/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "A collection of agent skills that help you build great interfaces."
-    },
-    {
       "id": "0acf196572ceb07e1cf2a260",
       "title": "JetBrains/thinkrail",
       "url": "https://github.com/JetBrains/thinkrail",
@@ -361,36 +783,6 @@
       "summary": "Vibe code with pi in a lightweight, real IDE that customises itself around the way you work — The Vibe You Need"
     },
     {
-      "id": "03dc7a9cfb878de8b10b5400",
-      "title": "ghostty-org/ghostty",
-      "url": "https://github.com/ghostty-org/ghostty",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "👻 Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration."
-    },
-    {
-      "id": "ca6e9330cc1b2a538d3772d7",
-      "title": "multica-ai/andrej-karpathy-skills",
-      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
-    },
-    {
-      "id": "e86f271c7e6b1a182df550d6",
-      "title": "hyprwm/Hyprland",
-      "url": "https://github.com/hyprwm/Hyprland",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks."
-    },
-    {
       "id": "4f795faf4eede06c1c10e4b0",
       "title": "AgriciDaniel/claude-seo",
       "url": "https://github.com/AgriciDaniel/claude-seo",
@@ -399,26 +791,6 @@
       "published": "2026-11-04T00:00:00.000Z",
       "observed": true,
       "summary": "Universal SEO skill for Claude Code. 26 sub-skills + 19 sub-agents covering technical SEO, E-E-A-T, schema, GEO/AEO, agent readiness (Lighthouse Agentic Browsing, WebMCP, llms.txt), backlinks, local SEO, e-commerce, international SEO, Google APIs, and PDF/Excel reporting. 9 optional extensions for live SEO data."
-    },
-    {
-      "id": "6d3bd03b499863301fb73ea1",
-      "title": "calesthio/OpenMontage",
-      "url": "https://github.com/calesthio/OpenMontage",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video production studio."
-    },
-    {
-      "id": "291d5eb46511b79f06895f30",
-      "title": "Leonxlnx/taste-skill",
-      "url": "https://github.com/Leonxlnx/taste-skill",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-04T00:00:00.000Z",
-      "observed": true,
-      "summary": "Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages"
     },
     {
       "id": "79f9eebdccb817e2ee068233",
@@ -473,6 +845,15 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-03T15:08:17.000Z",
       "summary": ""
+    },
+    {
+      "id": "14fe5780491ae296b2472ce3",
+      "title": "TextEdit vs. Pages",
+      "url": "https://leancrew.com/all-this/2026/10/textedit-vs-pages/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-03T15:00:09.000Z",
+      "summary": "Comments"
     },
     {
       "id": "6b33dbafe20f7aa9c3bb081f",
@@ -536,393 +917,12 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-03T12:14:43.000Z",
       "summary": ""
-    },
-    {
-      "id": "a29fc08ae2b3030ef53fbdac",
-      "title": "A stranger read what my app wrote about her and said she felt \"triggered, embarrassed almost.\" Best feedback I've ever had.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmr8gf/a_stranger_read_what_my_app_wrote_about_her_and/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T12:06:40.000Z",
-      "summary": ""
-    },
-    {
-      "id": "1285c6abe409ab26a424709d",
-      "title": "Sava Trust (YC F25) Is Hiring a Founding Engineer in NYC",
-      "url": "https://www.ycombinator.com/companies/sava-trust-company/jobs",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-03T12:01:01.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "ad310b39cc201295d2b21a04",
-      "title": "I'm building a place journal, and the everyday visits are what I like having a record of",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmqqjb/im_building_a_place_journal_and_the_everyday/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T11:40:58.000Z",
-      "summary": ""
-    },
-    {
-      "id": "13e29f54620b63525a0e131f",
-      "title": "Swipe the Flow - draw a wall and watch live wind swirl around it",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmqq8e/swipe_the_flow_draw_a_wall_and_watch_live_wind/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T11:40:31.000Z",
-      "summary": ""
-    },
-    {
-      "id": "85fa8e21ef01618d9b31af54",
-      "title": "Anthropic IPO filing: $1.7B quarterly payroll, about $107K per employee monthly",
-      "url": "https://www.techspot.com/news/114428-anthropic-ipo-filing-reveals-17-billion-quarterly-personnel.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-03T11:16:07.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "d6b17f9339ceda7aa9834995",
-      "title": "I’m a designer who never really coded. I spent two months building an interactive Solar System",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmq8bv/im_a_designer_who_never_really_coded_i_spent_two/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T11:12:19.000Z",
-      "summary": ""
-    },
-    {
-      "id": "a66e37f59d74bbb60e4b2938",
-      "title": "Here’s what I did to pass my first 100 clicks from Google in a month",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmpwf9/heres_what_i_did_to_pass_my_first_100_clicks_from/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T10:53:36.000Z",
-      "summary": ""
-    },
-    {
-      "id": "ff7d1b20051c1eea8379e3f7",
-      "title": "Modern CSS Might Make Your Front-End More Complex",
-      "url": "https://smashingmagazine.com/2026/11/modern-css-might-make-your-front-end-more-complex/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-11-03T10:00:00.000Z",
-      "summary": "Replacing JavaScript with a modern CSS feature can simplify a piece of code while making the wider application harder to reason about. Gabriel Shoyombo explores what happens when logic is split between CSS and JavaScript, sharing practical guidance to help you keep complexity in check during migration."
-    },
-    {
-      "id": "598a53a7d0f06c6bd38f2b5e",
-      "title": "classican - one screen of classical music where every piece gets its own pixel painting drawn in code",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmnhb8/classican_one_screen_of_classical_music_where/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T08:23:21.000Z",
-      "summary": ""
-    },
-    {
-      "id": "921aede24621fdae1e28cbea",
-      "title": "Could a modern chess engine on a Pentium have defeated Kasparov in 1996?",
-      "url": "https://nicholas.carlini.com/writing/2026/algorithmic-improvements-chess.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-03T07:56:21.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "83d03dc5facbf8d1c4b6f723",
-      "title": "Built an open-source async standup app you can self-host (Docker, AGPL-3.0)",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmmu7u/built_an_opensource_async_standup_app_you_can/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T07:41:50.000Z",
-      "summary": ""
-    },
-    {
-      "id": "e501aac8f03a6a8e79f2d551",
-      "title": "I made a boss key for Windows that triggers by itself using your webcam",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmmp2z/i_made_a_boss_key_for_windows_that_triggers_by/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T07:32:30.000Z",
-      "summary": ""
-    },
-    {
-      "id": "834f867a452076917a144850",
-      "title": "Nvidia – open-source auto-ontology",
-      "url": "https://github.com/NVIDIA/auto-ontology",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-03T07:04:50.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "627581157060332318d6ca54",
-      "title": "getting frustrated...",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmllnd/getting_frustrated/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T06:25:38.000Z",
-      "summary": ""
-    },
-    {
-      "id": "7a0fc40f8c932a5d93cdf019",
-      "title": "I made a gun simulator for phones",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmhavi/i_made_a_gun_simulator_for_phones/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T02:41:32.000Z",
-      "summary": ""
-    },
-    {
-      "id": "c6b64c6f66589d18f5c2e383",
-      "title": "Show HN: Hacker Times, a New York Times-inspired version of Hacker News",
-      "url": "https://hackertimes.ca/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-03T01:53:34.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "baf6a1185cdb25e90780b354",
-      "title": "DiscImageStudio: burn visible artwork onto CDs, DVDs and Blu-ray discs",
-      "url": "https://github.com/JiaFeiMiao-K-Cat/DiscImageStudio",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-03T01:33:43.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "34c66b47dd0c5af86211817a",
-      "title": "Show HN: HackerTV – HN's most-recommended Youtube videos as 24/7 TV channels",
-      "url": "https://hackertv.org/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-03T01:18:09.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "269a1c5d432fce3930fa36fe",
-      "title": "I'm not buying the \"built it in 2 days, now at XYZ MRR\" stories",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xmeadb/im_not_buying_the_built_it_in_2_days_now_at_xyz/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T00:20:44.000Z",
-      "summary": ""
-    },
-    {
-      "id": "53e3830aa091c040968c2b71",
-      "title": "My last post got 75 comments asking how a free Chrome extension makes money. Here are the straight answers.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xme911/my_last_post_got_75_comments_asking_how_a_free/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-03T00:19:03.000Z",
-      "summary": ""
-    },
-    {
-      "id": "9c15e014464735eb318029f4",
-      "title": "cloudflare/security-audit-skill",
-      "url": "https://github.com/cloudflare/security-audit-skill",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-03T00:00:00.000Z",
-      "observed": true,
-      "summary": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings"
-    },
-    {
-      "id": "626a5e4fcb233d8d7ffe545e",
-      "title": "TauricResearch/TradingAgents",
-      "url": "https://github.com/TauricResearch/TradingAgents",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-03T00:00:00.000Z",
-      "observed": true,
-      "summary": "TradingAgents: Multi-Agents LLM Financial Trading Framework"
-    },
-    {
-      "id": "edb3a626875732de5c9b6881",
-      "title": "affaan-m/ECC",
-      "url": "https://github.com/affaan-m/ECC",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-03T00:00:00.000Z",
-      "observed": true,
-      "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond."
-    },
-    {
-      "id": "f9ecf66c18226a74f1d159fc",
-      "title": "Astra can read and write weights to improve Qwen",
-      "url": "https://rikiyat.github.io/blog/weight-space-programming/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T18:21:28.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "ea9ecc5119c8cf4ddfb858db",
-      "title": "Self-Employed? Solopreneur? NIST Has a Cybersecurity Guide Just for You",
-      "url": "https://www.nist.gov/news-events/news/2026/11/self-employed-solopreneur-nist-has-cybersecurity-guide-just-you",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T17:47:40.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "b00f3c61979d2dea4922d18a",
-      "title": "Show HN: Subvocal – Talk to your computer without making noise",
-      "url": "https://news.ycombinator.com/item?id=50340088",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T17:16:17.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "7e4abe26de7f0b912222b818",
-      "title": "US boy names that became girl names and vice versa",
-      "url": "https://namedaisy.com/blog/boy-names-that-became-girl-names",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T16:34:36.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "101769515b6870b2042d4956",
-      "title": "Jailbreaking my car's navigation system just so I can change the time",
-      "url": "https://blog.nns.ee/2026/11/02/renault-hack/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T16:29:19.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e7b02d840c9947fa05326e55",
-      "title": "My side project just passed 100 GitHub stars: system design diagrams that tell you if the design would hold up",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xm1be2/my_side_project_just_passed_100_github_stars/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T16:08:54.000Z",
-      "summary": ""
-    },
-    {
-      "id": "b91cd0e3b7b1086e44086f73",
-      "title": "I built a site where 44 AI agents solve math, build games and film their own TV show, live!",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xlybx7/i_built_a_site_where_44_ai_agents_solve_math/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T14:15:36.000Z",
-      "summary": ""
-    },
-    {
-      "id": "997bd9be3612b4f59e0d4cb7",
-      "title": "I turned 100 old science fiction books into a database of 6,222 startup ideas",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xly9r8/i_turned_100_old_science_fiction_books_into_a/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T14:13:17.000Z",
-      "summary": ""
-    },
-    {
-      "id": "55211544f3507fd1a981e6f6",
-      "title": "I made a daily word game where you guess the rule, not the word",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xly54g/i_made_a_daily_word_game_where_you_guess_the_rule/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T14:08:11.000Z",
-      "summary": ""
-    },
-    {
-      "id": "0371ff9250f932ad40cec023",
-      "title": "Fujifilm to boost tape production 5x as AI fuels archiving demand",
-      "url": "https://arstechnica.com/gadgets/2026/10/fujifilm-to-boost-tape-production-5x-as-ai-fuels-archiving-demand/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T14:02:42.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e9b56a93caf2f10ebdee162b",
-      "title": "433MHz TUI scanner: using a FT232H connected to a CC1101",
-      "url": "https://blog.jacq.cc/guides/cc1101-433mhz-scanner-ft232h/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T13:28:14.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "3c3df74dab2380f5ee3ce95d",
-      "title": "If you love a website, back it up",
-      "url": "https://blog.mistys-internet.website/post/2026/10/29/if-you-love-a-website-back-it-up/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T13:25:35.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "fba2d9ccc6de657893c0ebef",
-      "title": "Your Secret Santa shouldn’t need your email. Mine never did, and this year it got a full redesign and the most requested feature (exclusions)",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xlwomw/your_secret_santa_shouldnt_need_your_email_mine/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T13:07:08.000Z",
-      "summary": ""
-    },
-    {
-      "id": "a536795606b35c622edf98ad",
-      "title": "STEWARD: an AI product expert I built to live inside your app, with a record for every answer",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xlwk8m/steward_an_ai_product_expert_i_built_to_live/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T13:01:42.000Z",
-      "summary": ""
-    },
-    {
-      "id": "9e8a6cc08fde12e12236045a",
-      "title": "Last night an AI agent performed brain surgery on a mouse",
-      "url": "https://twitter.com/OcanaSantero/status/2115442964574908902",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-02T12:50:59.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "0b3c450fb15dd42ccb332033",
-      "title": "Frontrumors - AI news, model rankings and API pricing",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xlvksz/frontrumors_ai_news_model_rankings_and_api_pricing/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T12:14:31.000Z",
-      "summary": ""
-    },
-    {
-      "id": "9edd56116f1ab293449a9143",
-      "title": "I'd love to hear feedback on my movie picker site.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xlviq3/id_love_to_hear_feedback_on_my_movie_picker_site/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T12:11:36.000Z",
-      "summary": ""
-    },
-    {
-      "id": "30bc1e2232f19e6b000bef3a",
-      "title": "Added step-by-step playback to Ablauf, a Markdown-compatible diagram tool",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xlveba/added_stepbystep_playback_to_ablauf_a/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T12:05:30.000Z",
-      "summary": ""
-    },
-    {
-      "id": "9d59a6a8801b6a8884ecdae5",
-      "title": "Any pixel artists here? I’d love to see what you’d draw in my project 🎨",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xlvcjn/any_pixel_artists_here_id_love_to_see_what_youd/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-02T12:02:58.000Z",
-      "summary": ""
     }
   ],
   "fetched": {
-    "smashing": "2026-11-04",
-    "hacker-news": "2026-11-04",
-    "github-trending": "2026-11-04",
-    "reddit-sideproject": "2026-11-04"
+    "smashing": "2026-11-05",
+    "hacker-news": "2026-11-05",
+    "github-trending": "2026-11-05",
+    "reddit-sideproject": "2026-11-05"
   }
 }
