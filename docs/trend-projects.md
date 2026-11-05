@@ -24,16 +24,16 @@ is Claude and Pages is off. Component source access remains optional.
 - Smashing Magazine RSS: design context. GitHub Blog RSS stays disabled because
   its current feed contains declarations rejected by the restricted XML reader.
 
-Every source has an eight-second timeout, 2 MiB ceiling and at most 20 entries.
-RSS parsing rejects unsafe declarations; discovery never executes source code.
-Project candidates use a 14-day freshness window and balance source families.
-The shared 100-item normalized cache supplies fallback. IDs used in the previous
-28 days are excluded. No extra model request is needed for discovery.
+Each date selects one enabled source in a fixed rotation. Only that source is
+fetched, and candidates come only from that source, including cached fallback.
+The team selects exactly one item and explains how it inspires the interactive
+project. Items must be at most 14 days old and unused in the last 28 days. If
+no eligible item remains, the run stops with a clear error; it does not silently
+use another feed or invent an inspiration. Custom briefs bypass discovery.
 
-Use at least two source families when available. If only one survives, use it;
-if none survives, record `original-fallback`, with no invented trend claims.
-Custom briefs bypass discovery and take priority. GitHub Trending HTML can change;
-an unrecognized page fails visibly rather than inventing repository entries.
+Requests have an eight-second timeout and 2 MiB ceiling. Feed parsing rejects
+unsafe declarations; discovery never executes source code. GitHub Trending HTML
+can change; an unrecognized page fails visibly. No extra model call is needed.
 
 ## Originality and scope
 

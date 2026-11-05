@@ -10,6 +10,10 @@ its size. `--artifacts 0` plans six components and writes metadata without build
 Every nonzero pack gets a connected `piece.html`, including smaller packs.
 All requested components must pass source checks before demo assembly.
 
+[Minimum interface copy](component-copy.md): target 12 rendered words per tile,
+24 only for necessary data-heavy panels. Keep labels/actions/current feedback;
+remove demo prose. The legacy 80-word markup check is not a design target.
+
 ## Run
 
 ```sh
