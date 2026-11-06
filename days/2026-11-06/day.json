@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-06",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-06\nSeason: 2026-10-26\n\n1. Watch restorer [new]\n   Method: Build the useful action before adding any motion. [new]\n   Stance: Speaks for the one who finds it.\n   Temperament: Asks for the exact moment the motion should stop.\n2. Motion engineer [new]\n   Method: Give one transition a clear start, middle and end. [new]\n   Stance: Wants it to last.\n   Temperament: Asks the quietest member to try it first.\n3. Interaction engineer [new]\n   Method: Replace one vague label with a clear action verb. [new]\n   Stance: Breaks the frame.\n   Temperament: Interrupts with a counterexample, then listens.\n4. Polar city navigator (future; invented) [guest] [new]\n   Method: Keep the route back visible in every expanded view.\n   Stance: Insists it must be beautiful.\n   Temperament: Tracks the unresolved point until someone answers.\n\nConstraint: Every action gives immediate visible feedback.\nTask: Loading preview: a skeleton for a project gallery that holds the card layout while sample content loads.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "c0a5e55491bfa6da43e2e25e454198ca12a4de1689e3ac4e978ae50b0a2d8ccf",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "253db4766250cc7717ffc2b3",
+      "d2e1dde966c93221d87261d6"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "You slide between a gallery's loading skeleton and its real cards and see exactly where they don't line up.",
+  "concept": "Register Check",
+  "plan": "# Pitch\n\n**Watch restorer.** A front-end developer ships a project gallery. The skeleton looks right, then the real cards arrive and everything jumps 14 px. Whoever lands on that page loses their place. Printers solved this with registration marks. Each colour plate carries the same crosshair, and when the plates are out of line you see a coloured fringe. So we print the skeleton in cyan and the loaded card in magenta on the same sheet. Where they agree, the ink goes dark. Where they don't, a fringe shows the exact edge and the exact pixels. First build the measurement. Motion comes after that.\n\n**Motion engineer.** I want one transition that someone can hold in their hand: skeleton to content, with a start, a middle and an end on a scrub slider. Drag it to 50 and you see both plates at once. That middle frame is where the problem sits, and today it lasts 16 ms. I want the developer to keep that frame on screen as long as they need it. My second idea was a \"private everyday app\" from the SideProject post, a medicine shelf with skeleton cards. It's a decent app, but the skeleton would only be decoration in it.\n\n**Interaction engineer.** Counter-direction: the Smashing post on accessible LLM chat. Streaming answers shift the page under a screen-reader cursor. We build a pacer that rehearses live-region announcements against a token stream. Its controls say \"Announce every sentence\" and \"Hold until done\" instead of \"Settings\".\n\n**Polar city navigator.** Third direction: the wood ants in the pitfall. A colony survives at the bottom of a bunker on what falls in. It would make an explorable with a route back up. It would be beautiful. But a title is all we have. We have no numbers from the paper.\n\n# Clash\n\n**Interaction engineer:** Counterexample. Lighthouse already gives you CLS. One number, done. Why build a sheet?\n\n**Watch restorer:** One number after load. It doesn't say which card or which edge. \"0.12\" doesn't tell you the title wrapped to two lines on card four.\n\n**Interaction engineer:** Fine. Then the pacer is a different job, and it needs claims about how screen readers behave that we can't test offline. I'll drop it. But don't ship a button called \"Analyze\".\n\n**Motion engineer:** Quietest first. Navigator, you've barely spoken. Scrub the slider. Where should it stop?\n\n**Polar city navigator:** At the frame where the fringe is widest. It should stop there and say \"card 4 · bottom edge · +14 px\". And when I open that card, \"Back to sheet\" stays pinned and the sheet keeps my scroll. Has anyone answered that yet?\n\n**Watch restorer:** Yes. The exact stop is the worst offset. Arrow keys step the slider in 5s, and End jumps to the worst frame. Nothing animates until the numbers exist.\n\n**Polar city navigator:** Then the marks get to be beautiful. Hairline crosshairs at every card corner, cyan and magenta multiplied, dark where they agree. The ants can wait for data.\n\n**Motion engineer:** And \"Nudge to fit\" moves the skeleton 1 px per press while the fringe narrows live. That gives immediate feedback on every action, which the constraint asks for.\n\n# Decision\n\nYou slide between a gallery's loading skeleton and its real cards and see exactly where they don't line up.\n\nConcept: Register Check\n\nThe sheet shows a sample gallery of six project cards. The skeleton is printed in cyan and the loaded cards in magenta, with multiply blend. Aligned edges read dark. Misaligned edges show a coloured fringe labelled with a pixel offset. A scrub slider runs from 0 (skeleton) to 100 (loaded). The sample cards include one that fails each common way: a two-line title, a missing thumbnail, a wrapping tag row and a long author name.\n\n- **Watch restorer:** the measurement comes first. Per-card, per-edge offsets are computed from `getBoundingClientRect` before any blend or motion exists. The slider's End key stops on the worst offset frame.\n- **Motion engineer:** one scrubbable transition with a defined start (0), middle (50, both plates) and end (100). Under reduced motion the slider swaps plates without a crossfade.\n- **Interaction engineer:** verb labels throughout: \"Overlay skeleton\", \"Jump to worst edge\", \"Nudge to fit\", \"Copy CSS fix\", \"Reset sample\". There is no Analyze or Settings.\n- **Polar city navigator:** registration crosshairs at every card corner. Opening a card keeps \"Back to sheet\" pinned and the scroll position kept. The worst-offset readout stays visible until someone fixes it.\n\nThe approach it improves is the CLS score in Lighthouse and the brief flash of DevTools layout-shift regions. Both report a shift after it has already happened. Register Check names the card and the edge, then lets the developer fix the size before shipping.\n\n# Build notes\n\n1. Render the gallery twice in one CSS grid using shared track definitions. `.plate-skel` is a cyan layer and `.plate-live` is a magenta layer, both with `mix-blend-mode: multiply`. On load, and after every nudge, measure all four edges of each card pair. Store the offsets in a `register` array and print the worst one in a fixed-width readout (\"card 4 · bottom · +14 px\").\n2. Bind the slider (`input type=range`, 0–100, step 5) to `--mix`, which drives plate opacity. Home, End and the arrow keys are native. \"Jump to worst edge\" sets the value to 50 and focuses the offending card's fringe label. Each press of \"Nudge to fit\" changes that skeleton's `min-height` or line count by 1 px, re-measures in the same frame and updates the fringe. Every action pushes onto an undo stack of 20 entries.\n3. \"Copy CSS fix\" writes the adjusted skeleton sizes as a CSS block and shows \"Copied 3 rules\". \"Reset sample\" restores the six original cards and clears the undo stack. When a card is open, \"Back to sheet\" is shown in a sticky header and returns to the stored `scrollY`. Everything is a single offline HTML file with no network calls.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Register Check\",\"audience\":\"Front-end developers building project galleries\",\"problem\":\"Skeletons drift from loaded cards; CLS names no card or edge\",\"interaction\":\"Scrub skeleton-to-loaded slider, jump to worst edge, nudge to fit\",\"outcome\":\"Per-card edge offsets in px, live fringe, copyable CSS fix\",\"recovery\":\"Undo nudge, Reset sample, Back to sheet keeps scroll\",\"mechanism\":\"Print registration: cyan and magenta plates multiply; fringe marks offset\",\"difference\":\"Lighthouse CLS is one post-load number; this names card, edge and fix\",\"whyNow\":\"Steam post on what AI output needed checking; Smashing on accessible chat. Titles only, no demand data\",\"sourceIds\":[\"253db4766250cc7717ffc2b3\",\"d2e1dde966c93221d87261d6\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Register Check\",\"need\":\"See where a skeleton mismatches loaded cards\",\"mechanism\":\"Two-plate overlay with scrub slider and 1 px nudge\",\"rejection\":\"Selected: offline, cross-domain, measurable result\"},{\"name\":\"Announce Pacer\",\"need\":\"Pace screen-reader output in streaming chat\",\"mechanism\":\"Rehearse live-region rules against a token stream\",\"rejection\":\"Needs untested AT claims; nears chat wrapper\"},{\"name\":\"Pitfall Colony\",\"need\":\"Explain ant survival in a closed bunker\",\"mechanism\":\"Explorable inflow sliders with route back up\",\"rejection\":\"Title only; no data to model honestly\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "efa2d534e1ab7abd0f15083f1fd97042fd79ba11f7d66b6edc587b7dd4bd7bc1",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Register Check",
+    "audience": "Front-end developers building project galleries",
+    "problem": "Skeletons drift from loaded cards; CLS names no card or edge",
+    "interaction": "Scrub skeleton-to-loaded slider, jump to worst edge, nudge to fit",
+    "outcome": "Per-card edge offsets in px, live fringe, copyable CSS fix",
+    "recovery": "Undo nudge, Reset sample, Back to sheet keeps scroll",
+    "mechanism": "Print registration: cyan and magenta plates multiply; fringe marks offset",
+    "difference": "Lighthouse CLS is one post-load number; this names card, edge and fix",
+    "whyNow": "Steam post on what AI output needed checking; Smashing on accessible chat. Titles only, no demand data",
+    "sourceIds": [
+      "253db4766250cc7717ffc2b3",
+      "d2e1dde966c93221d87261d6"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Register Check",
+        "need": "See where a skeleton mismatches loaded cards",
+        "mechanism": "Two-plate overlay with scrub slider and 1 px nudge",
+        "rejection": "Selected: offline, cross-domain, measurable result"
+      },
+      {
+        "name": "Announce Pacer",
+        "need": "Pace screen-reader output in streaming chat",
+        "mechanism": "Rehearse live-region rules against a token stream",
+        "rejection": "Needs untested AT claims; nears chat wrapper"
+      },
+      {
+        "name": "Pitfall Colony",
+        "need": "Explain ant survival in a closed bunker",
+        "mechanism": "Explorable inflow sliders with route back up",
+        "rejection": "Title only; no data to model honestly"
+      }
+    ]
+  }
+}

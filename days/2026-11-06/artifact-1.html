@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register Check</title>
+<style>
+:root{
+  --paper:#f4f0e7;
+  --sheet:#fbf8f1;
+  --ink:#1c1a24;
+  --mute:#56505f;
+  --line:#cfc7b6;
+  --cy:#0089b8;
+  --mg:#c8156f;
+  --so:1;
+  --lo:1;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:480px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:22px;line-height:1.2;margin:0;letter-spacing:-.01em}
+.lede{margin:4px 0 0;color:var(--mute);font-size:14px}
+#status{min-height:1.5em;margin:10px 0 6px;font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.controls{display:grid;gap:10px}
+.mixrow{display:grid;grid-template-columns:auto 1fr auto 3ch;align-items:center;gap:8px;font-size:13px;color:var(--mute)}
+.mixrow input{width:100%;min-height:44px;accent-color:var(--ink);margin:0}
+.mixrow output{font-variant-numeric:tabular-nums;text-align:right;color:var(--ink)}
+.readout{margin:0;padding:10px 12px;border:1px solid var(--ink);border-radius:4px;background:var(--sheet);
+  font:14px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.readout.ok{border-color:var(--line);color:var(--mute)}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;font-size:14px;font-weight:600;color:var(--ink);background:transparent;border:1.5px solid var(--ink);
+  border-radius:4px;min-height:44px;padding:0 14px;cursor:pointer;touch-action:manipulation;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+button.primary{background:var(--ink);color:var(--paper)}
+button:disabled{opacity:.4;cursor:default}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.sheet{position:relative;margin-top:22px;padding:14px;border:1px solid var(--line);background:var(--sheet);
+  display:grid;isolation:isolate}
+.demo{position:absolute;top:-10px;left:12px;z-index:3;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:2px 6px;border-radius:2px}
+.plate{grid-area:1/1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;mix-blend-mode:multiply}
+#skelPlate{pointer-events:none}
+.card{border:1.5px solid;border-radius:3px;padding:10px;display:flex;flex-direction:column;gap:8px;overflow:hidden;margin:0}
+.skel{border-color:var(--cy);background:rgba(0,137,184,.08);opacity:var(--so)}
+.s-thumb{display:block;flex:0 1 64px;height:64px;min-height:0;background:rgba(0,137,184,.28)}
+.s-line{display:block;flex:none;background:linear-gradient(rgba(0,137,184,.45),rgba(0,137,184,.45)) no-repeat 0 50%/var(--w) 10px}
+.s-title{height:18px;--w:78%}
+.s-meta{height:14px;--w:46%}
+.s-tags{height:18px;--w:30%}
+.live{width:100%;min-height:0;border-color:var(--mg);background:rgba(200,21,111,.07);color:#930f53;text-align:left;
+  font-weight:400;opacity:var(--lo)}
+.live:focus-visible{opacity:1}
+.l-thumb{display:block;flex:none;height:64px;background:linear-gradient(135deg,rgba(200,21,111,.38),rgba(200,21,111,.1))}
+.l-title{display:block;font-size:15px;line-height:18px;font-weight:600;overflow-wrap:anywhere}
+.l-meta{display:block;font-size:12px;line-height:14px;overflow-wrap:anywhere}
+.l-tags{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:11px;line-height:16px;border:1px solid rgba(200,21,111,.6);padding:0 6px;border-radius:2px}
+.live.flash{opacity:1;animation:flash .5s ease-in-out 3}
+@keyframes flash{0%,100%{box-shadow:0 0 0 0 rgba(28,26,36,0)}50%{box-shadow:0 0 0 5px var(--ink)}}
+.layer{position:absolute;inset:0;pointer-events:none}
+#marks{mix-blend-mode:multiply}
+.mark{position:absolute;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border:1px solid currentColor;border-radius:50%}
+.mark::before,.mark::after{content:"";position:absolute;background:currentColor}
+.mark::before{left:-5px;right:-5px;top:3px;height:1px}
+.mark::after{top:-5px;bottom:-5px;left:3px;width:1px}
+.m-s{color:var(--cy);opacity:var(--so)}
+.m-l{color:var(--mg);opacity:var(--lo)}
+.flag{position:absolute;z-index:2;transform:translate(-100%,-50%);font:11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--ink);color:var(--paper);padding:3px 5px;border-radius:2px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fix{margin:14px 0 0;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:4px;
+  font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+details{margin-top:28px;font-size:13px;color:var(--mute)}
+summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--ink);font-weight:600}
+details ul{padding-left:18px;margin:6px 0}
+details a{color:var(--ink)}
+.parked{height:0;overflow:hidden;visibility:hidden}
+.bar{position:sticky;top:0;z-index:5;background:var(--paper);display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.bar h2{font-size:15px;margin:0;font-weight:600}
+.proof{margin:20px 0;padding:20px;background:var(--sheet);border:1px solid var(--line);display:flex;justify-content:center;isolation:isolate;overflow:auto}
+.proof-in{position:relative;flex:none}
+.pbox{position:absolute;border:1.5px solid;border-radius:3px;mix-blend-mode:multiply}
+.ps{border-color:var(--cy);background:rgba(0,137,184,.14)}
+.pl{border-color:var(--mg);background:rgba(200,21,111,.12)}
+.proof .mark{opacity:1;mix-blend-mode:multiply}
+.edges{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:8px;margin:0 0 16px}
+.edges div{border-top:1px solid var(--line);padding-top:6px}
+.edges dt{font-size:12px;color:var(--mute)}
+.edges dd{margin:0;font:17px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){
+  .live.flash{animation:none;box-shadow:0 0 0 4px var(--ink)}
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Register Check</h1>
+    <p class="lede">See where a loading skeleton drifts from its loaded cards.</p>
+  </header>
+  <p id="status" role="status" aria-live="polite"></p>
+
+  <section id="sheetView">
+    <div class="controls">
+      <div class="mixrow">
+        <span aria-hidden="true">Skeleton</span>
+        <input type="range" id="mix" min="0" max="100" step="5" value="50" aria-label="Skeleton to loaded">
+        <span aria-hidden="true">Loaded</span>
+        <output id="mixOut" for="mix">50</output>
+      </div>
+      <p id="readout" class="readout"></p>
+      <div class="btns">
+        <button type="button" id="jump">Jump to worst</button>
+        <button type="button" id="nudge" class="primary">Nudge to fit</button>
+        <button type="button" id="undo">Undo</button>
+        <button type="button" id="copy">Copy CSS fix</button>
+        <button type="button" id="reset">Reset sample</button>
+      </div>
+    </div>
+
+    <div id="sheet" class="sheet">
+      <span class="demo">Demo</span>
+      <div id="skelPlate" class="plate" aria-hidden="true"></div>
+      <div id="livePlate" class="plate"></div>
+      <div id="marks" class="layer" aria-hidden="true"></div>
+      <div id="flags" class="layer" aria-hidden="true"></div>
+    </div>
+
+    <pre id="fix" class="fix" hidden aria-label="CSS fix"></pre>
+
+    <details>
+      <summary>Credits</summary>
+      <ul>
+        <li>Watch restorer (lead): edge offsets measured before any blend or motion. The readout names the card and edge.</li>
+        <li>Motion engineer: one scrub transition. Skeleton at 0, both plates at 50, loaded at 100.</li>
+        <li>Interaction engineer: verb labels and a 1 px nudge with a live fringe.</li>
+        <li>Polar city navigator: corner crosshairs. Back to sheet keeps the scroll position.</li>
+      </ul>
+      <p>Demo data. Runs offline with no network calls.</p>
+      <ul>
+        <li><a href="https://www.reddit.com/r/SideProject/comments/1xpb785/i_shipped_a_steam_strategy_game_with_aigenerated/" rel="noreferrer">I shipped a Steam strategy game with AI-generated code and visuals. Here is what I had to keep checking.</a></li>
+        <li><a href="https://smashingmagazine.com/2026/11/making-immersive-llm-chat-experiences-more-accessible/" rel="noreferrer">Making Immersive LLM Chat Experiences More Accessible</a></li>
+      </ul>
+    </details>
+  </section>
+
+  <section id="detail" hidden aria-labelledby="dTitle">
+    <div class="bar">
+      <button type="button" id="back">Back to sheet</button>
+      <h2 id="dTitle"></h2>
+    </div>
+    <div class="proof"><div id="proof" class="proof-in" aria-hidden="true"></div></div>
+    <dl id="edges" class="edges"></dl>
+    <div class="btns">
+      <button type="button" id="dNudge" class="primary">Nudge to fit</button>
+      <button type="button" id="dUndo">Undo</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const CARDS = [
+    {t:"Tide Clock", a:"Ana", g:["css"], th:1},
+    {t:"Orbit", a:"Kofi", g:["svg"], th:1},
+    {t:"Night Ferry Departure Boards", a:"Lea", g:["js"], th:1},
+    {t:"Pocket Loom", a:"Ines", g:["css"], th:0},
+    {t:"Grain", a:"Tomo", g:["css","js","svg","wasm","a11y","webgl"], th:1},
+    {t:"Kiln Log", a:"Maximiliane Oyelaran-Whitcombe", g:["svg"], th:1}
+  ];
+  const KEY = "register-check-v1";
+  const $ = s => document.querySelector(s);
+  const rmq = matchMedia("(prefers-reduced-motion: reduce)");
+
+  const sheet = $("#sheet"), skelPlate = $("#skelPlate"), livePlate = $("#livePlate");
+  const marks = $("#marks"), flags = $("#flags");
+  const mix = $("#mix"), mixOut = $("#mixOut"), readout = $("#readout"), statusEl = $("#status");
+  const bJump = $("#jump"), bNudge = $("#nudge"), bUndo = $("#undo"), bCopy = $("#copy"), bReset = $("#reset");
+  const fix = $("#fix"), sheetView = $("#sheetView"), detail = $("#detail");
+  const bBack = $("#back"), dTitle = $("#dTitle"), proof = $("#proof"), edgesEl = $("#edges");
+  const dNudge = $("#dNudge"), dUndo = $("#dUndo");
+
+  function el(tag, cls, text) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  const fmt = v => v > 0 ? "+" + v : v < 0 ? "\u2212" + (-v) : "0";
+  function say(t) { statusEl.textContent = t; }
+
+  const skels = [], lives = [];
+  CARDS.forEach((c, i) => {
+    const n = i + 1;
+    const s = el("div", "card skel");
+    s.dataset.card = n;
+    s.append(el("span", "s-thumb"), el("span", "s-line s-title"), el("span", "s-line s-meta"), el("span", "s-line s-tags"));
+    skelPlate.append(s); skels.push(s);
+
+    const b = el("button", "card live");
+    b.type = "button";
+    b.dataset.card = n;
+    if (c.th) b.append(el("span", "l-thumb"));
+    b.append(el("span", "l-title", c.t), el("span", "l-meta", c.a));
+    const g = el("span", "l-tags");
+    c.g.forEach(x => g.append(el("span", "chip", x)));
+    b.append(g);
+    b.addEventListener("click", () => openCard(i));
+    livePlate.append(b); lives.push(b);
+  });
+
+  const base0 = Math.round(skels[0].getBoundingClientRect().height);
+  let D = [0,0,0,0,0,0];
+  try {
+    const a = JSON.parse(localStorage.getItem(KEY));
+    if (Array.isArray(a) && a.length === 6 && a.every(Number.isInteger)) D = a.map(v => Math.max(-200, Math.min(200, v)));
+  } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(D)); } catch (e) {} }
+  function apply(i) { skels[i].style.height = (base0 + D[i]) + "px"; }
+  D.forEach((_, i) => apply(i));
+
+  let undo = [], reg = [], openIdx = -1, savedY = 0;
+
+  function rel(r, o) {
+    const x = Math.round(r.left - o.left), y = Math.round(r.top - o.top);
+    const w = Math.round(r.width), h = Math.round(r.height);
+    return {x, y, w, h, r: x + w, b: y + h};
+  }
+  function measure() {
+    const o = marks.getBoundingClientRect();
+    return skels.map((s, i) => {
+      const a = rel(s.getBoundingClientRect(), o), b = rel(lives[i].getBoundingClientRect(), o);
+      return {s: a, l: b, top: b.y - a.y, right: b.r - a.r, bottom: b.b - a.b, left: b.x - a.x, hd: b.h - a.h};
+    });
+  }
+  function worst() {
+    let w = -1, m = 0;
+    reg.forEach((r, i) => { const v = Math.abs(r.hd); if (v > m) { m = v; w = i; } });
+    return w;
+  }
+  function edgeOf(r) {
+    let name = "top", v = 0;
+    for (const k of ["top","right","bottom","left"]) if (Math.abs(r[k]) > Math.abs(v)) { v = r[k]; name = k; }
+    return [name, v];
+  }
+  function cornerMarks(rr, cls, dx, dy) {
+    return [[rr.x, rr.y],[rr.r, rr.y],[rr.x, rr.b],[rr.r, rr.b]].map(([x, y]) => {
+      const k = el("span", "mark " + cls);
+      k.style.left = (x - dx) + "px";
+      k.style.top = (y - dy) + "px";
+      return k;
+    });
+  }
+
+  function render() {
+    reg = measure();
+    const w = worst();
+    readout.textContent = w < 0 ? "All cards fit" : `Card ${w + 1} \u00b7 bottom \u00b7 ${fmt(reg[w].hd)} px`;
+    readout.classList.toggle("ok", w < 0);
+    bNudge.disabled = w < 0;
+    bJump.disabled = w < 0;
+    bUndo.disabled = dUndo.disabled = !undo.length;
+
+    const f = [], m = [];
+    reg.forEach((r, i) => {
+      const [e, v] = edgeOf(r);
+      lives[i].setAttribute("aria-label", `Card ${i + 1}, ${CARDS[i].t}` + (v ? `, ${e} ${fmt(v)} px` : ", fits"));
+      if (v) {
+        const t = el("span", "flag", fmt(v));
+        const y = e === "top" ? r.l.y : e === "bottom" ? r.l.b : r.l.y + r.l.h / 2;
+        t.style.left = (r.l.r - 4) + "px";
+        t.style.top = y + "px";
+        f.push(t);
+      }
+      m.push(...cornerMarks(r.s, "m-s", 0, 0), ...cornerMarks(r.l, "m-l", 0, 0));
+    });
+    flags.replaceChildren(...f);
+    marks.replaceChildren(...m);
+    if (openIdx >= 0) renderDetail();
+  }
+
+  function setMix() {
+    const v = +mix.value;
+    let so, lo;
+    if (rmq.matches) { so = v <= 50 ? 1 : 0; lo = v >= 50 ? 1 : 0; }
+    else { so = Math.min(1, (100 - v) / 50); lo = Math.min(1, v / 50); }
+    document.documentElement.style.setProperty("--so", so);
+    document.documentElement.style.setProperty("--lo", lo);
+    mixOut.textContent = v;
+    mix.setAttribute("aria-valuetext", v === 0 ? "Skeleton" : v === 100 ? "Loaded" : v === 50 ? "Both plates" : String(v));
+  }
+
+  function nudge(i) {
+    const r = reg[i];
+    if (!r || !r.hd) { say(`Card ${i + 1} fits`); return false; }
+    undo.push({i, d: D[i]});
+    if (undo.length > 20) undo.shift();
+    D[i] += Math.sign(r.hd);
+    apply(i); render(); save();
+    const h = reg[i].hd;
+    say(h ? `Card ${i + 1} \u00b7 ${fmt(h)} px left` : (worst() < 0 ? "All cards fit" : `Card ${i + 1} fits`));
+    return h !== 0;
+  }
+  function nudgeWorst() {
+    const w = worst();
+    if (w < 0) { say("All cards fit"); return false; }
+    return nudge(w);
+  }
+  function doUndo() {
+    const u = undo.pop();
+    if (!u) { say("Nothing to undo"); return false; }
+    D[u.i] = u.d;
+    apply(u.i); render(); save();
+    say(`Undid \u00b7 card ${u.i + 1} ${fmt(reg[u.i].hd)} px`);
+    return undo.length > 0;
+  }
+
+  let holdT = 0, holdI = 0;
+  function stopHold() { clearTimeout(holdT); clearInterval(holdI); holdT = holdI = 0; }
+  function bindHold(b, fn) {
+    let fired = false;
+    b.addEventListener("pointerdown", e => {
+      if (e.button !== 0 || b.disabled) return;
+      fired = false; stopHold();
+      holdT = setTimeout(() => {
+        holdI = setInterval(() => { fired = true; if (!fn() || b.disabled) stopHold(); }, 40);
+      }, 380);
+    });
+    ["pointerup","pointerleave","pointercancel"].forEach(t => b.addEventListener(t, stopHold));
+    b.addEventListener("click", () => { if (fired) { fired = false; return; } fn(); });
+    b.addEventListener("keydown", e => {
+      if (e.repeat && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); if (!b.disabled) fn(); }
+    });
+  }
+  bindHold(bNudge, nudgeWorst);
+  bindHold(dNudge, () => openIdx >= 0 && nudge(openIdx));
+  bindHold(bUndo, doUndo);
+  bindHold(dUndo, doUndo);
+
+  function flash(b) {
+    b.classList.remove("flash");
+    void b.offsetWidth;
+    b.classList.add("flash");
+    clearTimeout(flash.t);
+    flash.t = setTimeout(() => b.classList.remove("flash"), 1600);
+  }
+  bJump.addEventListener("click", () => {
+    const w = worst();
+    if (w < 0) { say("All cards fit"); return; }
+    mix.value = 50; setMix();
+    lives[w].scrollIntoView({block: "center", behavior: rmq.matches ? "auto" : "smooth"});
+    lives[w].focus({preventScroll: true});
+    flash(lives[w]);
+    say(`Card ${w + 1} \u00b7 bottom \u00b7 ${fmt(reg[w].hd)} px`);
+  });
+
+  bCopy.addEventListener("click", () => {
+    const rules = D.map((d, i) => d ? `.skel[data-card="${i + 1}"] { height: ${base0 + d}px; }` : null).filter(Boolean);
+    if (!rules.length) { fix.hidden = true; say("No fixes yet"); return; }
+    const txt = rules.join("\n"), n = rules.length, label = `${n} rule${n > 1 ? "s" : ""}`;
+    fix.textContent = txt;
+    fix.hidden = false;
+    const fallback = () => {
+      let ok = false;
+      try {
+        const t = el("textarea");
+        t.value = txt; t.setAttribute("readonly", "");
+        t.style.position = "fixed"; t.style.opacity = "0"; t.style.top = "0";
+        document.body.append(t); t.select();
+        ok = document.execCommand("copy");
+        t.remove();
+      } catch (e) {}
+      bCopy.focus({preventScroll: true});
+      say(ok ? `Copied ${label}` : `${label} ready below`);
+    };
+    try { navigator.clipboard.writeText(txt).then(() => say(`Copied ${label}`), fallback); }
+    catch (e) { fallback(); }
+  });
+
+  bReset.addEventListener("click", () => {
+    stopHold();
+    D = [0,0,0,0,0,0]; undo = [];
+    D.forEach((_, i) => apply(i));
+    mix.value = 50; setMix();
+    fix.hidden = true; fix.textContent = "";
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    render();
+    say("Sample reset");
+  });
+
+  function openCard(i) {
+    stopHold();
+    savedY = window.scrollY;
+    openIdx = i;
+    sheetView.classList.add("parked");
+    sheetView.inert = true;
+    detail.hidden = false;
+    window.scrollTo(0, 0);
+    render();
+    bBack.focus();
+    say(`Card ${i + 1} open`);
+  }
+  function back() {
+    if (openIdx < 0) return;
+    stopHold();
+    const i = openIdx;
+    openIdx = -1;
+    detail.hidden = true;
+    sheetView.classList.remove("parked");
+    sheetView.inert = false;
+    render();
+    window.scrollTo(0, savedY);
+    lives[i].focus({preventScroll: true});
+    say("");
+  }
+  bBack.addEventListener("click", back);
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && openIdx >= 0) back(); });
+
+  function renderDetail() {
+    const i = openIdx, r = reg[i];
+    dTitle.textContent = `Card ${i + 1} \u00b7 ${CARDS[i].t}`;
+    const x0 = Math.min(r.s.x, r.l.x), y0 = Math.min(r.s.y, r.l.y);
+    const W = Math.max(r.s.r, r.l.r) - x0, H = Math.max(r.s.b, r.l.b) - y0;
+    proof.style.width = W + "px";
+    proof.style.height = H + "px";
+    const box = (q, c) => {
+      const e = el("span", "pbox " + c);
+      e.style.left = (q.x - x0) + "px"; e.style.top = (q.y - y0) + "px";
+      e.style.width = q.w + "px"; e.style.height = q.h + "px";
+      return e;
+    };
+    proof.replaceChildren(box(r.s, "ps"), box(r.l, "pl"),
+      ...cornerMarks(r.s, "m-s", x0, y0), ...cornerMarks(r.l, "m-l", x0, y0));
+    const rows = [["Top", r.top], ["Right", r.right], ["Bottom", r.bottom], ["Left", r.left], ["Height", r.hd]];
+    edgesEl.replaceChildren(...rows.map(([k, v]) => {
+      const d = el("div");
+      d.append(el("dt", null, k), el("dd", null, fmt(v)));
+      return d;
+    }));
+    dNudge.disabled = !r.hd;
+  }
+
+  mix.addEventListener("input", setMix);
+  if (rmq.addEventListener) rmq.addEventListener("change", setMix);
+  let raf = 0;
+  window.addEventListener("resize", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(render); });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) stopHold(); });
+
+  setMix();
+  render();
+})();
+</script>
+</body>
+</html>

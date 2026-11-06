@@ -1,0 +1,1387 @@
+{
+  "schemaVersion": 1,
+  "mode": "project",
+  "date": "2026-11-06",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "request": null,
+  "sources": [
+    {
+      "source": "github-trending",
+      "status": "fetched",
+      "count": 18
+    },
+    {
+      "source": "smashing",
+      "status": "fetched",
+      "count": 12
+    },
+    {
+      "source": "hacker-news",
+      "status": "fetched",
+      "count": 20
+    },
+    {
+      "source": "reddit-sideproject",
+      "status": "fetched",
+      "count": 20
+    },
+    {
+      "source": "reddit-beautiful",
+      "status": "failed",
+      "reason": "HTTP 429"
+    },
+    {
+      "source": "github-blog",
+      "status": "disabled",
+      "reason": "2026-10-31: feed contains declarations rejected by restricted XML reader"
+    }
+  ],
+  "custom": false,
+  "candidates": [
+    {
+      "id": "be741613455312c7c5e19e9a",
+      "title": "I’ve been making minimal, private apps for everyday human needs (not another productivity apps lol)",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xpcio0/ive_been_making_minimal_private_apps_for_everyday/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-06T13:15:14.000Z",
+      "summary": "",
+      "kind": "feed"
+    },
+    {
+      "id": "4c9e64d865d814316102c4d6",
+      "title": "Tesla winds down Cybertruck production after years of poor sales in few markets",
+      "url": "https://www.msn.com/en-us/technology/tech-companies/tesla-to-wind-down-cybertruck-production-after-years-of-poor-sales-in-few-markets/ar-AA2gSZGv",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-06T12:13:51.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "aa86d8831359831a1618ba33",
+      "title": "A New Community For In-House UX People",
+      "url": "https://smashingmagazine.com/2026/11/ux-insiders-community-in-house-ux-people/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-11-06T08:00:00.000Z",
+      "summary": "We’ve been working on something new! We’ve teamed up for a **new small community** for people doing UX-inside organizations &mdash; with weekly calls and a shared library of the business cases, templates, and research plans that have actually worked for other folks. [Jump to details](https://uxinsiders.boagworld.com/).",
+      "kind": "feed"
+    },
+    {
+      "id": "14444dc7b4eca89947b208fb",
+      "title": "Donchitos/Claude-Code-Game-Studios",
+      "url": "https://github.com/Donchitos/Claude-Code-Game-Studios",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-06T00:00:00.000Z",
+      "observed": true,
+      "summary": "Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy.",
+      "kind": "feed"
+    },
+    {
+      "id": "e07ba416f11e13ccb7b423d2",
+      "title": "Im building an open source ide called Indy, where your and your coworkers AI agents can work together.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xpbsy1/im_building_an_open_source_ide_called_indy_where/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-06T12:40:00.000Z",
+      "summary": "",
+      "kind": "feed"
+    },
+    {
+      "id": "dce0d8e47b34973705637af0",
+      "title": "Mbodi AI (YC P25) Is Hiring Research and Robotic Engineers",
+      "url": "https://www.ycombinator.com/companies/mbodi-ai/jobs",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-06T12:00:42.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "d2e1dde966c93221d87261d6",
+      "title": "Making Immersive LLM Chat Experiences More Accessible",
+      "url": "https://smashingmagazine.com/2026/11/making-immersive-llm-chat-experiences-more-accessible/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-11-05T13:00:00.000Z",
+      "summary": "As LLM chat patterns become more widespread, making them accessible is essential to ensuring everyone can access the information, tools, and opportunities they offer. Drawing on his work improving these interfaces, Eric Bailey shares practical ways to make chat-based experiences on the web more accessible and usable for people who rely on assistive",
+      "kind": "feed"
+    },
+    {
+      "id": "553e1cc54ebc818266579b0a",
+      "title": "pingdotgg/t3code",
+      "url": "https://github.com/pingdotgg/t3code",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-06T00:00:00.000Z",
+      "observed": true,
+      "summary": "",
+      "kind": "feed"
+    },
+    {
+      "id": "86c97a3ce422e88502bc4d85",
+      "title": "gongu - USCIS data and Georgia inspection scores in two public-data sites",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xpbr0n/gongu_uscis_data_and_georgia_inspection_scores_in/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-06T12:37:13.000Z",
+      "summary": "",
+      "kind": "feed"
+    },
+    {
+      "id": "7ace9bb51dd233554ee6885a",
+      "title": "We've built an open-source feature flag server for 11 years",
+      "url": "https://github.com/Unleash/unleash",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-06T11:40:06.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "7366786c561f97cd051ac4ba",
+      "title": "milind-soni/OpenMausBot",
+      "url": "https://github.com/milind-soni/OpenMausBot",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-06T00:00:00.000Z",
+      "observed": true,
+      "summary": "Open-source Grok Bot alternative with a virtual machine that bots can use",
+      "kind": "feed"
+    },
+    {
+      "id": "253db4766250cc7717ffc2b3",
+      "title": "I shipped a Steam strategy game with AI-generated code and visuals. Here is what I had to keep checking.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xpb785/i_shipped_a_steam_strategy_game_with_aigenerated/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-06T12:07:44.000Z",
+      "summary": "",
+      "kind": "feed"
+    },
+    {
+      "id": "5eb6f69cfb37a9ae3869d0f6",
+      "title": "Living beyond the limits of survival: wood ants trapped in a gigantic pitfall (2016)",
+      "url": "https://jhr.pensoft.net/articles.php?id=9096",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-06T10:21:15.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "8c6014a36ca90e3fbda99713",
+      "title": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-06T00:00:00.000Z",
+      "observed": true,
+      "summary": "An agentic skills framework & software development methodology that works.",
+      "kind": "feed"
+    },
+    {
+      "id": "da079125f8ca64df1f46697a",
+      "title": "i made features: eight daily untangling puzzles in one html file",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xpb75w/i_made_features_eight_daily_untangling_puzzles_in/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-06T12:07:38.000Z",
+      "summary": "",
+      "kind": "feed"
+    },
+    {
+      "id": "d18ddd9c12e46dd96b3cda9f",
+      "title": "Dutch 'idealist' bank ASN blocks non-Google Android, including GrapheneOS",
+      "url": "https://github.com/PrivSec-dev/banking-apps-compat-report/issues/105",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-06T09:27:12.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "e622970364717202be2f5925",
+      "title": "HKUDS/DeepTutor",
+      "url": "https://github.com/HKUDS/DeepTutor",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-06T00:00:00.000Z",
+      "observed": true,
+      "summary": "DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/ .",
+      "kind": "feed"
+    },
+    {
+      "id": "3bce443e49424cb10a061e19",
+      "title": "I’m building an AI phone receptionist for small businesses - would love early feedback",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xpb5su/im_building_an_ai_phone_receptionist_for_small/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-06T12:05:31.000Z",
+      "summary": "",
+      "kind": "feed"
+    },
+    {
+      "id": "f02d763a4f6d9e5b086c176f",
+      "title": "Chomsky and the Two Cultures of Statistical Learning",
+      "url": "https://www.norvig.com/chomsky.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-06T08:18:36.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "e86f271c7e6b1a182df550d6",
+      "title": "hyprwm/Hyprland",
+      "url": "https://github.com/hyprwm/Hyprland",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-06T00:00:00.000Z",
+      "observed": true,
+      "summary": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks.",
+      "kind": "feed"
+    },
+    {
+      "id": "daily-task",
+      "kind": "task",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype."
+    }
+  ],
+  "recent": [
+    {
+      "date": "2026-10-09",
+      "task": "Goal tracker: one goal with milestones, dates, and percent done.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-10",
+      "task": "Camping checklist grouped by shelter, cooking, clothing, and safety, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-11",
+      "task": "Daily routine builder: morning and evening steps with times, printable.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-12",
+      "task": "Output style: a Claude Code voice that changes how every answer sounds.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-13",
+      "task": "Plugin: a bundle of Claude Code mods that arrives like a traveller with a full pack.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-14",
+      "task": "Long task: a Claude Code job that runs for hours while no one watches.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-15",
+      "task": "Loop: Claude Code waking on a schedule to check on something again and again.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-16",
+      "task": "Session log: the trail a Claude Code session leaves behind it.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-17",
+      "task": "Mod workshop: a place to build a Claude Code mod from parts.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-18",
+      "task": "Companion: a Claude Code mod that keeps someone company while they work.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-19",
+      "task": "Scroll progress: a thin line that shows how much of a page is read.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-20",
+      "task": "Undo in rewind: a mistake runs back along its own path, the way tape plays in reverse.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-21",
+      "task": "Color swatch in dye bath: dip the cloth, and it slowly takes one color from a small set of vats.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-22",
+      "task": "Badge in droplets: the count grows as drops merge, and a drop splits off when it goes down.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-23",
+      "task": "File drop in a well: a dropped file falls, rings spread, and the echo confirms it arrived.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-24",
+      "task": "Empty state in tide pool: an empty list is a still pool with one small creature waiting.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-25",
+      "task": "Breadcrumb in footprints: the trail back up is a line of prints that deepen as each is reached.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-26",
+      "task": "Log viewer: a compact panel for a developer tool that filters sample events by severity and opens the selected event details.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-27",
+      "task": "Pipeline panel: a status panel for a build tool that expands a failed step, shows its log and retries it in a local demo.",
+      "components": [],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-28",
+      "task": "Latency chart: a chart card for a service dashboard that selects a time range and reveals request latency at a chosen point.",
+      "components": [
+        {
+          "row": 1,
+          "id": "range-selector",
+          "file": "artifact-1.html",
+          "name": "Range selector",
+          "description": "Segmented radio group for 1h, 6h, 24h and 7d with fixed label widths.",
+          "category": "Inputs",
+          "tags": [
+            "time-range",
+            "radio-group",
+            "segmented",
+            "dashboard",
+            "dedupe"
+          ],
+          "purpose": "Choose the time window the card reads.",
+          "use": "Engineer widens from 6h to 24h to see whether a spike repeats daily.",
+          "input": "Click or tap a segment. Keyboard: Tab into the group, arrow keys move and select, Home and End jump to the ends.",
+          "outcome": "Range commits and emits one load request. Selecting the active range emits nothing.",
+          "recovery": "If the load is cancelled or fails, the selection reverts to the last range that loaded.",
+          "mechanism": "Native radio inputs styled as segments. A generation counter tags each request. Older generations are ignored on arrival.",
+          "nearestAnalogue": "2026-10-26 log viewer severity filter. That filter narrows a list. This control replaces the whole data window and must abort prior work.",
+          "usefulness": "Every latency question starts with a window. Without dedupe, rapid clicks queue several loads.",
+          "creativeDifference": "Revert-on-cancel keeps control and chart in agreement, which a plain segmented control does not handle.",
+          "states": [
+            "idle: one range checked, reached on load",
+            "focus: visible ring on checked segment, reached by Tab",
+            "pending: checked segment shows a 2px underline while its load runs, reached by selecting a new range",
+            "reverted: previous range re-checked with status text 'Kept 6h', reached by cancel or failure",
+            "no-op: active range pressed again, nothing changes"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices: Radio Group",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "load-stages",
+          "file": "artifact-2.html",
+          "name": "Load stages",
+          "description": "Status line that names three load stages, allows cancel and ends in a clear complete or failed state.",
+          "category": "Feedback",
+          "tags": [
+            "loader",
+            "stages",
+            "cancel",
+            "retry",
+            "status",
+            "live-region"
+          ],
+          "purpose": "Show what the card is doing while data loads, and how it ended.",
+          "use": "Engineer sees 'Aggregating 864 samples' and decides to wait or cancel.",
+          "input": "Click or tap Cancel or Retry. Keyboard: Tab to the button, Enter or Space.",
+          "outcome": "Stages Fetch, Aggregate and Draw tick in order. Completion reads 'Loaded 24h · 288 points · 14:52'.",
+          "recovery": "Cancel keeps the previous chart. Failure names the stage that failed and offers one Retry that disables while pending.",
+          "mechanism": "A single job object with an AbortController and stage index. Starting a job aborts the current one. Status text sits in a polite live region. No percentage is shown, because stage count is the honest measure.",
+          "nearestAnalogue": "2026-10-27 pipeline panel retry. That panel retries a build step. This one reports a data load with cancel and never shows invented progress.",
+          "usefulness": "Engineers need to know whether a flat line means low latency or no data yet.",
+          "creativeDifference": "Named stages with sample counts replace a spinner, so the wait carries information.",
+          "states": [
+            "idle: hidden status, reached when no load is running",
+            "fetching: 'Fetching 24h', reached by range change",
+            "aggregating: 'Aggregating 864 samples', reached after fetch resolves",
+            "drawing: 'Drawing p99', reached after aggregate",
+            "complete: summary line with timestamp, reached after draw",
+            "cancelled: 'Cancelled · kept 6h', reached by Cancel",
+            "failed: 'Aggregate failed · kept 6h' with Retry, reached by demo failure toggle",
+            "reduced-motion: stage ticks without transition"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices patterns",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "percentile-tiles",
+          "file": "artifact-3.html",
+          "name": "Percentile tiles",
+          "description": "Four tiles for p50, p95, p99 and error rate. The selected tile expands while neighbours yield track space.",
+          "category": "Layout",
+          "tags": [
+            "bento",
+            "metric-tiles",
+            "percentile",
+            "grid-tracks",
+            "spring",
+            "container-query"
+          ],
+          "purpose": "Pick which series the chart plots and show current values for all four.",
+          "use": "Engineer switches from p99 to p50 to check whether the median moved too.",
+          "input": "Click or tap a tile. Keyboard: Tab to a tile, Enter or Space selects.",
+          "outcome": "Selected tile expands to show its detail. The chart redraws in that series.",
+          "recovery": "Selecting another tile reverses the change. Nothing is lost.",
+          "mechanism": "rAF loop eases CSS fr track variables with k = 1 - (1 - 0.14)^dt, dt capped at 50 ms. The loop stops when the summed error drops below 0.002. Below 480 px container width, tiles become a chip row with no track animation.",
+          "nearestAnalogue": "None in recent dates. Source c16 magnetic bento is the direct ancestor.",
+          "usefulness": "Percentile choice changes what a spike means. Current values for all four stay visible.",
+          "creativeDifference": "Track yielding ties layout to selection, while values stay readable during resize.",
+          "states": [
+            "default: p99 selected, reached on load",
+            "selected: expanded track with detail and accent border, reached by click or Enter",
+            "focus: outline ring, reached by Tab",
+            "settled: loop stopped, reached about 400 ms after selection",
+            "compact: chip row under 480 px container width",
+            "reduced-motion: tracks set directly"
+          ],
+          "sources": [
+            {
+              "title": "c16 magnetic bento (creative-sites-vault)",
+              "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/cards/c16-magnetic-bento.html"
+            },
+            {
+              "title": "Stop Treating CSS Container Queries Like Traditional Media Queries",
+              "url": "https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/"
+            },
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "cursor-chart",
+          "file": "artifact-4.html",
+          "name": "Cursor chart",
+          "description": "SVG line chart with an SLO line and a cursor that snaps to measured samples and reveals the value at that point.",
+          "category": "Data",
+          "tags": [
+            "line-chart",
+            "crosshair",
+            "latency",
+            "slo",
+            "svg",
+            "keyboard-chart"
+          ],
+          "purpose": "Reveal request latency at a chosen point.",
+          "use": "Engineer drags across the deploy and reads '14:35 · p99 640 ms · +340 over SLO'.",
+          "input": "Pointer move or touch drag over the plot. Keyboard: focus the plot, Left and Right step one sample, Page Up and Page Down step 12, Home and End jump to the ends.",
+          "outcome": "Readout above the plot shows time, value and offset from SLO. Cursor snaps to the nearest real sample.",
+          "recovery": "Escape returns the cursor to the worst breach. Leaving the plot keeps the last cursor position.",
+          "mechanism": "Nearest-index lookup from x position against sample timestamps. Readout has fixed width from the longest sample label. Plot is a focusable element with role group and an aria-live readout.",
+          "nearestAnalogue": "None in recent dates. 2026-10-19 scroll progress maps position to value in one dimension, with no data points.",
+          "usefulness": "This component answers the core need. Snapping prevents reading interpolated values that were never measured.",
+          "creativeDifference": "The readout states distance from SLO, which reframes the number as a decision.",
+          "states": [
+            "initial: cursor on worst breach, reached on load",
+            "tracking: cursor follows pointer, reached by pointer or touch",
+            "focus: plot outline and key hint, reached by Tab",
+            "breach: readout marked over SLO, reached when value exceeds 300 ms",
+            "stale: dimmed plot while a new range loads",
+            "empty: 'No samples in range', reached when a range returns zero points"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices patterns",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "breach-stepper",
+          "file": "artifact-5.html",
+          "name": "Breach stepper",
+          "description": "Previous and next controls that move the chart cursor between SLO breaches, with a count.",
+          "category": "Navigation",
+          "tags": [
+            "stepper",
+            "breach",
+            "slo",
+            "pager",
+            "jump"
+          ],
+          "purpose": "Move directly between moments where latency crossed the SLO.",
+          "use": "Engineer steps 'Breach 2 of 4' to 'Breach 3 of 4' to see whether the second spike followed a deploy.",
+          "input": "Click or tap Previous or Next. Keyboard: Tab to the buttons, Enter or Space. Held keys move one step per keydown.",
+          "outcome": "Cursor jumps to the peak sample of the next breach. Count updates.",
+          "recovery": "The buttons disable at the ends, and the count reads 'Breach 4 of 4'. Escape in the chart returns to the worst breach.",
+          "mechanism": "Breaches are contiguous runs above SLO, computed once per load. Each run is stored by its peak index. A step sets the cursor index directly and replaces any running transition.",
+          "nearestAnalogue": "2026-10-25 breadcrumb in footprints moves through a path. This moves through computed events in data.",
+          "usefulness": "Finding breaches by dragging across 288 points is slow on a phone.",
+          "creativeDifference": "Navigation targets come from the data itself, not from pages or sections.",
+          "states": [
+            "default: 'Breach 1 of 4', reached on load",
+            "middle: both buttons enabled",
+            "start or end: one button disabled with count at bound",
+            "none: 'No breaches in 1h' with both disabled, reached when range has none",
+            "focus: visible ring"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices patterns",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "pin-pair",
+          "file": "artifact-6.html",
+          "name": "Pin pair",
+          "description": "Button that pins the cursor point. Two pins produce a delta line.",
+          "category": "Actions",
+          "tags": [
+            "pin",
+            "compare",
+            "delta",
+            "button",
+            "dedupe"
+          ],
+          "purpose": "Keep two moments and compare them.",
+          "use": "Engineer pins 14:15 and 14:35 and reads '+412 ms p99 over 20 min'.",
+          "input": "Click or tap Pin. Keyboard: Tab to Pin, Enter or Space. P while the chart has focus. Each pin chip has a remove button.",
+          "outcome": "First pin shows a marker. Second pin shows the delta line. A third pin replaces the oldest.",
+          "recovery": "Remove any pin with its x button or Delete on the focused chip. Pinning an already pinned point does nothing.",
+          "mechanism": "A two-slot array keyed by sample index. The label swaps in a reserved width: Pin, Pinned, Replace oldest.",
+          "nearestAnalogue": "2026-10-20 undo in rewind deals with reversal of an action. This keeps two references and computes between them.",
+          "usefulness": "Before and after a deploy is the comparison on-call engineers report.",
+          "creativeDifference": "The delta is the action's result, so no separate compare panel is needed.",
+          "states": [
+            "empty: 'Pin this point'",
+            "one pinned: marker on chart, label 'Pin second point'",
+            "pair: delta line shown",
+            "full: label 'Replace oldest'",
+            "duplicate: label 'Already pinned', no change",
+            "cleared: pins removed on range change, with status note"
+          ],
+          "sources": [
+            {
+              "title": "Engineering-leaning charts and UI components (visitor request)",
+              "url": "https://github.com/isas1/web-components/issues/127"
+            },
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        }
+      ],
+      "usedSources": [
+        "5c9d13f97faabce46da9b702"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "task": "Import progress: a loader for a file tool that shows named stages, lets someone cancel and ends with a clear completion state.",
+      "components": [
+        {
+          "row": 1,
+          "id": "choose-files-empty",
+          "file": "artifact-1.html",
+          "name": "Choose files empty state",
+          "description": "Empty import zone with one action and a drop target.",
+          "category": "Inputs",
+          "tags": [
+            "empty-state",
+            "file-input",
+            "drop-zone",
+            "single-action"
+          ],
+          "purpose": "Start an import when nothing is chosen.",
+          "use": "A designer opens Import and picks brand-kit.zip.",
+          "input": "Click or tap Choose files, or drop files onto the zone. Keyboard: Tab to the button, then Enter or Space opens the native file picker.",
+          "outcome": "The chosen files are counted ('14 files · 3.2 MB') and the import starts.",
+          "recovery": "Closing the picker without a choice leaves the empty state unchanged. A drop with zero files reads 'Nothing dropped' and keeps the button focused.",
+          "mechanism": "A native input type=file sits behind a visible button. Drop is handled by dragover and drop listeners on the zone. Pointer is not required, because the button covers every path.",
+          "nearestAnalogue": "2026-10-24 empty state in tide pool and 2026-10-23 file drop in a well. Both are animated scenes. This is a static zone with one labelled action.",
+          "usefulness": "It gives one obvious way in and meets the one-action constraint.",
+          "creativeDifference": "The drop target and the button are the same element, so touch users without drag lose nothing.",
+          "states": [
+            "empty: button 'Choose files', reached on load and after a cancel with nothing placed",
+            "drag-over: dashed border turns solid with text 'Drop to import', reached by dragging files over the zone",
+            "focus: 2px ring on the button, reached by Tab",
+            "nothing-dropped: note under the button, reached by an empty drop"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "import-stage-track",
+          "file": "artifact-2.html",
+          "name": "Import stage track",
+          "description": "Four named stages with real file counts and a small arc on the active stage only.",
+          "category": "Feedback",
+          "tags": [
+            "loader",
+            "stages",
+            "live-region",
+            "spinner",
+            "reduced-motion"
+          ],
+          "purpose": "Show which stage is running and how many files it has handled.",
+          "use": "A designer reads 'Convert · 7 of 13' and decides to wait.",
+          "input": "Display only. Keyboard: the track is skipped in tab order, and its live region is announced by screen readers.",
+          "outcome": "Read, Check, Convert and Place advance in order. Each completed stage shows a tick glyph and its final count.",
+          "recovery": "On cancel or failure, the track freezes at the stage reached and names it ('Stopped at Convert').",
+          "mechanism": "A job object holds the stage index and per-stage counters. The source's rotating top-border arc is drawn at 14px on the active stage. Glyphs and text change on each tick, and the live region throttles announcements to stage changes plus every fifth file. No percentage is shown.",
+          "nearestAnalogue": "2026-10-28 load stages. That row has three fixed stages with sample counts. This row counts discrete files per stage and records where a cancel happened.",
+          "usefulness": "File counts are the honest measure of an import, so the wait carries information.",
+          "creativeDifference": "State is shown by glyph shape and bold text, so it survives greyscale. The arc is the only motion.",
+          "states": [
+            "idle: hidden, reached before any files are chosen",
+            "reading: 'Read · 14 files', reached when files are chosen",
+            "checking: 'Check · 1 unsupported', reached after read",
+            "converting: 'Convert · n of 13', reached after check",
+            "placing: 'Place · n of 12', reached after convert",
+            "complete: all ticks, reached after place",
+            "stopped: hollow glyph and 'Stopped at <stage>', reached by Cancel or demo failure",
+            "reduced-motion: static arc and the word 'running'"
+          ],
+          "sources": [
+            {
+              "title": "Minimalist arc spinner (creative-sites-vault)",
+              "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/loaders/05-dash-orbital-ring/var-1-arc-spinner.html"
+            },
+            {
+              "title": "Loader tile variety pack (library content)",
+              "url": "https://github.com/isas1/web-components/issues/45"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "cancel-import",
+          "file": "artifact-3.html",
+          "name": "Cancel import",
+          "description": "A thumb-height cancel button that stops the job and rolls back any placed files.",
+          "category": "Actions",
+          "tags": [
+            "cancel",
+            "abort",
+            "rollback",
+            "button",
+            "escape-key"
+          ],
+          "purpose": "Stop an import in flight and leave the canvas as it was.",
+          "use": "A designer sees the wrong zip in the read count and cancels.",
+          "input": "Click or tap Cancel import (44px tall, full width at the panel's foot). Keyboard: Tab to it and press Enter or Space, or press Escape anywhere in the panel.",
+          "outcome": "The job aborts. Any layers placed in this run are removed, and replaced layers return.",
+          "recovery": "After cancelling, the panel returns to the row 1 empty state. A repeated press while cancelling is ignored.",
+          "mechanism": "An AbortController is passed to every stage. A placed-layer list is kept for the run and reversed on abort. The label swaps within a reserved width: Cancel import, Cancelling, Cancelled.",
+          "nearestAnalogue": "2026-10-28 load stages cancel, which kept the previous chart. This cancel also rolls back partial canvas changes.",
+          "usefulness": "Imports change user work, so stopping halfway must not leave half a kit on the canvas.",
+          "creativeDifference": "Escape and a bottom-edge target give the same reach to keyboard and thumb.",
+          "states": [
+            "ready: enabled during any running stage",
+            "pressed: sinks 1px with a reduced shadow, reached on pointer down or key down",
+            "cancelling: disabled with label 'Cancelling', reached on press",
+            "cancelled: 'Cancelled at Convert · canvas unchanged', reached after rollback",
+            "hidden: not rendered when idle or complete",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "file-manifest",
+          "file": "artifact-4.html",
+          "name": "File manifest",
+          "description": "Per-file list showing each file's state with shape glyphs and a short reason.",
+          "category": "Data",
+          "tags": [
+            "file-list",
+            "manifest",
+            "listbox",
+            "non-color-state",
+            "skip-reason"
+          ],
+          "purpose": "Show what happened to each file.",
+          "use": "A designer finds that ad-banner.psd was skipped as an unsupported type.",
+          "input": "Click or tap a row to expand its reason. Keyboard: Tab into the list, Up and Down move between rows, Home and End jump, Enter expands.",
+          "outcome": "The expanded row shows type, size and reason ('Unsupported type .psd', 'Replaces layer hero-photo').",
+          "recovery": "Collapsing a row with Enter or a second tap returns it to one line. Selection persists across stage updates.",
+          "mechanism": "A listbox with roving tabindex. Rows update in place by file id, so the order never jumps. Glyphs are a hollow circle (queued), a filled circle (placed), a slashed circle (skipped) and a double ring (replaced), each paired with a word.",
+          "nearestAnalogue": "2026-10-26 log viewer event list. That list filters past events. This one updates live per file and carries outcome reasons.",
+          "usefulness": "A summary count alone hides which file failed and why.",
+          "creativeDifference": "Each state has its own shape and word, so the list reads in greyscale.",
+          "states": [
+            "queued: hollow glyph, reached on read",
+            "working: bold row text, reached when the file's stage runs",
+            "placed: filled glyph",
+            "replaced: double ring with the layer name",
+            "skipped: slashed glyph with reason",
+            "expanded: detail line, reached by Enter or tap",
+            "focus: row ring, reached by arrows"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Listbox",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "import-summary",
+          "file": "artifact-5.html",
+          "name": "Import summary",
+          "description": "Completion card with grouped counts, skip reasons and one next action.",
+          "category": "Content",
+          "tags": [
+            "completion",
+            "summary",
+            "result",
+            "status"
+          ],
+          "purpose": "End the import with a clear statement of what landed.",
+          "use": "A designer reads 'Imported 12 of 14 · 3 replaced · 2 skipped · 14:52'.",
+          "input": "Click or tap Show skipped to jump to the manifest rows. Keyboard: Tab to the link and press Enter. Focus moves to the summary heading on completion.",
+          "outcome": "The counts are grouped by placed, replaced and skipped. The placed files settle into the canvas tray once at 180ms ease-out.",
+          "recovery": "If nothing was placed, the card reads 'Nothing imported' and offers a single 'Choose other files' action.",
+          "mechanism": "The summary is rendered once from the final job record. Focus moves to an h2 with tabindex=-1. The tray settle is one transform transition and is skipped under reduced motion.",
+          "nearestAnalogue": "2026-10-28 load stages completion line. That was one line. This row groups outcomes and links to the skipped files.",
+          "usefulness": "It gives the visitor a definite end, with no ambiguity between done and stuck.",
+          "creativeDifference": "The landing motion carries the Puppet maker's frame break into the editor once, then stops.",
+          "states": [
+            "complete: all files placed",
+            "complete-with-skips: counts plus a Show skipped link",
+            "nothing-imported: one action 'Choose other files'",
+            "undone: struck summary with 'Undone at 14:53', reached by row 6",
+            "reduced-motion: no tray settle"
+          ],
+          "sources": [
+            {
+              "title": "Loader tile variety pack (library content)",
+              "url": "https://github.com/isas1/web-components/issues/45"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "undo-import",
+          "file": "artifact-6.html",
+          "name": "Undo import",
+          "description": "Undo button that reverses a finished import and names the layers that came back.",
+          "category": "Actions",
+          "tags": [
+            "undo",
+            "restore",
+            "history",
+            "ctrl-z",
+            "button"
+          ],
+          "purpose": "Reverse a completed import and show what was restored.",
+          "use": "A designer undoes the import and reads 'Restored logo-mark, hero-photo, headline · removed 12'.",
+          "input": "Click or tap Undo import. Keyboard: Tab to it and press Enter or Space, or press Ctrl+Z (Cmd+Z on macOS) while the editor has focus.",
+          "outcome": "Imported layers are removed and the 3 replaced layers return in their original order. The restored names are listed and briefly outlined on the canvas.",
+          "recovery": "Redo import (Ctrl+Shift+Z) reapplies the same import. A second undo with an empty history does nothing and reads 'Nothing to undo'.",
+          "mechanism": "One history entry per import stores the removed layer snapshots and the added layer ids. Undo swaps them as one operation. The label swaps within a reserved width: Undo import, Undone, Redo import.",
+          "nearestAnalogue": "2026-10-20 undo in rewind, which animated a mistake playing backward. This undo is instant and names what returned.",
+          "usefulness": "An import that silently replaces layers needs a way back that says what it restored.",
+          "creativeDifference": "The result is a named list of what came back. Restoration is reported, not implied.",
+          "states": [
+            "available: enabled after complete",
+            "pressed: 1px sink with a reduced shadow",
+            "undone: restored names listed and the label set to 'Redo import'",
+            "redone: summary returns to complete",
+            "empty-history: disabled with 'Nothing to undo'",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        }
+      ],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-30",
+      "task": "Request loader: a loader for a content panel that moves from pending to loaded or failed, with a retry action and stable layout.",
+      "components": [
+        {
+          "row": 1,
+          "id": "source-tabs",
+          "file": "artifact-1.html",
+          "name": "Source tabs",
+          "description": "Tablist of three sources, each tab carrying a request-state glyph in a fixed 24px slot.",
+          "category": "Navigation",
+          "tags": [
+            "tabs",
+            "tablist",
+            "request-state",
+            "glyph",
+            "fixed-width"
+          ],
+          "purpose": "Switch between content sources and see each source's request state at a glance.",
+          "use": "A reader sees a slashed glyph on Archive, leaves it, reads Inbox, then returns.",
+          "input": "Click or tap a tab. Keyboard: Tab into the list, Left and Right move, Home and End jump, Enter or Space activates.",
+          "outcome": "The panel shows the chosen source. Each source keeps its own request, so switching never restarts or cancels another load.",
+          "recovery": "Returning to a failed tab shows its failure plate with Retry. Nothing is lost by switching.",
+          "mechanism": "ARIA tabs with roving tabindex and manual activation. Each tab reads status from a per-source store. Glyphs: hollow ring for pending, filled dot for loaded, dash for empty, slashed ring for failed, each with a visually hidden word. Selection is a 2px accent left bar, shared with row 6.",
+          "nearestAnalogue": "2026-10-28 range selector. That control replaced one data window and aborted prior work. These tabs keep three requests alive in parallel.",
+          "usefulness": "Readers move between sources while one is slow, so per-source state must be visible before they arrive.",
+          "creativeDifference": "Tabs act as a signal board. Request state shows by shape in a fixed slot, so the labels never shift.",
+          "states": [
+            "default: Inbox selected, reached on load",
+            "pending glyph: hollow ring, reached while that source loads",
+            "loaded glyph: filled dot, reached on success",
+            "empty glyph: dash, reached when Shared returns zero items",
+            "failed glyph: slashed ring, reached on Archive attempt 1 timeout",
+            "focus: 2px ring, reached by Tab or arrows"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Tabs",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "id": "pending-arc",
+          "file": "artifact-2.html",
+          "name": "Pending arc",
+          "description": "Delayed arc with an elapsed-seconds line that escalates to Still waiting and Cancel after 8 s.",
+          "category": "Feedback",
+          "tags": [
+            "loader",
+            "spinner",
+            "elapsed-time",
+            "cancel",
+            "live-region",
+            "reduced-motion"
+          ],
+          "purpose": "Say that a request is running and for how long, without inventing progress.",
+          "use": "A reader sees 'Still waiting · 9 s' on Archive and cancels.",
+          "input": "Display until 8 s. Then click or tap Cancel. Keyboard: Tab to Cancel, Enter or Space, or Escape while the panel has focus.",
+          "outcome": "The arc appears after 400 ms with 'Waiting · n s'. At 8 s the line reads 'Still waiting' and Cancel appears in a reserved slot. Cancel aborts the request.",
+          "recovery": "Cancel leaves the source in a cancelled state with Retry on row 4 and keeps any last-good list from row 5.",
+          "mechanism": "The source's rotating top-border arc is kept on a 20px ring in accent. A setTimeout of 400 ms prevents a flash on fast loads. A 1 s interval updates text, and the live region announces only at 0 s and 8 s. An AbortController is tied to Cancel. The component unmounts on loaded or failed.",
+          "nearestAnalogue": "2026-10-29 import stage track used the same arc on its active stage. That row counted files per stage. This row counts elapsed time on a single request and adds a cancel threshold.",
+          "usefulness": "Elapsed seconds are the honest measure for a request with no known size.",
+          "creativeDifference": "The wait escalates once at a fixed threshold. The visitor gets an exit only when it matters.",
+          "states": [
+            "hidden: first 400 ms of a request, or no request running",
+            "waiting: arc and 'Waiting · n s', reached after 400 ms",
+            "still-waiting: 'Still waiting · n s' with Cancel, reached at 8 s",
+            "cancelling: Cancel disabled with label 'Cancelling', reached on press",
+            "reduced-motion: static three-quarter arc with the word 'Waiting'"
+          ],
+          "sources": [
+            {
+              "title": "Minimalist arc spinner (creative-sites-vault)",
+              "url": "https://github.com/isas1/creative-sites-vault/blob/1595af38a69fbb67c674ef4b90b776a2245c270b/00-components/loaders/05-dash-orbital-ring/var-1-arc-spinner.html"
+            },
+            {
+              "title": "Loader tile variety pack (library content)",
+              "url": "https://github.com/isas1/web-components/issues/45"
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "id": "reserved-skeleton",
+          "file": "artifact-3.html",
+          "name": "Reserved skeleton",
+          "description": "Static placeholder rows at the exact height and column structure of loaded rows.",
+          "category": "Layout",
+          "tags": [
+            "skeleton",
+            "placeholder",
+            "layout-shift",
+            "fixed-height",
+            "static"
+          ],
+          "purpose": "Hold the panel's geometry while content is pending so nothing moves on arrival.",
+          "use": "A reader starts reading Inbox the moment it loads, with the first title where the first bar sat.",
+          "input": "Display only. Skipped in tab order. The panel sets aria-busy=true while it renders.",
+          "outcome": "Five 56px rows render, each with a 40px thumb box, a title bar and a meta bar. Loaded rows replace them one for one.",
+          "recovery": "On failure or cancel, the skeleton is replaced by the failure plate at the same panel height.",
+          "mechanism": "Rows share the grid template of row 6 through one CSS class. Bar widths are fixed percentages: 72, 64, 80, 58 and 68. There is no shimmer and no randomness. The panel min-height equals five rows plus 4 gaps of 8px.",
+          "nearestAnalogue": "None in recent dates. 2026-10-28 cursor chart dimmed a stale plot, which is a different job.",
+          "usefulness": "Layout shift during loading makes readers lose their place and mis-tap.",
+          "creativeDifference": "The skeleton and the list use one grid template, so the match is structural.",
+          "states": [
+            "pending: five static rows, reached when a request starts with no last-good data",
+            "short-list: rows beyond the loaded count collapse after load, reached when fewer than five items return",
+            "hidden: removed on loaded, empty or failed"
+          ],
+          "sources": [
+            {
+              "title": "Loader tile variety pack (library content)",
+              "url": "https://github.com/isas1/web-components/issues/45"
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "id": "retry-guard",
+          "file": "artifact-4.html",
+          "name": "Retry guard",
+          "description": "Retry button with a reserved label width, attempt count and a double-press guard.",
+          "category": "Actions",
+          "tags": [
+            "retry",
+            "button",
+            "dedupe",
+            "attempt-count",
+            "label-swap"
+          ],
+          "purpose": "Start one new attempt for a failed or cancelled source.",
+          "use": "A reader presses Retry on Archive twice by accident, and one request runs.",
+          "input": "Click or tap Retry. Keyboard: Tab to it, Enter or Space, or R while the panel has focus.",
+          "outcome": "Attempt n+1 starts. The label reads 'Retrying' and the button disables until the request settles.",
+          "recovery": "If attempt 2 also fails, the label returns to 'Retry' with 'Attempt 2 failed'. Focus returns to the button.",
+          "mechanism": "A request id increments per attempt. Presses while a request is in flight are ignored. Replies with an older id are dropped. Label width is reserved from the longest label, 'Retrying'.",
+          "nearestAnalogue": "2026-10-27 pipeline panel retried a build step. This retry adds a double-press guard and stale-reply dropping for a content request.",
+          "usefulness": "Double taps on slow networks are common, and duplicate requests cause flicker and wrong content.",
+          "creativeDifference": "The button reports the attempt number, so a second failure reads as new information.",
+          "states": [
+            "ready: 'Retry', reached on failed or cancelled",
+            "retrying: disabled 'Retrying', reached on press",
+            "ignored: second press during retrying, no change",
+            "failed-again: 'Retry' with 'Attempt 2 failed', reached by a second failure",
+            "hidden: not rendered when loaded or empty",
+            "focus: 2px ring"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Button",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "id": "failure-plate",
+          "file": "artifact-5.html",
+          "name": "Failure plate",
+          "description": "Failure notice naming the cause, laid over a dimmed last-good list stamped with its time.",
+          "category": "Content",
+          "tags": [
+            "error",
+            "failure",
+            "last-good",
+            "stale-content",
+            "disclosure"
+          ],
+          "purpose": "Explain why the load failed and keep previous content readable.",
+          "use": "A reader sees 'Timed out after 6 s · showing copy from 14:02' and keeps reading the old list.",
+          "input": "Click or tap Details to expand the cause. Keyboard: Tab to Details, Enter or Space toggles.",
+          "outcome": "The plate states the cause and the last-good time. Details show the sample source, the attempt and the elapsed time.",
+          "recovery": "Retry in row 4 sits inside the plate. With no last-good data, the plate reads 'Nothing loaded yet' at the same height.",
+          "mechanism": "The plate is a disclosure button and region. The last-good list renders at 0.55 opacity with inert set. The plate width is sized from the longest message, and text wraps on narrow widths without truncation.",
+          "nearestAnalogue": "2026-10-28 load stages reported 'Aggregate failed · kept 6h' in one line. This plate keeps the old content readable and gives it a timestamp.",
+          "usefulness": "A blank panel on failure throws away content the reader already had.",
+          "creativeDifference": "Failure shows as a layer over still-readable old content, so the panel keeps its height and its use.",
+          "states": [
+            "timed-out: 'Timed out after 6 s', reached on Archive attempt 1",
+            "cancelled: 'Cancelled at 9 s', reached by row 2 Cancel",
+            "with-last-good: dimmed list plus timestamp",
+            "no-last-good: 'Nothing loaded yet'",
+            "details-open: cause, attempt and elapsed time shown",
+            "focus: 2px ring on Details"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Disclosure",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "id": "loaded-list",
+          "file": "artifact-6.html",
+          "name": "Loaded list",
+          "description": "Article list with a single selection rule, a loaded-at line and an empty result.",
+          "category": "Data",
+          "tags": [
+            "listbox",
+            "article-list",
+            "selection",
+            "empty-state",
+            "timestamp"
+          ],
+          "purpose": "Show the loaded items and let the reader pick one.",
+          "use": "A reader opens 'Field notes on rail signalling' from Inbox.",
+          "input": "Click or tap a row. Keyboard: Tab into the list, Up and Down move, Home and End jump, Enter selects.",
+          "outcome": "The selected row gets the 2px accent left bar. The footer reads 'Loaded 12 · 14:06'. Focus moves to the list heading after load only if the reader triggered the load.",
+          "recovery": "Selection survives a reload when the item id still exists. Otherwise it clears with 'Selection no longer in list'.",
+          "mechanism": "A listbox with roving tabindex. Rows reuse the row 3 grid template at 56px. Titles clamp to 2 lines and the full title sits in a title attribute and the accessible name. Shared returns zero items and renders 'No shared articles' at row height.",
+          "nearestAnalogue": "2026-10-26 log viewer event list filtered events by severity. This list is the arrival point of a request and keeps selection across reloads.",
+          "usefulness": "This list is the reason the panel exists.",
+          "creativeDifference": "The selection mark is shared with the source tabs, so one visual rule reads across the panel.",
+          "states": [
+            "loaded: rows with footer count and time",
+            "selected: 2px accent left bar, reached by click or Enter",
+            "focus: row ring, reached by arrows",
+            "empty: 'No shared articles', reached on Shared",
+            "selection-cleared: note shown, reached when a reload drops the selected id",
+            "long-title: two-line clamp with full accessible name"
+          ],
+          "sources": [
+            {
+              "title": "ARIA Authoring Practices: Listbox",
+              "url": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+            }
+          ]
+        }
+      ],
+      "usedSources": []
+    },
+    {
+      "date": "2026-10-31",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Handshake Bench",
+        "audience": "Engineers writing or learning network protocol code",
+        "problem": "Timeout and replay failures are hard to reproduce and read",
+        "interaction": "Deliver, drop, duplicate or delay packets and advance the clock by hand",
+        "outcome": "Failed step expands with a one-line cause and a divergence marker between runs",
+        "recovery": "Retry from any snapshot as a new run, or Reset to the opening frame",
+        "mechanism": "Pure state machine fed hand-made events, with per-step snapshots and run diff",
+        "difference": "Packet captures show what happened. This lets you replay it and change one event.",
+        "whyNow": "HN sans-IO WireGuard post shows the testable shape. Dot post shows wish for readable errors. Titles only, no demand data.",
+        "sourceIds": [
+          "8d821849286ada42dbbaeffc",
+          "e32e9e5cb5666d607d79fa51"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Handshake Bench",
+            "need": "Reproduce and explain protocol failures",
+            "mechanism": "Manual clock and per-packet deliver, drop, duplicate, delay",
+            "rejection": "Selected: cross-domain, new to recent dates"
+          },
+          {
+            "name": "Error Signpost",
+            "need": "Plain next steps for a CLI error",
+            "mechanism": "Paste error, get you-are-here sign with routes",
+            "rejection": "Too close to the Dot feed entry and needs real parsing"
+          },
+          {
+            "name": "Fault Tag Sheet",
+            "need": "Report broken shared equipment",
+            "mechanism": "QR label opens a printable fault card",
+            "rejection": "Echoes the Avery label post and recent printables"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "8d821849286ada42dbbaeffc",
+        "e32e9e5cb5666d607d79fa51"
+      ]
+    },
+    {
+      "date": "2026-11-01",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Filing Loupe",
+        "audience": "Court clerks and paralegals screening filings",
+        "problem": "Hidden text in filings reaches AI summarizers unseen",
+        "interaction": "Step a keyboard loupe through hidden passages and name each",
+        "outcome": "Decoded hidden text plus seen vs read word tally and report",
+        "recovery": "Mark Not hidden, undo edits, Clear or Restore sample",
+        "mechanism": "Inert parse flags style and Unicode hiding, lens snaps per finding",
+        "difference": "Format marks miss styled hiding. This shows both readings and the gap",
+        "whyNow": "HN title on court sanction for prompt injection. claude-mem trend observed. Titles only",
+        "sourceIds": [
+          "0e356c09eb849e6e67cab0ec",
+          "853c63f738f0cecf3b918959"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Filing Loupe",
+            "need": "See hidden instructions in filings",
+            "mechanism": "Keyboard loupe steps findings, tally compares readings",
+            "rejection": "Selected: cross-domain, new to recent dates"
+          },
+          {
+            "name": "Cabin Tally",
+            "need": "Split trip costs between families",
+            "mechanism": "Market-clerk aligned running tallies per family",
+            "rejection": "Too close to the cabin split feed entry"
+          },
+          {
+            "name": "Island Payout Sim",
+            "need": "Explain how a basic income is funded",
+            "mechanism": "Households and tax sliders with live balance",
+            "rejection": "Needs fiscal data the sources do not give"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "0e356c09eb849e6e67cab0ec",
+        "853c63f738f0cecf3b918959"
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Tide-mark download",
+        "audience": "People downloading large files from a file panel",
+        "problem": "Fill bars fake progress and hide a stalled transfer",
+        "interaction": "Press or Enter Download, then repeat with its own 44 px tap",
+        "outcome": "Word names Preparing, Waiting or Ready over a byte-driven tide",
+        "recovery": "Repeat drains and restarts; stale replies dropped",
+        "mechanism": "Bytes move the line, a stall halts it flat and flips the word",
+        "difference": "Timed fills climb over a waiting file. This halts on real bytes",
+        "whyNow": "Smashing wallpaper post offers many file sizes. Hallmark trend targets sloppy UI. Titles only, no demand data",
+        "sourceIds": [
+          "17b11f98699dd6891e917f51",
+          "56ed6f5b1a23b5b5c199b408"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Word over tide",
+            "need": "Tell a stalled download from a finished one",
+            "mechanism": "20 px word over 24 px byte-driven tide",
+            "rejection": "Selected: won the vote 2 of 4"
+          },
+          {
+            "name": "Fixed-slot label row",
+            "need": "Read state before tapping",
+            "mechanism": "Label left of a 44 px target with spinner, check, arrow",
+            "rejection": "Waiting and stuck look alike without the word"
+          },
+          {
+            "name": "Edge tab",
+            "need": "Keep the button inside a narrow panel border",
+            "mechanism": "44 px tab cut into the panel's bottom edge",
+            "rejection": "State word leaves the face; no votes"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "17b11f98699dd6891e917f51",
+        "56ed6f5b1a23b5b5c199b408"
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Zero Hour Rehearsal",
+        "audience": "Indie makers shipping a launch page",
+        "problem": "Countdown states at zero and after go unseen",
+        "interaction": "Type launch time, press cues, switch viewer zone",
+        "outcome": "Light and dark panes show each state, then copy snippet",
+        "recovery": "Invalid date keeps last valid; Reset restores sample",
+        "mechanism": "Cue rail jumps clock; Hold moves launch and says so",
+        "difference": "Widgets show only live time; this rehearses all states",
+        "whyNow": "SideProject post: visitors skip own data. impeccable trend: catch sloppy UI. Titles only",
+        "sourceIds": [
+          "9e9ee0e5d4c6312bd2fdf39f",
+          "ec673bd7694d3a658bba5faa"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Zero Hour Rehearsal",
+            "need": "See every countdown state before launch",
+            "mechanism": "Broadcast cue rail with Hold, dual-mode panes",
+            "rejection": "Selected: works offline, covers zero and after"
+          },
+          {
+            "name": "Sunset Export Clock",
+            "need": "Users see a shutdown export deadline",
+            "mechanism": "Countdown flips app to read-only at zero",
+            "rejection": "Needs a real export behind it to help"
+          },
+          {
+            "name": "Split-flap Launch Board",
+            "need": "Countdown readable across a room",
+            "mechanism": "Flap rows flip as each cue arrives",
+            "rejection": "A skin of a counter; breaks at 320 px"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "9e9ee0e5d4c6312bd2fdf39f",
+        "ec673bd7694d3a658bba5faa"
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Write Time-Out",
+        "audience": "Engineers running ad hoc SQL writes on production",
+        "problem": "Confirm dialogs get clicked through and name no rows",
+        "interaction": "Type a write, tick three readback lines, commit",
+        "outcome": "Row count, before/after rows, then toast with Undo",
+        "recovery": "Toast Undo, history Restore, Reset sample",
+        "mechanism": "Surgical time-out readback; edits clear ticks; no WHERE needs typed name",
+        "difference": "Are-you-sure modals and read-only modes; this shows rows hit and undoes",
+        "whyNow": "NiceDB post: prod read-only by default. Worktrunk: parallel agent edits. Titles only, no demand data",
+        "sourceIds": [
+          "65db66769efd1b895ea5c3f0",
+          "d2a13eb5e04b724bc066229f"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Write Time-Out",
+            "need": "Know what a prod write will change",
+            "mechanism": "Readback card with per-line ticks and undo toast",
+            "rejection": "Selected: works offline, cross-domain, new to recent dates"
+          },
+          {
+            "name": "Worktree Ledger",
+            "need": "See which agent worktree saved which file",
+            "mechanism": "Per-worktree save marks and conflict preview",
+            "rejection": "Needs a live repo to be useful"
+          },
+          {
+            "name": "Apt Source Check",
+            "need": "Spot weak entries in sources.list",
+            "mechanism": "Paste file, mark each line by transport and key",
+            "rejection": "Advisory details unknown; flags would be guesses"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "65db66769efd1b895ea5c3f0",
+        "d2a13eb5e04b724bc066229f"
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Shelf Read",
+        "audience": "Maintainers of curated link lists",
+        "problem": "Stale but live links pile up; place is lost",
+        "interaction": "Page 8-entry shelves, mark Keep, Stale or Move",
+        "outcome": "Read-shelf rail, tally, pruned markdown and change list",
+        "recovery": "Undo last mark, bad paste keeps list, Reset sample",
+        "mechanism": "Library shelf-reading: per-shelf read marks persist",
+        "difference": "Link checkers miss live abandoned links; this adds judged pass",
+        "whyNow": "HN title on awesome lists decaying; skills repo observed trending. Titles only",
+        "sourceIds": [
+          "aeba5bf756bb149e5d922f04",
+          "82a901da1b9bedec6f38670b"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Shelf Read",
+            "need": "Prune a long curated list over sessions",
+            "mechanism": "Shelf pages with read marks and keyed triage",
+            "rejection": "Selected: offline, cross-domain, leaves a file"
+          },
+          {
+            "name": "Turn Pager",
+            "need": "Move through long chat transcripts by keys",
+            "mechanism": "Turn rail with J/K jumps and turn count",
+            "rejection": "Reads only, drifts toward a chat wrapper"
+          },
+          {
+            "name": "Discount Ledger",
+            "need": "Check if a was price existed",
+            "mechanism": "Paste seen prices, page dates against claim",
+            "rejection": "Echoes feed entry, needs real price data"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "aeba5bf756bb149e5d922f04",
+        "82a901da1b9bedec6f38670b"
+      ]
+    }
+  ],
+  "inventory": null
+}
