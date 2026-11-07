@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-07",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-07\nSeason: 2026-10-26\n\n1. Accessibility specialist [new]\n   Method: Test with a long name and an empty value. [new]\n   Stance: Pushes toward the strange.\n   Temperament: Prefers a clear label to a clever one.\n2. Architectural model maker [new]\n   Method: Find one familiar pattern and improve its weakest state. [new]\n   Stance: Guards the feeling it leaves behind.\n   Temperament: Offers two small options before backing one.\n3. Scientific illustrator [new]\n   Method: Choose one spacing unit and use it throughout. [new]\n   Stance: Cuts until only the core is left.\n   Temperament: Keeps asking which action matters most.\n4. Returning collaborator (archetype; invented) [guest] [new]\n   Method: Keep the last useful choice when the view opens again.\n   Stance: Defends the material.\n   Temperament: Looks for the hidden cost in a simple idea.\n\nConstraint: A failed action always offers a useful next step.\nTask: Preview zoom: a slider for an image editor that changes magnification while keeping the selected area in view.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "87935d92e52ed8dfdc117a41b5c8c14381f3d0e2b104be68fa1a667cc582fd8e",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "7504546fbd94a83a321f8354",
+      "f0247d2be6d23fda27989bba"
+    ]
+  },
+  "status": "needs review",
+  "error": null,
+  "decision": "Drag the zoom slider, and the image grows around your selection, keeping it on screen.",
+  "concept": "Anchor Zoom",
+  "plan": "## Pitch\n\n**Accessibility specialist.** Screen magnifiers already solved this. They follow keyboard focus. When the caret moves, the lens moves with it. Image editors zoom around the canvas centre or the cursor, so the selection drifts off screen at 300%. Make the selection the focus. Then test it with no selection at all, and with a layer called \"Hero photo final final v3 approved by legal (do not touch)\". If the label wraps or the zoom has nothing to anchor to, we find out early.\n\n**Architectural model maker.** I see two small options. One: a scale strip with fixed stops, 1:1, 1:2 and 1:4, like a model maker's scale rule. Two: a free slider that keeps the selection pinned. I back the second. The weakest state of a zoom slider is the moment the thing you care about slides out of view. Fix that state and leave everything else familiar. Afterwards it should feel like the image held still.\n\n**Scientific illustrator.** Figures in a paper use an inset. A boxed detail, a leader line and a scale bar sit next to the full specimen, so detail and context appear together. But what matters most here? The person is retouching one region. Use one 8 px unit everywhere. Give the slider one job, one readout and one recovery line. Cut the rest.\n\n**Returning collaborator.** The cost is hidden in \"keep it in view\". Selections change. Someone zooms to 400% on an eye, deselects, does other work, then reselects the eye. The slider sits at 100% again, so they redo the same zoom. Keep the last useful zoom per selection and restore it when that selection comes back. Defend the pixels too. Never resample the preview in a way that lies about the real edges.\n\n## Clash\n\n1. **Scientific illustrator:** An inset keeps context. Your pinned zoom throws the whole image away at 400%.\n2. **Accessibility specialist:** An inset doubles the canvas. At 320 px wide you get two postage stamps.\n3. **Architectural model maker:** And we ran a loupe on 1 November. Filing Loupe stepped a lens through findings. Another lens repeats it.\n4. **Returning collaborator:** Fine. Then what happens when the selection is wider than the view at 400%? Pinning the centre crops both edges, and nobody can see they were cropped.\n5. **Accessibility specialist:** That's the failed action. It can't just stop. Say \"Selection is 1840 px wide, so its edges are cut off at 400%.\" Then offer \"Fit at 260%\" and \"Step along the edges\".\n6. **Scientific illustrator:** Two buttons, then. And with no selection, the slider still has to do something.\n7. **Accessibility specialist:** It zooms around the centre and says so: \"No selection · zooming around centre\". Next step: \"Select the subject\", which selects the sample face.\n8. **Architectural model maker:** Keep the stops as tick marks on the free slider. Fit, 100% and 200%, with no snapping. The familiar control stays familiar.\n9. **Returning collaborator:** Restored zoom needs a label, or it feels like a bug: \"Restored 400% from last time · Reset\".\n10. **Scientific illustrator:** Agreed. One status line carries the failure, the restore and the next step.\n\n## Decision\n\nDrag the zoom slider, and the image grows around your selection, keeping it on screen.\n\nConcept: Anchor Zoom\n\n- **Accessibility specialist:** Adds the screen-magnifier focus-follow model. Writes the no-selection and long-name tests. Every failure line ends in a labelled next-step button: \"Fit at 260%\", \"Step along the edges\", \"Select the subject\", \"Recenter\".\n- **Architectural model maker:** Keeps the familiar slider and fixes its weakest state, the drifting selection. Adds three unsnapped ticks at Fit, 100% and 200%.\n- **Scientific illustrator:** Sets an 8 px spacing unit across the whole layout. Limits the panel to a slider, a 64 px fixed-width readout and one status line. Rejects the inset.\n- **Returning collaborator:** Stores the last zoom for each selection and restores it with a visible label and a Reset button. Uses nearest-neighbour rendering above 200%, so pixel edges stay true.\n\n## Build notes\n\n1. Build one `index.html` with a 1600×1067 sample image drawn on a `<canvas>`, made of three named regions: face, sign and horizon. Use a native `input type=range` for 25–800% with a `datalist` holding three ticks. Keys: arrows step 10%, Page Up and Page Down step 100%, Home goes to Fit, End goes to 800%. Compute the offset as `sel.cx*z - view.w/2` and the same for y, then clamp it to the image bounds. When the clamp moves the selection centre off the view centre, show \"Pinned to image edge\".\n2. Detect failure per frame. If the selection is wider or taller than the view at z, crop the edges and show \"Edges cut off at 400%\" with two buttons. \"Fit at N%\" sets z to `min(view.w/sel.w, view.h/sel.h)`. \"Step along the edges\" moves through the four selection edges using Left and Right. With no selection, zoom around the centre and offer \"Select the subject\". After a manual drag pan leaves the selection out of view, offer \"Recenter\". Put the status in an `aria-live=polite` line and announce only state changes.\n3. Keep a `Map` from selection id to zoom, mirrored to `sessionStorage`. On reselect, restore the saved zoom and show \"Restored 400% from last time · Reset\". Set `imageSmoothingEnabled=false` above 200%. Space every element in multiples of 8 px. Test at 320 px width with the long layer name, and confirm that under reduced motion zoom changes apply without easing.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Anchor Zoom\",\"audience\":\"People retouching regions in image editors\",\"problem\":\"Zooming in pushes the selected area off screen\",\"interaction\":\"Drag or key the zoom slider with a region selected\",\"outcome\":\"Image scales around the selection, which stays in view\",\"recovery\":\"Failures offer Fit at N%, Step edges, Select subject, Recenter, Reset\",\"mechanism\":\"Magnifier focus-follow: offset tracks selection, zoom saved per selection\",\"difference\":\"Editors zoom on centre or cursor; this holds the work region in view\",\"whyNow\":\"OpenScreen layouts post and HN agent memory title hint at view and recall needs. Titles only, no demand data\",\"sourceIds\":[\"7504546fbd94a83a321f8354\",\"f0247d2be6d23fda27989bba\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Anchor Zoom\",\"need\":\"Keep the selection visible while zooming\",\"mechanism\":\"Selection-anchored slider with per-selection recall\",\"rejection\":\"Selected: cross-domain, fits 320 px, new to recent dates\"},{\"name\":\"Figure Inset\",\"need\":\"See detail and full context together\",\"mechanism\":\"Boxed inset with leader line and scale bar\",\"rejection\":\"Halves canvas on phones; echoes Filing Loupe\"},{\"name\":\"Scale Rule Stops\",\"need\":\"Preview at fixed output scales\",\"mechanism\":\"Detented 1:1, 1:2, 1:4 strip like a scale rule\",\"rejection\":\"Solves a different need and needs DPI data\"}]}\n```",
+  "planProblems": [
+    "Clash has 0 lines, outside 6 to 10"
+  ],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "7b4233a40ec62f345686e09c69775bb387e2560e62c7c49891f41161e98ab658",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Anchor Zoom",
+    "audience": "People retouching regions in image editors",
+    "problem": "Zooming in pushes the selected area off screen",
+    "interaction": "Drag or key the zoom slider with a region selected",
+    "outcome": "Image scales around the selection, which stays in view",
+    "recovery": "Failures offer Fit at N%, Step edges, Select subject, Recenter, Reset",
+    "mechanism": "Magnifier focus-follow: offset tracks selection, zoom saved per selection",
+    "difference": "Editors zoom on centre or cursor; this holds the work region in view",
+    "whyNow": "OpenScreen layouts post and HN agent memory title hint at view and recall needs. Titles only, no demand data",
+    "sourceIds": [
+      "7504546fbd94a83a321f8354",
+      "f0247d2be6d23fda27989bba"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Anchor Zoom",
+        "need": "Keep the selection visible while zooming",
+        "mechanism": "Selection-anchored slider with per-selection recall",
+        "rejection": "Selected: cross-domain, fits 320 px, new to recent dates"
+      },
+      {
+        "name": "Figure Inset",
+        "need": "See detail and full context together",
+        "mechanism": "Boxed inset with leader line and scale bar",
+        "rejection": "Halves canvas on phones; echoes Filing Loupe"
+      },
+      {
+        "name": "Scale Rule Stops",
+        "need": "Preview at fixed output scales",
+        "mechanism": "Detented 1:1, 1:2, 1:4 strip like a scale rule",
+        "rejection": "Solves a different need and needs DPI data"
+      }
+    ]
+  }
+}
