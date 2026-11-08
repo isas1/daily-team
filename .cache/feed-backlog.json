@@ -1,6 +1,473 @@
 {
   "items": [
     {
+      "id": "f7bbadb93042a2997c39047e",
+      "title": "What the first 300 installs of my free Android widget taught me about onboarding",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqwxm9/what_the_first_300_installs_of_my_free_android/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T12:05:47.000Z",
+      "summary": ""
+    },
+    {
+      "id": "631e04656b9327e01bd0c174",
+      "title": "I made an extension that copies any text with one click. No selecting, no Ctrl+C.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqwx73/i_made_an_extension_that_copies_any_text_with_one/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T12:05:06.000Z",
+      "summary": ""
+    },
+    {
+      "id": "653ec7086cc2f05c3e156fdd",
+      "title": "Atlas Streak - a daily blank-map geography game (web + inside Reddit)",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqwvee/atlas_streak_a_daily_blankmap_geography_game_web/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T12:02:11.000Z",
+      "summary": ""
+    },
+    {
+      "id": "79f83838997b3539b5680f2d",
+      "title": "I got tired of scanner apps putting basic features behind paywalls, so I made my own",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqwn2e/i_got_tired_of_scanner_apps_putting_basic/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T11:48:50.000Z",
+      "summary": ""
+    },
+    {
+      "id": "bf6654aad97d682a79e5ed46",
+      "title": "We Closed 10K Worth Of Web Design Deals Using This",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqwh5v/we_closed_10k_worth_of_web_design_deals_using_this/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T11:38:25.000Z",
+      "summary": ""
+    },
+    {
+      "id": "1ae3d282518c24ec619410ff",
+      "title": "Please ban u/Investigatormarker: an AI bot advertising ThreadFox in every thread",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqw96n/please_ban_uinvestigatormarker_an_ai_bot/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T11:23:44.000Z",
+      "summary": ""
+    },
+    {
+      "id": "dcc13ba1d4d778565fb78c9f",
+      "title": "Person of Interest",
+      "url": "https://krthr.co/person-of-interest/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T11:23:28.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "17e16f9330abf0a4354c1384",
+      "title": "I made a tiny pixel bunny that lives on my Mac desktop",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqw8kg/i_made_a_tiny_pixel_bunny_that_lives_on_my_mac/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T11:22:36.000Z",
+      "summary": ""
+    },
+    {
+      "id": "af125f4317d5495db2bf2edb",
+      "title": "Memora+ - Turn buried iPhone photos into editable memory movies",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqw5wu/memora_turn_buried_iphone_photos_into_editable/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T11:17:51.000Z",
+      "summary": ""
+    },
+    {
+      "id": "c8c0c125927c424b7b2949c9",
+      "title": "TableCraft: a free, open-source database IDE in the spirit of DataGrip,",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqw018/tablecraft_a_free_opensource_database_ide_in_the/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T11:07:18.000Z",
+      "summary": ""
+    },
+    {
+      "id": "c60c4786c8d2113fd98c8df5",
+      "title": "Petered (what happens after the Peter Principle)",
+      "url": "https://aworkinglibrary.com/writing/petered",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T10:56:43.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "4ad7c9284c96b64ae9d09949",
+      "title": "After trying every birding app, I built the one I wanted",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqvrgl/after_trying_every_birding_app_i_built_the_one_i/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T10:52:04.000Z",
+      "summary": ""
+    },
+    {
+      "id": "fbb4c6ab199fa8c66f539df1",
+      "title": "JIT bitmap text rendering for microcontrollers",
+      "url": "https://linebender.org/blog/jit-bitmap-text/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T10:42:15.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "55858f2b4ca73bdea18bb38c",
+      "title": "Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU",
+      "url": "https://github.com/synchopate/llama-modchip",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T10:22:04.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "b1b040a10e13f61ef5c649ad",
+      "title": "My side project: a tiny pixel-art office where you can watch your AI coding agents work, wait and nap",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqv0x9/my_side_project_a_tiny_pixelart_office_where_you/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T10:03:22.000Z",
+      "summary": ""
+    },
+    {
+      "id": "b6896b2bb1e39efcaf7af4e8",
+      "title": "3D Crossword - hope you like it!",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xquu83/3d_crossword_hope_you_like_it/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T09:51:06.000Z",
+      "summary": ""
+    },
+    {
+      "id": "6a1732c3e8efbcfb0f034bc8",
+      "title": "[FOR HIRE] Brand & Graphic Designer | Visual Identity, Logo Design & Art Direction",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqul85/for_hire_brand_graphic_designer_visual_identity/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T09:33:48.000Z",
+      "summary": ""
+    },
+    {
+      "id": "96571aa39f8d3b2f00f21a82",
+      "title": "Agent memory needs its OpenTelemetry moment",
+      "url": "https://www.lorekit.io/blog/open-agent-memory-format",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T08:40:23.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "86a24adee386049be1a0fb1f",
+      "title": "I turned the old phone in my drawer into a control panel for my desk setup - DeskGadget, an open source Windows server with an Android client by issac_john",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqtskd/i_turned_the_old_phone_in_my_drawer_into_a/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T08:40:13.000Z",
+      "summary": ""
+    },
+    {
+      "id": "b811a181bf296e5d3a26eccc",
+      "title": "Free revision app for IGCSE students, built by a student. Launched on Product Hunt today",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqtei6/free_revision_app_for_igcse_students_built_by_a/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T08:13:44.000Z",
+      "summary": ""
+    },
+    {
+      "id": "5e29276ecf50d9099d31b1f0",
+      "title": "Looking for feedback: daily vocabulary email, website monitor & news tracker",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqt3g9/looking_for_feedback_daily_vocabulary_email/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T07:54:01.000Z",
+      "summary": ""
+    },
+    {
+      "id": "8f89633e9084f975aeefc5f1",
+      "title": "WaveDudeNext 2D Wave Simulator",
+      "url": "https://github.com/graealex/WaveDudeNext",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T07:09:02.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "b571349d718662da45a50245",
+      "title": "Built a software for backyard design, with 3D preview",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqrxc9/built_a_software_for_backyard_design_with_3d/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T06:38:08.000Z",
+      "summary": ""
+    },
+    {
+      "id": "7dac8a78f7feaf0ef0dec96f",
+      "title": "Kirlian Photography: Building Your Own Equipment",
+      "url": "https://imagesco.com/articles/kirlian/kirlian-photography.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T04:14:12.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "bb30ad069227b20fc320bf2f",
+      "title": "ISponsorBlockTV: SponsorBlock client for all YouTube TV clients",
+      "url": "https://github.com/dmunozv04/isponsorblocktv",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T03:47:19.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "149c124f7b07d2a10e3ffaa7",
+      "title": "Goodbye Claude, Hello Pi",
+      "url": "https://caleb.software/posts/claude-to-pi.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T03:11:48.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "eb9af25994bbaf89b04918c0",
+      "title": "I spent the last month building a Mac notes app that doesn't break my focus. Giving away 40 licenses",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqnc8t/i_spent_the_last_month_building_a_mac_notes_app/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T02:15:35.000Z",
+      "summary": ""
+    },
+    {
+      "id": "fd273feaa8fd4ac1ef548add",
+      "title": "Consumer brain wave headsets threaten privacy",
+      "url": "https://www.science.org/content/article/wearable-device-makers-are-harvesting-brain-data-train-ai-without-telling-users?referrer=https%3A%2F%2Fwww.google.com%2F",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T02:02:38.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "7df2eec33b1fc6b3cbd7f819",
+      "title": "LLM Game Automation MCP - lets an AI agent play PC games in the background (driving, walking and flying in GTA, and more)",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xqlnx6/llm_game_automation_mcp_lets_an_ai_agent_play_pc/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-08T00:49:09.000Z",
+      "summary": ""
+    },
+    {
+      "id": "834f867a452076917a144850",
+      "title": "NVIDIA/auto-ontology",
+      "url": "https://github.com/NVIDIA/auto-ontology",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows."
+    },
+    {
+      "id": "853c63f738f0cecf3b918959",
+      "title": "thedotmack/claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
+    },
+    {
+      "id": "d2a13eb5e04b724bc066229f",
+      "title": "max-sixty/worktrunk",
+      "url": "https://github.com/max-sixty/worktrunk",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows"
+    },
+    {
+      "id": "82a901da1b9bedec6f38670b",
+      "title": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Public repository for Agent Skills"
+    },
+    {
+      "id": "14444dc7b4eca89947b208fb",
+      "title": "Donchitos/Claude-Code-Game-Studios",
+      "url": "https://github.com/Donchitos/Claude-Code-Game-Studios",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy."
+    },
+    {
+      "id": "7366786c561f97cd051ac4ba",
+      "title": "milind-soni/OpenMausBot",
+      "url": "https://github.com/milind-soni/OpenMausBot",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Open-source Grok Bot alternative with a virtual machine that bots can use"
+    },
+    {
+      "id": "553e1cc54ebc818266579b0a",
+      "title": "pingdotgg/t3code",
+      "url": "https://github.com/pingdotgg/t3code",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": ""
+    },
+    {
+      "id": "56ed6f5b1a23b5b5c199b408",
+      "title": "Nutlope/hallmark",
+      "url": "https://github.com/Nutlope/hallmark",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
+    },
+    {
+      "id": "3cb2b485f02c0e6c56c67223",
+      "title": "Renhuai123/ziwei-doushu",
+      "url": "https://github.com/Renhuai123/ziwei-doushu",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "紫微斗数开源排盘引擎 — 基于倪海厦《天纪》体系，含完整排盘算法、四化系统、格局知识库、古籍原文数据"
+    },
+    {
+      "id": "df11630e65be505cc9baca77",
+      "title": "D4Vinci/Scrapling",
+      "url": "https://github.com/D4Vinci/Scrapling",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "🕷️ The BEST Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ and follow here for daily tips and tricks: https://x.com/Scrapling_dev"
+    },
+    {
+      "id": "401c6af5b51d16a5ed2fec53",
+      "title": "vercel-labs/agent-browser",
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Browser automation CLI for AI agents"
+    },
+    {
+      "id": "637c99109af31ed2fe7b7d57",
+      "title": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Skills for Real Engineers. Straight from my .agents directory."
+    },
+    {
+      "id": "c7f7c21cf16630e7e00262d2",
+      "title": "jakubkrehel/skills",
+      "url": "https://github.com/jakubkrehel/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "A collection of agent skills that help you build great interfaces."
+    },
+    {
+      "id": "f4e0adf84666b0c986e73ecd",
+      "title": "github/spec-kit",
+      "url": "https://github.com/github/spec-kit",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "💫 Toolkit to help you get started with SDD or any other process!"
+    },
+    {
+      "id": "19c1fb556084b78651bb8337",
+      "title": "The-PR-Agent/pr-agent",
+      "url": "https://github.com/The-PR-Agent/pr-agent",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier."
+    },
+    {
+      "id": "e86f271c7e6b1a182df550d6",
+      "title": "hyprwm/Hyprland",
+      "url": "https://github.com/hyprwm/Hyprland",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks."
+    },
+    {
+      "id": "2db4f7d2d7de0ea292a7b64c",
+      "title": "blader/humanizer",
+      "url": "https://github.com/blader/humanizer",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-08T00:00:00.000Z",
+      "observed": true,
+      "summary": "Agent skill that removes signs of AI-generated writing from text"
+    },
+    {
+      "id": "a5fe3cb9688bbbec7fe87794",
+      "title": "Making any integer with four 2s (2025)",
+      "url": "https://eli.thegreenplace.net/2025/making-any-integer-with-four-2s/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-07T22:38:58.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "10bdc73097cfd2386d0a762b",
+      "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
+      "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-07T20:45:32.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "579f1e45f94231f744dcf3fb",
+      "title": "What I run on my $10 USD OpenStick homelab",
+      "url": "https://blog.bosscher.ch/posts/openstick/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-07T18:12:12.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "322fdae5f7f118def71d9eae",
+      "title": "I got tired of scrolling through iPhone alarms, so I built a 24-hour alarm clock instead",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xq8it4/i_got_tired_of_scrolling_through_iphone_alarms_so/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-07T15:07:09.000Z",
+      "summary": ""
+    },
+    {
       "id": "217f22b71f934b4bd88b851f",
       "title": "Built a native Windows focus blocker that uses less than 4MB RAM (no Electron, no subscriptions)",
       "url": "https://www.reddit.com/r/SideProject/comments/1xq4ti5/built_a_native_windows_focus_blocker_that_uses/",
@@ -217,96 +684,6 @@
       "summary": ""
     },
     {
-      "id": "853c63f738f0cecf3b918959",
-      "title": "thedotmack/claude-mem",
-      "url": "https://github.com/thedotmack/claude-mem",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
-    },
-    {
-      "id": "d2a13eb5e04b724bc066229f",
-      "title": "max-sixty/worktrunk",
-      "url": "https://github.com/max-sixty/worktrunk",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows"
-    },
-    {
-      "id": "14444dc7b4eca89947b208fb",
-      "title": "Donchitos/Claude-Code-Game-Studios",
-      "url": "https://github.com/Donchitos/Claude-Code-Game-Studios",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy."
-    },
-    {
-      "id": "3cb2b485f02c0e6c56c67223",
-      "title": "Renhuai123/ziwei-doushu",
-      "url": "https://github.com/Renhuai123/ziwei-doushu",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "紫微斗数开源排盘引擎 — 基于倪海厦《天纪》体系，含完整排盘算法、四化系统、格局知识库、古籍原文数据"
-    },
-    {
-      "id": "553e1cc54ebc818266579b0a",
-      "title": "pingdotgg/t3code",
-      "url": "https://github.com/pingdotgg/t3code",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": ""
-    },
-    {
-      "id": "82a901da1b9bedec6f38670b",
-      "title": "anthropics/skills",
-      "url": "https://github.com/anthropics/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Public repository for Agent Skills"
-    },
-    {
-      "id": "56ed6f5b1a23b5b5c199b408",
-      "title": "Nutlope/hallmark",
-      "url": "https://github.com/Nutlope/hallmark",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
-    },
-    {
-      "id": "7366786c561f97cd051ac4ba",
-      "title": "milind-soni/OpenMausBot",
-      "url": "https://github.com/milind-soni/OpenMausBot",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Open-source Grok Bot alternative with a virtual machine that bots can use"
-    },
-    {
-      "id": "df11630e65be505cc9baca77",
-      "title": "D4Vinci/Scrapling",
-      "url": "https://github.com/D4Vinci/Scrapling",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "🕷️ The BEST Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ and follow here for daily tips and tricks: https://x.com/Scrapling_dev"
-    },
-    {
       "id": "6d3bd03b499863301fb73ea1",
       "title": "calesthio/OpenMontage",
       "url": "https://github.com/calesthio/OpenMontage",
@@ -317,56 +694,6 @@
       "summary": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video production studio."
     },
     {
-      "id": "c7f7c21cf16630e7e00262d2",
-      "title": "jakubkrehel/skills",
-      "url": "https://github.com/jakubkrehel/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "A collection of agent skills that help you build great interfaces."
-    },
-    {
-      "id": "401c6af5b51d16a5ed2fec53",
-      "title": "vercel-labs/agent-browser",
-      "url": "https://github.com/vercel-labs/agent-browser",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Browser automation CLI for AI agents"
-    },
-    {
-      "id": "637c99109af31ed2fe7b7d57",
-      "title": "mattpocock/skills",
-      "url": "https://github.com/mattpocock/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Skills for Real Engineers. Straight from my .agents directory."
-    },
-    {
-      "id": "e86f271c7e6b1a182df550d6",
-      "title": "hyprwm/Hyprland",
-      "url": "https://github.com/hyprwm/Hyprland",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks."
-    },
-    {
-      "id": "f4e0adf84666b0c986e73ecd",
-      "title": "github/spec-kit",
-      "url": "https://github.com/github/spec-kit",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "💫 Toolkit to help you get started with SDD or any other process!"
-    },
-    {
       "id": "8c6014a36ca90e3fbda99713",
       "title": "obra/superpowers",
       "url": "https://github.com/obra/superpowers",
@@ -375,16 +702,6 @@
       "published": "2026-11-07T00:00:00.000Z",
       "observed": true,
       "summary": "An agentic skills framework & software development methodology that works."
-    },
-    {
-      "id": "19c1fb556084b78651bb8337",
-      "title": "The-PR-Agent/pr-agent",
-      "url": "https://github.com/The-PR-Agent/pr-agent",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-07T00:00:00.000Z",
-      "observed": true,
-      "summary": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier."
     },
     {
       "id": "ec673bd7694d3a658bba5faa",
@@ -603,330 +920,12 @@
       "sourceId": "hacker-news",
       "published": "2026-11-06T10:21:15.000Z",
       "summary": "Comments"
-    },
-    {
-      "id": "f118987f00106ff0b829fa96",
-      "title": "I built a FREE macOS menu bar app for live sports scores (with Notch animations!)",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp95io/i_built_a_free_macos_menu_bar_app_for_live_sports/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T10:03:26.000Z",
-      "summary": ""
-    },
-    {
-      "id": "d18ddd9c12e46dd96b3cda9f",
-      "title": "Dutch 'idealist' bank ASN blocks non-Google Android, including GrapheneOS",
-      "url": "https://github.com/PrivSec-dev/banking-apps-compat-report/issues/105",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T09:27:12.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "b4e42e00a112cf0807879682",
-      "title": "I built koans.app: learn 14 programming languages by fixing failing tests, in your browser",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp817r/i_built_koansapp_learn_14_programming_languages/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T08:50:04.000Z",
-      "summary": ""
-    },
-    {
-      "id": "233ac604af997d93501666a1",
-      "title": "I built a tool to find potential customers in Facebook groups. Would love some feedback.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp7x4z/i_built_a_tool_to_find_potential_customers_in/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T08:42:30.000Z",
-      "summary": ""
-    },
-    {
-      "id": "f02d763a4f6d9e5b086c176f",
-      "title": "Chomsky and the Two Cultures of Statistical Learning",
-      "url": "https://www.norvig.com/chomsky.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T08:18:36.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "fca9fed350e783d9eaa5e110",
-      "title": "First open source project, and I'm not sure how to grow it. Any advice?",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp7c66/first_open_source_project_and_im_not_sure_how_to/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T08:02:59.000Z",
-      "summary": ""
-    },
-    {
-      "id": "aa86d8831359831a1618ba33",
-      "title": "A New Community For In-House UX People",
-      "url": "https://smashingmagazine.com/2026/11/ux-insiders-community-in-house-ux-people/",
-      "source": "Smashing Magazine",
-      "sourceId": "smashing",
-      "published": "2026-11-06T08:00:00.000Z",
-      "summary": "We’ve been working on something new! We’ve teamed up for a **new small community** for people doing UX-inside organizations &mdash; with weekly calls and a shared library of the business cases, templates, and research plans that have actually worked for other folks. [Jump to details](https://uxinsiders.boagworld.com/)."
-    },
-    {
-      "id": "5f3873c668bf9280beaa86ee",
-      "title": "Multiplayer tanks that demolish real buildings from OpenStreetMap",
-      "url": "https://worldstrike.fun/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T07:55:48.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "5c211a0829477d458f87a8ef",
-      "title": "I built a free, local-first notes app, but I’m struggling with knowing when it’s actually ready to launch",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp75mz/i_built_a_free_localfirst_notes_app_but_im/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T07:51:57.000Z",
-      "summary": ""
-    },
-    {
-      "id": "c1341098da6d4c5b2cef9d33",
-      "title": "Kugelblitz – Mac-Native Google Earth Alternative",
-      "url": "https://apps.metaebene.me/en/kugelblitz",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T07:47:38.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "bec042b19afda6a85fedd2f9",
-      "title": "Blender's UI and Runtime: Much Faster Than GPUI",
-      "url": "https://github.com/ppmpreetham/BUI",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T07:40:35.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e2cf07fcdaa30bd6e2c4f91a",
-      "title": "Are we putting too much pressure on ourselves to launch an MVP?",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp6y9j/are_we_putting_too_much_pressure_on_ourselves_to/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T07:38:03.000Z",
-      "summary": ""
-    },
-    {
-      "id": "b22bff2ad5f49085e700aa03",
-      "title": "Hardcoded credentials and other issues in Tata Motors App",
-      "url": "https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES01&VLCODE=CIVN-2026-0537",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T07:28:39.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "4c92c6dfeaab1aa2b8f0a679",
-      "title": "Britain to make salary disclosure in job ads mandatory",
-      "url": "https://www.reuters.com/business/world-at-work/britain-make-salary-disclosure-job-ads-mandatory-2026-11-05/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T07:22:04.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "124ec299103075f92b96056e",
-      "title": "Built a social media where you can just drop by without forced logins/signups",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp5u1h/built_a_social_media_where_you_can_just_drop_by/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T06:26:28.000Z",
-      "summary": ""
-    },
-    {
-      "id": "190ceb052e1ce41129390fb9",
-      "title": "I got tired of scanner apps that want a subscription and upload my documents to the cloud so I made CamPage.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp4z3b/i_got_tired_of_scanner_apps_that_want_a/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T05:35:25.000Z",
-      "summary": ""
-    },
-    {
-      "id": "ed512befc7c934917763c230",
-      "title": "From Linux to Wikipedia: How Volunteers Build the Internet",
-      "url": "https://thereader.mitpress.mit.edu/from-linux-to-wikipedia-how-volunteers-build-the-internet/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T04:17:49.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "5dd7f9063107c0909430f806",
-      "title": "US FAA says it will phase out floppy disks from air traffic control by 2028",
-      "url": "https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T04:00:28.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "4426de1380081881afc59be7",
-      "title": "Pwn.college",
-      "url": "https://pwn.college/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T03:27:14.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e2e23a0367960f2af33f005d",
-      "title": "Nvidia Kubernetes Engine (NVKE)",
-      "url": "https://github.com/dsx-ai-factory/nvke",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T03:16:26.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "f993c1211a5060c35af73cd4",
-      "title": "Rooted - A self help growth app",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp065u/rooted_a_self_help_growth_app/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T01:24:56.000Z",
-      "summary": ""
-    },
-    {
-      "id": "e5707d4ca802e66e659ddabc",
-      "title": "Inkling 2 Small",
-      "url": "https://thinkingmachines.ai/news/inkling-2-small/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T00:00:24.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e622970364717202be2f5925",
-      "title": "HKUDS/DeepTutor",
-      "url": "https://github.com/HKUDS/DeepTutor",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-06T00:00:00.000Z",
-      "observed": true,
-      "summary": "DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/ ."
-    },
-    {
-      "id": "59f086ad2f833f7ef34238cd",
-      "title": "nightly-labs/openbot",
-      "url": "https://github.com/nightly-labs/openbot",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-06T00:00:00.000Z",
-      "observed": true,
-      "summary": "A local-first desktop workspace for persistent AI teammates. Run Codex, Claude, and Grok with dedicated workspaces, task queues, file sharing, browser control, and agent-to-agent collaboration."
-    },
-    {
-      "id": "ca6e9330cc1b2a538d3772d7",
-      "title": "multica-ai/andrej-karpathy-skills",
-      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-06T00:00:00.000Z",
-      "observed": true,
-      "summary": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
-    },
-    {
-      "id": "f80850b9426ecaea6c49feba",
-      "title": "gta 6 is out in 2 weeks so i put the weapon wheel on my mac",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xow6gl/gta_6_is_out_in_2_weeks_so_i_put_the_weapon_wheel/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-05T22:22:44.000Z",
-      "summary": ""
-    },
-    {
-      "id": "199af8aea5b61129022fe080",
-      "title": "Claude Code sends your email address to websites",
-      "url": "https://github.com/anthropics/claude-code/issues/107757",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-05T22:17:15.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "ef3f53e2698295a00515dc56",
-      "title": "MS Paint Remote Code Execution Vulnerability",
-      "url": "https://www.cve.org/CVERecord?id=CVE-2026-83844",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-05T20:43:42.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "d6216bddfab170c9f5c2b84d",
-      "title": "I built a searchable database of US WARN layoff notices: 58,000 filings covering 6 million workers across 47 states",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xosb5h/i_built_a_searchable_database_of_us_warn_layoff/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-05T19:47:10.000Z",
-      "summary": ""
-    },
-    {
-      "id": "f11fe407018d39f53eb9f65d",
-      "title": "The Hackintosh Reborn",
-      "url": "https://www.naut.ca/blog/2026/11/05/the-hackintosh-reborn-with-ai/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-05T19:08:22.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "31e483ef3edc6c2a2797aa59",
-      "title": "Window Sweaters",
-      "url": "https://github.com/saragordic/window-sweaters",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-05T16:50:14.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "0807d3001fb10dda52e55e23",
-      "title": "I built a free iOS app using RT-DETR and OSNet for real-time people counting and tracking",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xoiwox/i_built_a_free_ios_app_using_rtdetr_and_osnet_for/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-05T13:40:37.000Z",
-      "summary": ""
-    },
-    {
-      "id": "9e2da1485772a81fd0ab7c39",
-      "title": "I built a history podcast generator you can interrupt. Ask it any topic and start learning",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xoio0f/i_built_a_history_podcast_generator_you_can/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-05T13:29:39.000Z",
-      "summary": ""
-    },
-    {
-      "id": "28f75214d18925c65b1307c9",
-      "title": "Built a free AliExpress price tracker (with AI help) because I got tired of fake discounts",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xoikzp/built_a_free_aliexpress_price_tracker_with_ai/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-05T13:25:42.000Z",
-      "summary": ""
-    },
-    {
-      "id": "bdaaf797088a75018023854d",
-      "title": "I built an iPhone app where you swipe on real job openings and it fills the application for you. You only pay when the employer's site confirms it.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xoi4dw/i_built_an_iphone_app_where_you_swipe_on_real_job/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-05T13:04:04.000Z",
-      "summary": ""
     }
   ],
   "fetched": {
-    "smashing": "2026-11-07",
-    "hacker-news": "2026-11-07",
-    "github-trending": "2026-11-07",
-    "reddit-sideproject": "2026-11-07"
+    "smashing": "2026-11-08",
+    "hacker-news": "2026-11-08",
+    "github-trending": "2026-11-08",
+    "reddit-sideproject": "2026-11-08"
   }
 }

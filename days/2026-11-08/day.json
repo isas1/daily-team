@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-08",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-08\nSeason: 2026-10-26\n\n1. Type designer [new]\n   Method: Try every action twice before calling it finished. [new]\n   Stance: Speaks for the one who finds it.\n   Temperament: Asks what a stranger would expect next.\n2. Icon designer [new]\n   Method: Show what changes when the main action succeeds. [new]\n   Stance: Breaks the frame.\n   Temperament: Names what improved before asking for more.\n3. Exhibit light technician [new]\n   Method: Name the useful result before naming the concept. [new]\n   Stance: Wants it to last.\n   Temperament: Rejects a claim until the state can be shown.\n4. Cautious beginner (archetype; invented) [guest] [new]\n   Method: Make the first action safe and easy to reverse.\n   Stance: Insists it must be beautiful.\n   Temperament: Changes their mind after a useful demonstration.\n\nConstraint: Reduced motion keeps every state usable.\nTask: Upload progress: a progress ring for a media tool that shows how much of a file has uploaded and when it finishes.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "e58d1298a05ee9e3d720b0ca490dc7464e8378bc4466808cb18e1177e6198c0e",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "79f83838997b3539b5680f2d",
+      "fbb4c6ab199fa8c66f539df1"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "You upload a video, and the ring fills only with parts already saved, so a dropped connection resumes from there.",
+  "concept": "Tachograph Upload",
+  "plan": "## Pitch\n\n**Type designer:** A creator uploads a 412 MB clip on café wifi. The ring says 71%, then the wifi drops. Do they lose 71% or keep it? Today's rings don't tell them. I'd set the centre in two lines: \"71% sent\" and \"64% safe\". A stranger expects the second number to be the one that survives. I'll press Pause twice, Resume twice and Retry twice, and the ring has to land in the same place each time.\n\n**Icon designer:** Borrow the tachograph disc from a truck cab. A stylus marks speed around a paper circle, so a stop shows as a flat stretch at the exact hour it happened. Here the angle is confirmed bytes and the radial trace is upload rate. A stall is a flat arc you can point at. When the upload succeeds, the trace closes into a full circle, the centre glyph becomes a link mark and the label reads \"Copy link\". The ring stops being progress and becomes the thing you share. That part is already better than a bar.\n\n**Exhibit light technician:** A museum light budget counts lux-hours already spent on a textile. An upload has a budget too: megabytes on a metered phone plan. The ring would show the cost of each retry in MB. My first line would be the useful one: \"Safe to close: 264 MB stored.\" I won't accept \"71%\" on its own until the server has acknowledged those chunks.\n\n**Cautious beginner:** Before anything, the first button I press has to be Pause. Cancel can wait. And if it looks like a system dialog, I won't trust it. I'd like it to look like a printed contact sheet, each file a frame that darkens as it lands.\n\n## Clash\n\n**Exhibit light technician:** Two numbers in the centre is one too many. \"Sent\" is a claim. Show me the chunk ticks and I'll believe \"safe.\"\n\n**Type designer:** Then the ticks carry it. Eight chunks, eight notches. Filled means stored. A stranger reads notches faster than a percent.\n\n**Cautious beginner:** The contact sheet is prettier than a ring with notches.\n\n**Icon designer:** It's also the import manifest from 29 October with thumbnails. The tachograph trace is new. Drop the wifi and watch the line go flat at 64%.\n\n**Cautious beginner:** Show me.\n\n**Icon designer:** Demo: chunk 6 is mid-flight, network off. The trace goes flat at 64%. The outer sent arc falls back to the last notch. Resume starts from notch 5.\n\n**Cautious beginner:** Fine. The flat arc reads like a pencil line on paper, and that's the part I liked. I'll drop the contact sheet if Pause comes before Cancel.\n\n**Exhibit light technician:** Then my budget stays out of the ring. One footnote line: \"Retries used 18 MB.\" It holds without carrier data.\n\n**Type designer:** I tried Resume twice during a drop. The second press has to do nothing and say \"Already resuming\". Otherwise the ring double-counts.\n\n## Decision\n\nYou upload a video, and the ring fills only with parts already saved, so a dropped connection resumes from there.\n\nConcept: Tachograph Upload\n\n- **Type designer:** Sets the centre readout in fixed-width tabular figures: \"64% safe · 5 of 8 parts\". Runs every control twice and sets the second-press results: \"Already resuming\", \"Already paused\", and Retry disabled while pending.\n- **Icon designer:** Draws the tachograph trace, with angle for confirmed bytes and radius for rate in 4 bands. On success the trace closes, the centre glyph swaps to a link mark and the action becomes \"Copy link\".\n- **Exhibit light technician:** Puts the result first: \"Safe to close: 264 MB stored\". Adds the footnote \"Retries used 18 MB\". Only acknowledged chunks advance the confirmed arc.\n- **Cautious beginner:** Places Pause as the first and largest action, with Cancel second behind a confirm that lists what is kept. Defines the paper-and-pencil finish: a warm off-white disc and a graphite trace.\n\nThe ring improves on the usual percent ring, which merges sent bytes with stored bytes and hides stalls. Here a drop shows where it happened and how much survived. That matters for large clips on unstable networks, where a reset to 0% costs minutes and mobile data.\n\nUnder reduced motion, the arcs jump per chunk, the trace draws without a sweep, and every state stays named in text.\n\n## Build notes\n\n1. Build a local upload simulator in `index.html`. It sends 8 chunks of a 412 MB sample with a seeded rate curve, a Network toggle, a Fail chunk 6 toggle and acknowledgement delays. State holds `sent`, `confirmed[]`, `rateLog[]` and a request id, and stale acks are dropped.\n2. Render one 240 px SVG. It has an outer sent arc, an inner confirmed arc with 8 notches, a radial rate trace from `rateLog`, and a centre readout in a live region announced per chunk and per state change. Add a `prefers-reduced-motion` path that sets arcs directly.\n3. Wire the controls Pause, Resume, Cancel, Retry and Copy link, plus the Space and Escape keys. Add second-press guards and a Reset sample. Resume restarts from the last confirmed notch. Test each control twice at 320 px width.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Tachograph Upload\",\"audience\":\"Video creators uploading large clips on unstable networks\",\"problem\":\"Rings merge sent and stored bytes and hide where a stall began\",\"interaction\":\"Upload, Pause, drop network, Resume or Retry\",\"outcome\":\"Ring shows safe parts, flat stall arc, then Copy link\",\"recovery\":\"Resume from last stored part, Retry guarded, Reset sample\",\"mechanism\":\"Tachograph disc: angle is acked bytes, radius is rate; 8 part notches\",\"difference\":\"Percent rings reset or freeze; this shows what survived and where\",\"whyNow\":\"SideProject scanner post: people build own media tools. HN microcontroller text: small readouts. Titles only, no demand data\",\"sourceIds\":[\"79f83838997b3539b5680f2d\",\"fbb4c6ab199fa8c66f539df1\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Tachograph Upload\",\"need\":\"Know what a dropped upload kept\",\"mechanism\":\"Acked-part notches with radial rate trace\",\"rejection\":\"Selected: cross-domain, differs from 11-02 tide download\"},{\"name\":\"Light Budget Ring\",\"need\":\"See mobile data spent on retries\",\"mechanism\":\"Lux-hour style budget arc per retry\",\"rejection\":\"Needs carrier plan data; kept as one footnote\"},{\"name\":\"Contact Sheet\",\"need\":\"Track several files at once\",\"mechanism\":\"Frames darken as each file lands\",\"rejection\":\"Echoes 10-29 import manifest\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "d22b241b698f95664597caa5b6742d33ab375402f4afc105777ba02fafdea177",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Tachograph Upload",
+    "audience": "Video creators uploading large clips on unstable networks",
+    "problem": "Rings merge sent and stored bytes and hide where a stall began",
+    "interaction": "Upload, Pause, drop network, Resume or Retry",
+    "outcome": "Ring shows safe parts, flat stall arc, then Copy link",
+    "recovery": "Resume from last stored part, Retry guarded, Reset sample",
+    "mechanism": "Tachograph disc: angle is acked bytes, radius is rate; 8 part notches",
+    "difference": "Percent rings reset or freeze; this shows what survived and where",
+    "whyNow": "SideProject scanner post: people build own media tools. HN microcontroller text: small readouts. Titles only, no demand data",
+    "sourceIds": [
+      "79f83838997b3539b5680f2d",
+      "fbb4c6ab199fa8c66f539df1"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Tachograph Upload",
+        "need": "Know what a dropped upload kept",
+        "mechanism": "Acked-part notches with radial rate trace",
+        "rejection": "Selected: cross-domain, differs from 11-02 tide download"
+      },
+      {
+        "name": "Light Budget Ring",
+        "need": "See mobile data spent on retries",
+        "mechanism": "Lux-hour style budget arc per retry",
+        "rejection": "Needs carrier plan data; kept as one footnote"
+      },
+      {
+        "name": "Contact Sheet",
+        "need": "Track several files at once",
+        "mechanism": "Frames darken as each file lands",
+        "rejection": "Echoes 10-29 import manifest"
+      }
+    ]
+  }
+}

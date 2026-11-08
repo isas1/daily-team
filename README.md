@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-07: Anchor Zoom
+### 2026-11-08: Tachograph Upload
 
-<a href="days/2026-11-07/"><img src="days/2026-11-07/team.png" alt="Team for 2026-11-07: Accessibility specialist · Architectural model maker · Scientific illustrator · Returning collaborator" width="100%"></a>
+<a href="days/2026-11-08/"><img src="days/2026-11-08/team.png" alt="Team for 2026-11-08: Type designer · Icon designer · Exhibit light technician · Cautious beginner" width="100%"></a>
 
 **Task:** Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.
 
-**Decision:** Drag the zoom slider, and the image grows around your selection, keeping it on screen.
+**Decision:** You upload a video, and the ring fills only with parts already saved, so a dropped connection resumes from there.
 
-<a href="days/2026-11-07/"><img src="days/2026-11-07/cover.png" alt="Designed cover for Anchor Zoom" width="100%"></a>
+<a href="days/2026-11-08/"><img src="days/2026-11-08/cover.png" alt="Designed cover for Tachograph Upload" width="100%"></a>
 
-[Open the day](days/2026-11-07/) · [Use it](https://isas1.github.io/daily-team/2026-11-07/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-08/) · [Use it](https://isas1.github.io/daily-team/2026-11-08/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-08](days/2026-11-08/) | <a href="days/2026-11-08/"><img src="days/2026-11-08/cover.png" alt="Tachograph Upload" width="160"></a> | Tachograph Upload | Type designer · Icon designer · Exhibit light technician · Cautious beginner |
 | [2026-11-07](days/2026-11-07/) | <a href="days/2026-11-07/"><img src="days/2026-11-07/cover.png" alt="Anchor Zoom" width="160"></a> | Anchor Zoom | Accessibility specialist · Architectural model maker · Scientific illustrator · Returning collaborator |
 | [2026-11-06](days/2026-11-06/) | <a href="days/2026-11-06/"><img src="days/2026-11-06/cover.png" alt="Register Check" width="160"></a> | Register Check | Watch restorer · Motion engineer · Interaction engineer · Polar city navigator |
 | [2026-11-05](days/2026-11-05/) | <a href="days/2026-11-05/"><img src="days/2026-11-05/cover.png" alt="Shelf Read" width="160"></a> | Shelf Read | Quality engineer · Visual designer · Mobile interface designer · Stone swallow |
 | [2026-11-04](days/2026-11-04/) | <a href="days/2026-11-04/"><img src="days/2026-11-04/cover.png" alt="Write Time-Out" width="160"></a> | Write Time-Out | Human factors engineer · Data interface designer · Interface designer · One-handed maker |
 | [2026-11-03](days/2026-11-03/) | <a href="days/2026-11-03/"><img src="days/2026-11-03/cover.png" alt="Zero Hour Rehearsal" width="160"></a> | Zero Hour Rehearsal | Design systems engineer · Technical illustrator · Motion director · Porcelain hare |
 | [2026-11-02](days/2026-11-02/) | <a href="days/2026-11-02/"><img src="days/2026-11-02/cover.png" alt="Tide-mark download" width="160"></a> | Tide-mark download | Flight deck designer · Cartographic designer · Ergonomist · Tidal library custodian |
-| [2026-11-01](days/2026-11-01/) | <a href="days/2026-11-01/"><img src="days/2026-11-01/cover.png" alt="Filing Loupe" width="160"></a> | Filing Loupe | Lens grinder · Kinetic sculptor · Game interface designer · Floating market clerk |
 
-[All 36 days](ARCHIVE.md)
+[All 37 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

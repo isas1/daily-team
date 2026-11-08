@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 36 days recorded.
+Every daily team and the asset it made, newest first. 37 days recorded.
 
 [Today](README.md)
 
 | Date | Project | Open |
 |---|---|---|
+| [2026-11-08](days/2026-11-08/) | Tachograph Upload | <a href="days/2026-11-08/"><img src="days/2026-11-08/cover.png" alt="Tachograph Upload" width="160"></a> [asset](days/2026-11-08/artifact-1.html) |
 | [2026-11-07](days/2026-11-07/) | Anchor Zoom | <a href="days/2026-11-07/"><img src="days/2026-11-07/cover.png" alt="Anchor Zoom" width="160"></a> [asset](days/2026-11-07/artifact-1.html) |
 | [2026-11-06](days/2026-11-06/) | Register Check | <a href="days/2026-11-06/"><img src="days/2026-11-06/cover.png" alt="Register Check" width="160"></a> [asset](days/2026-11-06/artifact-1.html) |
 | [2026-11-05](days/2026-11-05/) | Shelf Read | <a href="days/2026-11-05/"><img src="days/2026-11-05/cover.png" alt="Shelf Read" width="160"></a> [asset](days/2026-11-05/artifact-1.html) |

@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "31d001286dcd9b24f10b0cb6aad0e6540ea8af03639a32a0e430876912376ebb",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Type designer:** The title sits large and alone on the left, set in two lines so \"Tachograph\" holds at 160 px. The date is set in tabular figures. One descriptor line tells a stranger what the ring does.\n\n**Icon designer:** The disc breaks the frame on the top and right edges. The trace closes into a full circle, and the centre carries the link mark from the success state. The stall stays visible as a flat stretch.\n\n**Exhibit light technician:** The useful result goes first, so the descriptor names saved parts. The cover shows no percent and no MB figure. The 8 notches carry the claim, because they can be shown.\n\n**Cautious beginner:** The disc is warm off-white paper with a graphite trace. It should look printed, not like a system dialog. The flat arc reads as a pencil line, and the cover keeps that.\n\n**Lead's choice:**\n- **Composition:** One tachograph disc, 660 px across, offset right and cropped by the canvas edge. The radial trace runs a full turn. A 50° flat arc sits at zero rate after part 5. A small red tick marks the resume point. The title block sits in the left 480 px with 72 px margins.\n- **Palette:** Sam Creates navy #0E2A47 is the ground. The disc is paper #F1ECE2 and the trace is graphite #34373B. Red #BE4D4D appears only on the stall arc, the resume tick and a short rule under the title.\n- **Type:** `Cover Headline` at 92 px in paper white, with tight leading. `Cover Text` at 24 px sets the descriptor, and the date is 20 px in tabular figures.",
+  "width": 1200,
+  "height": 630
+}

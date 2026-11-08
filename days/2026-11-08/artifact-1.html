@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upload video · Tachograph Upload</title>
+<style>
+:root{--paper:#f6f1e6;--bg:#e6dfd1;--ink:#2b2925;--mute:#5a554b;--line:#cfc6b4;--rust:#9c3f22;--focus:#1f5a86;color-scheme:light}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:420px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.35rem;margin:0;letter-spacing:-.01em}
+.file{margin:4px 0 14px;color:var(--mute);font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--mute);padding:0 6px;border-radius:3px;margin-right:6px;vertical-align:1px}
+.ringwrap{position:relative;width:240px;height:240px;margin:0 auto}
+#ring{width:240px;height:240px;display:block}
+.centre{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;pointer-events:none}
+.pline{display:flex;align-items:baseline;gap:5px}
+#pctN{font-size:2.1rem;font-weight:650;line-height:1;min-width:3ch;text-align:right}
+.unit{font-size:.95rem;color:var(--mute)}
+.ptxt{font-size:.85rem;color:var(--mute);margin-top:4px}
+#glyph{color:var(--ink)}
+.status{text-align:center;font-weight:600;margin:14px 0 2px;min-height:1.4em;font-variant-numeric:tabular-nums}
+.note{text-align:center;min-height:1.3em;margin:0;color:var(--rust);font-size:.9rem}
+.foot{text-align:center;margin:2px 0 0;font-size:.85rem;color:var(--mute);font-variant-numeric:tabular-nums}
+.controls{display:grid;gap:10px;margin-top:12px}
+button{font:inherit;cursor:pointer;border-radius:8px;min-height:44px;padding:0 16px}
+button:active{transform:translateY(1px)}
+.primary{background:var(--ink);color:var(--paper);border:2px solid var(--ink);min-height:56px;font-size:1.1rem;font-weight:600}
+.primary[aria-disabled=true]{background:var(--mute);border-color:var(--mute);cursor:progress}
+.secondary{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.danger{color:var(--rust);border-color:var(--rust)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.confirm{background:var(--paper);border:2px solid var(--ink);border-radius:10px;padding:14px;margin-top:12px}
+.confirm p{margin:0 0 12px;font-weight:600}
+.confirm div{display:grid;gap:10px}
+.linkrow{display:grid;gap:4px;margin-top:12px}
+.linkrow label{font-size:.85rem;color:var(--mute)}
+.linkrow input{font:inherit;min-height:44px;padding:0 10px;border:1px solid var(--mute);border-radius:6px;background:var(--paper);color:var(--ink);font-family:ui-monospace,Menlo,Consolas,monospace}
+fieldset.sim{margin:22px 0 0;border:1px dashed var(--mute);border-radius:8px;display:flex;flex-wrap:wrap;gap:0 18px;align-items:center;padding:4px 12px 8px}
+legend{font-size:.85rem;color:var(--mute);padding:0 4px}
+.sim label{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--ink);margin:0}
+.text{background:none;border:1px solid transparent;text-decoration:underline;color:var(--ink);margin-left:auto;padding:0 8px}
+details{margin-top:14px;font-size:.9rem;color:var(--mute)}
+summary{cursor:pointer;min-height:32px;display:flex;align-items:center}
+details ul{padding-left:18px;margin:6px 0}
+details a{color:var(--focus)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}button:active{transform:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Upload video</h1>
+  <p class="file"><span class="tag">Demo</span>beach-cut.mp4 · 412 MB</p>
+
+  <div class="ringwrap">
+    <svg id="ring" viewBox="0 0 240 240" role="img" aria-label="0% safe, 0 of 8 parts stored">
+      <circle cx="120" cy="120" r="118" fill="#f6f1e6" stroke="#cfc6b4"/>
+      <circle cx="120" cy="120" r="58" fill="none" stroke="#e6dfd0" stroke-dasharray="2 4"/>
+      <circle cx="120" cy="120" r="78" fill="none" stroke="#e6dfd0" stroke-dasharray="2 4"/>
+      <circle cx="120" cy="120" r="108" fill="none" stroke="#e2dbcc" stroke-width="4"/>
+      <path id="sent" fill="none" stroke="#6d675c" stroke-width="4"/>
+      <g id="parts"></g>
+      <g id="stalls"></g>
+      <path id="trace" fill="none" stroke="#3a3733" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <div class="centre" aria-hidden="true">
+      <div class="pline" id="pline"><b id="pctN">0%</b><span class="unit">safe</span></div>
+      <svg id="glyph" hidden viewBox="0 0 24 24" width="44" height="44"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="ptxt" id="ptxt">0 of 8 parts</div>
+    </div>
+  </div>
+
+  <p class="status" id="status">Ready</p>
+  <p class="note" id="note" role="status" aria-live="polite"></p>
+  <p class="foot" id="foot" hidden></p>
+
+  <div class="controls" id="controls">
+    <button type="button" id="primary" class="primary" aria-keyshortcuts="Space">Upload</button>
+    <button type="button" id="cancel" class="secondary" aria-keyshortcuts="Escape" hidden>Cancel</button>
+  </div>
+
+  <div class="confirm" id="confirm" role="group" aria-labelledby="confirmText" hidden>
+    <p id="confirmText"></p>
+    <div>
+      <button type="button" id="keep" class="primary">Keep going</button>
+      <button type="button" id="del" class="secondary danger">Delete upload</button>
+    </div>
+  </div>
+
+  <div class="linkrow" id="linkrow" hidden>
+    <label for="link">Link</label>
+    <input id="link" readonly value="demo.local/v/7k3q">
+  </div>
+
+  <fieldset class="sim">
+    <legend>Simulate</legend>
+    <label><input type="checkbox" id="net" checked> Network</label>
+    <label><input type="checkbox" id="fail"> Fail part 6</label>
+    <button type="button" id="reset" class="text">Reset</button>
+  </fieldset>
+
+  <div id="live" class="sr" aria-live="polite"></div>
+
+  <details>
+    <summary>Keys</summary>
+    <p>Space: pause or resume. P: pause. Esc: cancel or keep going.</p>
+  </details>
+
+  <details>
+    <summary>Credits</summary>
+    <p>Local demo. The file, server and link are simulated in this page.</p>
+    <ul>
+      <li>Type designer (lead): tabular centre readout, second-press results such as "Already resuming".</li>
+      <li>Icon designer: tachograph trace, where angle is stored bytes and radius is rate; link mark on success.</li>
+      <li>Exhibit light technician: stored-bytes result line, retries footnote, ring fills only on server acks.</li>
+      <li>Cautious beginner (invented archetype): Pause as the first action, delete confirm that says what is kept, paper and graphite finish.</li>
+    </ul>
+    <p>Sources:</p>
+    <ul>
+      <li><a href="https://www.reddit.com/r/SideProject/comments/1xqwn2e/i_got_tired_of_scanner_apps_putting_basic/">I got tired of scanner apps putting basic features behind paywalls, so I made my own</a></li>
+      <li><a href="https://linebender.org/blog/jit-bitmap-text/">JIT bitmap text rendering for microcontrollers</a></li>
+    </ul>
+  </details>
+</main>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const TOTAL=412,N=8,PART=TOTAL/N,NS='http://www.w3.org/2000/svg';
+const ring=$('ring'),sentEl=$('sent'),partsG=$('parts'),stallsG=$('stalls'),traceEl=$('trace');
+const primaryBtn=$('primary'),cancelBtn=$('cancel'),keepBtn=$('keep'),delBtn=$('del');
+const net=$('net'),fail=$('fail'),live=$('live'),noteEl=$('note');
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+const ACTIVE=['sending','paused','resuming','retrying'];
+const CANCELABLE=['sending','paused','offline','failed','resuming','retrying'];
+
+let seed;
+function rng(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}
+function fresh(){seed=7;return{phase:'idle',cur:-1,partSent:0,acked:new Array(N).fill(false),pending:[],epoch:0,t:0,wait:0,lastLog:0,log:[{p:0,b:0}],stalls:[],wasted:0,failedPart:-1,failUsed:false,rate:0,copied:false,after:null,idleMsg:'Ready'}}
+let S=fresh();
+
+const partEls=[];
+for(let i=0;i<N;i++){const p=document.createElementNS(NS,'path');p.setAttribute('fill','none');p.setAttribute('stroke-width','10');partsG.appendChild(p);partEls.push(p)}
+
+function acked(){return S.acked.filter(Boolean).length}
+function mb(){return Math.round(acked()*PART)}
+function sentFrac(){return Math.min(1,((acked()+S.pending.length)*PART+S.partSent)/TOTAL)}
+function nextPart(){for(let i=0;i<N;i++){if(!S.acked[i]&&!S.pending.some(q=>q.part===i)&&i!==S.cur)return i}return -1}
+function band(r){return Math.max(1,Math.min(4,Math.ceil(r/15)))}
+function rad(b){return 58+b*5}
+function trim(){const f=sentFrac();S.log=S.log.filter(e=>e.p<=f+1e-9)}
+function mark(){trim();const f=sentFrac();S.stalls.push({p:f,d:0});S.log.push({p:f,b:0})}
+function drop(){S.epoch++;S.wasted+=S.pending.length*PART+S.partSent;S.pending=[];S.cur=-1;S.partSent=0;mark()}
+
+function pt(r,f){const a=f*Math.PI*2-Math.PI/2;return[(120+r*Math.cos(a)).toFixed(2),(120+r*Math.sin(a)).toFixed(2)]}
+function arc(r,f0,f1){
+  if(f1-f0<=0.0005)return'';
+  if(f1-f0>=0.9999)return'M120 '+(120-r)+'A'+r+' '+r+' 0 1 1 120 '+(120+r)+'A'+r+' '+r+' 0 1 1 120 '+(120-r);
+  const a=pt(r,f0),b=pt(r,f1);return'M'+a[0]+' '+a[1]+'A'+r+' '+r+' 0 '+(f1-f0>0.5?1:0)+' 1 '+b[0]+' '+b[1];
+}
+
+function drawRing(){
+  const rf=reduce.matches?(acked()+S.pending.length)*PART/TOTAL:sentFrac();
+  sentEl.setAttribute('d',arc(108,0,rf));
+  for(let i=0;i<N;i++){
+    const g=0.006;partEls[i].setAttribute('d',arc(94,i/N+g,(i+1)/N-g));
+    let c='#ddd5c4';
+    if(S.acked[i])c='#2b2925';
+    else if(S.failedPart===i)c='#9c3f22';
+    else if(S.pending.some(q=>q.part===i)||S.cur===i)c='#9a9282';
+    partEls[i].setAttribute('stroke',c);
+  }
+  const pts=S.log.filter(e=>e.p<=rf+1e-9);
+  let d='';
+  pts.forEach((e,i)=>{const q=pt(rad(e.b),e.p);d+=(i?'L':'M')+q[0]+' '+q[1]});
+  if(S.phase==='done'&&d)d+='Z';
+  traceEl.setAttribute('d',d);
+  const kids=S.stalls.map(s=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',arc(53,s.p,s.p+Math.min(0.02+s.d*0.012,0.1)));p.setAttribute('fill','none');p.setAttribute('stroke','#9c3f22');p.setAttribute('stroke-width','3');p.setAttribute('stroke-linecap','round');return p});
+  stallsG.replaceChildren(...kids);
+}
+
+function statusText(){
+  switch(S.phase){
+    case'idle':return S.idleMsg;
+    case'sending':return S.cur>=0?'Sending part '+(S.cur+1)+' · '+Math.round(S.rate)+' MB/s':'Waiting for server';
+    case'resuming':return'Resuming from part '+((S.cur>=0?S.cur:nextPart())+1);
+    case'paused':return'Paused · '+mb()+' MB stored';
+    case'offline':return(net.checked?'Back online · ':'Offline · ')+mb()+' MB stored';
+    case'failed':return'Part 6 failed · '+mb()+' MB stored';
+    case'retrying':return'Retrying part 6';
+    case'confirm':return'Held · '+mb()+' MB stored';
+    case'done':return'Safe to close: 412 MB stored';
+  }
+  return'';
+}
+const LABELS={idle:'Upload',sending:'Pause',paused:'Resume',offline:'Resume',resuming:'Resuming',failed:'Retry',retrying:'Retrying',done:'Copy link',confirm:'Pause'};
+
+function ui(){
+  const ph=S.phase,n=acked(),pct=Math.floor(n*100/N),done=ph==='done';
+  primaryBtn.textContent=LABELS[ph];
+  primaryBtn.setAttribute('aria-disabled',(ph==='resuming'||ph==='retrying')?'true':'false');
+  cancelBtn.hidden=!CANCELABLE.includes(ph);
+  $('controls').hidden=ph==='confirm';
+  $('confirm').hidden=ph!=='confirm';
+  $('linkrow').hidden=!done;
+  $('status').textContent=statusText();
+  $('pctN').textContent=pct+'%';
+  $('pline').hidden=done;$('glyph').hidden=!done;
+  $('ptxt').textContent=n+' of 8 parts';
+  const f=$('foot');f.hidden=S.wasted<0.5;f.textContent='Retries used '+Math.round(S.wasted)+' MB';
+  ring.setAttribute('aria-label',done?'Upload complete, 8 of 8 parts stored':pct+'% safe, '+n+' of 8 parts stored'+(S.stalls.length?', stalled '+S.stalls.length+(S.stalls.length>1?' times':' time'):''));
+}
+
+let noteTimer=0;
+function note(msg){noteEl.textContent=msg;clearTimeout(noteTimer);noteTimer=setTimeout(()=>{noteEl.textContent=''},2600)}
+function say(msg){live.textContent=msg;ui();drawRing();kick()}
+
+function finish(){S.phase='done';S.cur=-1;S.partSent=0;const last=S.log[S.log.length-1];S.log.push({p:1,b:last?last.b:1});say('Safe to close: 412 MB stored')}
+
+function step(dt){
+  const ph=S.phase;if(ph==='idle'||ph==='done'||ph==='confirm')return;
+  S.t+=dt;
+  if(ph==='resuming'||ph==='retrying'){S.wait-=dt;if(S.wait<=0){S.phase='sending';say(ph==='retrying'?'Retry started':'Resumed')}}
+  if(S.phase==='sending'){
+    if(S.cur<0)S.cur=nextPart();
+    if(S.cur>=0){
+      const r=Math.max(6,Math.min(58,34+14*Math.sin(S.t*1.3)+(rng()-.5)*14));S.rate=r;
+      S.partSent+=r*dt;
+      if(S.partSent>=PART){
+        S.partSent=0;S.pending.push({part:S.cur,at:S.t+.4+rng()*.6,ep:S.epoch});S.cur=-1;
+        S.log.push({p:sentFrac(),b:band(r)});S.lastLog=S.t;
+      }else if(S.t-S.lastLog>=.08){S.lastLog=S.t;S.log.push({p:sentFrac(),b:band(r)})}
+    }
+  }
+  if(S.phase==='offline'||S.phase==='failed'){const s=S.stalls[S.stalls.length-1];if(s)s.d+=dt}
+  if(ACTIVE.includes(S.phase)||S.phase==='failed'){
+    for(const q of S.pending.slice()){
+      if(q.at>S.t)continue;
+      S.pending.splice(S.pending.indexOf(q),1);
+      if(q.ep!==S.epoch)continue;
+      if(q.part===5&&fail.checked&&!S.failUsed){
+        S.failUsed=true;fail.checked=false;S.wasted+=PART+S.partSent;S.partSent=0;S.cur=-1;S.failedPart=5;
+        mark();S.phase='failed';say('Part 6 failed · Retry');continue;
+      }
+      S.acked[q.part]=true;if(S.failedPart===q.part)S.failedPart=-1;
+      if(acked()===N){finish();return}
+      say('Part '+(q.part+1)+' stored · '+mb()+' MB safe');
+    }
+  }
+}
+
+let raf=0,last=0,lastUi=0;
+function frame(ts){
+  const dt=last?Math.min(0.1,(ts-last)/1000):0;last=ts;
+  step(dt);
+  if(!reduce.matches)drawRing();
+  if(ts-lastUi>250){ui();lastUi=ts}
+  if(S.phase==='idle'||S.phase==='done'||S.phase==='confirm'){raf=0;last=0;ui();drawRing();return}
+  raf=requestAnimationFrame(frame);
+}
+function kick(){if(!raf&&!(S.phase==='idle'||S.phase==='done'||S.phase==='confirm')){last=0;raf=requestAnimationFrame(frame)}}
+document.addEventListener('visibilitychange',()=>{last=0});
+
+function copy(){
+  const v=$('link').value;
+  const ok=()=>{note(S.copied?'Copied again':'Link copied');S.copied=true};
+  const fb=()=>{const i=$('link');i.focus();i.select();let done=false;try{done=document.execCommand('copy')}catch(e){}if(done)ok();else note('Link selected · press Ctrl+C')};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).then(ok,fb);else fb()}catch(e){fb()}
+}
+
+function primary(){
+  switch(S.phase){
+    case'idle':if(!net.checked){note('No network');return}S=fresh();S.phase='sending';say('Uploading');break;
+    case'sending':S.phase='paused';say('Paused · '+mb()+' MB stored');break;
+    case'paused':case'offline':if(!net.checked){note('Still offline');return}S.phase='resuming';S.wait=.6;say(statusText());break;
+    case'resuming':note('Already resuming');break;
+    case'failed':if(!net.checked){note('Still offline');return}S.phase='retrying';S.wait=.6;say('Retrying part 6');break;
+    case'retrying':note('Already retrying');break;
+    case'done':copy();break;
+  }
+}
+
+function openConfirm(){
+  if(!CANCELABLE.includes(S.phase))return;
+  S.after=S.phase;S.phase='confirm';
+  const n=acked();
+  $('confirmText').textContent=n?'Delete '+n+' stored part'+(n>1?'s':'')+'? The file stays on this device.':'Stop upload? The file stays on this device.';
+  ui();keepBtn.focus();live.textContent='Upload held';
+}
+function keepGoing(){
+  S.phase=S.after;S.after=null;
+  if(!net.checked&&ACTIVE.includes(S.phase)){drop();S.phase='offline'}
+  say(statusText());primaryBtn.focus();
+}
+function deleteUpload(){S=fresh();S.idleMsg='Deleted · file kept on device';say(S.idleMsg);primaryBtn.focus()}
+
+primaryBtn.addEventListener('click',primary);
+cancelBtn.addEventListener('click',openConfirm);
+keepBtn.addEventListener('click',keepGoing);
+delBtn.addEventListener('click',deleteUpload);
+$('reset').addEventListener('click',()=>{S=fresh();net.checked=true;fail.checked=false;noteEl.textContent='';say('Demo reset')});
+
+net.addEventListener('change',()=>{
+  if(!net.checked){
+    if(ACTIVE.includes(S.phase)){drop();S.phase='offline';say('Offline · '+mb()+' MB stored')}
+    else if(S.phase==='failed'){S.epoch++;S.wasted+=S.pending.length*PART;S.pending=[];trim();say('Offline · '+mb()+' MB stored')}
+    else ui();
+  }else{
+    if(S.phase==='offline')say('Back online · press Resume');else ui();
+  }
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(S.phase==='confirm'){e.preventDefault();keepGoing()}
+    else if(CANCELABLE.includes(S.phase)){e.preventDefault();openConfirm()}
+    return;
+  }
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.target.closest&&e.target.closest('button,input,a,summary,textarea,select'))return;
+  if(e.key===' '&&['sending','paused','offline','resuming'].includes(S.phase)){e.preventDefault();primary()}
+  else if(e.key==='p'||e.key==='P'){if(S.phase==='sending')primary();else if(S.phase==='paused')note('Already paused')}
+});
+
+ui();drawRing();
+})();
+</script>
+</body>
+</html>
