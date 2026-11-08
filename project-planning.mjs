@@ -16,14 +16,22 @@ export const PROJECT_SOURCES = [
 
 const family = item => String(item.sourceId).replace(/^reddit-.*/, 'reddit').replace(/^github-.*/, 'github');
 
-export function projectInput({ date, discovery, recent, brief = '' }) {
+// Stable UTC date rotation; disabled sources never enter the cycle.
+export function projectSource(date) {
+  const enabled = PROJECT_SOURCES.filter(s => s.enabled);
+  const day = Math.floor(Date.parse(`${date}T00:00:00Z`) / 86400000);
+  if (!Number.isFinite(day)) throw new Error('invalid project date');
+  return enabled[((day % enabled.length) + enabled.length) % enabled.length];
+}
+
+export function projectInput({ date, discovery, recent, brief = '', source = null }) {
   const task = brief || 'Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.';
   const fresh = discovery.items.filter(i => {
     const age = (Date.parse(date) - Date.parse(i.published)) / 86400000;
     return age >= -1 && age <= 14;
   });
   return { schemaVersion: 1, mode: 'project', date, task, request: null,
-    sources: discovery.status, custom: Boolean(brief),
+    sources: discovery.status, custom: Boolean(brief), ...(source ? { feedPolicy: 'one-source-v1', selectedFeed: source.id } : {}),
     candidates: [...fresh.map(i => ({ ...i, kind: 'feed' })), { id: 'daily-task', kind: 'task', task }],
     recent, inventory: null };
 }
@@ -44,9 +52,13 @@ export function projectProblems(project, input) {
   if (!Array.isArray(ids) || ids.length > 5 || new Set(ids).size !== ids.length || ids.some(id => !feeds.some(c => c.id === id))) {
     problems.push('project sources must reference unique saved feed IDs');
   } else {
-    const minimum = input.custom ? 0 : Math.min(2, new Set(feeds.map(family)).size);
-    if (new Set(ids.map(id => family(feeds.find(c => c.id === id)))).size < minimum) problems.push('use signals from two available source families');
-    if (!input.custom && feeds.length && !ids.length) problems.push('available trend evidence must inform project');
+    if (input.feedPolicy === 'one-source-v1') {
+      if (!input.custom && (ids.length !== 1 || feeds.find(c => c.id === ids[0])?.sourceId !== input.selectedFeed)) problems.push('select exactly one item from the selected feed');
+    } else {
+      const minimum = input.custom ? 0 : Math.min(2, new Set(feeds.map(family)).size);
+      if (new Set(ids.map(id => family(feeds.find(c => c.id === id)))).size < minimum) problems.push('use signals from two available source families');
+      if (!input.custom && feeds.length && !ids.length) problems.push('available trend evidence must inform project');
+    }
   }
   if (typeof project.evidenceStatus !== 'string' || project.evidenceStatus !== (ids?.length ? 'sourced' : 'original-fallback')) problems.push('project evidence status must match actual sources');
   if (!Array.isArray(project.alternatives) || project.alternatives.length !== 3

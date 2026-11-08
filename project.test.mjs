@@ -6,7 +6,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { parseTrending, discover } from './feed-planning.mjs';
-import { PROJECT_SOURCES, projectInput, projectProblems, assertProjectExport } from './project-planning.mjs';
+import { PROJECT_SOURCES, projectSource, projectInput, projectProblems, assertProjectExport } from './project-planning.mjs';
 import { hash, recentPacks } from './component-pack.mjs';
 import { buildSite, dayReadme } from './publish.mjs';
 import { buildPrompt } from './recruit.mjs';
@@ -57,6 +57,40 @@ test('project evidence requires saved IDs and source diversity; fallback and cus
   assert.deepEqual(projectProblems({ ...project(), sourceIds: ['signal-2'] }, reddit), []);
 });
 
+test('project feed rotates daily and single-source policy requires one selected item', () => {
+  const enabled = PROJECT_SOURCES.filter(s => s.enabled);
+  const rotation = enabled.map((_, n) => projectSource(new Date(Date.parse('2026-11-05T00:00:00Z') + n * 86400000).toISOString().slice(0, 10)).id);
+  assert.equal(new Set(rotation).size, enabled.length);
+  assert.equal(projectSource('2026-11-05').id, rotation[0]);
+  const source = PROJECT_SOURCES.find(s => s.id === 'github-trending');
+  const selected = projectInput({ date, discovery: { items: [feeds[0]], status: [] }, recent: [], source });
+  assert.equal(selected.feedPolicy, 'one-source-v1');
+  assert.deepEqual(projectProblems({ ...project(), sourceIds: ['signal-0'] }, selected), []);
+  assert.match(projectProblems({ ...project(), sourceIds: [] }, selected).join(';'), /exactly one item/);
+  const wrong = { ...selected, selectedFeed: 'hacker-news' };
+  assert.match(projectProblems({ ...project(), sourceIds: ['signal-0'] }, wrong).join(';'), /selected feed/);
+  assert.deepEqual(projectProblems(project(), input()), [], 'old snapshots keep original source rules');
+});
+
+test('selected feed fetch and cache fallback exclude every other source', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'daily-one-feed-'));
+  try {
+    const cacheFile = join(dir, 'cache.json');
+    writeFileSync(cacheFile, JSON.stringify({ items: [feeds[1]], fetched: {} }));
+    const source = PROJECT_SOURCES.find(s => s.id === 'github-trending');
+    const calls = [];
+    const fetcher = async url => { calls.push(url); return new Response('<article class="Box-row"><h2><a href="/a/b">a/b</a></h2><p>Project</p></article>', { headers: { 'content-type': 'text/html' } }); };
+    const result = await discover({ date, cacheFile, sources: [source], fetcher, restrictToSources: true });
+    assert.deepEqual(calls, [source.url]);
+    assert.deepEqual(result.items.map(i => i.sourceId), [source.id]);
+    const offline = await discover({ date, cacheFile, sources: [source], offline: true, restrictToSources: true });
+    assert.deepEqual(offline.items.map(i => i.sourceId), [source.id]);
+    const failed = await discover({ date: '2026-11-01', cacheFile, sources: [source], fetcher: async () => { throw new Error('offline'); }, restrictToSources: true });
+    assert.equal(failed.status[0].status, 'failed');
+    assert.deepEqual(failed.items.map(i => i.sourceId), [source.id]);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
 test('future recruitment broadens crafts and project needs while retaining historical component prompt', () => {
   const base = { roles: [], methods: [], constraints: [], tasks: [], guests: [], temperaments: [] };
   const future = buildPrompt(base, [], [], '2026-11-02')[1].content;
@@ -83,7 +117,7 @@ test('live discovery path parses Trending and Atom, records rate limits and reta
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
-async function run(replies, args, inspect) {
+async function run(replies, args, inspect, snapshotInput = input()) {
   const dir = mkdtempSync(join(tmpdir(), 'daily-project-')), calls = [];
   const server = createServer((req, res) => {
     let body = ''; req.on('data', c => body += c); req.on('end', () => {
@@ -94,7 +128,7 @@ async function run(replies, args, inspect) {
   });
   await new Promise(r => server.listen(0, '127.0.0.1', r));
   try {
-    const snapshot = join(dir, 'input.json'); writeFileSync(snapshot, JSON.stringify(input()));
+    const snapshot = join(dir, 'input.json'); writeFileSync(snapshot, JSON.stringify(snapshotInput));
     const days = join(dir, 'days');
     const child = spawn(process.execPath, [resolve('run.mjs'), '--date', date, '--snapshot', snapshot, '--out', days, ...args], {
       env: { ...process.env, PROVIDER: 'openrouter', MODEL: 'fixture', OPENROUTER_API_KEY: 'fixture', API_URL: `http://127.0.0.1:${server.address().port}`, ARTIFACTS: '', COMPONENT_REQUESTS_FILE: '/must-not-read', COMPONENT_SOURCES_FILE: '', COMPONENTS_DIR: '', RETRY_MS: '0' },
@@ -126,6 +160,21 @@ test('actual default CLI builds one project, preserves citations, exports eviden
     writeFileSync(join(target, 'artifact-1.html'), 'changed');
     assert.throws(() => assertProjectExport(day, target), /hash mismatch/);
   });
+});
+
+test('runner builds from exactly one saved feed item and rejects multiple items', async () => {
+  const source = PROJECT_SOURCES.find(s => s.id === 'github-trending');
+  const selected = projectInput({ date, discovery: { items: [feeds[0]], status: [] }, recent: [], source });
+  const chosen = { ...project(), sourceIds: ['signal-0'] };
+  await run([plan(chosen), html], [], ({ code, day, calls, output }) => {
+    assert.equal(code, 0, output);
+    assert.deepEqual(day.planning.selectedSourceIds, ['signal-0']);
+    assert.match(calls[0].messages[1].content, /one-source-v1/);
+    assert.match(calls[1].messages[1].content, /signal-0/);
+  }, selected);
+  await run([plan({ ...chosen, sourceIds: [] }), plan({ ...chosen, sourceIds: [] })], [], ({ code, day, calls }) => {
+    assert.equal(code, 1); assert.equal(day.status, 'failed'); assert.equal(calls.length, 2);
+  }, selected);
 });
 
 test('invalid evidence stops before build; planning-only and snapshot mode guard work', async () => {
