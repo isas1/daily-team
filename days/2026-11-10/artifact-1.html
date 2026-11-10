@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invite to Harbor · Copy invite</title>
+<style>
+  :root{
+    --paper:#f4f1ea;
+    --ink:#1b2a33;
+    --muted:#4a5862;
+    --brass:#a8792b;
+    --brass-dark:#6e4c12;
+    --tag:#efe2c2;
+    --tag-edge:#b88d3f;
+    --gone:#e4e2dc;
+    --gone-edge:#6b6b6b;
+    --focus:#1b4b8a;
+    --line:#d6cfbf;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    padding:28px 18px 48px;
+  }
+  main{max-width:30rem;margin:0 auto}
+  header{display:flex;align-items:baseline;gap:10px;margin-bottom:22px}
+  h1{font-size:1.5rem;line-height:1.2;margin:0;letter-spacing:-.01em}
+  .demo{
+    font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    border:1px solid var(--muted);color:var(--muted);border-radius:4px;padding:1px 6px;
+  }
+  .controls{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;
+    padding:18px;border:1px solid var(--line);border-radius:10px;background:#fbf9f4;
+  }
+  label{display:block;font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:4px}
+  select,input[type=text]{
+    width:100%;min-height:44px;font:inherit;color:var(--ink);
+    background:#fff;border:1px solid #8b8576;border-radius:6px;padding:8px 10px;
+  }
+  button{
+    font:inherit;cursor:pointer;min-height:44px;border-radius:6px;
+  }
+  .copy{
+    grid-column:1 / -1;min-height:50px;font-weight:650;font-size:1.05rem;
+    background:var(--ink);color:#fff;border:2px solid var(--ink);
+  }
+  .copy:hover{background:#2b3f4b}
+  .copy:active{transform:translateY(1px)}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  .status{
+    min-height:1.6em;margin:14px 2px 0;font-weight:600;
+    font-variant-numeric:tabular-nums;
+  }
+  .fallback{margin-top:10px;padding:14px;border:2px dashed var(--ink);border-radius:8px;background:#fff}
+  .fallback p{margin:8px 0 0;font-weight:600}
+  .fallback input{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  [hidden]{display:none !important}
+
+  .ringwrap{margin-top:30px}
+  .ringhead{display:flex;align-items:center;gap:10px;min-height:40px}
+  .ringhead svg{flex:none}
+  .count{margin:0;font-weight:600;color:var(--muted)}
+  ol.ring{
+    list-style:none;margin:0;padding:0 0 4px;position:relative;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  ol.ring::before{
+    content:"";position:absolute;left:18px;top:-6px;bottom:18px;width:4px;border-radius:2px;
+    background:linear-gradient(to right,var(--brass-dark),var(--brass),var(--brass-dark));
+  }
+  ol.ring:empty::before{display:none}
+  .tag{
+    position:relative;z-index:1;
+    width:100%;max-width:22rem;
+    display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;
+    column-gap:10px;align-items:center;
+    padding:10px 12px 10px 42px;
+    background:var(--tag);border:2px solid var(--tag-edge);
+    border-radius:8px 8px 8px 22px;
+    transform-origin:20px 22px;
+  }
+  .tag.new{animation:drop 280ms cubic-bezier(.2,.8,.3,1)}
+  @keyframes drop{
+    from{transform:translateY(-14px) rotate(-5deg);opacity:0}
+    to{transform:none;opacity:1}
+  }
+  .hole{
+    position:absolute;left:11px;top:14px;width:18px;height:18px;border-radius:50%;
+    border:2px solid var(--tag-edge);
+    background:linear-gradient(to right,var(--paper) 39%,var(--brass) 39%,var(--brass) 61%,var(--paper) 61%);
+  }
+  .line1{margin:0;display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+  .code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:1.25rem;font-weight:700;letter-spacing:.08em;
+  }
+  .meta{min-width:13ch;font-weight:600}
+  .url{
+    margin:2px 0 0;grid-column:1;font-size:.85rem;color:var(--muted);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  .notch{grid-column:2;grid-row:1}
+  .act{grid-column:2;grid-row:2;justify-self:end;min-width:6.5rem;text-align:right}
+  .revoke{
+    min-width:6.5rem;background:#fff;color:var(--ink);border:2px solid var(--ink);font-weight:600;
+  }
+  .revoke:hover{background:#f1ede4}
+  .tag.revoked{background:var(--gone);border:2px dashed var(--gone-edge)}
+  .tag.revoked .hole{border-color:var(--gone-edge)}
+  .tag.revoked .code,.tag.revoked .meta,.tag.revoked .url{text-decoration:line-through;text-decoration-thickness:2px}
+  .tag.revoked .notch{opacity:.55}
+  .gone-word{display:inline-block;min-height:44px;line-height:44px;font-weight:700}
+
+  .foot{margin-top:28px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .reset{background:transparent;color:var(--ink);border:1px solid #8b8576;padding:0 16px}
+  details{width:100%;border-top:1px solid var(--line);padding-top:12px;font-size:.92rem}
+  summary{cursor:pointer;font-weight:600;min-height:32px}
+  details ul{padding-left:1.1rem;margin:8px 0}
+  details li{margin:4px 0}
+  a{color:var(--focus)}
+
+  @media (max-width:360px){
+    .controls{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tag.new{animation:none}
+    .copy:active{transform:none}
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Invite to Harbor</h1>
+    <span class="demo">Demo</span>
+  </header>
+
+  <form class="controls" id="form" novalidate>
+    <div>
+      <label for="role">Role</label>
+      <select id="role">
+        <option value="Member">Member</option>
+        <option value="Admin">Admin</option>
+      </select>
+    </div>
+    <div>
+      <label for="expiry">Expires</label>
+      <select id="expiry">
+        <option value="24 h">24 h</option>
+        <option value="7 d">7 d</option>
+        <option value="30 d">30 d</option>
+      </select>
+    </div>
+    <button type="submit" class="copy" id="copyBtn">Copy invite</button>
+  </form>
+
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+
+  <div class="fallback" id="fallback" hidden>
+    <label for="linkField">Invite link</label>
+    <input type="text" id="linkField" readonly>
+    <p id="fallbackHint">Press Ctrl+C</p>
+  </div>
+
+  <section class="ringwrap" aria-labelledby="count">
+    <div class="ringhead">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <linearGradient id="br" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#c99a45"/>
+            <stop offset="1" stop-color="#6e4c12"/>
+          </linearGradient>
+        </defs>
+        <path d="M24 33.5 A14 14 0 1 1 30 29" fill="none" stroke="url(#br)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <p class="count" id="count">No live links</p>
+    </div>
+    <ol class="ring" id="ring"></ol>
+  </section>
+
+  <div class="foot">
+    <button type="button" class="reset" id="resetBtn">Reset</button>
+    <details>
+      <summary>Credits</summary>
+      <ul>
+        <li><strong>Optical technician</strong> (lead): the mint, label, revoke rule. Revoked tags stay on the ring, struck and labelled.</li>
+        <li><strong>Braille transcriber</strong>: link store kept apart from the view. Confirmation text built from store data. Blocked-clipboard fallback.</li>
+        <li><strong>Weather forecaster</strong>: keys-only walkthrough. Focus stays on Copy invite. One polite announcement per action. Revoke reachable by Tab.</li>
+        <li><strong>Captain Nemo</strong> (literary guest, Jules Verne): brass ring and notch glyphs by role, 1 for Member and 2 for Admin. Tag width fixed from the longest label.</li>
+      </ul>
+      <p>Links, codes and harbor.app are local sample data. Nothing is sent anywhere.</p>
+      <p>Source: <a href="https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor" rel="noreferrer noopener">Fireworks AI security breach impacts Notion and their customers</a> (Hacker News title)</p>
+    </details>
+  </div>
+</main>
+
+<script type="module">
+  // ---- Store (Braille transcriber: state apart from view) ----
+  const KEY = "key-ring-invite-v1";
+  const ALPHA = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  let links = [];
+  try {
+    const raw = localStorage.getItem(KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    if (Array.isArray(parsed)) {
+      links = parsed.filter(l => l && typeof l.code === "string" && /^[A-Z0-9]{3}$/.test(l.code)
+        && (l.role === "Member" || l.role === "Admin")
+        && ["24 h","7 d","30 d"].includes(l.expiry))
+        .map(l => ({ code:l.code, role:l.role, expiry:l.expiry, url:"harbor.app/j/" + l.code, revoked:!!l.revoked }));
+    }
+  } catch (e) { links = []; }
+
+  function save(){
+    try { localStorage.setItem(KEY, JSON.stringify(links)); } catch (e) { /* storage optional */ }
+  }
+  function newCode(){
+    let c;
+    do {
+      c = "";
+      for (let i = 0; i < 3; i++) c += ALPHA[Math.floor(Math.random() * ALPHA.length)];
+    } while (links.some(l => l.code === c));
+    return c;
+  }
+  function mint(role, expiry){
+    const code = newCode();
+    const link = { code, role, expiry, url: "harbor.app/j/" + code, revoked:false };
+    links.unshift(link);
+    save();
+    return link;
+  }
+  function describe(l){ return l.code + " · " + l.role + " · " + l.expiry; }
+
+  // ---- View ----
+  const $ = id => document.getElementById(id);
+  const form = $("form"), copyBtn = $("copyBtn"), roleSel = $("role"), expSel = $("expiry");
+  const statusEl = $("status"), ring = $("ring"), countEl = $("count");
+  const fallback = $("fallback"), field = $("linkField"), hint = $("fallbackHint");
+  const SVGNS = "http://www.w3.org/2000/svg";
+
+  const isApple = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent || "");
+  const isTouch = window.matchMedia && matchMedia("(pointer: coarse)").matches;
+  hint.textContent = isTouch ? "Select and copy" : (isApple ? "Press Cmd+C" : "Press Ctrl+C");
+
+  function el(tag, cls, text){
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  // Captain Nemo: notch pattern by role, shape not colour
+  function notchGlyph(role){
+    const n = role === "Admin" ? 2 : 1;
+    const s = document.createElementNS(SVGNS, "svg");
+    s.setAttribute("width", "18"); s.setAttribute("height", "34");
+    s.setAttribute("viewBox", "0 0 18 34");
+    s.setAttribute("aria-hidden", "true");
+    s.classList.add("notch");
+    const ys = n === 1 ? [17] : [10, 24];
+    let d = "M2 2 H16";
+    ys.forEach(y => { d += " V" + (y - 4) + " L9 " + y + " L16 " + (y + 4); });
+    d += " V32 H2 Z";
+    const p = document.createElementNS(SVGNS, "path");
+    p.setAttribute("d", d);
+    p.setAttribute("fill", "#6e4c12");
+    s.appendChild(p);
+    return s;
+  }
+
+  function render(animateCode){
+    const items = links.map(l => {
+      const li = el("li", "tag" + (l.revoked ? " revoked" : "") + (l.code === animateCode ? " new" : ""));
+      li.tabIndex = -1;
+      li.dataset.code = l.code;
+      li.appendChild(el("span", "hole")).setAttribute("aria-hidden", "true");
+      const body = el("div");
+      const line1 = el("p", "line1");
+      line1.appendChild(el("span", "code", l.code));
+      line1.appendChild(el("span", "meta", l.role + " · " + l.expiry));
+      body.appendChild(line1);
+      li.appendChild(body);
+      li.appendChild(notchGlyph(l.role));
+      li.appendChild(el("p", "url", l.url));
+      const act = el("div", "act");
+      if (l.revoked) {
+        act.appendChild(el("span", "gone-word", "Revoked"));
+      } else {
+        const b = el("button", "revoke", "Revoke");
+        b.type = "button";
+        b.setAttribute("aria-label", "Revoke " + l.code);
+        b.addEventListener("click", () => revoke(l.code));
+        act.appendChild(b);
+      }
+      li.appendChild(act);
+      return li;
+    });
+    ring.replaceChildren(...items);
+    const live = links.filter(l => !l.revoked).length;
+    const gone = links.length - live;
+    countEl.textContent = links.length === 0 ? "No live links"
+      : (live === 0 ? "No live links" : live + " live") + (gone ? " · " + gone + " revoked" : "");
+  }
+
+  let announceTimer = 0;
+  function announce(text){
+    clearTimeout(announceTimer);
+    statusEl.textContent = "";
+    announceTimer = setTimeout(() => { statusEl.textContent = text; }, 40);
+  }
+
+  // ---- Behaviour ----
+  let busy = false;
+  let pending = null;
+
+  function copied(link){
+    pending = null;
+    fallback.hidden = true;
+    announce("Copied · " + describe(link));
+    copyBtn.focus();
+  }
+
+  function showFallback(link){
+    pending = link;
+    field.value = "https://" + link.url;
+    fallback.hidden = false;
+    field.focus();
+    field.select();
+    let ok = false;
+    try { ok = document.execCommand && document.execCommand("copy"); } catch (e) { ok = false; }
+    if (ok) { copied(link); return; }
+    announce("Copy blocked · " + link.code + " · " + hint.textContent);
+  }
+
+  form.addEventListener("submit", async ev => {
+    ev.preventDefault();
+    if (busy) return;
+    busy = true;
+    const link = mint(roleSel.value, expSel.value);
+    render(link.code);
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error("no clipboard");
+      await navigator.clipboard.writeText("https://" + link.url);
+      copied(link);
+    } catch (e) {
+      showFallback(link);
+    } finally {
+      busy = false;
+    }
+  });
+
+  field.addEventListener("copy", () => {
+    if (pending) {
+      const l = pending;
+      setTimeout(() => copied(l), 0);
+    }
+  });
+  field.addEventListener("focus", () => field.select());
+
+  function revoke(code){
+    const l = links.find(x => x.code === code);
+    if (!l || l.revoked) return;
+    l.revoked = true;
+    save();
+    if (pending && pending.code === code) { pending = null; fallback.hidden = true; }
+    render(null);
+    const li = ring.querySelector('[data-code="' + code + '"]');
+    if (li) li.focus();
+    announce("Revoked · " + describe(l));
+  }
+
+  $("resetBtn").addEventListener("click", () => {
+    links = [];
+    pending = null;
+    fallback.hidden = true;
+    field.value = "";
+    try { localStorage.removeItem(KEY); } catch (e) { /* optional */ }
+    render(null);
+    announce("Ring cleared");
+    copyBtn.focus();
+  });
+
+  render(null);
+</script>
+</body>
+</html>

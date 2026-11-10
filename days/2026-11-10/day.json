@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-10",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-10\nSeason: 2026-11-09\n\n1. Optical technician\n   Method: Write one sentence naming what a builder can reuse.\n   Stance: Wants it to last.\n   Temperament: Names what improved before asking for more.\n2. Braille transcriber [new]\n   Method: Separate the sample state from the rendered view.\n   Stance: Breaks the frame.\n   Temperament: Offers two small options before backing one.\n3. Weather forecaster [new]\n   Method: Record a short walkthrough and mark each moment of hesitation. [new]\n   Stance: Speaks for the one who finds it.\n   Temperament: Insists on trying it with keys only.\n4. Captain Nemo (literary; Jules Verne, died 1905) [guest] [new]\n   Method: Build the instrument that lets you see where others cannot.\n   Stance: Insists it must be beautiful.\n   Temperament: Tests the longest label in the room.\n\nConstraint: No information relies only on color.\nTask: Copy invite: a copy button for a team app that copies an invite link and confirms success.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "f7974ba82b9882a4cde94506ddd23ad0457a208ffe1ef8e912c6881a6d9be841",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "c7d3010a8bcc401c0c2a91aa"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "Press Copy invite, and the link is copied with a tagged key you can later revoke.",
+  "concept": "Key Ring Invite",
+  "plan": "## Pitch\n\n**Optical technician:** A copied invite link is a key cut and handed over. Once it leaves the clipboard, nobody knows where it went. Each copy should mint its own key, with a three-letter tag, a role and an expiry, and the key should hang on a ring where it can be revoked. A builder can reuse that pattern: mint, label, revoke.\n\n**Braille transcriber:** Keep two layers apart. The link store is a plain array of `{code, role, expiry, revoked}`. The view only renders it. Then the confirmation says exactly what was copied, such as \"Copied · K7Q · Member · 24 h\". It reads the same with no colour and no screen.\n\n**Weather forecaster:** I walked a copy button with keys only and marked three hesitations. The first was focus jumping away after copy. The second was a green tick with no words. The third was a silent failure when the clipboard was blocked. The person who receives the link never sees our UI, so the sender has to know what they sent.\n\n**Captain Nemo:** Give it an instrument, a brass ring of key tags. Each tag carries a notch pattern by role: one notch for Member, two for Admin. The pattern is shape, so it reads in grey. Then set \"Administrator · 30 d\" in the tag and see whether it holds.\n\n## Clash\n\n**Braille transcriber:** Two options. A tag shows the code as text, or it shows code plus notch glyph. I back code plus glyph, with the word always present.\n\n**Captain Nemo:** Glyph alone is cleaner. Beauty is fewer marks.\n\n**Weather forecaster:** Glyph alone fails the first-time sender. I hesitated on it in the walkthrough. Keep the word.\n\n**Optical technician:** The ring is better than a bare toast already. Now make sure revoke survives. A revoked tag stays on the ring, struck through, with \"Revoked\". It does not vanish.\n\n**Captain Nemo:** Struck and kept. Then fix the tag width from \"Administrator · 30 d\" so the ring never reflows.\n\n**Weather forecaster:** Clipboard blocked on file://. Then what.\n\n**Braille transcriber:** Option one: select the link text in a field and say \"Press Ctrl+C\". Option two: show a Retry. I back option one, because it always works.\n\n**Optical technician:** Agreed. Ship one ring and one button, and no settings page.\n\n## Decision\n\nPress Copy invite, and the link is copied with a tagged key you can later revoke.\n\nConcept: Key Ring Invite\n\n- **Optical technician:** Defines the reusable rule of mint, label and revoke. Also specifies that revoked tags stay visible, struck through and labelled \"Revoked\".\n- **Braille transcriber:** Separates the link store from the rendered ring. Writes the confirmation string from store data only. Owns the blocked-clipboard fallback, a selected text field with \"Press Ctrl+C\".\n- **Weather forecaster:** Runs a keys-only walkthrough and logs each hesitation. Keeps focus on Copy invite after copy. Announces the result once in a polite live region. Revoke buttons are reachable by Tab.\n- **Captain Nemo:** Draws the brass key-tag ring in SVG with notch patterns by role: 1 for Member, 2 for Admin. Fixes the tag width from the label \"Administrator · 30 d\".\n\nInitial screen is about 14 words: \"Invite to Harbor\", Role select, Expires select, \"Copy invite\", \"No live links\".\n\n## Build notes\n\n1. Create `index.html` with a single module script. Hold `links = []` in a store. `mint()` makes a 3-letter code and a sample URL `harbor.app/j/K7Q`. `navigator.clipboard.writeText` runs with a try/catch. On failure, focus a readonly input with the URL selected and show \"Press Ctrl+C\".\n2. Render the ring from the store into a `role=\"list\"`. Each tag is 200 px wide and shows code, role, expiry, notch glyph and a Revoke button. Revoke sets `revoked:true`, strikes the text and adds the word \"Revoked\". The status line reads `Copied · K7Q · Member · 24 h` in `aria-live=\"polite\"`.\n3. Test keys only: Tab, Enter, Space. Test the 320 px width and greyscale. Test the longest label \"Administrator · 30 d\". Under `prefers-reduced-motion`, the tag drop is skipped. Reset clears the ring to \"No live links\".\n\n```json\n{\"schemaVersion\":1,\"name\":\"Key Ring Invite\",\"audience\":\"Team admins sharing app invite links\",\"problem\":\"Copied invite links leak and stay valid unseen\",\"interaction\":\"Pick role and expiry, press Copy invite, revoke tags\",\"outcome\":\"Clipboard link plus tagged key on ring: code, role, expiry\",\"recovery\":\"Revoke any tag; blocked clipboard selects link for Ctrl+C; Reset\",\"mechanism\":\"Each copy mints a tagged key; revoked tags stay struck\",\"difference\":\"Copy buttons flash a tick; this names what was shared and revokes it\",\"whyNow\":\"HN title on AI vendor breach reaching Notion customers. Title only, no demand data\",\"sourceIds\":[\"c7d3010a8bcc401c0c2a91aa\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Key Ring Invite\",\"need\":\"Know and revoke what each copied link grants\",\"mechanism\":\"Per-copy tagged keys on a ring with notch glyphs\",\"rejection\":\"Selected: cross-domain, offline, new to recent dates\"},{\"name\":\"Readback Copy\",\"need\":\"Confirm the clipboard holds the right link\",\"mechanism\":\"Paste-check field matching last 4 characters\",\"rejection\":\"Checks the copy, not its reach; adds a field\"},{\"name\":\"Handoff Card\",\"need\":\"Invite someone in person\",\"mechanism\":\"Printable QR card with expiry stamp\",\"rejection\":\"Echoes recent printables; skips the copy task\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "c2413d9f751dc95ab721215d99e1af3fca9ad8ff794870b244726ccb63299fcd",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Key Ring Invite",
+    "audience": "Team admins sharing app invite links",
+    "problem": "Copied invite links leak and stay valid unseen",
+    "interaction": "Pick role and expiry, press Copy invite, revoke tags",
+    "outcome": "Clipboard link plus tagged key on ring: code, role, expiry",
+    "recovery": "Revoke any tag; blocked clipboard selects link for Ctrl+C; Reset",
+    "mechanism": "Each copy mints a tagged key; revoked tags stay struck",
+    "difference": "Copy buttons flash a tick; this names what was shared and revokes it",
+    "whyNow": "HN title on AI vendor breach reaching Notion customers. Title only, no demand data",
+    "sourceIds": [
+      "c7d3010a8bcc401c0c2a91aa"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Key Ring Invite",
+        "need": "Know and revoke what each copied link grants",
+        "mechanism": "Per-copy tagged keys on a ring with notch glyphs",
+        "rejection": "Selected: cross-domain, offline, new to recent dates"
+      },
+      {
+        "name": "Readback Copy",
+        "need": "Confirm the clipboard holds the right link",
+        "mechanism": "Paste-check field matching last 4 characters",
+        "rejection": "Checks the copy, not its reach; adds a field"
+      },
+      {
+        "name": "Handoff Card",
+        "need": "Invite someone in person",
+        "mechanism": "Printable QR card with expiry stamp",
+        "rejection": "Echoes recent printables; skips the copy task"
+      }
+    ]
+  }
+}

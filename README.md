@@ -11,23 +11,23 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-08: Tachograph Upload
+### 2026-11-10: Key Ring Invite
 
-<a href="days/2026-11-08/"><img src="days/2026-11-08/team.png" alt="Team for 2026-11-08: Type designer · Icon designer · Exhibit light technician · Cautious beginner" width="100%"></a>
+<a href="days/2026-11-10/"><img src="days/2026-11-10/team.png" alt="Team for 2026-11-10: Optical technician · Braille transcriber · Weather forecaster · Captain Nemo" width="100%"></a>
 
 **Task:** Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.
 
-**Decision:** You upload a video, and the ring fills only with parts already saved, so a dropped connection resumes from there.
+**Decision:** Press Copy invite, and the link is copied with a tagged key you can later revoke.
 
-<a href="days/2026-11-08/"><img src="days/2026-11-08/cover.png" alt="Designed cover for Tachograph Upload" width="100%"></a>
+<a href="days/2026-11-10/"><img src="days/2026-11-10/cover.png" alt="Designed cover for Key Ring Invite" width="100%"></a>
 
-[Open the day](days/2026-11-08/) · [Use it](https://isas1.github.io/daily-team/2026-11-08/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-10/) · [Use it](https://isas1.github.io/daily-team/2026-11-10/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
 
 <!-- WEEK:START -->
-**Season 5**, since 2026-10-26. New this season: Interface designer, Motion director, Interaction engineer, Type designer, Accessibility specialist, Human factors engineer, Icon designer, Design systems engineer, Mobile interface designer, Data interface designer, Usability researcher, Interaction prototyper, Visual designer, Motion engineer, Interface copywriter, Quality engineer, Cabinet maker, Watch restorer, Instrument maker, Exhibit light technician, Architectural model maker, Technical illustrator, Medical illustrator, Scientific illustrator, Foley artist, Color grading specialist, Dance choreographer, Puppet maker, Stage illusion builder, Camera operator, Furniture designer, Ergonomist, Railway signaller, Control room operator, Air traffic controller, Flight deck designer, Game interface designer, Technical writer, Cartographic designer, Wayfinding designer, Precision machinist, Optical technician, Lens grinder, Instrument tuner, Kinetic sculptor, Letter cutter, Silversmith, Furniture restorer, the first 36 guests, and 24 temperaments. A new season is drafted every Monday; from 2026-10-26 it replaces 16 roles and 16 methods.
+**Season 6**, since 2026-11-09. New this season: Haptic interaction designer, Voice interface designer, Captioning editor, Braille transcriber, Cognitive psychologist, Systems ecologist, Science demonstrator, Seismologist, Hydrologist, Weather forecaster, Puzzle setter, Escape room designer, Paper engineer, Kite maker, Planetarium presenter, Simulation modeller, Hypatia, Johannes Kepler, Icarus, Captain Nemo, The Apprentice, Coral reef cartographer, and 8 new temperaments. A new season is drafted every Monday; from 2026-10-26 it replaces 16 roles and 16 methods.
 
 ### Vote on what gets built next
 
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-10](days/2026-11-10/) | <a href="days/2026-11-10/"><img src="days/2026-11-10/cover.png" alt="Key Ring Invite" width="160"></a> | Key Ring Invite | Optical technician · Braille transcriber · Weather forecaster · Captain Nemo |
 | [2026-11-08](days/2026-11-08/) | <a href="days/2026-11-08/"><img src="days/2026-11-08/cover.png" alt="Tachograph Upload" width="160"></a> | Tachograph Upload | Type designer · Icon designer · Exhibit light technician · Cautious beginner |
 | [2026-11-07](days/2026-11-07/) | <a href="days/2026-11-07/"><img src="days/2026-11-07/cover.png" alt="Anchor Zoom" width="160"></a> | Anchor Zoom | Accessibility specialist · Architectural model maker · Scientific illustrator · Returning collaborator |
 | [2026-11-06](days/2026-11-06/) | <a href="days/2026-11-06/"><img src="days/2026-11-06/cover.png" alt="Register Check" width="160"></a> | Register Check | Watch restorer · Motion engineer · Interaction engineer · Polar city navigator |
 | [2026-11-05](days/2026-11-05/) | <a href="days/2026-11-05/"><img src="days/2026-11-05/cover.png" alt="Shelf Read" width="160"></a> | Shelf Read | Quality engineer · Visual designer · Mobile interface designer · Stone swallow |
 | [2026-11-04](days/2026-11-04/) | <a href="days/2026-11-04/"><img src="days/2026-11-04/cover.png" alt="Write Time-Out" width="160"></a> | Write Time-Out | Human factors engineer · Data interface designer · Interface designer · One-handed maker |
 | [2026-11-03](days/2026-11-03/) | <a href="days/2026-11-03/"><img src="days/2026-11-03/cover.png" alt="Zero Hour Rehearsal" width="160"></a> | Zero Hour Rehearsal | Design systems engineer · Technical illustrator · Motion director · Porcelain hare |
-| [2026-11-02](days/2026-11-02/) | <a href="days/2026-11-02/"><img src="days/2026-11-02/cover.png" alt="Tide-mark download" width="160"></a> | Tide-mark download | Flight deck designer · Cartographic designer · Ergonomist · Tidal library custodian |
 
-[All 37 days](ARCHIVE.md)
+[All 38 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

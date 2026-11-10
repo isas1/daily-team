@@ -1,6 +1,159 @@
 {
   "items": [
     {
+      "id": "f4ede3c182fb15126b081f6a",
+      "title": "Compress any LLM 3x in one click,near-lossless,in under 50 MB RAM",
+      "url": "https://neuracryption.com/research",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T13:51:51.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "40b00c00c6321e523e112030",
+      "title": "Don't buy AR glasses",
+      "url": "https://blog.yaros.ae/dont-buy-ar-glasses/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T13:10:25.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "8eed17b548317b3125e6976f",
+      "title": "Ableton Live 13",
+      "url": "https://www.ableton.com/en/live/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T12:58:04.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "f321c904268bcef29356d2d1",
+      "title": "AlphaProof Code",
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T12:11:12.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "d7379938113b1f2c55fc6b61",
+      "title": "Show HN: A 15 MB self-hosted Netflix and Spotify for your media server",
+      "url": "https://github.com/HolyArrs/HolyArrs",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T11:51:19.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "8c68f2e486c25c612dfa4560",
+      "title": "'C:\\ FORMAT C:' – relax, it's just a screen saver",
+      "url": "https://fakedos.com/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T10:32:36.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "cebc6ff5285087a8ba90dc73",
+      "title": "Queens Public library under ransomware attack e-borrowing suspended",
+      "url": "https://connect.queenslibrary.org/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T09:04:39.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "f7292bfa214acf8913aa2e00",
+      "title": "Fossil CO2 emissions decrease by 0.4% in 2026",
+      "url": "https://news.exeter.ac.uk/faculty-of-environment-science-and-economy/fossil-co2-emissions-decrease-in-2026/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T08:59:41.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "c7d3010a8bcc401c0c2a91aa",
+      "title": "Fireworks AI security breach impacts Notion and their customers",
+      "url": "https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T07:19:38.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "d8522f99f19120bae3a76977",
+      "title": "Amazon saves millions by replacing Sonnet 4.6 with Strands Decider",
+      "url": "https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T06:01:08.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "c75db4d83a5f26aa5a4f10c6",
+      "title": "Your TV can see through walls",
+      "url": "https://maurycyz.com/projects/fading/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T05:24:45.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ffd0277ad7cd64c27c62df16",
+      "title": "Locating the source of a mysterious beep",
+      "url": "https://simonwillison.net/2026/Nov/9/mysterious-beeps/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T00:10:46.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "3c86ca6a06f60e03f055bef4",
+      "title": "USPS now offers official ZIP Code boundary polygons",
+      "url": "https://postalpro.usps.com/zcb",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-09T19:58:59.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a989f1582084d0cf153c32d2",
+      "title": "Claude Fable 5.2 and Mythos 5.2",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-09T18:01:10.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a8ac24a5fed69e7112677854",
+      "title": "Payments Canada announces launch of Canada's Real-Time Rail (RTR) payment system",
+      "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-09T16:00:45.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ab9a571901c9fe81ed20b1e3",
+      "title": "Foldable Flight: The Best Paper Airplanes",
+      "url": "https://www.foldableflight.com/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-09T12:19:22.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6cc213f46dae3af4036db704",
+      "title": "Show HN: Ghanaian street games you can play in the browser",
+      "url": "https://www.ghanastreetgames.com/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T15:31:52.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "f7bbadb93042a2997c39047e",
       "title": "What the first 300 installs of my free Android widget taught me about onboarding",
       "url": "https://www.reddit.com/r/SideProject/comments/1xqwxm9/what_the_first_300_installs_of_my_free_android/",
@@ -214,6 +367,15 @@
       "source": "Hacker News",
       "sourceId": "hacker-news",
       "published": "2026-11-08T04:14:12.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "37c687c5ed694c71bb856290",
+      "title": "Simon Winchester, Author of 'The Professor and the Madman,' Has Died",
+      "url": "https://www.nytimes.com/2026/11/04/obituaries/simon-winchester-dead.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-08T04:07:21.000Z",
       "summary": "Comments"
     },
     {
@@ -438,6 +600,15 @@
       "source": "Hacker News",
       "sourceId": "hacker-news",
       "published": "2026-11-07T22:38:58.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "3e7a55394fafeb578cdc9ebe",
+      "title": "Billion Watts in the Speaker [video]",
+      "url": "https://www.youtube.com/watch?v=PHOcTXYaMfg",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-07T21:45:50.000Z",
       "summary": "Comments"
     },
     {
@@ -749,182 +920,11 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-06T21:42:00.000Z",
       "summary": ""
-    },
-    {
-      "id": "60724c835de1389a14bee876",
-      "title": "A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost",
-      "url": "https://hightouch.com/blog/llm-judges-identity-resolution",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T19:48:51.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "19e5a3d3b856bd20631f2915",
-      "title": "Firecracker VM Escape: PwnEscape Part 2",
-      "url": "https://pwn.ai/blog/firecracker-escape",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T19:33:38.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "e79c61234499a0a5bade1c10",
-      "title": "I’m building a retro cassette music app for Apple Music and local files",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xpl3po/im_building_a_retro_cassette_music_app_for_apple/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T19:01:12.000Z",
-      "summary": ""
-    },
-    {
-      "id": "751717b51f3356569e65fb82",
-      "title": "Notes on San Marino",
-      "url": "https://mattlakeman.org/2026/11/05/notes-on-san-marino/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T17:12:05.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "855f58e097914a6f498764e4",
-      "title": "mandir.dev - a small virtual Hindu temple you can walk through",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xph08d/mandirdev_a_small_virtual_hindu_temple_you_can/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T16:23:47.000Z",
-      "summary": ""
-    },
-    {
-      "id": "be741613455312c7c5e19e9a",
-      "title": "I’ve been making minimal, private apps for everyday human needs (not another productivity apps lol)",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xpcio0/ive_been_making_minimal_private_apps_for_everyday/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T13:15:14.000Z",
-      "summary": ""
-    },
-    {
-      "id": "e07ba416f11e13ccb7b423d2",
-      "title": "Im building an open source ide called Indy, where your and your coworkers AI agents can work together.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xpbsy1/im_building_an_open_source_ide_called_indy_where/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T12:40:00.000Z",
-      "summary": ""
-    },
-    {
-      "id": "86c97a3ce422e88502bc4d85",
-      "title": "gongu - USCIS data and Georgia inspection scores in two public-data sites",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xpbr0n/gongu_uscis_data_and_georgia_inspection_scores_in/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T12:37:13.000Z",
-      "summary": ""
-    },
-    {
-      "id": "3d951e64c858db640b1196a7",
-      "title": "Tesla to wind down Cybertruck production",
-      "url": "https://www.nbcnews.com/tech/tech-news/tesla-wind-cybertruck-production-years-poor-sales-markets-rcna607817",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T12:13:51.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "4c9e64d865d814316102c4d6",
-      "title": "Tesla winds down Cybertruck production after years of poor sales in few markets",
-      "url": "https://www.msn.com/en-us/technology/tech-companies/tesla-to-wind-down-cybertruck-production-after-years-of-poor-sales-in-few-markets/ar-AA2gSZGv",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T12:13:51.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "253db4766250cc7717ffc2b3",
-      "title": "I shipped a Steam strategy game with AI-generated code and visuals. Here is what I had to keep checking.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xpb785/i_shipped_a_steam_strategy_game_with_aigenerated/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T12:07:44.000Z",
-      "summary": ""
-    },
-    {
-      "id": "da079125f8ca64df1f46697a",
-      "title": "i made features: eight daily untangling puzzles in one html file",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xpb75w/i_made_features_eight_daily_untangling_puzzles_in/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T12:07:38.000Z",
-      "summary": ""
-    },
-    {
-      "id": "3bce443e49424cb10a061e19",
-      "title": "I’m building an AI phone receptionist for small businesses - would love early feedback",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xpb5su/im_building_an_ai_phone_receptionist_for_small/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T12:05:31.000Z",
-      "summary": ""
-    },
-    {
-      "id": "dce0d8e47b34973705637af0",
-      "title": "Mbodi AI (YC P25) Is Hiring Research and Robotic Engineers",
-      "url": "https://www.ycombinator.com/companies/mbodi-ai/jobs",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T12:00:42.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "7ace9bb51dd233554ee6885a",
-      "title": "We've built an open-source feature flag server for 11 years",
-      "url": "https://github.com/Unleash/unleash",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T11:40:06.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "d90e1dd0dc3c7d9ebcc742e3",
-      "title": "I got tired of radio apps full of ads, so I built my own for the dark side of music",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xpa6u1/i_got_tired_of_radio_apps_full_of_ads_so_i_built/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T11:08:41.000Z",
-      "summary": ""
-    },
-    {
-      "id": "72090be8d0d4d8e98e044ac2",
-      "title": "CloseToMe - Private family photo app without social media",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp9y59/closetome_private_family_photo_app_without_social/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T10:53:52.000Z",
-      "summary": ""
-    },
-    {
-      "id": "5b6d2aa6164a5062b6780168",
-      "title": "Looking for honest feedback on my free color palette app for developers and designers",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xp9m1s/looking_for_honest_feedback_on_my_free_color/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-06T10:32:27.000Z",
-      "summary": ""
-    },
-    {
-      "id": "5eb6f69cfb37a9ae3869d0f6",
-      "title": "Living beyond the limits of survival: wood ants trapped in a gigantic pitfall (2016)",
-      "url": "https://jhr.pensoft.net/articles.php?id=9096",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-06T10:21:15.000Z",
-      "summary": "Comments"
     }
   ],
   "fetched": {
     "smashing": "2026-11-09",
-    "hacker-news": "2026-11-08",
+    "hacker-news": "2026-11-10",
     "github-trending": "2026-11-08",
     "reddit-sideproject": "2026-11-08"
   }
