@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-10: Key Ring Invite
+### 2026-11-11: Pinned Tags
 
-<a href="days/2026-11-10/"><img src="days/2026-11-10/team.png" alt="Team for 2026-11-10: Optical technician · Braille transcriber · Weather forecaster · Captain Nemo" width="100%"></a>
+<a href="days/2026-11-11/"><img src="days/2026-11-11/team.png" alt="Team for 2026-11-11: Lens grinder · Haptic interaction designer · Puzzle setter · Polar city navigator" width="100%"></a>
 
 **Task:** Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.
 
-**Decision:** Press Copy invite, and the link is copied with a tagged key you can later revoke.
+**Decision:** Select words in a draft, type a tag, and the tag stays tied to those words.
 
-<a href="days/2026-11-10/"><img src="days/2026-11-10/cover.png" alt="Designed cover for Key Ring Invite" width="100%"></a>
+<a href="days/2026-11-11/"><img src="days/2026-11-11/cover.png" alt="Designed cover for Pinned Tags" width="100%"></a>
 
-[Open the day](days/2026-11-10/) · [Use it](https://isas1.github.io/daily-team/2026-11-10/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-11/) · [Use it](https://isas1.github.io/daily-team/2026-11-11/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-11](days/2026-11-11/) | <a href="days/2026-11-11/"><img src="days/2026-11-11/cover.png" alt="Pinned Tags" width="160"></a> | Pinned Tags | Lens grinder · Haptic interaction designer · Puzzle setter · Polar city navigator |
 | [2026-11-10](days/2026-11-10/) | <a href="days/2026-11-10/"><img src="days/2026-11-10/cover.png" alt="Key Ring Invite" width="160"></a> | Key Ring Invite | Optical technician · Braille transcriber · Weather forecaster · Captain Nemo |
 | [2026-11-08](days/2026-11-08/) | <a href="days/2026-11-08/"><img src="days/2026-11-08/cover.png" alt="Tachograph Upload" width="160"></a> | Tachograph Upload | Type designer · Icon designer · Exhibit light technician · Cautious beginner |
 | [2026-11-07](days/2026-11-07/) | <a href="days/2026-11-07/"><img src="days/2026-11-07/cover.png" alt="Anchor Zoom" width="160"></a> | Anchor Zoom | Accessibility specialist · Architectural model maker · Scientific illustrator · Returning collaborator |
 | [2026-11-06](days/2026-11-06/) | <a href="days/2026-11-06/"><img src="days/2026-11-06/cover.png" alt="Register Check" width="160"></a> | Register Check | Watch restorer · Motion engineer · Interaction engineer · Polar city navigator |
 | [2026-11-05](days/2026-11-05/) | <a href="days/2026-11-05/"><img src="days/2026-11-05/cover.png" alt="Shelf Read" width="160"></a> | Shelf Read | Quality engineer · Visual designer · Mobile interface designer · Stone swallow |
 | [2026-11-04](days/2026-11-04/) | <a href="days/2026-11-04/"><img src="days/2026-11-04/cover.png" alt="Write Time-Out" width="160"></a> | Write Time-Out | Human factors engineer · Data interface designer · Interface designer · One-handed maker |
-| [2026-11-03](days/2026-11-03/) | <a href="days/2026-11-03/"><img src="days/2026-11-03/cover.png" alt="Zero Hour Rehearsal" width="160"></a> | Zero Hour Rehearsal | Design systems engineer · Technical illustrator · Motion director · Porcelain hare |
 
-[All 38 days](ARCHIVE.md)
+[All 39 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

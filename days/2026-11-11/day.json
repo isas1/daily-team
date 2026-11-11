@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-11",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-11\nSeason: 2026-11-09\n\n1. Lens grinder\n   Method: End each session by naming one thing a visitor can now try that they could not before. [new]\n   Stance: Cuts until only the core is left.\n   Temperament: Rejects a claim until the state can be shown.\n2. Haptic interaction designer [new]\n   Method: Hand the controls to someone else and stay silent for two minutes. [new]\n   Stance: Pushes toward the strange.\n   Temperament: Asks for the exact moment the motion should stop.\n3. Puzzle setter [new]\n   Method: Change one input at a time and write down everything that moved. [new]\n   Stance: Guards the feeling it leaves behind.\n   Temperament: Wants to see the resting frame first.\n4. Polar city navigator (future; invented) [guest]\n   Method: Keep the route back visible in every expanded view.\n   Stance: Defends the material.\n   Temperament: Prefers a clear label to a clever one.\n\nConstraint: Use one consistent spacing scale.\nTask: Content tags: a tag input for a publishing tool that adds, edits, and removes labels from a draft.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "c10604c052a5a992b807e208603e9359768d7b61800872fc7a7a272f29db8acd",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "c695e2885bf59220365ca2ec"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "Select words in a draft, type a tag, and the tag stays tied to those words.",
+  "concept": "Pinned Tags",
+  "plan": "## Pitch\n\n**Lens grinder:** One field, one list of chips, one draft. Add, edit, remove. The only extra is a pin: a tag can point at the words that earned it. If I can't watch the pin hold or break, it isn't there. By the end, a visitor should be able to select a phrase and tag it.\n\n**Haptic interaction designer:** The mostra post puts each comment exactly where you pointed. Do that with tags. Drag across \"Fares rise 12%\", type *fares*, press Enter. The chip and the phrase are now tied together. Press the chip and the phrase lights once for 240 ms, then stops. One pulse and no loop.\n\n**Puzzle setter:** Show me the resting frame first. That's a short draft, two chips and an empty field. Then change one thing at a time. Each action writes one line saying what moved. Delete the phrase a pin points at and the chip says *pin lost*. That's the moment that should land: an edit broke a tag, and you see it.\n\n**Polar city navigator:** Keep the material plain. These are words, chips and a field, with labels that say what they do. When a chip sends you down into the draft, the way back stays on screen. Escape returns focus to that chip. Nobody gets stranded in the text.\n\n## Clash\n\n**Haptic interaction designer:** Make an unpinned tag float loose, drifting at the edge of the field. Strange is good here.\n\n**Polar city navigator:** A drifting chip is a moving target. Put it in the row and give it no pin glyph. That's clear enough.\n\n**Lens grinder:** Agreed. Show me drift as a state. I won't accept it as a mood.\n\n**Puzzle setter:** What happens to the feeling if *pin lost* turns red and shakes? It reads as an error the user made.\n\n**Haptic interaction designer:** Then the glyph swaps from a filled pin to a hollow ring. No shake. The change stops when the glyph changes.\n\n**Lens grinder:** Editing a label inline. Does that earn its place?\n\n**Puzzle setter:** Yes. Rename *ferry* to *ferries* and the pin should survive. One input changes and one thing moves.\n\n**Polar city navigator:** And removal says \"Removed fares · Undo\" in the status line. That's the route back, visible.\n\n**Lens grinder:** Cut everything else. Ship it.\n\n## Decision\n\nSelect words in a draft, type a tag, and the tag stays tied to those words.\n\nConcept: Pinned Tags\n\n- **Lens grinder:** Scope is held to add, edit, remove and pin. The closing line for the visitor: you can now select a phrase and pin a tag to it.\n- **Haptic interaction designer:** Owns the pin mechanism from the mostra signal. Pressing a chip pulses its phrase once for 240 ms. Reduced motion uses a static outline instead.\n- **Puzzle setter:** Owns the resting frame, which has 2 chips, 2 sentences and an empty field. Each action writes one status line naming what changed, including *pin lost* when an edit removes the anchored words.\n- **Polar city navigator:** Owns labels and the way back. Escape returns from the draft to the chip that sent you there. Removal always offers Undo in the status line.\n\nInitial visible text is 26 words: a headline, 2 sentences, \"Tags\", 2 chips, the \"Add tag\" field and one hint. That is under the 40-word target. Spacing uses one scale: 4, 8, 12, 16, 24 and 32 px.\n\n## Build notes\n\n1. **Tag store.** Each tag is stored as `{id, label, anchor}`, where `anchor` holds start, end and the quoted text. The draft is a `contenteditable` region. On every input event, each anchor is re-found by searching for its quoted text. A tag whose quote is missing becomes `orphan` and gets a hollow-ring glyph plus a visually hidden \"pin lost\". Duplicate labels are matched case-insensitively. A duplicate add focuses the existing chip and writes \"Already tagged fares\".\n2. **Field and chips.** Enter in the field adds a tag. If text is selected in the draft, the tag pins to that selection. Otherwise it is added unpinned. Backspace in an empty field moves focus to the last chip. On a focused chip, Left and Right move between chips, Enter or F2 edits the label inline, and Delete removes the chip. In inline edit, Escape reverts and an empty commit removes the tag. Every removal writes \"Removed fares · Undo\" to a polite live region, and Undo restores the tag with its anchor. Each × button has the accessible name \"Remove fares\". All chips have 44 px targets.\n3. **Pin jump and spacing.** Pressing a pinned chip scrolls to its span and adds one 240 ms highlight, then clears it. Escape in the draft returns focus to that chip. All gaps, padding and chip sizes come from `--s1` to `--s6` (4, 8, 12, 16, 24, 32 px), with no other values. Reset restores the sample draft and its 2 chips.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Pinned Tags\",\"audience\":\"Editors tagging drafts in a publishing tool\",\"problem\":\"Tags detach from the text that justified them\",\"interaction\":\"Select words, type a tag, Enter; edit or remove chips\",\"outcome\":\"Chip pinned to a phrase; press it to light the phrase\",\"recovery\":\"Undo removal, Escape reverts edit, Reset sample\",\"mechanism\":\"Each tag stores its quote; edits that delete it mark pin lost\",\"difference\":\"Tag fields keep a flat list; this shows why and when a tag breaks\",\"whyNow\":\"mostra post title: comments placed where you point. Title only, no demand data\",\"sourceIds\":[\"c695e2885bf59220365ca2ec\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Pinned Tags\",\"need\":\"Keep tags tied to the text they describe\",\"mechanism\":\"Selection-anchored chips with pin lost state\",\"rejection\":\"Selected: cross-domain, offline, new to recent dates\"},{\"name\":\"Keyboard Tag Rail\",\"need\":\"Tag a draft with no mouse\",\"mechanism\":\"Key-only chip rail from hotel no-mouse post\",\"rejection\":\"A shortcut layer on a plain tag field\"},{\"name\":\"Bidi Tag Field\",\"need\":\"Mix Hebrew, Arabic and Latin tags\",\"mechanism\":\"Per-chip direction with caret order hints\",\"rejection\":\"Needs RTL user testing the sources lack\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "3ff2837ece4890c1f6c8ffed03ce9cd4e0134263db388e64b00ce0cdc46201b3",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Pinned Tags",
+    "audience": "Editors tagging drafts in a publishing tool",
+    "problem": "Tags detach from the text that justified them",
+    "interaction": "Select words, type a tag, Enter; edit or remove chips",
+    "outcome": "Chip pinned to a phrase; press it to light the phrase",
+    "recovery": "Undo removal, Escape reverts edit, Reset sample",
+    "mechanism": "Each tag stores its quote; edits that delete it mark pin lost",
+    "difference": "Tag fields keep a flat list; this shows why and when a tag breaks",
+    "whyNow": "mostra post title: comments placed where you point. Title only, no demand data",
+    "sourceIds": [
+      "c695e2885bf59220365ca2ec"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Pinned Tags",
+        "need": "Keep tags tied to the text they describe",
+        "mechanism": "Selection-anchored chips with pin lost state",
+        "rejection": "Selected: cross-domain, offline, new to recent dates"
+      },
+      {
+        "name": "Keyboard Tag Rail",
+        "need": "Tag a draft with no mouse",
+        "mechanism": "Key-only chip rail from hotel no-mouse post",
+        "rejection": "A shortcut layer on a plain tag field"
+      },
+      {
+        "name": "Bidi Tag Field",
+        "need": "Mix Hebrew, Arabic and Latin tags",
+        "mechanism": "Per-chip direction with caret order hints",
+        "rejection": "Needs RTL user testing the sources lack"
+      }
+    ]
+  }
+}

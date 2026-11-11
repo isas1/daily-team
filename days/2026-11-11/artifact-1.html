@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pinned Tags</title>
+<style>
+:root{
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --tap:calc(var(--s6) + var(--s3));
+  --paper:#f3f1ec;--card:#fffdf8;--ink:#1c2330;--muted:#4f5866;--line:#c9c4b8;
+  --accent:#1d5a63;--focus:#a3460f;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:40rem;margin:0 auto;padding:var(--s6) var(--s4)}
+h1{font-size:1.75rem;line-height:1.2;margin:0 0 var(--s2);letter-spacing:-.01em}
+.lede{margin:0 0 var(--s6);color:var(--muted)}
+.label{display:block;font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 var(--s2)}
+.wrap{position:relative}
+#draft{background:var(--card);border:1px solid var(--line);border-radius:var(--s2);padding:var(--s4);font-size:1.125rem;line-height:1.7;min-height:var(--tap);outline:none;white-space:pre-wrap;word-break:break-word}
+#draft:focus{border-color:var(--accent)}
+#draft:focus-visible{outline:2px solid var(--focus);outline-offset:var(--s1)}
+::highlight(pins){background-color:#d3e4e4;text-decoration-line:underline;text-decoration-color:#1d5a63;text-decoration-thickness:2px}
+::highlight(pending){background-color:#f5dd9a}
+.layer{position:absolute;inset:0;pointer-events:none}
+.mark{position:absolute;border-radius:var(--s1);background:rgba(240,194,75,.65);mix-blend-mode:multiply;opacity:0;animation:pulse 240ms ease-out forwards}
+.mark.static{animation:none;opacity:1;background:transparent;mix-blend-mode:normal;outline:2px solid var(--focus)}
+@keyframes pulse{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+.tags{margin-top:var(--s6)}
+#chips{list-style:none;margin:0 0 var(--s5);padding:0;display:flex;flex-wrap:wrap;gap:var(--s2);min-height:var(--tap)}
+.tag{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:999px;background:var(--card)}
+.tag.pinned{border-color:var(--accent)}
+.tag.lost{border-style:dashed;border-color:var(--muted)}
+.chip,.x{border:0;background:none;font:inherit;color:var(--ink);cursor:pointer;min-height:var(--tap)}
+.chip{display:inline-flex;align-items:center;gap:var(--s2);padding:0 var(--s2) 0 var(--s4);border-radius:999px 0 0 999px}
+.x{min-width:var(--tap);font-size:1.25rem;line-height:1;color:var(--muted);border-radius:0 999px 999px 0}
+.x:hover,.chip:hover{background:rgba(29,90,99,.08)}
+.glyph{width:var(--s3);height:var(--s3);border-radius:50%;flex:none}
+.pinned .glyph{background:var(--accent)}
+.lost .glyph{border:2px solid var(--muted)}
+.loose .glyph{display:none}
+.edit{min-height:var(--tap);border:0;background:transparent;padding:0 var(--s4);font:inherit;color:var(--ink);border-radius:999px;min-width:var(--s6)}
+.row{display:flex;gap:var(--s2)}
+#field{flex:1;min-width:0;min-height:var(--tap);padding:0 var(--s3);border:1px solid var(--line);border-radius:var(--s2);background:var(--card);font:inherit;color:var(--ink)}
+#field:focus{border-color:var(--accent)}
+.btn{min-height:var(--tap);padding:0 var(--s4);border:1px solid var(--accent);border-radius:var(--s2);background:var(--accent);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.btn.quiet{background:transparent;color:var(--accent)}
+.link{min-height:var(--tap);padding:0 var(--s2);border:0;background:none;color:var(--accent);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:var(--s1);cursor:pointer}
+#hint{margin:var(--s2) 0 0;font-size:.875rem;color:var(--muted)}
+#hint.on{color:var(--ink)}
+.foot{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line)}
+#status{flex:1;min-width:0;min-height:var(--tap);display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);margin:0}
+details{margin-top:var(--s6);font-size:.875rem;color:var(--muted)}
+summary{cursor:pointer;min-height:var(--tap);display:flex;align-items:center;font-weight:600;color:var(--ink)}
+details ul{margin:0 0 var(--s3);padding-left:var(--s5)}
+details li{margin-bottom:var(--s1)}
+details p{margin:0 0 var(--s3)}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:var(--s1)}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion:reduce){.mark{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Pinned Tags</h1>
+  <p class="lede">Select words, type a tag, press Enter.</p>
+
+  <section aria-labelledby="draftLabel">
+    <span class="label" id="draftLabel">Demo draft</span>
+    <div class="wrap" id="wrap">
+      <div id="draft" role="textbox" aria-multiline="false" aria-labelledby="draftLabel"></div>
+      <div class="layer" id="layer" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="tags" aria-labelledby="tagsLabel">
+    <h2 class="label" id="tagsLabel">Tags</h2>
+    <ul id="chips" aria-labelledby="tagsLabel"></ul>
+
+    <form id="addForm" autocomplete="off">
+      <label class="label" for="field">Add tag</label>
+      <div class="row">
+        <input id="field" type="text" maxlength="32" enterkeyhint="done" aria-describedby="hint">
+        <button class="btn" type="submit">Add</button>
+      </div>
+      <p id="hint">No words selected</p>
+    </form>
+
+    <div class="foot">
+      <p id="status"><span id="msg" role="status" aria-live="polite"></span><button class="link" id="act" type="button" hidden></button></p>
+      <button class="btn quiet" id="reset" type="button">Reset</button>
+    </div>
+  </section>
+
+  <details>
+    <summary>Credits</summary>
+    <ul>
+      <li>Lens grinder (lead): held scope to add, edit, remove and pin. Now a visitor can select a phrase and pin a tag to it.</li>
+      <li>Haptic interaction designer: the pin, and one 240 ms pulse on the phrase. Reduced motion shows a static outline.</li>
+      <li>Puzzle setter: the resting frame and one status line per action, including pin lost.</li>
+      <li>Polar city navigator: plain labels, Escape from the draft back to its chip, Undo on every removal.</li>
+    </ul>
+    <p>Demo data only. Saved in this browser when storage is allowed.</p>
+    <p>Source: <a href="https://www.reddit.com/r/SideProject/comments/1xtffxl/mostra_talk_while_you_click_around_a_live_site/" rel="noopener noreferrer">mostra - talk while you click around a live site, and each point becomes a comment where you pointed</a></p>
+  </details>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const SAMPLE = "Ferry fares rise 12% from March. The harbour board blames fuel costs.";
+  const SAMPLE_TAGS = [["fares", "fares rise 12%"], ["fuel", "fuel costs"]];
+  const KEY = "pinned-tags-demo-v1";
+
+  const $ = id => document.getElementById(id);
+  const draft = $("draft"), wrap = $("wrap"), layer = $("layer"), list = $("chips");
+  const form = $("addForm"), field = $("field"), hint = $("hint");
+  const msg = $("msg"), act = $("act"), resetBtn = $("reset");
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const HL = !!(window.CSS && CSS.highlights && window.Highlight);
+
+  let tags = [], nextId = 1, pending = null, lastJump = null, actFn = null;
+  let editing = null, roving = null, markTimer = 0;
+
+  try { draft.contentEditable = "plaintext-only"; } catch (e) { draft.contentEditable = "true"; }
+
+  const el = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
+  const norm = s => s.replace(/\s+/g, " ").trim().slice(0, 32);
+  const low = s => s.toLowerCase();
+  const short = q => q.length > 28 ? q.slice(0, 27) + "\u2026" : q;
+  const quoted = q => "\u201c" + short(q) + "\u201d";
+  const text = () => draft.textContent;
+  const stateOf = g => g.quote == null ? "loose" : g.lost ? "lost" : "pinned";
+
+  function sampleTags() {
+    return SAMPLE_TAGS.map(([l, q]) => ({ id: "t" + (nextId++), label: l, quote: q, start: SAMPLE.indexOf(q), lost: false }));
+  }
+
+  function posAt(off) {
+    const w = document.createTreeWalker(draft, NodeFilter.SHOW_TEXT);
+    let n, acc = 0, last = null;
+    while ((n = w.nextNode())) {
+      const L = n.data.length;
+      if (off <= acc + L) return [n, off - acc];
+      acc += L; last = n;
+    }
+    return last ? [last, last.data.length] : (off === 0 ? [draft, 0] : null);
+  }
+  function rangeFor(start, end) {
+    const a = posAt(start), b = posAt(end);
+    if (!a || !b) return null;
+    const r = document.createRange();
+    try { r.setStart(a[0], a[1]); r.setEnd(b[0], b[1]); } catch (e) { return null; }
+    return r;
+  }
+
+  function reanchor() {
+    const t = text(), changed = [];
+    for (const g of tags) {
+      if (g.quote == null) continue;
+      let best = -1, i = t.indexOf(g.quote);
+      while (i !== -1) {
+        if (best === -1 || Math.abs(i - g.start) < Math.abs(best - g.start)) best = i;
+        i = t.indexOf(g.quote, i + 1);
+      }
+      const was = g.lost;
+      if (best === -1) g.lost = true; else { g.lost = false; g.start = best; }
+      if (was !== g.lost) changed.push(g);
+    }
+    return changed;
+  }
+
+  function paint() {
+    if (!HL) return;
+    const pins = [];
+    for (const g of tags) {
+      if (stateOf(g) === "pinned") {
+        const r = rangeFor(g.start, g.start + g.quote.length);
+        if (r) pins.push(r);
+      }
+    }
+    CSS.highlights.set("pins", new Highlight(...pins));
+    const pr = pending && rangeFor(pending.start, pending.start + pending.quote.length);
+    if (pr) CSS.highlights.set("pending", new Highlight(pr)); else CSS.highlights.delete("pending");
+  }
+
+  function say(t, label, fn) {
+    msg.textContent = t;
+    if (label) { act.textContent = label; act.hidden = false; actFn = fn; }
+    else { act.hidden = true; actFn = null; }
+  }
+  act.addEventListener("click", () => { const f = actFn; say(msg.textContent); if (f) f(); });
+
+  function updateHint() {
+    hint.textContent = pending ? "Pins to " + quoted(pending.quote) : "No words selected";
+    hint.classList.toggle("on", !!pending);
+  }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify({ text: text(), tags, nextId })); } catch (e) {}
+  }
+  function load() {
+    try {
+      const d = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (!d || typeof d.text !== "string" || !Array.isArray(d.tags) || typeof d.nextId !== "number") return false;
+      const ok = d.tags.filter(g => g && typeof g.id === "string" && typeof g.label === "string" && g.label &&
+        (g.quote === null || typeof g.quote === "string") && typeof g.start === "number");
+      draft.textContent = d.text.replace(/\n/g, " ");
+      tags = ok.map(g => ({ id: g.id, label: norm(g.label), quote: g.quote, start: g.start, lost: !!g.lost }));
+      nextId = d.nextId;
+      return true;
+    } catch (e) { return false; }
+  }
+
+  function focusChip(id) {
+    roving = id;
+    let target = null;
+    list.querySelectorAll(".chip").forEach(b => {
+      const on = b.parentNode.dataset.id === id;
+      b.tabIndex = on ? 0 : -1;
+      if (on) target = b;
+    });
+    if (target) target.focus();
+  }
+
+  function render(focusId) {
+    if (!tags.some(g => g.id === roving)) roving = tags[0] ? tags[0].id : null;
+    if (focusId && tags.some(g => g.id === focusId)) roving = focusId;
+    list.replaceChildren();
+    tags.forEach(g => {
+      const st = stateOf(g);
+      const li = el("li", "tag " + st);
+      li.dataset.id = g.id;
+      if (editing === g.id) {
+        const inp = el("input", "edit");
+        inp.type = "text"; inp.value = g.label; inp.maxLength = 32;
+        inp.size = Math.max(4, g.label.length + 1);
+        inp.setAttribute("aria-label", "Rename " + g.label);
+        inp.addEventListener("input", () => { inp.size = Math.max(4, inp.value.length + 1); });
+        inp.addEventListener("keydown", e => {
+          if (e.key === "Enter") { e.preventDefault(); commit(g, inp.value, true); }
+          else if (e.key === "Escape") { e.preventDefault(); editing = null; render(g.id); say("Kept " + g.label); }
+        });
+        inp.addEventListener("blur", () => { if (editing === g.id) commit(g, inp.value, false); });
+        li.append(inp);
+      } else {
+        const b = el("button", "chip");
+        b.type = "button";
+        b.tabIndex = g.id === roving ? 0 : -1;
+        const gl = el("span", "glyph"); gl.setAttribute("aria-hidden", "true");
+        const tx = el("span"); tx.textContent = g.label;
+        const sr = el("span", "sr");
+        sr.textContent = st === "pinned" ? ", pinned" : st === "lost" ? ", pin lost" : ", not pinned";
+        b.append(gl, tx, sr);
+        b.addEventListener("click", e => jump(g, e.detail === 0));
+        b.addEventListener("dblclick", () => startEdit(g));
+        b.addEventListener("keydown", e => chipKey(e, g));
+        const x = el("button", "x");
+        x.type = "button"; x.tabIndex = -1; x.textContent = "\u00d7";
+        x.setAttribute("aria-label", "Remove " + g.label);
+        x.addEventListener("click", () => remove(g));
+        li.append(b, x);
+      }
+      list.append(li);
+    });
+    if (focusId) {
+      const f = list.querySelector('[data-id="' + focusId + '"] .chip, [data-id="' + focusId + '"] .edit');
+      if (f) { f.focus(); if (f.classList.contains("edit")) f.select(); }
+    }
+    paint();
+    save();
+  }
+
+  function chipKey(e, g) {
+    const i = tags.indexOf(g);
+    const k = e.key;
+    if (k === "ArrowRight" || k === "ArrowLeft" || k === "Home" || k === "End") {
+      e.preventDefault();
+      let j = k === "ArrowRight" ? i + 1 : k === "ArrowLeft" ? i - 1 : k === "Home" ? 0 : tags.length - 1;
+      if (j >= tags.length) { field.focus(); return; }
+      focusChip(tags[Math.max(0, j)].id);
+    } else if (k === "Enter" || k === "F2") {
+      e.preventDefault(); startEdit(g);
+    } else if (k === "Delete" || k === "Backspace") {
+      e.preventDefault(); remove(g);
+    }
+  }
+
+  function startEdit(g) {
+    if (!tags.includes(g)) return;
+    editing = g.id;
+    render(g.id);
+  }
+
+  function commit(g, val, refocus) {
+    editing = null;
+    const v = norm(val);
+    if (!v) { remove(g); return; }
+    if (v === g.label) { render(refocus ? g.id : undefined); say("Kept " + v); return; }
+    const dup = tags.find(t => t !== g && low(t.label) === low(v));
+    if (dup) { render(refocus ? g.id : undefined); say("Already tagged " + dup.label); return; }
+    const old = g.label;
+    g.label = v;
+    render(refocus ? g.id : undefined);
+    say("Renamed " + old + " to " + v + (stateOf(g) === "pinned" ? " \u00b7 pin kept" : ""));
+  }
+
+  function remove(g) {
+    const i = tags.indexOf(g);
+    if (i < 0) return;
+    const hadFocus = list.contains(document.activeElement);
+    tags.splice(i, 1);
+    if (editing === g.id) editing = null;
+    if (lastJump === g.id) lastJump = null;
+    const nxt = tags[i] || tags[i - 1];
+    render(hadFocus && nxt ? nxt.id : undefined);
+    if (hadFocus && !nxt) field.focus();
+    say("Removed " + g.label, "Undo", () => {
+      if (tags.some(t => low(t.label) === low(g.label))) { say("Already tagged " + g.label); return; }
+      tags.splice(Math.min(i, tags.length), 0, g);
+      reanchor();
+      render(g.id);
+      say("Restored " + g.label + (stateOf(g) === "lost" ? " \u00b7 pin lost" : ""));
+    });
+  }
+
+  function clearMarks() { clearTimeout(markTimer); layer.replaceChildren(); }
+
+  function pulse(r) {
+    clearMarks();
+    if (!r) return;
+    const first = r.getBoundingClientRect();
+    if (first.top < 0 || first.bottom > window.innerHeight) {
+      window.scrollBy({ top: first.top - window.innerHeight / 3, behavior: mq.matches ? "auto" : "smooth" });
+    }
+    const w = wrap.getBoundingClientRect();
+    for (const q of r.getClientRects()) {
+      if (q.width < 1) continue;
+      const m = el("div", "mark" + (mq.matches ? " static" : ""));
+      m.style.left = (q.left - w.left) + "px";
+      m.style.top = (q.top - w.top) + "px";
+      m.style.width = q.width + "px";
+      m.style.height = q.height + "px";
+      layer.append(m);
+    }
+    markTimer = setTimeout(clearMarks, mq.matches ? 1600 : 260);
+  }
+
+  function jump(g, fromKeys) {
+    const st = stateOf(g);
+    if (st === "lost") { say("Pin lost: " + g.label + " \u00b7 select words and add it again", "Rename", () => startEdit(g)); return; }
+    if (st === "loose") { say(g.label + " is not pinned", "Rename", () => startEdit(g)); return; }
+    const r = rangeFor(g.start, g.start + g.quote.length);
+    lastJump = g.id;
+    say(g.label + ": " + quoted(g.quote), "Rename", () => startEdit(g));
+    if (fromKeys && r) {
+      draft.focus({ preventScroll: true });
+      const c = document.createRange();
+      c.setStart(r.endContainer, r.endOffset);
+      c.collapse(true);
+      const s = window.getSelection();
+      s.removeAllRanges(); s.addRange(c);
+    }
+    pulse(r);
+  }
+
+  function add() {
+    const v = norm(field.value);
+    if (!v) { say("Type a tag first"); field.focus(); return; }
+    const ex = tags.find(t => low(t.label) === low(v));
+    field.value = "";
+    if (ex) {
+      if (pending && stateOf(ex) !== "pinned") {
+        ex.quote = pending.quote; ex.start = pending.start; ex.lost = false;
+        pending = null; updateHint(); render(); field.focus();
+        say("Pinned " + ex.label + " to " + quoted(ex.quote));
+        pulse(rangeFor(ex.start, ex.start + ex.quote.length));
+      } else {
+        render(ex.id);
+        say("Already tagged " + ex.label);
+      }
+      return;
+    }
+    const g = { id: "t" + (nextId++), label: v, quote: pending ? pending.quote : null, start: pending ? pending.start : 0, lost: false };
+    tags.push(g);
+    pending = null; updateHint(); render(); field.focus();
+    if (g.quote != null) {
+      say("Pinned " + v + " to " + quoted(g.quote));
+      pulse(rangeFor(g.start, g.start + g.quote.length));
+    } else {
+      say("Added " + v + " \u00b7 not pinned");
+    }
+  }
+
+  form.addEventListener("submit", e => { e.preventDefault(); add(); });
+  field.addEventListener("keydown", e => {
+    if (e.key === "Backspace" && !field.value && tags.length) {
+      e.preventDefault(); focusChip(tags[tags.length - 1].id);
+    } else if (e.key === "Escape" && pending) {
+      e.preventDefault(); pending = null; updateHint(); paint(); say("Selection cleared");
+    }
+  });
+
+  document.addEventListener("selectionchange", () => {
+    const s = window.getSelection();
+    if (!s || !s.rangeCount) return;
+    const r = s.getRangeAt(0);
+    if (!draft.contains(r.commonAncestorContainer)) return;
+    if (r.collapsed) {
+      if (pending) { pending = null; updateHint(); paint(); }
+      return;
+    }
+    const pre = document.createRange();
+    pre.selectNodeContents(draft);
+    pre.setEnd(r.startContainer, r.startOffset);
+    let q = r.toString();
+    const start = pre.toString().length + (q.length - q.trimStart().length);
+    q = q.trim();
+    if (!q) return;
+    pending = { start, quote: q };
+    updateHint(); paint();
+  });
+
+  draft.addEventListener("input", () => {
+    pending = null; updateHint();
+    const ch = reanchor();
+    if (ch.length) {
+      render();
+      const g = ch[ch.length - 1];
+      say((g.lost ? "Pin lost: " : "Pin found: ") + g.label);
+    } else { paint(); save(); }
+  });
+  draft.addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); return; }
+    if (e.key === "Escape" && lastJump && tags.some(t => t.id === lastJump)) {
+      e.preventDefault(); clearMarks(); focusChip(lastJump);
+    }
+  });
+  draft.addEventListener("beforeinput", e => {
+    const t = e.inputType || "";
+    if (t === "insertParagraph" || t === "insertLineBreak" || t.startsWith("format")) e.preventDefault();
+  });
+  draft.addEventListener("paste", e => {
+    e.preventDefault();
+    const t = ((e.clipboardData && e.clipboardData.getData("text/plain")) || "").replace(/\s+/g, " ");
+    let done = false;
+    try { done = document.execCommand("insertText", false, t); } catch (err) { done = false; }
+    if (!done) {
+      const s = window.getSelection();
+      if (s.rangeCount) {
+        const r = s.getRangeAt(0);
+        r.deleteContents();
+        const n = document.createTextNode(t);
+        r.insertNode(n);
+        r.setStartAfter(n); r.collapse(true);
+        s.removeAllRanges(); s.addRange(r);
+        draft.dispatchEvent(new Event("input"));
+      }
+    }
+  });
+  draft.addEventListener("drop", e => e.preventDefault());
+
+  resetBtn.addEventListener("click", () => {
+    nextId = 1;
+    draft.textContent = SAMPLE;
+    tags = sampleTags();
+    pending = null; lastJump = null; editing = null; roving = null;
+    updateHint(); clearMarks(); reanchor(); render();
+    say("Demo restored");
+  });
+
+  document.addEventListener("visibilitychange", () => { if (document.hidden) clearMarks(); });
+  window.addEventListener("resize", clearMarks);
+
+  if (!load()) { draft.textContent = SAMPLE; tags = sampleTags(); }
+  reanchor();
+  updateHint();
+  render();
+})();
+</script>
+</body>
+</html>
