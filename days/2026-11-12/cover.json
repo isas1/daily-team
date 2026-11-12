@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "74d8474d33dc1c755f60145cf5a7af1f5e6d47069672062ee8516cea90f50b55",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n- **Hydrologist:** The cover shows the gauge rule. One red waterline crosses all three views at the same height. Water fills the area below it, and a staff gauge marks the right edge.\n- **Kite maker:** The read stat keeps its 2px red outline in each view, so the eye finds it at thumbnail size.\n- **Furniture restorer:** Each view is drawn at its density limit: 9 list rows, 10 grid cards and 17 compact rows. The anchor still sits on the line in all three.\n- **Floating market clerk:** Recorded method: keep changing totals aligned and easy to compare. Figures appear as blocks in one right-aligned column in List and Compact, and at the same card corner in Grid. Each figure has a ▲ or ▼ glyph beside it.\n\n**Composition.** The title sits on the left at 132px across two lines. The right half holds three abstract views: List, Grid and Compact. One horizontal waterline at y 330 runs through the outlined stat in each view. The figures are geometry only, with no numbers. All shapes are plain inline SVG rects, lines and polygons. There are no patterns, references or namespace URLs.\n\n**Palette.** Paper #F3EFE6, navy ink #0E2A47, anchor red #BE4D4D, water tint #8FB3C9 at 18%, and row fill #E4DED2.\n\n**Type.** `Cover Headline` sets the title in navy, with a short red rule beneath. `Cover Text` sets the descriptor, the date and the three small view labels.",
+  "width": 1200,
+  "height": 630
+}

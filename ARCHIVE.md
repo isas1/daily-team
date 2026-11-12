@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 39 days recorded.
+Every daily team and the asset it made, newest first. 40 days recorded.
 
 [Today](README.md)
 
 | Date | Project | Open |
 |---|---|---|
+| [2026-11-12](days/2026-11-12/) | Gauge Shelf | <a href="days/2026-11-12/"><img src="days/2026-11-12/cover.png" alt="Gauge Shelf" width="160"></a> [asset](days/2026-11-12/artifact-1.html) |
 | [2026-11-11](days/2026-11-11/) | Pinned Tags | <a href="days/2026-11-11/"><img src="days/2026-11-11/cover.png" alt="Pinned Tags" width="160"></a> [asset](days/2026-11-11/artifact-1.html) |
 | [2026-11-10](days/2026-11-10/) | Key Ring Invite | <a href="days/2026-11-10/"><img src="days/2026-11-10/cover.png" alt="Key Ring Invite" width="160"></a> [asset](days/2026-11-10/artifact-1.html) |
 | [2026-11-08](days/2026-11-08/) | Tachograph Upload | <a href="days/2026-11-08/"><img src="days/2026-11-08/cover.png" alt="Tachograph Upload" width="160"></a> [asset](days/2026-11-08/artifact-1.html) |

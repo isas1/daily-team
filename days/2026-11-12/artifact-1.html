@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stat shelf</title>
+<style>
+  :root{
+    --paper:#f3f1eb;
+    --card:#fbfaf6;
+    --ink:#1c2228;
+    --muted:#56616b;
+    --line:#d9d5ca;
+    --water:#0e5a6b;
+    --water-soft:#d6e6e8;
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 16px 48px}
+  header{
+    position:sticky;top:0;z-index:5;background:var(--paper);
+    padding:20px 0 12px;border-bottom:1px solid var(--line);
+  }
+  .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  h1{font-size:1.375rem;margin:0;letter-spacing:-.01em}
+  .tag{
+    font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--water);border:1px solid var(--water);border-radius:4px;padding:1px 6px;
+  }
+  .bar{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+  fieldset{border:0;margin:0;padding:0;min-width:0}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .seg{
+    display:inline-flex;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:3px;
+  }
+  .seg label{position:relative;display:block}
+  .seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+  .seg span{
+    display:block;min-width:84px;text-align:center;padding:9px 14px;border-radius:999px;
+    font-weight:600;font-size:.9375rem;color:var(--muted);user-select:none;
+  }
+  .seg input:checked + span{background:var(--water);color:#fff}
+  .seg input:focus-visible + span{outline:2px solid var(--ink);outline-offset:2px}
+  button.reset{
+    font:inherit;font-size:.9375rem;font-weight:600;color:var(--ink);background:transparent;
+    border:1px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer;min-height:44px;
+  }
+  button.reset:hover{border-color:var(--muted)}
+  button.reset:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+  .status{min-height:1.4em;margin:10px 0 0;font-size:.875rem;color:var(--muted)}
+
+  /* shelf */
+  .shelf{list-style:none;margin:16px 0 0;padding:0}
+  .stat{
+    width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer;
+    background:var(--card);border:1px solid var(--line);
+    display:grid;grid-template-columns:1fr 6ch 1.25rem;align-items:baseline;column-gap:10px;
+  }
+  .stat:hover{border-color:var(--muted)}
+  .stat:focus-visible{outline:2px dashed var(--ink);outline-offset:2px}
+  .stat[aria-pressed="true"]{outline:2px solid var(--water);outline-offset:-2px;background:var(--water-soft)}
+  .stat[aria-pressed="true"]:focus-visible{outline:2px solid var(--water);box-shadow:0 0 0 4px var(--paper),0 0 0 6px var(--ink)}
+  .name{overflow-wrap:anywhere}
+  .fig{text-align:right;font-variant-numeric:tabular-nums;font-weight:650;white-space:nowrap}
+  .trend{text-align:center;font-size:.75em;color:var(--muted)}
+
+  .shelf[data-view="list"] li + li{margin-top:-1px}
+  .shelf[data-view="list"] .stat{padding:16px;min-height:56px;border-radius:0}
+  .shelf[data-view="list"] li:first-child .stat{border-radius:var(--radius) var(--radius) 0 0}
+  .shelf[data-view="list"] li:last-child .stat{border-radius:0 0 var(--radius) var(--radius)}
+
+  .shelf[data-view="compact"] li + li{margin-top:-1px}
+  .shelf[data-view="compact"] .stat{padding:6px 16px;font-size:.875rem;min-height:34px;border-radius:0}
+  .shelf[data-view="compact"] li:first-child .stat{border-radius:6px 6px 0 0}
+  .shelf[data-view="compact"] li:last-child .stat{border-radius:0 0 6px 6px}
+
+  .shelf[data-view="grid"]{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .shelf[data-view="grid"] .stat{
+    padding:14px;min-height:112px;border-radius:var(--radius);height:100%;
+    grid-template-rows:1fr auto;align-items:end;
+  }
+  .shelf[data-view="grid"] .name{grid-column:1/-1;align-self:start;color:var(--muted);font-size:.9375rem}
+  .shelf[data-view="grid"] .fig{grid-column:2;font-size:1.375rem}
+  .shelf[data-view="grid"] .trend{grid-column:3}
+
+  .empty{margin:24px 0;padding:32px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius)}
+
+  /* gauge tick: held reading height */
+  .tick{
+    position:fixed;left:0;width:10px;height:2px;background:var(--water);
+    opacity:0;pointer-events:none;transition:opacity .25s ease-out;z-index:6;
+  }
+  .tick.on{opacity:1;transition:none}
+
+  details{margin-top:40px;font-size:.875rem;color:var(--muted)}
+  summary{cursor:pointer;font-weight:600;color:var(--ink);padding:6px 0;width:max-content}
+  summary:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+  details ul{padding-left:18px;margin:8px 0}
+  details a{color:var(--water)}
+  details a:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+
+  @media (prefers-reduced-motion:reduce){ .tick{transition:none} }
+  @media (max-width:420px){ .seg span{min-width:0;padding:9px 12px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="top">
+      <h1>Stat shelf</h1>
+      <span class="tag">Demo</span>
+    </div>
+    <div class="bar">
+      <fieldset id="views">
+        <legend class="sr">View</legend>
+        <div class="seg">
+          <label><input type="radio" name="view" value="list" checked><span>List</span></label>
+          <label><input type="radio" name="view" value="grid"><span>Grid</span></label>
+          <label><input type="radio" name="view" value="compact"><span>Compact</span></label>
+        </div>
+      </fieldset>
+      <button type="button" class="reset" id="reset">Reset</button>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </header>
+
+  <ul class="shelf" id="shelf" data-view="list" aria-label="Demo figures"></ul>
+
+  <details>
+    <summary>Credits</summary>
+    <ul>
+      <li>Hydrologist (lead): the gauge rule. The stat you read keeps its screen height across views.</li>
+      <li>Kite maker: the outline on the kept stat and the short status line.</li>
+      <li>Furniture restorer: rapid-press handling. Last press wins, place taken before the burst.</li>
+      <li>Floating market clerk: one aligned figure column with trend glyphs in every view.</li>
+    </ul>
+    <p>Figures are demo values, not official statistics. Signal:
+      <a href="https://www.reddit.com/r/InternetIsBeautiful/comments/1xu9gxj/uk_by_numbers_the_uks_official_social_and/" rel="noopener noreferrer">UK by Numbers: the UK’s official social and economic statistics visualised</a>
+    </p>
+  </details>
+</div>
+<div class="tick" id="tick" aria-hidden="true"></div>
+
+<script>
+(function(){
+  "use strict";
+  var BASE = [
+    ["Inflation","3.8%",1],["Unemployment","4.4%",1],["GDP growth","0.3%",-1],
+    ["Weekly pay","£728",1],["House price","£290k",1],["Population","68.3m",1],
+    ["Births","594k",-1],["Rent rise","7.1%",-1],["Energy cap","£1,755",-1],
+    ["Exports","£72bn",1],["Public debt","96%",1],["Life expectancy","81.1",-1]
+  ];
+  var LABEL = {list:"List",grid:"Grid",compact:"Compact"};
+  var KEY = "statShelf.v1";
+
+  var params = new URLSearchParams(location.search);
+  var n = params.has("n") ? Math.max(0, Math.min(200, parseInt(params.get("n"),10) || 0)) : BASE.length;
+  var data = [];
+  for (var i = 0; i < n; i++){
+    var b = BASE[i % BASE.length], round = Math.floor(i / BASE.length);
+    data.push({id:"s"+i, name: round ? b[0]+" "+(round+1) : b[0], fig:b[1], dir:b[2]});
+  }
+
+  var shelf = document.getElementById("shelf");
+  var statusEl = document.getElementById("status");
+  var tick = document.getElementById("tick");
+  var radios = Array.prototype.slice.call(document.querySelectorAll('input[name="view"]'));
+  var scroller = document.scrollingElement || document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  var view = "list", want = "list";
+  var anchorId = data.length ? data[0].id : null;
+  var raf = 0, burst = null, burstTimer = 0, anims = [];
+  var lastDrift = 0;
+  var els = {};
+
+  function load(){
+    try{
+      var s = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (s && LABEL[s.view]) view = want = s.view;
+      if (s && s.anchorId && data.some(function(d){return d.id === s.anchorId;})) anchorId = s.anchorId;
+    }catch(e){}
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify({view:view, anchorId:anchorId})); }catch(e){}
+  }
+  function clearSave(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+
+  function build(){
+    while (shelf.firstChild) shelf.removeChild(shelf.firstChild);
+    els = {};
+    if (!data.length){
+      var p = document.createElement("li");
+      p.className = "empty";
+      p.textContent = "No stats";
+      shelf.appendChild(p);
+      return;
+    }
+    data.forEach(function(d){
+      var li = document.createElement("li");
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.className = "stat"; btn.dataset.id = d.id;
+      var nm = document.createElement("span"); nm.className = "name"; nm.textContent = d.name;
+      var fg = document.createElement("span"); fg.className = "fig"; fg.textContent = d.fig;
+      var tr = document.createElement("span"); tr.className = "trend";
+      var g = document.createElement("span"); g.setAttribute("aria-hidden","true"); g.textContent = d.dir > 0 ? "▲" : "▼";
+      var w = document.createElement("span"); w.className = "sr"; w.textContent = d.dir > 0 ? "rising" : "falling";
+      tr.appendChild(g); tr.appendChild(w);
+      btn.appendChild(nm); btn.appendChild(fg); btn.appendChild(tr);
+      li.appendChild(btn); shelf.appendChild(li);
+      els[d.id] = btn;
+    });
+  }
+
+  function markAnchor(){
+    Object.keys(els).forEach(function(id){
+      els[id].setAttribute("aria-pressed", id === anchorId ? "true" : "false");
+    });
+  }
+  function anchorEl(){ return anchorId ? els[anchorId] : null; }
+  function nameOf(id){
+    for (var i = 0; i < data.length; i++) if (data[i].id === id) return data[i].name;
+    return "";
+  }
+
+  function cancelAnims(){
+    anims.forEach(function(a){ try{ a.cancel(); }catch(e){} });
+    anims = [];
+  }
+
+  function press(v){
+    if (!LABEL[v]) return;
+    if (!burst){
+      var a = anchorEl();
+      burst = {top: a ? a.getBoundingClientRect().top : 0};
+      if (a){ tick.style.top = Math.round(burst.top) + "px"; tick.classList.add("on"); }
+    }
+    want = v;
+    clearTimeout(burstTimer);
+    if (!raf) raf = requestAnimationFrame(apply);
+  }
+
+  function apply(){
+    raf = 0;
+    cancelAnims();
+    var motion = !reduce.matches && !document.hidden && typeof Element.prototype.animate === "function";
+    var before = null;
+    if (motion){
+      before = {};
+      Object.keys(els).forEach(function(id){ before[id] = els[id].getBoundingClientRect(); });
+    }
+    view = want;
+    shelf.dataset.view = view;
+
+    var a = anchorEl();
+    if (a && burst){
+      var t = a.getBoundingClientRect().top;
+      scroller.scrollTop += (t - burst.top);
+      lastDrift = Math.abs(a.getBoundingClientRect().top - burst.top);
+    }
+
+    if (before){
+      var vh = window.innerHeight;
+      Object.keys(els).forEach(function(id){
+        var el = els[id], o = before[id], r = el.getBoundingClientRect();
+        if (r.bottom < -40 || r.top > vh + 40) return;
+        var dx = o.left - r.left, dy = o.top - r.top;
+        if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+        anims.push(el.animate(
+          [{transform:"translate("+dx+"px,"+dy+"px)"},{transform:"none"}],
+          {duration:200, easing:"cubic-bezier(.2,.7,.2,1)"}
+        ));
+      });
+    }
+
+    statusEl.textContent = data.length ? ("Kept " + nameOf(anchorId) + " · " + LABEL[view]) : "No stats";
+    save();
+    burstTimer = setTimeout(function(){ burst = null; tick.classList.remove("on"); }, 300);
+  }
+
+  function setAnchor(id){
+    if (!id || id === anchorId) return;
+    anchorId = id; markAnchor(); save();
+  }
+
+  /* inputs */
+  radios.forEach(function(r){
+    r.addEventListener("change", function(){ if (r.checked) press(r.value); });
+  });
+  document.getElementById("views").addEventListener("keydown", function(e){
+    if (e.key !== "Home" && e.key !== "End") return;
+    e.preventDefault();
+    var r = e.key === "Home" ? radios[0] : radios[radios.length - 1];
+    if (!r.checked){ r.checked = true; press(r.value); }
+    r.focus();
+  });
+  shelf.addEventListener("click", function(e){
+    var b = e.target.closest(".stat"); if (b) setAnchor(b.dataset.id);
+  });
+  shelf.addEventListener("focusin", function(e){
+    var b = e.target.closest(".stat"); if (b) setAnchor(b.dataset.id);
+  });
+
+  document.getElementById("reset").addEventListener("click", function(){
+    if (raf){ cancelAnimationFrame(raf); raf = 0; }
+    clearTimeout(burstTimer); burst = null; tick.classList.remove("on");
+    cancelAnims();
+    clearSave();
+    view = want = "list";
+    shelf.dataset.view = view;
+    radios.forEach(function(r){ r.checked = r.value === "list"; });
+    anchorId = data.length ? data[0].id : null;
+    markAnchor();
+    scroller.scrollTop = 0;
+    statusEl.textContent = "Reset";
+  });
+
+  document.addEventListener("visibilitychange", function(){ if (document.hidden) cancelAnims(); });
+
+  /* start */
+  load();
+  build();
+  shelf.dataset.view = view;
+  radios.forEach(function(r){ r.checked = r.value === view; });
+  markAnchor();
+  if (!data.length) statusEl.textContent = "No stats";
+
+  /* optional self-check, console only: ?test */
+  if (params.has("test")){
+    var seq = ["grid","compact","list","grid","compact","grid","list","compact","grid","compact"];
+    var target = data[Math.min(5, data.length - 1)];
+    setTimeout(function(){
+      if (!target){ console.log("[test] empty set:", statusEl.textContent === "No stats"); return; }
+      setAnchor(target.id);
+      els[target.id].scrollIntoView({block:"center"});
+      var k = 0;
+      (function step(){
+        var v = seq[k++];
+        radios.forEach(function(r){ r.checked = r.value === v; });
+        press(v);
+        if (k < seq.length) setTimeout(step, 30);
+        else setTimeout(function(){
+          console.log("[test] final view", view, view === seq[seq.length-1] ? "ok" : "FAIL");
+          console.log("[test] drift", lastDrift.toFixed(1)+"px", lastDrift <= 8 ? "ok" : "FAIL");
+        }, 420);
+      })();
+    }, 200);
+  }
+})();
+</script>
+</body>
+</html>

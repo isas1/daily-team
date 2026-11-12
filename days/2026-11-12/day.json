@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-12",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-12\nSeason: 2026-11-09\n\n1. Hydrologist [new]\n   Method: Play the project as a game with one extra rule, then remove the rule. [new]\n   Stance: Breaks the frame.\n   Temperament: Restates the goal whenever the talk drifts.\n2. Kite maker [new]\n   Method: Find the smallest change that makes the result easier to read.\n   Stance: Speaks for the one who finds it.\n   Temperament: Changes their mind after a useful demonstration.\n3. Furniture restorer\n   Method: Set every control to its extreme and check the result still makes sense. [new]\n   Stance: Wants it to last.\n   Temperament: Answers a question with a quick experiment.\n4. Floating market clerk (future; invented) [guest]\n   Method: Keep changing totals aligned and easy to compare.\n   Stance: Insists it must be beautiful.\n   Temperament: Holds back until everyone has given a number.\n\nConstraint: The state remains correct during rapid input.\nTask: View switch: a segmented control for a project library that switches between list, grid, and compact views.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "b8ce878b0632b2d3a36ad11248f1407fe6af3f473019e8b38451c75357ab7b09",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "f2a3efafda89d422e16693fa"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "Press List, Grid or Compact, and the stat you were reading stays where your eyes are.",
+  "concept": "Gauge Shelf",
+  "plan": "## Pitch\n\n**Hydrologist:** Goal first: a person browsing a statistics library switches between list, grid and compact and never loses the figure they were reading. Here is the game. Extra rule: every switch must leave the stat you were on at the same height on screen, like a gauge board that stays put while the water moves. Play it ten times, then drop the rule and see what breaks.\n\n**Kite maker:** The person who finds this is a reporter scanning UK by Numbers style charts for one figure. Smallest change that helps: the stat they last touched keeps a 2px outline in all three views, and one status line names it.\n\n**Furniture restorer:** I want it to last under abuse. Press Grid, Compact, List, Grid in 300 ms. The last press wins, the anchor is the stat from before the burst, and nothing is left mid-transition.\n\n**Floating market clerk:** I will wait for your numbers.\n\n## Clash\n\n**Hydrologist:** Without the rule, Grid to Compact jumps the reader 900px down. With it, the outlined stat moves less than 8px. The rule stays.\n\n**Kite maker:** Then the outline is redundant. Drop it.\n\n**Furniture restorer:** Quick test. Switch with keyboard focus on the sixth stat, at 320px, with 48 stats. The anchor holds, but the eye still needs the outline to find it after a reflow. Keep both.\n\n**Kite maker:** That demo convinced me. Outline stays. I'll hold the status line to four words: \"Kept Inflation · Grid\".\n\n**Hydrologist:** Back to the goal. Anchor capture happens on the first press of a burst. Otherwise each mid-burst view becomes the new anchor and the place drifts.\n\n**Furniture restorer:** Extremes. One stat, zero stats, a 40-character name, 200% text. The empty state reads \"No stats\", in all three views.\n\n**Floating market clerk:** Numbers in: 8px drift, 300 ms burst, 4 words, 320px. Now mine. The figure sits in one right-aligned tabular column in List and Compact, at the same card corner in Grid, with a trend glyph next to it. If it moves, it is wrong. If it is not aligned, it is not beautiful.\n\n**Hydrologist:** Agreed. That is the build.\n\n## Decision\n\nPress List, Grid or Compact, and the stat you were reading stays where your eyes are.\n\nConcept: Gauge Shelf\n\n- **Hydrologist:** The gauge rule. The anchor stat's screen offset is measured before a switch and restored after it, within 8px.\n- **Kite maker:** A 2px outline that stays on the anchor stat across views, plus a four-word status line.\n- **Furniture restorer:** Burst handling with last press winning and the anchor taken from before the burst. Extreme cases tested at 0, 1 and 48 stats, at 320px and 200% text.\n- **Floating market clerk:** A tabular right-aligned figure column with ▲▼ trend glyphs, kept in the same position in every view.\n\n## Build notes\n\n1. Keep one `view` state and one `anchorId`. On the first press of a burst, record the `anchorId` and its `getBoundingClientRect().top`. Debounce the render to one rAF, apply the final `view`, then set `scrollTop` so the anchor returns to its recorded top. Cancel in-flight transitions on each new press.\n2. Use native radio inputs styled as three segments (List, Grid, Compact) with arrow, Home and End keys. Show 12 sample stats from one data array, labelled \"Sample figures\". Use `font-variant-numeric: tabular-nums` and a fixed 6ch figure column. The trend is shown by glyph shape and word, without relying on color.\n3. Add a test strip behind `?test`. It fires a 10-press burst, runs the 0, 1 and 48 stat sets, and asserts that the anchor drift is 8px or less. Under reduced motion, layout is set directly. Keep visible copy at 40 words or fewer.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Gauge Shelf\",\"audience\":\"Reporters browsing a statistics chart library\",\"problem\":\"Switching list, grid, compact loses the stat being read\",\"interaction\":\"Press List, Grid or Compact, even rapidly\",\"outcome\":\"Read stat stays at same screen height, outlined, figure aligned\",\"recovery\":\"Last press wins; anchor from before burst; empty shows No stats\",\"mechanism\":\"Gauge rule: anchor offset saved before switch, restored after, under 8px\",\"difference\":\"View toggles reflow from top; this holds place and figure column\",\"whyNow\":\"UK by Numbers post shows public stats libraries. Title only, no demand data\",\"sourceIds\":[\"f2a3efafda89d422e16693fa\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Gauge Shelf\",\"need\":\"Keep place and figures while changing view density\",\"mechanism\":\"Anchored three-view switch with fixed figure column\",\"rejection\":\"Selected: cross-domain, offline; differs from 11-07 zoom anchor\"},{\"name\":\"Doodle Relay Shelf\",\"need\":\"Browse doodles left by past visitors\",\"mechanism\":\"Grid, list, compact of visitor doodles by time\",\"rejection\":\"Echoes the doodle feed entry; weak need\"},{\"name\":\"Pass Contact Sheet\",\"need\":\"See which satellites imaged a place\",\"mechanism\":\"Three views of passes with image thumbs\",\"rejection\":\"Needs real imagery; echoes 11-08 contact sheet\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "949b7c274499b0fb4bccc07fba8c9150b26449848c938a875265c8dc80c5afae",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Gauge Shelf",
+    "audience": "Reporters browsing a statistics chart library",
+    "problem": "Switching list, grid, compact loses the stat being read",
+    "interaction": "Press List, Grid or Compact, even rapidly",
+    "outcome": "Read stat stays at same screen height, outlined, figure aligned",
+    "recovery": "Last press wins; anchor from before burst; empty shows No stats",
+    "mechanism": "Gauge rule: anchor offset saved before switch, restored after, under 8px",
+    "difference": "View toggles reflow from top; this holds place and figure column",
+    "whyNow": "UK by Numbers post shows public stats libraries. Title only, no demand data",
+    "sourceIds": [
+      "f2a3efafda89d422e16693fa"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Gauge Shelf",
+        "need": "Keep place and figures while changing view density",
+        "mechanism": "Anchored three-view switch with fixed figure column",
+        "rejection": "Selected: cross-domain, offline; differs from 11-07 zoom anchor"
+      },
+      {
+        "name": "Doodle Relay Shelf",
+        "need": "Browse doodles left by past visitors",
+        "mechanism": "Grid, list, compact of visitor doodles by time",
+        "rejection": "Echoes the doodle feed entry; weak need"
+      },
+      {
+        "name": "Pass Contact Sheet",
+        "need": "See which satellites imaged a place",
+        "mechanism": "Three views of passes with image thumbs",
+        "rejection": "Needs real imagery; echoes 11-08 contact sheet"
+      }
+    ]
+  }
+}
