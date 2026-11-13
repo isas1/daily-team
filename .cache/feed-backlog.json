@@ -1,6 +1,146 @@
 {
   "items": [
     {
+      "id": "3619c42254a9370454c84e21",
+      "title": "sherlock-project/sherlock",
+      "url": "https://github.com/sherlock-project/sherlock",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Hunt down social media accounts by username across social networks"
+    },
+    {
+      "id": "82a901da1b9bedec6f38670b",
+      "title": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Public repository for Agent Skills"
+    },
+    {
+      "id": "7366786c561f97cd051ac4ba",
+      "title": "milind-soni/OpenMausBot",
+      "url": "https://github.com/milind-soni/OpenMausBot",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Open-source Grok Bot alternative with a virtual machine that bots can use"
+    },
+    {
+      "id": "401c6af5b51d16a5ed2fec53",
+      "title": "vercel-labs/agent-browser",
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Browser automation CLI for AI agents"
+    },
+    {
+      "id": "8703b76429c37137e259340c",
+      "title": "ZhuLinsen/daily_stock_analysis",
+      "url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs."
+    },
+    {
+      "id": "834f867a452076917a144850",
+      "title": "NVIDIA/auto-ontology",
+      "url": "https://github.com/NVIDIA/auto-ontology",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows."
+    },
+    {
+      "id": "447a55563fd3408d8fd50841",
+      "title": "google-deepmind/mujoco",
+      "url": "https://github.com/google-deepmind/mujoco",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Multi-Joint dynamics with Contact. A general purpose physics simulator."
+    },
+    {
+      "id": "637c99109af31ed2fe7b7d57",
+      "title": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Skills for Real Engineers. Straight from my .agents directory."
+    },
+    {
+      "id": "dae9f02535f7c22f84f17fbe",
+      "title": "addyosmani/agent-skills",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Production-grade engineering skills for AI coding agents."
+    },
+    {
+      "id": "9c15e014464735eb318029f4",
+      "title": "cloudflare/security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings"
+    },
+    {
+      "id": "b6bd2783a916c52eefcb6ee6",
+      "title": "zed-industries/zed",
+      "url": "https://github.com/zed-industries/zed",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter."
+    },
+    {
+      "id": "b3731f96b1a0159dac974dc6",
+      "title": "anthropics/claude-quickstarts",
+      "url": "https://github.com/anthropics/claude-quickstarts",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "A collection of projects designed to help developers quickly get started with building deployable applications using the Claude API"
+    },
+    {
+      "id": "23746973c38c4e68bc892f81",
+      "title": "vercel-labs/agent-desktop",
+      "url": "https://github.com/vercel-labs/agent-desktop",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "Computer use CLI for AI agents"
+    },
+    {
+      "id": "51d6155061d60774c495a562",
+      "title": "lobehub/lobehub",
+      "url": "https://github.com/lobehub/lobehub",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-13T00:00:00.000Z",
+      "observed": true,
+      "summary": "🤯 LobeHub - Super-Agents on Your Team. Add super-agents to the chats your team already uses.They take on work by themselves and get better every week."
+    },
+    {
       "id": "f2a3efafda89d422e16693fa",
       "title": "UK by Numbers: the UK’s official social and economic statistics visualised",
       "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xu9gxj/uk_by_numbers_the_uks_official_social_and/",
@@ -676,16 +816,6 @@
       "summary": ""
     },
     {
-      "id": "834f867a452076917a144850",
-      "title": "NVIDIA/auto-ontology",
-      "url": "https://github.com/NVIDIA/auto-ontology",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows."
-    },
-    {
       "id": "853c63f738f0cecf3b918959",
       "title": "thedotmack/claude-mem",
       "url": "https://github.com/thedotmack/claude-mem",
@@ -706,16 +836,6 @@
       "summary": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows"
     },
     {
-      "id": "82a901da1b9bedec6f38670b",
-      "title": "anthropics/skills",
-      "url": "https://github.com/anthropics/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Public repository for Agent Skills"
-    },
-    {
       "id": "14444dc7b4eca89947b208fb",
       "title": "Donchitos/Claude-Code-Game-Studios",
       "url": "https://github.com/Donchitos/Claude-Code-Game-Studios",
@@ -724,16 +844,6 @@
       "published": "2026-11-08T00:00:00.000Z",
       "observed": true,
       "summary": "Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy."
-    },
-    {
-      "id": "7366786c561f97cd051ac4ba",
-      "title": "milind-soni/OpenMausBot",
-      "url": "https://github.com/milind-soni/OpenMausBot",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Open-source Grok Bot alternative with a virtual machine that bots can use"
     },
     {
       "id": "553e1cc54ebc818266579b0a",
@@ -776,26 +886,6 @@
       "summary": "🕷️ The BEST Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ and follow here for daily tips and tricks: https://x.com/Scrapling_dev"
     },
     {
-      "id": "401c6af5b51d16a5ed2fec53",
-      "title": "vercel-labs/agent-browser",
-      "url": "https://github.com/vercel-labs/agent-browser",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Browser automation CLI for AI agents"
-    },
-    {
-      "id": "637c99109af31ed2fe7b7d57",
-      "title": "mattpocock/skills",
-      "url": "https://github.com/mattpocock/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Skills for Real Engineers. Straight from my .agents directory."
-    },
-    {
       "id": "c7f7c21cf16630e7e00262d2",
       "title": "jakubkrehel/skills",
       "url": "https://github.com/jakubkrehel/skills",
@@ -834,94 +924,12 @@
       "published": "2026-11-08T00:00:00.000Z",
       "observed": true,
       "summary": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks."
-    },
-    {
-      "id": "2db4f7d2d7de0ea292a7b64c",
-      "title": "blader/humanizer",
-      "url": "https://github.com/blader/humanizer",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Agent skill that removes signs of AI-generated writing from text"
-    },
-    {
-      "id": "a5fe3cb9688bbbec7fe87794",
-      "title": "Making any integer with four 2s (2025)",
-      "url": "https://eli.thegreenplace.net/2025/making-any-integer-with-four-2s/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-07T22:38:58.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "3e7a55394fafeb578cdc9ebe",
-      "title": "Billion Watts in the Speaker [video]",
-      "url": "https://www.youtube.com/watch?v=PHOcTXYaMfg",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-07T21:45:50.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "10bdc73097cfd2386d0a762b",
-      "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
-      "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-07T20:45:32.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "579f1e45f94231f744dcf3fb",
-      "title": "What I run on my $10 USD OpenStick homelab",
-      "url": "https://blog.bosscher.ch/posts/openstick/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-07T18:12:12.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "322fdae5f7f118def71d9eae",
-      "title": "I got tired of scrolling through iPhone alarms, so I built a 24-hour alarm clock instead",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xq8it4/i_got_tired_of_scrolling_through_iphone_alarms_so/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-07T15:07:09.000Z",
-      "summary": ""
-    },
-    {
-      "id": "217f22b71f934b4bd88b851f",
-      "title": "Built a native Windows focus blocker that uses less than 4MB RAM (no Electron, no subscriptions)",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xq4ti5/built_a_native_windows_focus_blocker_that_uses/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-07T12:05:12.000Z",
-      "summary": ""
-    },
-    {
-      "id": "833c047d62b75cc50153155e",
-      "title": "I built Watchify — a free watch-party website to watch videos together in real time 🎬",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xq4n53/i_built_watchify_a_free_watchparty_website_to/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-07T11:55:38.000Z",
-      "summary": ""
-    },
-    {
-      "id": "fa90c225b7f41b88db06396b",
-      "title": "I parsed the pay in 3,634 remote frontend job postings. Only 28% list a salary",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xq4hve/i_parsed_the_pay_in_3634_remote_frontend_job/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-07T11:46:38.000Z",
-      "summary": ""
     }
   ],
   "fetched": {
     "smashing": "2026-11-09",
     "hacker-news": "2026-11-10",
-    "github-trending": "2026-11-08",
+    "github-trending": "2026-11-13",
     "reddit-sideproject": "2026-11-11",
     "reddit-beautiful": "2026-11-12"
   }

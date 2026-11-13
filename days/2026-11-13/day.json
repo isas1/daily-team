@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-13",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-13\nSeason: 2026-11-09\n\n1. Letter cutter\n   Method: Write the question the visitor arrives with at the top of your notes. [new]\n   Stance: Guards the feeling it leaves behind.\n   Temperament: Asks what a stranger would expect next.\n2. Escape room designer [new]\n   Method: Give a tester a goal instead of an instruction and watch the route they take. [new]\n   Stance: Pushes toward the strange.\n   Temperament: Compares every idea to one from another field.\n3. Captioning editor [new]\n   Method: Turn one hidden calculation into something the visitor can see. [new]\n   Stance: Cuts until only the core is left.\n   Temperament: Builds a rough version rather than discuss it.\n4. Icarus (myth; Greek myth) [guest] [new]\n   Method: Mark the limit clearly before anyone flies close to it.\n   Stance: Defends the material.\n   Temperament: Asks the quietest member to try it first.\n\nConstraint: Use realistic short sample content.\nTask: Save button: an action button for an editor that shows pending work, confirms success and offers retry after a sample failure.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "d6c8c731b92b398c5c61df0046e8bce4b2b3a48000b9e38fd2873594d5d23205",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "b6bd2783a916c52eefcb6ee6"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "Type in a short note and press Save.",
+  "concept": "Cut on Save",
+  "plan": "## Pitch\n\n**Letter cutter:** The question at the top of my notes is \"Is my last change safe?\" A Saved tick answers that for the whole file. It never says which words. In my trade, pencil marks are guides and cut letters are permanent. Show unsaved text in pencil. When the save lands, cut it.\n\n**Escape room designer:** I gave a tester one goal: \"make sure your last line is safe.\" They pressed Save and kept typing. In an escape room, a lock clicks for one code, not for every code you tried. A save should behave the same way. It covers the snapshot it sent. Anything typed after that stays open.\n\n**Captioning editor:** The hidden calculation is the set of edits since the last stored version. Most editors keep that set internal and show only a dot. I'll draw it. Each pending range gets a dashed pencil underline, and the button counts the edits: \"Save 2 edits.\" Cut everything else.\n\n**Icarus:** Mark the limit before anyone gets close to it. One sample failure, behind a visible toggle. On failure, the text says the edits are kept. It never implies they are lost. Caption editor, you said the least, so you try it first.\n\n## Clash\n\n**Escape room designer:** Pencil and chisel is still a metaphor. What if the button were a lock with tumblers, one for each edit?\n\n**Captioning editor:** Tumblers move the answer off the text. The underline sits on the words themselves. Keep it there.\n\n**Letter cutter:** A stranger expects the button to change. They don't expect the words to change. That surprise is the whole point, so the button has to stay plain.\n\n**Icarus:** I typed during Saving. My new word stayed pencil and the older words were cut. That's correct, and the status line has to say so.\n\n**Escape room designer:** Then the button reads \"Save 1 edit\" again straight after success. The tester follows that route without being told.\n\n**Captioning editor:** Agreed. Status gets four words at most. \"Not saved · edit kept.\" Then Retry.\n\n**Letter cutter:** Failure has to feel calm. The pencil stays exactly as it was, and nothing gets struck through.\n\n**Icarus:** The toggle reads \"Fail next save\" and resets itself after one failure. The limit stays in plain view.\n\n## Decision\n\nType in a short note and press Save. Unsaved words change from pencil to carved once they are stored.\n\nConcept: Cut on Save\n\n- Letter cutter: the pencil-to-carved visual rule, and calm failure copy that keeps the pencil intact.\n- Escape room designer: snapshot-scoped saves. Edits typed during Saving stay pencil, and the count updates afterward.\n- Captioning editor: the visible pending-range calculation, the edit count on the button, and a 40-word ceiling.\n- Icarus: a single labelled \"Fail next save\" toggle that resets after use, and a guarded Retry.\n\n## Build notes\n\n1. Use one `contenteditable` file pane for `release-notes.md` with three sample lines: \"Fix crash on paste.\", \"Add dark theme.\" and \"Bump to 2.4.1.\". The last line starts as a pending range.\n   - Track pending ranges as `{id, start, end, version}`.\n   - Draw pencil as a 1px dashed grey underline at 0.7 opacity.\n   - Draw carved as solid ink with a 1px inset shadow.\n   - Use a 0.25 s ink transition, skipped under `prefers-reduced-motion`.\n2. Save is a native button, also triggered by Ctrl+S or Cmd+S. Reserve its width from the longest label, \"Saving 2 edits\".\n   - On press, record a snapshot version and start a 900 ms fake write with a request id.\n   - On acknowledgement, carve only the ranges at or below the snapshot version.\n   - Drop replies with a stale request id.\n   - Ignore presses while a save is pending.\n3. Use a polite live region for the status line, at most 4 words: \"Saved 14:52\" or \"Not saved · edit kept\". Retry appears in a reserved slot, takes focus on failure, and disables while pending.\n   - The \"Fail next save\" checkbox fails one attempt, then unchecks itself.\n   - Reset restores the sample.\n   - Visible word count is 17 at load and stays under 40 including dynamic text.\n   - Layout fits a 320 px width.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Cut on Save\",\"audience\":\"Writers and developers saving files in an editor\",\"problem\":\"A Saved tick never shows which edits are still at risk\",\"interaction\":\"Type, press Save or Ctrl+S, toggle a failure, Retry\",\"outcome\":\"Stored words turn from pencil to carved; newer edits stay pencil\",\"recovery\":\"Failure keeps edits in pencil with guarded Retry; Reset sample\",\"mechanism\":\"Snapshot-scoped save carves only ranges sent; later typing stays pending\",\"difference\":\"Editors show a file-level dot; this marks unsaved words in place\",\"whyNow\":\"Zed trending observed, summary names a multiplayer editor. Title and summary only, no demand data\",\"sourceIds\":[\"b6bd2783a916c52eefcb6ee6\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Cut on Save\",\"need\":\"See which words a save stored\",\"mechanism\":\"Pencil-to-carved ranges scoped to save snapshot\",\"rejection\":\"Selected: cross-domain, offline, new to recent dates\"},{\"name\":\"Tumbler Lock Save\",\"need\":\"Count edits a save covers\",\"mechanism\":\"Button lock with one tumbler per edit\",\"rejection\":\"Moves the answer off the text\"},{\"name\":\"Save Limit Gauge\",\"need\":\"Know time since last stored version\",\"mechanism\":\"Arc fills toward an autosave limit\",\"rejection\":\"Timer nags and hides which edits are at risk\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "b8f84ccd667ffbe843f4560af8d5bcc78ca091651e0a624ac18e95f0f504f1a9",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Cut on Save",
+    "audience": "Writers and developers saving files in an editor",
+    "problem": "A Saved tick never shows which edits are still at risk",
+    "interaction": "Type, press Save or Ctrl+S, toggle a failure, Retry",
+    "outcome": "Stored words turn from pencil to carved; newer edits stay pencil",
+    "recovery": "Failure keeps edits in pencil with guarded Retry; Reset sample",
+    "mechanism": "Snapshot-scoped save carves only ranges sent; later typing stays pending",
+    "difference": "Editors show a file-level dot; this marks unsaved words in place",
+    "whyNow": "Zed trending observed, summary names a multiplayer editor. Title and summary only, no demand data",
+    "sourceIds": [
+      "b6bd2783a916c52eefcb6ee6"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Cut on Save",
+        "need": "See which words a save stored",
+        "mechanism": "Pencil-to-carved ranges scoped to save snapshot",
+        "rejection": "Selected: cross-domain, offline, new to recent dates"
+      },
+      {
+        "name": "Tumbler Lock Save",
+        "need": "Count edits a save covers",
+        "mechanism": "Button lock with one tumbler per edit",
+        "rejection": "Moves the answer off the text"
+      },
+      {
+        "name": "Save Limit Gauge",
+        "need": "Know time since last stored version",
+        "mechanism": "Arc fills toward an autosave limit",
+        "rejection": "Timer nags and hides which edits are at risk"
+      }
+    ]
+  }
+}
