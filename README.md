@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-13: Cut on Save
+### 2026-11-14: Checked Countdown
 
-<a href="days/2026-11-13/"><img src="days/2026-11-13/team.png" alt="Team for 2026-11-13: Letter cutter · Escape room designer · Captioning editor · Icarus" width="100%"></a>
+<a href="days/2026-11-14/"><img src="days/2026-11-14/team.png" alt="Team for 2026-11-14: Seismologist · Paper engineer · Instrument tuner · Satellite repair apprentice" width="100%"></a>
 
 **Task:** Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.
 
-**Decision:** Type in a short note and press Save.
+**Decision:** A visitor watches the countdown and sees the exact local launch time it counts toward.
 
-<a href="days/2026-11-13/"><img src="days/2026-11-13/cover.png" alt="Designed cover for Cut on Save" width="100%"></a>
+<a href="days/2026-11-14/"><img src="days/2026-11-14/cover.png" alt="Designed cover for Checked Countdown" width="100%"></a>
 
-[Open the day](days/2026-11-13/) · [Use it](https://isas1.github.io/daily-team/2026-11-13/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-14/) · [Use it](https://isas1.github.io/daily-team/2026-11-14/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-14](days/2026-11-14/) | <a href="days/2026-11-14/"><img src="days/2026-11-14/cover.png" alt="Checked Countdown" width="160"></a> | Checked Countdown | Seismologist · Paper engineer · Instrument tuner · Satellite repair apprentice |
 | [2026-11-13](days/2026-11-13/) | <a href="days/2026-11-13/"><img src="days/2026-11-13/cover.png" alt="Cut on Save" width="160"></a> | Cut on Save | Letter cutter · Escape room designer · Captioning editor · Icarus |
 | [2026-11-12](days/2026-11-12/) | <a href="days/2026-11-12/"><img src="days/2026-11-12/cover.png" alt="Gauge Shelf" width="160"></a> | Gauge Shelf | Hydrologist · Kite maker · Furniture restorer · Floating market clerk |
 | [2026-11-11](days/2026-11-11/) | <a href="days/2026-11-11/"><img src="days/2026-11-11/cover.png" alt="Pinned Tags" width="160"></a> | Pinned Tags | Lens grinder · Haptic interaction designer · Puzzle setter · Polar city navigator |
 | [2026-11-10](days/2026-11-10/) | <a href="days/2026-11-10/"><img src="days/2026-11-10/cover.png" alt="Key Ring Invite" width="160"></a> | Key Ring Invite | Optical technician · Braille transcriber · Weather forecaster · Captain Nemo |
 | [2026-11-08](days/2026-11-08/) | <a href="days/2026-11-08/"><img src="days/2026-11-08/cover.png" alt="Tachograph Upload" width="160"></a> | Tachograph Upload | Type designer · Icon designer · Exhibit light technician · Cautious beginner |
 | [2026-11-07](days/2026-11-07/) | <a href="days/2026-11-07/"><img src="days/2026-11-07/cover.png" alt="Anchor Zoom" width="160"></a> | Anchor Zoom | Accessibility specialist · Architectural model maker · Scientific illustrator · Returning collaborator |
-| [2026-11-06](days/2026-11-06/) | <a href="days/2026-11-06/"><img src="days/2026-11-06/cover.png" alt="Register Check" width="160"></a> | Register Check | Watch restorer · Motion engineer · Interaction engineer · Polar city navigator |
 
-[All 41 days](ARCHIVE.md)
+[All 42 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

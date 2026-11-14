@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-14",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-14\nSeason: 2026-11-09\n\n1. Seismologist [new]\n   Method: Build a version with one deliberate error and see if testers notice it. [new]\n   Stance: Wants it to last.\n   Temperament: Asks who would use it on their worst day.\n2. Paper engineer [new]\n   Method: Keep the animation speed stable across frame rates.\n   Stance: Breaks the frame.\n   Temperament: Proposes a test that could prove them wrong.\n3. Instrument tuner\n   Method: Make two versions with different hierarchy and compare them.\n   Stance: Speaks for the one who finds it.\n   Temperament: Tracks the unresolved point until someone answers.\n4. Satellite repair apprentice (future; invented) [guest]\n   Method: Test the same action twice before trusting it.\n   Stance: Insists it must be beautiful.\n   Temperament: Asks for the simplest case before the general one.\n\nConstraint: Error text stays beside the relevant action.\nTask: Launch countdown: a countdown for a product launch page that shows time remaining and changes state when the launch arrives.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "ca35335792f92118118b7b1e641a188f36c78ed893d4550ed5328dae59ec5a72",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "9f663437118e879c3e8168d2"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "A visitor watches the countdown and sees the exact local launch time it counts toward.",
+  "concept": "Checked Countdown",
+  "plan": "## Pitch\n\n**Seismologist:** Seismic stations log the clock offset next to every reading, because a wrong clock gives a wrong arrival. A launch countdown has the same flaw. The visitor's device clock drives the number. If that clock runs 4 minutes fast, the Buy button opens early and fails. The countdown should check its clock and print the offset. I'll ship one test build with a 4-minute skew and see who notices.\n\n**Paper engineer:** Arrival rings. The launch spreads across a world map by time zone, like a wavefront. Each ring lights up when it reaches a zone. The animation runs from timestamps, so 30 fps and 144 fps show the same position. Here's how to prove me wrong: put a visitor in front of it and ask them their local launch time.\n\n**Instrument tuner:** Think about the person who finds this page on a phone. They want one fact: when it opens for them. The usual widget shows \"2d 4h\" and never says which 18:00 it means. I'll build two layouts. One leads with the number, the other leads with their local time. Then we compare.\n\n**Satellite repair apprentice:** Start with the simplest case. Same zone, correct clock, one button. Press Notify twice and get the same result both times. Then add the hard cases. And it has to look good. A launch page is a shop window.\n\n## Clash\n\n**Paper engineer:** Rings are the frame break. A plain number is just one more widget.\n\n**Instrument tuner:** The ring map takes the visitor's worst day and hides their own zone in a crowd of other zones.\n\n**Paper engineer:** Then run the test I offered. Ask someone their local launch time using the map, and time how long it takes.\n\n**Seismologist:** I'll take the result in advance. On a phone they squint. The clock check answers it in one line, and it also catches the early-open failure.\n\n**Satellite repair apprentice:** That leaves the case nobody answered. Device clock 4 minutes fast, visitor presses Buy at what they think is 18:00. What do they see?\n\n**Seismologist:** The button stays shut. The note beside it reads \"Your clock is 4 min fast. Opens 18:00 your time.\"\n\n**Instrument tuner:** The note goes next to the button, never in a banner up top. That matches the constraint, and I'll hold us to it.\n\n**Satellite repair apprentice:** Then I test it twice. Skew on, press. Skew off, press. Both results must match the corrected clock.\n\n**Paper engineer:** Fine. The frame break moves into the zero moment. The digits fold away and the button takes their place, all timed from the clock rather than frame count.\n\n## Decision\n\nA visitor watches the countdown and sees the exact local launch time it counts toward.\n\nConcept: Checked Countdown\n\nThe countdown runs on a checked clock. The page compares the device clock with a reference timestamp, stores the offset, and counts from the corrected time. It names the launch moment in the visitor's zone. If the device clock is wrong, the Buy button stays closed and the note beside it gives the offset and the true opening time. At zero, the digits fold into an open Buy button.\n\nThis improves on standard launch timers. Those count down from the device clock and give no zone. A skewed clock opens the button early, and an ambiguous \"18:00\" sends visitors to look up the time elsewhere. The Smashing audit asks what users need to verify output. Here the output is the number, and the page shows the clock offset and the zone it is based on.\n\n- **Seismologist:** the clock offset model, plus a test build with a deliberate +4 min skew to see whether testers notice the note.\n- **Paper engineer:** the zero transition, driven by `performance.now()` deltas against the launch instant. It looks the same at 30, 60 and 144 fps.\n- **Instrument tuner:** the A/B hierarchy. Version A leads with the digits. Version B leads with \"18:00 your time\". The one testers read faster ships. The tuner also enforces the rule that error text stays beside the button.\n- **Satellite repair apprentice:** the double-press checks for Notify and Buy, the same-zone sample as the default case, and the final visual pass at 320 px.\n\nInitial copy, about 30 words: \"Orbit Pen launches in\", \"02 d 04 h 11 m 09 s\", \"Sat 21 Nov · 18:00 your time (Europe/London)\", \"Clock checked · 0 s off\", \"Notify me\", \"Shift clock +4 min\".\n\n## Build notes\n\n1. Compute `offset = referenceNow - Date.now()` once on load. Derive the remaining time on every frame as `launch - (Date.now() + offset)`. Never decrement a counter. Format the launch instant with `Intl.DateTimeFormat` in the resolved zone.\n2. Put the Buy/Notify button and its note in one fixed-height block, with the note in a polite live region directly under the button. The button enables only when the corrected time reaches the launch instant. A second press while it is pending is ignored. \"Shift clock +4 min\" and Reset buttons sit below as demo controls.\n3. At zero, collapse the digit cells over 320 ms using elapsed-time easing, reveal \"Buy now\" and \"Live since 18:00\", then move focus to the button. Under reduced motion, swap the elements directly.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Checked Countdown\",\"audience\":\"Visitors to a product launch page\",\"problem\":\"Device clock skew and unnamed zones make countdowns wrong\",\"interaction\":\"Watch countdown, press Notify or Buy, shift demo clock\",\"outcome\":\"Local launch time, clock offset, Buy opens at true zero\",\"recovery\":\"Skewed press stays shut with offset note beside it; Reset\",\"mechanism\":\"Station clock check: offset stored, count runs on corrected time\",\"difference\":\"Timers trust device clock and omit zone; this shows both\",\"whyNow\":\"Smashing audit asks what users need to verify output. Title and summary only, no demand data\",\"sourceIds\":[\"9f663437118e879c3e8168d2\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Checked Countdown\",\"need\":\"Trust when a launch opens locally\",\"mechanism\":\"Clock offset check with note beside the button\",\"rejection\":\"Selected: cross-domain, offline; differs from 11-03 rehearsal\"},{\"name\":\"Arrival Rings\",\"need\":\"See launch reach each time zone\",\"mechanism\":\"Wavefront rings light zones on a world map\",\"rejection\":\"Hides the visitor's own zone; slow on phones\"},{\"name\":\"Launch Queue Slip\",\"need\":\"Know your place once sales open\",\"mechanism\":\"Numbered slip issued at zero\",\"rejection\":\"Needs a real server to be honest\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "b2cc42493f6613c86113fa1c5318c363900fc0611fc1f1c3c7b9687f42d1dde0",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Checked Countdown",
+    "audience": "Visitors to a product launch page",
+    "problem": "Device clock skew and unnamed zones make countdowns wrong",
+    "interaction": "Watch countdown, press Notify or Buy, shift demo clock",
+    "outcome": "Local launch time, clock offset, Buy opens at true zero",
+    "recovery": "Skewed press stays shut with offset note beside it; Reset",
+    "mechanism": "Station clock check: offset stored, count runs on corrected time",
+    "difference": "Timers trust device clock and omit zone; this shows both",
+    "whyNow": "Smashing audit asks what users need to verify output. Title and summary only, no demand data",
+    "sourceIds": [
+      "9f663437118e879c3e8168d2"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Checked Countdown",
+        "need": "Trust when a launch opens locally",
+        "mechanism": "Clock offset check with note beside the button",
+        "rejection": "Selected: cross-domain, offline; differs from 11-03 rehearsal"
+      },
+      {
+        "name": "Arrival Rings",
+        "need": "See launch reach each time zone",
+        "mechanism": "Wavefront rings light zones on a world map",
+        "rejection": "Hides the visitor's own zone; slow on phones"
+      },
+      {
+        "name": "Launch Queue Slip",
+        "need": "Know your place once sales open",
+        "mechanism": "Numbered slip issued at zero",
+        "rejection": "Needs a real server to be honest"
+      }
+    ]
+  }
+}

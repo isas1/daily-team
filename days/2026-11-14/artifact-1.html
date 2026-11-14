@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orbit Pen launch countdown</title>
+<style>
+  :root{
+    --bg:#f3f0e8;--panel:#fbfaf6;--ink:#1b1d22;--soft:#4a4d55;--line:#d6d0c2;
+    --accent:#1d5a55;--accent-ink:#ffffff;--warn:#8a3a10;--shut:#e2ddd1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.4;min-height:100vh;
+  }
+  main{max-width:560px;margin:0 auto;padding:28px 20px 40px}
+  .tag{
+    display:inline-block;margin:0 0 18px;padding:2px 8px;
+    border:1px solid var(--soft);border-radius:3px;
+    font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);
+  }
+  h1{font-size:1.15rem;font-weight:600;margin:0 0 14px;color:var(--soft)}
+  .clock{
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:22px 18px 18px;
+  }
+  .digits{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+    transform-origin:50% 0;will-change:transform,opacity;
+  }
+  .cell{display:flex;align-items:baseline;gap:3px;justify-content:center}
+  .cell b{
+    font-size:clamp(2.1rem,11vw,3.9rem);font-weight:650;
+    font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1;
+  }
+  .cell i{font-style:normal;font-size:.95rem;color:var(--soft)}
+  .live{
+    margin:0;font-size:clamp(1.7rem,8vw,2.6rem);font-weight:650;
+    color:var(--accent);line-height:1.1;text-align:center;
+  }
+  .live.in{animation:rise 260ms ease-out both}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .local{
+    margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line);
+    font-size:1.05rem;font-weight:600;text-align:center;
+  }
+  .local span{font-weight:400;color:var(--soft)}
+  .act{display:grid;gap:14px;margin-top:18px}
+  .slot{display:grid;gap:8px}
+  button{
+    font:inherit;min-height:48px;border-radius:8px;cursor:pointer;
+    padding:10px 18px;border:1px solid var(--ink);background:transparent;color:var(--ink);
+  }
+  button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+  #buy{
+    font-size:1.1rem;font-weight:650;min-width:12ch;
+    background:var(--shut);border-color:var(--line);color:#3b3d43;
+  }
+  #buy.open{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  #buy[aria-disabled="true"]{cursor:not-allowed}
+  .noterow{display:flex;align-items:center;gap:12px;min-height:2.6em}
+  .note{margin:0;font-size:.95rem;color:var(--soft);flex:1}
+  .note.warn{color:var(--warn);font-weight:600}
+  .gauge{position:relative;width:84px;height:18px;flex:none}
+  .gauge::before{content:"";position:absolute;left:0;right:0;top:9px;height:1px;background:var(--line)}
+  .gauge::after{content:"";position:absolute;left:41px;top:3px;width:2px;height:13px;background:var(--soft)}
+  .mark{
+    position:absolute;top:5px;left:38px;width:8px;height:8px;border-radius:50%;
+    background:var(--accent);transition:transform 300ms ease-out;
+  }
+  .mark.warn{background:var(--warn)}
+  #notify{justify-self:start}
+  .demo{
+    margin:28px 0 0;padding:14px 0 0;border:0;border-top:1px dashed var(--line);
+    display:flex;flex-wrap:wrap;gap:10px;
+  }
+  .demo button{min-height:44px;font-size:.95rem;border-color:var(--soft)}
+  .demo button[aria-pressed="true"]{background:var(--warn);border-color:var(--warn);color:#fff}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  details{margin-top:32px;color:var(--soft);font-size:.9rem}
+  summary{cursor:pointer;min-height:32px}
+  summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  details ul{padding-left:18px}
+  a{color:var(--accent)}
+  [hidden]{display:none !important}
+  @media (prefers-reduced-motion:reduce){
+    .live.in{animation:none}
+    .mark{transition:none}
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="tag">Demo</p>
+  <h1 id="title">Orbit Pen launches in</h1>
+
+  <section class="clock" aria-labelledby="title">
+    <div class="digits" id="digits" role="timer" aria-live="off">
+      <span class="cell"><b id="dd">00</b><i>d</i></span>
+      <span class="cell"><b id="hh">00</b><i>h</i></span>
+      <span class="cell"><b id="mm">00</b><i>m</i></span>
+      <span class="cell"><b id="ss">00</b><i>s</i></span>
+    </div>
+    <p class="live" id="live" hidden></p>
+    <p class="local" id="local"></p>
+  </section>
+
+  <section class="act">
+    <div class="slot">
+      <button id="buy" type="button" aria-disabled="true" aria-describedby="buyNote">Buy now</button>
+      <div class="noterow">
+        <p class="note" id="buyNote" aria-live="polite"></p>
+        <span class="gauge" aria-hidden="true"><span class="mark" id="mark"></span></span>
+      </div>
+    </div>
+    <div class="slot" id="notifySlot">
+      <button id="notify" type="button" aria-describedby="notifyNote">Notify me</button>
+      <p class="note" id="notifyNote" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <fieldset class="demo">
+    <legend class="sr">Demo controls</legend>
+    <button id="skew" type="button" aria-pressed="false">Clock +4 min</button>
+    <button id="skip" type="button">Skip to 0:30</button>
+    <button id="reset" type="button">Reset</button>
+  </fieldset>
+
+  <details>
+    <summary>Credits</summary>
+    <ul>
+      <li>Seismologist (lead): clock offset check and the +4 min skew switch.</li>
+      <li>Paper engineer: zero fold timed from elapsed time, same at any frame rate.</li>
+      <li>Instrument tuner: digits paired with local time; error note kept beside Buy.</li>
+      <li>Satellite repair apprentice: repeat-press guards, same-zone default, 320 px pass.</li>
+    </ul>
+    <p>Source: <a href="https://smashingmagazine.com/2026/11/should-you-add-ai-audit-product-teams/">Should You Actually Add AI To That? A Four-Question Audit For Product Teams</a> (Smashing Magazine)</p>
+    <p>Sample product and reference clock are local. No orders, reminders or network calls.</p>
+  </details>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var el = {
+    title:$("title"), digits:$("digits"), dd:$("dd"), hh:$("hh"), mm:$("mm"), ss:$("ss"),
+    live:$("live"), local:$("local"), buy:$("buy"), buyNote:$("buyNote"), mark:$("mark"),
+    notifySlot:$("notifySlot"), notify:$("notify"), notifyNote:$("notifyNote"),
+    skew:$("skew"), skip:$("skip"), reset:$("reset")
+  };
+
+  var zone = "UTC";
+  try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; } catch(e){}
+  var fDay, fTime;
+  try {
+    fDay = new Intl.DateTimeFormat("en-GB",{weekday:"short",day:"numeric",month:"short",timeZone:zone});
+    fTime = new Intl.DateTimeFormat("en-GB",{hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:zone});
+  } catch(e){
+    zone = "UTC";
+    fDay = new Intl.DateTimeFormat("en-GB",{weekday:"short",day:"numeric",month:"short",timeZone:"UTC"});
+    fTime = new Intl.DateTimeFormat("en-GB",{hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:"UTC"});
+  }
+
+  // Demo launch: Sat 21 Nov 2026, 18:00 Europe/London. If that has passed, count 2d 4h 11m ahead.
+  var FIXED = Date.UTC(2026,10,21,18,0,0);
+  var launch = FIXED > Date.now() + 60000
+    ? FIXED
+    : Math.ceil((Date.now() + ((2*86400 + 4*3600 + 11*60 + 9) * 1000)) / 60000) * 60000;
+
+  var SKEW = 240000;           // deliberate test error: device clock 4 min fast
+  var FOLD_MS = 320;
+  var reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : {matches:false};
+
+  var jump = 0, skew = 0, offset = 0;
+  var phase = "count", foldStart = 0, lastSecs = -1, lastMin = -1;
+  var buyMsg = "", buyPending = false, raf = 0;
+
+  // Reference clock is local demo time; the device clock may carry the skew.
+  function trueNow(){ return Date.now() + jump; }
+  function deviceNow(){ return trueNow() + skew; }
+  function check(){ offset = trueNow() - deviceNow(); }
+  function corrected(){ return deviceNow() + offset; }
+
+  var launchTime = function(){ return fTime.format(launch); };
+  function offText(){
+    var a = Math.abs(offset);
+    return a >= 60000 ? Math.round(a/60000) + " min" : Math.round(a/1000) + " s";
+  }
+  var skewed = function(){ return Math.abs(offset) >= 1000; };
+
+  function storeGet(){ try { return localStorage.getItem("orbitpen-notify") === "1"; } catch(e){ return false; } }
+  function storeSet(v){ try { if (v) localStorage.setItem("orbitpen-notify","1"); else localStorage.removeItem("orbitpen-notify"); } catch(e){} }
+
+  function renderLocal(){
+    el.local.textContent = "";
+    el.local.appendChild(document.createTextNode(fDay.format(launch) + " · " + launchTime() + " "));
+    var s = document.createElement("span");
+    s.textContent = "your time (" + zone + ")";
+    el.local.appendChild(s);
+  }
+
+  function renderNote(){
+    var warn = false, text;
+    if (buyMsg) {
+      text = buyMsg;
+      warn = phase !== "live" || skewed();
+    } else if (skewed()) {
+      text = "Your clock is " + offText() + (offset < 0 ? " fast" : " slow") + " · corrected";
+      warn = true;
+    } else {
+      text = "Clock checked · 0 s off";
+    }
+    el.buyNote.textContent = text;
+    el.buyNote.classList.toggle("warn", warn);
+    var px = Math.max(-38, Math.min(38, (-offset / 300000) * 38));
+    el.mark.style.transform = "translateX(" + px + "px)";
+    el.mark.classList.toggle("warn", skewed());
+  }
+
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function renderDigits(remain){
+    var secs = Math.max(0, Math.ceil(remain / 1000));
+    if (secs === lastSecs) return;
+    lastSecs = secs;
+    var d = Math.floor(secs/86400), h = Math.floor(secs%86400/3600),
+        m = Math.floor(secs%3600/60), s = secs%60;
+    el.dd.textContent = pad(d); el.hh.textContent = pad(h);
+    el.mm.textContent = pad(m); el.ss.textContent = pad(s);
+    var min = Math.ceil(secs/60);
+    if (min !== lastMin) {
+      lastMin = min;
+      el.digits.setAttribute("aria-label", d + " days " + h + " hours " + m + " minutes left");
+    }
+  }
+
+  function toCount(){
+    phase = "count";
+    el.digits.hidden = false;
+    el.digits.style.transform = ""; el.digits.style.opacity = "";
+    el.live.hidden = true; el.live.classList.remove("in");
+    el.title.textContent = "Orbit Pen launches in";
+    el.buy.setAttribute("aria-disabled","true");
+    el.buy.classList.remove("open");
+    el.notifySlot.hidden = false;
+    buyMsg = ""; lastSecs = -1;
+    renderNote();
+  }
+
+  function finishLive(){
+    phase = "live";
+    el.digits.hidden = true;
+    el.digits.style.transform = ""; el.digits.style.opacity = "";
+    el.live.textContent = "Live since " + launchTime();
+    el.live.hidden = false;
+    if (!reduce.matches) { el.live.classList.remove("in"); void el.live.offsetWidth; el.live.classList.add("in"); }
+    el.title.textContent = "Orbit Pen is live";
+    el.buy.setAttribute("aria-disabled","false");
+    el.buy.classList.add("open");
+    el.notifySlot.hidden = true;
+    buyMsg = "";
+    renderNote();
+    try { el.buy.focus({preventScroll:true}); } catch(e){ el.buy.focus(); }
+  }
+
+  function frame(now){
+    raf = 0;
+    var remain = launch - corrected();
+    if (phase === "count") {
+      renderDigits(remain);
+      if (remain <= 0) {
+        if (reduce.matches) finishLive();
+        else { phase = "folding"; foldStart = now; }
+      }
+    }
+    if (phase === "folding") {
+      // Position comes from elapsed time, so any frame rate lands on the same pose.
+      var p = Math.min(1, (now - foldStart) / FOLD_MS);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.digits.style.transform = "perspective(600px) rotateX(" + (e * 88) + "deg)";
+      el.digits.style.opacity = String(1 - e);
+      if (p >= 1) finishLive();
+    }
+    if (phase !== "count" && remain > 0) toCount();
+    start();
+  }
+  function start(){ if (!raf && !document.hidden) raf = requestAnimationFrame(frame); }
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) { if (raf) cancelAnimationFrame(raf); raf = 0; }
+    else start();
+  });
+
+  el.buy.addEventListener("click", function(){
+    if (phase !== "live") {
+      buyMsg = (skewed() ? "Your clock is " + offText() + (offset < 0 ? " fast. " : " slow. ") : "") +
+               "Opens " + launchTime() + " your time.";
+      renderNote();
+      return;
+    }
+    if (buyPending) return;
+    buyPending = true;
+    el.buy.textContent = "Opening…";
+    setTimeout(function(){
+      buyPending = false;
+      el.buy.textContent = "Buy now";
+      if (phase === "live") { buyMsg = "Demo checkout · nothing charged"; renderNote(); }
+    }, 700);
+  });
+
+  function showNotify(){ el.notifyNote.textContent = "Reminder set · " + launchTime() + " · demo"; }
+  el.notify.addEventListener("click", function(){ storeSet(true); showNotify(); });
+
+  el.skew.addEventListener("click", function(){
+    skew = skew ? 0 : SKEW;
+    el.skew.setAttribute("aria-pressed", skew ? "true" : "false");
+    check(); buyMsg = ""; renderNote();
+  });
+
+  el.skip.addEventListener("click", function(){
+    jump = launch - 30000 - Date.now();
+    if (phase !== "count") toCount();
+    buyMsg = ""; lastSecs = -1; renderNote(); start();
+  });
+
+  el.reset.addEventListener("click", function(){
+    jump = 0; skew = 0;
+    el.skew.setAttribute("aria-pressed","false");
+    check(); storeSet(false);
+    el.notifyNote.textContent = "";
+    buyPending = false; el.buy.textContent = "Buy now";
+    toCount(); start();
+  });
+
+  check();
+  renderLocal();
+  if (storeGet()) showNotify();
+  renderNote();
+  renderDigits(launch - corrected());
+  start();
+})();
+</script>
+</body>
+</html>

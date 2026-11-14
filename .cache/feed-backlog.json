@@ -150,6 +150,15 @@
       "summary": ""
     },
     {
+      "id": "9f663437118e879c3e8168d2",
+      "title": "Should You Actually Add AI To That? A Four-Question Audit For Product Teams",
+      "url": "https://smashingmagazine.com/2026/11/should-you-add-ai-audit-product-teams/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-11-12T10:00:00.000Z",
+      "summary": "An AI feature can save users time on a task, only for them to spend it checking the results. This practical audit helps product teams decide where AI earns its place and what users need to verify its output."
+    },
+    {
       "id": "e08900b75948b3d14b103587",
       "title": "Draw a quick doodle for the next visitor",
       "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xtm5bg/draw_a_quick_doodle_for_the_next_visitor/",
@@ -914,20 +923,10 @@
       "published": "2026-11-08T00:00:00.000Z",
       "observed": true,
       "summary": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier."
-    },
-    {
-      "id": "e86f271c7e6b1a182df550d6",
-      "title": "hyprwm/Hyprland",
-      "url": "https://github.com/hyprwm/Hyprland",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks."
     }
   ],
   "fetched": {
-    "smashing": "2026-11-09",
+    "smashing": "2026-11-14",
     "hacker-news": "2026-11-10",
     "github-trending": "2026-11-13",
     "reddit-sideproject": "2026-11-11",
