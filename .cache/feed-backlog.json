@@ -1,6 +1,159 @@
 {
   "items": [
     {
+      "id": "6921618a4fcf3aa8e35773fc",
+      "title": "Why did some Apollo missions carry a grenade launcher?",
+      "url": "https://space.stackexchange.com/questions/37775",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-15T09:06:43.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a11994a80f2fdec7a177dd4c",
+      "title": "Book list for streetfighting computer scientists",
+      "url": "https://nick-black.com/dankwiki/index.php?title=Book_list_for_streetfighting_computer_scientists",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-15T07:08:50.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "1093309b494ccc9a99d9dffe",
+      "title": "Disk encryption on NetBSD – achieving secrecy",
+      "url": "https://netbsd.org/~nia/disk-encrypt/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-15T05:29:54.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "2b72b271581ba0ed49d927bb",
+      "title": "My favourite modern NES games",
+      "url": "https://jordi.inversethought.com/blog/25-of-my-favourite-modern-nes-games/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-15T02:41:25.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "88ae2cfdd6f592722f0248e2",
+      "title": "Court denies motion to dismiss DRAM price fixing case",
+      "url": "https://litnews.ai/articles/garciaguirre-samsung-sk-hynix-micron-dram-conspiracy-suit-survives-dismissal",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-15T01:18:36.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "04d059df669879a50a4e7807",
+      "title": "How did Woz write the Apple 1 BASIC before building the computer?",
+      "url": "https://retrocomputing.stackexchange.com/questions/17957",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-14T22:22:49.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "79b046481bd48da63ddc54a9",
+      "title": "SpaceX catches the Starship to end Flight 15",
+      "url": "https://www.spacex.com/launches/starship-flight-15",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-14T21:22:24.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a21cc815013d30aa83e78031",
+      "title": "A family tree of software job titles",
+      "url": "https://zwischenzugs.com/2026/11/03/a-family-tree-of-software-job-titles/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-14T17:45:19.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "94aa6d9b525a12a4d5a78dc7",
+      "title": "Lovable apps expose passport details and more than 200K private messages",
+      "url": "https://www.crissyfield.de/research/lovable-en/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-14T17:43:10.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "9ed594075d0bf1a5606ffe84",
+      "title": "PyPI's redesigned project pages with clearer security signals are now live",
+      "url": "https://blog.pypi.org/posts/2026-11-06-ui-updates-complete/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-14T15:40:52.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "94b61c00d4a22219feeacd3c",
+      "title": "KDE: The documentary [video]",
+      "url": "https://tube.kockatoo.org/w/fFinNHfanLT7aBEb2B8y4c",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-14T13:43:28.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "87caaae267df6703c0a2b2f7",
+      "title": "Semicircle Packing",
+      "url": "https://rorz.io/writing/semicircle-packing",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-13T14:42:57.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "7c864418eae759f01d8bab43",
+      "title": "500 Lines or Less A 3D Modeller",
+      "url": "https://aosabook.org/en/500L/a-3d-modeller.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-13T13:47:42.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "bea60a3c996cc2bc708552e5",
+      "title": "Show HN: Carton Clock – A working pendulum clock made from empty drink cartons",
+      "url": "https://www.niklasroy.com/carton-clock/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-13T12:00:18.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "8af7a01a0b185e3db2c863bb",
+      "title": "The Evolving Story of How Chemistry Became Biology",
+      "url": "https://www.quantamagazine.org/the-evolving-story-of-how-chemistry-became-biology-20261112/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-13T11:55:19.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "dd8b0d57dc17fd7fec2defc3",
+      "title": "What thousands of conversations look like inside a language model",
+      "url": "https://operator0x.com/field-notes/qwen-conversation-state-space/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-13T10:26:01.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ddd34cc7886c3c3654c885f3",
+      "title": "Strictly monotonic timestamps and gapless sequences in Rust",
+      "url": "https://tsoracle.rs/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-13T10:04:37.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "3619c42254a9370454c84e21",
       "title": "sherlock-project/sherlock",
       "url": "https://github.com/sherlock-project/sherlock",
@@ -141,6 +294,15 @@
       "summary": "🤯 LobeHub - Super-Agents on Your Team. Add super-agents to the chats your team already uses.They take on work by themselves and get better every week."
     },
     {
+      "id": "b47b6276d86ea4c161440c6b",
+      "title": "Handwritten 200-year-old dismissal notice found on roof tile",
+      "url": "https://www.bbc.co.uk/news/articles/c6jdmdzv25r9o",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-12T21:27:01.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "f2a3efafda89d422e16693fa",
       "title": "UK by Numbers: the UK’s official social and economic statistics visualised",
       "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xu9gxj/uk_by_numbers_the_uks_official_social_and/",
@@ -238,6 +400,15 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-11T11:16:01.000Z",
       "summary": ""
+    },
+    {
+      "id": "5a1167f840c9843bd0017a14",
+      "title": "Open-Source HF Communications for Remote Communities and Experimenters",
+      "url": "https://www.ardc.net/rhizomaticas-hermes-and-mercury-expand-open-source-hf-communications-for-remote-communities-while-appealing-to-experimenters/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-11T11:11:22.000Z",
+      "summary": "Comments"
     },
     {
       "id": "bd527c7f439db479e029fe5c",
@@ -355,6 +526,15 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-10T14:51:34.000Z",
       "summary": ""
+    },
+    {
+      "id": "53a787ce3e64cd8e0fa259e9",
+      "title": "Why get an expensive Pi when I have an old phone?",
+      "url": "https://so.long.thanks.fish/why-pi-when-i-have-an-old-phone/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-10T14:16:05.000Z",
+      "summary": "Comments"
     },
     {
       "id": "f4ede3c182fb15126b081f6a",
@@ -733,201 +913,11 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-08T07:54:01.000Z",
       "summary": ""
-    },
-    {
-      "id": "8f89633e9084f975aeefc5f1",
-      "title": "WaveDudeNext 2D Wave Simulator",
-      "url": "https://github.com/graealex/WaveDudeNext",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T07:09:02.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "b571349d718662da45a50245",
-      "title": "Built a software for backyard design, with 3D preview",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqrxc9/built_a_software_for_backyard_design_with_3d/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T06:38:08.000Z",
-      "summary": ""
-    },
-    {
-      "id": "7dac8a78f7feaf0ef0dec96f",
-      "title": "Kirlian Photography: Building Your Own Equipment",
-      "url": "https://imagesco.com/articles/kirlian/kirlian-photography.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T04:14:12.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "37c687c5ed694c71bb856290",
-      "title": "Simon Winchester, Author of 'The Professor and the Madman,' Has Died",
-      "url": "https://www.nytimes.com/2026/11/04/obituaries/simon-winchester-dead.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T04:07:21.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "bb30ad069227b20fc320bf2f",
-      "title": "ISponsorBlockTV: SponsorBlock client for all YouTube TV clients",
-      "url": "https://github.com/dmunozv04/isponsorblocktv",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T03:47:19.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "149c124f7b07d2a10e3ffaa7",
-      "title": "Goodbye Claude, Hello Pi",
-      "url": "https://caleb.software/posts/claude-to-pi.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T03:11:48.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "41d30ce7c5e62497e2fce13e",
-      "title": "watahy",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xqnyds/watahy/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-08T02:48:44.000Z",
-      "summary": ""
-    },
-    {
-      "id": "eb9af25994bbaf89b04918c0",
-      "title": "I spent the last month building a Mac notes app that doesn't break my focus. Giving away 40 licenses",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqnc8t/i_spent_the_last_month_building_a_mac_notes_app/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T02:15:35.000Z",
-      "summary": ""
-    },
-    {
-      "id": "fd273feaa8fd4ac1ef548add",
-      "title": "Consumer brain wave headsets threaten privacy",
-      "url": "https://www.science.org/content/article/wearable-device-makers-are-harvesting-brain-data-train-ai-without-telling-users?referrer=https%3A%2F%2Fwww.google.com%2F",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T02:02:38.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "7df2eec33b1fc6b3cbd7f819",
-      "title": "LLM Game Automation MCP - lets an AI agent play PC games in the background (driving, walking and flying in GTA, and more)",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqlnx6/llm_game_automation_mcp_lets_an_ai_agent_play_pc/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T00:49:09.000Z",
-      "summary": ""
-    },
-    {
-      "id": "853c63f738f0cecf3b918959",
-      "title": "thedotmack/claude-mem",
-      "url": "https://github.com/thedotmack/claude-mem",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More"
-    },
-    {
-      "id": "d2a13eb5e04b724bc066229f",
-      "title": "max-sixty/worktrunk",
-      "url": "https://github.com/max-sixty/worktrunk",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows"
-    },
-    {
-      "id": "14444dc7b4eca89947b208fb",
-      "title": "Donchitos/Claude-Code-Game-Studios",
-      "url": "https://github.com/Donchitos/Claude-Code-Game-Studios",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy."
-    },
-    {
-      "id": "553e1cc54ebc818266579b0a",
-      "title": "pingdotgg/t3code",
-      "url": "https://github.com/pingdotgg/t3code",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": ""
-    },
-    {
-      "id": "56ed6f5b1a23b5b5c199b408",
-      "title": "Nutlope/hallmark",
-      "url": "https://github.com/Nutlope/hallmark",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
-    },
-    {
-      "id": "3cb2b485f02c0e6c56c67223",
-      "title": "Renhuai123/ziwei-doushu",
-      "url": "https://github.com/Renhuai123/ziwei-doushu",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "紫微斗数开源排盘引擎 — 基于倪海厦《天纪》体系，含完整排盘算法、四化系统、格局知识库、古籍原文数据"
-    },
-    {
-      "id": "df11630e65be505cc9baca77",
-      "title": "D4Vinci/Scrapling",
-      "url": "https://github.com/D4Vinci/Scrapling",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "🕷️ The BEST Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ and follow here for daily tips and tricks: https://x.com/Scrapling_dev"
-    },
-    {
-      "id": "c7f7c21cf16630e7e00262d2",
-      "title": "jakubkrehel/skills",
-      "url": "https://github.com/jakubkrehel/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "A collection of agent skills that help you build great interfaces."
-    },
-    {
-      "id": "f4e0adf84666b0c986e73ecd",
-      "title": "github/spec-kit",
-      "url": "https://github.com/github/spec-kit",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "💫 Toolkit to help you get started with SDD or any other process!"
-    },
-    {
-      "id": "19c1fb556084b78651bb8337",
-      "title": "The-PR-Agent/pr-agent",
-      "url": "https://github.com/The-PR-Agent/pr-agent",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-08T00:00:00.000Z",
-      "observed": true,
-      "summary": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier."
     }
   ],
   "fetched": {
     "smashing": "2026-11-14",
-    "hacker-news": "2026-11-10",
+    "hacker-news": "2026-11-15",
     "github-trending": "2026-11-13",
     "reddit-sideproject": "2026-11-11",
     "reddit-beautiful": "2026-11-12"

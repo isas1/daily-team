@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprint order</title>
+<style>
+:root{
+  --bg:#f4f1ea; --sheet:#fffdf8; --ink:#1d2126; --muted:#585d64; --rule:#ddd6c8; --margin:#c4b29d;
+  --accent:#1d5c57; --accent-ink:#ffffff; --strike:#a1351e; --sel:#e7efea; --focus:#1d5c57;
+  --lift:0 8px 22px rgba(40,30,15,.18);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141719; --sheet:#1c2023; --ink:#e9e6df; --muted:#a6abb0; --rule:#30363a; --margin:#5a4c42;
+    --accent:#6fbfb4; --accent-ink:#0d1716; --strike:#f2937a; --sel:#21302e; --focus:#8fd3c9;
+    --lift:0 8px 22px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141719; --sheet:#1c2023; --ink:#e9e6df; --muted:#a6abb0; --rule:#30363a; --margin:#5a4c42;
+  --accent:#6fbfb4; --accent-ink:#0d1716; --strike:#f2937a; --sel:#21302e; --focus:#8fd3c9;
+  --lift:0 8px 22px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0; color:var(--ink); background:var(--bg);
+  font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+main{max-width:36rem; margin:0 auto; padding:32px 16px 48px}
+header{display:flex; align-items:flex-start; gap:12px}
+.titles{flex:1}
+h1{font-size:24px; line-height:1.2; margin:0; letter-spacing:-.01em; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.tag{font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); border:1px solid var(--rule); border-radius:4px; padding:1px 6px}
+.hint{margin:6px 0 0; color:var(--muted)}
+button,select{font:inherit; color:inherit}
+.icon-btn{
+  width:44px; height:44px; flex:none; display:grid; place-items:center;
+  background:transparent; border:1px solid var(--rule); border-radius:8px; cursor:pointer;
+}
+svg{display:block}
+.sheet{
+  position:relative; margin-top:24px; background:var(--sheet);
+  border:1px solid var(--rule); border-radius:10px; overflow:visible;
+}
+ul[role="listbox"]{list-style:none; margin:0; padding:0; position:relative}
+li[role="option"]{
+  position:relative; display:grid; grid-template-columns:3ch 3ch 1fr 44px; align-items:center;
+  column-gap:12px; min-height:56px; padding:8px 0 8px 16px;
+  border-top:1px solid var(--rule); background:var(--sheet); cursor:pointer;
+  -webkit-tap-highlight-color:transparent; user-select:none; -webkit-user-select:none;
+}
+li[role="option"]:first-child{border-top:0; border-radius:10px 10px 0 0}
+li[role="option"]:last-child{border-radius:0 0 10px 10px}
+li[aria-selected="true"]{background:var(--sel)}
+li.moved::before{content:""; position:absolute; left:0; top:6px; bottom:6px; width:3px; border-radius:2px; background:var(--accent)}
+li:focus{outline:none}
+li:focus-visible{outline:2px solid var(--focus); outline-offset:-3px}
+.pos,.was{font-variant-numeric:tabular-nums; text-align:right; width:3ch}
+.pos{font-weight:650; font-size:16px}
+.was{
+  color:var(--strike); font-size:14px; padding-right:2px;
+  border-right:3px double var(--margin); align-self:stretch; display:flex; align-items:center; justify-content:flex-end;
+  width:calc(3ch + 8px);
+}
+.was s{text-decoration:line-through; text-decoration-thickness:1.5px; text-decoration-color:var(--strike)}
+.label{overflow-wrap:anywhere; padding-left:4px}
+.grip{
+  width:44px; height:44px; display:grid; place-items:center; color:var(--muted);
+  cursor:grab; touch-action:none;
+}
+li.dragging{z-index:3; box-shadow:var(--lift); border-radius:8px; cursor:grabbing}
+li.dragging .grip{cursor:grabbing}
+.drop-line{
+  position:absolute; left:8px; right:8px; height:3px; border-radius:2px; background:var(--accent);
+  z-index:4; pointer-events:none; display:none;
+}
+#panel{
+  margin-top:12px; padding:12px; background:var(--sheet); border:1px solid var(--rule); border-radius:10px;
+  display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+}
+#panel[hidden]{display:none}
+.field{display:flex; align-items:center; gap:8px; margin-left:auto}
+.field label{color:var(--muted)}
+select{
+  height:44px; min-width:64px; padding:0 8px; border:1px solid var(--rule); border-radius:8px;
+  background:var(--bg); font-variant-numeric:tabular-nums;
+}
+.btn{
+  height:44px; padding:0 18px; border-radius:8px; border:1px solid var(--rule);
+  background:var(--sheet); cursor:pointer; font-weight:550;
+}
+.btn.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.btn:disabled{opacity:.55; cursor:not-allowed}
+.actions{display:flex; gap:8px; margin-top:16px}
+#status{margin:12px 0 0; min-height:1.45em; font-variant-numeric:tabular-nums}
+button:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+details{margin-top:24px; border-top:1px solid var(--rule); padding-top:8px}
+details + details{margin-top:0}
+summary{cursor:pointer; padding:10px 0; color:var(--muted); font-weight:550; width:max-content}
+details p, details li, details dd, details dt{color:var(--ink)}
+dl{display:grid; grid-template-columns:max-content 1fr; gap:6px 16px; margin:4px 0 12px}
+dt{font-variant-numeric:tabular-nums; font-weight:600}
+dd{margin:0}
+details ul{padding-left:18px; margin:4px 0 12px}
+a{color:var(--accent)}
+@media (max-width:400px){
+  main{padding:24px 12px 40px}
+  li[role="option"]{column-gap:8px; padding-left:12px}
+  .field{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="titles">
+      <h1 id="title">Sprint order <span class="tag">Demo</span></h1>
+      <p class="hint">Select a task to move it.</p>
+    </div>
+    <button class="icon-btn" id="theme" type="button" aria-label="Dark theme" aria-pressed="false">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75">
+        <circle cx="10" cy="10" r="7"/><path d="M10 3a7 7 0 0 1 0 14z" fill="currentColor" stroke="none"/>
+      </svg>
+    </button>
+  </header>
+
+  <div class="sheet" id="sheet">
+    <ul role="listbox" id="list" aria-labelledby="title"></ul>
+    <div class="drop-line" id="dropLine" aria-hidden="true"></div>
+  </div>
+
+  <form id="panel" role="group" aria-label="Move task" hidden>
+    <button class="icon-btn" type="button" id="up" aria-label="Move up">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>
+    </button>
+    <button class="icon-btn" type="button" id="down" aria-label="Move down">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg>
+    </button>
+    <span class="field">
+      <label for="to">Move to</label>
+      <select id="to"></select>
+      <button class="btn primary" type="submit">Move</button>
+    </span>
+    <button class="icon-btn" type="button" id="close" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M3 3l8 8M11 3l-8 8"/></svg>
+    </button>
+  </form>
+
+  <div class="actions">
+    <button class="btn" type="button" id="undo" disabled>Undo</button>
+    <button class="btn" type="button" id="reset">Reset</button>
+  </div>
+  <p id="status" role="status" aria-live="polite"></p>
+
+  <details>
+    <summary>Keys</summary>
+    <dl>
+      <dt>↑ ↓</dt><dd>Next or previous task</dd>
+      <dt>Alt + ↑ ↓</dt><dd>Move one step</dd>
+      <dt>1–5</dt><dd>Move to that number</dd>
+      <dt>Enter</dt><dd>Open move panel</dd>
+      <dt>Esc</dt><dd>Close panel or cancel drag</dd>
+      <dt>Ctrl + Z</dt><dd>Undo last move</dd>
+    </dl>
+  </details>
+  <details>
+    <summary>Credits</summary>
+    <ul>
+      <li>Puppet maker (lead): one move at a time, Move to keeps its last value, a 41-character sample label for wrapping.</li>
+      <li>Foley artist: 1.75 px arrow strokes beside 15 px text, one 160 ms settle, status written after the order commits.</li>
+      <li>Exhibit light technician: ledger strike at 1.5 px on old numbers, resting list first, light and dark palettes set for 4.5:1 on struck figures.</li>
+      <li>Screen reader user (archetype; invented): rows named with position and old position, one summary line per move.</li>
+    </ul>
+    <p>Source, title only: <a href="https://tsoracle.rs/">Strictly monotonic timestamps and gapless sequences in Rust</a>. It supplied the gapless 1 to n rule. Tasks are local sample data.</p>
+  </details>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var SAMPLE = [
+    {id:"a", label:"Draft release notes"},
+    {id:"b", label:"Review API errors"},
+    {id:"c", label:"Migrate billing exports to the new ledger"},
+    {id:"d", label:"Update onboarding emails"},
+    {id:"e", label:"Fix login"}
+  ];
+  var KEY = "gapless-rank-v1";
+  var byId = {};
+  SAMPLE.forEach(function(t){ byId[t.id] = t; });
+  var DEFAULT = SAMPLE.map(function(t){ return t.id; });
+  var n = DEFAULT.length;
+
+  var order = DEFAULT.slice(), prev = {}, movedId = null, hist = null, current = DEFAULT[0], lastTo = null;
+
+  var list = document.getElementById("list");
+  var sheet = document.getElementById("sheet");
+  var dropLine = document.getElementById("dropLine");
+  var panel = document.getElementById("panel");
+  var toSel = document.getElementById("to");
+  var undoBtn = document.getElementById("undo");
+  var resetBtn = document.getElementById("reset");
+  var statusEl = document.getElementById("status");
+  var themeBtn = document.getElementById("theme");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function validOrder(a){
+    if(!Array.isArray(a) || a.length !== n) return false;
+    var seen = {};
+    for(var i=0;i<a.length;i++){ if(!byId[a[i]] || seen[a[i]]) return false; seen[a[i]] = 1; }
+    return true;
+  }
+  function load(){
+    try{
+      var s = JSON.parse(localStorage.getItem(KEY) || "null");
+      if(!s) return;
+      if(validOrder(s.order)) order = s.order;
+      if(s.prev && typeof s.prev === "object"){
+        prev = {};
+        Object.keys(s.prev).forEach(function(k){ var v = +s.prev[k]; if(byId[k] && v>=1 && v<=n) prev[k]=v; });
+      }
+      if(byId[s.movedId]) movedId = s.movedId;
+      if(s.lastTo>=1 && s.lastTo<=n) lastTo = +s.lastTo;
+      if(s.theme === "dark" || s.theme === "light") document.documentElement.setAttribute("data-theme", s.theme);
+    }catch(e){}
+  }
+  function save(){
+    try{
+      localStorage.setItem(KEY, JSON.stringify({
+        order:order, prev:prev, movedId:movedId, lastTo:lastTo,
+        theme:document.documentElement.getAttribute("data-theme")
+      }));
+    }catch(e){}
+  }
+
+  /* rows built once, reordered by key */
+  var nodes = {};
+  SAMPLE.forEach(function(t){
+    var li = document.createElement("li");
+    li.setAttribute("role","option");
+    li.id = "task-" + t.id;
+    li.tabIndex = -1;
+    li.dataset.id = t.id;
+    var pos = document.createElement("span"); pos.className = "pos"; pos.setAttribute("aria-hidden","true");
+    var was = document.createElement("span"); was.className = "was"; was.setAttribute("aria-hidden","true");
+    var s = document.createElement("s"); was.appendChild(s);
+    var lab = document.createElement("span"); lab.className = "label"; lab.setAttribute("aria-hidden","true"); lab.textContent = t.label;
+    var grip = document.createElement("span"); grip.className = "grip"; grip.setAttribute("aria-hidden","true");
+    var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+    svg.setAttribute("width","18"); svg.setAttribute("height","18"); svg.setAttribute("viewBox","0 0 18 18");
+    svg.setAttribute("fill","none"); svg.setAttribute("stroke","currentColor"); svg.setAttribute("stroke-width","1.75"); svg.setAttribute("stroke-linecap","round");
+    var p = document.createElementNS("http://www.w3.org/2000/svg","path");
+    p.setAttribute("d","M3 6h12M3 9h12M3 12h12");
+    svg.appendChild(p); grip.appendChild(svg);
+    li.appendChild(pos); li.appendChild(was); li.appendChild(lab); li.appendChild(grip);
+    li._pos = pos; li._was = s;
+    nodes[t.id] = li;
+  });
+
+  for(var i=1;i<=n;i++){
+    var o = document.createElement("option"); o.value = String(i); o.textContent = String(i); toSel.appendChild(o);
+  }
+
+  function posOf(id){ return order.indexOf(id) + 1; }
+
+  function render(){
+    var hadFocus = list.contains(document.activeElement) ? document.activeElement.dataset.id : null;
+    order.forEach(function(id, idx){
+      var li = nodes[id], p = idx + 1, w = prev[id];
+      li._pos.textContent = String(p);
+      li._was.textContent = (w && w !== p) ? String(w) : "";
+      li.classList.toggle("moved", id === movedId && !!w);
+      li.setAttribute("aria-label", byId[id].label + ", " + p + " of " + n + ((w && w !== p) ? ", was " + w : "") + ".");
+      li.setAttribute("aria-selected", id === current ? "true" : "false");
+      li.tabIndex = id === current ? 0 : -1;
+      list.appendChild(li);
+    });
+    if(hadFocus) nodes[hadFocus].focus({preventScroll:true});
+    panel.setAttribute("aria-label", "Move " + byId[current].label);
+    undoBtn.disabled = !hist;
+  }
+
+  function measure(){
+    var r = {};
+    order.forEach(function(id){ r[id] = nodes[id].getBoundingClientRect().top; });
+    return r;
+  }
+  var anims = [];
+  function flip(before){
+    if(reduce.matches || document.hidden) return;
+    order.forEach(function(id){
+      var li = nodes[id];
+      var dy = before[id] - li.getBoundingClientRect().top;
+      if(Math.abs(dy) < 1 || !li.animate) return;
+      var a = li.animate(
+        [{transform:"translateY(" + dy + "px)"}, {transform:"translateY(0)"}],
+        {duration:160, easing:"cubic-bezier(.2,.7,.3,1)"}
+      );
+      anims.push(a);
+      a.onfinish = a.oncancel = function(){ var k = anims.indexOf(a); if(k>-1) anims.splice(k,1); };
+    });
+  }
+  document.addEventListener("visibilitychange", function(){
+    if(document.hidden) anims.slice().forEach(function(a){ try{ a.finish(); }catch(e){} });
+  });
+
+  function announce(msg){
+    statusEl.textContent = "";
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ statusEl.textContent = msg; }); });
+  }
+
+  function move(id, to, before){
+    var from = posOf(id);
+    to = Math.max(1, Math.min(n, to));
+    var label = byId[id].label;
+    if(to === from){
+      if(before){ render(); flip(before); }
+      announce(label + " already " + from + " of " + n + ".");
+      return false;
+    }
+    if(!before) before = measure();
+    hist = {order:order.slice(), prev:Object.assign({}, prev), movedId:movedId};
+    var old = order.slice();
+    order.splice(from - 1, 1);
+    order.splice(to - 1, 0, id);
+    prev = {};
+    var shifted = 0;
+    order.forEach(function(x, i){
+      var o = old.indexOf(x) + 1;
+      if(o !== i + 1){ prev[x] = o; if(x !== id) shifted++; }
+    });
+    movedId = id; current = id;
+    render(); flip(before); save();
+    nodes[id].scrollIntoView({block:"nearest"});
+    announce(label + " moved " + from + " to " + to + ". " + shifted + " shifted.");
+    return true;
+  }
+
+  function undo(){
+    if(!hist) return;
+    var m = movedId;
+    var before = measure();
+    order = hist.order; prev = hist.prev; movedId = hist.movedId; hist = null;
+    if(m) current = m;
+    render(); flip(before); save();
+    if(list.contains(document.activeElement)) focusCurrent();
+    announce("Undone · " + byId[m].label + " back to " + posOf(m) + ".");
+  }
+
+  function reset(){
+    var before = measure();
+    order = DEFAULT.slice(); prev = {}; movedId = null; hist = null; current = DEFAULT[0]; lastTo = null;
+    closePanel(false);
+    render(); flip(before); save();
+    announce("Demo reset.");
+  }
+
+  function focusCurrent(){ nodes[current].focus(); }
+  function setCurrent(id, focus){
+    current = id;
+    order.forEach(function(x){
+      nodes[x].tabIndex = x === id ? 0 : -1;
+      nodes[x].setAttribute("aria-selected", x === id ? "true" : "false");
+    });
+    panel.setAttribute("aria-label", "Move " + byId[id].label);
+    if(focus) nodes[id].focus();
+  }
+
+  function openPanel(focusField){
+    toSel.value = String(lastTo || posOf(current));
+    panel.hidden = false;
+    if(focusField) toSel.focus();
+  }
+  function closePanel(returnFocus){
+    if(panel.hidden) return;
+    panel.hidden = true;
+    if(returnFocus) focusCurrent();
+  }
+
+  list.addEventListener("keydown", function(e){
+    var li = e.target.closest && e.target.closest("li[role=option]");
+    if(!li) return;
+    var id = li.dataset.id, idx = order.indexOf(id);
+    if((e.ctrlKey || e.metaKey) && (e.key === "z" || e.key === "Z")){ e.preventDefault(); undo(); return; }
+    if(e.key === "ArrowUp" || e.key === "ArrowDown"){
+      e.preventDefault();
+      var d = e.key === "ArrowUp" ? -1 : 1;
+      if(e.altKey){ move(id, idx + 1 + d); focusCurrent(); }
+      else{ var j = idx + d; if(j>=0 && j<n) setCurrent(order[j], true); }
+      return;
+    }
+    if(e.key === "Home"){ e.preventDefault(); setCurrent(order[0], true); return; }
+    if(e.key === "End"){ e.preventDefault(); setCurrent(order[n-1], true); return; }
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); setCurrent(id, false); openPanel(true); return; }
+    if(e.key === "Escape"){ closePanel(false); return; }
+    var m = /^Digit([1-9])$/.exec(e.code || "");
+    var digit = /^[1-9]$/.test(e.key) ? +e.key : (m && !e.ctrlKey && !e.metaKey ? +m[1] : 0);
+    if(digit && digit <= n && !e.ctrlKey && !e.metaKey){
+      e.preventDefault(); move(id, digit); focusCurrent();
+    }
+  });
+
+  var suppressClick = false;
+  list.addEventListener("click", function(e){
+    if(suppressClick){ suppressClick = false; return; }
+    var li = e.target.closest("li[role=option]");
+    if(!li) return;
+    setCurrent(li.dataset.id, true);
+    openPanel(false);
+  });
+
+  /* drag: shortcut path, same move() */
+  var drag = null;
+  list.addEventListener("pointerdown", function(e){
+    var grip = e.target.closest(".grip");
+    if(!grip || e.button !== 0) return;
+    var li = grip.closest("li");
+    e.preventDefault();
+    var id = li.dataset.id;
+    setCurrent(id, true);
+    var others = [];
+    order.forEach(function(x){
+      if(x === id) return;
+      var r = nodes[x].getBoundingClientRect();
+      others.push({id:x, top:r.top, bottom:r.bottom, mid:r.top + r.height / 2});
+    });
+    var r0 = li.getBoundingClientRect();
+    drag = {id:id, li:li, startY:e.clientY, mid0:r0.top + r0.height / 2, others:others, to:posOf(id), pointer:e.pointerId};
+    try{ grip.setPointerCapture(e.pointerId); }catch(err){}
+    li.classList.add("dragging");
+  });
+  function dragMove(e){
+    if(!drag || e.pointerId !== drag.pointer) return;
+    var dy = e.clientY - drag.startY;
+    drag.li.style.transform = "translateY(" + dy + "px)";
+    var c = drag.mid0 + dy, t = 0;
+    drag.others.forEach(function(o){ if(o.mid < c) t++; });
+    drag.to = t + 1;
+    var sr = sheet.getBoundingClientRect();
+    var y;
+    if(t === 0) y = drag.others[0].top;
+    else y = drag.others[t - 1].bottom;
+    dropLine.style.top = (y - sr.top - 1.5) + "px";
+    dropLine.style.display = drag.to === posOf(drag.id) ? "none" : "block";
+  }
+  function dragEnd(e, cancel){
+    if(!drag) return;
+    if(e && e.pointerId !== undefined && e.pointerId !== drag.pointer) return;
+    var d = drag; drag = null;
+    dropLine.style.display = "none";
+    var before = measure();
+    d.li.style.transform = "";
+    d.li.classList.remove("dragging");
+    suppressClick = true;
+    setTimeout(function(){ suppressClick = false; }, 0);
+    if(cancel){ render(); flip(before); announce("Drag cancelled."); }
+    else move(d.id, d.to, before);
+    focusCurrent();
+  }
+  list.addEventListener("pointermove", dragMove);
+  list.addEventListener("pointerup", function(e){ dragEnd(e, false); });
+  list.addEventListener("pointercancel", function(e){ dragEnd(e, true); });
+  document.addEventListener("keydown", function(e){
+    if(drag && e.key === "Escape"){ e.preventDefault(); dragEnd(null, true); }
+  });
+
+  /* panel */
+  toSel.addEventListener("change", function(){ lastTo = +toSel.value; save(); });
+  panel.addEventListener("submit", function(e){
+    e.preventDefault();
+    lastTo = +toSel.value; save();
+    move(current, lastTo);
+    closePanel(true);
+  });
+  document.getElementById("up").addEventListener("click", function(){ move(current, posOf(current) - 1); });
+  document.getElementById("down").addEventListener("click", function(){ move(current, posOf(current) + 1); });
+  document.getElementById("close").addEventListener("click", function(){ closePanel(true); });
+  panel.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){ e.preventDefault(); closePanel(true); }
+  });
+
+  undoBtn.addEventListener("click", undo);
+  resetBtn.addEventListener("click", reset);
+
+  /* theme */
+  function isDark(){
+    var t = document.documentElement.getAttribute("data-theme");
+    if(t) return t === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function syncTheme(){
+    var d = isDark();
+    themeBtn.setAttribute("aria-pressed", d ? "true" : "false");
+    themeBtn.setAttribute("aria-label", "Dark theme");
+  }
+  themeBtn.addEventListener("click", function(){
+    document.documentElement.setAttribute("data-theme", isDark() ? "light" : "dark");
+    syncTheme(); save();
+  });
+
+  load();
+  if(movedId) current = movedId;
+  render();
+  syncTheme();
+})();
+</script>
+</body>
+</html>

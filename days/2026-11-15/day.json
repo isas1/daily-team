@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-15",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-15\nSeason: 2026-11-09\n\n1. Puppet maker\n   Method: Keep the user's last choice when a panel closes.\n   Stance: Cuts until only the core is left.\n   Temperament: Tests the longest label in the room.\n2. Foley artist\n   Method: Match icon weight to the weight of nearby text.\n   Stance: Guards the feeling it leaves behind.\n   Temperament: Rejects a claim until the state can be shown.\n3. Exhibit light technician\n   Method: Compare light and dark with the same content.\n   Stance: Pushes toward the strange.\n   Temperament: Wants to see the resting frame first.\n4. Screen reader user (archetype; invented) [guest]\n   Method: Name each state and result without relying on its shape.\n   Stance: Defends the material.\n   Temperament: Looks for the hidden cost in a simple idea.\n\nConstraint: Use tabular figures where values change.\nTask: Board order: a reorder list for a planning board that moves tasks and makes their new order clear.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "329eccbd3252c8b60bbb9e575d697777f1c8c9129c05c5132fe4e3297f152ddf",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "ddd34cc7886c3c3654c885f3"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "Pick a task, choose its new number, and every task that shifted shows its old number struck.",
+  "concept": "Gapless Rank",
+  "plan": "## Pitch\n\n**Puppet maker:** A board with forty tasks. Someone drags one. Which others moved? Nobody can say. Strip it down to the list, a number per row, and one move. When the move panel closes, it remembers the last target. And I'll load the longest label we have: \"Migrate billing exports to the new ledger.\" If that wraps cleanly, the rest will.\n\n**Foley artist:** A move has a sound, even when it's silent. The row should land, then settle. One 160 ms settle and nothing more. The arrow glyphs carry the same stroke weight as the task text beside them. And the word \"Moved\" stays off the screen until the order has actually changed.\n\n**Exhibit light technician:** Show me the resting frame first, before anyone touches it. Then go strange: a ledger correction. Accountants never erase. They strike the old figure and write the new one beside it. Each shifted row keeps its old number struck through. Light and dark, same five tasks, side by side.\n\n**Screen reader user:** Shapes tell me nothing. I need \"Fix login, 2 of 5, was 5.\" The hidden cost: if every shifted row announces itself, a long list buries me. Give one summary line. I can read the rows myself.\n\n## Clash\n\n**Exhibit light technician:** Struck numbers on every shifted row. That's the whole idea.\n\n**Screen reader user:** On screen, yes. Read aloud, that's noise. Announce the moved task and a count of shifted tasks. Nothing else.\n\n**Puppet maker:** Agreed. And the struck marks clear on the next move. Keep only one correction visible.\n\n**Foley artist:** Then the last move has to stay legible until the next one. No fade timer. A timer is a claim that I'm done reading.\n\n**Exhibit light technician:** Fine, no timer. The struck figure in dark mode has to hold contrast, though. Strike at 1.5 px, not a hairline.\n\n**Puppet maker:** Drag?\n\n**Screen reader user:** Drag can stay as a shortcut. The real path is: select a row, press a number, or press Alt+Up or Alt+Down. Same result, same announcement.\n\n**Foley artist:** Undo restores the old order and the old strikes in one step. If it can't show that, it doesn't count.\n\n## Decision\n\nPick a task, choose its new number, and every task that shifted shows its old number struck.\n\nConcept: Gapless Rank\n\nThe list is a gapless sequence from 1 to n, like an invoice ledger. A move renumbers every row without holes. Each row that changed shows its old position struck beside the new one. The nearest usual approach is a drag list that reorders with no trace, so a reviewer cannot tell what shifted. Here the last move stays readable until the next one, and Undo reverses it. The source is the HN post on strictly monotonic timestamps and gapless sequences in Rust. Only its title was used. It supplied the gapless renumbering rule, and the struck old numbers make that rule visible.\n\n- **Puppet maker:** The \"Move to\" field remembers its last value when it closes. The sample list includes a 40-character label to test wrapping at 320 px.\n- **Foley artist:** Arrow glyphs use a 1.75 px stroke to match 15 px text weight. The moved row settles once in 160 ms, which is skipped under reduced motion. Status text is written only after the DOM order commits.\n- **Exhibit light technician:** Ledger strike on old numbers at 1.5 px. The first frame shown is the resting list. Light and dark were checked with the same 5 tasks, and the struck figure meets 4.5:1 contrast in both.\n- **Screen reader user:** Each row is named \"Task, n of 5, was m.\" One polite live line reads \"Fix login moved 5 to 2. 3 shifted.\" Per-row announcements are suppressed.\n\nInitial visible copy: \"Sprint order\", five task labels, numbers 1 to 5, \"Undo\" and \"Reset\". The total is under 40 words. The status line is empty until the first move.\n\n## Build notes\n\n1. Store the list as an ordered array of ids with a `prev` index map from the last move only. Render positions and struck old numbers in `font-variant-numeric: tabular-nums` inside a fixed 3ch column.\n2. Use a listbox with roving tabindex. Up and Down move focus. Alt+Up and Alt+Down move the task one step. Digits 1–5 move it to that position. Drag uses pointer events and calls the same `move(id, to)`. A move to the current position is a no-op.\n3. Keep a one-step history of `{order, prev}`. Undo swaps it back and rewrites the live line (\"Undone · Fix login back to 5\"). Reset restores the sample and clears the strikes. Set the status text after layout commits, using `requestAnimationFrame`.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Gapless Rank\",\"audience\":\"Team leads reprioritizing a planning board\",\"problem\":\"After a reorder, nobody can tell which tasks shifted\",\"interaction\":\"Select a task, press a number or Alt+arrow, or drag\",\"outcome\":\"Gapless 1..n renumber; shifted rows show old number struck\",\"recovery\":\"Undo restores order and marks; Reset restores sample\",\"mechanism\":\"Ledger correction: last move's old positions kept struck\",\"difference\":\"Drag lists reorder with no trace; this shows what shifted\",\"whyNow\":\"HN Rust post on gapless sequences. Title only, no demand data\",\"sourceIds\":[\"ddd34cc7886c3c3654c885f3\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Gapless Rank\",\"need\":\"See what a reorder shifted\",\"mechanism\":\"Gapless renumber with struck old positions\",\"rejection\":\"Selected: cross-domain, offline, new to recent dates\"},{\"name\":\"Swap Ledger\",\"need\":\"Reorder by trading two tasks\",\"mechanism\":\"Pair-swap only, each swap logged\",\"rejection\":\"Long moves take many swaps\"},{\"name\":\"Earcon Order\",\"need\":\"Hear position while reordering\",\"mechanism\":\"Pitch rises with rank on each step\",\"rejection\":\"Needs audio; hidden cost for shared rooms\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "8f520f79fdd2d5f9d1494a600776ca610863bbd3c51bebaca22d5ef7202be27d",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Gapless Rank",
+    "audience": "Team leads reprioritizing a planning board",
+    "problem": "After a reorder, nobody can tell which tasks shifted",
+    "interaction": "Select a task, press a number or Alt+arrow, or drag",
+    "outcome": "Gapless 1..n renumber; shifted rows show old number struck",
+    "recovery": "Undo restores order and marks; Reset restores sample",
+    "mechanism": "Ledger correction: last move's old positions kept struck",
+    "difference": "Drag lists reorder with no trace; this shows what shifted",
+    "whyNow": "HN Rust post on gapless sequences. Title only, no demand data",
+    "sourceIds": [
+      "ddd34cc7886c3c3654c885f3"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Gapless Rank",
+        "need": "See what a reorder shifted",
+        "mechanism": "Gapless renumber with struck old positions",
+        "rejection": "Selected: cross-domain, offline, new to recent dates"
+      },
+      {
+        "name": "Swap Ledger",
+        "need": "Reorder by trading two tasks",
+        "mechanism": "Pair-swap only, each swap logged",
+        "rejection": "Long moves take many swaps"
+      },
+      {
+        "name": "Earcon Order",
+        "need": "Hear position while reordering",
+        "mechanism": "Pitch rises with rank on each step",
+        "rejection": "Needs audio; hidden cost for shared rooms"
+      }
+    ]
+  }
+}

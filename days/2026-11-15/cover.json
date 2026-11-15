@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "f8f254b4f3744a701f773d487400565c26fc45206d786cbdbff42dc310550276",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Puppet maker:** One move, five rows. Cut the task labels down to bars and keep the figures. The longest bar sits on the moved row and sets the panel width.\n\n**Foley artist:** The arrow stroke is scaled to the weight of the figures beside it. Only the moved row carries red. No other row signals arrival.\n\n**Exhibit light technician:** A dark ledger sits on light paper with the same five figures, so both modes appear in one frame. The strikes are 5 px at poster scale so they survive a 160 px thumbnail. Old figures stay at readable contrast on navy.\n\n**Screen reader user (method):** Name the state in words, without relying on shape. One status line under the descriptor reads the move as text: \"5 to 2 · 3 shifted.\"\n\n**Lead decision (Puppet maker):**\n- **Composition:** Split canvas. On the left, 72 px margins hold the date, a two-line title at 128 px, the descriptor, and the status line. On the right, a 470 × 490 navy ledger panel holds rows 1 to 5 after the move. Rows 3, 4 and 5 show struck old figures 2, 3 and 4. Row 2 shows a struck 5. One red arc runs from slot 5 up to slot 2.\n- **Palette:** Paper #F2EDE2, navy #0E2A47, ink #13202E, red #BE4D4D, rose #E58A8A for strikes on navy, and mist #A9B8C9 for old figures.\n- **Type:** `Cover Headline` for the title and the rank figures. `Cover Text` for the date, descriptor and status. All figures use `tabular-nums` in a fixed 3ch column.",
+  "width": 1200,
+  "height": 630
+}
