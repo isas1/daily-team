@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-16",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-16\nSeason: 2026-11-09\n\n1. Technical illustrator\n   Method: Count the steps between intent and result, then remove one.\n   Stance: Wants it to last.\n   Temperament: Defends a familiar pattern when it helps.\n2. Railway signaller\n   Method: Keep the label still while the icon changes.\n   Stance: Speaks for the one who finds it.\n   Temperament: Offers two small options before backing one.\n3. Cabinet maker\n   Method: Replace one vague label with a clear action verb.\n   Stance: Breaks the frame.\n   Temperament: Keeps asking which action matters most.\n4. Paper fox (creature; invented) [guest]\n   Method: Fold away detail while keeping the main action visible.\n   Stance: Insists it must be beautiful.\n   Temperament: Prefers a clear label to a clever one.\n\nConstraint: Random results can be repeated from a visible seed.\nTask: Undo edit: an undo control for a canvas editor that restores the previous change and shows what came back.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "fd756af387b02ecfc0c760b6b7fbf2c2ae69fdcec38dd86f6db44c139a9982b9",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "5c9f3a4ba90c3c4b005240dc"
+    ]
+  },
+  "status": "ok",
+  "error": null,
+  "decision": "Press or scatter clay, press Undo, and a gold seam outlines exactly what came back.",
+  "concept": "Clay Mend",
+  "plan": "# Clay Mend: Pitch, Clash, Decision and Build Notes\n\n## Pitch\n\n**Technical illustrator.** Somebody presses Ctrl+Z and then studies the canvas, hunting for what moved. That search is a wasted step, and I want it gone. The undo should mark the region that changed. There should be no history panel to open. The familiar Undo button stays where people expect it.\n\n**Railway signaller.** I speak for the person who comes back to the canvas after a pause. Two options. Option one: the Undo label stays put, and a 16 px icon beside it shows which tool the next undo will reverse, either a thumbprint or a pebble. Option two: a history list. I back option one. The label never moves, so nobody loses the target.\n\n**Cabinet maker.** Which action matters most here? Undo. Everything else is only there to give undo something to reverse. So the status line should say the verb and the thing: \"Back: Scatter, 6 pebbles.\" The word \"Undone\" tells you nothing. Then break the frame. Redo should replay from the seed instead of pasting stored pixels. That makes the seed honest.\n\n**Paper fox.** It must be beautiful, or nobody will look twice. Mend the clay the way a broken bowl is mended, with a gold seam along the edge of what came back. Then fold the seam down to a thin crease so the work stays readable. The label should be plain words, and the gold does the showing.\n\n## Clash\n\n**Cabinet maker:** A history list shows every step. Why throw that away?\n\n**Technical illustrator:** Because it is one more place to look. The answer belongs on the clay.\n\n**Railway signaller:** Then keep one thing still. Undo stays at the same spot, with the same word.\n\n**Paper fox:** A gold seam for 2 seconds, then a crease. The crease stays until the next edit.\n\n**Cabinet maker:** And if someone scatters, undoes and redoes? A different spray would be a lie.\n\n**Railway signaller:** So show the seed beside Scatter. Same seed, same pebbles.\n\n**Technical illustrator:** That is checkable. Redo draws the same 6 pebbles at the same points.\n\n**Paper fox:** A clever label like \"Mend\" would charm people and confuse them. Keep \"Undo.\"\n\n## Decision\n\nPress or scatter clay, press Undo, and a gold seam outlines exactly what came back.\n\nConcept: Clay Mend\n\n**Source.** The selected feed item is 5c9f3a4ba90c3c4b005240dc, a Reddit r/SideProject post titled \"I've spent my evenings and weekends creating a game where the whole world is clay.\" The title supplies the material. The canvas is clay that can be pressed and scattered, and undo is shown as a repair to it.\n\n**Audience and need.** The audience is indie game developers blocking out clay-style terrain. Undo in paint tools restores pixels silently. With random brushes there is a second problem: redo can produce a different spray from the first one.\n\n**Mechanism.** Each change stores two things: the tool, and a mask of the pixels it touched. Scatter also stores its seed.\n\n- **Undo** restores the masked pixels. It traces the edge of the mask in gold for 2 s. After that the trace fades to a 1 px crease, which stays until the next edit.\n- **Redo** reruns the tool from its stored seed and inputs. Because of that, the result is identical to the first run.\n\n**Difference.** Photoshop-style history panels name a step but do not show where it was on the canvas. The 2026-10-29 \"Undo import\" listed restored layer names. Clay Mend instead marks the restored region on the canvas itself. It also makes random edits repeatable from a seed the user can see.\n\n**Contributions.**\n\n- **Technical illustrator:** removes the history panel and puts the restored outline directly on the canvas.\n- **Railway signaller:** fixes the Undo label in place and adds a 16 px icon slot that shows the next tool to be reversed.\n- **Cabinet maker:** writes the status line as \"Back: <tool>, <count>, seed <n>.\" Also sets Redo to replay from the seed.\n- **Paper fox:** designs the gold seam and the fold-down to a crease, and holds the line on keeping the label \"Undo.\"\n\n**Visible copy.** The initial screen carries about 19 words:\n\n- Title: \"Clay Mend\"\n- Buttons: Press, Scatter, Undo, Redo, Reset\n- Seed field: \"Seed 7031\"\n- Status: \"Drag to press clay\"\n\nAfter an undo, the status reads, for example, \"Back: Scatter, 6 pebbles, seed 7031.\"\n\n## Build notes\n\n1. **Canvas and seeded scatter.** Use a 320×320 canvas with a clay height grid at 4 px cells. Press lowers the cells under a 24 px brush. Scatter uses mulberry32(seed) to place 6 pebbles. After each scatter, the seed advances, and the new value is shown in an editable field. Reset restores the sample grid and seed 7031.\n\n2. **History entries.** Each entry stores {tool, inputs, seed, mask, before}.\n   - Undo writes `before` back into the masked cells. It then draws the mask outline as a gold stroke, which a requestAnimationFrame (rAF) loop fades to a 1 px crease over 2 s. Under reduced motion, the crease is drawn directly.\n   - Redo reruns the tool from `inputs` and `seed`. In debug mode, it also checks that the resulting cells match the stored mask.\n\n3. **Controls and announcements.** The Undo label has a fixed width, with a 16 px icon slot that swaps between a thumbprint and a pebble.\n   - Ctrl+Z or Cmd+Z undoes. Ctrl+Shift+Z redoes.\n   - When there is no history, Undo is disabled and the status reads \"Nothing to undo.\"\n   - Status text sits in a polite live region.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Clay Mend\",\"audience\":\"Indie game devs blocking out clay terrain\",\"problem\":\"Undo restores silently; random brushes redo differently\",\"interaction\":\"Press or Scatter clay, then Undo or Redo\",\"outcome\":\"Gold seam outlines restored clay; status names tool, count, seed\",\"recovery\":\"Redo replays from seed; Reset restores sample and seed 7031\",\"mechanism\":\"Masked history; undo traces mask edge in gold, folds to crease\",\"difference\":\"History panels name steps off-canvas; this marks the region and repeats random edits\",\"whyNow\":\"SideProject post on a game world made of clay. Title only, no demand data\",\"sourceIds\":[\"5c9f3a4ba90c3c4b005240dc\"],\"evidenceStatus\":\"sourced\",\"alternatives\":[{\"name\":\"Clay Mend\",\"need\":\"See what an undo brought back\",\"mechanism\":\"Gold seam on restored mask with visible seed\",\"rejection\":\"Selected: cross-domain, offline; differs from 10-29 layer list\"},{\"name\":\"Before/After Swipe\",\"need\":\"Compare canvas states\",\"mechanism\":\"Drag a divider between pre and post undo\",\"rejection\":\"Extra step; eye leaves the work\"},{\"name\":\"Step Film Strip\",\"need\":\"Jump many steps back\",\"mechanism\":\"Thumbnail strip of every history entry\",\"rejection\":\"A history panel; echoes 10-20 rewind\"}]}\n```",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "1b6cb7c698aa6798289486672561b5d5c617dda86fb8cc192c05e2dd0ba67fde",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Clay Mend",
+    "audience": "Indie game devs blocking out clay terrain",
+    "problem": "Undo restores silently; random brushes redo differently",
+    "interaction": "Press or Scatter clay, then Undo or Redo",
+    "outcome": "Gold seam outlines restored clay; status names tool, count, seed",
+    "recovery": "Redo replays from seed; Reset restores sample and seed 7031",
+    "mechanism": "Masked history; undo traces mask edge in gold, folds to crease",
+    "difference": "History panels name steps off-canvas; this marks the region and repeats random edits",
+    "whyNow": "SideProject post on a game world made of clay. Title only, no demand data",
+    "sourceIds": [
+      "5c9f3a4ba90c3c4b005240dc"
+    ],
+    "evidenceStatus": "sourced",
+    "alternatives": [
+      {
+        "name": "Clay Mend",
+        "need": "See what an undo brought back",
+        "mechanism": "Gold seam on restored mask with visible seed",
+        "rejection": "Selected: cross-domain, offline; differs from 10-29 layer list"
+      },
+      {
+        "name": "Before/After Swipe",
+        "need": "Compare canvas states",
+        "mechanism": "Drag a divider between pre and post undo",
+        "rejection": "Extra step; eye leaves the work"
+      },
+      {
+        "name": "Step Film Strip",
+        "need": "Jump many steps back",
+        "mechanism": "Thumbnail strip of every history entry",
+        "rejection": "A history panel; echoes 10-20 rewind"
+      }
+    ]
+  }
+}

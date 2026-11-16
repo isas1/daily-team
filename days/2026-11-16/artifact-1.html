@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clay Mend</title>
+<style>
+  :root{
+    --bg:#efe9df;--panel:#faf7f2;--ink:#2a221e;--muted:#5f534b;
+    --line:#cbbfb1;--gold:#b8861f;--focus:#1d5c86;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  main{max-width:940px;margin:0 auto;padding:28px 16px 56px}
+  h1{font-size:1.65rem;line-height:1.15;margin:0 0 6px;letter-spacing:-.01em}
+  .lede{margin:0;color:var(--muted)}
+  .work{display:grid;gap:22px;margin-top:22px}
+  @media (min-width:780px){
+    .work{grid-template-columns:minmax(0,480px) minmax(0,1fr);align-items:start;gap:36px}
+  }
+  .stage{position:relative;background:var(--ink);padding:8px;border-radius:12px}
+  canvas{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:7px;
+    touch-action:none;cursor:crosshair;background:#9a6044}
+  canvas:focus{outline:none}
+  canvas:focus-visible{outline:3px solid #8fc3e6;outline-offset:3px}
+  .tag{position:absolute;top:16px;left:16px;pointer-events:none;
+    background:rgba(250,247,242,.92);color:var(--ink);font-size:.72rem;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;padding:2px 9px;border-radius:999px}
+  .status{min-height:1.6em;margin:12px 2px 0;font-weight:600;
+    padding-left:12px;border-left:3px solid var(--gold)}
+  .rail{display:grid;gap:18px;align-content:start}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  fieldset{border:0;margin:0;padding:0;min-width:0}
+  .seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:9px;overflow:hidden}
+  .seg input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+  .seg label{min-height:44px;min-width:92px;display:flex;align-items:center;justify-content:center;
+    padding:0 16px;font-weight:600;cursor:pointer;background:var(--panel);user-select:none}
+  .seg label + input + label,.seg input + label ~ label{border-left:1.5px solid var(--ink)}
+  .seg input:checked + label{background:var(--ink);color:var(--panel)}
+  .seg input:focus-visible + label{outline:3px solid var(--focus);outline-offset:-5px}
+  .seed{display:flex;align-items:center;gap:8px;font-weight:600}
+  .seed input{width:7.5ch;min-height:44px;padding:0 10px;font:inherit;font-variant-numeric:tabular-nums;
+    color:var(--ink);background:var(--panel);border:1.5px solid var(--ink);border-radius:9px}
+  .seed input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  button{min-height:44px;padding:0 16px;font:inherit;font-weight:600;color:var(--ink);
+    background:var(--panel);border:1.5px solid var(--ink);border-radius:9px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:8px}
+  button:hover:not(:disabled){background:#fff}
+  button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  #undo{background:var(--ink);color:var(--panel);min-width:108px;justify-content:center}
+  #undo:hover:not(:disabled){background:#3d322c}
+  .slot{width:16px;height:16px;display:inline-block;flex:none}
+  .slot svg{display:block;width:16px;height:16px}
+  .sep{flex:1 1 0;min-width:4px}
+  details{border-top:1px solid var(--line);padding-top:10px}
+  details + details{border-top:0;padding-top:0}
+  summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center;width:max-content}
+  summary:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+  details p,details ul{margin:6px 0 10px;color:var(--muted);font-size:.93rem}
+  details ul{padding-left:18px}
+  details li{margin:3px 0}
+  a{color:var(--focus)}
+  a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Clay Mend</h1>
+    <p class="lede">Shape the clay, then undo. Gold marks what came back.</p>
+  </header>
+
+  <div class="work">
+    <section aria-label="Canvas">
+      <div class="stage">
+        <canvas id="clay" width="640" height="640" tabindex="0"
+          aria-label="Clay canvas" aria-describedby="kbdHelp"></canvas>
+        <span class="tag" aria-hidden="true">Demo</span>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite">Drag to press clay</p>
+      <p id="kbdHelp" class="sr">Demo terrain. Arrow keys move the brush, Shift moves faster, Enter applies the tool.</p>
+    </section>
+
+    <section class="rail" aria-label="Controls">
+      <div class="row">
+        <fieldset>
+          <legend class="sr">Tool</legend>
+          <div class="seg">
+            <input type="radio" name="tool" id="tPress" value="press" checked>
+            <label for="tPress">Press</label>
+            <input type="radio" name="tool" id="tScatter" value="scatter">
+            <label for="tScatter">Scatter</label>
+          </div>
+        </fieldset>
+        <label class="seed" for="seed">Seed
+          <input id="seed" type="number" inputmode="numeric" min="0" max="99999" step="1" value="7031">
+        </label>
+      </div>
+
+      <div class="row">
+        <button id="undo" type="button" disabled aria-keyshortcuts="Control+Z Meta+Z">
+          <span class="slot" id="slot" aria-hidden="true"></span>Undo<span class="sr" id="undoNext"></span>
+        </button>
+        <button id="redo" type="button" disabled aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z">Redo</button>
+        <span class="sep"></span>
+        <button id="reset" type="button">Reset</button>
+      </div>
+
+      <div>
+        <details>
+          <summary>Keys</summary>
+          <ul>
+            <li>Arrows move the brush. Shift moves faster.</li>
+            <li>Enter or Space applies the tool.</li>
+            <li>Ctrl+Z undoes. Ctrl+Shift+Z redoes. Cmd on macOS.</li>
+            <li>Redo reruns the tool from its seed, so the same pebbles return.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Credits</summary>
+          <ul>
+            <li>Technical illustrator (lead): put the restored outline on the canvas and dropped the history panel.</li>
+            <li>Railway signaller: kept the Undo label fixed, with a 16 px slot showing the next tool to reverse.</li>
+            <li>Cabinet maker: status names tool, count and seed. Redo replays from the seed.</li>
+            <li>Paper fox: gold seam that folds to a crease. Kept the plain label Undo.</li>
+          </ul>
+          <p>Source: <a href="https://www.reddit.com/r/SideProject/comments/1xxprui/ive_spent_my_evenings_and_weekends_creating_a/" rel="noopener noreferrer">I've spent my evenings and weekends creating a game where the whole world is clay</a> (Reddit r/SideProject). The terrain here is local demo data.</p>
+        </details>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const N = 80, C = 4;               // 80x80 cells, 4 px each, 320 px canvas
+  const cv = document.getElementById("clay");
+  const ctx = cv.getContext("2d");
+  const off = document.createElement("canvas");
+  off.width = off.height = 320;
+  const octx = off.getContext("2d");
+  const img = octx.createImageData(320, 320);
+
+  const statusEl = document.getElementById("status");
+  const seedIn = document.getElementById("seed");
+  const undoBtn = document.getElementById("undo");
+  const redoBtn = document.getElementById("redo");
+  const resetBtn = document.getElementById("reset");
+  const slot = document.getElementById("slot");
+  const undoNext = document.getElementById("undoNext");
+
+  const H = new Float32Array(N * N);
+  const S = new Uint8Array(N * N);
+  const DEFAULT_SEED = 7031;
+  let seed = DEFAULT_SEED;
+  let tool = "press";
+  const undoStack = [], redoStack = [];
+  let seam = null, raf = 0;
+  let stroke = null, hover = null, focused = false;
+  const kpos = [40, 40];
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  function sample() {
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+      let h = .5 + .16 * Math.sin(x * .11 + .6) * Math.cos(y * .09 - .4)
+            + .1 * Math.sin((x + y) * .05 + 1)
+            + .06 * Math.cos(x * .31) * Math.sin(y * .27);
+      const n = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+      h += (n - Math.floor(n) - .5) * .03;
+      H[y * N + x] = h; S[y * N + x] = 0;
+    }
+  }
+
+  function render() {
+    const d = img.data;
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+      const i = y * N + x, h = H[i];
+      const hp = (x > 0 && y > 0) ? H[i - N - 1] : h;
+      let l = (h - hp) * 2.4;
+      l = Math.max(-.35, Math.min(.35, l));
+      let r, g, b;
+      if (S[i]) {
+        const k = .5 + .45 * Math.min(h, 1.45) / 1.45;
+        r = 40 + 118 * k; g = 38 + 112 * k; b = 36 + 102 * k;
+      } else {
+        const k = .5 + .5 * Math.min(Math.max(h, 0), 1.2) / 1.2;
+        r = 86 + 120 * k; g = 48 + 80 * k; b = 34 + 60 * k;
+      }
+      r += l * 120; g += l * 100; b += l * 80;
+      for (let yy = 0; yy < C; yy++) {
+        let p = ((y * C + yy) * 320 + x * C) * 4;
+        for (let xx = 0; xx < C; xx++, p += 4) {
+          d[p] = r; d[p + 1] = g; d[p + 2] = b; d[p + 3] = 255;
+        }
+      }
+    }
+    octx.putImageData(img, 0, 0);
+    draw();
+  }
+
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+  function draw() {
+    ctx.setTransform(2, 0, 0, 2, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(off, 0, 0);
+    if (seam) {
+      const t = seam.t;
+      if (t < 1) {
+        ctx.fillStyle = "rgba(240,196,84," + (.3 * (1 - t)).toFixed(3) + ")";
+        ctx.fill(seam.area);
+      }
+      const w = t < 1 ? 1 + 4 * (1 - easeOut(t)) : 1;
+      ctx.lineJoin = "round"; ctx.lineCap = "round"; ctx.setLineDash([]);
+      ctx.strokeStyle = "rgba(43,26,14,.6)"; ctx.lineWidth = w + 1.5; ctx.stroke(seam.edge);
+      ctx.strokeStyle = "#f0c454"; ctx.lineWidth = w; ctx.stroke(seam.edge);
+    }
+    const p = stroke ? null : (hover || (focused ? [kpos[0], kpos[1]] : null));
+    if (p) {
+      const r = tool === "press" ? 12 : 40;
+      ctx.beginPath(); ctx.arc(p[0] * C, p[1] * C, r, 0, Math.PI * 2);
+      ctx.setLineDash(tool === "press" ? [] : [4, 4]);
+      ctx.lineWidth = 1; ctx.strokeStyle = "rgba(250,247,242,.85)"; ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+
+  function buildSeam(cells) {
+    const m = new Uint8Array(N * N);
+    for (const c of cells) m[c] = 1;
+    const edge = new Path2D(), area = new Path2D();
+    for (const c of cells) {
+      const x = c % N, y = (c / N) | 0, X = x * C, Y = y * C;
+      area.rect(X, Y, C, C);
+      if (y === 0 || !m[c - N]) { edge.moveTo(X, Y); edge.lineTo(X + C, Y); }
+      if (y === N - 1 || !m[c + N]) { edge.moveTo(X, Y + C); edge.lineTo(X + C, Y + C); }
+      if (x === 0 || !m[c - 1]) { edge.moveTo(X, Y); edge.lineTo(X, Y + C); }
+      if (x === N - 1 || !m[c + 1]) { edge.moveTo(X + C, Y); edge.lineTo(X + C, Y + C); }
+    }
+    return { edge, area, t: 0 };
+  }
+
+  function startSeam(cells) {
+    cancelAnimationFrame(raf);
+    seam = buildSeam(cells);
+    const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || document.hidden) { seam.t = 1; draw(); return; }
+    const t0 = performance.now();
+    const step = now => {
+      if (!seam) return;
+      seam.t = Math.min(1, (now - t0) / 2000);
+      draw();
+      if (seam.t < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  }
+
+  function clearSeam() { cancelAnimationFrame(raf); seam = null; }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && seam && seam.t < 1) { cancelAnimationFrame(raf); seam.t = 1; draw(); }
+  });
+
+  // Tools
+  function touch(map, i) { if (!map.has(i)) map.set(i, [H[i], S[i]]); }
+
+  function pressAt(px, py, map) {
+    const R = 3;
+    for (let y = Math.floor(py - R); y <= Math.ceil(py + R); y++)
+      for (let x = Math.floor(px - R); x <= Math.ceil(px + R); x++) {
+        if (x < 0 || y < 0 || x >= N || y >= N) continue;
+        const d = Math.hypot(x + .5 - px, y + .5 - py);
+        if (d >= R) continue;
+        const i = y * N + x;
+        touch(map, i);
+        const f = 1 - (d / R) * (d / R);
+        const target = Math.max(.02, map.get(i)[0] - .26 * f);
+        if (target < H[i]) H[i] = target;
+      }
+  }
+
+  function scatter(cx, cy, sd, map) {
+    const rnd = mulberry32(sd);
+    for (let k = 0; k < 6; k++) {
+      const a = rnd() * Math.PI * 2, dd = 2 + rnd() * 7;
+      const px = cx + Math.cos(a) * dd, py = cy + Math.sin(a) * dd;
+      const r = 1.3 + rnd() * 1.3;
+      for (let y = Math.floor(py - r); y <= Math.ceil(py + r); y++)
+        for (let x = Math.floor(px - r); x <= Math.ceil(px + r); x++) {
+          if (x < 0 || y < 0 || x >= N || y >= N) continue;
+          const d = Math.hypot(x + .5 - px, y + .5 - py);
+          if (d >= r) continue;
+          const i = y * N + x;
+          touch(map, i);
+          S[i] = 1;
+          H[i] = Math.min(1.45, H[i] + .32 * Math.sqrt(1 - (d / r) * (d / r)));
+        }
+    }
+    return Math.floor(rnd() * 9000) + 1000;
+  }
+
+  function run(e, map) {
+    if (e.tool === "press") { for (const p of e.inputs) pressAt(p[0], p[1], map); return null; }
+    return scatter(e.inputs[0], e.inputs[1], e.seed, map);
+  }
+
+  function describe(e) {
+    return e.tool === "press"
+      ? "Press, " + e.cells.length + " cells"
+      : "Scatter, 6 pebbles, seed " + e.seed;
+  }
+
+  function commit(e, map) {
+    if (!map.size) return false;
+    const cells = Int32Array.from(map.keys());
+    e.cells = cells;
+    e.bH = Float32Array.from(cells, i => map.get(i)[0]);
+    e.bS = Uint8Array.from(cells, i => map.get(i)[1]);
+    e.aH = Float32Array.from(cells, i => H[i]);
+    e.aS = Uint8Array.from(cells, i => S[i]);
+    undoStack.push(e);
+    if (undoStack.length > 60) undoStack.shift();
+    redoStack.length = 0;
+    clearSeam();
+    ui();
+    return true;
+  }
+
+  function say(msg) { statusEl.textContent = msg; }
+
+  function undo() {
+    const e = undoStack.pop();
+    if (!e) { say("Nothing to undo"); return; }
+    e.cells.forEach((c, k) => { H[c] = e.bH[k]; S[c] = e.bS[k]; });
+    if (e.tool === "scatter") { seed = e.seed; seedIn.value = seed; }
+    redoStack.push(e);
+    startSeam(e.cells);
+    render();
+    say("Back: " + describe(e));
+    ui();
+  }
+
+  function redo() {
+    const e = redoStack.pop();
+    if (!e) { say("Nothing to redo"); return; }
+    const map = new Map();
+    const next = run(e, map);
+    let same = map.size === e.cells.length;
+    if (same) e.cells.forEach((c, k) => { if (H[c] !== e.aH[k] || S[c] !== e.aS[k]) same = false; });
+    if (next !== null) { seed = next; seedIn.value = next; }
+    undoStack.push(e);
+    clearSeam();
+    render();
+    say("Again: " + describe(e) + (same ? " · identical" : " · changed"));
+    ui();
+  }
+
+  function reset() {
+    if (stroke) stroke = null;
+    sample();
+    seed = DEFAULT_SEED; seedIn.value = seed;
+    undoStack.length = 0; redoStack.length = 0;
+    clearSeam();
+    render(); ui();
+    say("Demo restored");
+  }
+
+  // Undo icon slot
+  const NS = "http://www.w3.org/2000/svg";
+  function el(name, attrs) {
+    const n = document.createElementNS(NS, name);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+  function makeIcon(t) {
+    const s = el("svg", { viewBox: "0 0 16 16", focusable: "false" });
+    if (t === "press") {
+      const g = el("g", { fill: "none", stroke: "currentColor", "stroke-width": "1.3", "stroke-linecap": "round" });
+      ["M2.6 6.4a5.8 5.8 0 0 1 10.8 0",
+       "M4.8 12.6c-.8-1.2-1.1-2.6-1.1-4a4.3 4.3 0 0 1 8.6 0c0 1.6-.4 3-1 4.2",
+       "M7 13.6c-.6-1.4-1-3-1-4.6a2 2 0 0 1 4 0c0 1.5-.3 3-.8 4.3",
+       "M8 9c0 1.8.3 3.3.9 4.8"].forEach(d => g.appendChild(el("path", { d })));
+      s.appendChild(g);
+    } else {
+      s.appendChild(el("ellipse", { cx: "8", cy: "9.4", rx: "6.2", ry: "4.4", fill: "currentColor" }));
+      s.appendChild(el("ellipse", { cx: "6", cy: "7.8", rx: "1.9", ry: "1", fill: "#2a221e", "fill-opacity": ".45" }));
+    }
+    return s;
+  }
+  const icons = { press: makeIcon("press"), scatter: makeIcon("scatter") };
+
+  function ui() {
+    const top = undoStack[undoStack.length - 1];
+    undoBtn.disabled = !top;
+    redoBtn.disabled = !redoStack.length;
+    if (top) { slot.replaceChildren(icons[top.tool]); undoNext.textContent = top.tool === "press" ? " Press" : " Scatter"; }
+    else { slot.replaceChildren(); undoNext.textContent = ""; }
+    if (document.activeElement === undoBtn && undoBtn.disabled) cv.focus({ preventScroll: true });
+    if (document.activeElement === redoBtn && redoBtn.disabled) undoBtn.disabled ? cv.focus({ preventScroll: true }) : undoBtn.focus();
+  }
+
+  // Input
+  const r2 = v => Math.round(v * 100) / 100;
+  function pos(ev) {
+    const rc = cv.getBoundingClientRect();
+    const x = (ev.clientX - rc.left) / rc.width * N;
+    const y = (ev.clientY - rc.top) / rc.height * N;
+    return [r2(Math.max(0, Math.min(N, x))), r2(Math.max(0, Math.min(N, y)))];
+  }
+
+  function doScatter(cx, cy) {
+    const e = { tool: "scatter", inputs: [r2(cx), r2(cy)], seed };
+    const map = new Map();
+    const next = scatter(e.inputs[0], e.inputs[1], e.seed, map);
+    if (commit(e, map)) {
+      seed = next; seedIn.value = next;
+      render();
+      say("Scattered 6 pebbles, seed " + e.seed);
+    } else render();
+  }
+
+  function pressOnce(x, y) {
+    const e = { tool: "press", inputs: [[r2(x), r2(y)]] };
+    const map = new Map();
+    pressAt(e.inputs[0][0], e.inputs[0][1], map);
+    if (commit(e, map)) say("Pressed " + map.size + " cells");
+    render();
+  }
+
+  cv.addEventListener("pointerdown", ev => {
+    if (ev.button > 0) return;
+    cv.focus({ preventScroll: true });
+    const p = pos(ev);
+    ev.preventDefault();
+    if (tool === "scatter") { doScatter(p[0], p[1]); return; }
+    stroke = { e: { tool: "press", inputs: [p] }, map: new Map(), last: p };
+    pressAt(p[0], p[1], stroke.map);
+    try { cv.setPointerCapture(ev.pointerId); } catch (_) {}
+    render();
+  });
+
+  cv.addEventListener("pointermove", ev => {
+    const p = pos(ev);
+    hover = ev.pointerType === "mouse" ? p : null;
+    if (!stroke) { draw(); return; }
+    const [lx, ly] = stroke.last;
+    const steps = Math.floor(Math.hypot(p[0] - lx, p[1] - ly));
+    if (steps < 1) return;
+    let q = null;
+    for (let s = 1; s <= steps; s++) {
+      q = [r2(lx + (p[0] - lx) * s / steps), r2(ly + (p[1] - ly) * s / steps)];
+      stroke.e.inputs.push(q);
+      pressAt(q[0], q[1], stroke.map);
+    }
+    stroke.last = q;
+    render();
+  });
+
+  function endStroke() {
+    if (!stroke) return;
+    const s = stroke; stroke = null;
+    if (commit(s.e, s.map)) say("Pressed " + s.map.size + " cells");
+    draw();
+  }
+  cv.addEventListener("pointerup", endStroke);
+  cv.addEventListener("pointercancel", endStroke);
+  cv.addEventListener("lostpointercapture", endStroke);
+  cv.addEventListener("pointerleave", () => { hover = null; if (!stroke) draw(); });
+
+  cv.addEventListener("focus", () => { focused = true; draw(); });
+  cv.addEventListener("blur", () => { focused = false; draw(); });
+
+  cv.addEventListener("keydown", ev => {
+    if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    const st = ev.shiftKey ? 8 : 2;
+    const moves = { ArrowLeft: [-st, 0], ArrowRight: [st, 0], ArrowUp: [0, -st], ArrowDown: [0, st] };
+    if (moves[ev.key]) {
+      ev.preventDefault();
+      hover = null;
+      kpos[0] = Math.max(0, Math.min(N, kpos[0] + moves[ev.key][0]));
+      kpos[1] = Math.max(0, Math.min(N, kpos[1] + moves[ev.key][1]));
+      draw();
+    } else if (ev.key === "Enter" || ev.key === " ") {
+      ev.preventDefault();
+      if (tool === "scatter") doScatter(kpos[0], kpos[1]);
+      else pressOnce(kpos[0], kpos[1]);
+    }
+  });
+
+  document.addEventListener("keydown", ev => {
+    if (!(ev.ctrlKey || ev.metaKey) || ev.altKey) return;
+    if (ev.target === seedIn) return;
+    const k = ev.key.toLowerCase();
+    if (k === "z" && !ev.shiftKey) { ev.preventDefault(); undo(); }
+    else if ((k === "z" && ev.shiftKey) || k === "y") { ev.preventDefault(); redo(); }
+  });
+
+  document.querySelectorAll('input[name="tool"]').forEach(r => r.addEventListener("change", () => {
+    tool = r.value;
+    say(tool === "press" ? "Drag to press clay" : "Tap to scatter 6 pebbles");
+    draw();
+  }));
+
+  seedIn.addEventListener("change", () => {
+    const v = Number(seedIn.value);
+    if (Number.isInteger(v) && v >= 0 && v <= 99999) { seed = v; say("Seed " + v); }
+    else { seedIn.value = seed; say("Seed must be 0–99999"); }
+  });
+
+  undoBtn.addEventListener("click", undo);
+  redoBtn.addEventListener("click", redo);
+  resetBtn.addEventListener("click", reset);
+
+  sample();
+  render();
+  ui();
+})();
+</script>
+</body>
+</html>

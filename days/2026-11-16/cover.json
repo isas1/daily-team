@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "40f41c1657f548d3830843ab292790ce41b52d4ff4caef627ca42d100900415e",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Technical illustrator.** The cover drops the panel and the screenshot. It shows one clay slab with the restored region marked on the clay. The eye goes from the title to the seam in one step.\n\n**Railway signaller.** One undo arrow in navy sits fixed at the slab's upper left and points at the seam. The arrow and the title stay still. The clay carries the change.\n\n**Cabinet maker.** The most important action is the return. The restored region is the largest shape. Its six pebbles sit at fixed points, standing for a seeded scatter that replays the same way. The press dents sit around it at a smaller scale.\n\n**Paper fox.** The seam is gold. Its edge is stepped on a grid because the history stores a cell mask. A second, older repair is folded down to a thin 1.5 px crease. The title stays plain: \"Clay Mend.\"\n\n**Lead decision.**\n- Composition: the text column takes the left 440 px. The clay slab fills the right 580 px. A 7 px gold stepped seam outlines the restored fragment. A 1.5 px crease marks an earlier mend.\n- Palette: cream ground #F1E7D8, clay #B8714A and #C9875D, dent shadow #9C5A3A, gold #D8A535, pebble #5A4A42. Navy #0E2A47 is used for type and the arrow. Red #BE4D4D appears only as one 64 px rule.\n- Type: \"Clay\" and \"Mend\" are stacked at 156 px in Cover Headline, navy. The descriptor is 28 px Cover Text. The date is 22 px, set with letter spacing.",
+  "width": 1200,
+  "height": 630
+}

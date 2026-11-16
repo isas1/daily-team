@@ -1,6 +1,186 @@
 {
   "items": [
     {
+      "id": "e48105d3532673b8d2b5d8f9",
+      "title": "I built a Mac notes app where you tell the AI what you want and it appears in the page. Launched today.",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxqn67/i_built_a_mac_notes_app_where_you_tell_the_ai/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T14:24:47.000Z",
+      "summary": ""
+    },
+    {
+      "id": "3917125ab16c7d9df930d466",
+      "title": "I built Risphai – an AI that automatically picks the right model, tools, and optimizes your prompt so you get better results with AI",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxql3a/i_built_risphai_an_ai_that_automatically_picks/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T14:22:21.000Z",
+      "summary": ""
+    },
+    {
+      "id": "0f0858d2f9d1370e593811f3",
+      "title": "PaperTool update: import your existing PDFs and edit them, translate templates, faster app, and you can try it without signing up",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxq8lt/papertool_update_import_your_existing_pdfs_and/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T14:07:45.000Z",
+      "summary": ""
+    },
+    {
+      "id": "65a05140b644f53603f853c8",
+      "title": "I built a free AI running coach on top of my Garmin data. Looking for honest feedback",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxq8ai/i_built_a_free_ai_running_coach_on_top_of_my/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T14:07:24.000Z",
+      "summary": ""
+    },
+    {
+      "id": "42f310893a89b7bedfd0eefd",
+      "title": "I built a ranking of every pub in the UK (~40,000) from open data",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxq363/i_built_a_ranking_of_every_pub_in_the_uk_40000/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T14:01:25.000Z",
+      "summary": ""
+    },
+    {
+      "id": "bb53614ed57727ce73d49176",
+      "title": "My partner and I realized we'd never actually talked through most of the parenting questions, so I built a free site where each of us answers alone, then we compare",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxpzt6/my_partner_and_i_realized_wed_never_actually/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T13:57:45.000Z",
+      "summary": ""
+    },
+    {
+      "id": "5c9f3a4ba90c3c4b005240dc",
+      "title": "I've spent my evenings and weekends creating a game where the whole world is clay",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxprui/ive_spent_my_evenings_and_weekends_creating_a/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T13:47:55.000Z",
+      "summary": ""
+    },
+    {
+      "id": "b541d65e79541948d8d1ae8a",
+      "title": "Do side projects still mean anything on a CV now",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxp020/do_side_projects_still_mean_anything_on_a_cv_now/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T13:12:25.000Z",
+      "summary": ""
+    },
+    {
+      "id": "f4a542c348c9d47240b422c9",
+      "title": "I built AgentEd, a visual Markdown editor with live token estimates and YAML frontmatter (free, open source)",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxoqkk/i_built_agented_a_visual_markdown_editor_with/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T13:00:09.000Z",
+      "summary": ""
+    },
+    {
+      "id": "d1f38b129229e05a8b2f5fee",
+      "title": "I Built A Desktop Companion Bot",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxop79/i_built_a_desktop_companion_bot/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T12:58:16.000Z",
+      "summary": ""
+    },
+    {
+      "id": "b6ce9bd5473e2cf0c6b11a89",
+      "title": "Is the \"subscription fatigue\" real for small niche tools, or are one-time passes the way to go?",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxooho/is_the_subscription_fatigue_real_for_small_niche/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T12:57:19.000Z",
+      "summary": ""
+    },
+    {
+      "id": "b14fd556c144da3700eb30d2",
+      "title": "I built Crossroad: it finds people who are publicly asking for what you built",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxogd6/i_built_crossroad_it_finds_people_who_are/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T12:45:29.000Z",
+      "summary": ""
+    },
+    {
+      "id": "f2e094db0c23f90ef7990cd5",
+      "title": "Katran, a local shelf for Windows that lets you collect and transfer clipboard items in batches",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxoa73/katran_a_local_shelf_for_windows_that_lets_you/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T12:36:18.000Z",
+      "summary": ""
+    },
+    {
+      "id": "c70f4fd0676116296525e477",
+      "title": "finally rebuilt my portfolio after neglecting it for years",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxn6ee/finally_rebuilt_my_portfolio_after_neglecting_it/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T11:36:44.000Z",
+      "summary": ""
+    },
+    {
+      "id": "0c85b33921c6d471a1b18e4a",
+      "title": "I added partner dancing to my choreography app! So excited 🔥",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxmf8g/i_added_partner_dancing_to_my_choreography_app_so/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T10:52:07.000Z",
+      "summary": ""
+    },
+    {
+      "id": "636ee505da4a7d6aa7c78258",
+      "title": "After 8 years of research I've released Veshell a Linux environment that aims to provide a workflow that reduces the need to manipulate windows, feels more natural to navigate, and",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxla2q/after_8_years_of_research_ive_released_veshell_a/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T09:40:34.000Z",
+      "summary": ""
+    },
+    {
+      "id": "42368d8739e7758c8c04f2c5",
+      "title": "So many bots posting about everything we build",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxj2yb/so_many_bots_posting_about_everything_we_build/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T07:18:58.000Z",
+      "summary": ""
+    },
+    {
+      "id": "af85c175a429c190bb203104",
+      "title": "My 6-year-old asked me to make bugs talk to him, so I built an app for it",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxiq32/my_6yearold_asked_me_to_make_bugs_talk_to_him_so/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T06:57:36.000Z",
+      "summary": ""
+    },
+    {
+      "id": "677194ee37bd39c908f50613",
+      "title": "Side project of some time ago, AR soccer concept",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xxc62c/side_project_of_some_time_ago_ar_soccer_concept/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-16T01:06:57.000Z",
+      "summary": ""
+    },
+    {
+      "id": "10fb39fb7259b1053f068020",
+      "title": "Never build a URL shortener. NEVER!",
+      "url": "https://www.reddit.com/r/SideProject/comments/1xx5n46/never_build_a_url_shortener_never/",
+      "source": "Reddit r/SideProject",
+      "sourceId": "reddit-sideproject",
+      "published": "2026-11-15T20:19:47.000Z",
+      "summary": ""
+    },
+    {
       "id": "6921618a4fcf3aa8e35773fc",
       "title": "Why did some Apollo missions carry a grenade launcher?",
       "url": "https://space.stackexchange.com/questions/37775",
@@ -733,193 +913,13 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-08T12:05:47.000Z",
       "summary": ""
-    },
-    {
-      "id": "631e04656b9327e01bd0c174",
-      "title": "I made an extension that copies any text with one click. No selecting, no Ctrl+C.",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqwx73/i_made_an_extension_that_copies_any_text_with_one/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T12:05:06.000Z",
-      "summary": ""
-    },
-    {
-      "id": "653ec7086cc2f05c3e156fdd",
-      "title": "Atlas Streak - a daily blank-map geography game (web + inside Reddit)",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqwvee/atlas_streak_a_daily_blankmap_geography_game_web/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T12:02:11.000Z",
-      "summary": ""
-    },
-    {
-      "id": "79f83838997b3539b5680f2d",
-      "title": "I got tired of scanner apps putting basic features behind paywalls, so I made my own",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqwn2e/i_got_tired_of_scanner_apps_putting_basic/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T11:48:50.000Z",
-      "summary": ""
-    },
-    {
-      "id": "bf6654aad97d682a79e5ed46",
-      "title": "We Closed 10K Worth Of Web Design Deals Using This",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqwh5v/we_closed_10k_worth_of_web_design_deals_using_this/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T11:38:25.000Z",
-      "summary": ""
-    },
-    {
-      "id": "1ae3d282518c24ec619410ff",
-      "title": "Please ban u/Investigatormarker: an AI bot advertising ThreadFox in every thread",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqw96n/please_ban_uinvestigatormarker_an_ai_bot/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T11:23:44.000Z",
-      "summary": ""
-    },
-    {
-      "id": "dcc13ba1d4d778565fb78c9f",
-      "title": "Person of Interest",
-      "url": "https://krthr.co/person-of-interest/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T11:23:28.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "17e16f9330abf0a4354c1384",
-      "title": "I made a tiny pixel bunny that lives on my Mac desktop",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqw8kg/i_made_a_tiny_pixel_bunny_that_lives_on_my_mac/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T11:22:36.000Z",
-      "summary": ""
-    },
-    {
-      "id": "af125f4317d5495db2bf2edb",
-      "title": "Memora+ - Turn buried iPhone photos into editable memory movies",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqw5wu/memora_turn_buried_iphone_photos_into_editable/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T11:17:51.000Z",
-      "summary": ""
-    },
-    {
-      "id": "c8c0c125927c424b7b2949c9",
-      "title": "TableCraft: a free, open-source database IDE in the spirit of DataGrip,",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqw018/tablecraft_a_free_opensource_database_ide_in_the/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T11:07:18.000Z",
-      "summary": ""
-    },
-    {
-      "id": "c60c4786c8d2113fd98c8df5",
-      "title": "Petered (what happens after the Peter Principle)",
-      "url": "https://aworkinglibrary.com/writing/petered",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T10:56:43.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "4ad7c9284c96b64ae9d09949",
-      "title": "After trying every birding app, I built the one I wanted",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqvrgl/after_trying_every_birding_app_i_built_the_one_i/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T10:52:04.000Z",
-      "summary": ""
-    },
-    {
-      "id": "fbb4c6ab199fa8c66f539df1",
-      "title": "JIT bitmap text rendering for microcontrollers",
-      "url": "https://linebender.org/blog/jit-bitmap-text/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T10:42:15.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "55858f2b4ca73bdea18bb38c",
-      "title": "Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU",
-      "url": "https://github.com/synchopate/llama-modchip",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T10:22:04.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "b1b040a10e13f61ef5c649ad",
-      "title": "My side project: a tiny pixel-art office where you can watch your AI coding agents work, wait and nap",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqv0x9/my_side_project_a_tiny_pixelart_office_where_you/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T10:03:22.000Z",
-      "summary": ""
-    },
-    {
-      "id": "b6896b2bb1e39efcaf7af4e8",
-      "title": "3D Crossword - hope you like it!",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xquu83/3d_crossword_hope_you_like_it/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T09:51:06.000Z",
-      "summary": ""
-    },
-    {
-      "id": "6a1732c3e8efbcfb0f034bc8",
-      "title": "[FOR HIRE] Brand & Graphic Designer | Visual Identity, Logo Design & Art Direction",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqul85/for_hire_brand_graphic_designer_visual_identity/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T09:33:48.000Z",
-      "summary": ""
-    },
-    {
-      "id": "96571aa39f8d3b2f00f21a82",
-      "title": "Agent memory needs its OpenTelemetry moment",
-      "url": "https://www.lorekit.io/blog/open-agent-memory-format",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T08:40:23.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "86a24adee386049be1a0fb1f",
-      "title": "I turned the old phone in my drawer into a control panel for my desk setup - DeskGadget, an open source Windows server with an Android client by issac_john",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqtskd/i_turned_the_old_phone_in_my_drawer_into_a/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T08:40:13.000Z",
-      "summary": ""
-    },
-    {
-      "id": "b811a181bf296e5d3a26eccc",
-      "title": "Free revision app for IGCSE students, built by a student. Launched on Product Hunt today",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqtei6/free_revision_app_for_igcse_students_built_by_a/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T08:13:44.000Z",
-      "summary": ""
-    },
-    {
-      "id": "5e29276ecf50d9099d31b1f0",
-      "title": "Looking for feedback: daily vocabulary email, website monitor & news tracker",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqt3g9/looking_for_feedback_daily_vocabulary_email/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T07:54:01.000Z",
-      "summary": ""
     }
   ],
   "fetched": {
     "smashing": "2026-11-14",
     "hacker-news": "2026-11-15",
     "github-trending": "2026-11-13",
-    "reddit-sideproject": "2026-11-11",
+    "reddit-sideproject": "2026-11-16",
     "reddit-beautiful": "2026-11-12"
   }
 }
