@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Password reveal · Sign up</title>
+<style>
+  :root{
+    --paper:#f3f0e9;
+    --card:#fffdf8;
+    --ink:#1f2a33;
+    --muted:#5b6670;
+    --line:#cfc8bb;
+    --accent:#1f5f6b;
+    --warn:#8f3a22;
+    --ok:#2f5d2a;
+    --kA:#1f5f6b;
+    --ka:#1f2a33;
+    --k1:#8f3a22;
+    --kh:#5a4a12;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);
+    font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:34rem;margin:0 auto;padding:2rem 1rem 3rem}
+  h1{font-size:1.6rem;margin:0 0 .25rem;letter-spacing:-.01em}
+  .lede{margin:0 0 1.5rem;color:var(--muted)}
+  form{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.25rem 1rem 1rem}
+  .lab{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
+  .lab label{font-weight:600}
+  .tag{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:0 .35rem}
+  .field{display:flex;gap:.5rem}
+  #pw{flex:1;min-width:0;font:17px/1 var(--mono);padding:.7rem .7rem;height:2.9rem;
+    border:1px solid var(--ink);border-radius:6px;background:#fff;color:var(--ink)}
+  #pw[readonly]{background:#f6f4ef}
+  button{font:inherit;font-weight:600;border-radius:6px;padding:0 .9rem;height:2.9rem;cursor:pointer;
+    border:1px solid var(--ink);background:#fff;color:var(--ink)}
+  #show{width:4.6rem}
+  button[aria-disabled="true"]{cursor:default;opacity:.75}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  #pw:focus-visible{outline-offset:1px}
+
+  .page{display:grid;grid-template-columns:repeat(20,1fr);gap:2px;margin:.9rem 0 .4rem}
+  .cell{height:2.6rem;display:grid;grid-template-rows:1fr .95rem;align-items:center;justify-items:center;
+    background:#fff;border:1px solid #e3ddd1;border-radius:3px;min-width:0;overflow:hidden}
+  .cell.on{border-color:var(--line)}
+  .ch{font:clamp(12px,3.4vw,17px)/1 var(--mono)}
+  .mk{font:600 clamp(8px,2.3vw,10px)/1 var(--mono);color:var(--muted)}
+  .cell[data-k="A"] .mk{color:var(--kA)}
+  .cell[data-k="a"] .mk{color:var(--ka)}
+  .cell[data-k="1"] .mk{color:var(--k1)}
+  .cell[data-k="#"] .mk,.cell[data-k="*"] .mk{color:var(--kh)}
+  .cell.caret{box-shadow:inset 2px 0 0 var(--accent)}
+  .shelf{margin:0 0 1.25rem;font:14px/1.4 var(--mono);color:var(--muted);min-height:1.4em}
+  .shelf sup{font-size:.7em}
+
+  .actions{display:flex;gap:.5rem;align-items:center}
+  #go{background:var(--ink);color:#fff;border-color:var(--ink)}
+  #go.failed{background:var(--warn);border-color:var(--warn)}
+  #go.done{background:var(--ok);border-color:var(--ok)}
+  #cancel{visibility:hidden}
+  #cancel.live{visibility:visible}
+  .status{display:flex;align-items:center;gap:.5rem;min-height:1.6rem;margin:.6rem 0 .2rem;font-size:.95rem}
+  .dot{width:.55rem;height:.55rem;border-radius:50%;background:transparent;flex:none}
+  .checking .dot{background:var(--accent);animation:pulse 1s ease-in-out infinite}
+  .failed .dot{background:var(--warn)}
+  .done .dot{background:var(--ok)}
+  .failed{color:var(--warn)}
+  .done{color:var(--ok)}
+  @keyframes pulse{50%{opacity:.25}}
+  .paused .dot{animation-play-state:paused}
+
+  .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e6e0d4;
+    margin-top:.6rem;padding-top:.8rem;font-size:.95rem}
+  .foot label{display:flex;align-items:center;gap:.4rem;color:var(--muted)}
+  .foot input{width:1.1rem;height:1.1rem;accent-color:var(--warn)}
+  #reset{height:2.4rem}
+
+  details{margin-top:1.5rem;color:var(--muted);font-size:.9rem}
+  summary{cursor:pointer;width:max-content}
+  details ul{padding-left:1.1rem}
+  details a{color:var(--accent)}
+
+  @media (prefers-reduced-motion:reduce){
+    .checking .dot{animation:none}
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Sign up</h1>
+  <p class="lede">Check each character before you sign up.</p>
+
+  <form id="f" novalidate>
+    <div class="lab"><label for="pw">Password</label><span class="tag">Demo</span></div>
+    <div class="field" id="field">
+      <input id="pw" type="password" maxlength="40" autocomplete="new-password"
+             spellcheck="false" autocapitalize="off" autocorrect="off" aria-describedby="shelf">
+      <button type="button" id="show" aria-controls="pw">Show</button>
+    </div>
+
+    <div class="page" id="page" aria-hidden="true"></div>
+    <p class="shelf" id="shelf"></p>
+
+    <div class="actions">
+      <button type="submit" id="go">Create account</button>
+      <button type="button" id="cancel" tabindex="-1">Cancel</button>
+    </div>
+    <div class="status" id="statusWrap"><span class="dot" aria-hidden="true"></span><span id="status" role="status"></span></div>
+
+    <div class="foot">
+      <label><input type="checkbox" id="fail"> Fail next</label>
+      <button type="button" id="reset">Reset</button>
+    </div>
+  </form>
+
+  <details>
+    <summary>Credits</summary>
+    <ul>
+      <li>Flight deck designer (lead): submit states, Cancel during Checking, Retry in the same reserved box, input kept in every state.</li>
+      <li>Medical illustrator: lookalike sample Il1O0-rain, one monospace face, class marks that appear without motion, shelf line cut to length and alphabet.</li>
+      <li>Ergonomist: 320 px first, two reserved rows of 20 cells, keys only (Tab, Space, Alt+F8, Escape), caret and selection kept across the toggle.</li>
+      <li>Cautious beginner (invented archetype, guest): Escape and leaving the field both hide; the password shown as one page of cells.</li>
+    </ul>
+    <p>Source: <a href="https://www.reddit.com/r/InternetIsBeautiful/comments/1xyki7k/borges_library_of_babel_walk_to_the_book_where/" rel="noopener noreferrer">Borges' Library of Babel: walk to the book where any sentence is already written</a> (title only).</p>
+    <p>Local demo. No account is created and nothing is sent.</p>
+  </details>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var SAMPLE = "Il1O0-rain";
+  var MAX = 40;
+  var SIZES = {A:26, a:26, "1":10, "#":33};
+
+  var $ = function(id){ return document.getElementById(id); };
+  var form = $("f"), pw = $("pw"), showBtn = $("show"), page = $("page"), shelf = $("shelf");
+  var go = $("go"), cancelBtn = $("cancel"), statusEl = $("status"), statusWrap = $("statusWrap");
+  var failBox = $("fail"), resetBtn = $("reset"), field = $("field");
+
+  var cells = [];
+  for (var i = 0; i < MAX; i++){
+    var c = document.createElement("div"); c.className = "cell";
+    var ch = document.createElement("span"); ch.className = "ch";
+    var mk = document.createElement("span"); mk.className = "mk";
+    c.appendChild(ch); c.appendChild(mk); page.appendChild(c);
+    cells.push({el:c, ch:ch, mk:mk});
+  }
+
+  function cls(c){
+    if (/[A-Z]/.test(c)) return "A";
+    if (/[a-z]/.test(c)) return "a";
+    if (/[0-9]/.test(c)) return "1";
+    if (c >= " " && c <= "~") return "#";
+    return "*";
+  }
+
+  function render(){
+    var chars = Array.from(pw.value).slice(0, MAX);
+    var shown = pw.type === "text";
+    var caret = document.activeElement === pw ? Math.min(pw.selectionStart || 0, MAX - 1) : -1;
+    var present = {}, others = {};
+    for (var i = 0; i < MAX; i++){
+      var c = chars[i], cell = cells[i];
+      if (c === undefined){
+        cell.ch.textContent = ""; cell.mk.textContent = "";
+        cell.el.removeAttribute("data-k"); cell.el.classList.remove("on");
+      } else {
+        var k = cls(c);
+        present[k] = true; if (k === "*") others[c] = true;
+        cell.ch.textContent = shown ? (c === " " ? "\u2423" : c) : "\u2022";
+        cell.mk.textContent = k;
+        cell.el.setAttribute("data-k", k); cell.el.classList.add("on");
+      }
+      cell.el.classList.toggle("caret", i === caret);
+    }
+    var n = chars.length;
+    if (!n){ shelf.replaceChildren(document.createTextNode("Empty page")); return; }
+    var size = 0;
+    Object.keys(present).forEach(function(k){ if (SIZES[k]) size += SIZES[k]; });
+    size += Object.keys(others).length;
+    var sup = document.createElement("sup"); sup.textContent = String(n);
+    shelf.replaceChildren(document.createTextNode(n + " of " + size + " \u00b7 one page in " + size), sup);
+  }
+
+  function setShown(show, focusField){
+    var s = pw.selectionStart, e = pw.selectionEnd, d = pw.selectionDirection || "none";
+    if ((pw.type === "text") !== show) pw.type = show ? "text" : "password";
+    showBtn.textContent = show ? "Hide" : "Show";
+    if (focusField) pw.focus();
+    try { if (s !== null) pw.setSelectionRange(s, e, d); } catch (err) {}
+    render();
+  }
+
+  showBtn.addEventListener("click", function(){ setShown(pw.type === "password", true); });
+
+  pw.addEventListener("keydown", function(e){
+    if (e.altKey && e.key === "F8"){ e.preventDefault(); setShown(pw.type === "password", true); return; }
+    if (e.key === "Escape"){
+      if (job){ e.preventDefault(); cancelJob(); return; }
+      if (pw.type === "text"){ e.preventDefault(); setShown(false, true); }
+    }
+  });
+
+  field.addEventListener("focusout", function(e){
+    if (!field.contains(e.relatedTarget) && pw.type === "text") setShown(false, false);
+    setTimeout(render, 0);
+  });
+  pw.addEventListener("focus", render);
+  ["input","keyup","click","select"].forEach(function(t){ pw.addEventListener(t, render); });
+  document.addEventListener("selectionchange", function(){ if (document.activeElement === pw) render(); });
+
+  document.addEventListener("visibilitychange", function(){
+    document.documentElement.classList.toggle("paused", document.hidden);
+    if (document.hidden && pw.type === "text") setShown(false, false);
+  });
+
+  /* Submit states */
+  var job = null, timer = 0;
+  go.style.minWidth = go.offsetWidth + "px";
+
+  function say(text, state){
+    statusEl.textContent = text;
+    statusWrap.className = "status" + (state ? " " + state : "");
+  }
+  function setGo(label, state){
+    go.textContent = label;
+    go.className = state || "";
+    if (state === "done" || state === "checking") go.setAttribute("aria-disabled", "true");
+    else go.removeAttribute("aria-disabled");
+  }
+  function endJob(){
+    var hadFocus = document.activeElement === cancelBtn;
+    job = null; clearTimeout(timer);
+    pw.readOnly = false;
+    cancelBtn.classList.remove("live"); cancelBtn.tabIndex = -1;
+    if (hadFocus) go.focus();
+  }
+  function cancelJob(){
+    if (!job) return;
+    job.abort(); endJob();
+    setGo("Create account");
+    say("Cancelled \u00b7 password kept", "");
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (job || go.classList.contains("done")) return;
+    var len = Array.from(pw.value).length;
+    if (!len){ say("Type a password", "failed"); pw.focus(); return; }
+    if (len < 8){ say("Use 8 or more characters", "failed"); pw.focus(); return; }
+    var willFail = failBox.checked;
+    job = new AbortController();
+    var signal = job.signal;
+    pw.readOnly = true;
+    setGo("Checking", "checking");
+    cancelBtn.classList.add("live"); cancelBtn.tabIndex = 0;
+    say("Checking\u2026", "checking");
+    timer = setTimeout(function(){
+      if (signal.aborted) return;
+      endJob();
+      if (willFail){
+        failBox.checked = false;
+        setGo("Retry", "failed");
+        say("Failed \u00b7 password kept", "failed");
+      } else {
+        setGo("Created", "done");
+        say("Account created \u00b7 demo", "done");
+      }
+    }, 1200);
+  });
+
+  cancelBtn.addEventListener("click", cancelJob);
+
+  pw.addEventListener("input", function(){
+    if (go.classList.contains("done")){ setGo("Create account"); say("", ""); }
+  });
+
+  resetBtn.addEventListener("click", function(){
+    if (job){ job.abort(); endJob(); }
+    pw.value = SAMPLE;
+    failBox.checked = false;
+    setShown(false, false);
+    setGo("Create account");
+    say("", "");
+    render();
+  });
+
+  pw.value = SAMPLE;
+  render();
+})();
+</script>
+</body>
+</html>

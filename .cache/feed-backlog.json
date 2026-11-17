@@ -1,6 +1,24 @@
 {
   "items": [
     {
+      "id": "92ac2a3840749053e8a29656",
+      "title": "A live word cloud of what the internet is talking about right now, updated every minute",
+      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xym0q9/a_live_word_cloud_of_what_the_internet_is_talking/",
+      "source": "Reddit r/InternetIsBeautiful",
+      "sourceId": "reddit-beautiful",
+      "published": "2026-11-17T14:36:02.000Z",
+      "summary": ""
+    },
+    {
+      "id": "5145194c97dcbf48afca4167",
+      "title": "Borges' Library of Babel: walk to the book where any sentence is already written",
+      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xyki7k/borges_library_of_babel_walk_to_the_book_where/",
+      "source": "Reddit r/InternetIsBeautiful",
+      "sourceId": "reddit-beautiful",
+      "published": "2026-11-17T13:31:06.000Z",
+      "summary": ""
+    },
+    {
       "id": "e48105d3532673b8d2b5d8f9",
       "title": "I built a Mac notes app where you tell the AI what you want and it appears in the page. Launched today.",
       "url": "https://www.reddit.com/r/SideProject/comments/1xxqn67/i_built_a_mac_notes_app_where_you_tell_the_ai/",
@@ -172,6 +190,15 @@
       "summary": ""
     },
     {
+      "id": "0aa331dcab89dc022f27088e",
+      "title": "A browser house builder: draw a floor plan in 2D, see it in 3D, change the time of day, and walk inside!",
+      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xx5oeu/a_browser_house_builder_draw_a_floor_plan_in_2d/",
+      "source": "Reddit r/InternetIsBeautiful",
+      "sourceId": "reddit-beautiful",
+      "published": "2026-11-15T20:21:17.000Z",
+      "summary": ""
+    },
+    {
       "id": "10fb39fb7259b1053f068020",
       "title": "Never build a URL shortener. NEVER!",
       "url": "https://www.reddit.com/r/SideProject/comments/1xx5n46/never_build_a_url_shortener_never/",
@@ -278,6 +305,33 @@
       "sourceId": "hacker-news",
       "published": "2026-11-14T13:43:28.000Z",
       "summary": "Comments"
+    },
+    {
+      "id": "cc014defea6936783426fe75",
+      "title": "Star Trek-themed Wikipedia Reader",
+      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xvu1bm/star_trekthemed_wikipedia_reader/",
+      "source": "Reddit r/InternetIsBeautiful",
+      "sourceId": "reddit-beautiful",
+      "published": "2026-11-14T05:13:41.000Z",
+      "summary": ""
+    },
+    {
+      "id": "06ceb52f44bd68a5f77e5306",
+      "title": "This 3D gorilla has a bad temper but is very stretchy",
+      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xvatrz/this_3d_gorilla_has_a_bad_temper_but_is_very/",
+      "source": "Reddit r/InternetIsBeautiful",
+      "sourceId": "reddit-beautiful",
+      "published": "2026-11-13T15:29:28.000Z",
+      "summary": ""
+    },
+    {
+      "id": "fcf7a29a532b8dcda4698893",
+      "title": "I built a visual website that shows the time and the exact weather and position on the planet wherever you are",
+      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xvaddw/i_built_a_visual_website_that_shows_the_time_and/",
+      "source": "Reddit r/InternetIsBeautiful",
+      "sourceId": "reddit-beautiful",
+      "published": "2026-11-13T15:11:09.000Z",
+      "summary": ""
     },
     {
       "id": "87caaae267df6703c0a2b2f7",
@@ -859,60 +913,6 @@
       "sourceId": "hacker-news",
       "published": "2026-11-09T19:58:59.000Z",
       "summary": "Comments"
-    },
-    {
-      "id": "a989f1582084d0cf153c32d2",
-      "title": "Claude Fable 5.2 and Mythos 5.2",
-      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-09T18:01:10.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "3cf54ecbca9c3df9e4e1f301",
-      "title": "Battle Draw",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xrvzn9/battle_draw/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-09T16:19:47.000Z",
-      "summary": ""
-    },
-    {
-      "id": "a8ac24a5fed69e7112677854",
-      "title": "Payments Canada announces launch of Canada's Real-Time Rail (RTR) payment system",
-      "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-09T16:00:45.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "ab9a571901c9fe81ed20b1e3",
-      "title": "Foldable Flight: The Best Paper Airplanes",
-      "url": "https://www.foldableflight.com/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-09T12:19:22.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "6cc213f46dae3af4036db704",
-      "title": "Show HN: Ghanaian street games you can play in the browser",
-      "url": "https://www.ghanastreetgames.com/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-08T15:31:52.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "f7bbadb93042a2997c39047e",
-      "title": "What the first 300 installs of my free Android widget taught me about onboarding",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xqwxm9/what_the_first_300_installs_of_my_free_android/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-08T12:05:47.000Z",
-      "summary": ""
     }
   ],
   "fetched": {
@@ -920,6 +920,6 @@
     "hacker-news": "2026-11-15",
     "github-trending": "2026-11-13",
     "reddit-sideproject": "2026-11-16",
-    "reddit-beautiful": "2026-11-12"
+    "reddit-beautiful": "2026-11-17"
   }
 }

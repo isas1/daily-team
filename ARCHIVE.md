@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 44 days recorded.
+Every daily team and the asset it made, newest first. 45 days recorded.
 
 [Today](README.md)
 
 | Date | Project | Open |
 |---|---|---|
+| [2026-11-17](days/2026-11-17/) | Shelf Peek | <a href="days/2026-11-17/"><img src="days/2026-11-17/cover.png" alt="Shelf Peek" width="160"></a> [asset](days/2026-11-17/artifact-1.html) |
 | [2026-11-16](days/2026-11-16/) | Clay Mend | <a href="days/2026-11-16/"><img src="days/2026-11-16/cover.png" alt="Clay Mend" width="160"></a> [asset](days/2026-11-16/artifact-1.html) |
 | [2026-11-15](days/2026-11-15/) | Gapless Rank | <a href="days/2026-11-15/"><img src="days/2026-11-15/cover.png" alt="Gapless Rank" width="160"></a> [asset](days/2026-11-15/artifact-1.html) |
 | [2026-11-14](days/2026-11-14/) | Checked Countdown | <a href="days/2026-11-14/"><img src="days/2026-11-14/cover.png" alt="Checked Countdown" width="160"></a> [asset](days/2026-11-14/artifact-1.html) |
