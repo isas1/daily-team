@@ -33,8 +33,9 @@ const project = () => ({ schemaVersion: 1, name: 'Queue garden', audience: 'Work
     { name: 'Shift tally', need: 'Check shift coverage', mechanism: 'Accumulate staff minutes', action: 'Assign a shift', result: 'Find unstaffed times', rejection: 'Hides the effect of uneven arrivals' },
   ] });
 const plan = p => `## Pitch\n**Member 1: Queue**\nShape time.\n**Member 2: Lanes**\nReveal waits.\n**Member 3: Pulse**\nShow arrival.\n**Member 4: Reset**\nAllow recovery.\n\n## Clash\n${['Member 1', 'Member 2', 'Member 3', 'Member 4', 'Member 1', 'Member 2'].map(r => `**${r}:** Show changing waits.`).join('\n')}\n\n## Decision\nWorkshop hosts move arrivals and see waiting lanes change.\nConcept: Queue garden\n\n## Build notes\nConnect time. Show waits. Reset sample.\n\n\`\`\`json\n${JSON.stringify(p)}\n\`\`\``;
-const html = `<!doctype html><html lang="en"><head><title>Queue garden</title><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body><label>Second arrival<input type="range" min="0" max="10" value="5"></label><output>0 minutes waiting</output><button>Reset</button>
+const pageMarkup = `<!doctype html><html lang="en"><head><title>Queue garden</title><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body><label>Second arrival<input type="range" min="0" max="10" value="5"></label><output>0 minutes waiting</output><button>Reset</button>`;
+const html = `${pageMarkup}
 <script>
 const input = document.querySelector('input');
 const output = document.querySelector('output');
@@ -119,6 +120,8 @@ test('project script gate parses classic JavaScript without executing it or coun
   assert.equal(projectScriptProblem('<script type="application/javascript">throw new Error("do not run");</script>'), null);
   assert.equal(projectScriptProblem('<script type="module">export {};</script>'), null);
   assert.match(projectScriptProblem('<script>function broken( {</script>'), /syntax error/);
+  assert.equal(projectScriptProblem('<SCRIPT>void 0</SCRIPT extra>'), null);
+  assert.match(projectScriptProblem('<script-example>void 0</script>'), /needs inline JavaScript/);
   assert.match(projectScriptProblem('<!--<script>doThing()</script>--><script type="application/json">{}</script>'), /needs inline JavaScript/);
   assert.match(projectScriptProblem('<script src="elsewhere.js">doThing()</script>'), /needs inline JavaScript/);
 });
@@ -254,7 +257,7 @@ test('invalid evidence stops before build; planning-only and snapshot mode guard
 
 test('actual CLI retries a cloned idea and a static artifact, then saves the usable result', async () => {
   const cloned = project(); cloned.alternatives[1].action = cloned.alternatives[0].action;
-  const staticHtml = html.replace(/<script>[\s\S]*?<\/script>/, '');
+  const staticHtml = `${pageMarkup}</body></html>`;
   await run([plan(cloned), plan(project()), staticHtml, html], [], ({ calls, code, day, output }) => {
     assert.equal(code, 0, output); assert.equal(calls.length, 4); assert.equal(day.status, 'ok', output);
     assert.match(calls[1].messages.at(-1).content, /distinct actions/);

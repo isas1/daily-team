@@ -85,7 +85,7 @@ export function vendorManifest() {
 // Source-only gate. Compile classic scripts without running generated code.
 export function projectScriptProblem(html) {
   let found = false;
-  for (const [, attrs, code] of html.matchAll(/<!--[\s\S]*?-->|<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)) {
+  for (const [, attrs, code] of html.matchAll(/<!--[\s\S]*?-->|<script(?=[\t\n\f\r />])([^>]*)>([\s\S]*?)<\/script(?=[\t\n\f\r />])[^>]*>/gi)) {
     if (!code?.trim() || /(?:^|\s)src\s*=/i.test(attrs)) continue;
     const [, doubleQuoted, singleQuoted, unquoted] = attrs.match(/(?:^|\s)type\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i) || [];
     const type = (doubleQuoted ?? singleQuoted ?? unquoted ?? '').trim().toLowerCase();
@@ -133,17 +133,19 @@ export function inlineVendor(html) {
     if (createHash('sha256').update(buf).digest('hex') !== o.sha256) throw new Error(`vendor/${o.file} does not match its hash`);
     return buf;
   };
+  // A placeholder keeps text on either side from forming a new HTML tag.
+  const skipped = '<!-- Vendor request skipped -->';
   const used = new Set();
   const out = html
     .replace(LIB_TAG, (m, name) => {
       const lib = libs[name];
-      if (!lib || used.has(`lib:${name}`)) return '';
+      if (!lib || used.has(`lib:${name}`)) return skipped;
       used.add(`lib:${name}`);
       return `<script>/* ${lib.version}, ${lib.license} */\n${read(lib).toString('utf8')}\n</script>`;
     })
     .replace(FONT_TAG, (m, name) => {
       const f = fonts[name];
-      if (!f || used.has(`font:${name}`)) return '';
+      if (!f || used.has(`font:${name}`)) return skipped;
       used.add(`font:${name}`);
       return `<style>/* ${f.version}, ${f.license} */ @font-face{font-family:"${f.family}";font-weight:${f.weight};`
         + `font-display:block;src:url(data:font/woff2;base64,${read(f).toString('base64')}) format("woff2")}</style>`;

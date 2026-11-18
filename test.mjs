@@ -223,6 +223,8 @@ test('inlineVendor inlines each vendored file once, matching its hash', () => {
   assert.equal(out.match(/animejs 4\.5\.0, MIT/g).length, 1);
   assert.match(out, /@font-face\{font-family:"IBM Plex Mono";font-weight:400;font-display:block;src:url\(data:font\/woff2;base64,/);
   assert.doesNotMatch(out, /data-lib|data-font/);
+  const splitTag = '<scr<script data-lib="absent"></script>ipt>';
+  assert.equal(inlineVendor(splitTag), '<scr<!-- Vendor request skipped -->ipt>');
   assert.deepEqual(checkArtifact(GOOD), []);
 });
 
