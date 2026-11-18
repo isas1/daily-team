@@ -104,7 +104,7 @@ export function assertProjectExport(day, dir) {
   if (day.status === 'building') throw new Error('project generation still incomplete');
   const input = JSON.parse(readFileSync(join(dir, 'planning-input.json'), 'utf8'));
   if (input.mode !== 'project' || input.date !== day.date || hash(input) !== day.planning?.inputHash) throw new Error('project input hash/date mismatch');
-  if (day.status === 'failed') return;
+  if (day.status === 'failed') return input;
   const problems = projectProblems(day.project, input);
   if (problems.length) throw new Error(`invalid project: ${problems.join('; ')}`);
   if (JSON.stringify(day.project.sourceIds) !== JSON.stringify(day.planning.selectedSourceIds)) throw new Error('project source receipt mismatch');
@@ -113,4 +113,5 @@ export function assertProjectExport(day, dir) {
     if (a.file !== 'artifact-1.html') throw new Error('unsafe project artifact path');
     if (a.status !== 'failed' && (!a.sha256 || hash(readFileSync(join(dir, a.file))) !== a.sha256)) throw new Error('project artifact hash mismatch');
   }
+  return input;
 }

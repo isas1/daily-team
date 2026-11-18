@@ -169,6 +169,7 @@ export function assertPackExport(day, dir) {
     if (!/^(artifact-\d+|piece)\.html$/.test(a.file)) throw new Error('unsafe artifact path');
     if (!a.sha256 || hash(readFileSync(join(dir, a.file))) !== a.sha256) throw new Error(`artifact hash mismatch: ${a.file}`);
   }
+  return input;
 }
 
 export function packBuildRules(pack, row) {
