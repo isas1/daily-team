@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-18",
+  "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+  "brief": null,
+  "team": "Team for 2026-11-18\nSeason: 2026-11-09\n\n1. Game interface designer\n   Method: Find one familiar pattern and improve its weakest state.\n   Stance: Insists it must be beautiful.\n   Temperament: Asks what a stranger would expect next.\n2. Watch restorer\n   Method: Keep the moving part inside a steady layout.\n   Stance: Speaks for the one who finds it.\n   Temperament: Builds a rough version rather than discuss it.\n3. Control room operator\n   Method: Use one quiet surface to make the important edge clear.\n   Stance: Wants it to last.\n   Temperament: Asks for the simplest case before the general one.\n4. Lunar archivist (future; invented) [guest]\n   Method: Make every saved choice easy to find and reverse.\n   Stance: Breaks the frame.\n   Temperament: Asks who would use it on their worst day.\n\nConstraint: Idle components stop their render loop.\nTask: Booking date: a date picker for an appointment prototype that selects an available day and shows the choice.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "6476549a32dfb7989967b581a2a40053910a8d877adf886f54efbb5685c390cf",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "e6357f1e7e944cc84f059f59"
+    ]
+  },
+  "status": "needs review",
+  "error": null,
+  "decision": "Mark plan steps Keep or Cut and press Send; reversing a sent mark writes a numbered Restore line.",
+  "concept": "Countermand",
+  "plan": "# Countermand\n\n**Source.** One item from the github-trending feed: `e6357f1e7e944cc84f059f59` (backnotprop/plannotator). Its summary describes reviewing an agent's plan and sending all feedback \"with one click.\" That summary prompted a narrower need. After a reviewer sends feedback, changing their mind about one step leaves the agent with an old instruction it has already acted on. Countermand shows this on screen. Reversing a sent mark writes a new outgoing line. It does not erase anything. The summary records observation only. It is not proof of demand.\n\n**Recent-project check.**\n- Cut on Save (11-13) split sent and pending text edits.\n- Clay Mend (11-16) traced undo on a canvas.\n- Gapless Rank (11-15) struck old positions.\n- Countermand covers a different case: choices that have already been sent to a reader who acted on them. Undo here produces outgoing text. It does not restore local state.\n- The structure differs too. These are plan rows with a two-layer mark, plus a numbered send ledger. There is no slider, no canvas and no reorder.\n\n---\n\n## Pitch\n\n**Game interface designer.** Undo is the familiar pattern, and its weakest state is undo after send. Every app treats it like undo before send. I want the mark itself to show two layers: a ring for what the agent was told, a fill for what you want now. When they disagree, you see it without reading.\n\n**Watch restorer.** Five rows that never move. The only moving part is the fill inside each mark slot. I already sketched it: a 28 px slot on the right of each row, ring and fill separate. The outbox sits under the rows and grows downward. Nothing above it shifts.\n\n**Control room operator.** Simplest case first. One step, cut, sent, then kept again. The plain approach deletes the note and sends nothing. The agent never learns step 3 is back. The edge that matters is sent versus wanted. Put that on one quiet surface and it holds up over many sends.\n\n**Lunar archivist.** On your worst day you sent the wrong cut and the agent is already working. You need the reversal to be a thing you can find: \"Restore 3, reverses #1.\" Every sent choice gets a number. Every reversal points at it. Break the habit where undo means silence.\n\n## Clash\n\n1. **Watch restorer:** Ran the sample. \"Add CSV export,\" five steps. Cut step 3, Write migration. Send. Outbox shows \"#1 Cut 3.\" Then I pressed Keep on 3. Outbox shows \"Restore 3 · reverses #1.\"\n2. **Game interface designer:** And the ring on row 3 is still red while the fill is ink. A stranger would expect that mismatch to mean \"not done yet.\" Good.\n3. **Lunar archivist:** Here's the mistake. Someone presses Keep, sees the fill go back to normal and walks away. They think the reversal happened. The agent still has #1.\n4. **Control room operator:** So the mismatch can't sit on a quiet row alone. Send needs the count: \"Send 1.\" When ring and fill agree everywhere, Send greys and says nothing.\n5. **Game interface designer:** And the page title gains a small dot while anything is unsent. You can see it from another tab.\n6. **Lunar archivist:** Second case. Cut 3 before sending, then Keep 3. That's no counter at all. The pending line just disappears. Only sent marks earn a reversal.\n7. **Watch restorer:** Then the rule is about the ring, not the history. A difference between ring and fill makes a line. No difference, no line.\n8. **Control room operator:** And the slide animation stops when the fill settles. No loop runs while the page is idle. That's the team constraint, and it keeps an open review tab cheap for hours.\n\n## Decision\n\nMark plan steps Keep or Cut and press Send; reversing a sent mark writes a numbered Restore line.\n\nConcept: Countermand\n\n- **Game interface designer:** the two-layer mark. The ring shows the sent state and the fill shows the wanted state, so a mismatch reads as unsent.\n- **Watch restorer:** the steady layout. Five fixed rows with a 28 px mark slot. Only the fill moves, and the outbox grows below.\n- **Control room operator:** the Send count and the grey idle state. Send reads \"Send N\" only while rings and fills differ.\n- **Lunar archivist:** the countermand rule. Each send gets a number. Reversing a sent choice emits \"Restore N · reverses #k\" instead of deleting text.\n\n## Build notes\n\n1. Model each step as `{sent, wanted}`. The outbox is a pure function: for every step where `sent ≠ wanted`, emit Cut or Restore. Restore cites the send number that last set `sent`. On Send, copy `wanted` into `sent`, push a numbered ledger entry, and set the title dot from the outbox length.\n2. Render 5 rows with a fixed 28 px mark slot: an SVG ring for `sent` and a fill for `wanted`. Keep and Cut act on the selected row. Arrow keys move the selection, K and X apply marks, and Ctrl+Enter sends. Send stays disabled with no label count while the outbox is empty.\n3. Run the fill slide (120 ms) with a requestAnimationFrame loop that calls `cancelAnimationFrame` when the fill settles. Expose a `frames` counter in a debug hook and assert it does not increase during 2 s of idle after any action.\n\n**Visible words on the first screen (about 24):** Countermand · Add CSV export · Read schema · Add route · Write migration · Add tests · Update docs · Keep · Cut · Send · Nothing unsent.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Countermand\",\"audience\":\"Developers reviewing a coding agent's plan before and during its run\",\"problem\":\"After feedback is sent, reversing one choice deletes the note locally, and the agent never learns the step is back\",\"interaction\":\"Select a plan step, press Keep or Cut, press Send; later reverse a sent mark and Send again\",\"outcome\":\"Outbox lists numbered lines; reversing a sent Cut produces 'Restore 3 · reverses #1', and Send shows the unsent count\",\"recovery\":\"Reversing an unsent mark removes its pending line; a wrong sent cut is fixed by Keep plus Cut on the right step, then Send\",\"mechanism\":\"Each step holds sent and wanted states; any mismatch emits a line, and Restore cites the send number that set the old state\",\"difference\":\"Usual review tools edit or delete notes in place, so a reversal sends nothing; here a reversal after send becomes an explicit numbered countermand\",\"whyNow\":\"Saved trending item plannotator describes sending all plan feedback to agents in one click; that suggests the after-send case matters, with no demand data\",\"sourceIds\":[\"e6357f1e7e944cc84f059f59\"],\"evidenceStatus\":\"sourced\",\"craft\":{\"rule\":\"Lunar archivist: every saved choice easy to find and reverse. A sent mark can't be erased; a mismatch between sent and wanted emits a Restore line citing the send number, so undo after send creates output\",\"design\":\"Surface: five fixed plan rows, 28px ring+fill mark slot. Phone: rows, Keep/Cut bar, sticky Send+outbox. Mono for numbers, sans for steps. Ink on paper, red Cut, blue Restore. Sparse. 120ms fill slide; loop stops at rest\",\"trial\":{\"start\":\"Plan 'Add CSV export': 1 Read schema, 2 Add route, 3 Write migration, 4 Add tests, 5 Update docs. All Keep, ledger empty\",\"action\":\"Select 3, press Cut, press Send (#1 Cut 3). Then select 3, press Keep\",\"result\":\"Row 3 ring red, fill ink; outbox 'Restore 3 · reverses #1'; button 'Send 1'; title dot on. No loop frames after 120ms\",\"mistake\":\"User meant to cut step 4, pressed Keep on 3, and walked away without pressing Send, so the agent still holds #1\",\"recovery\":\"Send 1 and title dot stay visible; Cut 4 adds a line, Send makes #2 with Restore 3 and Cut 4; rings match fills, Send greys\"}},\"alternatives\":[{\"name\":\"Countermand\",\"need\":\"Reverse a sent plan choice so the agent hears it\",\"mechanism\":\"Sent vs wanted states per step; mismatch emits numbered Cut or Restore lines\",\"action\":\"Cut a step, Send, then press Keep on it\",\"result\":\"Outbox shows 'Restore 3 · reverses #1' and Send 1\",\"rejection\":\"Selected: clear gain over in-place note deletion, and the rule changes output state\"},{\"name\":\"Hold Points\",\"need\":\"Decide where an unattended agent must stop and wait\",\"mechanism\":\"Steps marked Go or Hold; dependents of a Hold inherit it; a reach line marks the last unattended step\",\"action\":\"Toggle Hold on a plan step\",\"result\":\"Reach line moves up; dependent steps grey as blocked\",\"rejection\":\"Rejected: Hold-moves-the-line repeats Zero Hour Rehearsal, and dependency entry is too heavy for one screen\"},{\"name\":\"Note Weigher\",\"need\":\"Catch contradictory review notes before one-click send\",\"mechanism\":\"Groups notes by step and flags pairs that both cut and edit the same step\",\"action\":\"Type two notes on the same step\",\"result\":\"Conflict pair shown with Keep one prompt\",\"rejection\":\"Rejected: needs text heuristics that misfire offline; conflicts are rarer than reversals\"}]}\n```",
+  "planProblems": [
+    "Clash has 0 lines, outside 6 to 10"
+  ],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "ad87699b76782acc30651fbaf0be119f003225932d717ee5873125e40643730d",
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Countermand",
+    "audience": "Developers reviewing a coding agent's plan before and during its run",
+    "problem": "After feedback is sent, reversing one choice deletes the note locally, and the agent never learns the step is back",
+    "interaction": "Select a plan step, press Keep or Cut, press Send; later reverse a sent mark and Send again",
+    "outcome": "Outbox lists numbered lines; reversing a sent Cut produces 'Restore 3 · reverses #1', and Send shows the unsent count",
+    "recovery": "Reversing an unsent mark removes its pending line; a wrong sent cut is fixed by Keep plus Cut on the right step, then Send",
+    "mechanism": "Each step holds sent and wanted states; any mismatch emits a line, and Restore cites the send number that set the old state",
+    "difference": "Usual review tools edit or delete notes in place, so a reversal sends nothing; here a reversal after send becomes an explicit numbered countermand",
+    "whyNow": "Saved trending item plannotator describes sending all plan feedback to agents in one click; that suggests the after-send case matters, with no demand data",
+    "sourceIds": [
+      "e6357f1e7e944cc84f059f59"
+    ],
+    "evidenceStatus": "sourced",
+    "craft": {
+      "rule": "Lunar archivist: every saved choice easy to find and reverse. A sent mark can't be erased; a mismatch between sent and wanted emits a Restore line citing the send number, so undo after send creates output",
+      "design": "Surface: five fixed plan rows, 28px ring+fill mark slot. Phone: rows, Keep/Cut bar, sticky Send+outbox. Mono for numbers, sans for steps. Ink on paper, red Cut, blue Restore. Sparse. 120ms fill slide; loop stops at rest",
+      "trial": {
+        "start": "Plan 'Add CSV export': 1 Read schema, 2 Add route, 3 Write migration, 4 Add tests, 5 Update docs. All Keep, ledger empty",
+        "action": "Select 3, press Cut, press Send (#1 Cut 3). Then select 3, press Keep",
+        "result": "Row 3 ring red, fill ink; outbox 'Restore 3 · reverses #1'; button 'Send 1'; title dot on. No loop frames after 120ms",
+        "mistake": "User meant to cut step 4, pressed Keep on 3, and walked away without pressing Send, so the agent still holds #1",
+        "recovery": "Send 1 and title dot stay visible; Cut 4 adds a line, Send makes #2 with Restore 3 and Cut 4; rings match fills, Send greys"
+      }
+    },
+    "alternatives": [
+      {
+        "name": "Countermand",
+        "need": "Reverse a sent plan choice so the agent hears it",
+        "mechanism": "Sent vs wanted states per step; mismatch emits numbered Cut or Restore lines",
+        "action": "Cut a step, Send, then press Keep on it",
+        "result": "Outbox shows 'Restore 3 · reverses #1' and Send 1",
+        "rejection": "Selected: clear gain over in-place note deletion, and the rule changes output state"
+      },
+      {
+        "name": "Hold Points",
+        "need": "Decide where an unattended agent must stop and wait",
+        "mechanism": "Steps marked Go or Hold; dependents of a Hold inherit it; a reach line marks the last unattended step",
+        "action": "Toggle Hold on a plan step",
+        "result": "Reach line moves up; dependent steps grey as blocked",
+        "rejection": "Rejected: Hold-moves-the-line repeats Zero Hour Rehearsal, and dependency entry is too heavy for one screen"
+      },
+      {
+        "name": "Note Weigher",
+        "need": "Catch contradictory review notes before one-click send",
+        "mechanism": "Groups notes by step and flags pairs that both cut and edit the same step",
+        "action": "Type two notes on the same step",
+        "result": "Conflict pair shown with Keep one prompt",
+        "rejection": "Rejected: needs text heuristics that misfire offline; conflicts are rarer than reversals"
+      }
+    ]
+  },
+  "completed": true
+}

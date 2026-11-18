@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Countermand</title>
+<style>
+:root{
+  --paper:#f6f3ec;--ink:#1d1b18;--mute:#5a554d;--line:#d6cfc0;--sel:#ebe5d8;
+  --red:#b3261e;--blue:#1f4fbf;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);line-height:1.4}
+main{max-width:34rem;margin:0 auto;padding:1rem 1rem 2rem}
+h1{font-size:1.45rem;margin:.2rem 0 .15rem;letter-spacing:.01em;display:flex;align-items:center;gap:.5rem}
+.dot{width:.55rem;height:.55rem;border-radius:50%;background:var(--ink);display:inline-block}
+.dot[hidden]{display:none}
+.lead{margin:0 0 1rem;color:var(--mute);font-size:.95rem}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:600;padding:0 0 .4rem;display:flex;align-items:center;gap:.5rem}
+.demo{font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;border:1px solid var(--ink);padding:.2rem .35rem;border-radius:3px}
+.rows{border-top:1px solid var(--line)}
+.row{position:relative;display:grid;grid-template-columns:1.4rem 28px 1fr 2.4rem;align-items:center;gap:.6rem;min-height:46px;padding:.3rem .6rem;border-bottom:1px solid var(--line);cursor:pointer}
+.row input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.row:has(input:checked){background:var(--sel);box-shadow:inset 3px 0 0 var(--ink)}
+.row:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:-3px}
+@supports not selector(:has(*)){.row:focus-within{outline:3px solid var(--blue);outline-offset:-3px}}
+.num,.tag{font-family:var(--mono);font-size:.85rem;color:var(--mute)}
+.tag{text-align:right}
+.mark{width:28px;height:28px;display:block}
+.row.cut .txt{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--red);color:var(--mute)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.panel{position:sticky;bottom:0;background:var(--paper);border-top:2px solid var(--ink);margin-top:1rem;padding:.55rem 0 .75rem;z-index:2}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin:0}
+#status{margin:0;font-family:var(--mono);font-size:.85rem}
+ol{list-style:none;margin:.35rem 0 .5rem;padding:0}
+ol:empty{display:none}
+.line{display:block;width:100%;text-align:left;font:500 .9rem/1.3 var(--mono);background:none;border:0;border-left:3px solid currentColor;padding:.35rem .5rem;margin:.15rem 0;cursor:pointer;min-height:32px}
+.line.Cut{color:var(--red)}
+.line.Restore{color:var(--blue)}
+.bar{display:flex;gap:.5rem}
+button.act{flex:1;min-height:46px;font:600 1rem system-ui,sans-serif;border-radius:6px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+#cut{color:var(--red);border-color:var(--red)}
+#send{background:var(--ink);color:var(--paper);font-family:var(--mono)}
+#send:disabled{background:#e3ded3;color:var(--mute);border-color:#c8c1b2;cursor:default}
+button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.ledger{margin-top:1.2rem}
+.ledger[hidden]{display:none}
+.entry{display:grid;grid-template-columns:2.4rem 1fr;gap:.4rem;align-items:start;border-bottom:1px solid var(--line);padding:.25rem 0}
+.entry .n{font:600 .9rem/2 var(--mono)}
+.entry ol{margin:0}
+#reset{font:500 .85rem system-ui,sans-serif;background:none;border:1px solid var(--mute);color:var(--ink);border-radius:4px;padding:.3rem .6rem;min-height:32px;cursor:pointer}
+details{margin-top:1rem;font-size:.9rem}
+summary{cursor:pointer;color:var(--mute);padding:.25rem 0}
+details p,details li{color:var(--ink)}
+details ul{padding-left:1.1rem}
+kbd{font-family:var(--mono);border:1px solid var(--line);border-radius:3px;padding:0 .25rem;background:#fff}
+a{color:var(--blue)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Countermand <span class="dot" id="dot" aria-hidden="true" hidden></span></h1>
+  <p class="lead">Mark steps, then Send. Reversing a sent mark queues a Restore.</p>
+
+  <fieldset>
+    <legend>Add CSV export <span class="demo">Demo</span></legend>
+    <div class="rows" id="rows"></div>
+  </fieldset>
+
+  <section class="panel" aria-label="Outbox and actions">
+    <div class="head">
+      <h2>Outbox</h2>
+      <p id="status" role="status" aria-live="polite">Nothing unsent</p>
+    </div>
+    <ol id="outbox" aria-label="Unsent lines"></ol>
+    <div class="bar">
+      <button type="button" class="act" id="keep">Keep</button>
+      <button type="button" class="act" id="cut">Cut</button>
+      <button type="button" class="act" id="send" disabled>Send</button>
+    </div>
+  </section>
+
+  <section class="ledger" id="ledgerBox" hidden aria-label="Sent">
+    <div class="head">
+      <h2>Sent</h2>
+      <button type="button" id="reset">Reset</button>
+    </div>
+    <ol id="ledger"></ol>
+  </section>
+
+  <details>
+    <summary>Keys</summary>
+    <p><kbd>↑</kbd> <kbd>↓</kbd> select · <kbd>K</kbd> keep · <kbd>X</kbd> cut · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> send</p>
+    <p>Ring: sent. Fill: wanted. Mismatch means unsent.</p>
+  </details>
+
+  <details>
+    <summary>Credits</summary>
+    <ul>
+      <li>Game interface designer (lead): two-layer mark. Ring shows the sent state, fill shows the wanted state.</li>
+      <li>Watch restorer: five fixed rows with a 28 px mark slot. Only the fill moves.</li>
+      <li>Control room operator: Send count, grey idle state, render loop that stops at rest.</li>
+      <li>Lunar archivist: numbered sends. Reversing a sent mark writes a Restore line citing its send.</li>
+    </ul>
+    <p>Demo plan held in this page only. Send records lines locally. No agent or service receives them.</p>
+    <p>Source: <a href="https://github.com/backnotprop/plannotator" rel="noopener noreferrer">backnotprop/plannotator</a></p>
+  </details>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var TEXTS = ["Read schema","Add route","Write migration","Add tests","Update docs"];
+  var COLOR = {keep:"#1d1b18", cut:"#b3261e"};
+  var SLIDE_MS = 120;
+
+  var steps, ledger, sel;
+  var rowEls = [];
+  var anims = new Map();
+  var loopId = null;
+  var frames = 0;
+  var reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : {matches:false};
+
+  var $ = function(id){ return document.getElementById(id); };
+  var rowsBox = $("rows"), outboxEl = $("outbox"), ledgerEl = $("ledger"),
+      ledgerBox = $("ledgerBox"), sendBtn = $("send"), statusEl = $("status"), dot = $("dot");
+
+  function fresh(){
+    steps = TEXTS.map(function(t, i){
+      return {id:i+1, text:t, sent:"keep", wanted:"keep", setBy:null, shown:"keep"};
+    });
+    ledger = [];
+    sel = 1;
+  }
+
+  // Pure: every mismatch between sent and wanted emits one line.
+  function outbox(){
+    return steps.filter(function(s){ return s.sent !== s.wanted; }).map(function(s){
+      if (s.wanted === "cut") return {id:s.id, kind:"Cut", text:"Cut " + s.id};
+      return {id:s.id, kind:"Restore", text:"Restore " + s.id + " \u00b7 reverses #" + s.setBy};
+    });
+  }
+
+  function svg(tag, attrs){
+    var el = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+
+  function buildRows(){
+    rowsBox.replaceChildren();
+    rowEls = steps.map(function(s){
+      var label = document.createElement("label");
+      label.className = "row";
+      var input = document.createElement("input");
+      input.type = "radio"; input.name = "step"; input.value = String(s.id);
+      input.checked = s.id === sel;
+      input.addEventListener("change", function(){ if (input.checked) sel = s.id; });
+
+      var num = document.createElement("span");
+      num.className = "num"; num.textContent = String(s.id);
+
+      var mark = svg("svg", {"class":"mark", viewBox:"0 0 28 28", width:"28", height:"28", "aria-hidden":"true", focusable:"false"});
+      var clip = svg("clipPath", {id:"clip" + s.id});
+      var rect = svg("rect", {x:"6", y:"0", width:"16", height:"28"});
+      clip.appendChild(rect);
+      var defs = svg("defs", {}); defs.appendChild(clip);
+      var base = svg("circle", {cx:"14", cy:"14", r:"8", fill:COLOR[s.shown]});
+      var top = svg("circle", {cx:"14", cy:"14", r:"8", fill:COLOR[s.shown], "clip-path":"url(#clip" + s.id + ")"});
+      var ring = svg("circle", {cx:"14", cy:"14", r:"12", fill:"none", "stroke-width":"2.5", stroke:COLOR[s.sent]});
+      mark.appendChild(defs); mark.appendChild(base); mark.appendChild(top); mark.appendChild(ring);
+
+      var txt = document.createElement("span");
+      txt.className = "txt"; txt.textContent = s.text;
+      var tag = document.createElement("span");
+      tag.className = "tag";
+      var sr = document.createElement("span");
+      sr.className = "sr";
+
+      label.append(input, num, mark, txt, tag, sr);
+      rowsBox.appendChild(label);
+      return {label:label, input:input, base:base, top:top, rect:rect, ring:ring, tag:tag, sr:sr};
+    });
+  }
+
+  // Fill slide: only the fill moves; loop cancels once every fill settles.
+  function settle(id){
+    var a = anims.get(id); if (!a) return;
+    var r = rowEls[id-1];
+    r.base.setAttribute("fill", COLOR[a.to]);
+    r.top.setAttribute("fill", COLOR[a.to]);
+    r.rect.setAttribute("width", "16");
+    anims.delete(id);
+  }
+  function stopLoop(){
+    if (loopId !== null){ cancelAnimationFrame(loopId); loopId = null; }
+  }
+  function settleAll(){
+    stopLoop();
+    Array.from(anims.keys()).forEach(settle);
+  }
+  function tick(t){
+    frames++;
+    anims.forEach(function(a, id){
+      if (a.t0 === null) a.t0 = t;
+      var p = Math.min(1, (t - a.t0) / SLIDE_MS);
+      if (p >= 1) settle(id);
+      else rowEls[id-1].rect.setAttribute("width", (16 * p).toFixed(2));
+    });
+    loopId = anims.size ? requestAnimationFrame(tick) : null;
+  }
+  function slideFill(s, from, to){
+    var r = rowEls[s.id-1];
+    if (reduce.matches || document.hidden){
+      anims.delete(s.id);
+      r.base.setAttribute("fill", COLOR[to]);
+      r.top.setAttribute("fill", COLOR[to]);
+      r.rect.setAttribute("width", "16");
+      if (!anims.size) stopLoop();
+      return;
+    }
+    r.base.setAttribute("fill", COLOR[from]);
+    r.top.setAttribute("fill", COLOR[to]);
+    r.rect.setAttribute("width", "0");
+    anims.set(s.id, {to:to, t0:null});
+    if (loopId === null) loopId = requestAnimationFrame(tick);
+  }
+
+  function selectRow(id, focus){
+    sel = id;
+    var r = rowEls[id-1];
+    r.input.checked = true;
+    if (focus) r.input.focus();
+  }
+
+  function lineButton(l){
+    var li = document.createElement("li");
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "line " + l.kind;
+    b.textContent = l.text;
+    b.addEventListener("click", function(){ selectRow(l.id, true); });
+    li.appendChild(b);
+    return li;
+  }
+
+  function render(){
+    var ob = outbox();
+    steps.forEach(function(s, i){
+      var r = rowEls[i];
+      r.ring.setAttribute("stroke", COLOR[s.sent]);
+      r.label.classList.toggle("cut", s.wanted === "cut");
+      r.tag.textContent = s.setBy ? "#" + s.setBy : "";
+      var desc = ", sent " + s.sent + (s.setBy ? " by #" + s.setBy : "");
+      desc += s.sent !== s.wanted ? ", wanted " + s.wanted + ", unsent" : "";
+      r.sr.textContent = desc;
+    });
+
+    outboxEl.replaceChildren.apply(outboxEl, ob.map(lineButton));
+
+    sendBtn.disabled = ob.length === 0;
+    sendBtn.textContent = ob.length ? "Send " + ob.length : "Send";
+    dot.hidden = ob.length === 0;
+    document.title = (ob.length ? "\u25cf " : "") + "Countermand";
+
+    ledgerBox.hidden = ledger.length === 0;
+    var entries = ledger.slice().reverse().map(function(e){
+      var li = document.createElement("li");
+      li.className = "entry";
+      var n = document.createElement("span");
+      n.className = "n"; n.textContent = "#" + e.n;
+      var ol = document.createElement("ol");
+      ol.setAttribute("aria-label", "Send " + e.n);
+      e.lines.forEach(function(l){ ol.appendChild(lineButton(l)); });
+      li.append(n, ol);
+      return li;
+    });
+    ledgerEl.replaceChildren.apply(ledgerEl, entries);
+    return ob;
+  }
+
+  function say(text){ statusEl.textContent = text; }
+  function pendingStatus(ob){ say(ob.length ? ob.length + " unsent" : "Nothing unsent"); }
+
+  function mark(kind){
+    var s = steps[sel-1];
+    if (!s || s.wanted === kind) return;
+    var from = s.shown;
+    s.wanted = kind;
+    s.shown = kind;
+    slideFill(s, from, kind);
+    pendingStatus(render());
+  }
+
+  function send(){
+    var ob = outbox();
+    if (!ob.length) return;
+    var n = ledger.length + 1;
+    ob.forEach(function(l){
+      var s = steps[l.id-1];
+      s.sent = s.wanted;
+      s.setBy = n;
+    });
+    ledger.push({n:n, lines:ob});
+    render();
+    say("Sent #" + n);
+  }
+
+  function reset(){
+    settleAll();
+    fresh();
+    buildRows();
+    render();
+    say("Nothing unsent");
+    rowEls[0].input.focus();
+  }
+
+  $("keep").addEventListener("click", function(){ mark("keep"); });
+  $("cut").addEventListener("click", function(){ mark("cut"); });
+  sendBtn.addEventListener("click", send);
+  $("reset").addEventListener("click", reset);
+
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); send(); return; }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var k = e.key.toLowerCase();
+    if (k === "k"){ e.preventDefault(); mark("keep"); }
+    else if (k === "x"){ e.preventDefault(); mark("cut"); }
+  });
+
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) settleAll();
+  });
+
+  window.countermand = {
+    get frames(){ return frames; },
+    get running(){ return loopId !== null; },
+    outbox: function(){ return outbox().map(function(l){ return l.text; }); }
+  };
+
+  fresh();
+  buildRows();
+  render();
+})();
+</script>
+</body>
+</html>

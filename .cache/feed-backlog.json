@@ -1,6 +1,166 @@
 {
   "items": [
     {
+      "id": "301f2d14985e5303f37abc05",
+      "title": "GoogleChrome/modern-web-guidance-src",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "Keep your coding agent up to date with the latest web best practices"
+    },
+    {
+      "id": "e6357f1e7e944cc84f059f59",
+      "title": "backnotprop/plannotator",
+      "url": "https://github.com/backnotprop/plannotator",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click."
+    },
+    {
+      "id": "f6c3adbf52c79b3178a8fe68",
+      "title": "elementalsouls/Claude-BugHunter",
+      "url": "https://github.com/elementalsouls/Claude-BugHunter",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices."
+    },
+    {
+      "id": "5e8027802f61d7f22ead2d33",
+      "title": "meta/astryx",
+      "url": "https://github.com/meta/astryx",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "An open source design system that's fully customizable and agent ready"
+    },
+    {
+      "id": "2f31f6b854b3cc16d4646d00",
+      "title": "we-promise/sure",
+      "url": "https://github.com/we-promise/sure",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "The personal finance app for everyone (by everyone)"
+    },
+    {
+      "id": "c489e6fb5febf2abff16877b",
+      "title": "alibaba/open-code-review",
+      "url": "https://github.com/alibaba/open-code-review",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible."
+    },
+    {
+      "id": "c87cd13d69aef69146c01790",
+      "title": "google-labs-code/stitch-skills",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor."
+    },
+    {
+      "id": "f9da1acd54ca38642ffd3679",
+      "title": "tradermonty/claude-trading-skills",
+      "url": "https://github.com/tradermonty/claude-trading-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development."
+    },
+    {
+      "id": "379642deb53f3714eb4d3fd4",
+      "title": "ChromeDevTools/chrome-devtools-mcp",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "Chrome DevTools for coding agents"
+    },
+    {
+      "id": "82a901da1b9bedec6f38670b",
+      "title": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "Public repository for Agent Skills"
+    },
+    {
+      "id": "8703b76429c37137e259340c",
+      "title": "ZhuLinsen/daily_stock_analysis",
+      "url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs."
+    },
+    {
+      "id": "b88590c43555a909e1ff4309",
+      "title": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary"
+    },
+    {
+      "id": "10a12acb9645adccd1054069",
+      "title": "ag-ui-protocol/ag-ui",
+      "url": "https://github.com/ag-ui-protocol/ag-ui",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications."
+    },
+    {
+      "id": "401c6af5b51d16a5ed2fec53",
+      "title": "vercel-labs/agent-browser",
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "Browser automation CLI for AI agents"
+    },
+    {
+      "id": "328a7b2dd544e1886d6cbf15",
+      "title": "openai/codex-security",
+      "url": "https://github.com/openai/codex-security",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security"
+    },
+    {
+      "id": "d148e3d2c2843c2bb453066d",
+      "title": "dream-num/univer",
+      "url": "https://github.com/dream-num/univer",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-18T00:00:00.000Z",
+      "observed": true,
+      "summary": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core."
+    },
+    {
       "id": "92ac2a3840749053e8a29656",
       "title": "A live word cloud of what the internet is talking about right now, updated every minute",
       "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xym0q9/a_live_word_cloud_of_what_the_internet_is_talking/",
@@ -398,16 +558,6 @@
       "summary": "Hunt down social media accounts by username across social networks"
     },
     {
-      "id": "82a901da1b9bedec6f38670b",
-      "title": "anthropics/skills",
-      "url": "https://github.com/anthropics/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-13T00:00:00.000Z",
-      "observed": true,
-      "summary": "Public repository for Agent Skills"
-    },
-    {
       "id": "7366786c561f97cd051ac4ba",
       "title": "milind-soni/OpenMausBot",
       "url": "https://github.com/milind-soni/OpenMausBot",
@@ -416,26 +566,6 @@
       "published": "2026-11-13T00:00:00.000Z",
       "observed": true,
       "summary": "Open-source Grok Bot alternative with a virtual machine that bots can use"
-    },
-    {
-      "id": "401c6af5b51d16a5ed2fec53",
-      "title": "vercel-labs/agent-browser",
-      "url": "https://github.com/vercel-labs/agent-browser",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-13T00:00:00.000Z",
-      "observed": true,
-      "summary": "Browser automation CLI for AI agents"
-    },
-    {
-      "id": "8703b76429c37137e259340c",
-      "title": "ZhuLinsen/daily_stock_analysis",
-      "url": "https://github.com/ZhuLinsen/daily_stock_analysis",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-13T00:00:00.000Z",
-      "observed": true,
-      "summary": "LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs."
     },
     {
       "id": "834f867a452076917a144850",
@@ -796,129 +926,12 @@
       "sourceId": "hacker-news",
       "published": "2026-11-10T12:58:04.000Z",
       "summary": "Comments"
-    },
-    {
-      "id": "f321c904268bcef29356d2d1",
-      "title": "AlphaProof Code",
-      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T12:11:12.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "d7379938113b1f2c55fc6b61",
-      "title": "Show HN: A 15 MB self-hosted Netflix and Spotify for your media server",
-      "url": "https://github.com/HolyArrs/HolyArrs",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T11:51:19.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "8c68f2e486c25c612dfa4560",
-      "title": "'C:\\ FORMAT C:' – relax, it's just a screen saver",
-      "url": "https://fakedos.com/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T10:32:36.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "cebc6ff5285087a8ba90dc73",
-      "title": "Queens Public library under ransomware attack e-borrowing suspended",
-      "url": "https://connect.queenslibrary.org/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T09:04:39.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "f7292bfa214acf8913aa2e00",
-      "title": "Fossil CO2 emissions decrease by 0.4% in 2026",
-      "url": "https://news.exeter.ac.uk/faculty-of-environment-science-and-economy/fossil-co2-emissions-decrease-in-2026/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T08:59:41.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "ff9e82ce50e44f94784b564f",
-      "title": "Celeryman",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xshbbc/celeryman/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-10T08:06:10.000Z",
-      "summary": ""
-    },
-    {
-      "id": "c7d3010a8bcc401c0c2a91aa",
-      "title": "Fireworks AI security breach impacts Notion and their customers",
-      "url": "https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T07:19:38.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "d8522f99f19120bae3a76977",
-      "title": "Amazon saves millions by replacing Sonnet 4.6 with Strands Decider",
-      "url": "https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T06:01:08.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "c75db4d83a5f26aa5a4f10c6",
-      "title": "Your TV can see through walls",
-      "url": "https://maurycyz.com/projects/fading/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T05:24:45.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "6bd7e9895114794ff3f78e16",
-      "title": "I built a tiny version of NYC.",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xsbmq1/i_built_a_tiny_version_of_nyc/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-10T02:47:28.000Z",
-      "summary": ""
-    },
-    {
-      "id": "ffd0277ad7cd64c27c62df16",
-      "title": "Locating the source of a mysterious beep",
-      "url": "https://simonwillison.net/2026/Nov/9/mysterious-beeps/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T00:10:46.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "027391508239ba2c15c0306e",
-      "title": "I built a site that shows every satellite that passed over any location, plus the actual images they took",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xs3wxq/i_built_a_site_that_shows_every_satellite_that/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-09T21:11:58.000Z",
-      "summary": ""
-    },
-    {
-      "id": "3c86ca6a06f60e03f055bef4",
-      "title": "USPS now offers official ZIP Code boundary polygons",
-      "url": "https://postalpro.usps.com/zcb",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-09T19:58:59.000Z",
-      "summary": "Comments"
     }
   ],
   "fetched": {
     "smashing": "2026-11-14",
     "hacker-news": "2026-11-15",
-    "github-trending": "2026-11-13",
+    "github-trending": "2026-11-18",
     "reddit-sideproject": "2026-11-16",
     "reddit-beautiful": "2026-11-17"
   }
