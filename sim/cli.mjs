@@ -9,7 +9,9 @@ import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { findBanned, parseTeam, prepareProvider, sections, teamFor, today } from '../run.mjs';
+import { findBanned, sections } from '../prompt-rules.mjs';
+import { prepareProvider } from '../providers.mjs';
+import { parseTeam, teamFor, today } from '../team-session.mjs';
 import { appendTo, DEFAULT_SIM_MODEL, interviews, meteredAsk, runSim } from './run-sim.mjs';
 import { clashSection, pitchSection } from './adapter.mjs';
 
@@ -71,4 +73,4 @@ async function main() {
   }, null, 2));
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exit(1); });
+if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exit(e.exitCode ?? 1); });

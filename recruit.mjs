@@ -10,10 +10,17 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { completeChecked, die, findBanned, prepareProvider, sections, today } from './run.mjs';
+import { completeChecked, prepareProvider } from './providers.mjs';
+import { findBanned, sections } from './prompt-rules.mjs';
+import { today } from './team-session.mjs';
 import { inspirationContext } from './component-focus.mjs';
-import { markdownCell } from './security.mjs';
+import { markdownCell, redactCredentials } from './security.mjs';
 import { PROJECTS_FROM } from './project-planning.mjs';
+
+function die(message, code = 2) {
+  console.error(`recruit.mjs: ${redactCredentials(message)}`);
+  process.exit(code);
+}
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const KINDS = ['roles', 'methods', 'stances', 'constraints', 'tasks', 'guests', 'temperaments'];
@@ -371,4 +378,4 @@ async function main() {
   console.log(`season ${start}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((error) => die(error.message, error.exitCode ?? 1));

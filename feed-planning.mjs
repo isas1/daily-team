@@ -71,22 +71,33 @@ export async function discover({ date, cacheFile, recent = [], fetcher = fetch, 
   let cache = { items: [], fetched: {} };
   try { cache = JSON.parse(readFileSync(cacheFile, 'utf8')); if (!Array.isArray(cache.items) || !cache.fetched || typeof cache.fetched !== 'object') throw new Error('invalid cache'); }
   catch { cache = { items: [], fetched: {} }; }
+  const timestamp = Date.parse(date);
   const items = [...cache.items], status = [];
-  for (const source of sources) {
-    if (!source.enabled) { status.push({ source: source.id, status: 'disabled', reason: source.reason }); continue; }
-    const age = Date.parse(date) - Date.parse(cache.fetched[source.id]);
-    if (offline || (age >= 0 && age < 86400000)) { status.push({ source: source.id, status: offline ? 'offline' : 'cached' }); continue; }
+  // Sources are independent. Merge in configured order so latency cannot change candidate order.
+  const results = await Promise.all(sources.map(async (source) => {
+    const base = { source: source.id };
+    if (!source.enabled) return { ...base, status: 'disabled', reason: source.reason };
+    const age = timestamp - Date.parse(cache.fetched[source.id]);
+    if (offline || (age >= 0 && age < 86400000)) return { ...base, status: offline ? 'offline' : 'cached' };
     try {
       const body = await fetchFeed(source, fetcher);
       const found = source.format === 'trending' ? parseTrending(body, source, date) : parseFeed(body, source, date);
-      items.unshift(...found); cache.fetched[source.id] = date;
-      status.push({ source: source.id, status: 'fetched', count: found.length });
-    } catch (e) { status.push({ source: source.id, status: 'failed', reason: e.message.slice(0, 150) }); }
+      return { ...base, status: 'fetched', count: found.length, found };
+    } catch (error) {
+      return { ...base, status: 'failed', reason: String(error?.message ?? error).slice(0, 150) };
+    }
+  }));
+  for (const { found, ...receipt } of results) {
+    if (found) {
+      items.unshift(...found);
+      cache.fetched[receipt.source] = date;
+    }
+    status.push(receipt);
   }
   const seen = new Set();
   cache.items = items.filter((i) => {
     if (!textItem(i)) return false;
-    const age = (Date.parse(date) - Date.parse(i.published)) / 86400000;
+    const age = (timestamp - Date.parse(i.published)) / 86400000;
     if (age < -1 || age > 60 || seen.has(i.id)) return false; seen.add(i.id); return true;
   }).sort((a, b) => b.published.localeCompare(a.published)).slice(0, 100);
   if (!offline) {

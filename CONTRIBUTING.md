@@ -29,6 +29,8 @@ Guests bring one method each and never speak as the figure. They can be historic
 
 ## Code
 
-Run `node --test test.mjs` before opening a pull request. Keep to plain wording: the tests reject the words listed in `prompt.md`.
+Run `node --test test.mjs *.test.mjs` before opening a pull request. Tests use local mock servers; allow loopback listeners. Keep to plain wording: the tests reject the words listed in `prompt.md`.
+
+[Code structure](docs/code-structure.md) maps shared modules, CLI boundaries, and remaining architecture work.
 
 `reports/`, `days/`, `ARCHIVE.md`, and the generated blocks in `README.md` are written by the workflows. Do not edit them by hand.

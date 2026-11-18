@@ -1,23 +1,32 @@
 #!/usr/bin/env node
 // A separate, resumable team commission. Never regenerates the day or its artifacts.
 import { createHash } from 'node:crypto';
-import { readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { closeSync, fstatSync, openSync, readFileSync, readSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { addCsp, completeChecked, dayTitle, extractHtml, prepareProvider, sections, today } from './run.mjs';
+import { addCsp, extractHtml } from './artifact-policy.mjs';
+import { completeChecked, prepareProvider } from './providers.mjs';
+import { dayTitle, today } from './team-session.mjs';
+import { sections } from './prompt-rules.mjs';
 import { renderPng } from './card.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
+const PNG_SIGNATURE = Buffer.from('89504e470d0a1a0a', 'hex');
 export const coverHash = (day) => createHash('sha256').update(JSON.stringify(day)).digest('hex');
 
 export function hasCover(day, daysDir) {
   const dir = join(daysDir, day.date);
   try {
     const record = JSON.parse(readFileSync(join(dir, 'cover.json'), 'utf8'));
-    const png = readFileSync(join(dir, 'cover.png'));
-    return record.status === 'ok' && record.sourceHash === coverHash(day)
-      && png.subarray(0, 8).equals(Buffer.from('89504e470d0a1a0a', 'hex'))
-      && png.length > 8000 && png.readUInt32BE(16) === 1200 && png.readUInt32BE(20) === 630;
+    if (record.status !== 'ok' || record.sourceHash !== coverHash(day)) return false;
+    const file = openSync(join(dir, 'cover.png'), 'r');
+    try {
+      if (fstatSync(file).size <= 8000) return false;
+      const header = Buffer.alloc(24);
+      return readSync(file, header, 0, header.length, 0) === header.length
+        && header.subarray(0, 8).equals(PNG_SIGNATURE)
+        && header.readUInt32BE(16) === 1200 && header.readUInt32BE(20) === 630;
+    } finally { closeSync(file); }
   } catch { return false; }
 }
 
@@ -87,4 +96,4 @@ async function main() {
   });
   console.log(`${date} cover: ${result.status}`);
 }
-if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((error) => { console.error(`cover.mjs: ${error.message}`); process.exitCode = 1; });
+if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((error) => { console.error(`cover.mjs: ${error.message}`); process.exitCode = error.exitCode ?? 1; });

@@ -9,7 +9,7 @@ import { existsSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { dayTitle, parseTeam, taskName } from './run.mjs';
+import { dayTitle, parseTeam, taskName } from './team-session.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BRAND = pathToFileURL(join(HERE, 'brand')).href;

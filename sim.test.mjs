@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { appendFileSync, chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { appendFileSync, chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -280,13 +280,18 @@ test('days with a sim get a Watch link and highlights; other days do not change'
 });
 
 test('live mode tails new lines of the log', () => {
-  const p = join(tmp(), 'sim.jsonl');
-  const read = tail(p);
+  const dir = tmp();
+  const p = join(dir, 'sim.jsonl');
+  const stage = join(dir, 'staged.jsonl');
+  const read = tail(p, stage);
   assert.deepEqual(read(), []);
-  writeFileSync(p, '{"a":1}\n{"b"');
+  writeFileSync(stage, '{"a":1}\n{"b"');
   assert.deepEqual(read(), ['{"a":1}']);
-  appendFileSync(p, ':2}\n');
+  appendFileSync(stage, ':2}\n');
   assert.deepEqual(read(), ['{"b":2}']);
+  renameSync(stage, p);
+  appendFileSync(p, '{"c":3}\n');
+  assert.deepEqual(read(), ['{"c":3}'], 'publishing the staged log does not replay old lines');
 });
 
 // run.mjs end to end, with a fake claude CLI that plays the scripted model

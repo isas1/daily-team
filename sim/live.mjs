@@ -6,11 +6,11 @@
 //   --run starts the sim itself (node sim/cli.mjs) and writes into --dir.
 // Without --run, start the day in another terminal (node run.mjs, or node sim/cli.mjs --out days).
 import { spawn } from 'node:child_process';
-import { existsSync, openSync, readSync, closeSync, statSync, watch } from 'node:fs';
+import { existsSync, openSync, readSync, closeSync, fstatSync, watch } from 'node:fs';
 import { createServer } from 'node:http';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseTeam, teamFor, today } from '../run.mjs';
+import { parseTeam, teamFor, today } from '../team-session.mjs';
 import { watchHtml } from '../sim-view.mjs';
 import { defaultLook } from './rig.mjs';
 
@@ -28,23 +28,33 @@ export function livePage(date, team) {
 }
 
 // Reads lines appended to a file since the last read.
-export function tail(path) {
+export function tail(path, stagedPath) {
   let pos = 0;
   let rest = '';
+  let identity;
   return () => {
-    if (!existsSync(path)) return [];
-    const size = statSync(path).size;
-    if (size < pos) { pos = 0; rest = ''; }
-    if (size === pos) return [];
-    const fd = openSync(path, 'r');
-    const buf = Buffer.alloc(size - pos);
-    readSync(fd, buf, 0, buf.length, pos);
-    closeSync(fd);
-    pos = size;
-    const text = rest + buf.toString('utf8');
-    const lines = text.split('\n');
-    rest = lines.pop();
-    return lines.filter(Boolean);
+    let fd;
+    try {
+      fd = openSync(stagedPath && existsSync(stagedPath) ? stagedPath : path, 'r');
+    } catch (error) {
+      if (error.code === 'ENOENT') return [];
+      throw error;
+    }
+    try {
+      const { size, dev, ino } = fstatSync(fd);
+      const current = `${dev}:${ino}`;
+      if (current !== identity || size < pos) { pos = 0; rest = ''; }
+      identity = current;
+      if (size === pos) return [];
+      const buf = Buffer.alloc(size - pos);
+      const count = readSync(fd, buf, 0, buf.length, pos);
+      pos += count;
+      const lines = (rest + buf.toString('utf8', 0, count)).split('\n');
+      rest = lines.pop();
+      return lines.filter(Boolean);
+    } finally {
+      closeSync(fd);
+    }
   };
 }
 
@@ -56,7 +66,7 @@ async function main() {
   const log = join(dir, date, 'sim.jsonl');
   const page = livePage(date, teamFor(date));
   const clients = new Set();
-  const read = tail(log);
+  const read = tail(log, argv.includes('--run') ? null : join(dir, `.${date}.pending`, 'sim.jsonl'));
   const sent = [];
   const pump = () => {
     for (const line of read()) { sent.push(line); for (const res of clients) res.write(`data: ${line}\n\n`); }
