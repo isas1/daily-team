@@ -8,7 +8,9 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { completeChecked, parseTeam, prepareProvider, sections, today } from '../run.mjs';
+import { completeChecked, prepareProvider } from '../providers.mjs';
+import { sections } from '../prompt-rules.mjs';
+import { parseTeam, today } from '../team-session.mjs';
 import { defaultLook, lookProblems, normalizeLook } from './rig.mjs';
 import { parseTurn } from './agent.mjs';
 
@@ -59,4 +61,4 @@ async function main() {
   console.log(`look: ${result.status}${result.model ? ` (${result.model})` : ''}${result.problems.length ? `: ${result.problems.join('; ')}` : ''}`);
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exit(1); });
+if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exit(e.exitCode ?? 1); });

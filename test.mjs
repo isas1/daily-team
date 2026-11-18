@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { spawn, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
-import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -403,9 +403,12 @@ test('a component day builds ten tiles with turns at the lead, then a piece from
     const day = readDay(out, '2026-10-21');
     assert.equal(day.component, true);
     assert.equal(day.artifacts.length, 11);
-    assert.deepEqual({ ...day.artifacts[0], model: undefined }, { file: PIECE_FILE, kind: 'piece', lead: 1, rows: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], model: undefined, status: 'ok', problems: [] });
+    const piece = readFileSync(join(out, '2026-10-21', PIECE_FILE));
+    assert.deepEqual({ ...day.artifacts[0], model: undefined }, {
+      file: PIECE_FILE, kind: 'piece', lead: 1, rows: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      model: undefined, sha256: createHash('sha256').update(piece).digest('hex'), status: 'ok', problems: [],
+    });
     assert.deepEqual(day.artifacts.slice(1).map((a) => [a.row, a.lead, a.status]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => [n, rowLead(n), 'ok']));
-    assert.ok(existsSync(join(out, '2026-10-21', PIECE_FILE)));
   });
   rmSync(out, { recursive: true });
 });
@@ -855,6 +858,28 @@ test('publish shows today\'s team before the first run', () => {
   assert.equal(typeof dayReadme, 'function');
 });
 
+test('repeat publishing leaves unchanged Markdown alone and still updates changed days', () => {
+  const { root, days } = fakeRepo();
+  const date = '2026-10-02';
+  const dayDir = join(days, date);
+  const readme = join(dayDir, 'README.md');
+  const oldTime = new Date('2000-01-01T00:00:00Z');
+  try {
+    fakeDay(days, date, []);
+    writeFileSync(join(dayDir, 'team.png'), 'fixture');
+    publish(root);
+    const files = [readme, join(root, 'README.md'), join(root, 'ARCHIVE.md')];
+    for (const file of files) utimesSync(file, oldTime, oldTime);
+    publish(root);
+    for (const file of files) assert.equal(statSync(file).mtimeMs, oldTime.getTime(), file);
+    fakeDay(days, date, [], { decision: 'New decision.' });
+    publish(root);
+    assert.match(readFileSync(readme, 'utf8'), /New decision\./);
+    assert.match(readFileSync(join(root, 'README.md'), 'utf8'), /New decision\./);
+    assert.equal(statSync(join(root, 'ARCHIVE.md')).mtimeMs, oldTime.getTime());
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
 test('the site runs artifacts only inside a sandboxed frame and uses the brand', () => {
   const dir = tmp();
   const days = join(dir, 'days');
@@ -882,6 +907,23 @@ test('the site runs artifacts only inside a sandboxed frame and uses the brand',
   }
   assert.ok(!existsSync(join(site, '2026-10-02', 'artifact-1.html')), 'raw artifact must not be served');
   rmSync(dir, { recursive: true });
+});
+
+test('project pages link to one full archive and keep recent previews short', () => {
+  const dir = tmp(), days = join(dir, 'days'), site = join(dir, '_site');
+  try {
+    for (const date of dates('2026-10-01', 9)) fakeDay(days, date, []);
+    buildSite(site, loadDays(days), days, '');
+    const root = readFileSync(join(site, 'index.html'), 'utf8');
+    const dated = readFileSync(join(site, '2026-10-09', 'index.html'), 'utf8');
+    const archivePage = readFileSync(join(site, 'archive.html'), 'utf8');
+    assert.match(root, /href="\.\/archive\.html">All 9 projects/);
+    assert.match(dated, /href="\.\.\/archive\.html">All 9 projects/);
+    assert.equal([...dated.matchAll(/<li><a href="\.\.\/2026-/g)].length, 7);
+    assert.doesNotMatch(dated, /href="\.\.\/2026-10-01\/"/);
+    assert.match(archivePage, /href="\.\/2026-10-01\/"/);
+    assert.equal([...archivePage.matchAll(/<li><a href="\.\/2026-/g)].length, 9);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
 // Shell scripts
@@ -1644,7 +1686,16 @@ test('designed cover replaces previews consistently; stale/missing covers fall b
     assert.doesNotMatch(archive([changed], days), /cover\.png/);
     await assert.rejects(generateCover(day, days, { complete, render: () => false, force: true }), /render failed/);
     assert.ok(hasCover(day, days), 'failed replacement preserves existing cover');
-    rmSync(join(dir, 'cover.png'));
+    const file = join(dir, 'cover.png');
+    const small = readFileSync(file).subarray(0, 24);
+    writeFileSync(file, small);
+    assert.equal(hasCover(day, days), false, 'matching header alone is too small');
+    render('', file);
+    const wrongSize = readFileSync(file);
+    wrongSize.writeUInt32BE(1, 16);
+    writeFileSync(file, wrongSize);
+    assert.equal(hasCover(day, days), false, 'wrong dimensions');
+    rmSync(file);
     assert.equal(hasCover(day, days), false);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

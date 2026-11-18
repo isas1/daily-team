@@ -5,7 +5,9 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { addCsp, checkArtifact, completeChecked, completeClaude, extractHtml, prepareProvider, rowLead, sections } from './run.mjs';
+import { addCsp, checkArtifact, extractHtml, rowLead } from './artifact-policy.mjs';
+import { completeChecked, completeClaude, prepareProvider } from './providers.mjs';
+import { sections } from './prompt-rules.mjs';
 import { comparisonHtml } from './comparison-view.mjs';
 import { applyTokens, assertPackExport, packArtifactProblems, packBuildRules } from './component-pack.mjs';
 
@@ -119,4 +121,4 @@ async function main() {
   console.log(`${dir}/comparison.html: ${record.status}`);
   if (!opts.viewOnly && record.status !== 'ok') process.exitCode = 3;
 }
-if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exitCode = 1; });
+if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exitCode = e.exitCode ?? 1; });

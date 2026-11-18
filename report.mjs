@@ -12,7 +12,9 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { completeChecked, conceptName, findBanned, parseTeam, planSections, prepareProvider, sections, taskName, today } from './run.mjs';
+import { completeChecked, prepareProvider } from './providers.mjs';
+import { conceptName, parseTeam, planSections, taskName, today } from './team-session.mjs';
+import { findBanned, sections } from './prompt-rules.mjs';
 import { markdownCell as cell } from './security.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));

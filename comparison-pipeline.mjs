@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { today } from './run.mjs';
+import { today } from './team-session.mjs';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
 const value = (flag, fallback) => { const i = args.lastIndexOf(flag); return i >= 0 ? args[i + 1] : fallback; };

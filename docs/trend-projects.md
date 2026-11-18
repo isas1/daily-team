@@ -37,20 +37,36 @@ can change; an unrecognized page fails visibly. No extra model call is needed.
 
 ## Originality and scope
 
-The team compares three concrete directions, combines a need with a mechanism
-from another field, and names the useful difference. Recent project name and
-problem/mechanism overlap checks block close lexical repeats. These heuristics
-do not prove semantic novelty, usefulness or visual quality. Source checks flag
-issues; browser and human review still judge generated work.
+The team compares three directions with different first actions and visible
+results. The chosen direction names a rule from one member's craft and uses it
+in a calculation, constraint or state change. The plan records a visual direction
+and a trial with starting data, an exact input, the expected result, a likely
+mistake and recovery. The builder uses these details to implement the workflow.
+Recent visual directions go to the planner so it can spot repeated layouts.
+
+New planning snapshots require this craft contract. The planner gets one retry
+for missing fields, repeated action or result text, or a project name that
+matches none of the pitches. Existing snapshots and records keep their earlier
+contract. Recent name and problem/mechanism overlap checks screen for close
+lexical repeats. Browser and human review judge semantic novelty, usefulness and
+visual quality.
 
 One self-contained `artifact-1.html` supplies the entire useful workflow, with
 sample data, input, result and recovery. No network requests, dependencies or
 pretend live service integrations. Projects can scroll and use multiple controls;
-the component tile size does not apply. Aim for at most 40 visible words across
-the initial project, including labels and sample data. Allow more when essential
-for clarity or the task. Use a plain title and, if needed, one short action-and-result
-sentence. Keep optional help and credits collapsed. Normal runs no longer pay
+component tile sizing does not apply. Apply [minimum-copy rules](component-copy.md)
+across the whole initial project: aim for at most 40 rendered words, including
+labels and sample data. Allow more only when essential for clarity or the task.
+Use a plain title and, if needed, one short action-and-result sentence. Keep optional help and credits collapsed. Normal runs no longer pay
 for component model comparisons. Their cover and archive stages continue.
+
+The build request carries the chosen direction, build notes and selected
+attribution. A missing inline script or classic JavaScript syntax error triggers
+one build retry. If the problem persists, the runner records a failed artifact
+without saving the HTML. This source check compiles classic scripts without
+running them. Browser review still covers behavior and module scripts. The full
+planning record stays available for review. Pages show seven recent projects and
+link to the full archive as it grows.
 
 ## Run and replay
 

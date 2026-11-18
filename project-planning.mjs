@@ -30,7 +30,7 @@ export function projectInput({ date, discovery, recent, brief = '', source = nul
     const age = (Date.parse(date) - Date.parse(i.published)) / 86400000;
     return age >= -1 && age <= 14;
   });
-  return { schemaVersion: 1, mode: 'project', date, task, request: null,
+  return { schemaVersion: 1, craftVersion: 1, mode: 'project', date, task, request: null,
     sources: discovery.status, custom: Boolean(brief), ...(source ? { feedPolicy: 'one-source-v1', selectedFeed: source.id } : {}),
     candidates: [...fresh.map(i => ({ ...i, kind: 'feed' })), { id: 'daily-task', kind: 'task', task }],
     recent, inventory: null };
@@ -39,6 +39,30 @@ export function projectInput({ date, discovery, recent, brief = '', source = nul
 const words = s => new Set(String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').split(' ')
   .filter(w => w.length > 2 && !['the', 'and', 'for', 'with', 'from', 'that', 'this'].includes(w)));
 const overlap = (a, b) => { const x = words(a), y = words(b); return [...x].filter(w => y.has(w)).length / Math.max(x.size, y.size, 1); };
+const shortText = value => typeof value === 'string' && value.length <= 300 && /[\p{L}\p{N}]/u.test(value);
+const directionKey = text => text.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+
+function craftProblems(project) {
+  const problems = [];
+  const { craft, alternatives } = project;
+  for (const key of ['rule', 'design']) {
+    if (!shortText(craft?.[key])) problems.push(`project craft.${key} needs a concrete description (1–300 characters)`);
+  }
+  for (const key of ['start', 'action', 'result', 'mistake', 'recovery']) {
+    if (!shortText(craft?.trial?.[key])) problems.push(`project craft.trial.${key} needs a concrete example (1–300 characters)`);
+  }
+  if (!Array.isArray(alternatives) || alternatives.length !== 3) return problems;
+  for (const key of ['action', 'result']) {
+    if (!alternatives.every(a => shortText(a?.[key]))) {
+      problems.push(`each project direction needs a concrete ${key} (1–300 characters)`);
+    } else if (new Set(alternatives.map(a => directionKey(a[key]))).size !== 3) {
+      problems.push(`project directions must have distinct ${key}s`);
+    }
+  }
+  if (typeof project.name === 'string' && !alternatives.some(a => typeof a?.name === 'string'
+    && directionKey(a.name) === directionKey(project.name))) problems.push('project name must match the chosen direction');
+  return problems;
+}
 
 export function projectProblems(project, input) {
   if (!project || typeof project !== 'object' || Array.isArray(project)) return ['project must be an object'];
@@ -64,6 +88,7 @@ export function projectProblems(project, input) {
   if (!Array.isArray(project.alternatives) || project.alternatives.length !== 3
     || project.alternatives.some(a => !a || ['name', 'need', 'mechanism', 'rejection'].some(k => typeof a[k] !== 'string' || !a[k].trim() || a[k].length > 1200))) problems.push('compare three concrete directions with rejection rationale');
   else if (['name', 'mechanism'].some(key => new Set(project.alternatives.map(a => a[key].toLowerCase().replace(/\s+/g, ' ').trim())).size !== 3)) problems.push('project directions must have distinct names and mechanisms');
+  if (input.craftVersion === 1) problems.push(...craftProblems(project));
   for (const day of input.recent) {
     const old = day.project;
     if (old && (overlap(project.name, old.name) === 1

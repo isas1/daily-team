@@ -10,6 +10,7 @@ import { PROJECT_SOURCES, projectSource, projectInput, projectProblems, assertPr
 import { hash, recentPacks } from './component-pack.mjs';
 import { buildSite, dayReadme } from './publish.mjs';
 import { buildPrompt } from './recruit.mjs';
+import { projectScriptProblem } from './artifact-policy.mjs';
 
 const date = '2026-10-31';
 const feeds = ['github-trending', 'hacker-news', 'reddit-sideproject'].map((sourceId, n) => ({
@@ -22,9 +23,25 @@ const project = () => ({ schemaVersion: 1, name: 'Queue garden', audience: 'Work
   outcome: 'See queue length change', recovery: 'Reset sample', mechanism: 'Direct scheduling linked to animated waiting lanes',
   difference: 'A manipulable time model instead of a static queue chart', whyNow: 'Saved signals suggest local simulation tools',
   sourceIds: ['signal-0', 'signal-1'], evidenceStatus: 'sourced',
-  alternatives: [1, 2, 3].map(n => ({ name: `Direction ${n}`, need: `Need ${n}`, mechanism: `Mechanism ${n}`, rejection: n === 1 ? 'Chosen for direct action' : 'Less useful' })) });
+  craft: { rule: 'The arranger uses a canon: each arrival repeats a five-minute service block, starting after the prior block ends.',
+    design: 'Line up time and waiting lanes in one score. On phones put the arrival slider above its lane. Amber marks waits.',
+    trial: { start: 'Open with arrivals at minutes 0 and 5.', action: 'Move the second arrival to minute 2.',
+      result: 'Show three minutes of waiting.', mistake: 'Put both arrivals at minute 0.', recovery: 'Reset the second arrival to minute 5 and show zero wait.' } },
+  alternatives: [
+    { name: 'Queue garden', need: 'Teach why queues form', mechanism: 'Repeat service blocks', action: 'Move an arrival', result: 'See wait time', rejection: 'Chosen for direct action' },
+    { name: 'Room map', need: 'Reduce walking between stations', mechanism: 'Trace paths', action: 'Join two stations', result: 'Get walking distance', rejection: 'Needs a surveyed floor plan' },
+    { name: 'Shift tally', need: 'Check shift coverage', mechanism: 'Accumulate staff minutes', action: 'Assign a shift', result: 'Find unstaffed times', rejection: 'Hides the effect of uneven arrivals' },
+  ] });
 const plan = p => `## Pitch\n**Member 1: Queue**\nShape time.\n**Member 2: Lanes**\nReveal waits.\n**Member 3: Pulse**\nShow arrival.\n**Member 4: Reset**\nAllow recovery.\n\n## Clash\n${['Member 1', 'Member 2', 'Member 3', 'Member 4', 'Member 1', 'Member 2'].map(r => `**${r}:** Show changing waits.`).join('\n')}\n\n## Decision\nWorkshop hosts move arrivals and see waiting lanes change.\nConcept: Queue garden\n\n## Build notes\nConnect time. Show waits. Reset sample.\n\n\`\`\`json\n${JSON.stringify(p)}\n\`\`\``;
-const html = '<!doctype html><html lang="en"><head><title>Queue garden</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><label>Arrival<input type="range" min="0" max="10"></label><output>Sample queue</output><script>document.querySelector("input").oninput=e=>document.querySelector("output").textContent=e.target.value;</script></body></html>';
+const html = `<!doctype html><html lang="en"><head><title>Queue garden</title><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body><label>Second arrival<input type="range" min="0" max="10" value="5"></label><output>0 minutes waiting</output><button>Reset</button>
+<script>
+const input = document.querySelector('input');
+const output = document.querySelector('output');
+function showWait() { output.textContent = Math.max(0, 5 - Number(input.value)) + ' minutes waiting'; }
+input.addEventListener('input', showWait);
+document.querySelector('button').addEventListener('click', () => { input.value = 5; showWait(); });
+</script></body></html>`;
 
 test('Trending cards normalize repository links and mark observed time; markup drift fails', () => {
   const source = PROJECT_SOURCES[0];
@@ -44,6 +61,12 @@ test('project evidence requires saved IDs and source diversity; fallback and cus
     [p => p.mechanism = '', /mechanism/],
     [p => p.evidenceStatus = 'original-fallback', /actual sources/],
     [p => p.alternatives[1].mechanism = p.alternatives[0].mechanism, /distinct names and mechanisms/],
+    [p => p.alternatives[1].action = 'Move an arrival!', /distinct actions/],
+    [p => p.alternatives[1].result = 'See wait time.', /distinct results/],
+    [p => p.alternatives[1].result = '?', /concrete result/],
+    [p => p.name = 'An unpitched idea', /match the chosen direction/],
+    [p => delete p.craft.trial.recovery, /craft.trial.recovery/],
+    [p => delete p.craft.rule, /craft.rule/],
   ]) { const p = project(); change(p); assert.match(projectProblems(p, input()).join(';'), expected); }
   const empty = projectInput({ date, discovery: { items: [], status: [] }, recent: [] });
   const fallback = { ...project(), sourceIds: [], evidenceStatus: 'original-fallback' };
@@ -91,6 +114,15 @@ test('selected feed fetch and cache fallback exclude every other source', async 
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
+test('project script gate parses classic JavaScript without executing it or counting HTML comments or data scripts', () => {
+  assert.equal(projectScriptProblem(html), null);
+  assert.equal(projectScriptProblem('<script type="application/javascript">throw new Error("do not run");</script>'), null);
+  assert.equal(projectScriptProblem('<script type="module">export {};</script>'), null);
+  assert.match(projectScriptProblem('<script>function broken( {</script>'), /syntax error/);
+  assert.match(projectScriptProblem('<!--<script>doThing()</script>--><script type="application/json">{}</script>'), /needs inline JavaScript/);
+  assert.match(projectScriptProblem('<script src="elsewhere.js">doThing()</script>'), /needs inline JavaScript/);
+});
+
 test('future recruitment broadens crafts and project needs while retaining historical component prompt', () => {
   const base = { roles: [], methods: [], constraints: [], tasks: [], guests: [], temperaments: [] };
   const future = buildPrompt(base, [], [], '2026-11-02')[1].content;
@@ -103,12 +135,19 @@ test('live discovery path parses Trending and Atom, records rate limits and reta
   const dir = mkdtempSync(join(tmpdir(), 'project-feeds-'));
   try {
     const sources = PROJECT_SOURCES.filter(s => ['github-trending', 'reddit-sideproject', 'reddit-beautiful'].includes(s.id));
-    const fetcher = async (url, options) => url.includes('trending')
+    const response = (url, options) => url.includes('trending')
       ? (assert.equal(options.headers.Accept, 'text/html'), new Response('<article class="Box-row"><h2><a href="/a/b">a/b</a></h2><p>Project</p></article>', { headers: { 'content-type': 'text/html' } }))
       : url.includes('SideProject') ? new Response('<feed><entry><title>Local tool</title><link href="https://example.test/post"/><updated>2026-10-30T00:00:00Z</updated></entry></feed>', { headers: { 'content-type': 'application/atom+xml' } })
         : new Response('Limited', { status: 429 });
-    const opts = { date, cacheFile: join(dir, 'cache.json'), sources, fetcher };
-    const result = await discover(opts);
+    const requests = [];
+    const opts = { date, cacheFile: join(dir, 'cache.json'), sources, fetcher: response };
+    const pending = discover({ ...opts, fetcher: (url, options) => new Promise((resolve) => {
+      requests.push(() => resolve(response(url, options)));
+    }) });
+    assert.equal(requests.length, sources.length, 'start every fetch before the slowest feed responds');
+    for (const respond of requests.reverse()) respond();
+    const result = await pending;
+    assert.deepEqual(result.status.map((receipt) => receipt.source), sources.map((source) => source.id));
     assert.equal(result.items.length, 2); assert.equal(result.status[2].reason, 'HTTP 429');
     const cached = await discover({ ...opts, offline: true, fetcher: () => { throw new Error('offline must not fetch'); } });
     assert.equal(cached.items.length, 2);
@@ -141,11 +180,19 @@ async function run(replies, args, inspect, snapshotInput = input()) {
 }
 
 test('actual default CLI builds one project, preserves citations, exports evidence and blocks tampering', async () => {
+  const snapshot = input();
+  snapshot.recent = [{ date: '2026-10-30', project: { name: 'Paper fold', problem: 'Align two corners',
+    mechanism: 'Reflect the crease', interaction: 'Fold one corner', craft: { design: 'Use an edge-on fold diagram' } } }];
   await run([plan(project()), html], [], ({ days, dir, calls, output, code, day }) => {
     assert.equal(code, 0, output); assert.equal(calls.length, 2); assert.equal(day.component, false);
     assert.equal(day.projectMode, true); assert.equal(day.status, 'ok', output); assert.equal(day.artifacts.length, 1);
-    assert.equal(day.planning.inputHash, hash(input())); assert.equal(day.pack, undefined);
+    assert.equal(day.planning.inputHash, hash(snapshot)); assert.equal(day.pack, undefined);
     assert.match(calls[1].messages[1].content, /https:\/\/example.test\/0/);
+    assert.match(calls[0].messages[1].content, /https:\/\/example.test\/2/);
+    assert.match(calls[0].messages[1].content, /Use an edge-on fold diagram/);
+    assert.doesNotMatch(calls[1].messages[1].content, /https:\/\/example.test\/2|Use an edge-on fold diagram|<planning_input|## Clash|"alternatives":/);
+    assert.match(calls[1].messages[1].content, /## Build notes\nConnect time\. Show waits\. Reset sample\./);
+    assert.match(calls[1].messages[1].content, /"trial":\{"start":"Open with arrivals at minutes 0 and 5\."/);
     assert.deepEqual(day.planning.selectedSourceIds, project().sourceIds);
     const target = join(days, date); assertProjectExport(day, target);
     assert.match(dayReadme(day, days, ''), /Used feed inspiration/);
@@ -159,7 +206,11 @@ test('actual default CLI builds one project, preserves citations, exports eviden
     assert.deepEqual(recentPacks(days, '2026-11-01')[0].project, project());
     writeFileSync(join(target, 'artifact-1.html'), 'changed');
     assert.throws(() => assertProjectExport(day, target), /hash mismatch/);
-  });
+    assert.throws(() => dayReadme(day, days, ''), /hash mismatch/);
+    const rejectedSite = join(dir, 'rejected-site');
+    assert.throws(() => buildSite(rejectedSite, [day], days, ''), /hash mismatch/);
+    assert.equal(existsSync(rejectedSite), false);
+  }, snapshot);
 });
 
 test('runner builds from exactly one saved feed item and rejects multiple items', async () => {
@@ -182,9 +233,13 @@ test('invalid evidence stops before build; planning-only and snapshot mode guard
   await run([plan(invalid), plan(invalid)], [], ({ calls, code, day }) => {
     assert.equal(code, 1); assert.equal(calls.length, 2); assert.equal(day.status, 'failed'); assert.equal(day.artifacts.length, 0);
   });
-  await run([plan(project())], ['--artifacts', '0'], ({ calls, code, day, output }) => {
+  const legacy = input(); delete legacy.craftVersion;
+  const legacyProject = project(); delete legacyProject.craft;
+  for (const direction of legacyProject.alternatives) { delete direction.action; delete direction.result; }
+  await run([plan(legacyProject)], ['--artifacts', '0'], ({ calls, code, day, output, days }) => {
     assert.equal(code, 0, output); assert.equal(calls.length, 1); assert.equal(day.artifacts.length, 0);
-  });
+    assertProjectExport(day, join(days, date));
+  }, legacy);
   await run([plan({ ...project(), sourceIds: [], evidenceStatus: 'original-fallback' }), html], ['--brief', 'Make a chosen local tool'], ({ calls, code, day, output }) => {
     assert.equal(code, 0, output); assert.equal(calls.length, 2); assert.equal(day.task, 'Make a chosen local tool');
     assert.deepEqual(day.planning.selectedSourceIds, []);
@@ -194,5 +249,26 @@ test('invalid evidence stops before build; planning-only and snapshot mode guard
   });
   await run([], ['--artifacts', '6'], ({ calls, code, output }) => {
     assert.equal(code, 2); assert.equal(calls.length, 0); assert.match(output, /one finished project/);
+  });
+});
+
+test('actual CLI retries a cloned idea and a static artifact, then saves the usable result', async () => {
+  const cloned = project(); cloned.alternatives[1].action = cloned.alternatives[0].action;
+  const staticHtml = html.replace(/<script>[\s\S]*?<\/script>/, '');
+  await run([plan(cloned), plan(project()), staticHtml, html], [], ({ calls, code, day, output }) => {
+    assert.equal(code, 0, output); assert.equal(calls.length, 4); assert.equal(day.status, 'ok', output);
+    assert.match(calls[1].messages.at(-1).content, /distinct actions/);
+    assert.match(calls[3].messages.at(-1).content, /needs inline JavaScript/);
+  });
+});
+
+test('actual CLI records a failed day without saving a project that still has a syntax error after retry', async () => {
+  const broken = html.replace('function showWait()', 'function showWait(');
+  await run([plan(project()), broken, broken], [], ({ calls, code, day, days }) => {
+    assert.equal(code, 3); assert.equal(calls.length, 3); assert.equal(day.status, 'failed');
+    assert.match(calls[2].messages.at(-1).content, /syntax error/);
+    assert.match(day.error, /syntax error/);
+    assert.equal(existsSync(join(days, date, 'artifact-1.html')), false);
+    assertProjectExport(day, join(days, date));
   });
 });
