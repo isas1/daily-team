@@ -9,7 +9,7 @@
 // Usage: node publish.mjs [--site dir] [--root dir] [--suggestions file.json] [--cards]
 // Env:   PAGES_URL          site link to show in the README
 //        GITHUB_REPOSITORY  owner/repo, for links from the site back to the repo
-import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { constants, copyFileSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { dayTitle, parseTeam, planSections, teamFor, today } from './team-session.mjs';
@@ -26,6 +26,8 @@ import { hasSim, highlights, watchHtml, WATCH_FILE } from './sim-view.mjs';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RECENT_DAYS = 7;
 const MIN_SCREENSHOT_BYTES = 8000;
+// Clone blocks on filesystems that support it. Node falls back to a byte copy.
+const SITE_COPY_MODE = constants.COPYFILE_FICLONE;
 const SANDBOX = 'allow-scripts allow-modals allow-downloads allow-popups allow-forms';
 const SITE_CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'self' 'unsafe-inline'; "
   + "img-src 'self' data: blob:; media-src data: blob:; font-src 'self' data:; form-action 'none'";
@@ -34,7 +36,8 @@ const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 export const title = dayTitle;
-const roles = (day) => parseTeam(day.team).members.map((m) => m.role).join(' · ');
+const memberRoles = (members) => members.map((m) => m.role).join(' · ');
+const roles = (day) => memberRoles(parseTeam(day.team).members);
 // A component day's piece is its headline asset; otherwise the first that worked.
 const firstAsset = (day) => day.artifacts.find((a) => a.kind === 'piece' && a.status !== 'failed')
   ?? day.artifacts.find((a) => a.status !== 'failed');
@@ -51,26 +54,26 @@ export function loadDays(daysDir) {
     .map((d) => JSON.parse(readFileSync(join(daysDir, d, 'day.json'), 'utf8')));
 }
 
-function assetLines(day, base, pagesUrl) {
+function assetLines(day, dir, pagesUrl, members) {
   if (day.status === 'failed' && !day.plan) return [`No asset. The team could not run: ${day.error}`];
   const lines = [];
   for (const a of day.artifacts) {
-    const lead = parseTeam(day.team).members[a.lead - 1]?.role ?? `member ${a.lead}`;
+    const lead = members[a.lead - 1]?.role ?? `member ${a.lead}`;
     if (a.status === 'failed') { lines.push(`${a.file}: no asset. ${a.problems.join('; ')}`, ''); continue; }
-    if (existsSync(join(base.dir, png(a)))) lines.push(`<a href="${base.href}${a.file}"><img src="${base.href}${png(a)}" alt="Screenshot of ${esc(a.file)}" width="100%"></a>`, '');
+    if (existsSync(join(dir, png(a)))) lines.push(`<a href="${a.file}"><img src="${png(a)}" alt="Screenshot of ${esc(a.file)}" width="100%"></a>`, '');
     const use = pagesUrl ? `[Use it](${pagesUrl}${day.date}/) · ` : '';
     const note = a.status === 'ok' ? '' : ` Needs review: ${a.problems.join('; ')}.`;
-    lines.push(`${use}[${a.file}](${base.href}${a.file}), led by ${lead}. Model: ${a.model}.${note}`, '');
+    lines.push(`${use}[${a.file}](${a.file}), led by ${lead}. Model: ${a.model}.${note}`, '');
   }
   return lines.length ? lines : ['No asset was requested for this day.'];
 }
 
 // The team session in parts, with speakers matched to member numbers. Null for days recorded
 // before the Pitch and Clash format; those keep their plan as plain markdown.
-export function session(day) {
+export function session(day, team) {
   const parts = day.plan ? planSections(day.plan) : {};
   if (parts.Pitch === undefined || parts.Clash === undefined) return null;
-  const members = parseTeam(day.team).members;
+  const { members } = team ?? parseTeam(day.team);
   const num = (who) => (members.findIndex((m) => m.role.toLowerCase() === who.toLowerCase()) + 1) || null;
   const pitches = [];
   for (const l of lines(parts.Pitch)) {
@@ -137,20 +140,27 @@ function sessionHtml(s) {
 // Guests bring a method drawn from a figure, myth, book, or idea. Historical guests never speak as
 // the person; others speak in character in original words. Days recorded before the Pitch and
 // Clash format keep the stricter note.
-function guestNote(day) {
-  const g = parseTeam(day.team).members.find((m) => m.guest);
+function guestNote(members, transcript) {
+  const g = members.find((m) => m.guest);
   if (!g) return [];
-  const voice = g.guest.kind === 'historical' || !session(day)
+  const voice = g.guest.kind === 'historical' || !transcript
     ? 'The guest never speaks as the figure'
     : 'The guest speaks in character in original words, never quoting the source';
   return [`**Guest:** ${g.role} (${g.guest.kind}; ${g.guest.source}). The method is drawn from public-domain history, myth, or literature, or invented. ${voice}, and nothing here is endorsed by anyone.`, ''];
 }
 
+function readPlanningInput(dir) {
+  try { return JSON.parse(readFileSync(join(dir, 'planning-input.json'), 'utf8')); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
+}
+
 // Fetch success and actual influence are separate facts, both visible in the receipt.
 export function feedEvidence(day, daysDir) {
-  const file = join(daysDir, day.date, 'planning-input.json');
-  if (!existsSync(file)) return [];
-  const input = JSON.parse(readFileSync(file, 'utf8'));
+  return formatFeedEvidence(day, readPlanningInput(join(daysDir, day.date)));
+}
+
+function formatFeedEvidence(day, input) {
+  if (input === undefined) return [];
   const selected = new Set(day.planning?.selectedSourceIds || []);
   return [
     ...(input.sources || []).map(s => `${s.source}: ${s.status}${s.count !== undefined ? ` (${s.count} items)` : ''}${s.reason ? ` — ${s.reason}` : ''}`),
@@ -161,14 +171,21 @@ export function feedEvidence(day, daysDir) {
 }
 
 export function dayReadme(day, daysDir, pagesUrl) {
-  validateDay(day, daysDir);
-  return renderDayReadme(day, daysDir, pagesUrl, hasCover(day, daysDir));
+  return renderDayReadme(day, pagesUrl, readDay(day, daysDir));
 }
 
-function validateDay(day, daysDir) {
+// Use the input that passed validation for every representation of this day.
+function readDay(day, daysDir) {
   const dir = join(daysDir, day.date);
-  assertPackExport(day, dir);
-  assertProjectExport(day, dir);
+  const packInput = assertPackExport(day, dir);
+  const projectInput = assertProjectExport(day, dir);
+  const evidence = formatFeedEvidence(day, projectInput ?? packInput ?? readPlanningInput(dir));
+  const team = parseTeam(day.team);
+  return { dir, evidence, team, transcript: session(day, team), cover: hasCover(day, daysDir) };
+}
+
+function readDays(days, daysDir) {
+  return new Map(days.map((day) => [day, readDay(day, daysDir)]));
 }
 
 function writeMarkdown(file, text) {
@@ -178,15 +195,12 @@ function writeMarkdown(file, text) {
   if (current !== text) writeFileSync(file, text);
 }
 
-function renderDayReadme(day, daysDir, pagesUrl, cover) {
-  const { constraint, season, suggestedBy } = parseTeam(day.team);
-  const dir = join(daysDir, day.date);
-  const evidence = feedEvidence(day, daysDir);
-  const transcript = session(day);
+function renderDayReadme(day, pagesUrl, { dir, cover, evidence, team, transcript }) {
+  const { constraint, season, suggestedBy, members } = team;
   return [
     `# ${day.date}: ${title(day)}`, '',
     '[Today](../../README.md) · [Archive](../../ARCHIVE.md)', '',
-    `<img src="team.png" alt="Team for ${day.date}: ${esc(roles(day))}" width="100%">`, '',
+    `<img src="team.png" alt="Team for ${day.date}: ${esc(memberRoles(members))}" width="100%">`, '',
     `**Task:** ${day.brief || day.task}`, '',
     ...(day.request ? [`**Request source:** [${cell(day.request.repository)} #${Number(day.request.number)}](https://github.com/${encodeURI(day.request.repository)}/issues/${Number(day.request.number)}). Local prototype; source issue stays open.`, ''] : []),
     ...(suggestedBy ? [`**Suggested by:** ${suggestedBy}`, ''] : []),
@@ -202,11 +216,11 @@ function renderDayReadme(day, daysDir, pagesUrl, cover) {
       '[Compare Opus, Sonnet, and Haiku](comparison.html)', '',
       ...(existsSync(join(dir, 'comparison.mp4')) ? ['[Watch square comparison video](comparison.mp4)', ''] : []),
     ] : []),
-    ...assetLines(day, { dir, href: '' }, pagesUrl),
+    ...assetLines(day, dir, pagesUrl, members),
     ...studioMarkdown(day, dir, pagesUrl),
     ...(transcript ? sessionMarkdown(transcript)
       : day.plan ? ['## Team plan', '', day.plan.replace(/^(#{1,5}) /gm, '#$1 '), ''] : []),
-    ...guestNote(day),
+    ...guestNote(members, transcript),
     '## Team', '', '```text', day.team, '```', '',
     `Provider: ${day.provider}. Model: ${day.model ?? 'none'}.`, '',
   ].join('\n');
@@ -394,32 +408,32 @@ ${body}
 `;
 }
 
-function grid(days, prefix, covers) {
+function grid(days, prefix, details) {
   return `<h2>Past projects</h2>\n<ul class="grid">\n${days.map((d) => {
     const asset = firstAsset(d);
-    const image = covers.has(d.date) ? 'cover.png' : asset ? png(asset) : 'team.png';
+    const image = details.get(d).cover ? 'cover.png' : asset ? png(asset) : 'team.png';
     const img = `<img src="${prefix}${d.date}/${image}" alt="" loading="lazy">`;
     return `<li><a href="${prefix}${d.date}/">${img}<strong>${esc(title(d))}</strong><br>${d.date}${d.projectMode && d.decision ? `<br>${esc(d.decision)}` : ''}</a></li>`;
   }).join('\n')}\n</ul>`;
 }
 
-function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix, cover }) {
-  const comparisonDir = join(daysDir, day.date);
-  const comparison = existsSync(join(comparisonDir, 'comparison.html'))
-    ? `<p><a href="${imagePrefix}comparison.html">Compare Opus, Sonnet, and Haiku</a>`
-      + (existsSync(join(comparisonDir, 'comparison.mp4')) ? ` · <a href="${imagePrefix}comparison.mp4">Watch square video</a>` : '') + '</p>' : '';
-  const frames = day.artifacts.filter((a) => a.status !== 'failed' && existsSync(join(daysDir, day.date, a.file))).map((a) => {
-    const html = readFileSync(join(daysDir, day.date, a.file), 'utf8');
+function dayFrames(day, { dir, team }) {
+  return day.artifacts.filter((a) => a.status !== 'failed' && existsSync(join(dir, a.file))).map((a) => {
+    const html = readFileSync(join(dir, a.file), 'utf8');
     const note = a.status === 'ok' ? '' : ` <span class="muted">(${esc(a.status)}: ${esc(a.problems.join('; '))})</span>`;
-    const lead = parseTeam(day.team).members[a.lead - 1]?.role ?? '';
+    const lead = team.members[a.lead - 1]?.role ?? '';
     const component = day.pack?.components.find((c) => c.row === a.row);
     const heading = a.kind === 'piece' ? 'Try it' : component ? component.name
       : a.row ? `Component ${a.row}${lead ? ` · ${lead}` : ''}` : 'Try it';
     return `<h2>${esc(heading)}${note}</h2>\n<iframe sandbox="${SANDBOX}" title="${esc(heading)}" srcdoc="${esc(html)}"></iframe>`;
   });
-  const s = session(day);
-  const evidence = feedEvidence(day, daysDir);
-  const plan = repo ? `<p><a href="https://github.com/${esc(repo)}/tree/main/${day.edition ? `editions/${encodeURIComponent(day.edition.lane)}/` : ''}days/${day.date}">${s ? 'Source' : 'Team plan and source'}</a></p>` : '';
+}
+
+function dayPage(day, repo, archiveHtml, { root, pagesUrl, imagePrefix }, { dir, cover, evidence, team, transcript, frames }) {
+  const comparison = existsSync(join(dir, 'comparison.html'))
+    ? `<p><a href="${imagePrefix}comparison.html">Compare Opus, Sonnet, and Haiku</a>`
+      + (existsSync(join(dir, 'comparison.mp4')) ? ` · <a href="${imagePrefix}comparison.mp4">Watch square video</a>` : '') + '</p>' : '';
+  const plan = repo ? `<p><a href="https://github.com/${esc(repo)}/tree/main/${day.edition ? `editions/${encodeURIComponent(day.edition.lane)}/` : ''}days/${day.date}">${transcript ? 'Source' : 'Team plan and source'}</a></p>` : '';
   return page(`${day.date}: ${title(day)}`, [
     `<p class="muted">Daily Team · ${day.date}</p>`,
     `<h1>${esc(titleCase(title(day)))}</h1>`,
@@ -429,49 +443,48 @@ function dayPage(day, daysDir, repo, archiveHtml, { root, pagesUrl, imagePrefix,
     '<details><summary>About this project</summary>',
     ...(!day.edition ? [`<p><a href="${root}editions/">Extra editions</a></p>`] : []),
     day.request ? `<p>Request source: <a href="https://github.com/${esc(day.request.repository)}/issues/${Number(day.request.number)}">${esc(day.request.repository)} #${Number(day.request.number)}</a> · Local prototype</p>` : '',
-    `<img class="card" src="${imagePrefix}team.png" alt="Team for ${day.date}: ${esc(roles(day))}" loading="lazy">`,
-    ...(hasSim(day, join(daysDir, day.date)) ? [studioHtml(day, join(daysDir, day.date), imagePrefix)] : []),
+    `<img class="card" src="${imagePrefix}team.png" alt="Team for ${day.date}: ${esc(memberRoles(team.members))}" loading="lazy">`,
+    ...(hasSim(day, dir) ? [studioHtml(day, dir, imagePrefix)] : []),
     cover ? `<img src="${imagePrefix}cover.png" alt="Designed cover for ${esc(title(day))}" loading="lazy">` : '',
     comparison,
     ...(evidence.length ? ['<h2>Feed evidence</h2>', `<ul>${evidence.map(line => `<li>${esc(line)}</li>`).join('')}</ul>`] : []),
     ...(day.pack ? [`<p>Generated pack candidates await human review. <a href="${imagePrefix}pack.json">Pack manifest</a> · <a href="${imagePrefix}tokens.json">Shared tokens</a> · <a href="${imagePrefix}planning-input.json">Saved input</a></p>`] : []),
-    s ? sessionHtml(s) : '', plan, '</details>',
+    transcript ? sessionHtml(transcript) : '', plan, '</details>',
   ].join('\n'), { root, image: pagesUrl ? `${pagesUrl}${day.date}/${cover ? 'cover.png' : 'team.png'}` : '' });
 }
 
 export function buildSite(siteDir, days, daysDir, repo, pagesUrl = '') {
-  for (const day of days) validateDay(day, daysDir);
-  const covers = new Set(days.filter((day) => hasCover(day, daysDir)).map((day) => day.date));
-  writeSite(siteDir, days, daysDir, repo, pagesUrl, covers);
+  writeSite(siteDir, days, repo, pagesUrl, readDays(days, daysDir));
 }
 
 // Callers verify all records before rendering from them.
-function writeSite(siteDir, days, daysDir, repo, pagesUrl, covers) {
-  cpSync(join(HERE, 'brand'), join(siteDir, 'brand'), { recursive: true });
+function writeSite(siteDir, days, repo, pagesUrl, details) {
+  cpSync(join(HERE, 'brand'), join(siteDir, 'brand'), { recursive: true, mode: SITE_COPY_MODE });
   const newestFirst = [...days].reverse();
   const recent = newestFirst.slice(0, RECENT_DAYS);
-  const previews = (root) => grid(recent, root, covers)
+  const previews = (root) => grid(recent, root, details)
     + (days.length > RECENT_DAYS ? `<p><a href="${root}archive.html">All ${days.length} projects</a></p>` : '');
   const datedPreviews = previews('../');
-  writeFileSync(join(siteDir, 'archive.html'), page('Project archive', `<h1>Project archive</h1>\n<p><a href="./">Latest project</a></p>\n${grid(newestFirst, './', covers)}`));
+  writeFileSync(join(siteDir, 'archive.html'), page('Project archive', `<h1>Project archive</h1>\n<p><a href="./">Latest project</a></p>\n${grid(newestFirst, './', details)}`));
+  const latest = days.at(-1);
+  let latestPage;
   for (const day of days) {
+    const detail = details.get(day);
     const out = join(siteDir, day.date);
     mkdirSync(out, { recursive: true });
     for (const f of ['team.png', 'cover.png', 'cover.html', 'cover.json', ...day.artifacts.map(png),
       ...(day.projectMode ? ['planning-input.json', ...day.artifacts.filter((a) => a.status !== 'failed').map((a) => a.file)] : []),
       ...(day.pack ? ['pack.json', 'tokens.json', 'planning-input.json', ...day.artifacts.filter((a) => a.status !== 'failed').map((a) => a.file)] : []),
       'comparison.html', 'comparison.png', 'comparison.mp4']) {
-      if (existsSync(join(daysDir, day.date, f))) copyFileSync(join(daysDir, day.date, f), join(out, f));
+      const source = join(detail.dir, f);
+      if (existsSync(source)) copyFileSync(source, join(out, f), SITE_COPY_MODE);
     }
-    writeFileSync(join(out, 'index.html'), dayPage(day, daysDir, repo, datedPreviews,
-      { root: '../', pagesUrl, imagePrefix: '', cover: covers.has(day.date) }));
-    if (hasSim(day, join(daysDir, day.date))) writeFileSync(join(out, WATCH_FILE), watchHtml(day, join(daysDir, day.date), { csp: SITE_CSP }));
+    const content = { ...detail, frames: dayFrames(day, detail) };
+    writeFileSync(join(out, 'index.html'), dayPage(day, repo, datedPreviews, { root: '../', pagesUrl, imagePrefix: '' }, content));
+    if (day === latest) latestPage = dayPage(day, repo, previews('./'), { root: './', pagesUrl, imagePrefix: `./${day.date}/` }, content);
+    if (hasSim(day, detail.dir)) writeFileSync(join(out, WATCH_FILE), watchHtml(day, detail.dir, { csp: SITE_CSP }));
   }
-  const latest = days.at(-1);
-  writeFileSync(join(siteDir, 'index.html'), latest
-    ? dayPage(latest, daysDir, repo, previews('./'),
-      { root: './', pagesUrl, imagePrefix: `./${latest.date}/`, cover: covers.has(latest.date) })
-    : page('daily-team', '<p>No days yet.</p>'));
+  writeFileSync(join(siteDir, 'index.html'), latestPage ?? page('daily-team', '<p>No days yet.</p>'));
 }
 
 // The season a day belongs to: from its record, or by date for days recorded before seasons.
@@ -485,11 +498,11 @@ export function seasonNumber(seasons, day) {
 export function publish(root, { pagesUrl = '', site = '', repo = '', suggestions = [], cards = false } = {}) {
   const daysDir = join(root, 'days');
   const days = loadDays(daysDir);
-  for (const day of days) validateDay(day, daysDir);
+  const details = readDays(days, daysDir);
   const seasons = listSeasons(root);
-  const covers = new Set();
   for (const day of days) {
-    const dir = join(daysDir, day.date);
+    const detail = details.get(day);
+    const { dir } = detail;
     const card = join(dir, 'team.png');
     if (cards || !existsSync(card)) {
       if (!renderPng(cardHtml(day, seasonNumber(seasons, day)), card, 1200, 630)) {
@@ -497,18 +510,16 @@ export function publish(root, { pagesUrl = '', site = '', repo = '', suggestions
       }
     }
     rmSync(join(dir, 'team.svg'), { force: true });
-    const cover = hasCover(day, daysDir);
-    if (cover) covers.add(day.date);
-    writeMarkdown(join(dir, 'README.md'), renderDayReadme(day, daysDir, pagesUrl, cover));
+    writeMarkdown(join(dir, 'README.md'), renderDayReadme(day, pagesUrl, detail));
   }
-  writeMarkdown(join(root, 'ARCHIVE.md'), renderArchive(days, (day) => covers.has(day.date)));
+  writeMarkdown(join(root, 'ARCHIVE.md'), renderArchive(days, (day) => details.get(day).cover));
   const readme = join(root, 'README.md');
   const previous = readFileSync(readme, 'utf8');
   let text = replaceBlock(previous, 'TODAY', todayBlock(days.at(-1), daysDir, pagesUrl));
   text = replaceBlock(text, 'WEEK', weekBlock(root, days, suggestions));
   text = replaceBlock(text, 'RECENT', recentBlock(days, daysDir));
   if (text !== previous) writeFileSync(readme, text);
-  if (site) writeSite(site, days, daysDir, repo, pagesUrl, covers);
+  if (site) writeSite(site, days, repo, pagesUrl, details);
   publishEditions(root, { site, repo, pagesUrl });
   return days.length;
 }
@@ -520,21 +531,21 @@ export function publishEditions(root, { site = '', repo = '', pagesUrl = '' } = 
     const records = loadDays(daysDir), ready = [];
     if (!records.length) continue;
     const laneUrl = pagesUrl ? `${pagesUrl}editions/${lane}/` : '';
-    const covers = new Set();
+    const details = new Map();
     for (const day of records) {
-      try { validateDay(day, daysDir); }
+      let detail;
+      try { detail = readDay(day, daysDir); }
       catch (e) { console.warn(`Edition ${lane}/${day.date} withheld: ${e.message}`); continue; }
-      const dir = join(daysDir, day.date);
+      const { dir } = detail;
       const card = join(dir, 'team.png');
       if (!existsSync(card)) renderPng(cardHtml(day, 1), card, 1200, 630);
-      const cover = hasCover(day, daysDir);
-      if (cover) covers.add(day.date);
-      writeMarkdown(join(dir, 'README.md'), renderDayReadme(day, daysDir, laneUrl, cover));
+      details.set(day, detail);
+      writeMarkdown(join(dir, 'README.md'), renderDayReadme(day, laneUrl, detail));
       ready.push(day);
     }
-    writeMarkdown(join(base, 'ARCHIVE.md'), renderArchive(ready, (day) => covers.has(day.date)));
+    writeMarkdown(join(base, 'ARCHIVE.md'), renderArchive(ready, (day) => details.get(day).cover));
     writeMarkdown(join(base, 'README.md'), `# ${lane} editions\n\n[Main daily record](../../README.md)\n\n` + recentBlock(ready, daysDir) + '\n');
-    if (site) writeSite(join(site, 'editions', lane), ready, daysDir, repo, laneUrl, covers);
+    if (site) writeSite(join(site, 'editions', lane), ready, repo, laneUrl, details);
     links.push(`<li><a href="${lane}/">${lane}</a>: ${ready.length} published / ${records.length} recorded</li>`);
   }
   if (site) {
