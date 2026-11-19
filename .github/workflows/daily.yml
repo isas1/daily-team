@@ -84,8 +84,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.COMPONENT_REQUESTS_TOKEN || github.token }}
         run: node github.mjs component-sources > "$RUNNER_TEMP/component-sources.json"
       - name: Install project browser checks
-        if: steps.key.outputs.ok == 'true' && inputs.mode != 'components' && inputs.artifacts != '0'
+        if: steps.key.outputs.ok == 'true' && inputs.mode != 'components'
+        env:
+          ARTIFACTS: ${{ inputs.artifacts }}
         run: |
+          if [ "$ARTIFACTS" = 0 ]; then exit 0; fi
           npm install --no-save --no-package-lock --ignore-scripts playwright@1.63.0
           ./node_modules/.bin/playwright install chromium --only-shell
       - name: Run today's team
