@@ -33,9 +33,17 @@ Daily workflow's `brief` and `force` inputs.
 The plan sets four browser checkpoints before the build: a primary input,
 a second input, an error and recovery. The build sees the primary checkpoint and
 the public control IDs. Chromium runs all four at phone width, in the same
-sandbox as the published page. A failed check gets one build retry. The runner
-saves only passing HTML, with a receipt tied to the file and the test cases.
-The day page shows the problem, its source and the browser result.
+sandbox as the published page. Independent journeys run together in fresh tabs.
+New runs check phone layout before and after input and replay the second result
+at desktop width with keyboard activation. A failed check gets one build retry.
+The runner saves only passing HTML with a receipt tied to the file and test cases.
+
+If both build attempts fail, a normal retry reuses a validated plan and its
+test cases when the saved inputs, team and run settings still match. Use
+`--force` to start fresh. The day page shows the problem, source and browser result.
+The scheduled project run starts cover design alongside the tool build.
+It saves the cover against the finished day. If cover design fails, the checked
+tool can still publish with its screenshot.
 
 For a local build, install the browser checks once:
 

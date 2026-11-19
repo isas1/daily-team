@@ -178,10 +178,11 @@ export function dayReadme(day, daysDir, pagesUrl) {
 
 function solutionDetails(day, input) {
   if (input?.solutionVersion !== 1 || day.status === 'failed' || !day.project) return null;
-  const verified = day.artifacts.some(a => a.solutionCheck);
+  const verified = day.artifacts.find(a => a.solutionCheck)?.solutionCheck;
   const source = input.candidates.find(c => c.id === day.project.sourceIds[0]);
   return { problem: day.project.problem, improvement: day.project.proof.improvement,
-    verification: verified ? 'Browser passed both inputs, error feedback and recovery.' : 'Plan saved. Browser test pending.',
+    verification: verified?.quality ? 'Browser passed both inputs, error feedback and recovery. Phone fit and keyboard replay passed.'
+      : verified ? 'Browser passed both inputs, error feedback and recovery.' : 'Plan saved. Browser test pending.',
     source };
 }
 
