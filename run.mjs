@@ -28,7 +28,9 @@ import { PACKS_FROM, DEFAULT_PACK_SIZE, CATEGORIES, parsePack, packProblems, pac
 import { discover, planningInput, readSnapshot } from './feed-planning.mjs';
 import { chooseSource, localSources, sourceContext } from './component-source.mjs';
 import { redactCredentials } from './security.mjs';
-import { PROJECTS_FROM, projectSource, projectInput, parseProject, projectProblems } from './project-planning.mjs';
+import { PROJECTS_FROM, SOLUTIONS_FROM, SOLUTION_FEEDS, projectSource, projectInput, parseProject,
+  projectProblems, canDeclineProblem, reviewedProblems } from './project-planning.mjs';
+import { checkSolution, openSolutionBrowser, solutionBuildSpec, validSolutionReceipt } from './solution-check.mjs';
 import { simPlan } from './sim/adapter.mjs';
 import { isSimDay, reviewDraft, appendTo } from './sim/run-sim.mjs';
 
@@ -41,7 +43,7 @@ import { acquireDay, atomicWrite, publishDay, recoverDay, seedFailedInput } from
 // Compatibility for existing consumers. New code imports the owning module directly.
 export { CLASH_LINES, CLASH_TURNS, PLAN_WORDS, today, teamFor, parseTeam, decisionLine, planSections, conceptName, dayTitle, taskName, sessionProblems, settle } from './team-session.mjs';
 export { sections, bannedWords, findBanned } from './prompt-rules.mjs';
-export { STUDIO_DAYS, COMPONENTS_FROM, MAX_ARTIFACTS, PIECE_FILE, rowLead, extractHtml, isComponentDay, componentProblems, isStudio, vendorManifest, checkArtifact, projectScriptProblem, inlineVendor, addCsp } from './artifact-policy.mjs';
+export { STUDIO_DAYS, COMPONENTS_FROM, MAX_ARTIFACTS, ARTIFACT_SANDBOX, PIECE_FILE, rowLead, extractHtml, isComponentDay, componentProblems, isStudio, vendorManifest, checkArtifact, projectScriptProblem, inlineVendor, addCsp } from './artifact-policy.mjs';
 export { DEFAULT_CLAUDE_MODEL, completeOpenRouter, claudeArgs, completeClaude, prepareProvider, completeChecked } from './providers.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -160,18 +162,22 @@ async function main() {
       task = input.task; request = input.request;
     } else {
       const recent = recentPacks(opts.out, date);
-      const sourceForDay = projectMode && !custom ? projectSource(date) : null;
+      const solve = projectMode && date >= SOLUTIONS_FROM;
+      const sourceForDay = projectMode && !solve && !custom ? projectSource(date) : null;
+      const sources = solve ? SOLUTION_FEEDS : sourceForDay ? [sourceForDay] : null;
+      const problemBriefs = solve && !custom ? reviewedProblems(join(HERE, 'problem-briefs.json'), date, recent) : [];
       const discovery = custom ? { items: [], status: [{ source: 'all', status: 'custom-brief' }] }
-        : await discover({ date, cacheFile: opts.feedCache, recent, ...(projectMode ? { sources: [sourceForDay], restrictToSources: true } : {}), offline: opts.offline || opts.dryRun });
+        : await discover({ date, cacheFile: opts.feedCache, recent, ...(sources ? { sources, restrictToSources: true } : {}), offline: opts.offline || opts.dryRun });
       let inventory = null;
       if (opts.inventory) inventory = JSON.parse(readFileSync(opts.inventory, 'utf8'));
-      input = projectMode ? projectInput({ date, discovery, recent, brief: custom, source: sourceForDay })
+      input = projectMode ? projectInput({ date, discovery, recent, brief: custom, source: sourceForDay, problemBriefs })
         : planningInput({ date, task: custom || task, request, discovery, recent, inventory });
       if (projectMode) task = input.task;
       if (sourceForDay && !opts.dryRun && !input.candidates.some(c => c.kind === 'feed')) die(`No fresh unused item from ${sourceForDay.name}; retry when available or provide a brief.`);
     }
     if (!opts.dryRun) atomicWrite(inputPath, `${JSON.stringify(input, null, 2)}\n`);
   }
+  const solve = input?.solutionVersion === 1;
   let source = null;
   if (component && date >= '2026-10-26' && (opts.sources || process.env.COMPONENTS_DIR)) {
     // Private source sharing is approved for Claude, not OpenRouter's provider pool.
@@ -201,19 +207,21 @@ async function main() {
       return { date, project: { name, problem, mechanism, interaction, design: craft?.design } };
     }),
   }).replaceAll('<', '\\u003c')}\n</planning_input>` : '';
-  const work = projectMode ? s['Project plan'] : packMode ? s['Pack plan'].replaceAll('{{COUNT}}', String(packCount))
+  const work = projectMode ? (solve ? s['Project plan'] + '\n\n' + s['Find and solve a problem'] : s['Project plan']) : packMode ? s['Pack plan'].replaceAll('{{COUNT}}', String(packCount))
     : component ? `${s['Work the brief']}\n\n${s['Component plan']}` : s['Work the brief'];
   const planMessages = [system, { role: 'user', content: `${context}${packContext}${projectContext}\n\n${work}` }];
   const studio = !component && isStudio(date);
   const mode = component ? 'component' : studio ? 'studio' : 'page';
-  const build = projectMode ? s['Build a project'] : component ? (packMode ? s['Build a pack component'] : s['Build a component'])
+  const build = projectMode ? (solve ? s['Build a project'] + '\n\n' + s['Build the solution'] : s['Build a project']) : component ? (packMode ? s['Build a pack component'] : s['Build a component'])
     : studio ? `${s['Build an artifact']}\n\n${s['Studio tier']}` : s['Build an artifact'];
   let activePack = null;
   const projectBuild = (plan, project) => {
     if (!project) return plan; // Dry run placeholder.
-    const { alternatives, ...chosen } = project;
-    const selected = input.candidates.filter((c) => c.kind === 'feed' && chosen.sourceIds.includes(c.id))
-      .map(({ id, title, url }) => ({ id, title, url }));
+    const { alternatives, cases, ...chosen } = project;
+    if (solve) chosen.browser = solutionBuildSpec(cases);
+    const selected = input.candidates.filter((c) => ['feed', 'reviewed'].includes(c.kind) && chosen.sourceIds.includes(c.id))
+      .map(({ id, title, url, kind, problem, workaround, gap }) =>
+        ({ id, title, url, ...(kind === 'reviewed' ? { problem, workaround, gap } : {}) }));
     const narrative = plan.replace(/```json\s*\n[\s\S]*?```/g, '');
     const parts = planSections(narrative);
     const brief = parts.Decision && parts['Build notes']
@@ -254,6 +262,10 @@ async function main() {
     || Boolean(day.projectMode) !== projectMode || Boolean(day.packMode) !== packMode
     || day.requestedArtifacts !== undefined && day.requestedArtifacts !== opts.artifacts
     || input && day.planning?.inputHash !== hash(input))) die('staged run settings changed; use --force to start again');
+  if (resumeDay && solve && day.artifacts.some(a => a.status !== 'failed'
+    && !validSolutionReceipt(a.solutionCheck, day.project?.cases, a.sha256))) {
+    die('staged solution is missing its passing browser receipt; use --force to start again');
+  }
   if (resumeDay?.completed && day.status !== 'failed') {
     for (const asset of day.artifacts.filter((a) => a.status !== 'failed')) {
       if (!asset.sha256 || !existsSync(join(dir, asset.file)) || hash(readFileSync(join(dir, asset.file))) !== asset.sha256)
@@ -276,12 +288,27 @@ async function main() {
     if (!existsSync(old) || JSON.parse(readFileSync(old, 'utf8')).status === 'failed') publishDay(opts.out, date);
   };
 
+  const failPlan = (error, plan = '') => {
+    Object.assign(day, { status: 'failed', error, plan });
+    save();
+    finishFailed();
+    die(error, 1);
+  };
+  if (solve && canDeclineProblem(input) && !input.candidates.some(c => c.kind === 'feed')) {
+    failPlan('No fresh problem leads or reviewed briefs available.');
+  }
+
   // A failed day is still recorded, so the archive has no silent gaps.
-  const planTokens = packMode ? 14000 : projectMode || component ? 5000 : 3000;
+  const planTokens = packMode ? 14000 : solve ? 6500 : projectMode || component ? 5000 : 3000;
   const checkPlan = (t) => {
     const problems = findBanned(t).map((w) => `uses the word "${w}"`);
     if (packMode) { try { const pack = parsePack(t); problems.push(...packProblems(pack, packCount), ...packInputProblems(pack, input, Boolean(custom))); } catch (e) { problems.push(e.message); } }
-    if (projectMode) { try { problems.push(...projectProblems(parseProject(t), input)); } catch (e) { problems.push(e.message); } }
+    if (projectMode) {
+      try {
+        const project = parseProject(t);
+        if (!(project?.noProblem === true && canDeclineProblem(input))) problems.push(...projectProblems(project, input));
+      } catch (e) { problems.push(e.message); }
+    }
     return problems;
   };
   let plan = resumeDay?.plan ? { text: resumeDay.plan, model: resumeDay.model, problems: resumeDay.planProblems || [] } : null;
@@ -304,10 +331,7 @@ async function main() {
   try {
     if (!plan) plan = await completeChecked(complete, planMessages, planTokens, checkPlan);
   } catch (e) {
-    Object.assign(day, { status: 'failed', error: e.message });
-    save();
-    finishFailed();
-    die(`plan failed, recorded ${record}: ${e.message}`, 1);
+    failPlan(`plan failed: ${e.message}`);
   }
   let planText = plan.text.trim();
   const planProblems = [...plan.problems];
@@ -322,13 +346,14 @@ async function main() {
   }
   if (projectMode) {
     try {
-      const project = parseProject(planText), problems = projectProblems(project, input);
+      const project = parseProject(planText);
+      if (project?.noProblem === true && canDeclineProblem(input)) failPlan('No saved lead shows a concrete problem the team can solve.');
+      const problems = projectProblems(project, input);
       if (problems.length) throw new Error(problems.join('; '));
       day.project = project;
       day.planning.selectedSourceIds = project.sourceIds;
     } catch (e) {
-      Object.assign(day, { status: 'failed', plan: planText, error: `invalid project plan: ${e.message}` }); save(); finishFailed();
-      die(day.error, 1);
+      failPlan(`invalid project plan: ${e.message}`, planText);
     }
   }
   if (packMode) {
@@ -361,14 +386,23 @@ async function main() {
         die(`staged ${file} changed; use --force to start again`);
       continue;
     }
+    let browser;
+    let solutionCheck;
+    const outputHtml = html => `${addCsp(packMode ? applyTokens(html, activePack.tokens) : studio ? inlineVendor(html) : html)}\n`;
     try {
-      const checkBuild = (t) => {
+      const checkBuild = async (t) => {
+        solutionCheck = undefined;
         const html = extractHtml(t);
         if (!html) return ['no HTML code block'];
         const problems = checkArtifact(html, mode);
         if (packMode) problems.push(...packArtifactProblems(html));
         const scriptProblem = projectMode && projectScriptProblem(html);
         if (scriptProblem) problems.push(scriptProblem);
+        if (solve && !problems.length) {
+          browser ??= await openSolutionBrowser();
+          try { solutionCheck = await checkSolution(browser, outputHtml(html), day.project.cases); }
+          catch (e) { problems.push(e.message); }
+        }
         return problems;
       };
       const messages = buildMessages(planText, n, day.project);
@@ -377,8 +411,10 @@ async function main() {
       if (!html) throw new Error(`${out.model} returned no HTML`);
       const scriptProblem = projectMode ? projectScriptProblem(html) : null;
       if (scriptProblem) throw new Error(scriptProblem);
+      if (solve && out.problems.length) throw new Error(out.problems.join('; '));
       // Studio review: the team reads the draft and the lead builds the final once more.
       if (sim && n === 1 && !component && process.env.SIM_REVIEW === '1') {
+        const draftCheck = solutionCheck;
         try {
           atomicWrite(join(dir, 'draft-1.html'), `${addCsp(studio ? inlineVendor(html) : html)}\n`);
           const emit = appendTo(sim.logPath, sim.events);
@@ -387,26 +423,31 @@ async function main() {
             const again = await completeChecked(complete, [...messages, { role: 'assistant', content: out.text },
               { role: 'user', content: `The team reviewed your draft. Apply these changes where they help the person who uses it, and return the full file again:\n- ${changes.join('\n- ')}` }], 16000, checkBuild);
             const final = extractHtml(again.text);
-            if (final && again.problems.length <= out.problems.length && (!projectMode || !projectScriptProblem(final))) {
+            if (final && (!solve || solutionCheck) && again.problems.length <= out.problems.length && (!projectMode || !projectScriptProblem(final))) {
+              emit({ r: sim.world.rounds, phase: 'review', seq: sim.world.seq++, type: 'build', who: sim.world.members[0].label, text: 'The lead builds the final.', final: file });
               html = final;
               out.problems = again.problems;
               out.model = again.model;
-            }
-            emit({ r: sim.world.rounds, phase: 'review', seq: sim.world.seq++, type: 'build', who: sim.world.members[0].label, text: 'The lead builds the final.', final: file });
+            } else solutionCheck = draftCheck;
           }
           day.sim.review = changes.length;
         } catch (e) {
+          solutionCheck = draftCheck;
           console.error(`review skipped: ${e.message}`);
         }
       }
-      const output = `${addCsp(packMode ? applyTokens(html, activePack.tokens) : studio ? inlineVendor(html) : html)}\n`;
+      const output = outputHtml(html);
+      const sha256 = hash(output);
+      if (solve && !validSolutionReceipt(solutionCheck, day.project.cases, sha256)) throw new Error('daily solution is missing its passing browser receipt');
       atomicWrite(join(dir, file), output);
-      day.artifacts.push({ file, sha256: hash(output), ...(packMode ? { componentId: activePack.components[n - 1].id } : {}), lead: component ? rowLead(n) : n, ...(component ? { row: n } : {}), model: out.model, status: out.problems.length ? 'needs review' : 'ok', problems: out.problems });
+      day.artifacts.push({ file, sha256, ...(solve ? { solutionCheck } : {}), ...(packMode ? { componentId: activePack.components[n - 1].id } : {}), lead: component ? rowLead(n) : n, ...(component ? { row: n } : {}), model: out.model, status: out.problems.length ? 'needs review' : 'ok', problems: out.problems });
       console.log(`${file}: ${out.model}${out.problems.length ? `, needs review: ${out.problems.join('; ')}` : ''}`);
     } catch (e) {
       if (projectMode) day.error = e.message;
       day.artifacts.push({ file, lead: component ? rowLead(n) : n, ...(component ? { row: n } : {}), model: null, status: 'failed', problems: [e.message] });
       console.error(`${file}: ${e.message}`);
+    } finally {
+      if (browser) await browser.close().catch(() => {});
     }
     save();
   }

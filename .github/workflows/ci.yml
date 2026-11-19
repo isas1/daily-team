@@ -29,4 +29,8 @@ jobs:
       - name: Install gawk and mawk
         if: runner.os == 'Linux'
         run: sudo apt-get install -y gawk mawk
+      - name: Install project browser checks
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.63.0
+          ./node_modules/.bin/playwright install chromium --only-shell
       - run: node --test test.mjs *.test.mjs

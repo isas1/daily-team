@@ -23,6 +23,7 @@ const COMPONENT_MAX_BYTES = 16 * 1024;
 const COMPONENT_MAX_WORDS = 80;
 // Component/pack limit remains ten; new packs default to six distinct tiles plus a demo.
 export const MAX_ARTIFACTS = 10;
+export const ARTIFACT_SANDBOX = 'allow-scripts allow-modals allow-downloads allow-popups allow-forms';
 const PIECE_MAX_BYTES = 120 * 1024;
 export const PIECE_FILE = 'piece.html';
 // Members take turns to lead the rows: 1-4, 1-4, 1, 2.

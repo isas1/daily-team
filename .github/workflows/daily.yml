@@ -6,12 +6,16 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: Project prototype or explicit legacy component pack
+        description: Daily solution or explicit legacy component pack
         type: choice
         options: [project, components]
         default: project
       artifacts:
         description: Project 0 or 1 (empty 1); component pack 0 to 10 (empty 6)
+        default: ''
+      brief:
+        description: Optional reviewed problem with the current workaround and remaining gap
+        type: string
         default: ''
       force:
         description: Replace today's results
@@ -79,6 +83,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.COMPONENT_REQUESTS_TOKEN || github.token }}
         run: node github.mjs component-sources > "$RUNNER_TEMP/component-sources.json"
+      - name: Install project browser checks
+        if: steps.key.outputs.ok == 'true' && inputs.mode != 'components' && inputs.artifacts != '0'
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.63.0
+          ./node_modules/.bin/playwright install chromium --only-shell
       - name: Run today's team
         if: steps.key.outputs.ok == 'true'
         env:
@@ -90,10 +99,13 @@ jobs:
           ARTIFACTS: ${{ inputs.artifacts }}
           RUN_MODE: ${{ inputs.mode == 'components' && '--pack' || '--project' }}
           FORCE: ${{ inputs.force && '--force' || '' }}
+          PROBLEM_BRIEF: ${{ inputs.mode != 'components' && inputs.brief || '' }}
           COMPONENT_REQUESTS_FILE: ${{ inputs.mode == 'components' && format('{0}/component-requests.json', runner.temp) || '' }}
           COMPONENT_FEED_CACHE: .cache/feed-backlog.json
           COMPONENT_SOURCES_FILE: ${{ inputs.mode == 'components' && env.PROVIDER == 'claude' && format('{0}/component-sources.json', runner.temp) || '' }}
-        run: node run.mjs $RUN_MODE $FORCE
+        run: |
+          if [ -n "$PROBLEM_BRIEF" ]; then set -- --brief "$PROBLEM_BRIEF"; else set --; fi
+          node run.mjs $RUN_MODE $FORCE "$@"
       - name: Design daily project cover
         continue-on-error: true
         if: always() && steps.key.outputs.ok == 'true'
