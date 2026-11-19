@@ -1,0 +1,18 @@
+[
+  {
+    "reviewed": "2026-11-19",
+    "url": "https://www.reddit.com/r/SewingForBeginners/comments/1wn8svu/",
+    "title": "Calibrate printed sewing patterns",
+    "problem": "A home sewer measures a printed pattern and finds that it came out larger than the intended size.",
+    "workaround": "Print at actual size, check the test square with a ruler, then adjust printer scale and print again if needed.",
+    "gap": "When the measured square is still off, calculate the exact scale from the measured and intended lengths. Give the user a single calibration page to print before risking the whole pattern."
+  },
+  {
+    "reviewed": "2026-11-19",
+    "url": "https://www.reddit.com/r/excel/comments/1xxlhji/",
+    "title": "Review possible duplicates before merging two lists",
+    "problem": "A spreadsheet beginner needs to screen recurring imports of hundreds of rows, review ambiguous matches, and keep a clean master list.",
+    "workaround": "Maintain a workbook macro or set up Power Query, then review potential matches before writing them to the master list.",
+    "gap": "Give the user a reusable offline review step with pasted spreadsheet rows, a review queue for near matches and a downloadable merged result. Keep IDs and same-name records distinct until the user decides."
+  }
+]

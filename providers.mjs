@@ -109,12 +109,12 @@ export function prepareProvider(provider) {
 // One call, then one more with the problems listed if the result fails its check.
 export async function completeChecked(complete, messages, maxTokens, check) {
   let out = await complete(messages, maxTokens);
-  let problems = check(out.text);
+  let problems = await check(out.text);
   if (problems.length) {
     const retry = [...messages, { role: 'assistant', content: out.text },
       { role: 'user', content: `Fix these problems and return the full result again:\n- ${problems.join('\n- ')}` }];
     out = await complete(retry, maxTokens);
-    problems = check(out.text);
+    problems = await check(out.text);
   }
   return { ...out, problems };
 }

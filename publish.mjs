@@ -19,6 +19,7 @@ import { cardHtml, renderPng, titleCase } from './card.mjs';
 import { hasCover } from './cover.mjs';
 import { assertPackExport } from './component-pack.mjs';
 import { assertProjectExport } from './project-planning.mjs';
+import { ARTIFACT_SANDBOX } from './artifact-policy.mjs';
 import { markdownCell as cell } from './security.mjs';
 
 import { hasSim, highlights, watchHtml, WATCH_FILE } from './sim-view.mjs';
@@ -28,7 +29,6 @@ const RECENT_DAYS = 7;
 const MIN_SCREENSHOT_BYTES = 8000;
 // Clone blocks on filesystems that support it. Node falls back to a byte copy.
 const SITE_COPY_MODE = constants.COPYFILE_FICLONE;
-const SANDBOX = 'allow-scripts allow-modals allow-downloads allow-popups allow-forms';
 const SITE_CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'self' 'unsafe-inline'; "
   + "img-src 'self' data: blob:; media-src data: blob:; font-src 'self' data:; form-action 'none'";
 
@@ -162,16 +162,27 @@ export function feedEvidence(day, daysDir) {
 function formatFeedEvidence(day, input) {
   if (input === undefined) return [];
   const selected = new Set(day.planning?.selectedSourceIds || []);
+  const solution = input.solutionVersion === 1;
   return [
     ...(input.sources || []).map(s => `${s.source}: ${s.status}${s.count !== undefined ? ` (${s.count} items)` : ''}${s.reason ? ` — ${s.reason}` : ''}`),
-    ...(input.candidates || []).filter(c => selected.has(c.id)).map(c => `Used feed inspiration: ${c.title} — ${c.url}`),
-    ...(selected.size ? [] : ['No feed article recorded as used; fetched items may have been considered without selection.']),
+    ...(input.candidates || []).filter(c => selected.has(c.id)).map(c =>
+      `${solution ? 'Problem source' : 'Used feed inspiration'}: ${c.title} — ${c.url}`),
+    ...(selected.size || solution ? [] : ['No feed article recorded as used; fetched items may have been considered without selection.']),
     ...(day.planning?.selection ? [`Chosen opportunity: ${day.planning.selection.id}. ${day.planning.selection.rationale}`] : []),
   ];
 }
 
 export function dayReadme(day, daysDir, pagesUrl) {
   return renderDayReadme(day, pagesUrl, readDay(day, daysDir));
+}
+
+function solutionDetails(day, input) {
+  if (input?.solutionVersion !== 1 || day.status === 'failed' || !day.project) return null;
+  const verified = day.artifacts.some(a => a.solutionCheck);
+  const source = input.candidates.find(c => c.id === day.project.sourceIds[0]);
+  return { problem: day.project.problem, improvement: day.project.proof.improvement,
+    verification: verified ? 'Browser passed both inputs, error feedback and recovery.' : 'Plan saved. Browser test pending.',
+    source };
 }
 
 // Use the input that passed validation for every representation of this day.
@@ -181,7 +192,8 @@ function readDay(day, daysDir) {
   const projectInput = assertProjectExport(day, dir);
   const evidence = formatFeedEvidence(day, projectInput ?? packInput ?? readPlanningInput(dir));
   const team = parseTeam(day.team);
-  return { dir, evidence, team, transcript: session(day, team), cover: hasCover(day, daysDir) };
+  return { dir, evidence, team, solution: solutionDetails(day, projectInput), solutionError: projectInput?.solutionVersion === 1 ? day.error : null,
+    transcript: session(day, team), cover: hasCover(day, daysDir) };
 }
 
 function readDays(days, daysDir) {
@@ -195,13 +207,15 @@ function writeMarkdown(file, text) {
   if (current !== text) writeFileSync(file, text);
 }
 
-function renderDayReadme(day, pagesUrl, { dir, cover, evidence, team, transcript }) {
+function renderDayReadme(day, pagesUrl, { dir, cover, evidence, team, transcript, solution, solutionError }) {
   const { constraint, season, suggestedBy, members } = team;
   return [
     `# ${day.date}: ${title(day)}`, '',
     '[Today](../../README.md) · [Archive](../../ARCHIVE.md)', '',
     `<img src="team.png" alt="Team for ${day.date}: ${esc(memberRoles(members))}" width="100%">`, '',
     `**Task:** ${day.brief || day.task}`, '',
+    ...(solution ? [`**Problem:** ${cell(solution.problem)}`, '', `**Improvement:** ${cell(solution.improvement)}`, '', `**Check:** ${solution.verification}`, ''] : []),
+    ...(solutionError ? [`**Run result:** ${cell(solutionError)}`, ''] : []),
     ...(day.request ? [`**Request source:** [${cell(day.request.repository)} #${Number(day.request.number)}](https://github.com/${encodeURI(day.request.repository)}/issues/${Number(day.request.number)}). Local prototype; source issue stays open.`, ''] : []),
     ...(suggestedBy ? [`**Suggested by:** ${suggestedBy}`, ''] : []),
     `**Constraint:** ${constraint}`, '',
@@ -425,11 +439,11 @@ function dayFrames(day, { dir, team }) {
     const component = day.pack?.components.find((c) => c.row === a.row);
     const heading = a.kind === 'piece' ? 'Try it' : component ? component.name
       : a.row ? `Component ${a.row}${lead ? ` · ${lead}` : ''}` : 'Try it';
-    return `<h2>${esc(heading)}${note}</h2>\n<iframe sandbox="${SANDBOX}" title="${esc(heading)}" srcdoc="${esc(html)}"></iframe>`;
+    return `<h2>${esc(heading)}${note}</h2>\n<iframe sandbox="${ARTIFACT_SANDBOX}" title="${esc(heading)}" srcdoc="${esc(html)}"></iframe>`;
   });
 }
 
-function dayPage(day, repo, archiveHtml, { root, pagesUrl, imagePrefix }, { dir, cover, evidence, team, transcript, frames }) {
+function dayPage(day, repo, archiveHtml, { root, pagesUrl, imagePrefix }, { dir, cover, evidence, team, transcript, frames, solution }) {
   const comparison = existsSync(join(dir, 'comparison.html'))
     ? `<p><a href="${imagePrefix}comparison.html">Compare Opus, Sonnet, and Haiku</a>`
       + (existsSync(join(dir, 'comparison.mp4')) ? ` · <a href="${imagePrefix}comparison.mp4">Watch square video</a>` : '') + '</p>' : '';
@@ -437,7 +451,10 @@ function dayPage(day, repo, archiveHtml, { root, pagesUrl, imagePrefix }, { dir,
   return page(`${day.date}: ${title(day)}`, [
     `<p class="muted">Daily Team · ${day.date}</p>`,
     `<h1>${esc(titleCase(title(day)))}</h1>`,
+    ...(solution ? [`<p><strong>Problem</strong> ${esc(solution.problem)}</p>`] : []),
     `<p>${esc(day.decision || day.brief || day.task)}</p>`,
+    ...(solution ? [`<p>${esc(solution.improvement)}</p>`, `<p>${esc(solution.verification)}</p>`,
+      ...(solution.source ? [`<p>${esc(solution.source.source)} · ${esc(solution.source.url)}</p>`] : [])] : []),
     ...(frames.length ? frames : [`<p>No project available. ${esc(day.error || '')}</p>`]),
     archiveHtml,
     '<details><summary>About this project</summary>',

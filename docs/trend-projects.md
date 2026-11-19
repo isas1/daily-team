@@ -14,7 +14,39 @@ history-preserving copy rather than a GitHub fork-network member. Existing
 generation; encrypted GitHub secrets cannot be read back or copied. Its provider
 is Claude and Pages is off. Component source access remains optional.
 
-## Discovery
+## Problem-first daily runs
+
+From 2026-11-19, new project runs use the problem-first contract. GitHub Trending,
+Hacker News RSS and Smashing Magazine RSS supply leads in parallel. The planner
+must point to an exact phrase supporting the problem. Curated Reddit briefs are
+available on every run and serve as fallbacks when the live leads are weak.
+The runner does not fetch Reddit for new runs.
+
+To add a brief, read the thread and its proposed answers. Add a short description,
+current workaround and remaining gap in `problem-briefs.json`. Use the canonical
+Reddit post link and the date reviewed. Keep post text and usernames out. Entries
+expire after 90 days and rest for 28 days after use. An explicit `--brief` bypasses
+discovery. If nothing supports a useful offline solution, the run records a failed
+day. A maintainer can retry with a reviewed brief and `--force`, or with the
+Daily workflow's `brief` and `force` inputs.
+
+The plan sets four browser checkpoints before the build: a primary input,
+a second input, an error and recovery. The build sees the primary checkpoint and
+the public control IDs. Chromium runs all four at phone width, in the same
+sandbox as the published page. A failed check gets one build retry. The runner
+saves only passing HTML, with a receipt tied to the file and the test cases.
+The day page shows the problem, its source and the browser result.
+
+For a local build, install the browser checks once:
+
+```sh
+npm install --no-save --no-package-lock --ignore-scripts playwright@1.63.0
+./node_modules/.bin/playwright install chromium --only-shell
+```
+
+Set `CHROME` to use a different Chrome executable. Plan-only runs need no browser.
+
+## Historical discovery
 
 - GitHub Trending, weekly view: public repository cards and descriptions.
   The timestamp means observed today, not repository publication date.
