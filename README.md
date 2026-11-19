@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-19: Pattern Scale
+### 2026-11-19: Chained Scale
 
 <a href="days/2026-11-19/"><img src="days/2026-11-19/team.png" alt="Team for 2026-11-19: Furniture designer · Architectural model maker · Color grading specialist · Orbital mechanic" width="100%"></a>
 
 **Task:** Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
 
-**Decision:** Type how big your printed test square came out, and get the exact printer scale to use next.
+**Decision:** Type how you printed and what your ruler measured.
 
-No asset today. Cannot find package 'playwright' imported from /home/runner/work/daily-team/daily-team/solution-check.mjs
+<a href="days/2026-11-19/"><img src="days/2026-11-19/cover.png" alt="Designed cover for Chained Scale" width="100%"></a>
 
-[Open the day](days/2026-11-19/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-19/) · [Use it](https://isas1.github.io/daily-team/2026-11-19/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,7 +41,7 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
-| [2026-11-19](days/2026-11-19/) | No asset | Pattern Scale | Furniture designer · Architectural model maker · Color grading specialist · Orbital mechanic |
+| [2026-11-19](days/2026-11-19/) | <a href="days/2026-11-19/"><img src="days/2026-11-19/cover.png" alt="Chained Scale" width="160"></a> | Chained Scale | Furniture designer · Architectural model maker · Color grading specialist · Orbital mechanic |
 | [2026-11-18](days/2026-11-18/) | <a href="days/2026-11-18/"><img src="days/2026-11-18/cover.png" alt="Countermand" width="160"></a> | Countermand | Game interface designer · Watch restorer · Control room operator · Lunar archivist |
 | [2026-11-17](days/2026-11-17/) | <a href="days/2026-11-17/"><img src="days/2026-11-17/cover.png" alt="Shelf Peek" width="160"></a> | Shelf Peek | Flight deck designer · Medical illustrator · Ergonomist · Cautious beginner |
 | [2026-11-16](days/2026-11-16/) | <a href="days/2026-11-16/"><img src="days/2026-11-16/cover.png" alt="Clay Mend" width="160"></a> | Clay Mend | Technical illustrator · Railway signaller · Cabinet maker · Paper fox |

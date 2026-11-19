@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pattern Print Scale</title>
+<style>
+:root{
+  --ink:#1a1a1a;--paper:#fbfaf6;--line:#c9c5bb;--soft:#5a5750;
+  --focus:#1d4ed8;--err:#b42318;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.4}
+main{max-width:880px;margin:0 auto;padding:16px 16px 0}
+h1{font-size:1.35rem;margin:0 0 2px}
+.lede{margin:0 0 14px;color:var(--soft)}
+form{display:block}
+.eq{display:grid;grid-template-columns:1fr;gap:6px;position:relative;padding:14px 0 6px;border-top:2px solid var(--ink)}
+.tag{position:absolute;top:-11px;right:0;background:var(--paper);border:1px solid var(--ink);padding:0 6px;font-size:.75rem;font-weight:700;letter-spacing:.04em}
+.term{display:flex;flex-direction:column;gap:3px}
+.term label{font-size:.85rem;font-weight:600}
+.pair{display:flex;gap:6px}
+.stack{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stack .term{min-width:0}
+.op{font-family:var(--mono);font-size:1.4rem;text-align:center;line-height:1;color:var(--soft)}
+input,select,button{font:inherit;color:var(--ink)}
+input,select{
+  font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1.15rem;
+  min-height:46px;padding:6px 10px;border:1.5px solid var(--ink);border-radius:4px;background:#fff;width:100%;min-width:0
+}
+select{width:auto;font-weight:700;padding-right:6px}
+input[aria-invalid="true"]{border:3px double var(--err)}
+button{min-height:46px;padding:8px 16px;border:2px solid var(--ink);border-radius:4px;background:var(--ink);color:var(--paper);font-weight:600;cursor:pointer}
+button.ghost{background:#fff;color:var(--ink)}
+:focus{outline:none}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.out{
+  position:sticky;bottom:0;z-index:2;background:var(--paper);
+  border-top:1px solid var(--line);margin-top:8px;padding:10px 0 12px;
+  display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center
+}
+.out .op{grid-column:1/-1;text-align:left;display:none}
+#solution-result{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1.5rem;font-weight:700;min-height:1.6em}
+#solution-detail,#solution-error{grid-column:1/-1;margin:0;font-family:var(--mono);font-size:.92rem}
+#solution-detail:empty,#solution-error:empty{display:none}
+#solution-error{color:var(--err);font-weight:600}
+#solution-print{grid-column:1/-1}
+details{margin:14px 0;border-top:1px solid var(--line);padding-top:8px}
+summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center}
+#why-t{font-family:var(--mono);margin:6px 0 0}
+.credits ul{padding-left:18px;margin:6px 0}
+.credits li{margin:4px 0}
+a{color:var(--ink)}
+@media (min-width:760px){
+  .eq{display:flex;align-items:flex-end;gap:10px}
+  .op{padding-bottom:10px}
+  .term input{width:110px}
+  .stack{display:flex;gap:8px}
+  .out{grid-template-columns:auto auto 1fr;position:static}
+  .out .op{display:block;grid-column:auto}
+  #solution-print{grid-column:auto;justify-self:end}
+}
+/* overlay */
+#solution-preview{position:fixed;inset:0;z-index:10;background:#e9e6de;display:flex;flex-direction:column}
+#solution-preview[hidden]{display:none}
+.pv-bar{flex:none;display:flex;gap:8px;align-items:center;padding:10px 12px;background:var(--paper);border-bottom:2px solid var(--ink)}
+.pv-bar span{font-weight:700;margin-right:auto}
+.pv-scroll{flex:1;overflow:auto;padding:16px}
+.page{background:#fff;color:#000;width:190mm;min-height:250mm;margin:0 auto;padding:12mm;box-shadow:0 1px 4px rgba(0,0,0,.25);font-family:var(--sans)}
+.page h2{margin:0 0 4mm;font-size:16pt}
+.page p{margin:0 0 6mm;font-family:var(--mono);font-size:12pt}
+.sqs{display:flex;gap:10mm;align-items:flex-start;flex-wrap:wrap}
+.sq{border:.3mm solid #000;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10pt}
+.sq100{width:100mm;height:100mm}
+.sq1{width:1in;height:1in}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  @page{margin:10mm}
+  html,body{background:#fff}
+  #app{display:none!important}
+  #solution-preview,#solution-preview[hidden]{display:block!important;position:static;background:#fff}
+  .pv-bar{display:none!important}
+  .pv-scroll{overflow:visible;padding:0}
+  .page{box-shadow:none;margin:0;width:auto;min-height:0;padding:0}
+}
+</style>
+</head>
+<body>
+<main id="app">
+  <h1>Pattern Print Scale</h1>
+  <p class="lede">Measure the test square. Get the next scale.</p>
+
+  <form id="calc-form" novalidate>
+    <div class="eq">
+      <span class="tag" id="demo-tag">Demo</span>
+      <div class="term">
+        <label for="solution-printed">Printed %</label>
+        <input id="solution-printed" type="number" inputmode="decimal" step="any" min="1" value="97">
+      </div>
+      <span class="op" aria-hidden="true">×</span>
+      <div class="term">
+        <label for="solution-intended">Square</label>
+        <div class="pair">
+          <input id="solution-intended" type="number" inputmode="decimal" step="any" min="0" value="100">
+          <select id="solution-unit" aria-label="Unit">
+            <option value="mm" selected>mm</option>
+            <option value="in">in</option>
+          </select>
+        </div>
+      </div>
+      <span class="op" aria-hidden="true">÷</span>
+      <div class="stack">
+        <div class="term">
+          <label for="solution-width">Across</label>
+          <input id="solution-width" type="number" inputmode="decimal" step="any" min="0" value="103">
+        </div>
+        <div class="term">
+          <label for="solution-height">Down</label>
+          <input id="solution-height" type="number" inputmode="decimal" step="any" min="0" value="103">
+        </div>
+      </div>
+    </div>
+
+    <div class="out">
+      <span class="op" aria-hidden="true">=</span>
+      <button id="solution-calc" type="submit">Calculate</button>
+      <output id="solution-result" for="solution-printed solution-intended solution-width solution-height" aria-live="polite"></output>
+      <p id="solution-detail" aria-live="polite"></p>
+      <p id="solution-error" role="alert"></p>
+      <button id="solution-print" type="button" class="ghost">Print test page</button>
+    </div>
+  </form>
+
+  <details id="why">
+    <summary>Why chain?</summary>
+    <p id="why-t"></p>
+  </details>
+
+  <details class="credits">
+    <summary>Credits</summary>
+    <ul>
+      <li>Furniture designer (lead): no motion; the result appears in place and the test page opens without transition.</li>
+      <li>Architectural model maker: chained-scale rule, out-of-range units check, unit marked with brackets and bold.</li>
+      <li>Color grading specialist: the 97% demo, with results from 100% and from 97% compared under Why chain.</li>
+      <li>Orbital mechanic (guest, invented future role): per-axis results, mismatch message, controls pinned while the preview scrolls.</li>
+    </ul>
+    <p>Source: <a href="https://www.reddit.com/r/SewingForBeginners/comments/1wn8svu/" rel="noopener noreferrer">Calibrate printed sewing patterns</a>. Demo values are local sample data.</p>
+  </details>
+</main>
+
+<div id="solution-preview" role="dialog" aria-modal="true" aria-labelledby="pv-h" hidden>
+  <div class="pv-bar">
+    <span id="pv-h">Test page</span>
+    <button id="solution-preview-print" type="button">Print</button>
+    <button id="solution-preview-close" type="button" class="ghost">Close</button>
+  </div>
+  <div class="pv-scroll" tabindex="0" aria-label="Page preview">
+    <div class="page">
+      <h2>Scale check</h2>
+      <p id="pv-scale">Print at 100%.</p>
+      <div class="sqs">
+        <div class="sq sq100">100 mm</div>
+        <div class="sq sq1">1 in</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var form = $('calc-form');
+  var F = {
+    printed: $('solution-printed'),
+    intended: $('solution-intended'),
+    width: $('solution-width'),
+    height: $('solution-height')
+  };
+  var unit = $('solution-unit');
+  var result = $('solution-result');
+  var detail = $('solution-detail');
+  var error = $('solution-error');
+  var whyT = $('why-t');
+  var pvScale = $('pv-scale');
+  var app = $('app');
+  var pv = $('solution-preview');
+  var openBtn = $('solution-print');
+  var pvPrint = $('solution-preview-print');
+  var pvClose = $('solution-preview-close');
+  var pvScroll = pv.querySelector('.pv-scroll');
+  var lastScale = null;
+
+  function num(el){
+    var s = String(el.value).trim();
+    if (s === '') return NaN;
+    return Number(s);
+  }
+  function fmt(n){ return String(n); }
+
+  function syncUnit(){
+    for (var k = 0; k < unit.options.length; k++){
+      var o = unit.options[k];
+      o.textContent = o.selected ? '[' + o.value + ']' : o.value;
+    }
+  }
+
+  function clearInvalid(){
+    Object.keys(F).forEach(function(k){ F[k].removeAttribute('aria-invalid'); });
+  }
+
+  function updatePage(){
+    pvScale.textContent = lastScale ? lastScale + '.' : 'Print at 100%.';
+  }
+
+  function fail(el, msg, moveFocus){
+    result.textContent = '';
+    detail.textContent = '';
+    whyT.textContent = '';
+    error.textContent = msg;
+    el.setAttribute('aria-invalid', 'true');
+    lastScale = null;
+    updatePage();
+    if (moveFocus) el.focus();
+  }
+
+  function calc(moveFocus){
+    clearInvalid();
+    var u = unit.value;
+    var p = num(F.printed), i = num(F.intended), w = num(F.width), h = num(F.height);
+
+    if (!(isFinite(p) && p > 0 && p <= 1000)) return fail(F.printed, 'Printed % needs a number from 1 to 1000.', moveFocus);
+    if (!(isFinite(i) && i > 0)) return fail(F.intended, 'Square needs a size above 0.', moveFocus);
+
+    var axes = [[F.width, 'Across', w], [F.height, 'Down', h]];
+    for (var a = 0; a < axes.length; a++){
+      var el = axes[a][0], name = axes[a][1], v = axes[a][2];
+      if (!(isFinite(v) && v > 0)) return fail(el, name + ' needs a measurement.', moveFocus);
+      if (v < 0.8 * i || v > 1.25 * i){
+        return fail(el, name + ' ' + fmt(v) + ' ' + u + ' is far from ' + fmt(i) + ' ' + u + '. Check units.', moveFocus);
+      }
+    }
+
+    var sx = p * i / w;
+    var sy = p * i / h;
+    error.textContent = '';
+    var base100 = (100 * i / w + 100 * i / h) / 2;
+
+    if (Math.abs(sx - sy) <= 0.5){
+      var avg = (sx + sy) / 2;
+      var n = Math.round(avg);
+      var len = Math.round(1000 * n / avg);
+      result.textContent = 'Print at ' + avg.toFixed(1) + '%';
+      detail.textContent = 'At ' + n + '%: 1 m \u2192 ' + len + ' mm';
+      lastScale = 'Print at ' + avg.toFixed(1) + '%';
+      whyT.textContent = 'From 100%: ' + base100.toFixed(1) + '%. From ' + fmt(p) + '%: ' + avg.toFixed(1) + '%.';
+    } else {
+      result.textContent = 'Across ' + sx.toFixed(1) + '%, down ' + sy.toFixed(1) + '%';
+      detail.textContent = 'Axes differ. Use per-axis scale if your printer has it.';
+      lastScale = 'Print across ' + sx.toFixed(1) + '%, down ' + sy.toFixed(1) + '%';
+      whyT.textContent = 'From 100%: ' + base100.toFixed(1) + '%. From ' + fmt(p) + '%: ' + ((sx + sy) / 2).toFixed(1) + '%.';
+    }
+    updatePage();
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    calc(true);
+  });
+  form.addEventListener('input', function(){
+    $('demo-tag').hidden = true;
+  });
+  unit.addEventListener('change', function(){
+    syncUnit();
+    calc(false);
+  });
+
+  /* overlay */
+  function openPv(){
+    updatePage();
+    pv.hidden = false;
+    app.inert = true;
+    app.setAttribute('aria-hidden', 'true');
+    pvScroll.scrollTop = 0;
+    pvPrint.focus();
+  }
+  function closePv(){
+    pv.hidden = true;
+    app.inert = false;
+    app.removeAttribute('aria-hidden');
+    openBtn.focus();
+  }
+  openBtn.addEventListener('click', openPv);
+  pvClose.addEventListener('click', closePv);
+  pvPrint.addEventListener('click', function(){ window.print(); });
+
+  document.addEventListener('keydown', function(e){
+    if (pv.hidden) return;
+    if (e.key === 'Escape' || e.key === 'Esc'){
+      e.preventDefault();
+      closePv();
+      return;
+    }
+    if (e.key === 'Tab'){
+      var list = [pvPrint, pvClose, pvScroll];
+      var idx = list.indexOf(document.activeElement);
+      e.preventDefault();
+      var next = e.shiftKey ? (idx <= 0 ? list.length - 1 : idx - 1) : (idx === -1 || idx === list.length - 1 ? 0 : idx + 1);
+      list[next].focus();
+    }
+  });
+
+  syncUnit();
+  calc(false);
+})();
+</script>
+</body>
+</html>

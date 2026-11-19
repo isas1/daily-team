@@ -1,4 +1,4 @@
-# 2026-11-19: Pattern Scale
+# 2026-11-19: Chained Scale
 
 [Today](../../README.md) · [Archive](../../ARCHIVE.md)
 
@@ -6,13 +6,21 @@
 
 **Task:** Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
 
-**Run result:** Cannot find package 'playwright' imported from /home/runner/work/daily-team/daily-team/solution-check.mjs
+**Problem:** A test square printed at an adjusted scale still measures wrong, and the next scale must be calculated from the current one, not from 100%
+
+**Improvement:** Calculating from 97% gives 94.2% where calculating from 100% gives 97.1%; the tool removes that wrong-base error and replaces guessed reprints with one calculated setting plus one test-page print
+
+**Check:** Browser passed both inputs, error feedback and recovery.
 
 **Constraint:** An open overlay closes with the escape key.
 
 **Season:** 2026-11-09
 
-**Decision:** Type how big your printed test square came out, and get the exact printer scale to use next.
+**Decision:** Type how you printed and what your ruler measured.
+
+<img src="cover.png" alt="Designed cover for Chained Scale" width="100%">
+
+[Cover art direction](cover.json) · [Cover source](cover.html)
 
 ## Feed evidence
 
@@ -25,7 +33,9 @@
 
 ## Asset
 
-artifact-1.html: no asset. Cannot find package 'playwright' imported from /home/runner/work/daily-team/daily-team/solution-check.mjs
+<a href="artifact-1.html"><img src="artifact-1.png" alt="Screenshot of artifact-1.html" width="100%"></a>
+
+[Use it](https://isas1.github.io/daily-team/2026-11-19/) · [artifact-1.html](artifact-1.html), led by Furniture designer. Model: claude-opus-5-5.
 
 ## The session
 
@@ -33,68 +43,56 @@ artifact-1.html: no asset. Cannot find package 'playwright' imported from /home/
 
 ### Clash
 
-**3 · Color grading specialist:** Quick test. 10 cm square, printed at 97%, measured 10.3. I get 94.2%.
+**3 · Color grading specialist:** Quick test. Printed at 97, square should be 100 mm, measures 103 both ways. Computing from 100% gives 97.1. Computing from 97% gives 94.2. Same ruler reading, same duration of effort, two answers. Only one of them lands on 100 mm.
 
-**2 · Architectural model maker:** I'd have said 97.1%. Show me.
+**4 · Orbital mechanic:** So most people will type 100 into "printed at" even after they changed it. What stops them?
 
-**3 · Color grading specialist:** 100 times 10 over 10.3 is 97.1. That assumes the last print was at 100. It was at 97. Multiply 97 instead and you get 94.2.
+**2 · Architectural model maker:** The field starts empty and the label says "Printed at." The result line stays blank until it is filled. Leaving it empty is not an option, so no one gets 100% by default.
 
-**2 · Architectural model maker:** Fine, I'm convinced. The last-scale field stays. I wanted to cut it.
+**1 · Furniture designer:** Back to the goal. One page printed, one square checked, then the pattern. Card Window still leaves the printer scale unknown. Seam Count wastes the paper we are trying to save.
 
-**4 · Orbital mechanic:** Unresolved. Someone measures in millimetres and types 103 into a centimetre form. Your tool says print at 9.4% and they waste a sheet.
+**4 · Orbital mechanic:** Card Window drops, then. But I'm holding the axis question. Paper feed stretches one direction. Across and down can differ.
 
-**1 · Furniture designer:** Back to the goal. One good sheet. A wild ratio has to stop before Print.
+**2 · Architectural model maker:** Then you get two numbers, and you are told plainly that one box cannot fix both axes. If the two axes are within half a point of each other, you get their average.
 
-**4 · Orbital mechanic:** Then refuse anything outside 0.75 to 1.33 times. Name the ratio. Say "check the unit."
+**3 · Color grading specialist:** Here is a mistake. Someone measures in centimetres and types the reading into a millimetre box. You get a scale near 900%, the printer accepts it, and the result is garbage.
 
-**3 · Color grading specialist:** I tried it. 103 over 10 reads as 10.3 times. That message is clear enough to act on.
+**2 · Architectural model maker:** I'd planned to just compute. That demonstration changes my mind. If a measurement is under 80% or over 125% of the intended size, the result line stays empty and an error names the field, the value and the unit. Fix the field, press Calculate again, and the error clears.
 
 ### Decision
 
-Type how big your printed test square came out, and get the exact printer scale to use next.
+Type how you printed and what your ruler measured. You get the exact printer scale to use next.
 
-Concept: Pattern Scale
+Concept: Chained Scale
 
-Contributions:
-- **Architectural model maker:** The compounding rule, where the new scale equals the last scale times intended over measured. Also the cut down to three inputs.
-- **Color grading specialist:** The cutting-mat surface. A test of ease-out against linear at 160 ms; ease-out was chosen because the ghost square settles without overshoot.
-- **Orbital mechanic:** The ratio guard from 0.75 to 1.33 with a named-unit error. A fixed-height diagram so the inputs never shift while the square animates.
-- **Furniture designer:** A reduced-motion check, where the ghost square jumps with no tween. The printable calibration sheet as the thing the session leaves behind.
-
-The square diagram shows its active state without relying on color. The measured square is dashed and the intended square is solid.
-
-On screen there are about 20 words: title, four labels, Calculate, the result line and Print test page. The work surface is the cutting-mat panel. It holds an intended square in solid ink and a dashed square for the measured size, drawn in proportion.
-
-On a phone the order is:
-1. Result line.
-2. Inputs.
-3. Mat diagram.
-4. A sticky Print test page button.
-
-The test page opens in a native `<dialog>` that closes with Escape and returns focus to the Print test page button.
+- **Architectural model maker:** the chained-scale rule and the out-of-range units check. The selected unit is marked with brackets and bold weight, so the active state does not depend on color.
+- **Color grading specialist:** the 97% sample that shows the result from 100% and from 97% side by side. This sample becomes the primary case.
+- **Orbital mechanic:** per-axis results and the mismatch message. In the print preview overlay, the controls stay pinned while the page preview scrolls.
+- **Furniture designer:** no motion at all. The result appears in place on Calculate and the overlay appears without transition. The preview check gets the same treatment, so it leaves the user calm and sure of the next step.
 
 ### Build notes
 
-1. **Form and logic.**
-   - Build one HTML page with these controls: `solution-intended` (text, decimal), `solution-unit` (select: `in`, `cm`), `solution-measured`, `solution-last` (percent, default 100), and the `solution-calc` button.
-   - Show output in `solution-result` and errors in `solution-error`. Use `aria-live` on both.
-   - Compute `last × intended ÷ measured`, rounded to 0.1, and show it as "Print at N%".
-   - If measured ÷ intended falls outside 0.75 to 1.33, clear the result. Show the ratio to one decimal with an instruction to check the unit.
-   - Reject empty or non-positive numbers with an inline error.
-   - First case: intended `2`, unit `in`, measured `2.08`, last `100`, then click Calculate. Expect `solution-result` to read "Print at 96.2%".
-2. **Mat diagram.**
-   - Use an SVG at a fixed 220 px height. The background is cutting-mat green #2f5d50 with a #e8efe9 1 cm grid.
-   - Draw the solid ink intended square and the dashed measured square, scaled by the ratio.
-   - On Calculate, tween the dashed square onto the solid one over 160 ms with ease-out. Under `prefers-reduced-motion`, jump with no tween.
-   - Use mono type for numbers and sans for labels. Paper is #f7f4ec and ink is #1b1b1b.
-3. **Calibration sheet.**
-   - `solution-print` opens the `<dialog id="solution-sheet">`. It shows the square at true physical size using CSS `in` or `cm`, the line "Set printer scale N%", and a `solution-sheet-print` button that calls `window.print()`.
-   - Add `@media print` rules so only the sheet prints.
-   - Escape and `solution-sheet-close` both close the dialog. Focus returns to `solution-print`.
-   - Store the last computed scale in `localStorage` as a suggestion. A filled value always overrides it.
+1. Build one form on one offline HTML page with these controls:
+   - `solution-printed` (number, empty at start)
+   - `solution-intended` (number)
+   - `solution-unit` (select, values `mm` and `in`)
+   - `solution-width` (number, across)
+   - `solution-height` (number, down)
+   - `solution-calc` (button)
+   - `solution-result` (output line)
+   - `solution-detail` (output line)
+   - `solution-error` (error line)
+
+   Calculate each axis as printed × intended ÷ measured. If the two axes are within 0.5 points, average them and show the result in `solution-result` as `Print at {n}%`, with one decimal place. In `solution-detail`, show the whole-number scale and how far a 1 m piece would be off at that scale.
+
+   Primary case: fill `solution-printed` 97, `solution-intended` 100, `solution-width` 103 and `solution-height` 103, then click `solution-calc`. `solution-result` must read `Print at 94.2%`.
+
+2. Validate before calculating. Check across first, then down. If a measurement is under 0.8× or over 1.25× the intended size, clear `solution-result` and set `solution-error` from the template `Across {value} {unit} is far from {intended} {unit}. Check units.` Use `Down` for the height field and print numbers as parsed. A valid calculation clears `solution-error`.
+
+3. Add `solution-print` (button). It opens `solution-preview`, a modal overlay showing a calibration page with a true 100 mm square, a 1 in square and the scale to print at. The overlay contains `solution-preview-print`, which calls `window.print()`, and `solution-preview-close`. Escape closes the overlay and returns focus to `solution-print`. Print CSS hides everything except the page. There is no animation.
 
 ```json
-{"schemaVersion":1,"name":"Pattern Scale","audience":"Home sewers printing PDF sewing patterns on a home printer","problem":"A printed test square measures larger than intended, and guessing a new printer percent wastes paper and risks a wrong-size garment","interaction":"Type intended side, unit, measured side and last print scale, press Calculate, then print the one-page calibration sheet","outcome":"One exact scale percent to type into the print dialog, plus a printable sheet with a true-size square and that percent","recovery":"A measured/intended ratio outside 0.75 to 1.33 clears the result and names the ratio with a unit check; correcting the field and recalculating restores a valid percent","mechanism":"New scale = last scale x intended / measured; ratio guard blocks unit mix-ups; dashed measured square tweens onto the solid intended square on a cutting-mat grid","difference":"Usual approach: print at actual size, measure, guess a new percent, reprint. Pattern Scale computes the percent from the last scale, so the sewer reprints one test page with a computed value instead of a guessed one, and a unit mix-up is flagged before printing","whyNow":"Saved reviewed brief reddit-1wn8svu, reviewed 2026-11-19, documents the problem and workaround; no live feed item supports it; no demand figures claimed","sourceIds":["reddit-1wn8svu"],"evidenceStatus":"sourced","proof":{"workaround":"Print at actual size, check the test square with a ruler, then adjust printer scale and print again if needed.","gap":"No exact scale is calculated from the measured and intended lengths, and there is no single calibration page to print before the full pattern.","improvement":"Replaces a guessed reprint percent with one computed value based on the last scale used, and stops unit mix-ups before a sheet is printed; a reviewer can check the percent by hand"},"cases":[{"phase":"primary","steps":[{"action":"fill","target":"solution-intended","value":"2"},{"action":"select","target":"solution-unit","value":"in"},{"action":"fill","target":"solution-measured","value":"2.08"},{"action":"fill","target":"solution-last","value":"100"},{"action":"click","target":"solution-calc"}],"expect":{"target":"solution-result","text":"Print at 96.2%"}},{"phase":"alternate","steps":[{"action":"fill","target":"solution-intended","value":"10"},{"action":"select","target":"solution-unit","value":"cm"},{"action":"fill","target":"solution-measured","value":"10.3"},{"action":"fill","target":"solution-last","value":"97"},{"action":"click","target":"solution-calc"}],"expect":{"target":"solution-result","text":"Print at 94.2%"}},{"phase":"mistake","steps":[{"action":"fill","target":"solution-intended","value":"2"},{"action":"select","target":"solution-unit","value":"in"},{"action":"fill","target":"solution-measured","value":"5.2"},{"action":"fill","target":"solution-last","value":"100"},{"action":"click","target":"solution-calc"}],"expect":{"target":"solution-error","text":"Measured is 2.6 times the intended size. Check the unit."}},{"phase":"recovery","steps":[{"action":"fill","target":"solution-measured","value":"2.06"},{"action":"click","target":"solution-calc"}],"expect":{"target":"solution-result","text":"Print at 97.1%"}}],"craft":{"rule":"Architectural model maker's rescale rule: a model is rescaled from its current ratio, not from life. New scale = last scale x intended / measured, so a 97% print measuring 10.3 cm on a 10 cm square gives 94.2%, not the 97.1% you get from 100%.","design":"Surface: cutting-mat panel, green #2f5d50 with a 1 cm grid, solid intended square, dashed measured square. Phone: result, inputs, mat, sticky Print test page. Mono numbers, sans labels, ink on paper #f7f4ec. Sparse, about 20 words. 160ms ease-out snap; no tween with reduced motion.","trial":{"start":"10 cm test square, unit cm, last print scale 97, fresh page","action":"Fill intended 10, measured 10.3, last 97, press Calculate","result":"Result reads Print at 94.2%; dashed square snaps onto the solid square","mistake":"Measured in millimetres and typed 103 while unit is cm","recovery":"Error names a 10.3 times ratio and asks for a unit check; retype 10.3, press Calculate, Print at 94.2% returns"}},"alternatives":[{"name":"Pattern Scale","need":"Exact printer scale after a test square prints wrong","mechanism":"Compounds correction on the last scale used, guards the ratio, prints a true-size calibration sheet","action":"Type intended, measured and last scale, press Calculate","result":"One percent for the print dialog and a printable one-page sheet","rejection":"Selected: matches the reviewed brief directly and fits three inputs and one output"},{"name":"Tile Map","need":"Tiled pattern pages drift at the joins","mechanism":"Per-edge overlap errors mapped onto a page grid to locate the shifted sheet","action":"Enter overlap error at each page edge","result":"Grid marks which page shifted and by how much","rejection":"Rejected: the brief documents overall size error, not tile alignment"},{"name":"Vernier Strip","need":"Read scale error without a fine ruler","mechanism":"Printed vernier strip whose aligned tick converts to a percent","action":"Print the strip and enter the aligned tick number","result":"Scale percent read from the tick","rejection":"Rejected: the reference comes from the same faulty printer and still needs a ruler to verify"}]}
+{"schemaVersion":1,"name":"Chained Scale","audience":"Home sewers printing PDF patterns on a home printer","problem":"A test square printed at an adjusted scale still measures wrong, and the next scale must be calculated from the current one, not from 100%","interaction":"Type printed scale, intended square size and unit, measured width and height, press Calculate, then open and print the calibration page","outcome":"Exact next scale to one decimal place, per-axis warning, whole-number box error over 1 m, and a printable calibration page","recovery":"A measurement outside 0.8 to 1.25 of the intended size blocks the result and names the field, value and unit; correcting it and pressing Calculate clears the error","mechanism":"Each axis scale is printed times intended divided by measured; axes within 0.5 points are averaged, otherwise both are shown; the result stays empty until every field is valid","difference":"Baseline is adjust, reprint and remeasure by guess. Here one calculation from the current scale gives the next setting, and the calibration page is printed in place of the pattern","whyNow":"The reviewed brief dated 2026-11-19 states the workaround and the gap; live feeds held no concrete problem; no demand figures are claimed","sourceIds":["reddit-1wn8svu"],"evidenceStatus":"sourced","proof":{"workaround":"Print at actual size, check the test square with a ruler, then adjust printer scale and print again if needed.","gap":"When the measured square is still off, calculate the exact scale from the measured and intended lengths, and give a single calibration page to print before risking the whole pattern.","improvement":"Calculating from 97% gives 94.2% where calculating from 100% gives 97.1%; the tool removes that wrong-base error and replaces guessed reprints with one calculated setting plus one test-page print"},"craft":{"rule":"Architectural model maker: chained scale ratios. The new scale multiplies the scale already used, per axis, instead of restarting at 100%. A 97% print measuring 103 of 100 mm yields 94.2%, not 97.1%","design":"Work surface is one equation line: printed % times intended over measured equals next %. Phone: inputs stacked, result and Print pinned below. Mono tabular figures, sans labels, ink on paper, one blue focus ring, red error text. Sparse, about 30 words. No motion","trial":{"start":"Fresh page, unit mm, all fields empty, result blank","action":"Printed 97, intended 100, across 103, down 103, press Calculate","result":"Result reads Print at 94.2%; detail shows whole-number 94% and the 1 m error","mistake":"User types a centimetre reading, 10.3, into across and down while the unit is mm","recovery":"Error names Across 10.3 mm; user types 103 in both, presses Calculate; error clears and Print at 94.2% returns"}},"alternatives":[{"name":"Chained Scale","need":"Next printer scale after a test print measured wrong","mechanism":"Per-axis ratio chained from the current scale, with a units check","action":"Type printed scale, intended size and measured across and down, press Calculate","result":"Exact next scale, whole-number error over 1 m, printable calibration page","rejection":"Selected: it produces the printer setting the brief asks for and stops the wrong-base and wrong-unit errors"},{"name":"Card Window","need":"Check paper size without a ruler","mechanism":"User matches a box to a bank card to set screen pixels per mm, then shows a true-size square","action":"Drag box edges to match a card held against the screen","result":"True-size square on screen to lay paper against","rejection":"Rejected: screen calibration drifts between devices and still yields no printer scale"},{"name":"Seam Count","need":"Find which tile slipped in a taped pattern","mechanism":"Cumulative drift computed from the gap typed at each seam","action":"Type measured gap at each seam of assembled tiles","result":"Tile that is off and its offset in mm","rejection":"Rejected: it needs the whole pattern printed first, which wastes the paper the brief aims to save"}],"cases":[{"phase":"primary","steps":[{"action":"fill","target":"solution-printed","value":"97"},{"action":"fill","target":"solution-intended","value":"100"},{"action":"fill","target":"solution-width","value":"103"},{"action":"fill","target":"solution-height","value":"103"},{"action":"click","target":"solution-calc"}],"expect":{"target":"solution-result","text":"Print at 94.2%"}},{"phase":"alternate","steps":[{"action":"select","target":"solution-unit","value":"in"},{"action":"fill","target":"solution-printed","value":"100"},{"action":"fill","target":"solution-intended","value":"4"},{"action":"fill","target":"solution-width","value":"4.125"},{"action":"fill","target":"solution-height","value":"4.125"},{"action":"click","target":"solution-calc"}],"expect":{"target":"solution-result","text":"Print at 97.0%"}},{"phase":"mistake","steps":[{"action":"fill","target":"solution-printed","value":"97"},{"action":"fill","target":"solution-intended","value":"100"},{"action":"fill","target":"solution-width","value":"10.3"},{"action":"fill","target":"solution-height","value":"10.3"},{"action":"click","target":"solution-calc"}],"expect":{"target":"solution-error","text":"Across 10.3 mm is far from 100 mm. Check units."}},{"phase":"recovery","steps":[{"action":"fill","target":"solution-width","value":"103"},{"action":"fill","target":"solution-height","value":"103"},{"action":"click","target":"solution-calc"}],"expect":{"target":"solution-result","text":"Print at 94.2%"}}]}
 ```
 
 **Guest:** Orbital mechanic (future; invented). The method is drawn from public-domain history, myth, or literature, or invented. The guest speaks in character in original words, never quoting the source, and nothing here is endorsed by anyone.

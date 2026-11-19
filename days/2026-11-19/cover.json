@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "3bb010a4224f5d2b9608c04bcf57f2758e7014ff2315aa8e52a065fa201d8146",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Furniture designer:** The cover has no motion cues. There are no arrows and no speed lines. It is a still sheet of paper with crop marks at the corners, and it reads as a calibration page waiting on the desk.\n\n**Architectural model maker:** The cover has one square and one equation. The intended 100 mm square is a solid navy outline. The measured 103 mm edge is a dashed outline. The difference reads through line style first and colour second.\n\n**Color grading specialist:** The 97% sample sets the type. The equation `97 × 100 ÷ 103 = 94.2%` carries the result. The wrong-base answer, 97.1%, sits beneath it with a strike line.\n\n**Orbital mechanic (guest, recorded method):** The rulers sit fixed on two axes, one labelled Across and one labelled Down. The square changes size inside them. The frame stays clear while the measured shape grows.\n\n**Lead's choice (Architectural model maker):**\n- **Composition:** The title, descriptor and date sit in the left column. A true-proportion test square sits on the right between a top ruler and a side ruler. The 3% overshoot is drawn to scale as a thin red band. The equation sits under the square.\n- **Palette:** Paper #F3EFE6 and ink #0E2A47. Red #BE4D4D is used only for the overshoot and the 103 label. Muted grey #8A8F96 is used for the struck value.\n- **Type:** The title is set in Cover Headline at 116px on two lines. The equation, descriptor and date are set in Cover Text with tabular figures.",
+  "width": 1200,
+  "height": 630
+}

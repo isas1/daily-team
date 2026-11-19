@@ -6,7 +6,7 @@ Every daily team and the asset it made, newest first. 47 days recorded.
 
 | Date | Project | Open |
 |---|---|---|
-| [2026-11-19](days/2026-11-19/) | Pattern Scale | no asset |
+| [2026-11-19](days/2026-11-19/) | Chained Scale | <a href="days/2026-11-19/"><img src="days/2026-11-19/cover.png" alt="Chained Scale" width="160"></a> [asset](days/2026-11-19/artifact-1.html) |
 | [2026-11-18](days/2026-11-18/) | Countermand | <a href="days/2026-11-18/"><img src="days/2026-11-18/cover.png" alt="Countermand" width="160"></a> [asset](days/2026-11-18/artifact-1.html) |
 | [2026-11-17](days/2026-11-17/) | Shelf Peek | <a href="days/2026-11-17/"><img src="days/2026-11-17/cover.png" alt="Shelf Peek" width="160"></a> [asset](days/2026-11-17/artifact-1.html) |
 | [2026-11-16](days/2026-11-16/) | Clay Mend | <a href="days/2026-11-16/"><img src="days/2026-11-16/cover.png" alt="Clay Mend" width="160"></a> [asset](days/2026-11-16/artifact-1.html) |
