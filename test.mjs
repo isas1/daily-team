@@ -911,19 +911,29 @@ test('the site runs artifacts only inside a sandboxed frame and uses the brand',
   rmSync(dir, { recursive: true });
 });
 
-test('project pages link to one full archive and keep recent previews short', () => {
+test('project pages link to the full archive and neighboring recorded days', () => {
   const dir = tmp(), days = join(dir, 'days'), site = join(dir, '_site');
   try {
     for (const date of dates('2026-10-01', 9)) fakeDay(days, date, []);
     buildSite(site, loadDays(days), days, '');
     const root = readFileSync(join(site, 'index.html'), 'utf8');
     const dated = readFileSync(join(site, '2026-10-09', 'index.html'), 'utf8');
+    const middle = readFileSync(join(site, '2026-10-05', 'index.html'), 'utf8');
+    const oldest = readFileSync(join(site, '2026-10-01', 'index.html'), 'utf8');
     const archivePage = readFileSync(join(site, 'archive.html'), 'utf8');
-    assert.match(root, /href="\.\/archive\.html">All 9 projects/);
-    assert.match(dated, /href="\.\.\/archive\.html">All 9 projects/);
+    assert.match(root, /href="\.\/" aria-current="page">Latest tool/);
+    assert.match(root, /href="\.\/archive\.html">All days/);
+    assert.match(dated, /href="\.\.\/archive\.html">All days/);
+    assert.match(root, /href="\.\/2026-10-08\/" rel="prev">Previous day/);
+    assert.doesNotMatch(dated, /rel="next"/);
+    assert.match(middle, /href="\.\.\/2026-10-04\/" rel="prev">Previous day/);
+    assert.match(middle, /href="\.\.\/2026-10-06\/" rel="next">Next day/);
+    assert.doesNotMatch(oldest, /rel="prev"/);
     assert.equal([...dated.matchAll(/<li><a href="\.\.\/2026-/g)].length, 7);
     assert.doesNotMatch(dated, /href="\.\.\/2026-10-01\/"/);
+    assert.match(archivePage, /href="\.\/archive\.html" aria-current="page">All days/);
     assert.match(archivePage, /href="\.\/2026-10-01\/"/);
+    assert.match(archivePage, /<time datetime="2026-10-01">2026-10-01<\/time><span class="day-summary">No tool published\./);
     assert.equal([...archivePage.matchAll(/<li><a href="\.\/2026-/g)].length, 9);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
@@ -1671,6 +1681,9 @@ test('designed cover replaces previews consistently; stale/missing covers fall b
     assert.match(dayReadme(day, days, ''), /piece\.png/);
     const site = join(root, 'site');
     buildSite(site, [day], days, '', 'https://example.test/');
+    const gallery = readFileSync(join(site, 'archive.html'), 'utf8');
+    assert.ok(gallery.includes(`<img src="./${day.date}/piece.png"`));
+    assert.doesNotMatch(gallery, /cover\.png/);
     for (const path of ['index.html', `${day.date}/index.html`]) {
       const html = readFileSync(join(site, path), 'utf8');
       assert.match(html, /cover\.png/);

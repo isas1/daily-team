@@ -1,5 +1,7 @@
 # daily-team
 
+**[Try the latest tool](https://isas1.github.io/daily-team/)** · **[Browse all days](https://isas1.github.io/daily-team/archive.html)**
+
 Each day, four creative roles build one offline tool for a documented problem. RSS, GitHub Trending, and reviewed Reddit briefs supply leads. The team compares three ways to solve the same job and checks the finished tool in a browser.
 
 From 2026-10-31, normal Daily Team runs focus on original projects: creative tools, simulations, games, explorable explanations and unusual product workflows. Each saved plan records its evidence, nearest familiar approach, useful difference, recovery path and comparison with recent projects. Trend signals inspire work; they do not prove demand or originality.
@@ -59,7 +61,7 @@ No open suggestions yet.
 3. **The cast.** Every Monday a language model drafts the next season: 16 new roles, 16 new methods, 8 new temperaments, and 6 new guests join from 2026-10-26, the longest-serving leave, and voted suggestions inform the brief pool; new project runs choose their direction from current evidence. Scripts check the draft and it opens as a pull request for review. Seasons start on a future Monday, so past days never change.
 4. **The work.** Each morning a language model plays the team. From 2026-11-19, the team picks a documented problem and compares three ways to solve it. The tool takes real input, gives a usable result and lets the user recover from mistakes. The runner holds the tool unless both test inputs, error feedback and recovery pass in a browser. Recent matches rest for 28 days.
 5. **The checks.** The file must have a title and a mobile layout, stay under 100 KB, and make no network requests. Component tiles target at most 12 rendered words, or 24 for necessary data-heavy panels; the legacy 80-word markup gate remains an archive-compatible source ceiling. [Minimum-copy rules](docs/component-copy.md) keep labels and current feedback, with no demo prose. A file that fails is retried once, then marked "needs review". These source checks do not prove visual quality; browser review must verify state behavior, motion, both themes and phone fit before reuse.
-6. **The record.** The workflow commissions a project cover from the same four members and their saved plan, renders it at 1200 × 630, then uses that cover in Today, thumbnails, day pages, the archive and gallery. The branded team card stays first; interface screenshots stay as evidence. Missing or stale covers fall back to the original screenshots. The workflow writes the pages and commits the result. Days that fail are recorded too.
+6. **The record.** The workflow commissions a project cover from the same four members and their saved plan, then renders it at 1200 × 630 for the GitHub record and share preview. The live archive shows tool screenshots first, with cover art or team cards as fallbacks. The workflow writes the pages and commits the result. Days that fail are recorded too.
 7. **The weekly report.** Each Sunday a script gathers the week's changes, days, seasons, and GitHub activity, and a language model writes a short summary from those facts only. A check rejects any number or name that is not in the facts. Reports are in [reports/](reports/).
 
 ## Take part
