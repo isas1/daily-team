@@ -58,7 +58,7 @@ export function projectInput({ date, discovery, recent, brief = '', source = nul
   });
   return { schemaVersion: 1, craftVersion: 1, mode: 'project', date, task, request: null,
     sources: discovery.status, custom: Boolean(brief), ...(source ? { feedPolicy: 'one-source-v1', selectedFeed: source.id } : {}),
-    ...(solve ? { solutionVersion: 1 } : {}),
+    ...(solve ? { solutionVersion: 1, qualityVersion: 1 } : {}),
     candidates: [...(solve && !brief ? problemBriefs : []), ...fresh.map(i => ({ ...i, kind: 'feed' })), { id: 'daily-task', kind: 'task', task }],
     recent, inventory: null };
 }
@@ -167,7 +167,7 @@ export function assertProjectExport(day, dir) {
   if (![0, 1].includes(day.requestedArtifacts) || day.artifacts.length !== day.requestedArtifacts) throw new Error('incomplete project artifact record');
   for (const a of day.artifacts) {
     if (a.file !== 'artifact-1.html') throw new Error('unsafe project artifact path');
-    if (input.solutionVersion === 1 && (a.status !== 'ok' || !validSolutionReceipt(a.solutionCheck, day.project.cases, a.sha256))) {
+    if (input.solutionVersion === 1 && (a.status !== 'ok' || !validSolutionReceipt(a.solutionCheck, day.project.cases, a.sha256, input.qualityVersion))) {
       throw new Error('daily solution is missing its passing browser receipt');
     }
     if (a.status !== 'failed' && (!a.sha256 || hash(readFileSync(join(dir, a.file))) !== a.sha256)) throw new Error('project artifact hash mismatch');

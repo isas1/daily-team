@@ -4,7 +4,7 @@
 //
 // Usage: node run.mjs [--provider openrouter|claude] [--artifacts N] [--brief "text"]
 //                     [--requests file.json] [--sources file.json] [--date YYYY-MM-DD] [--out dir] [--force] [--dry-run]
-//                     [--project | --pack] [--snapshot file] [--inventory file] [--feed-cache file] [--offline]
+//                     [--project | --pack] [--cover] [--snapshot file] [--inventory file] [--feed-cache file] [--offline]
 // Env:   PROVIDER            openrouter (default) or claude
 //        OPENROUTER_API_KEY  required for openrouter
 //        MODEL               openrouter models, comma-separated, tried in order
@@ -26,6 +26,7 @@ import { chooseRequest, inspirationContext } from './component-focus.mjs';
 import { PACKS_FROM, DEFAULT_PACK_SIZE, CATEGORIES, parsePack, packProblems, packInputProblems, recentPacks,
   repetitionWarnings, applyTokens, packArtifactProblems, packBuildRules, makeManifest, hash } from './component-pack.mjs';
 import { discover, planningInput, readSnapshot } from './feed-planning.mjs';
+import { draftCover, writeCover } from './cover.mjs';
 import { chooseSource, localSources, sourceContext } from './component-source.mjs';
 import { redactCredentials } from './security.mjs';
 import { PROJECTS_FROM, SOLUTIONS_FROM, SOLUTION_FEEDS, projectSource, projectInput, parseProject,
@@ -81,6 +82,7 @@ function parseArgs(argv) {
     else if (a === '--date') opts.date = value();
     else if (a === '--out') opts.out = value();
     else if (a === '--force') opts.force = true;
+    else if (a === '--cover') opts.cover = true;
     else if (a === '--dry-run') opts.dryRun = true;
     else die(`unknown argument ${a}`);
   }
@@ -126,21 +128,22 @@ async function main() {
   const dir = opts.dryRun ? finalDir : pendingDir;
   const record = join(dir, 'day.json');
   // A completed day stays put. An interrupted staged day resumes.
-  if (!opts.dryRun && !existsSync(record) && existsSync(join(finalDir, 'day.json')) && !opts.force
-    && JSON.parse(readFileSync(join(finalDir, 'day.json'), 'utf8')).status !== 'failed') {
+  if (!opts.dryRun && opts.force) rmSync(dir, { recursive: true, force: true });
+  let resumeDay = !opts.dryRun && existsSync(record) ? JSON.parse(readFileSync(record, 'utf8')) : null;
+  const publishedPath = join(finalDir, 'day.json');
+  const published = !opts.dryRun && !opts.force && (!resumeDay || resumeDay.status === 'failed') && existsSync(publishedPath)
+    ? JSON.parse(readFileSync(publishedPath, 'utf8')) : null;
+  if (!resumeDay && published && published.status !== 'failed') {
     console.log(`${date} is already recorded, skipping (use --force to replace)`);
     return;
   }
-  if (!opts.dryRun && opts.force) rmSync(dir, { recursive: true, force: true });
-  let resumeDay = !opts.dryRun && existsSync(record) ? JSON.parse(readFileSync(record, 'utf8')) : null;
-  if (resumeDay?.status === 'failed' && !opts.force && existsSync(join(finalDir, 'day.json'))
-    && JSON.parse(readFileSync(join(finalDir, 'day.json'), 'utf8')).status !== 'failed') {
+  if (resumeDay?.status === 'failed' && published && published.status !== 'failed') {
     console.log(`${date} is already recorded, skipping (use --force to replace)`);
     return;
   }
   if (resumeDay?.status === 'failed') { rmSync(dir, { recursive: true, force: true }); resumeDay = null; }
   if (resumeDay?.request) { task = resumeDay.task; request = { ...resumeDay.request, task }; }
-  if (!opts.dryRun && !resumeDay && !existsSync(dir) && existsSync(join(finalDir, 'day.json')) && !opts.force) {
+  if (!resumeDay && !existsSync(dir) && published?.status === 'failed') {
     seedFailedInput(finalDir, dir);
   }
 
@@ -263,7 +266,7 @@ async function main() {
     || day.requestedArtifacts !== undefined && day.requestedArtifacts !== opts.artifacts
     || input && day.planning?.inputHash !== hash(input))) die('staged run settings changed; use --force to start again');
   if (resumeDay && solve && day.artifacts.some(a => a.status !== 'failed'
-    && !validSolutionReceipt(a.solutionCheck, day.project?.cases, a.sha256))) {
+    && !validSolutionReceipt(a.solutionCheck, day.project?.cases, a.sha256, input.qualityVersion))) {
     die('staged solution is missing its passing browser receipt; use --force to start again');
   }
   if (resumeDay?.completed && day.status !== 'failed') {
@@ -311,7 +314,15 @@ async function main() {
     }
     return problems;
   };
-  let plan = resumeDay?.plan ? { text: resumeDay.plan, model: resumeDay.model, problems: resumeDay.planProblems || [] } : null;
+  const previousBuildFailed = solve && !opts.snapshot && published?.status === 'failed' && published.date === date
+    && published.provider === day.provider && published.brief === day.brief && published.team === day.team
+    && !published.sim && published.project && published.planning?.inputHash === day.planning.inputHash
+    && published.requestedArtifacts === day.requestedArtifacts && published.artifacts?.some(a => a.status === 'failed')
+    && typeof published.plan === 'string' && checkPlan(published.plan).length === 0
+    && hash(parseProject(published.plan)) === hash(published.project);
+  const saved = resumeDay?.plan ? resumeDay : previousBuildFailed ? published : null;
+  if (saved === published && saved) console.log('retry: reusing the verified plan and browser cases');
+  let plan = saved ? { text: saved.plan, model: saved.model, problems: saved.planProblems || [] } : null;
   let sim = null;
   // Studio days: four member agents play the day; the single plan call is the fallback.
   if (!plan && isSimDay(date) && !custom) {
@@ -372,11 +383,18 @@ async function main() {
       die(day.error, 1);
     }
   }
-  if (!resumeDay?.plan) planProblems.push(...sessionProblems(packMode || projectMode ? planText.replace(/```json[\s\S]*?```/g, '') : planText));
+  if (!saved) planProblems.push(...sessionProblems(packMode || projectMode ? planText.replace(/```json[\s\S]*?```/g, '') : planText));
   Object.assign(day, { model: plan.model, plan: planText, decision: decisionLine(planText), concept: conceptName(planText), planProblems });
   console.log(`plan: ${plan.model}${planProblems.length ? `, flagged: ${planProblems.join('; ')}` : ''}`);
   mkdirSync(dir, { recursive: true });
   save();
+
+  const quietCoverError = error => {
+    console.error(`cover skipped: ${redactCredentials(error.message)}`);
+    return null;
+  };
+  const cover = opts.cover && projectMode && opts.artifacts === 1
+    ? draftCover(day, complete).catch(quietCoverError) : null;
 
   for (let n = 1; n <= opts.artifacts; n++) {
     const file = `artifact-${n}.html`;
@@ -400,7 +418,7 @@ async function main() {
         if (scriptProblem) problems.push(scriptProblem);
         if (solve && !problems.length) {
           browser ??= await openSolutionBrowser();
-          try { solutionCheck = await checkSolution(browser, outputHtml(html), day.project.cases); }
+          try { solutionCheck = await checkSolution(browser, outputHtml(html), day.project.cases, input.qualityVersion); }
           catch (e) { problems.push(e.message); }
         }
         return problems;
@@ -438,7 +456,7 @@ async function main() {
       }
       const output = outputHtml(html);
       const sha256 = hash(output);
-      if (solve && !validSolutionReceipt(solutionCheck, day.project.cases, sha256)) throw new Error('daily solution is missing its passing browser receipt');
+      if (solve && !validSolutionReceipt(solutionCheck, day.project.cases, sha256, input.qualityVersion)) throw new Error('daily solution is missing its passing browser receipt');
       atomicWrite(join(dir, file), output);
       day.artifacts.push({ file, sha256, ...(solve ? { solutionCheck } : {}), ...(packMode ? { componentId: activePack.components[n - 1].id } : {}), lead: component ? rowLead(n) : n, ...(component ? { row: n } : {}), model: out.model, status: out.problems.length ? 'needs review' : 'ok', problems: out.problems });
       console.log(`${file}: ${out.model}${out.problems.length ? `, needs review: ${out.problems.join('; ')}` : ''}`);
@@ -480,8 +498,15 @@ async function main() {
   if (packMode || projectMode) day.status = 'ok';
   if (day.artifacts.length && day.artifacts.every((a) => a.status === 'failed')) day.status = 'failed';
   else if (day.artifacts.some((a) => a.status !== 'ok')) day.status = 'needs review';
-  if ((packMode || projectMode) && (planProblems.length || day.packWarnings?.length)) day.status = 'needs review';
+  if (day.status === 'ok' && (packMode || projectMode) && (planProblems.length || day.packWarnings?.length)) day.status = 'needs review';
   day.completed = true;
+  if (cover) {
+    const draft = await cover;
+    if (draft && day.status !== 'failed') {
+      try { console.log(`cover: ${writeCover(day, dir, draft).model}`); }
+      catch (error) { quietCoverError(error); }
+    }
+  }
   save();
   if (day.artifacts.some((a) => a.status === 'failed')) finishFailed();
   else publishDay(opts.out, date);

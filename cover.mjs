@@ -58,12 +58,13 @@ function embedFonts(html) {
   return html.replace(/<head[^>]*>/i, (head) => `${head}<style>${fonts}</style>`);
 }
 
-export async function generateCover(day, daysDir, { complete, render = renderPng, force = false } = {}) {
-  const dir = join(daysDir, day.date);
-  if (!day.plan || !day.artifacts.some((a) => a.status !== 'failed')) return { status: 'skipped' };
-  if (!force && hasCover(day, daysDir)) return { status: 'cached' };
+export async function draftCover(day, complete) {
   const out = await completeChecked(complete, coverMessages(day), 12000, coverProblems);
   if (out.problems.length) throw new Error(out.problems.join('; '));
+  return out;
+}
+
+export function writeCover(day, dir, out, render = renderPng) {
   const html = addCsp(embedFonts(extractHtml(out.text)));
   const temp = join(dir, 'cover.pending.png');
   try {
@@ -78,6 +79,13 @@ export async function generateCover(day, daysDir, { complete, render = renderPng
     writeFileSync(join(dir, 'cover.json'), `${JSON.stringify(record, null, 2)}\n`);
     return record;
   } finally { rmSync(temp, { force: true }); }
+}
+
+export async function generateCover(day, daysDir, { complete, render, force = false } = {}) {
+  if (!day.plan || !day.artifacts.some(a => a.status !== 'failed')) return { status: 'skipped' };
+  if (!force && hasCover(day, daysDir)) return { status: 'cached' };
+  const out = await draftCover(day, complete);
+  return writeCover(day, join(daysDir, day.date), out, render);
 }
 
 async function main() {

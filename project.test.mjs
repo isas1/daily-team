@@ -10,7 +10,8 @@ import { PROJECT_SOURCES, projectSource, projectInput, projectProblems, assertPr
 import { hash, recentPacks } from './component-pack.mjs';
 import { buildSite, dayReadme } from './publish.mjs';
 import { buildPrompt } from './recruit.mjs';
-import { projectScriptProblem } from './artifact-policy.mjs';
+import { addCsp, projectScriptProblem } from './artifact-policy.mjs';
+import { checkSolution, openSolutionBrowser } from './solution-check.mjs';
 
 const date = '2026-10-31';
 const feeds = ['github-trending', 'hacker-news', 'reddit-sideproject'].map((sourceId, n) => ({
@@ -159,20 +160,33 @@ test('live discovery path parses Trending and Atom, records rate limits and reta
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
-async function run(replies, args, inspect, snapshotInput = input()) {
+function sendReply(res, text) {
+  res.writeHead(text === undefined ? 500 : 200, { 'content-type': 'application/json' });
+  res.end(JSON.stringify({ model: 'fixture', choices: [{ message: { content: text || '' } }] }));
+}
+
+async function run(replies, args, inspect, snapshotInput = input(), previousDay = null) {
   const dir = mkdtempSync(join(tmpdir(), 'daily-project-')), calls = [];
   const server = createServer((req, res) => {
     let body = ''; req.on('data', c => body += c); req.on('end', () => {
-      calls.push(JSON.parse(body)); const text = replies.shift();
-      res.writeHead(text === undefined ? 500 : 200, { 'content-type': 'application/json' });
-      res.end(JSON.stringify({ model: 'fixture', choices: [{ message: { content: text || '' } }] }));
+      calls.push(JSON.parse(body));
+      const reply = typeof replies === 'function' ? replies(calls.at(-1), res) : replies.shift();
+      if (reply === null) return; // Fixture will release this response when the other request arrives.
+      sendReply(res, reply);
     });
   });
   await new Promise(r => server.listen(0, '127.0.0.1', r));
   try {
     const snapshot = join(dir, 'input.json'); writeFileSync(snapshot, JSON.stringify(snapshotInput));
     const days = join(dir, 'days');
-    const child = spawn(process.execPath, [resolve('run.mjs'), '--date', snapshotInput.date, '--snapshot', snapshot, '--out', days, ...args], {
+    if (previousDay) {
+      const out = join(days, snapshotInput.date);
+      mkdirSync(out, { recursive: true });
+      writeFileSync(join(out, 'day.json'), JSON.stringify(previousDay));
+      writeFileSync(join(out, 'planning-input.json'), JSON.stringify(snapshotInput));
+    }
+    const source = previousDay ? [] : ['--snapshot', snapshot];
+    const child = spawn(process.execPath, [resolve('run.mjs'), '--date', snapshotInput.date, '--out', days, ...source, ...args], {
       env: { ...process.env, PROVIDER: 'openrouter', MODEL: 'fixture', OPENROUTER_API_KEY: 'fixture', API_URL: `http://127.0.0.1:${server.address().port}`, ARTIFACTS: '', COMPONENT_REQUESTS_FILE: '/must-not-read', COMPONENT_SOURCES_FILE: '', COMPONENTS_DIR: '', RETRY_MS: '0' },
     });
     let output = ''; child.stdout.on('data', c => output += c); child.stderr.on('data', c => output += c);
@@ -350,6 +364,7 @@ test('actual project checks an unseen input, retries a hardcoded result and expo
     assert.match(calls[2].messages.at(-1).content, /browser alternate failed/);
     assert.doesNotMatch(calls[1].messages[1].content, /121\.95%|96\.15%/);
     assert.deepEqual(day.artifacts[0].solutionCheck.passed, ['primary', 'alternate', 'mistake', 'recovery']);
+    assert.deepEqual(day.artifacts[0].solutionCheck.quality, { phoneFit: true, keyboardReplay: true });
     const target = join(days, SOLUTIONS_FROM);
     assertProjectExport(day, target);
     const readme = dayReadme(day, days, '');
@@ -360,18 +375,65 @@ test('actual project checks an unseen input, retries a hardcoded result and expo
     const page = readFileSync(join(site, SOLUTIONS_FROM, 'index.html'), 'utf8');
     assert.match(page, /A pattern prints at the wrong size/);
     assert.match(page, /Browser passed both inputs/);
-    delete day.artifacts[0].solutionCheck;
+    delete day.artifacts[0].solutionCheck.quality;
     assert.throws(() => assertProjectExport(day, target), /passing browser receipt/);
   }, solutionInput());
 });
 
-test('the runner records a failed recovery and withholds the HTML after retry', browserTests, async () => {
+test('the runner records a failed recovery and withholds the HTML then retries only the build on a new run', browserTests, async () => {
   const broken = solutionHtml.replace("result.textContent = value > 0 ?", "if (result.textContent === 'Enter a positive length') return; result.textContent = value > 0 ?");
-  await run([plan(solution()), broken, broken], [], ({ code, day, calls, output, days }) => {
+  await run([plan(solution()).replace('## Clash', '## Debate'), broken, broken], [], async ({ code, day, calls, output, days }) => {
     assert.equal(code, 3, output);
     assert.equal(calls.length, 3, output);
     assert.equal(day.status, 'failed');
+    assert.ok(day.planProblems.length);
     assert.match(day.error, /browser recovery failed/);
     assert.equal(existsSync(join(days, SOLUTIONS_FROM, 'artifact-1.html')), false);
+    await run([solutionHtml], [], ({ code, output, calls, day: fixed }) => {
+      assert.equal(code, 0, output);
+      assert.match(output, /reusing the verified plan/);
+      assert.equal(calls.length, 1);
+      assert.equal(fixed.plan, day.plan);
+      assert.deepEqual(fixed.planning.selectedSourceIds, day.planning.selectedSourceIds);
+    }, solutionInput(), day);
+  }, solutionInput());
+});
+
+
+test('browser rejects a horizontal overflow and a pointer-only submit control', browserTests, async () => {
+  const browser = await openSolutionBrowser();
+  try {
+    const cases = solution().cases;
+    const tooWide = solutionHtml.replace('</head>', '<style>body{width:700px}</style></head>');
+    await assert.rejects(checkSolution(browser, addCsp(tooWide), cases, 1), /overflows the phone width/);
+    const pointerOnly = solutionHtml.replace('<button id="solution-calculate">', '<button tabindex="-1" id="solution-calculate">');
+    await assert.rejects(checkSolution(browser, addCsp(pointerOnly), cases, 1), /keyboard alternate failed: solution-calculate cannot take keyboard focus/);
+  } finally { await browser.close(); }
+});
+
+
+test('cover drafting overlaps the build and a failed cover does not block the tool', { ...browserTests, timeout: 20_000 }, async () => {
+  let coverResponse, buildResponse;
+  function respond({ messages }, res) {
+    const user = messages[1].content;
+    if (user.includes('<planning_input')) return plan(solution());
+    res.setTimeout(5_000, () => res.destroy());
+    if (user.includes('Exact title:')) {
+      if (messages.length > 2) return 'No cover';
+      coverResponse = res;
+    } else {
+      buildResponse = res;
+    }
+    if (coverResponse && buildResponse) {
+      sendReply(coverResponse, 'No cover');
+      sendReply(buildResponse, solutionHtml);
+    }
+    return null;
+  }
+  await run(respond, ['--cover'], ({ code, day, calls, output }) => {
+    assert.equal(code, 0, output);
+    assert.equal(calls.length, 4, output);
+    assert.equal(day.status, 'ok');
+    assert.match(output, /cover skipped: no HTML code block/);
   }, solutionInput());
 });

@@ -393,7 +393,7 @@ Render the starting sample as soon as the page opens and keep the main control i
 
 ## Build the solution
 
-Build the documented job through its usable result. The chosen project includes browser.primary, browser.controls and browser.outputs. Give every listed input, action and visible output its exact ID. Treat these as ordinary controls for the user. The checked output should contain just the expected visible result text, separate from its static label. Compute it for arbitrary supported input, including cases beyond the sample. Implement real correction after bad input, and preserve the user's work where possible.
+Build the documented job through its usable result. The chosen project includes browser.primary, browser.controls and browser.outputs. Give every listed input, action and visible output its exact ID. Treat these as ordinary controls for the user. The checked output should contain just the expected visible result text, separate from its static label. Compute it for arbitrary supported input, including cases beyond the sample. Implement real correction after bad input, and preserve the user's work where possible. Keep the page within the phone width at rest and after input. Use native focusable controls with visible focus, and make the same action work with Enter or Space as appropriate.
 
 ## Pack plan
 

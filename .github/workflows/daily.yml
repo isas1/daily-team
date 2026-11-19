@@ -108,10 +108,11 @@ jobs:
           COMPONENT_SOURCES_FILE: ${{ inputs.mode == 'components' && env.PROVIDER == 'claude' && format('{0}/component-sources.json', runner.temp) || '' }}
         run: |
           if [ -n "$PROBLEM_BRIEF" ]; then set -- --brief "$PROBLEM_BRIEF"; else set --; fi
+          if [ "$RUN_MODE" = --project ]; then set -- --cover "$@"; fi
           node run.mjs $RUN_MODE $FORCE "$@"
-      - name: Design daily project cover
+      - name: Design component pack cover
         continue-on-error: true
-        if: always() && steps.key.outputs.ok == 'true'
+        if: always() && steps.key.outputs.ok == 'true' && inputs.mode == 'components'
         env:
           OPENROUTER_API_KEY: ${{ env.PROVIDER != 'claude' && secrets.OPENROUTER_API_KEY || '' }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ env.PROVIDER == 'claude' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
