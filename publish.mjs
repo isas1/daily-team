@@ -384,11 +384,19 @@ function page(heading, body, { root = './', image = '' } = {}) {
 <meta name="twitter:card" content="summary_large_image">` : ''}
 <link rel="stylesheet" href="${root}brand/tokens.css">
 <style>
-body { margin: 0 auto; max-width: 1000px; padding: var(--space-7) var(--space-4); background: var(--sc-white);
+body { margin: 0 auto; max-width: 1000px; padding: var(--space-4) var(--space-4) var(--space-7); background: var(--sc-white);
   font: 16px/var(--leading-body) var(--font-body); color: var(--text-body); }
 h1 { font-family: var(--font-headline); font-weight: 700; font-stretch: var(--stretch-condensed); font-size: 56px;
   line-height: var(--leading-display); letter-spacing: -0.01em; margin: 0 0 var(--space-2); }
 h2 { font-family: var(--font-headline); font-weight: 700; font-size: 24px; margin-top: var(--space-7); }
+.site-bar { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 0 var(--space-5); border-bottom: 1px solid var(--border-line); margin-bottom: var(--space-5); }
+.site-bar nav { display: flex; flex-wrap: wrap; gap: 0 var(--space-4); }
+.site-bar a { display: inline-flex; align-items: center; min-height: 44px; color: var(--sc-navy); }
+.site-bar [aria-current="page"] { color: var(--sc-red-600); font-weight: 700; }
+.day-date { margin: 0 0 var(--space-2); font-size: 14px; font-variant-numeric: tabular-nums; }
+.day-lead { max-width: 68ch; margin: 0 0 var(--space-4); }
+.day-lead + h2 { margin: var(--space-4) 0 var(--space-2); }
 .kicker { font-family: var(--font-headline); font-weight: 600; font-size: 14px; letter-spacing: var(--tracking-caps);
   text-transform: uppercase; color: var(--text-accent); }
 .muted { color: var(--text-muted); }
@@ -396,12 +404,20 @@ img { max-width: 100%; height: auto; }
 .card { border-radius: var(--radius-lg); box-shadow: var(--shadow-frame); }
 summary { cursor: pointer; font-weight: 700; }
 details { margin-top: var(--space-7); }
-iframe { width: 100%; height: 80vh; border: 1px solid var(--border-line); border-radius: var(--radius-lg);
+iframe { box-sizing: border-box; width: 100%; height: 80vh; border: 1px solid var(--border-line); border-radius: var(--radius-lg);
   box-shadow: var(--shadow-frame); background: var(--sc-white); }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4); padding: 0; list-style: none; }
-.grid a { color: inherit; text-decoration: none; }
-.grid img { display: block; border: 1px solid var(--border-line); border-radius: var(--radius-md); margin-bottom: var(--space-2); }
-a { color: var(--sc-red); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 265px), 1fr));
+  gap: var(--space-5); padding: 0; list-style: none; margin-bottom: var(--space-5); }
+.grid a { display: block; height: 100%; color: inherit; text-decoration: none; }
+.grid a:hover strong { text-decoration: underline; }
+.grid img { display: block; box-sizing: border-box; width: 100%; aspect-ratio: 3 / 2; object-fit: contain;
+  background: var(--sc-canvas); border: 1px solid var(--border-line);
+  border-radius: var(--radius-md); margin-bottom: var(--space-2); }
+.grid strong { display: block; font: 700 19px/1.35 var(--font-headline); }
+.grid time { color: var(--text-muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.day-summary { display: block; margin-top: var(--space-2); }
+a { color: var(--sc-red-600); text-underline-offset: 0.18em; }
+:focus-visible { outline: 2px solid var(--sc-navy); outline-offset: 3px; }
 h3 { font-family: var(--font-headline); font-weight: 700; font-size: 18px; margin: var(--space-6) 0 var(--space-3); }
 .who { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-headline); font-weight: 700; color: var(--sc-navy); }
 .num { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: var(--radius-pill); background: var(--sc-navy);
@@ -413,7 +429,10 @@ h3 { font-family: var(--font-headline); font-weight: 700; font-size: 18px; margi
 .clash { list-style: none; padding: 0; }
 .clash li { display: grid; grid-template-columns: minmax(120px, 200px) 1fr; gap: var(--space-3); padding: var(--space-2) 0; border-bottom: 1px solid var(--border-line); }
 .referee { padding: var(--space-3) var(--space-4); border-left: 4px solid var(--sc-navy); background: var(--sc-canvas); }
-@media (max-width: 600px) { .clash li { grid-template-columns: 1fr; gap: var(--space-1); } }
+@media (max-width: 600px) {
+  h1 { font-size: clamp(36px, 8.5vw, 56px); }
+  .clash li { grid-template-columns: 1fr; gap: var(--space-1); }
+}
 </style>
 </head>
 <body>
@@ -423,12 +442,27 @@ ${body}
 `;
 }
 
+function siteNav(root, current, { previous, next } = {}) {
+  const active = (name) => current === name ? ' aria-current="page"' : '';
+  return `<header class="site-bar">
+<nav aria-label="Daily Team"><a href="${root}"${active('latest')}>Latest tool</a><a href="${root}archive.html"${active('archive')}>All days</a></nav>
+${previous || next ? `<nav aria-label="Adjacent days">
+${previous ? `<a href="${root}${previous.date}/" rel="prev">Previous day</a>` : ''}
+${next ? `<a href="${root}${next.date}/" rel="next">Next day</a>` : ''}
+</nav>` : ''}
+</header>`;
+}
+
 function grid(days, prefix, details) {
-  return `<h2>Past projects</h2>\n<ul class="grid">\n${days.map((d) => {
-    const asset = firstAsset(d);
-    const image = details.get(d).cover ? 'cover.png' : asset ? png(asset) : 'team.png';
-    const img = `<img src="${prefix}${d.date}/${image}" alt="" loading="lazy">`;
-    return `<li><a href="${prefix}${d.date}/">${img}<strong>${esc(title(d))}</strong><br>${d.date}${d.projectMode && d.decision ? `<br>${esc(d.decision)}` : ''}</a></li>`;
+  return `<ul class="grid" role="list">\n${days.map((day) => {
+    const asset = firstAsset(day);
+    const { dir, cover, solution } = details.get(day);
+    const image = asset && existsSync(join(dir, png(asset))) ? png(asset)
+      : cover ? 'cover.png' : existsSync(join(dir, 'team.png')) ? 'team.png' : '';
+    const href = `${prefix}${day.date}/`;
+    const img = image ? `<img src="${href}${esc(image)}" alt="" loading="lazy">` : '';
+    const summary = asset ? solution?.problem || day.decision || day.brief || day.task : 'No tool published.';
+    return `<li><a href="${href}">${img}<strong>${esc(titleCase(title(day)))}</strong><time datetime="${day.date}">${day.date}</time><span class="day-summary">${esc(summary)}</span></a></li>`;
   }).join('\n')}\n</ul>`;
 }
 
@@ -444,21 +478,22 @@ function dayFrames(day, { dir, team }) {
   });
 }
 
-function dayPage(day, repo, archiveHtml, { root, pagesUrl, imagePrefix }, { dir, cover, evidence, team, transcript, frames, solution }) {
+function dayPage(day, repo, archiveHtml, { root, pagesUrl, imagePrefix, current, neighbors }, { dir, cover, evidence, team, transcript, frames, solution }) {
   const comparison = existsSync(join(dir, 'comparison.html'))
     ? `<p><a href="${imagePrefix}comparison.html">Compare Opus, Sonnet, and Haiku</a>`
       + (existsSync(join(dir, 'comparison.mp4')) ? ` · <a href="${imagePrefix}comparison.mp4">Watch square video</a>` : '') + '</p>' : '';
   const plan = repo ? `<p><a href="https://github.com/${esc(repo)}/tree/main/${day.edition ? `editions/${encodeURIComponent(day.edition.lane)}/` : ''}days/${day.date}">${transcript ? 'Source' : 'Team plan and source'}</a></p>` : '';
   return page(`${day.date}: ${title(day)}`, [
-    `<p class="muted">Daily Team · ${day.date}</p>`,
+    siteNav(root, current, neighbors),
+    `<p class="day-date muted"><time datetime="${day.date}">${day.date}</time></p>`,
     `<h1>${esc(titleCase(title(day)))}</h1>`,
-    ...(solution ? [`<p><strong>Problem</strong> ${esc(solution.problem)}</p>`] : []),
-    `<p>${esc(day.decision || day.brief || day.task)}</p>`,
-    ...(solution ? [`<p>${esc(solution.improvement)}</p>`, `<p>${esc(solution.verification)}</p>`,
-      ...(solution.source ? [`<p>${esc(solution.source.source)} · ${esc(solution.source.url)}</p>`] : [])] : []),
+    `<p class="day-lead">${esc(day.decision || day.brief || day.task)}</p>`,
     ...(frames.length ? frames : [`<p>No project available. ${esc(day.error || '')}</p>`]),
     archiveHtml,
     '<details><summary>About this project</summary>',
+    ...(solution ? [`<p><strong>Problem</strong> ${esc(solution.problem)}</p>`] : []),
+    ...(solution ? [`<p>${esc(solution.improvement)}</p>`, `<p>${esc(solution.verification)}</p>`,
+      ...(solution.source ? [`<p>${esc(solution.source.source)} · ${esc(solution.source.url)}</p>`] : [])] : []),
     ...(!day.edition ? [`<p><a href="${root}editions/">Extra editions</a></p>`] : []),
     day.request ? `<p>Request source: <a href="https://github.com/${esc(day.request.repository)}/issues/${Number(day.request.number)}">${esc(day.request.repository)} #${Number(day.request.number)}</a> · Local prototype</p>` : '',
     `<img class="card" src="${imagePrefix}team.png" alt="Team for ${day.date}: ${esc(memberRoles(team.members))}" loading="lazy">`,
@@ -480,14 +515,17 @@ function writeSite(siteDir, days, repo, pagesUrl, details) {
   cpSync(join(HERE, 'brand'), join(siteDir, 'brand'), { recursive: true, mode: SITE_COPY_MODE });
   const newestFirst = [...days].reverse();
   const recent = newestFirst.slice(0, RECENT_DAYS);
-  const previews = (root) => grid(recent, root, details)
-    + (days.length > RECENT_DAYS ? `<p><a href="${root}archive.html">All ${days.length} projects</a></p>` : '');
+  const previews = (root) => '<h2>Past projects</h2>\n' + grid(recent, root, details);
   const datedPreviews = previews('../');
-  writeFileSync(join(siteDir, 'archive.html'), page('Project archive', `<h1>Project archive</h1>\n<p><a href="./">Latest project</a></p>\n${grid(newestFirst, './', details)}`));
+  writeFileSync(join(siteDir, 'archive.html'), page('Daily Team archive', [
+    siteNav('./', 'archive'), '<h1>All days</h1>', `<p class="muted">${plural(days.length, 'recorded day')}</p>`,
+    grid(newestFirst, './', details),
+  ].join('\n')));
   const latest = days.at(-1);
   let latestPage;
-  for (const day of days) {
+  for (const [index, day] of days.entries()) {
     const detail = details.get(day);
+    const neighbors = { previous: days[index - 1], next: days[index + 1] };
     const out = join(siteDir, day.date);
     mkdirSync(out, { recursive: true });
     for (const f of ['team.png', 'cover.png', 'cover.html', 'cover.json', ...day.artifacts.map(png),
@@ -498,11 +536,12 @@ function writeSite(siteDir, days, repo, pagesUrl, details) {
       if (existsSync(source)) copyFileSync(source, join(out, f), SITE_COPY_MODE);
     }
     const content = { ...detail, frames: dayFrames(day, detail) };
-    writeFileSync(join(out, 'index.html'), dayPage(day, repo, datedPreviews, { root: '../', pagesUrl, imagePrefix: '' }, content));
-    if (day === latest) latestPage = dayPage(day, repo, previews('./'), { root: './', pagesUrl, imagePrefix: `./${day.date}/` }, content);
+    writeFileSync(join(out, 'index.html'), dayPage(day, repo, datedPreviews, { root: '../', pagesUrl, imagePrefix: '', neighbors }, content));
+    if (day === latest) latestPage = dayPage(day, repo, previews('./'),
+      { root: './', pagesUrl, imagePrefix: `./${day.date}/`, current: 'latest', neighbors }, content);
     if (hasSim(day, detail.dir)) writeFileSync(join(out, WATCH_FILE), watchHtml(day, detail.dir, { csp: SITE_CSP }));
   }
-  writeFileSync(join(siteDir, 'index.html'), latestPage ?? page('daily-team', '<p>No days yet.</p>'));
+  writeFileSync(join(siteDir, 'index.html'), latestPage ?? page('Daily Team', `${siteNav('./', 'latest')}<h1>Daily Team</h1><p>No days yet.</p>`));
 }
 
 // The season a day belongs to: from its record, or by date for days recorded before seasons.
