@@ -11,17 +11,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-18: Countermand
+### 2026-11-19: Pattern Scale
 
-<a href="days/2026-11-18/"><img src="days/2026-11-18/team.png" alt="Team for 2026-11-18: Game interface designer · Watch restorer · Control room operator · Lunar archivist" width="100%"></a>
+<a href="days/2026-11-19/"><img src="days/2026-11-19/team.png" alt="Team for 2026-11-19: Furniture designer · Architectural model maker · Color grading specialist · Orbital mechanic" width="100%"></a>
 
-**Task:** Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.
+**Task:** Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
 
-**Decision:** Mark plan steps Keep or Cut and press Send; reversing a sent mark writes a numbered Restore line.
+**Decision:** Type how big your printed test square came out, and get the exact printer scale to use next.
 
-<a href="days/2026-11-18/"><img src="days/2026-11-18/cover.png" alt="Designed cover for Countermand" width="100%"></a>
+No asset today. Cannot find package 'playwright' imported from /home/runner/work/daily-team/daily-team/solution-check.mjs
 
-[Open the day](days/2026-11-18/) · [Use it](https://isas1.github.io/daily-team/2026-11-18/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-19/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-19](days/2026-11-19/) | No asset | Pattern Scale | Furniture designer · Architectural model maker · Color grading specialist · Orbital mechanic |
 | [2026-11-18](days/2026-11-18/) | <a href="days/2026-11-18/"><img src="days/2026-11-18/cover.png" alt="Countermand" width="160"></a> | Countermand | Game interface designer · Watch restorer · Control room operator · Lunar archivist |
 | [2026-11-17](days/2026-11-17/) | <a href="days/2026-11-17/"><img src="days/2026-11-17/cover.png" alt="Shelf Peek" width="160"></a> | Shelf Peek | Flight deck designer · Medical illustrator · Ergonomist · Cautious beginner |
 | [2026-11-16](days/2026-11-16/) | <a href="days/2026-11-16/"><img src="days/2026-11-16/cover.png" alt="Clay Mend" width="160"></a> | Clay Mend | Technical illustrator · Railway signaller · Cabinet maker · Paper fox |
 | [2026-11-15](days/2026-11-15/) | <a href="days/2026-11-15/"><img src="days/2026-11-15/cover.png" alt="Gapless Rank" width="160"></a> | Gapless Rank | Puppet maker · Foley artist · Exhibit light technician · Screen reader user |
 | [2026-11-14](days/2026-11-14/) | <a href="days/2026-11-14/"><img src="days/2026-11-14/cover.png" alt="Checked Countdown" width="160"></a> | Checked Countdown | Seismologist · Paper engineer · Instrument tuner · Satellite repair apprentice |
 | [2026-11-13](days/2026-11-13/) | <a href="days/2026-11-13/"><img src="days/2026-11-13/cover.png" alt="Cut on Save" width="160"></a> | Cut on Save | Letter cutter · Escape room designer · Captioning editor · Icarus |
-| [2026-11-12](days/2026-11-12/) | <a href="days/2026-11-12/"><img src="days/2026-11-12/cover.png" alt="Gauge Shelf" width="160"></a> | Gauge Shelf | Hydrologist · Kite maker · Furniture restorer · Floating market clerk |
 
-[All 46 days](ARCHIVE.md)
+[All 47 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

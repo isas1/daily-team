@@ -1,12 +1,30 @@
 {
   "items": [
     {
+      "id": "e8a84f6111970e8a26ca2d6a",
+      "title": "Gemini 4 Neon looks like an Opus 5.5 competitor",
+      "url": "https://micjm.com/blog/gemini-4-neon-looks-like-a-top-model/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-19T00:29:45.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "69d2a53c7d513a69a91ca141",
+      "title": "Fable: Written, painted and directed by Claude Fable 5.2",
+      "url": "https://claudia.gallery/fable/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-19T00:18:18.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "301f2d14985e5303f37abc05",
       "title": "GoogleChrome/modern-web-guidance-src",
       "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
       "source": "GitHub Trending (weekly, observed)",
       "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
+      "published": "2026-11-19T00:00:00.000Z",
       "observed": true,
       "summary": "Keep your coding agent up to date with the latest web best practices"
     },
@@ -16,9 +34,274 @@
       "url": "https://github.com/backnotprop/plannotator",
       "source": "GitHub Trending (weekly, observed)",
       "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
+      "published": "2026-11-19T00:00:00.000Z",
       "observed": true,
       "summary": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click."
+    },
+    {
+      "id": "5e8027802f61d7f22ead2d33",
+      "title": "meta/astryx",
+      "url": "https://github.com/meta/astryx",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "An open source design system that's fully customizable and agent ready"
+    },
+    {
+      "id": "2f31f6b854b3cc16d4646d00",
+      "title": "we-promise/sure",
+      "url": "https://github.com/we-promise/sure",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "The personal finance app for everyone (by everyone)"
+    },
+    {
+      "id": "c489e6fb5febf2abff16877b",
+      "title": "alibaba/open-code-review",
+      "url": "https://github.com/alibaba/open-code-review",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible."
+    },
+    {
+      "id": "c87cd13d69aef69146c01790",
+      "title": "google-labs-code/stitch-skills",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor."
+    },
+    {
+      "id": "f9da1acd54ca38642ffd3679",
+      "title": "tradermonty/claude-trading-skills",
+      "url": "https://github.com/tradermonty/claude-trading-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development."
+    },
+    {
+      "id": "379642deb53f3714eb4d3fd4",
+      "title": "ChromeDevTools/chrome-devtools-mcp",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "Chrome DevTools for coding agents"
+    },
+    {
+      "id": "82a901da1b9bedec6f38670b",
+      "title": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "Public repository for Agent Skills"
+    },
+    {
+      "id": "8703b76429c37137e259340c",
+      "title": "ZhuLinsen/daily_stock_analysis",
+      "url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs."
+    },
+    {
+      "id": "b88590c43555a909e1ff4309",
+      "title": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary"
+    },
+    {
+      "id": "10a12acb9645adccd1054069",
+      "title": "ag-ui-protocol/ag-ui",
+      "url": "https://github.com/ag-ui-protocol/ag-ui",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications."
+    },
+    {
+      "id": "401c6af5b51d16a5ed2fec53",
+      "title": "vercel-labs/agent-browser",
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "Browser automation CLI for AI agents"
+    },
+    {
+      "id": "328a7b2dd544e1886d6cbf15",
+      "title": "openai/codex-security",
+      "url": "https://github.com/openai/codex-security",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security"
+    },
+    {
+      "id": "d148e3d2c2843c2bb453066d",
+      "title": "dream-num/univer",
+      "url": "https://github.com/dream-num/univer",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-19T00:00:00.000Z",
+      "observed": true,
+      "summary": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core."
+    },
+    {
+      "id": "763d275708865eb475744a32",
+      "title": "We need smart people who give a shit",
+      "url": "https://violetpixel.com/blog/2026-11-17-we-need-smart-people-who-give-a-shit/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T23:53:49.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "92460c3cc95e98a3dd813d62",
+      "title": "Multiple vulnerabilities in Regexp and String case conversion",
+      "url": "https://www.ruby-lang.org/en/news/2026/11/18/multiple-vulnerabilities-in-regexp-and-string/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T23:52:50.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "0322032653579595213c3316",
+      "title": "Software companies are trying to kill home computing?",
+      "url": "https://lateblt.livejournal.com/526188.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T23:49:18.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e308a84a77ae00d83193b951",
+      "title": "Anthropic prices initial public offering",
+      "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T23:30:09.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "f255b78c66f1c4647739aae9",
+      "title": "LLM assisted reverse engineering",
+      "url": "https://www.slowchronicle.com/posts/llm-assisted-reverse-engineering",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T22:29:13.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "f539fcdaf975fdb95a5bae09",
+      "title": "Gemini 4 Neon",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T21:34:07.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "f8fba398499bc4a3f9209f88",
+      "title": "DaisyRose-27B",
+      "url": "https://www.radixark.com/blog/daisyrose-27b",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T19:39:16.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e88bc937214729b32fc5abc5",
+      "title": "Advancing chip design with OpenAI models",
+      "url": "https://openai.com/index/advancing-chip-design-with-our-models/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T17:45:47.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ab00b903e6c152288b031481",
+      "title": "Seven new models at scalable price-performance",
+      "url": "https://microsoft.ai/news/microsoft-ignite-2026/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T16:08:24.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "c1172ed18ac8a1aafcda4317",
+      "title": "Show HN: ExitPath – Open-source ways out of Slack, Notion and Microsoft 365",
+      "url": "https://exitpath-ruddy.vercel.app/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T16:04:43.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "ee3431af9f197f0e42bf99c0",
+      "title": "AI agents ask better questions than KPMG accountants in audit trial",
+      "url": "https://europeanbusinessmagazine.com/ai-agents-better-questions-kpmg/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T15:49:34.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "6a8b0ad87e924218ba2030b8",
+      "title": "Inside Deutsche Bank",
+      "url": "https://www.inside-db.com/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T15:38:33.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "0c457241d113ed5afb203a3a",
+      "title": "Unauthenticated remote code execution in Nginx",
+      "url": "https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T15:19:55.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a5b55294c383bc1414628819",
+      "title": "The Cambridge Dictionary has named ‘human’ as the Word of the Year 2026",
+      "url": "https://www.cam.ac.uk/news/cambridge-dictionary-reveals-word-of-the-year-2026",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T14:43:52.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "1d3b46ca8bcb0b99acb7aeb1",
+      "title": "DNS resolvers are the wrong place to fight piracy",
+      "url": "https://techstackups.com/articles/quad9-leaves-france-dns-blocking/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T13:18:02.000Z",
+      "summary": "Comments"
     },
     {
       "id": "f6c3adbf52c79b3178a8fe68",
@@ -29,136 +312,6 @@
       "published": "2026-11-18T00:00:00.000Z",
       "observed": true,
       "summary": "A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices."
-    },
-    {
-      "id": "5e8027802f61d7f22ead2d33",
-      "title": "meta/astryx",
-      "url": "https://github.com/meta/astryx",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "An open source design system that's fully customizable and agent ready"
-    },
-    {
-      "id": "2f31f6b854b3cc16d4646d00",
-      "title": "we-promise/sure",
-      "url": "https://github.com/we-promise/sure",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "The personal finance app for everyone (by everyone)"
-    },
-    {
-      "id": "c489e6fb5febf2abff16877b",
-      "title": "alibaba/open-code-review",
-      "url": "https://github.com/alibaba/open-code-review",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible."
-    },
-    {
-      "id": "c87cd13d69aef69146c01790",
-      "title": "google-labs-code/stitch-skills",
-      "url": "https://github.com/google-labs-code/stitch-skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor."
-    },
-    {
-      "id": "f9da1acd54ca38642ffd3679",
-      "title": "tradermonty/claude-trading-skills",
-      "url": "https://github.com/tradermonty/claude-trading-skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development."
-    },
-    {
-      "id": "379642deb53f3714eb4d3fd4",
-      "title": "ChromeDevTools/chrome-devtools-mcp",
-      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "Chrome DevTools for coding agents"
-    },
-    {
-      "id": "82a901da1b9bedec6f38670b",
-      "title": "anthropics/skills",
-      "url": "https://github.com/anthropics/skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "Public repository for Agent Skills"
-    },
-    {
-      "id": "8703b76429c37137e259340c",
-      "title": "ZhuLinsen/daily_stock_analysis",
-      "url": "https://github.com/ZhuLinsen/daily_stock_analysis",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs."
-    },
-    {
-      "id": "b88590c43555a909e1ff4309",
-      "title": "mvanhorn/last30days-skill",
-      "url": "https://github.com/mvanhorn/last30days-skill",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary"
-    },
-    {
-      "id": "10a12acb9645adccd1054069",
-      "title": "ag-ui-protocol/ag-ui",
-      "url": "https://github.com/ag-ui-protocol/ag-ui",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications."
-    },
-    {
-      "id": "401c6af5b51d16a5ed2fec53",
-      "title": "vercel-labs/agent-browser",
-      "url": "https://github.com/vercel-labs/agent-browser",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "Browser automation CLI for AI agents"
-    },
-    {
-      "id": "328a7b2dd544e1886d6cbf15",
-      "title": "openai/codex-security",
-      "url": "https://github.com/openai/codex-security",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security"
-    },
-    {
-      "id": "d148e3d2c2843c2bb453066d",
-      "title": "dream-num/univer",
-      "url": "https://github.com/dream-num/univer",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-18T00:00:00.000Z",
-      "observed": true,
-      "summary": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core."
     },
     {
       "id": "92ac2a3840749053e8a29656",
@@ -177,6 +330,42 @@
       "sourceId": "reddit-beautiful",
       "published": "2026-11-17T13:31:06.000Z",
       "summary": ""
+    },
+    {
+      "id": "526efa440b05206d22761187",
+      "title": "Meet AI 2027 Conference (Dec 1)",
+      "url": "https://smashingmagazine.com/2026/11/online-smashingconf-ai-2027/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-11-17T12:00:00.000Z",
+      "summary": "Roll up your sleeves! Meet shiny new [AI 2027 Conference](https://smashingconf.com/ai-2027-conference), a friendly online conference on AI-ready design systems, AI + Figma and AI design patterns. What to expect in 2027 and where teams are getting AI right. [Jump to tickets.](https://smashingconf.com/ai-2027-conference/registration)"
+    },
+    {
+      "id": "91c9391a99e9e119da12ae6f",
+      "title": "AI Sped Up The Build: How Can Accessibility Testing Keep Up?",
+      "url": "https://smashingmagazine.com/2026/11/ai-sped-up-build-how-can-accessibility-testing-keep-up/",
+      "source": "Smashing Magazine",
+      "sourceId": "smashing",
+      "published": "2026-11-17T08:00:00.000Z",
+      "summary": "AI has sped up how teams design and build, but quality assurance (QA) testing hasn’t kept pace, and the web may be getting less accessible. Drawing on new research, Andrew Chung explains what separates the teams whose accessibility efforts are keeping up, and how to embed human judgment into AI-enabled workflows without slowing delivery."
+    },
+    {
+      "id": "a688573dcb2327f54ff73141",
+      "title": "Dumping an AES key from a MyQ garage opener to stop rebooting when offline",
+      "url": "https://kusha.me/blog/stop_myq_homebridge_819lmb_rebooting/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-16T23:47:26.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "cc198026e3a4c56ff5f76f76",
+      "title": "Show HN: Open-source, real-time object tracking for live video feeds",
+      "url": "https://github.com/aryamandarda/tamserve",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-16T21:14:39.000Z",
+      "summary": "Comments"
     },
     {
       "id": "e48105d3532673b8d2b5d8f9",
@@ -348,6 +537,15 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-16T01:06:57.000Z",
       "summary": ""
+    },
+    {
+      "id": "9a1e0d772957b6839d7b6bba",
+      "title": "Cuttlefish on Mac: Android's Virtual Device Framework on Apple Silicon",
+      "url": "https://engineering.fb.com/2026/11/13/android/cuttlefish-on-mac/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-15T20:30:42.000Z",
+      "summary": "Comments"
     },
     {
       "id": "0aa331dcab89dc022f27088e",
@@ -728,210 +926,12 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-11T12:46:47.000Z",
       "summary": ""
-    },
-    {
-      "id": "7131f3591042117eec7a29b4",
-      "title": "SameFont - edit PDF text on iPhone with matching fonts and Hebrew/Arabic support",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtg90r/samefont_edit_pdf_text_on_iphone_with_matching/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T12:15:29.000Z",
-      "summary": ""
-    },
-    {
-      "id": "12d2cd4a014ead8d4e0c33f8",
-      "title": "I built a nicer way to deliver finished work to clients. Please tell me what’s wrong with it!",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtfnc5/i_built_a_nicer_way_to_deliver_finished_work_to/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T11:43:08.000Z",
-      "summary": ""
-    },
-    {
-      "id": "c695e2885bf59220365ca2ec",
-      "title": "mostra - talk while you click around a live site, and each point becomes a comment where you pointed",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtffxl/mostra_talk_while_you_click_around_a_live_site/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T11:30:59.000Z",
-      "summary": ""
-    },
-    {
-      "id": "9a0dee0f5a4f8c446733b1e6",
-      "title": "I built a free hotel management system that runs with no internet and no mouse (50-sec demo)",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtf6w1/i_built_a_free_hotel_management_system_that_runs/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T11:16:01.000Z",
-      "summary": ""
-    },
-    {
-      "id": "5a1167f840c9843bd0017a14",
-      "title": "Open-Source HF Communications for Remote Communities and Experimenters",
-      "url": "https://www.ardc.net/rhizomaticas-hermes-and-mercury-expand-open-source-hf-communications-for-remote-communities-while-appealing-to-experimenters/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-11T11:11:22.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "bd527c7f439db479e029fe5c",
-      "title": "I made a SaaS dashboard UI kit in Figma (light + dark, loading/empty/failed payment states) — looking for feedback",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtf1fl/i_made_a_saas_dashboard_ui_kit_in_figma_light/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T11:07:07.000Z",
-      "summary": ""
-    },
-    {
-      "id": "8d289b31236780572f07c8b9",
-      "title": "I’m a psychiatry resident with adhd, and I spent six months building a study app I actually enjoy using",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xteezj/im_a_psychiatry_resident_with_adhd_and_i_spent/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T10:29:23.000Z",
-      "summary": ""
-    },
-    {
-      "id": "a14af3b13227be49def71427",
-      "title": "Businesses With Websites or Without? Who Should You Target as a Web Designer?",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xte6vg/businesses_with_websites_or_without_who_should/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T10:16:10.000Z",
-      "summary": ""
-    },
-    {
-      "id": "808a80e397349b606ee909f8",
-      "title": "I vibe coded my first app ever so I could play PC games on the TV without reaching for a mouse",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtdwwq/i_vibe_coded_my_first_app_ever_so_i_could_play_pc/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T09:59:11.000Z",
-      "summary": ""
-    },
-    {
-      "id": "6ea584abfc3116c62590eda0",
-      "title": "I’m statistically halfway through my life, so I built an app for the second half",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtcjg4/im_statistically_halfway_through_my_life_so_i/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T08:28:29.000Z",
-      "summary": ""
-    },
-    {
-      "id": "b5fca0c968be5b959a9a0d4a",
-      "title": "I made a free, fast and open-source reader for PDF, EPUB, Markdown and comics, built with Rust and GPUI",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtcfd4/i_made_a_free_fast_and_opensource_reader_for_pdf/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T08:21:24.000Z",
-      "summary": ""
-    },
-    {
-      "id": "5afa11649c862235c7a28e49",
-      "title": "＄700 in 70 days!",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xtc951/700_in_70_days/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T08:10:42.000Z",
-      "summary": ""
-    },
-    {
-      "id": "2ac8d46279ea2eb343dc06f1",
-      "title": "My skill was featured on XDA devs! Claudemy is a Claude skill that lets you research any topic and turn it into a set of 2 minute audio classes - 700 stars so far on GH",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xt8z8a/my_skill_was_featured_on_xda_devs_claudemy_is_a/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T04:58:55.000Z",
-      "summary": ""
-    },
-    {
-      "id": "3386711425b6d534528fb5a2",
-      "title": "I open sourced a 15 MB, Netflix-inspired app for my home server. 600 stars and 4,4K+ Docker pulls in 1 day",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xt6oss/i_open_sourced_a_15_mb_netflixinspired_app_for_my/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T02:59:59.000Z",
-      "summary": ""
-    },
-    {
-      "id": "142ef1ddb30ba2b3892b7843",
-      "title": "I have successfully made measuring things worse",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xt6aki/i_have_successfully_made_measuring_things_worse/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-11T02:40:17.000Z",
-      "summary": ""
-    },
-    {
-      "id": "2877f8a904fb4b856e066c1c",
-      "title": "a site that listens to any song and writes it out as live code while it plays",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xswrw7/a_site_that_listens_to_any_song_and_writes_it_out/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-10T19:51:00.000Z",
-      "summary": ""
-    },
-    {
-      "id": "c3e63c1af6d777edc11b026a",
-      "title": "Someone bought my mac app 40 seconds after opening the site",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xstbbp/someone_bought_my_mac_app_40_seconds_after/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-10T17:41:02.000Z",
-      "summary": ""
-    },
-    {
-      "id": "0990acb73c299f9d61326568",
-      "title": "I just got my first sale, still can’t believe it!!!",
-      "url": "https://www.reddit.com/r/SideProject/comments/1xsouhg/i_just_got_my_first_sale_still_cant_believe_it/",
-      "source": "Reddit r/SideProject",
-      "sourceId": "reddit-sideproject",
-      "published": "2026-11-10T14:51:34.000Z",
-      "summary": ""
-    },
-    {
-      "id": "53a787ce3e64cd8e0fa259e9",
-      "title": "Why get an expensive Pi when I have an old phone?",
-      "url": "https://so.long.thanks.fish/why-pi-when-i-have-an-old-phone/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T14:16:05.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "f4ede3c182fb15126b081f6a",
-      "title": "Compress any LLM 3x in one click,near-lossless,in under 50 MB RAM",
-      "url": "https://neuracryption.com/research",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T13:51:51.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "40b00c00c6321e523e112030",
-      "title": "Don't buy AR glasses",
-      "url": "https://blog.yaros.ae/dont-buy-ar-glasses/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T13:10:25.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "8eed17b548317b3125e6976f",
-      "title": "Ableton Live 13",
-      "url": "https://www.ableton.com/en/live/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-10T12:58:04.000Z",
-      "summary": "Comments"
     }
   ],
   "fetched": {
-    "smashing": "2026-11-14",
-    "hacker-news": "2026-11-15",
-    "github-trending": "2026-11-18",
+    "smashing": "2026-11-19",
+    "hacker-news": "2026-11-19",
+    "github-trending": "2026-11-19",
     "reddit-sideproject": "2026-11-16",
     "reddit-beautiful": "2026-11-17"
   }
