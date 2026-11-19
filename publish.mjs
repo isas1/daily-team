@@ -273,8 +273,6 @@ export function todayBlock(day, daysDir, pagesUrl) {
     `### ${day.date}: ${title(day)}`, '',
     `<a href="${base}"><img src="${base}team.png" alt="Team for ${day.date}: ${esc(roles(day))}" width="100%"></a>`, '',
     `**Task:** ${day.brief || day.task}`, '',
-    ...(solution ? [`**Problem:** ${cell(solution.problem)}`, '', `**Improvement:** ${cell(solution.improvement)}`, '', `**Check:** ${solution.verification}`, ''] : []),
-    ...(solutionError ? [`**Run result:** ${cell(solutionError)}`, ''] : []),
     ...(day.decision ? [`**Decision:** ${day.decision}`, ''] : []),
   ];
   if (shot && existsSync(shot)) {
