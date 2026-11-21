@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 48 days recorded.
+Every daily team and the asset it made, newest first. 49 days recorded.
 
 [Today](README.md)
 
 | Date | Project | Open |
 |---|---|---|
+| [2026-11-21](days/2026-11-21/) | Two-Clue Merge | no asset |
 | [2026-11-20](days/2026-11-20/) | Merge Hold | no asset |
 | [2026-11-19](days/2026-11-19/) | Chained Scale | <a href="days/2026-11-19/"><img src="days/2026-11-19/cover.png" alt="Chained Scale" width="160"></a> [asset](days/2026-11-19/artifact-1.html) |
 | [2026-11-18](days/2026-11-18/) | Countermand | <a href="days/2026-11-18/"><img src="days/2026-11-18/cover.png" alt="Countermand" width="160"></a> [asset](days/2026-11-18/artifact-1.html) |

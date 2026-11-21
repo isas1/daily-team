@@ -13,17 +13,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-20: Merge Hold
+### 2026-11-21: Two-Clue Merge
 
-<a href="days/2026-11-20/"><img src="days/2026-11-20/team.png" alt="Team for 2026-11-20: Wayfinding designer · Stage illusion builder · Dance choreographer · Ink wren" width="100%"></a>
+<a href="days/2026-11-21/"><img src="days/2026-11-21/team.png" alt="Team for 2026-11-21: Escape room designer · Puzzle setter · Precision machinist · Deadline editor" width="100%"></a>
 
 **Task:** Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
 
-**Decision:** Paste two lists, press Compare, settle each doubtful pair, then download one clean list.
+**Decision:** Paste your master list and a new import, press Check import, and each row is sorted for you.
 
-No asset today. browser alternate failed: solution-result did not show the expected visible result after the saved steps
+No asset today. browser mistake failed: solution-error did not show the expected visible result after the saved steps
 
-[Open the day](days/2026-11-20/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-21/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -43,15 +43,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-21](days/2026-11-21/) | No asset | Two-Clue Merge | Escape room designer · Puzzle setter · Precision machinist · Deadline editor |
 | [2026-11-20](days/2026-11-20/) | No asset | Merge Hold | Wayfinding designer · Stage illusion builder · Dance choreographer · Ink wren |
 | [2026-11-19](days/2026-11-19/) | <a href="days/2026-11-19/"><img src="days/2026-11-19/cover.png" alt="Chained Scale" width="160"></a> | Chained Scale | Furniture designer · Architectural model maker · Color grading specialist · Orbital mechanic |
 | [2026-11-18](days/2026-11-18/) | <a href="days/2026-11-18/"><img src="days/2026-11-18/cover.png" alt="Countermand" width="160"></a> | Countermand | Game interface designer · Watch restorer · Control room operator · Lunar archivist |
 | [2026-11-17](days/2026-11-17/) | <a href="days/2026-11-17/"><img src="days/2026-11-17/cover.png" alt="Shelf Peek" width="160"></a> | Shelf Peek | Flight deck designer · Medical illustrator · Ergonomist · Cautious beginner |
 | [2026-11-16](days/2026-11-16/) | <a href="days/2026-11-16/"><img src="days/2026-11-16/cover.png" alt="Clay Mend" width="160"></a> | Clay Mend | Technical illustrator · Railway signaller · Cabinet maker · Paper fox |
 | [2026-11-15](days/2026-11-15/) | <a href="days/2026-11-15/"><img src="days/2026-11-15/cover.png" alt="Gapless Rank" width="160"></a> | Gapless Rank | Puppet maker · Foley artist · Exhibit light technician · Screen reader user |
-| [2026-11-14](days/2026-11-14/) | <a href="days/2026-11-14/"><img src="days/2026-11-14/cover.png" alt="Checked Countdown" width="160"></a> | Checked Countdown | Seismologist · Paper engineer · Instrument tuner · Satellite repair apprentice |
 
-[All 48 days](ARCHIVE.md)
+[All 49 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works

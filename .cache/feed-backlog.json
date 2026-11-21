@@ -1,8 +1,273 @@
 {
   "items": [
     {
+      "id": "cf85127411206c4ec73b9cf5",
+      "title": "Derek Lowe: Detonating a Pile of Lead Azide",
+      "url": "https://www.science.org/content/blog-post/detonating-huge-pile-lead-azide-really",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-21T13:23:14.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "f97b000bae6b219428a24851",
+      "title": "Adult-only households accounted for 55% of toy sales in the first half of 2026",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-18/jellycats-squishmallows-and-lego-sets-for-adults-drive-holiday-traffic",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-21T12:15:41.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "772848921d60d08d08d16716",
+      "title": "My Monitor Was Cutting My Download Speed by 75%",
+      "url": "https://blog.tymscar.com/posts/studiodisplayethernet/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-21T10:36:32.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "859d9bb59e13136fc3e56a8b",
+      "title": "FBI reportedly investigating apparent hack of its criminal database",
+      "url": "https://www.bbc.com/news/articles/cvze7de86pk3o",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-21T10:33:57.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "b8606c68272e2ff2bb29ab50",
+      "title": "RCE in Gnupg",
+      "url": "https://lists.gnupg.org/pipermail/gnupg-announce/2026q4/000517.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-21T08:32:58.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "784c995a07e77d4ec083fd65",
+      "title": "Surprisingly Adorable Insect Portraits",
+      "url": "https://amateurphotographer.com/latest/these-astonishing-insect-portraits-reveal-a-hidden-world-you-never-knew-existed/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-21T06:44:14.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "fe15c21a8715941cf59120b8",
+      "title": "Clojure will affect the way you think about programming (2017)",
+      "url": "https://eli.thegreenplace.net/2017/clojure-the-perfect-language-to-expand-your-brain/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-21T02:40:39.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e6357f1e7e944cc84f059f59",
+      "title": "backnotprop/plannotator",
+      "url": "https://github.com/backnotprop/plannotator",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click."
+    },
+    {
+      "id": "c87cd13d69aef69146c01790",
+      "title": "google-labs-code/stitch-skills",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor."
+    },
+    {
+      "id": "301f2d14985e5303f37abc05",
+      "title": "GoogleChrome/modern-web-guidance-src",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "Keep your coding agent up to date with the latest web best practices"
+    },
+    {
+      "id": "c489e6fb5febf2abff16877b",
+      "title": "alibaba/open-code-review",
+      "url": "https://github.com/alibaba/open-code-review",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible."
+    },
+    {
+      "id": "b88590c43555a909e1ff4309",
+      "title": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary"
+    },
+    {
+      "id": "379642deb53f3714eb4d3fd4",
+      "title": "ChromeDevTools/chrome-devtools-mcp",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "Chrome DevTools for coding agents"
+    },
+    {
+      "id": "f9da1acd54ca38642ffd3679",
+      "title": "tradermonty/claude-trading-skills",
+      "url": "https://github.com/tradermonty/claude-trading-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development."
+    },
+    {
+      "id": "10a12acb9645adccd1054069",
+      "title": "ag-ui-protocol/ag-ui",
+      "url": "https://github.com/ag-ui-protocol/ag-ui",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications."
+    },
+    {
+      "id": "5e8027802f61d7f22ead2d33",
+      "title": "meta/astryx",
+      "url": "https://github.com/meta/astryx",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "An open source design system that's fully customizable and agent ready"
+    },
+    {
+      "id": "2622cdbdf6f6e22b82c00d31",
+      "title": "pookjw/HermesEnabler",
+      "url": "https://github.com/pookjw/HermesEnabler",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "Enable Hermès Watch Faces on any Apple Watch devices"
+    },
+    {
+      "id": "2f31f6b854b3cc16d4646d00",
+      "title": "we-promise/sure",
+      "url": "https://github.com/we-promise/sure",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "The personal finance app for everyone (by everyone)"
+    },
+    {
+      "id": "d148e3d2c2843c2bb453066d",
+      "title": "dream-num/univer",
+      "url": "https://github.com/dream-num/univer",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core."
+    },
+    {
+      "id": "bd036b2924d3b3d21ca3cfbe",
+      "title": "kajisho5/ffmpeg-skill",
+      "url": "https://github.com/kajisho5/ffmpeg-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-21T00:00:00.000Z",
+      "observed": true,
+      "summary": "Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys."
+    },
+    {
+      "id": "61dcc6fa995985d286dbf607",
+      "title": "Sir Brian May adds new dimension to Hera asteroid",
+      "url": "https://www.esa.int/articles/about-us/directorates/operations/space-safety/hera/sir-brian-may-adds-new-dimension-to-hera-asteroid",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-20T23:19:44.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "3293eb0f037addf5466f9d97",
+      "title": "Ask HN: I have been unemployed for 2y. 15 years of experience, US. What to do?",
+      "url": "https://news.ycombinator.com/item?id=50583761",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-20T23:18:32.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "e1c97d950edb30187e244f0e",
+      "title": "NINLIVE: The Nine Inch Nails live archive",
+      "url": "https://ninlive.com/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-20T22:30:47.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "89c1b5008b7af961675486e4",
+      "title": "Inkling 2 Mini",
+      "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-20T20:12:19.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "cb5e6e91712c9ca41bd5cad3",
+      "title": "Hurried Announcement: Alessandro Masullo GRH",
+      "url": "https://math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-20T18:33:14.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "c884460ec18c9cae40d3ceca",
+      "title": "We promoted developers into architects without informing them",
+      "url": "https://manidoraisamy.com/developer-to-architect.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-20T18:17:51.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "a5368ddb02b51560693e29a7",
+      "title": "Unforced Navier-Stokes Singularity and the Generalized Riemann Hypothesis",
+      "url": "https://terrytao.wordpress.com/2026/11/20/unforced-euler-singularity-unforced-navier-stokes-singularity-and-the-generalized-riemann-hypothesis/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-20T17:21:36.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "03b179946dd0e551984b025c",
+      "title": "Language Models Can Rewrite Their Own Weights",
+      "url": "https://arxiv.org/abs/2611.21885",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-20T16:29:06.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "3b3270b0917323ae879a1f5a",
-      "title": "Anthropic employee claims general proof of the Riemann Hypothesis [pdf]",
+      "title": "Levent Alpöge claims proof of the Generalized Riemann Hypothesis [pdf]",
       "url": "https://alpo.ge/remark.pdf",
       "source": "Hacker News",
       "sourceId": "hacker-news",
@@ -20,7 +285,7 @@
     },
     {
       "id": "0d485e0dfc8d69ca83636983",
-      "title": "Global stock markets slump as Anthropic's record IPO fails to stem AI sell-off",
+      "title": "Nasdaq erases all 2026 gains as AI sell-off dampens Anthropic’s second day",
       "url": "https://www.theguardian.com/business/2026/nov/20/global-stock-markets-slump-anthropic-ipo-ai-sell-off",
       "source": "Hacker News",
       "sourceId": "hacker-news",
@@ -125,136 +390,6 @@
       "sourceId": "hacker-news",
       "published": "2026-11-20T02:01:09.000Z",
       "summary": "Comments"
-    },
-    {
-      "id": "e6357f1e7e944cc84f059f59",
-      "title": "backnotprop/plannotator",
-      "url": "https://github.com/backnotprop/plannotator",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click."
-    },
-    {
-      "id": "c87cd13d69aef69146c01790",
-      "title": "google-labs-code/stitch-skills",
-      "url": "https://github.com/google-labs-code/stitch-skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor."
-    },
-    {
-      "id": "301f2d14985e5303f37abc05",
-      "title": "GoogleChrome/modern-web-guidance-src",
-      "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "Keep your coding agent up to date with the latest web best practices"
-    },
-    {
-      "id": "c489e6fb5febf2abff16877b",
-      "title": "alibaba/open-code-review",
-      "url": "https://github.com/alibaba/open-code-review",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible."
-    },
-    {
-      "id": "b88590c43555a909e1ff4309",
-      "title": "mvanhorn/last30days-skill",
-      "url": "https://github.com/mvanhorn/last30days-skill",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary"
-    },
-    {
-      "id": "379642deb53f3714eb4d3fd4",
-      "title": "ChromeDevTools/chrome-devtools-mcp",
-      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "Chrome DevTools for coding agents"
-    },
-    {
-      "id": "f9da1acd54ca38642ffd3679",
-      "title": "tradermonty/claude-trading-skills",
-      "url": "https://github.com/tradermonty/claude-trading-skills",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development."
-    },
-    {
-      "id": "10a12acb9645adccd1054069",
-      "title": "ag-ui-protocol/ag-ui",
-      "url": "https://github.com/ag-ui-protocol/ag-ui",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications."
-    },
-    {
-      "id": "5e8027802f61d7f22ead2d33",
-      "title": "meta/astryx",
-      "url": "https://github.com/meta/astryx",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "An open source design system that's fully customizable and agent ready"
-    },
-    {
-      "id": "2622cdbdf6f6e22b82c00d31",
-      "title": "pookjw/HermesEnabler",
-      "url": "https://github.com/pookjw/HermesEnabler",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "Enable Hermès Watch Faces on any Apple Watch devices"
-    },
-    {
-      "id": "2f31f6b854b3cc16d4646d00",
-      "title": "we-promise/sure",
-      "url": "https://github.com/we-promise/sure",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "The personal finance app for everyone (by everyone)"
-    },
-    {
-      "id": "d148e3d2c2843c2bb453066d",
-      "title": "dream-num/univer",
-      "url": "https://github.com/dream-num/univer",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core."
-    },
-    {
-      "id": "bd036b2924d3b3d21ca3cfbe",
-      "title": "kajisho5/ffmpeg-skill",
-      "url": "https://github.com/kajisho5/ffmpeg-skill",
-      "source": "GitHub Trending (weekly, observed)",
-      "sourceId": "github-trending",
-      "published": "2026-11-20T00:00:00.000Z",
-      "observed": true,
-      "summary": "Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys."
     },
     {
       "id": "cbbbac7b6ef9e80278ce9422",
@@ -459,6 +594,15 @@
       "summary": "Comments"
     },
     {
+      "id": "c65d718f1a492feb68e2c424",
+      "title": "LLMs can read and write executables byte by byte from a hex dump",
+      "url": "https://sgiannopoulos.github.io/blog/machine-code-programming/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-18T14:15:58.000Z",
+      "summary": "Comments"
+    },
+    {
       "id": "1d3b46ca8bcb0b99acb7aeb1",
       "title": "DNS resolvers are the wrong place to fight piracy",
       "url": "https://techstackups.com/articles/quad9-leaves-france-dns-blocking/",
@@ -485,6 +629,24 @@
       "published": "2026-11-18T00:00:00.000Z",
       "observed": true,
       "summary": "A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices."
+    },
+    {
+      "id": "128d85857a2a73569c6ae758",
+      "title": "Valkey kills the skiplist, cuts sorted set overhead by up to 43%",
+      "url": "https://valkey.io/blog/from-skiplist-to-b+tree/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-17T16:58:30.000Z",
+      "summary": "Comments"
+    },
+    {
+      "id": "8b203e54ba21f7946591236c",
+      "title": "Brazil's tax authority open-sources its tax calculator on GitHub under MIT",
+      "url": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-publica-primeiro-codigo-fonte-aberto-no-github-e-amplia-transparencia-da-reforma-tributaria",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-17T15:22:57.000Z",
+      "summary": "Comments"
     },
     {
       "id": "92ac2a3840749053e8a29656",
@@ -755,174 +917,12 @@
       "sourceId": "reddit-sideproject",
       "published": "2026-11-15T20:19:47.000Z",
       "summary": ""
-    },
-    {
-      "id": "6921618a4fcf3aa8e35773fc",
-      "title": "Why did some Apollo missions carry a grenade launcher?",
-      "url": "https://space.stackexchange.com/questions/37775",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-15T09:06:43.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "a11994a80f2fdec7a177dd4c",
-      "title": "Book list for streetfighting computer scientists",
-      "url": "https://nick-black.com/dankwiki/index.php?title=Book_list_for_streetfighting_computer_scientists",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-15T07:08:50.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "1093309b494ccc9a99d9dffe",
-      "title": "Disk encryption on NetBSD – achieving secrecy",
-      "url": "https://netbsd.org/~nia/disk-encrypt/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-15T05:29:54.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "2b72b271581ba0ed49d927bb",
-      "title": "My favourite modern NES games",
-      "url": "https://jordi.inversethought.com/blog/25-of-my-favourite-modern-nes-games/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-15T02:41:25.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "88ae2cfdd6f592722f0248e2",
-      "title": "Court denies motion to dismiss DRAM price fixing case",
-      "url": "https://litnews.ai/articles/garciaguirre-samsung-sk-hynix-micron-dram-conspiracy-suit-survives-dismissal",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-15T01:18:36.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "04d059df669879a50a4e7807",
-      "title": "How did Woz write the Apple 1 BASIC before building the computer?",
-      "url": "https://retrocomputing.stackexchange.com/questions/17957",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-14T22:22:49.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "79b046481bd48da63ddc54a9",
-      "title": "SpaceX catches the Starship to end Flight 15",
-      "url": "https://www.spacex.com/launches/starship-flight-15",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-14T21:22:24.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "a21cc815013d30aa83e78031",
-      "title": "A family tree of software job titles",
-      "url": "https://zwischenzugs.com/2026/11/03/a-family-tree-of-software-job-titles/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-14T17:45:19.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "94aa6d9b525a12a4d5a78dc7",
-      "title": "Lovable apps expose passport details and more than 200K private messages",
-      "url": "https://www.crissyfield.de/research/lovable-en/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-14T17:43:10.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "9ed594075d0bf1a5606ffe84",
-      "title": "PyPI's redesigned project pages with clearer security signals are now live",
-      "url": "https://blog.pypi.org/posts/2026-11-06-ui-updates-complete/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-14T15:40:52.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "94b61c00d4a22219feeacd3c",
-      "title": "KDE: The documentary [video]",
-      "url": "https://tube.kockatoo.org/w/fFinNHfanLT7aBEb2B8y4c",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-14T13:43:28.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "4819235e89f7803f105b2167",
-      "title": "Why the Airbus A321XLR often gets stuck climbing for first few hours of flight",
-      "url": "https://simpleflying.com/airbus-a321xlr-often-stuck-climbing-1st-few-hours-flight/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-14T09:13:24.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "cc014defea6936783426fe75",
-      "title": "Star Trek-themed Wikipedia Reader",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xvu1bm/star_trekthemed_wikipedia_reader/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-14T05:13:41.000Z",
-      "summary": ""
-    },
-    {
-      "id": "06ceb52f44bd68a5f77e5306",
-      "title": "This 3D gorilla has a bad temper but is very stretchy",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xvatrz/this_3d_gorilla_has_a_bad_temper_but_is_very/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-13T15:29:28.000Z",
-      "summary": ""
-    },
-    {
-      "id": "fcf7a29a532b8dcda4698893",
-      "title": "I built a visual website that shows the time and the exact weather and position on the planet wherever you are",
-      "url": "https://www.reddit.com/r/InternetIsBeautiful/comments/1xvaddw/i_built_a_visual_website_that_shows_the_time_and/",
-      "source": "Reddit r/InternetIsBeautiful",
-      "sourceId": "reddit-beautiful",
-      "published": "2026-11-13T15:11:09.000Z",
-      "summary": ""
-    },
-    {
-      "id": "87caaae267df6703c0a2b2f7",
-      "title": "Semicircle Packing",
-      "url": "https://rorz.io/writing/semicircle-packing",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-13T14:42:57.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "7c864418eae759f01d8bab43",
-      "title": "500 Lines or Less A 3D Modeller",
-      "url": "https://aosabook.org/en/500L/a-3d-modeller.html",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-13T13:47:42.000Z",
-      "summary": "Comments"
-    },
-    {
-      "id": "bea60a3c996cc2bc708552e5",
-      "title": "Show HN: Carton Clock – A working pendulum clock made from empty drink cartons",
-      "url": "https://www.niklasroy.com/carton-clock/",
-      "source": "Hacker News",
-      "sourceId": "hacker-news",
-      "published": "2026-11-13T12:00:18.000Z",
-      "summary": "Comments"
     }
   ],
   "fetched": {
-    "smashing": "2026-11-20",
-    "hacker-news": "2026-11-20",
-    "github-trending": "2026-11-20",
+    "smashing": "2026-11-21",
+    "hacker-news": "2026-11-21",
+    "github-trending": "2026-11-21",
     "reddit-sideproject": "2026-11-16",
     "reddit-beautiful": "2026-11-17"
   }
