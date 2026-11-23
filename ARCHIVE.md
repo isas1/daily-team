@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 50 days recorded.
+Every daily team and the asset it made, newest first. 51 days recorded.
 
 [Today](README.md)
 
 | Date | Project | Open |
 |---|---|---|
+| [2026-11-23](days/2026-11-23/) | Pair Ledger | no asset |
 | [2026-11-22](days/2026-11-22/) | Pair Ledger | no asset |
 | [2026-11-21](days/2026-11-21/) | Two-Clue Merge | no asset |
 | [2026-11-20](days/2026-11-20/) | Merge Hold | no asset |
