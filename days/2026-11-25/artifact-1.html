@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; font-src data:; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Held Merge: merge two CSV lists</title>
+<style>
+  :root{
+    --ink:#1b1b1b; --paper:#f7f4ec; --line:#d9d1bf; --amber:#b06a00; --amber-ink:#7a4a00;
+    --gray:#5f5f5f; --focus:#1a5fd0;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+  main{
+    max-width:1000px;margin:0 auto;padding:16px;
+    display:grid;gap:12px;grid-template-columns:minmax(0,1fr);
+  }
+  main>*{min-width:0}
+  h1{font-size:1.25rem;margin:0}
+  .field{display:grid;gap:4px}
+  .lab{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:.95rem}
+  .tag{font-weight:600;font-size:.75rem;border:1px solid var(--ink);border-radius:3px;padding:0 5px;letter-spacing:.04em}
+  textarea{
+    width:100%;font:14px/1.5 var(--mono);color:var(--ink);background:#fffdf7;
+    border:1px solid #8c8577;border-radius:4px;padding:8px;resize:vertical;min-height:6.5em;
+  }
+  textarea[aria-invalid="true"]{border:2px solid var(--ink)}
+  .run{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+  button{
+    font:600 1rem var(--sans);min-height:44px;padding:0 16px;border-radius:4px;cursor:pointer;
+    border:1px solid var(--ink);background:#fffdf7;color:var(--ink);
+  }
+  button.solid{background:var(--ink);color:var(--paper)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  #solution-result{margin:0;font:600 .95rem/1.4 var(--sans);font-variant-numeric:tabular-nums}
+  #solution-result.err{border-left:4px solid var(--ink);padding-left:8px}
+  .ledger{display:grid;gap:8px;transition:opacity .12s}
+  .ledger.stale{opacity:.55}
+  ol{list-style:none;margin:0;padding:0}
+  .pair{position:relative;padding:8px 0 10px 18px;border-bottom:1px solid var(--line);overflow:hidden;
+    transition:max-height .12s ease,opacity .12s ease,padding .12s ease}
+  .pair.go{opacity:0;max-height:0 !important;padding-top:0;padding-bottom:0}
+  .rows{position:relative}
+  .rows::before{content:"";position:absolute;left:-13px;top:.55em;bottom:.55em;width:8px;
+    border:2px solid var(--amber);border-right:0}
+  .row{font:14px/1.5 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+  .row.i{color:var(--amber-ink)}
+  .ask{margin:6px 0 4px;font-size:.9rem;color:var(--amber-ink);font-weight:600}
+  .acts{display:flex;flex-wrap:wrap;gap:8px}
+  .done li{font:14px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;display:flex;gap:8px}
+  .done .sym{flex:none;width:1ch}
+  .done .skip .txt{color:var(--gray);text-decoration:line-through}
+  .dl{position:sticky;bottom:0;background:var(--paper);padding:8px 0;border-top:1px solid var(--line)}
+  .dl button{width:100%}
+  details{font-size:.9rem;line-height:1.5}
+  summary{cursor:pointer;min-height:32px;padding:4px 0;font-weight:600}
+  details p,details ul{margin:4px 0 8px}
+  details ul{padding-left:18px}
+  a{color:var(--focus)}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (min-width:760px){
+    main{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:24px;
+      grid-template-areas:"h h" "m l" "i l" "c d" "x x";align-items:start}
+    header{grid-area:h} .fm{grid-area:m} .fi{grid-area:i} .run{grid-area:c}
+    .ledger{grid-area:l} .dl{grid-area:d;position:static;border-top:0;padding:0} .more{grid-area:x}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<main>
+  <header><h1>Merge two CSV lists</h1></header>
+
+  <div class="field fm">
+    <div class="lab"><label for="solution-master">Master</label><span class="tag">Demo</span></div>
+    <textarea id="solution-master" rows="4" spellcheck="false" autocomplete="off">ID,Name,Email
+101,Ana Ruiz,ana@x.org
+102,Ben Okafor,ben@x.org</textarea>
+  </div>
+
+  <div class="field fi">
+    <div class="lab"><label for="solution-import">Import</label></div>
+    <textarea id="solution-import" rows="5" spellcheck="false" autocomplete="off">ID,Name,Email
+102,Ben Okafor,ben@x.org
+,ana ruiz,ana@x.org
+103,Cy Lam,cy@x.org</textarea>
+  </div>
+
+  <div class="run">
+    <button type="button" id="solution-compare" class="solid">Compare</button>
+    <p id="solution-result" role="status" aria-live="polite"></p>
+  </div>
+
+  <section class="ledger" id="ledger-wrap" aria-label="Result">
+    <ol id="solution-queue" aria-label="Held pairs"></ol>
+    <ol id="solution-done" class="done" aria-label="Import rows"></ol>
+  </section>
+
+  <div class="dl">
+    <button type="button" id="solution-download" class="solid" disabled>Download CSV</button>
+  </div>
+
+  <div class="more">
+    <details>
+      <summary>Rules</summary>
+      <p>+ new row. Struck: same ID, skipped.</p>
+      <p>Amber bracket: same name, other or no ID. Held until Merge or Keep both. Merge fills only empty master fields.</p>
+      <p>Ctrl+Enter in a list runs Compare. Demo data is local; nothing leaves this page.</p>
+    </details>
+    <details>
+      <summary>Credits</summary>
+      <ul>
+        <li>Seismologist (lead): the held count stays in the result line until every pair is decided; "Same person?" asks before each choice.</li>
+        <li>Science demonstrator: the Demo trial, the missing-header catch, raw row text shown unchanged in mono.</li>
+        <li>Haptic interaction designer: cut copy to short labels; rules cut to two captions.</li>
+        <li>Deep space dispatcher (invented future role, guest): held rows are counted, shown on the Download label and written with Review=held.</li>
+      </ul>
+      <p>Source: <a href="https://www.reddit.com/r/excel/comments/1xxlhji/" rel="noreferrer noopener">Review possible duplicates before merging two lists</a></p>
+    </details>
+  </div>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var M = $("solution-master"), I = $("solution-import"), C = $("solution-compare"),
+      D = $("solution-download"), R = $("solution-result"), Q = $("solution-queue"),
+      L = $("solution-done"), W = $("ledger-wrap");
+  var model = null;
+  var reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : {matches:false};
+
+  function parseCSV(t){
+    var out = [], row = [], f = "", q = false, s = 0, touched = false, i;
+    function end(e){
+      var raw = t.slice(s, e).replace(/\r$/, "");
+      if (row.some(function(c){ return c.trim() !== ""; })) out.push({cells: row, raw: raw});
+    }
+    for (i = 0; i < t.length; i++){
+      var ch = t[i];
+      if (q){
+        if (ch === '"'){ if (t[i+1] === '"'){ f += '"'; i++; } else q = false; }
+        else f += ch;
+      } else if (ch === '"'){ q = true; touched = true; }
+      else if (ch === ","){ row.push(f); f = ""; touched = true; }
+      else if (ch === "\n"){ row.push(f); end(i); row = []; f = ""; s = i + 1; touched = false; }
+      else if (ch === "\r"){ /* ignore */ }
+      else { f += ch; touched = true; }
+    }
+    if (touched || f){ row.push(f); end(i); }
+    return out;
+  }
+
+  function readList(text, label){
+    var rows = parseCSV(text);
+    var head = rows.length ? rows[0].cells.map(function(h){ return h.trim(); }) : [];
+    var low = head.map(function(h){ return h.toLowerCase(); });
+    var miss = [];
+    if (low.indexOf("id") < 0) miss.push("ID");
+    if (low.indexOf("name") < 0) miss.push("Name");
+    var ks = low.map(function(h, j){ return h || ("\u0000" + label + j); });
+    return {label: label, head: head, ks: ks, rows: rows.slice(1), miss: miss};
+  }
+
+  function norm(s){
+    return String(s || "").toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, " ").trim();
+  }
+
+  function compare(){
+    var a = readList(M.value, "Master"), b = readList(I.value, "Import");
+    M.setAttribute("aria-invalid", a.miss.length ? "true" : "false");
+    I.setAttribute("aria-invalid", b.miss.length ? "true" : "false");
+    W.classList.remove("stale");
+    var errs = [a, b].filter(function(x){ return x.miss.length; });
+    if (errs.length){
+      model = null;
+      R.classList.add("err");
+      R.textContent = errs.map(function(x){
+        return x.label + " is missing the " + x.miss.join(", ") + " header.";
+      }).join(" ");
+      Q.replaceChildren(); L.replaceChildren(); updDownload(0);
+      return;
+    }
+    R.classList.remove("err");
+
+    var cols = [], idx = new Map();
+    function add(k, label){ if (idx.has(k)) return; idx.set(k, cols.length); cols.push(label); }
+    a.ks.forEach(function(k, j){ add(k, a.head[j]); });
+    b.ks.forEach(function(k, j){ add(k, b.head[j]); });
+    function vals(list, r){
+      var v = cols.map(function(){ return ""; }), seen = new Set();
+      list.ks.forEach(function(k, j){
+        if (seen.has(k)) return; seen.add(k);
+        v[idx.get(k)] = r.cells[j] == null ? "" : r.cells[j];
+      });
+      return v;
+    }
+    var idC = idx.get("id"), nmC = idx.get("name");
+    var master = a.rows.map(function(r){ return {vals: vals(a, r), raw: r.raw}; });
+    var ids = new Set(), names = new Map();
+    master.forEach(function(m, i){
+      var id = m.vals[idC].trim(); if (id) ids.add(id);
+      var nm = norm(m.vals[nmC]); if (nm && !names.has(nm)) names.set(nm, i);
+    });
+    var n = 0;
+    var imp = b.rows.map(function(r){
+      var v = vals(b, r), id = v[idC].trim(), nm = norm(v[nmC]), st, pair = -1, num = 0;
+      if (id && ids.has(id)) st = "skip";
+      else if (nm && names.has(nm)){ st = "held"; pair = names.get(nm); num = ++n; }
+      else st = "new";
+      if (st !== "skip" && id) ids.add(id);
+      return {vals: v, raw: r.raw, st: st, pair: pair, n: num};
+    });
+    model = {cols: cols, master: master, imp: imp};
+    status();
+    render(null);
+  }
+
+  function counts(){
+    var c = {new: 0, skip: 0, held: 0};
+    model.imp.forEach(function(r){ c[r.st]++; });
+    return c;
+  }
+
+  function status(){
+    var c = counts();
+    R.textContent = "Merged " + (model.master.length + c.new + c.held) + " rows. New " + c.new +
+      ", skipped " + c.skip + ", held " + c.held + ".";
+    updDownload(c.held);
+  }
+
+  function updDownload(h){
+    D.disabled = !model;
+    D.textContent = h > 0 ? "Download CSV (" + h + " held)" : "Download CSV";
+  }
+
+  function el(tag, cls, text){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function render(focusAfter){
+    Q.replaceChildren(); L.replaceChildren();
+    if (!model) return;
+    model.imp.forEach(function(r){
+      if (r.st === "held"){
+        var m = model.master[r.pair];
+        var li = el("li", "pair"); li.dataset.n = r.n;
+        li.setAttribute("role", "group");
+        li.setAttribute("aria-labelledby", "ask-" + r.n);
+        var rows = el("div", "rows");
+        var rm = el("div", "row m", m.raw), ri = el("div", "row i", r.raw);
+        rm.prepend(el("span", "sr", "Master: "));
+        ri.prepend(el("span", "sr", "Import: "));
+        rows.append(rm, ri);
+        var ask = el("p", "ask", "Same person?"); ask.id = "ask-" + r.n;
+        var acts = el("div", "acts");
+        var bm = el("button", null, "Merge"); bm.type = "button"; bm.id = "solution-merge-" + r.n;
+        var bk = el("button", null, "Keep both"); bk.type = "button"; bk.id = "solution-keep-" + r.n;
+        bm.addEventListener("click", function(){ decide(r.n, true); });
+        bk.addEventListener("click", function(){ decide(r.n, false); });
+        acts.append(bm, bk);
+        li.append(rows, ask, acts);
+        Q.append(li);
+      } else {
+        var d = el("li", r.st);
+        d.append(el("span", "sym", r.st === "new" ? "+" : "="));
+        d.firstChild.setAttribute("aria-hidden", "true");
+        var tx = el("span", "txt", r.raw);
+        tx.prepend(el("span", "sr", r.st === "new" ? "New: " : "Skipped: "));
+        d.append(tx);
+        L.append(d);
+      }
+    });
+    if (focusAfter != null){
+      var next = Q.querySelector("button");
+      (next || D).focus();
+    }
+  }
+
+  function decide(n, merge){
+    if (!model) return;
+    var r = model.imp.find(function(x){ return x.n === n && x.st === "held"; });
+    if (!r) return;
+    if (merge){
+      var m = model.master[r.pair];
+      m.vals = m.vals.map(function(v, j){ return v.trim() === "" ? r.vals[j] : v; });
+      r.st = "skip";
+    } else {
+      r.st = "new";
+    }
+    status();
+    var li = Q.querySelector('li[data-n="' + n + '"]');
+    if (!li || reduce.matches || document.hidden){ render(true); return; }
+    li.style.maxHeight = li.scrollHeight + "px";
+    void li.offsetHeight;
+    li.classList.add("go");
+    setTimeout(function(){ render(true); }, 130);
+  }
+
+  function esc(v){
+    v = String(v == null ? "" : v);
+    return /[",\r\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+  }
+
+  function download(){
+    if (!model) return;
+    var lines = [model.cols.concat("Review").map(esc).join(",")];
+    model.master.forEach(function(m){ lines.push(m.vals.concat("").map(esc).join(",")); });
+    model.imp.forEach(function(r){
+      if (r.st === "skip") return;
+      lines.push(r.vals.concat(r.st === "held" ? "held" : "").map(esc).join(","));
+    });
+    var blob = new Blob([lines.join("\r\n") + "\r\n"], {type: "text/csv"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "merged.csv"; a.hidden = true;
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+
+  C.addEventListener("click", compare);
+  D.addEventListener("click", download);
+  [M, I].forEach(function(t){
+    t.addEventListener("input", function(){ W.classList.add("stale"); });
+    t.addEventListener("keydown", function(e){
+      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); compare(); }
+    });
+  });
+
+  compare();
+})();
+</script>
+</body>
+</html>

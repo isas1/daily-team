@@ -10,43 +10,54 @@
   "projectMode": true,
   "requestedArtifacts": 1,
   "planning": {
-    "inputHash": "22e38b191d10c10794759880f29a730aa13051888a3528f4ef5221a01ccf62bc",
+    "inputHash": "e4c1f693476b2b64ae2ab353eabb78e2d88a82ab99d426ea2a06b86d2ec5071f",
     "snapshot": "planning-input.json",
     "selectedSourceIds": [
       "reddit-1xxlhji"
     ]
   },
-  "status": "failed",
-  "error": "browser mistake failed: solution-error did not show the expected visible result after the saved steps",
-  "decision": "Paste your master list and new rows, press Compare, decide each unsure pair, then download one clean list.",
-  "concept": "Station Merge",
-  "plan": "# Station Merge\n\n## Source\n\nThe live leads do not describe a concrete problem. They include a GitHub status incident, trending agent-skill repositories, news items and a hiring post. None of them states a user problem with a workaround.\n\nThe reviewed brief `reddit-1xxlhji` (r/excel, reviewed 2026-11-19) does describe one. A spreadsheet beginner screens recurring imports of hundreds of rows against a master list. Today they use a workbook macro or Power Query, then review the possible matches by hand. The brief asks for three things:\n\n- an offline review step that takes pasted rows\n- a queue for near matches\n- a merged file to download, with IDs and same-name records kept distinct until the user decides\n\nRecent projects (Chained Scale, Countermand, Shelf Peek) covered print calibration, plan feedback and password reveal. None of them compared two lists, so the problem does not repeat.\n\n## Directions\n\n**1. Station Merge.**\n- **Who and when:** A clerk with a weekly import of rows to fold into a master sheet.\n- **First action:** They paste both ranges and press Compare.\n- **Result:** A summary of added, merged and pending rows appears. One near-match pair waits with Same and Different buttons. The download becomes available when the queue is empty.\n\n**2. Threshold Slide.**\n- **Who and when:** The same clerk, when they want speed.\n- **First action:** They drag a similarity slider from 60 to 95.\n- **Result:** Rows above the threshold merge, and a count updates. This is the usual fuzzy-merge model. It merges \"Ana Ruiz\" 104 with \"Ana Ruiz\" 233 because the names match. It never says which field caused a merge.\n\n**3. Call It First.**\n- **Who and when:** A new hire learning the master list.\n- **First action:** They tag each import row New or Duplicate before the tool reveals its own call.\n- **Result:** A score of disagreements. It teaches the data, but it costs one decision per row. With hundreds of rows, that is slow.\n\nDirection 1 has a clear gain over the baseline:\n- It needs no macro or Power Query setup.\n- It queues only the pairs that are ambiguous.\n- Different IDs block a merge outright.\n\n## Pitch\n\n**Seismologist:** One station tells you nothing. Three stations, you have a location. So treat ID, Name and Email as stations. Two agree, it's the same person. One agrees, it goes to a human. And two IDs that differ? That's a veto. Doesn't matter what the names say.\n\n**Science demonstrator:** Give me two lists and a button. Paste, Compare, done. The material is the rows. Show the rows, not a dashboard about the rows.\n\n**Haptic interaction designer:** Three captions. \"Paste both lists.\" \"Decide the unsure pairs.\" \"Download one list.\" Cut the first. The two empty boxes already say it.\n\n**Deep space dispatcher:** Pending work stays visible. While a pair is undecided, the download says so. No green tick on a list that is still wrong.\n\n## Clash\n\n**Science demonstrator:** Trying it. Master has 101 John Smith, 104 Ana Ruiz. Import has a blank-ID \"Jon Smith\" with John's email, 233 Ana Ruiz, and Li Wei. Compare.\n\n**Seismologist:** Jon shares one station, the email. Queue. Ana 233 versus 104, the IDs differ. Veto. She gets added. Li matches nothing. Added.\n\n**Deep space dispatcher:** A stranger expects two Anas to merge. They'll ask why there are two now.\n\n**Seismologist:** Then the summary says it. Two added, one to review. The veto is the answer. Same name, different employee.\n\n**Haptic interaction designer:** Here's the mistake. Someone copies the data rows and skips the header. The first row is \"Li Wei, li@...\". Now Li Wei becomes a column name.\n\n**Science demonstrator:** Quick check. Nothing in that row says Name. We stop at Compare, and nothing gets written.\n\n**Haptic interaction designer:** And the error names the column it couldn't find, and which box. Then they paste the header and press Compare again. Nothing else is lost.\n\n**Deep space dispatcher:** The download stays disabled and shows the pending count. One pending is honest.\n\n## Decision\n\nPaste your master list and new rows, press Compare, decide each unsure pair, then download one clean list.\n\nConcept: Station Merge\n\n**Seismologist:** The station rule.\n- ID, Name and Email each count as one station.\n- Different non-blank IDs veto any match.\n- A matching ID merges.\n- If an ID is blank, two agreeing stations merge and one agreeing station goes to review.\n\n**Science demonstrator:** The sample that defines the primary case, and the requirement that rows stay on screen as monospaced text.\n\n**Haptic interaction designer:** The header check that catches pasted rows without a header, and the cut caption, which leaves the first screen with four labels.\n\n**Deep space dispatcher:** The disabled download that carries the pending count, and the one-pair-at-a-time review card with station marks.\n\n**Rule effect.** The veto changes a state transition. A pair with an identical name and different IDs moves from \"review\" to \"added\" before any name comparison runs. The surprise is two Ana Ruiz rows in the output. The user can explain it from the ID station mark.\n\n**Visual direction.**\n- **Work surface:** Two monospaced lists face each other: Master on the left, Import on the right. A narrow station strip between them holds three marks: ID, Name and Email.\n- **Review card:** The review card spans the strip. Agreeing marks are filled. An ID veto is marked in red.\n- **Phone:** The order is Master, Import, Compare, the summary and review card pinned below, then Download.\n- **Type and color:** Monospace with tabular figures for rows, sans-serif for labels. Ink on paper. Green marks agreement, red marks a veto or an error, and one blue focus ring.\n- **Density and motion:** About 8 visible words at rest and about 30 with a review card showing. No motion.\n- **Comparison with past projects:** Chained Scale used one equation line and Countermand used fixed rows. This project uses balance: two sides facing across a shared seam.\n\n## Build notes\n\n1. **Page structure.** Build one offline HTML page with these native controls:\n   - textareas `solution-master` and `solution-import`\n   - button `solution-compare`\n   - output `solution-summary` and error region `solution-error`\n   - review card `solution-review` with buttons `solution-same` and `solution-different`\n   - button `solution-download`\n\n   Native buttons handle Space and Enter. Parsing works as follows:\n   - Accept CSV or tab-separated input, including quoted fields.\n   - Row 1 is the header. ID and Email columns are optional.\n   - Each box requires a Name column. If it is missing, show the missing column and box in `solution-error` and change no state.\n\n2. **Station rule.** Apply these steps in order:\n   - Normalize names and emails: lowercase, trim and collapse spaces.\n   - Different non-blank IDs: add the row as new.\n   - Same ID: merge. Import values overwrite master values, and blank fields are filled.\n   - Any ID blank: two agreeing stations merge, one queues the pair and none adds the row.\n\n   Write `solution-summary` as \"A added, M merged, R to review\". Same merges the current pair. Different adds it. The summary updates after each decision.\n\n3. **Download and first case.** `solution-download` stays disabled and reads \"Download CSV (R pending)\" while R > 0. When R is 0, it writes `merged.csv` in the master header order.\n\n   First case:\n   - Master:\n     ```\n     ID,Name,Email\n     101,John Smith,john@acme.com\n     104,Ana Ruiz,ana@acme.com\n     ```\n   - Import:\n     ```\n     ID,Name,Email\n     ,Jon Smith,john@acme.com\n     233,Ana Ruiz,ana.r@acme.com\n     ,Li Wei,li@acme.com\n     ```\n   - Press Compare, then Same. `solution-summary` must read \"2 added, 1 merged, 0 to review\".\n\n```json\n{\"schemaVersion\":1,\"name\":\"Station Merge\",\"audience\":\"Spreadsheet beginners who fold recurring imports of hundreds of rows into a master list\",\"problem\":\"Screening an import against a master list for duplicates needs a macro or Power Query, plus a manual review of possible matches before writing the master\",\"interaction\":\"Paste master and import rows, press Compare, decide each queued pair with Same or Different, press Download CSV\",\"outcome\":\"A summary of added, merged and pending rows, one near-match pair at a time with station marks, and a downloadable merged.csv once the queue is empty\",\"recovery\":\"A missing Name header blocks Compare and names the box; pasting the header and pressing Compare again runs the merge with nothing lost\",\"mechanism\":\"ID, Name and Email act as stations. Different non-blank IDs veto a match, the same ID merges, and with an ID blank two agreeing stations merge while one agreeing station queues the pair for review\",\"difference\":\"Baseline is Excel Power Query fuzzy merge or a macro, which need setup and merge on name similarity. Here there is no setup, only one-station pairs are queued, and different IDs never merge\",\"whyNow\":\"Reviewed brief reddit-1xxlhji (2026-11-19) states the workaround and gap. Today's live feeds list incidents and repositories with no stated user problem. No demand data beyond the brief\",\"sourceIds\":[\"reddit-1xxlhji\"],\"evidenceStatus\":\"sourced\",\"proof\":{\"workaround\":\"Maintain a workbook macro or set up Power Query, then review potential matches before writing them to the master list\",\"gap\":\"No reusable offline review step that takes pasted rows, queues near matches, keeps IDs and same-name records distinct until the user decides, and downloads the merged result\",\"improvement\":\"No macro or query setup: paste, Compare, decide queued pairs, download. Same-name rows with different IDs are added as new rows, never merged, which a reviewer can check with two Ana Ruiz rows\"},\"craft\":{\"rule\":\"Seismologist's station agreement: a location needs agreeing stations. ID, Name and Email are stations; different IDs veto the pair before names are compared, two agreeing stations merge, one queues. Same-name rows 104 and 233 become two rows\",\"design\":\"Work surface: Master and Import lists facing across a station strip of three marks. Phone: Master, Import, Compare, pinned summary and review card, then Download. Mono rows, sans labels, ink on paper, green agree, red veto and error, blue focus. About 8 words at rest. No motion\",\"trial\":{\"start\":\"Fresh page. Master: 101 John Smith john@acme.com, 104 Ana Ruiz ana@acme.com. Import: blank-ID Jon Smith john@acme.com, 233 Ana Ruiz ana.r@acme.com, blank-ID Li Wei li@acme.com, all with an ID,Name,Email header\",\"action\":\"Press Compare, check the review card shows Jon Smith against 101 with only Email filled, then press Same\",\"result\":\"Summary reads 2 added, 1 merged, 0 to review. Download CSV enables, and merged.csv holds 101, 104, 233 Ana Ruiz and Li Wei\",\"mistake\":\"User pastes import data rows without the header, so row 1 is Li Wei,li@acme.com and has no Name column\",\"recovery\":\"Error names the missing Name column in the Import box. User pastes Name,Email above the row and presses Compare. Error clears, the summary shows the added row, and the master text is unchanged\"}},\"alternatives\":[{\"name\":\"Station Merge\",\"need\":\"Merge a recurring import into a master list without merging distinct people\",\"mechanism\":\"Station agreement over ID, Name and Email with an ID veto, a one-pair review queue and a download disabled while any pair is pending\",\"action\":\"Paste master and import rows and press Compare\",\"result\":\"A summary of added, merged and to-review rows, one review card with filled station marks, and merged.csv after the queue empties\",\"rejection\":\"Selected: no setup, only ambiguous pairs need a decision, and different IDs never merge\"},{\"name\":\"Threshold Slide\",\"need\":\"Merge fast with a single tolerance setting\",\"mechanism\":\"Name similarity score with a slider; rows above the threshold merge automatically\",\"action\":\"Drag the similarity slider from 60 to 95\",\"result\":\"A merged count that changes with the slider position\",\"rejection\":\"Rejected: it matches the usual fuzzy merge, merges same-name rows with different IDs, and hides which field caused each merge\"},{\"name\":\"Call It First\",\"need\":\"Learn the master list by judging rows before the tool does\",\"mechanism\":\"User tags each import row New or Duplicate; the tool then reveals its own call and counts disagreements\",\"action\":\"Tag every import row New or Duplicate before pressing Reveal\",\"result\":\"A disagreement score with the disputed rows listed\",\"rejection\":\"Rejected: one decision per row is slow for hundreds of rows and produces no merged list\"}],\"cases\":[{\"phase\":\"primary\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-master\",\"value\":\"ID,Name,Email\\n101,John Smith,john@acme.com\\n104,Ana Ruiz,ana@acme.com\"},{\"action\":\"fill\",\"target\":\"solution-import\",\"value\":\"ID,Name,Email\\n,Jon Smith,john@acme.com\\n233,Ana Ruiz,ana.r@acme.com\\n,Li Wei,li@acme.com\"},{\"action\":\"click\",\"target\":\"solution-compare\"},{\"action\":\"click\",\"target\":\"solution-same\"}],\"expect\":{\"target\":\"solution-summary\",\"text\":\"2 added, 1 merged, 0 to review\"}},{\"phase\":\"alternate\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-master\",\"value\":\"ID,Name,Email\\n101,John Smith,john@acme.com\\n104,Ana Ruiz,ana@acme.com\"},{\"action\":\"fill\",\"target\":\"solution-import\",\"value\":\"ID,Name,Email\\n101,John Smith,john.smith@acme.com\\n,Ana Ruiz,ana@acme.com\"},{\"action\":\"click\",\"target\":\"solution-compare\"}],\"expect\":{\"target\":\"solution-summary\",\"text\":\"0 added, 2 merged, 0 to review\"}},{\"phase\":\"mistake\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-master\",\"value\":\"ID,Name,Email\\n101,John Smith,john@acme.com\\n104,Ana Ruiz,ana@acme.com\"},{\"action\":\"fill\",\"target\":\"solution-import\",\"value\":\"Li Wei,li@acme.com\"},{\"action\":\"click\",\"target\":\"solution-compare\"}],\"expect\":{\"target\":\"solution-error\",\"text\":\"Import row 1 has no Name column.\"}},{\"phase\":\"recovery\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-import\",\"value\":\"Name,Email\\nLi Wei,li@acme.com\"},{\"action\":\"click\",\"target\":\"solution-compare\"}],\"expect\":{\"target\":\"solution-summary\",\"text\":\"1 added, 0 merged, 0 to review\"}}]}\n```",
-  "planProblems": [
-    "session is 1237 words, more than 1200"
-  ],
+  "status": "ok",
+  "error": null,
+  "decision": "Paste your master list and a new import, press Compare, then settle each held lookalike before downloading.",
+  "concept": "Held Merge",
+  "plan": "## Source\n\nThe cached live leads are GitHub incident notes, trending agent repositories, news items and showcases. None of them states a user problem with a workaround. The reviewed brief `reddit-1xxlhji` (Reddit r/excel, reviewed 2026-11-19) does:\n\n- **Problem:** A spreadsheet beginner screens recurring imports of hundreds of rows into a master list.\n- **Workaround:** A workbook macro or Power Query, followed by manual review.\n- **Gap:** An offline review step with pasted rows, a queue for near matches and a downloadable result. IDs and same-name records stay distinct until the user decides.\n\nNo recent project covers list reconciliation. The closest are Gapless Rank (ledger of moved positions) and Countermand (sent versus wanted state). Both deal with order or sync. Neither deals with record identity.\n\n## Pitch\n\n**Seismologist.** Before the merge, you type how many new rows you expect. Then the tool shows the real count. If you guessed 3 and it says 5, you go looking. That gap is the feeling I want to guard: surprise caught before it reaches the master list.\n\n**Haptic interaction designer.** Cut the page down to a formula. Paste two headers, get an XLOOKUP-plus-COUNTIF line, paste it back into Excel. Three captions explain it, and I would cut the third. The work stays where the user already is.\n\n**Deep space dispatcher.** Held Merge. Paste master, paste import, press Compare. Exact ID repeats are skipped. New IDs are added. Anything that only looks like a master row is held, and held stays visible. The download carries held rows with a Review column, so nothing is silently fused and nothing is silently dropped. A stranger expects the download to say what is still open. It does.\n\n**Science demonstrator.** I'll back Held Merge and defend the material. Show the pasted row text unchanged, in mono, with no cleaned-up version. If the user typed \"ana ruiz\" in lower case, the queue shows \"ana ruiz\".\n\n## Clash\n\n**Science demonstrator:** Quick try. Master has 101 Ana Ruiz and 102 Ben Okafor. Import has 102 Ben again, a lowercase ana ruiz with no ID, and 103 Cy Lam. Compare. Four rows: one new, one skipped, one held.\n\n**Seismologist:** And the held one. Who closes it? It sits there until someone presses something. The count stays in the result line until it reads zero.\n\n**Haptic interaction designer:** My number first. The formula route is one paste, and Held Merge is four steps. But my formula would mark ana ruiz as a match and 211 Ana Ruiz as a match too. Same name, different person, maybe. That's the mistake.\n\n**Deep space dispatcher:** Which is why a different ID never auto-merges. 211 Ana Ruiz goes to held, beside 101. Strange result, and the right one.\n\n**Science demonstrator:** Another mistake. People copy the rows and miss the header line. Then \"103,Cy Lam\" becomes the header, there is no ID column, and every row looks wrong.\n\n**Haptic interaction designer:** So the error names the missing columns. The pasted text stays in the box. Add one line, press Compare again. No reset.\n\n**Seismologist:** The prediction box goes, then. But the held count is my prediction kept honest. It must never go below the real open pairs.\n\n**Deep space dispatcher:** Agreed. Download works at any time, and its label carries the held count.\n\n## Decision\n\nPaste your master list and a new import, press Compare, then settle each held lookalike before downloading.\n\nConcept: Held Merge\n\n- **Deep space dispatcher:** The rule. Lookalikes enter a held state that is counted, written to the CSV with Review=held, and shown on the Download label.\n- **Seismologist:** The held count stays in the result line until every pair has a decision.\n- **Science demonstrator:** The sample trial, the missing-header catch, and raw row text shown unchanged in mono.\n- **Haptic interaction designer:** The cut copy, about 30 visible words. The formula route serves as the rejected baseline that exposed the same-name risk.\n\n**Design.** The work surface reads left to right in sequence: Master and Import textareas feed one result ledger. Each held pair is drawn as two mono rows joined by a 2px amber bracket, which makes the \"maybe one record\" relationship visible. On a phone, the order is Master, Import, Compare, result line, held queue, with Download pinned to the bottom. Mono tabular type is used for rows and sans for labels. Colors are ink on paper, amber for held, gray strike for skipped duplicates, and one blue focus ring. Density is sparse. A resolved pair collapses in 120ms. There is no other motion.\n\n## Build notes\n\n1. Build a single HTML file with native controls: textareas `solution-master` and `solution-import`, buttons `solution-compare` and `solution-download`, a live status `solution-result` and a list `solution-queue`. Held pairs get buttons `solution-merge-N` and `solution-keep-N`. Parse CSV with quoted fields. Both lists need a header containing ID and Name, matched case-insensitively. If either header is missing, write an error naming the list and the missing columns to `solution-result` and keep the textarea text.\n2. Classify each import row:\n   - Same nonempty ID as a master row: skipped.\n   - Name equal to a master name after lowercasing, trimming, collapsing spaces and stripping punctuation, with an empty or different ID: held.\n   - Anything else: new.\n   \n   Write \"Merged N rows. New X, skipped Y, held Z.\" where N is master + new + held. First case: master `ID,Name,Email` / `101,Ana Ruiz,ana@x.org` / `102,Ben Okafor,ben@x.org`. Import `ID,Name,Email` / `102,Ben Okafor,ben@x.org` / `,ana ruiz,ana@x.org` / `103,Cy Lam,cy@x.org`. Press Compare. Expected result: \"Merged 4 rows. New 1, skipped 1, held 1.\"\n3. Handle decisions and download:\n   - Merge drops the import row, fills only empty master fields, and moves the pair from held to skipped.\n   - Keep both moves the pair from held to new.\n   - Recompute the status line after every decision.\n   - Download builds a CSV Blob with a Review column (blank or \"held\"). The button label is \"Download CSV\" plus \"(Z held)\" when Z > 0.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Held Merge\",\"audience\":\"A spreadsheet beginner who merges recurring imports of hundreds of rows into one master list\",\"problem\":\"Near-duplicate rows must be reviewed before they reach the master list, and same-name records with different IDs must not be fused without a decision\",\"interaction\":\"Paste master and import CSV text, press Compare, press Merge or Keep both on each held pair, press Download CSV\",\"outcome\":\"A status line with row, new, skipped and held counts, a queue of held pairs, and a downloadable merged CSV with a Review column\",\"recovery\":\"A missing ID or Name header shows an error naming the list and columns; the pasted text stays, the user adds the header and presses Compare again\",\"mechanism\":\"Same ID is skipped, same normalized name with empty or different ID is held, the rest is new; held rows are counted, shown on Download and written with Review=held until decided\",\"difference\":\"Baseline is a workbook macro or Power Query plus manual review. Here the user pastes two lists and presses Compare with no query to build, and a different-ID same-name row is never merged without a click\",\"whyNow\":\"The reviewed brief dated 2026-11-19 describes the task, workaround and gap. Today's cached live leads hold no concrete user problem. No demand size is claimed\",\"sourceIds\":[\"reddit-1xxlhji\"],\"evidenceStatus\":\"sourced\",\"proof\":{\"workaround\":\"Maintain a workbook macro or set up Power Query, then review potential matches before writing them to the master list\",\"gap\":\"No reusable offline review step that takes pasted rows, queues near matches, keeps IDs and same-name records distinct until the user decides, and downloads the merged result\",\"improvement\":\"Paste, Compare, decide, Download: no macro or query to build, and a same-name row with a different ID always waits for a Merge or Keep both click instead of matching automatically\"},\"craft\":{\"rule\":\"Deep space dispatcher: show pending work honestly. Lookalike rows enter a held state that counts toward N, shows on the Download label and is written with Review=held. Only Merge (held to skipped) or Keep both (held to new) changes that state\",\"design\":\"Left-to-right sequence: Master and Import feed one result ledger; held pairs are two mono rows joined by a 2px amber bracket. Phone: inputs, Compare, result, queue, pinned Download. Mono rows, sans labels, ink on paper, amber held, gray strike skipped, blue focus. Sparse. 120ms collapse only\",\"trial\":{\"start\":\"Fresh page. Master: 101 Ana Ruiz, 102 Ben Okafor, with ID,Name,Email header\",\"action\":\"Paste an import with header and rows 102 Ben Okafor, blank-ID ana ruiz, 103 Cy Lam, then press Compare\",\"result\":\"Status reads Merged 4 rows. New 1, skipped 1, held 1. The queue shows ana ruiz bracketed to 101 Ana Ruiz, and Download reads Download CSV (1 held)\",\"mistake\":\"The user pastes import rows without the ID,Name,Email header line and presses Compare\",\"recovery\":\"The error names Import and the missing ID and Name columns while the pasted rows stay. The user adds the header, presses Compare, and the counts and queue return\"}},\"alternatives\":[{\"name\":\"Held Merge\",\"need\":\"Merge an import into a master list without fusing lookalike records unseen\",\"mechanism\":\"ID and normalized-name classification with a held state that stays counted and is exported until decided\",\"action\":\"Paste master and import CSV text, press Compare\",\"result\":\"Counts of new, skipped and held, a bracketed held-pair queue, and a CSV download with a Review column\",\"rejection\":\"Selected: it completes the merge offline, and held pairs keep same-name different-ID records apart until a click\"},{\"name\":\"Predict Count\",\"need\":\"Catch an unexpected number of new rows before it reaches the master list\",\"mechanism\":\"The user enters an expected new-row count before the reveal; a mismatch highlights the surplus rows\",\"action\":\"Type the expected number of new rows, then paste the import and press Reveal\",\"result\":\"Predicted versus actual count, with surplus rows marked\",\"rejection\":\"Rejected: the guess adds a step and still produces no merged list or review decisions\"},{\"name\":\"Formula Card\",\"need\":\"Flag duplicates inside the user's own Excel workbook\",\"mechanism\":\"Generates an XLOOKUP and COUNTIF formula from the pasted header names\",\"action\":\"Paste both header rows and press Make formula\",\"result\":\"A copyable formula that marks matching rows in Excel\",\"rejection\":\"Rejected: it matches on name alone, so 211 Ana Ruiz would be flagged as 101, and the review still happens by hand\"}],\"cases\":[{\"phase\":\"primary\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-master\",\"value\":\"ID,Name,Email\\n101,Ana Ruiz,ana@x.org\\n102,Ben Okafor,ben@x.org\"},{\"action\":\"fill\",\"target\":\"solution-import\",\"value\":\"ID,Name,Email\\n102,Ben Okafor,ben@x.org\\n,ana ruiz,ana@x.org\\n103,Cy Lam,cy@x.org\"},{\"action\":\"click\",\"target\":\"solution-compare\"}],\"expect\":{\"target\":\"solution-result\",\"text\":\"Merged 4 rows. New 1, skipped 1, held 1.\"}},{\"phase\":\"alternate\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-master\",\"value\":\"ID,Name,Email\\n101,Ana Ruiz,ana@x.org\\n102,Ben Okafor,ben@x.org\"},{\"action\":\"fill\",\"target\":\"solution-import\",\"value\":\"ID,Name,Email\\n104,Dee Park,dee@x.org\\n105,Eli Moss,eli@x.org\"},{\"action\":\"click\",\"target\":\"solution-compare\"}],\"expect\":{\"target\":\"solution-result\",\"text\":\"Merged 4 rows. New 2, skipped 0, held 0.\"}},{\"phase\":\"mistake\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-master\",\"value\":\"ID,Name,Email\\n101,Ana Ruiz,ana@x.org\\n102,Ben Okafor,ben@x.org\"},{\"action\":\"fill\",\"target\":\"solution-import\",\"value\":\"103,Cy Lam,cy@x.org\\n211,Ana Ruiz,ana.r@x.org\"},{\"action\":\"click\",\"target\":\"solution-compare\"}],\"expect\":{\"target\":\"solution-result\",\"text\":\"Import needs a header row with ID and Name.\"}},{\"phase\":\"recovery\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-import\",\"value\":\"ID,Name,Email\\n103,Cy Lam,cy@x.org\\n211,Ana Ruiz,ana.r@x.org\"},{\"action\":\"click\",\"target\":\"solution-compare\"}],\"expect\":{\"target\":\"solution-result\",\"text\":\"Merged 4 rows. New 1, skipped 0, held 1.\"}}]}\n```",
+  "planProblems": [],
   "referee": false,
   "artifacts": [
     {
       "file": "artifact-1.html",
+      "sha256": "a6edfe39fcef74dfbf00b6179e609b54eeda9e98dd166022abd2454c160a7e91",
+      "solutionCheck": {
+        "artifactHash": "a6edfe39fcef74dfbf00b6179e609b54eeda9e98dd166022abd2454c160a7e91",
+        "casesHash": "7f21b03b908b9529bbbc8cb852b7906ec537b7fb0765e330ced40de3e6742524",
+        "passed": [
+          "primary",
+          "alternate",
+          "mistake",
+          "recovery"
+        ],
+        "quality": {
+          "phoneFit": true,
+          "keyboardReplay": true
+        }
+      },
       "lead": 1,
-      "model": null,
-      "status": "failed",
-      "problems": [
-        "browser mistake failed: solution-error did not show the expected visible result after the saved steps"
-      ]
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
     }
   ],
   "project": {
     "schemaVersion": 1,
-    "name": "Station Merge",
-    "audience": "Spreadsheet beginners who fold recurring imports of hundreds of rows into a master list",
-    "problem": "Screening an import against a master list for duplicates needs a macro or Power Query, plus a manual review of possible matches before writing the master",
-    "interaction": "Paste master and import rows, press Compare, decide each queued pair with Same or Different, press Download CSV",
-    "outcome": "A summary of added, merged and pending rows, one near-match pair at a time with station marks, and a downloadable merged.csv once the queue is empty",
-    "recovery": "A missing Name header blocks Compare and names the box; pasting the header and pressing Compare again runs the merge with nothing lost",
-    "mechanism": "ID, Name and Email act as stations. Different non-blank IDs veto a match, the same ID merges, and with an ID blank two agreeing stations merge while one agreeing station queues the pair for review",
-    "difference": "Baseline is Excel Power Query fuzzy merge or a macro, which need setup and merge on name similarity. Here there is no setup, only one-station pairs are queued, and different IDs never merge",
-    "whyNow": "Reviewed brief reddit-1xxlhji (2026-11-19) states the workaround and gap. Today's live feeds list incidents and repositories with no stated user problem. No demand data beyond the brief",
+    "name": "Held Merge",
+    "audience": "A spreadsheet beginner who merges recurring imports of hundreds of rows into one master list",
+    "problem": "Near-duplicate rows must be reviewed before they reach the master list, and same-name records with different IDs must not be fused without a decision",
+    "interaction": "Paste master and import CSV text, press Compare, press Merge or Keep both on each held pair, press Download CSV",
+    "outcome": "A status line with row, new, skipped and held counts, a queue of held pairs, and a downloadable merged CSV with a Review column",
+    "recovery": "A missing ID or Name header shows an error naming the list and columns; the pasted text stays, the user adds the header and presses Compare again",
+    "mechanism": "Same ID is skipped, same normalized name with empty or different ID is held, the rest is new; held rows are counted, shown on Download and written with Review=held until decided",
+    "difference": "Baseline is a workbook macro or Power Query plus manual review. Here the user pastes two lists and presses Compare with no query to build, and a different-ID same-name row is never merged without a click",
+    "whyNow": "The reviewed brief dated 2026-11-19 describes the task, workaround and gap. Today's cached live leads hold no concrete user problem. No demand size is claimed",
     "sourceIds": [
       "reddit-1xxlhji"
     ],
@@ -54,43 +65,43 @@
     "proof": {
       "workaround": "Maintain a workbook macro or set up Power Query, then review potential matches before writing them to the master list",
       "gap": "No reusable offline review step that takes pasted rows, queues near matches, keeps IDs and same-name records distinct until the user decides, and downloads the merged result",
-      "improvement": "No macro or query setup: paste, Compare, decide queued pairs, download. Same-name rows with different IDs are added as new rows, never merged, which a reviewer can check with two Ana Ruiz rows"
+      "improvement": "Paste, Compare, decide, Download: no macro or query to build, and a same-name row with a different ID always waits for a Merge or Keep both click instead of matching automatically"
     },
     "craft": {
-      "rule": "Seismologist's station agreement: a location needs agreeing stations. ID, Name and Email are stations; different IDs veto the pair before names are compared, two agreeing stations merge, one queues. Same-name rows 104 and 233 become two rows",
-      "design": "Work surface: Master and Import lists facing across a station strip of three marks. Phone: Master, Import, Compare, pinned summary and review card, then Download. Mono rows, sans labels, ink on paper, green agree, red veto and error, blue focus. About 8 words at rest. No motion",
+      "rule": "Deep space dispatcher: show pending work honestly. Lookalike rows enter a held state that counts toward N, shows on the Download label and is written with Review=held. Only Merge (held to skipped) or Keep both (held to new) changes that state",
+      "design": "Left-to-right sequence: Master and Import feed one result ledger; held pairs are two mono rows joined by a 2px amber bracket. Phone: inputs, Compare, result, queue, pinned Download. Mono rows, sans labels, ink on paper, amber held, gray strike skipped, blue focus. Sparse. 120ms collapse only",
       "trial": {
-        "start": "Fresh page. Master: 101 John Smith john@acme.com, 104 Ana Ruiz ana@acme.com. Import: blank-ID Jon Smith john@acme.com, 233 Ana Ruiz ana.r@acme.com, blank-ID Li Wei li@acme.com, all with an ID,Name,Email header",
-        "action": "Press Compare, check the review card shows Jon Smith against 101 with only Email filled, then press Same",
-        "result": "Summary reads 2 added, 1 merged, 0 to review. Download CSV enables, and merged.csv holds 101, 104, 233 Ana Ruiz and Li Wei",
-        "mistake": "User pastes import data rows without the header, so row 1 is Li Wei,li@acme.com and has no Name column",
-        "recovery": "Error names the missing Name column in the Import box. User pastes Name,Email above the row and presses Compare. Error clears, the summary shows the added row, and the master text is unchanged"
+        "start": "Fresh page. Master: 101 Ana Ruiz, 102 Ben Okafor, with ID,Name,Email header",
+        "action": "Paste an import with header and rows 102 Ben Okafor, blank-ID ana ruiz, 103 Cy Lam, then press Compare",
+        "result": "Status reads Merged 4 rows. New 1, skipped 1, held 1. The queue shows ana ruiz bracketed to 101 Ana Ruiz, and Download reads Download CSV (1 held)",
+        "mistake": "The user pastes import rows without the ID,Name,Email header line and presses Compare",
+        "recovery": "The error names Import and the missing ID and Name columns while the pasted rows stay. The user adds the header, presses Compare, and the counts and queue return"
       }
     },
     "alternatives": [
       {
-        "name": "Station Merge",
-        "need": "Merge a recurring import into a master list without merging distinct people",
-        "mechanism": "Station agreement over ID, Name and Email with an ID veto, a one-pair review queue and a download disabled while any pair is pending",
-        "action": "Paste master and import rows and press Compare",
-        "result": "A summary of added, merged and to-review rows, one review card with filled station marks, and merged.csv after the queue empties",
-        "rejection": "Selected: no setup, only ambiguous pairs need a decision, and different IDs never merge"
+        "name": "Held Merge",
+        "need": "Merge an import into a master list without fusing lookalike records unseen",
+        "mechanism": "ID and normalized-name classification with a held state that stays counted and is exported until decided",
+        "action": "Paste master and import CSV text, press Compare",
+        "result": "Counts of new, skipped and held, a bracketed held-pair queue, and a CSV download with a Review column",
+        "rejection": "Selected: it completes the merge offline, and held pairs keep same-name different-ID records apart until a click"
       },
       {
-        "name": "Threshold Slide",
-        "need": "Merge fast with a single tolerance setting",
-        "mechanism": "Name similarity score with a slider; rows above the threshold merge automatically",
-        "action": "Drag the similarity slider from 60 to 95",
-        "result": "A merged count that changes with the slider position",
-        "rejection": "Rejected: it matches the usual fuzzy merge, merges same-name rows with different IDs, and hides which field caused each merge"
+        "name": "Predict Count",
+        "need": "Catch an unexpected number of new rows before it reaches the master list",
+        "mechanism": "The user enters an expected new-row count before the reveal; a mismatch highlights the surplus rows",
+        "action": "Type the expected number of new rows, then paste the import and press Reveal",
+        "result": "Predicted versus actual count, with surplus rows marked",
+        "rejection": "Rejected: the guess adds a step and still produces no merged list or review decisions"
       },
       {
-        "name": "Call It First",
-        "need": "Learn the master list by judging rows before the tool does",
-        "mechanism": "User tags each import row New or Duplicate; the tool then reveals its own call and counts disagreements",
-        "action": "Tag every import row New or Duplicate before pressing Reveal",
-        "result": "A disagreement score with the disputed rows listed",
-        "rejection": "Rejected: one decision per row is slow for hundreds of rows and produces no merged list"
+        "name": "Formula Card",
+        "need": "Flag duplicates inside the user's own Excel workbook",
+        "mechanism": "Generates an XLOOKUP and COUNTIF formula from the pasted header names",
+        "action": "Paste both header rows and press Make formula",
+        "result": "A copyable formula that marks matching rows in Excel",
+        "rejection": "Rejected: it matches on name alone, so 211 Ana Ruiz would be flagged as 101, and the review still happens by hand"
       }
     ],
     "cases": [
@@ -100,25 +111,21 @@
           {
             "action": "fill",
             "target": "solution-master",
-            "value": "ID,Name,Email\n101,John Smith,john@acme.com\n104,Ana Ruiz,ana@acme.com"
+            "value": "ID,Name,Email\n101,Ana Ruiz,ana@x.org\n102,Ben Okafor,ben@x.org"
           },
           {
             "action": "fill",
             "target": "solution-import",
-            "value": "ID,Name,Email\n,Jon Smith,john@acme.com\n233,Ana Ruiz,ana.r@acme.com\n,Li Wei,li@acme.com"
+            "value": "ID,Name,Email\n102,Ben Okafor,ben@x.org\n,ana ruiz,ana@x.org\n103,Cy Lam,cy@x.org"
           },
           {
             "action": "click",
             "target": "solution-compare"
-          },
-          {
-            "action": "click",
-            "target": "solution-same"
           }
         ],
         "expect": {
-          "target": "solution-summary",
-          "text": "2 added, 1 merged, 0 to review"
+          "target": "solution-result",
+          "text": "Merged 4 rows. New 1, skipped 1, held 1."
         }
       },
       {
@@ -127,12 +134,12 @@
           {
             "action": "fill",
             "target": "solution-master",
-            "value": "ID,Name,Email\n101,John Smith,john@acme.com\n104,Ana Ruiz,ana@acme.com"
+            "value": "ID,Name,Email\n101,Ana Ruiz,ana@x.org\n102,Ben Okafor,ben@x.org"
           },
           {
             "action": "fill",
             "target": "solution-import",
-            "value": "ID,Name,Email\n101,John Smith,john.smith@acme.com\n,Ana Ruiz,ana@acme.com"
+            "value": "ID,Name,Email\n104,Dee Park,dee@x.org\n105,Eli Moss,eli@x.org"
           },
           {
             "action": "click",
@@ -140,8 +147,8 @@
           }
         ],
         "expect": {
-          "target": "solution-summary",
-          "text": "0 added, 2 merged, 0 to review"
+          "target": "solution-result",
+          "text": "Merged 4 rows. New 2, skipped 0, held 0."
         }
       },
       {
@@ -150,12 +157,12 @@
           {
             "action": "fill",
             "target": "solution-master",
-            "value": "ID,Name,Email\n101,John Smith,john@acme.com\n104,Ana Ruiz,ana@acme.com"
+            "value": "ID,Name,Email\n101,Ana Ruiz,ana@x.org\n102,Ben Okafor,ben@x.org"
           },
           {
             "action": "fill",
             "target": "solution-import",
-            "value": "Li Wei,li@acme.com"
+            "value": "103,Cy Lam,cy@x.org\n211,Ana Ruiz,ana.r@x.org"
           },
           {
             "action": "click",
@@ -163,8 +170,8 @@
           }
         ],
         "expect": {
-          "target": "solution-error",
-          "text": "Import row 1 has no Name column."
+          "target": "solution-result",
+          "text": "Import needs a header row with ID and Name."
         }
       },
       {
@@ -173,7 +180,7 @@
           {
             "action": "fill",
             "target": "solution-import",
-            "value": "Name,Email\nLi Wei,li@acme.com"
+            "value": "ID,Name,Email\n103,Cy Lam,cy@x.org\n211,Ana Ruiz,ana.r@x.org"
           },
           {
             "action": "click",
@@ -181,8 +188,8 @@
           }
         ],
         "expect": {
-          "target": "solution-summary",
-          "text": "1 added, 0 merged, 0 to review"
+          "target": "solution-result",
+          "text": "Merged 4 rows. New 1, skipped 0, held 1."
         }
       }
     ]

@@ -13,17 +13,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-25: Station Merge
+### 2026-11-25: Held Merge
 
 <a href="days/2026-11-25/"><img src="days/2026-11-25/team.png" alt="Team for 2026-11-25: Seismologist · Science demonstrator · Haptic interaction designer · Deep space dispatcher" width="100%"></a>
 
 **Task:** Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
 
-**Decision:** Paste your master list and new rows, press Compare, decide each unsure pair, then download one clean list.
+**Decision:** Paste your master list and a new import, press Compare, then settle each held lookalike before downloading.
 
-No asset today. browser mistake failed: solution-error did not show the expected visible result after the saved steps
+<a href="days/2026-11-25/"><img src="days/2026-11-25/cover.png" alt="Designed cover for Held Merge" width="100%"></a>
 
-[Open the day](days/2026-11-25/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-25/) · [Use it](https://isas1.github.io/daily-team/2026-11-25/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -43,7 +43,7 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
-| [2026-11-25](days/2026-11-25/) | No asset | Station Merge | Seismologist · Science demonstrator · Haptic interaction designer · Deep space dispatcher |
+| [2026-11-25](days/2026-11-25/) | <a href="days/2026-11-25/"><img src="days/2026-11-25/cover.png" alt="Held Merge" width="160"></a> | Held Merge | Seismologist · Science demonstrator · Haptic interaction designer · Deep space dispatcher |
 | [2026-11-24](days/2026-11-24/) | No asset | Hold Lane | Voice interface designer · Captioning editor · Optical technician · Copper snail |
 | [2026-11-23](days/2026-11-23/) | No asset | Pair Ledger | Cognitive psychologist · Weather forecaster · Instrument tuner · Returning collaborator |
 | [2026-11-22](days/2026-11-22/) | No asset | Pair Ledger | Lens grinder · Kite maker · Silversmith · One-handed maker |

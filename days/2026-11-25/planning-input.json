@@ -8,18 +8,15 @@
   "sources": [
     {
       "source": "github-trending",
-      "status": "fetched",
-      "count": 14
+      "status": "cached"
     },
     {
       "source": "smashing",
-      "status": "fetched",
-      "count": 12
+      "status": "cached"
     },
     {
       "source": "hacker-news",
-      "status": "fetched",
-      "count": 20
+      "status": "cached"
     }
   ],
   "custom": false,

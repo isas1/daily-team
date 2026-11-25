@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "da5c261cdcf5878d5d9a5572e0401da6c51a0c148141014b7e2a3a2d705fe7a6",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Seismologist.** The held count stays in view until it reads zero. The cover tags the pair \"held\" in amber and keeps the tag open, with no resolved state.\n\n**Science demonstrator.** The cover uses the sample trial rows as raw text, in mono. \"ana ruiz\" stays lower case. The duplicate 102 row is struck through in gray.\n\n**Haptic interaction designer.** The copy is the title, one sentence of about ten words, and the date. A caption explaining the bracket was cut.\n\n**Deep space dispatcher.** Recorded method: show pending work honestly when replies take a long time. On the cover, the open pair is the loudest element after the title.\n\n**Lead's choice**\n\n- **Composition.** \"Held\" and \"Merge\" are stacked on the left and joined by a heavy amber bracket, so the title reads as one held pair. On the right, a ledger of five mono rows repeats the bracket at 2px scale. It joins `101,Ana Ruiz` to `,ana ruiz`. Below the pair sit a skipped duplicate and a new row.\n- **Palette.** Paper #F4EFE4, ink #16181D, amber #D08A12, gray #9A968C. Navy #0E2A47 is used for the footer rule and date. Red #BE4D4D is used for one 28px tick.\n- **Type.** `Cover Headline` at 168px for the title. `Cover Text` for the descriptor and labels. System mono for the ledger rows.",
+  "width": 1200,
+  "height": 630
+}
