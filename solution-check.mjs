@@ -41,8 +41,13 @@ export async function openSolutionBrowser() {
     ...(process.env.CHROME ? { executablePath: process.env.CHROME } : {}) });
 }
 
+const clean = text => (text || '').replace(/\s+/g, ' ').trim();
+
 async function checkCheckpoint(frame, entry, keyboard) {
   try {
+    // The builder never sees the planner's error wording, so a mistake passes on any new visible message.
+    const loose = entry.phase === 'mistake';
+    const before = loose ? clean(await frame.locator(`#${entry.expect.target}`).evaluate(el => el.textContent).catch(() => '')) : '';
     for (const { action, target, value } of entry.steps) {
       const control = frame.locator(`#${target}`);
       if (keyboard) {
@@ -63,12 +68,19 @@ async function checkCheckpoint(frame, entry, keyboard) {
         }
       } else await control[action]();
     }
-    const expected = entry.expect.text.replace(/\s+/g, ' ').trim();
+    if (loose) {
+      const shown = frame.locator(`#${entry.expect.target}`).filter({ hasText: /\S/ });
+      await shown.waitFor({ state: 'visible' });
+      const text = clean(await shown.innerText());
+      if (!text || text === before) throw new Error('unexpected output');
+      return;
+    }
+    const expected = clean(entry.expect.text);
     const literal = expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const result = frame.locator(`#${entry.expect.target}`)
       .filter({ hasText: new RegExp(`^\\s*${literal.replaceAll(' ', '\\s+')}\\s*$`) });
     await result.waitFor({ state: 'visible' });
-    if ((await result.innerText()).replace(/\s+/g, ' ').trim() !== expected) throw new Error('unexpected output');
+    if (clean(await result.innerText()) !== expected) throw new Error('unexpected output');
   } catch (error) {
     const reason = error.message.match(/^solution-[\w-]+ (?:cannot take keyboard focus|did not change with Space)$/)?.[0];
     throw new Error(`browser ${keyboard ? 'keyboard ' : ''}${entry.phase} failed: ${reason || `${entry.expect.target} did not show the expected visible result after the saved steps`}`);

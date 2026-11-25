@@ -411,6 +411,17 @@ test('browser rejects a horizontal overflow and a pointer-only submit control', 
   } finally { await browser.close(); }
 });
 
+test('browser accepts any new error wording for the mistake but still needs a visible change', browserTests, async () => {
+  const browser = await openSolutionBrowser();
+  try {
+    const cases = solution().cases;
+    const reworded = solutionHtml.replace("'Enter a positive length'", "'Length must be above zero.'");
+    assert.deepEqual((await checkSolution(browser, addCsp(reworded), cases, 1)).passed, ['primary', 'alternate', 'mistake', 'recovery']);
+    const silent = solutionHtml.replace("result.textContent = value > 0 ?", "if (!(value > 0)) return; result.textContent = value > 0 ?");
+    await assert.rejects(checkSolution(browser, addCsp(silent), cases, 1), /browser mistake failed/);
+  } finally { await browser.close(); }
+});
+
 
 test('cover drafting overlaps the build and a failed cover does not block the tool', { ...browserTests, timeout: 20_000 }, async () => {
   let coverResponse, buildResponse;
