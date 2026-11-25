@@ -13,17 +13,17 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-24: Hold Lane
+### 2026-11-25: Station Merge
 
-<a href="days/2026-11-24/"><img src="days/2026-11-24/team.png" alt="Team for 2026-11-24: Voice interface designer · Captioning editor · Optical technician · Copper snail" width="100%"></a>
+<a href="days/2026-11-25/"><img src="days/2026-11-25/team.png" alt="Team for 2026-11-25: Seismologist · Science demonstrator · Haptic interaction designer · Deep space dispatcher" width="100%"></a>
 
 **Task:** Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
 
-**Decision:** Paste your master list and a new import, press Compare, decide each held pair, then download the merged list.
+**Decision:** Paste your master list and new rows, press Compare, decide each unsure pair, then download one clean list.
 
 No asset today. browser mistake failed: solution-error did not show the expected visible result after the saved steps
 
-[Open the day](days/2026-11-24/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-25/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -43,15 +43,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-25](days/2026-11-25/) | No asset | Station Merge | Seismologist · Science demonstrator · Haptic interaction designer · Deep space dispatcher |
 | [2026-11-24](days/2026-11-24/) | No asset | Hold Lane | Voice interface designer · Captioning editor · Optical technician · Copper snail |
 | [2026-11-23](days/2026-11-23/) | No asset | Pair Ledger | Cognitive psychologist · Weather forecaster · Instrument tuner · Returning collaborator |
 | [2026-11-22](days/2026-11-22/) | No asset | Pair Ledger | Lens grinder · Kite maker · Silversmith · One-handed maker |
 | [2026-11-21](days/2026-11-21/) | No asset | Two-Clue Merge | Escape room designer · Puzzle setter · Precision machinist · Deadline editor |
 | [2026-11-20](days/2026-11-20/) | No asset | Merge Hold | Wayfinding designer · Stage illusion builder · Dance choreographer · Ink wren |
 | [2026-11-19](days/2026-11-19/) | <a href="days/2026-11-19/"><img src="days/2026-11-19/cover.png" alt="Chained Scale" width="160"></a> | Chained Scale | Furniture designer · Architectural model maker · Color grading specialist · Orbital mechanic |
-| [2026-11-18](days/2026-11-18/) | <a href="days/2026-11-18/"><img src="days/2026-11-18/cover.png" alt="Countermand" width="160"></a> | Countermand | Game interface designer · Watch restorer · Control room operator · Lunar archivist |
 
-[All 52 days](ARCHIVE.md)
+[All 53 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works
