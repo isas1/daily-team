@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-26",
+  "task": "Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.",
+  "brief": null,
+  "team": "Team for 2026-11-26\nSeason: 2026-11-09\n\n1. Paper engineer [new]\n   Method: Keep a list of every guessed number and replace one guess per pass. [new]\n   Stance: Insists it must be beautiful.\n   Temperament: Asks for the simplest case before the general one.\n2. Simulation modeller [new]\n   Method: Set every control to its extreme and check the result still makes sense. [new]\n   Stance: Wants it to last.\n   Temperament: Proposes a test that could prove them wrong.\n3. Planetarium presenter [new]\n   Method: Write one sentence naming what a builder can reuse.\n   Stance: Speaks for the one who finds it.\n   Temperament: Asks who would use it on their worst day.\n4. Remote habitat gardener (future; invented) [guest]\n   Method: Show slow progress without pretending it is complete.\n   Stance: Breaks the frame.\n   Temperament: Restates the goal whenever the talk drifts.\n\nConstraint: The useful result stays visible after motion stops.\nTask: Erosion sandbox: an explorable model for school geography classes that sets rainfall and slope and shows how a riverbank wears away over time.",
+  "provider": "claude",
+  "model": null,
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "28016a3dc8c2185a7673eefb2e0e4c6d3fe273326ea320394f30bdd15539dc47",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": []
+  },
+  "status": "failed",
+  "error": "No saved lead shows a concrete problem the team can solve.",
+  "decision": "",
+  "concept": "",
+  "plan": "",
+  "planProblems": [],
+  "referee": false,
+  "artifacts": []
+}

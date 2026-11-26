@@ -1,11 +1,12 @@
 # Archive
 
-Every daily team and the asset it made, newest first. 53 days recorded.
+Every daily team and the asset it made, newest first. 54 days recorded.
 
 [Today](README.md)
 
 | Date | Project | Open |
 |---|---|---|
+| [2026-11-26](days/2026-11-26/) | Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem. | no asset |
 | [2026-11-25](days/2026-11-25/) | Held Merge | <a href="days/2026-11-25/"><img src="days/2026-11-25/cover.png" alt="Held Merge" width="160"></a> [asset](days/2026-11-25/artifact-1.html) |
 | [2026-11-24](days/2026-11-24/) | Hold Lane | no asset |
 | [2026-11-23](days/2026-11-23/) | Pair Ledger | no asset |
