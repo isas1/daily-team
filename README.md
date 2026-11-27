@@ -13,15 +13,15 @@ Everything in `days/` is written by a language model and checked by scripts, not
 ## Today
 
 <!-- TODAY:START -->
-### 2026-11-26: Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
+### 2026-11-27: Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
 
-<a href="days/2026-11-26/"><img src="days/2026-11-26/team.png" alt="Team for 2026-11-26: Paper engineer · Simulation modeller · Planetarium presenter · Remote habitat gardener" width="100%"></a>
+<a href="days/2026-11-27/"><img src="days/2026-11-27/team.png" alt="Team for 2026-11-27: Wayfinding designer · Stage illusion builder · Railway signaller · Detail collector" width="100%"></a>
 
 **Task:** Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.
 
 No asset today. No saved lead shows a concrete problem the team can solve.
 
-[Open the day](days/2026-11-26/) · [Archive](ARCHIVE.md)
+[Open the day](days/2026-11-27/) · [Archive](ARCHIVE.md)
 <!-- TODAY:END -->
 
 ## This week
@@ -41,15 +41,15 @@ No open suggestions yet.
 <!-- RECENT:START -->
 | Date | Asset | Task | Team |
 |---|---|---|---|
+| [2026-11-27](days/2026-11-27/) | No asset | Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem. | Wayfinding designer · Stage illusion builder · Railway signaller · Detail collector |
 | [2026-11-26](days/2026-11-26/) | No asset | Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem. | Paper engineer · Simulation modeller · Planetarium presenter · Remote habitat gardener |
 | [2026-11-25](days/2026-11-25/) | <a href="days/2026-11-25/"><img src="days/2026-11-25/cover.png" alt="Held Merge" width="160"></a> | Held Merge | Seismologist · Science demonstrator · Haptic interaction designer · Deep space dispatcher |
 | [2026-11-24](days/2026-11-24/) | No asset | Hold Lane | Voice interface designer · Captioning editor · Optical technician · Copper snail |
 | [2026-11-23](days/2026-11-23/) | No asset | Pair Ledger | Cognitive psychologist · Weather forecaster · Instrument tuner · Returning collaborator |
 | [2026-11-22](days/2026-11-22/) | No asset | Pair Ledger | Lens grinder · Kite maker · Silversmith · One-handed maker |
 | [2026-11-21](days/2026-11-21/) | No asset | Two-Clue Merge | Escape room designer · Puzzle setter · Precision machinist · Deadline editor |
-| [2026-11-20](days/2026-11-20/) | No asset | Merge Hold | Wayfinding designer · Stage illusion builder · Dance choreographer · Ink wren |
 
-[All 54 days](ARCHIVE.md)
+[All 55 days](ARCHIVE.md)
 <!-- RECENT:END -->
 
 ## How it works
