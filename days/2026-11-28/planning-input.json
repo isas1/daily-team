@@ -1,0 +1,1425 @@
+{
+  "schemaVersion": 1,
+  "craftVersion": 1,
+  "mode": "project",
+  "date": "2026-11-28",
+  "task": "Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.",
+  "request": null,
+  "sources": [
+    {
+      "source": "github-trending",
+      "status": "fetched",
+      "count": 15
+    },
+    {
+      "source": "smashing",
+      "status": "fetched",
+      "count": 12
+    },
+    {
+      "source": "hacker-news",
+      "status": "fetched",
+      "count": 20
+    }
+  ],
+  "custom": false,
+  "solutionVersion": 1,
+  "qualityVersion": 1,
+  "candidates": [
+    {
+      "id": "7894c64dc70e906c996c8774",
+      "title": "Physics Breakthrough Simulator",
+      "url": "https://pages.ethanmdavidson.com/ai-physics-breakthrough",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T14:52:45.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "c87cd13d69aef69146c01790",
+      "title": "google-labs-code/stitch-skills",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.",
+      "kind": "feed"
+    },
+    {
+      "id": "bb7d17bdebf7d9e2a04799c6",
+      "title": "Why stop at Emacs? Native apps you or an AI reprogram in Clojure while they run",
+      "url": "https://github.com/RiccardoSottini/AffrescoUI",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T14:09:39.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "301f2d14985e5303f37abc05",
+      "title": "GoogleChrome/modern-web-guidance-src",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "Keep your coding agent up to date with the latest web best practices",
+      "kind": "feed"
+    },
+    {
+      "id": "574d7c65207354b2ed81ec30",
+      "title": "IBM MVS 3.8j Community Edition (52-year old OS)",
+      "url": "https://github.com/MVS-sysgen/sysgen",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T13:17:39.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "8b1c7ec39d8341ccd07a023f",
+      "title": "n8n-io/nod",
+      "url": "https://github.com/n8n-io/nod",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "Open source personal agent with its own computer. It chases invoices, preps your calls and cancels trials on real websites, and asks before it acts. Runs on your machine with the model you choose. By n8n.",
+      "kind": "feed"
+    },
+    {
+      "id": "39e066ead81017c6f062f397",
+      "title": "Show HN: Luciole Mono – terminal font designed for legibility",
+      "url": "https://scriptor-pro.github.io/luciole-mono/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T12:50:15.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "c489e6fb5febf2abff16877b",
+      "title": "alibaba/open-code-review",
+      "url": "https://github.com/alibaba/open-code-review",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+      "kind": "feed"
+    },
+    {
+      "id": "8b716eecbb9560f2a0f09e98",
+      "title": "GGUF LLM Models with Hidden Malware on Hugging Face Reached 2400 Victims",
+      "url": "https://malspark.com/blog/malicious-gguf-models-hugging-face/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T11:57:04.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "b88590c43555a909e1ff4309",
+      "title": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+      "kind": "feed"
+    },
+    {
+      "id": "9664a77cd54aa3989ae49777",
+      "title": "Audible removes download option for purchased audiobooks",
+      "url": "https://consumerrights.wiki/w/Audible_removes_download_option_for_purchased_audiobooks",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T11:51:27.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "379642deb53f3714eb4d3fd4",
+      "title": "ChromeDevTools/chrome-devtools-mcp",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "Chrome DevTools for coding agents",
+      "kind": "feed"
+    },
+    {
+      "id": "6883534b81e937fbdac17842",
+      "title": "Farewell",
+      "url": "https://github.com/p-e-w/heretic/issues/601",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T11:42:26.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "f9da1acd54ca38642ffd3679",
+      "title": "tradermonty/claude-trading-skills",
+      "url": "https://github.com/tradermonty/claude-trading-skills",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development.",
+      "kind": "feed"
+    },
+    {
+      "id": "82d791fb8b445f867df4b900",
+      "title": "Claude Code sabotage: preliminary benchmarking",
+      "url": "https://xinyadu.github.io/blog/claude-code-sabotage.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T10:37:40.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "10a12acb9645adccd1054069",
+      "title": "ag-ui-protocol/ag-ui",
+      "url": "https://github.com/ag-ui-protocol/ag-ui",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications.",
+      "kind": "feed"
+    },
+    {
+      "id": "0b70a01ea1ae81566fadf808",
+      "title": "Diablo II",
+      "url": "https://www.filfre.net/2026/11/diablo-ii/",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T09:54:19.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "5e8027802f61d7f22ead2d33",
+      "title": "meta/astryx",
+      "url": "https://github.com/meta/astryx",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "An open source design system that's fully customizable and agent ready",
+      "kind": "feed"
+    },
+    {
+      "id": "1c749128592cff7356f64afb",
+      "title": "Knuth: Moratorium on Error Reports",
+      "url": "https://www-cs-faculty.stanford.edu/~knuth/moratorium.html",
+      "source": "Hacker News",
+      "sourceId": "hacker-news",
+      "published": "2026-11-28T03:49:21.000Z",
+      "summary": "Comments",
+      "kind": "feed"
+    },
+    {
+      "id": "2622cdbdf6f6e22b82c00d31",
+      "title": "pookjw/HermesEnabler",
+      "url": "https://github.com/pookjw/HermesEnabler",
+      "source": "GitHub Trending (weekly, observed)",
+      "sourceId": "github-trending",
+      "published": "2026-11-28T00:00:00.000Z",
+      "observed": true,
+      "summary": "Enable Hermès Watch Faces on any Apple Watch devices",
+      "kind": "feed"
+    },
+    {
+      "id": "daily-task",
+      "kind": "task",
+      "task": "Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem."
+    }
+  ],
+  "recent": [
+    {
+      "date": "2026-10-31",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Handshake Bench",
+        "audience": "Engineers writing or learning network protocol code",
+        "problem": "Timeout and replay failures are hard to reproduce and read",
+        "interaction": "Deliver, drop, duplicate or delay packets and advance the clock by hand",
+        "outcome": "Failed step expands with a one-line cause and a divergence marker between runs",
+        "recovery": "Retry from any snapshot as a new run, or Reset to the opening frame",
+        "mechanism": "Pure state machine fed hand-made events, with per-step snapshots and run diff",
+        "difference": "Packet captures show what happened. This lets you replay it and change one event.",
+        "whyNow": "HN sans-IO WireGuard post shows the testable shape. Dot post shows wish for readable errors. Titles only, no demand data.",
+        "sourceIds": [
+          "8d821849286ada42dbbaeffc",
+          "e32e9e5cb5666d607d79fa51"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Handshake Bench",
+            "need": "Reproduce and explain protocol failures",
+            "mechanism": "Manual clock and per-packet deliver, drop, duplicate, delay",
+            "rejection": "Selected: cross-domain, new to recent dates"
+          },
+          {
+            "name": "Error Signpost",
+            "need": "Plain next steps for a CLI error",
+            "mechanism": "Paste error, get you-are-here sign with routes",
+            "rejection": "Too close to the Dot feed entry and needs real parsing"
+          },
+          {
+            "name": "Fault Tag Sheet",
+            "need": "Report broken shared equipment",
+            "mechanism": "QR label opens a printable fault card",
+            "rejection": "Echoes the Avery label post and recent printables"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "8d821849286ada42dbbaeffc",
+        "e32e9e5cb5666d607d79fa51"
+      ]
+    },
+    {
+      "date": "2026-11-01",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Filing Loupe",
+        "audience": "Court clerks and paralegals screening filings",
+        "problem": "Hidden text in filings reaches AI summarizers unseen",
+        "interaction": "Step a keyboard loupe through hidden passages and name each",
+        "outcome": "Decoded hidden text plus seen vs read word tally and report",
+        "recovery": "Mark Not hidden, undo edits, Clear or Restore sample",
+        "mechanism": "Inert parse flags style and Unicode hiding, lens snaps per finding",
+        "difference": "Format marks miss styled hiding. This shows both readings and the gap",
+        "whyNow": "HN title on court sanction for prompt injection. claude-mem trend observed. Titles only",
+        "sourceIds": [
+          "0e356c09eb849e6e67cab0ec",
+          "853c63f738f0cecf3b918959"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Filing Loupe",
+            "need": "See hidden instructions in filings",
+            "mechanism": "Keyboard loupe steps findings, tally compares readings",
+            "rejection": "Selected: cross-domain, new to recent dates"
+          },
+          {
+            "name": "Cabin Tally",
+            "need": "Split trip costs between families",
+            "mechanism": "Market-clerk aligned running tallies per family",
+            "rejection": "Too close to the cabin split feed entry"
+          },
+          {
+            "name": "Island Payout Sim",
+            "need": "Explain how a basic income is funded",
+            "mechanism": "Households and tax sliders with live balance",
+            "rejection": "Needs fiscal data the sources do not give"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "0e356c09eb849e6e67cab0ec",
+        "853c63f738f0cecf3b918959"
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Tide-mark download",
+        "audience": "People downloading large files from a file panel",
+        "problem": "Fill bars fake progress and hide a stalled transfer",
+        "interaction": "Press or Enter Download, then repeat with its own 44 px tap",
+        "outcome": "Word names Preparing, Waiting or Ready over a byte-driven tide",
+        "recovery": "Repeat drains and restarts; stale replies dropped",
+        "mechanism": "Bytes move the line, a stall halts it flat and flips the word",
+        "difference": "Timed fills climb over a waiting file. This halts on real bytes",
+        "whyNow": "Smashing wallpaper post offers many file sizes. Hallmark trend targets sloppy UI. Titles only, no demand data",
+        "sourceIds": [
+          "17b11f98699dd6891e917f51",
+          "56ed6f5b1a23b5b5c199b408"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Word over tide",
+            "need": "Tell a stalled download from a finished one",
+            "mechanism": "20 px word over 24 px byte-driven tide",
+            "rejection": "Selected: won the vote 2 of 4"
+          },
+          {
+            "name": "Fixed-slot label row",
+            "need": "Read state before tapping",
+            "mechanism": "Label left of a 44 px target with spinner, check, arrow",
+            "rejection": "Waiting and stuck look alike without the word"
+          },
+          {
+            "name": "Edge tab",
+            "need": "Keep the button inside a narrow panel border",
+            "mechanism": "44 px tab cut into the panel's bottom edge",
+            "rejection": "State word leaves the face; no votes"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "17b11f98699dd6891e917f51",
+        "56ed6f5b1a23b5b5c199b408"
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Zero Hour Rehearsal",
+        "audience": "Indie makers shipping a launch page",
+        "problem": "Countdown states at zero and after go unseen",
+        "interaction": "Type launch time, press cues, switch viewer zone",
+        "outcome": "Light and dark panes show each state, then copy snippet",
+        "recovery": "Invalid date keeps last valid; Reset restores sample",
+        "mechanism": "Cue rail jumps clock; Hold moves launch and says so",
+        "difference": "Widgets show only live time; this rehearses all states",
+        "whyNow": "SideProject post: visitors skip own data. impeccable trend: catch sloppy UI. Titles only",
+        "sourceIds": [
+          "9e9ee0e5d4c6312bd2fdf39f",
+          "ec673bd7694d3a658bba5faa"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Zero Hour Rehearsal",
+            "need": "See every countdown state before launch",
+            "mechanism": "Broadcast cue rail with Hold, dual-mode panes",
+            "rejection": "Selected: works offline, covers zero and after"
+          },
+          {
+            "name": "Sunset Export Clock",
+            "need": "Users see a shutdown export deadline",
+            "mechanism": "Countdown flips app to read-only at zero",
+            "rejection": "Needs a real export behind it to help"
+          },
+          {
+            "name": "Split-flap Launch Board",
+            "need": "Countdown readable across a room",
+            "mechanism": "Flap rows flip as each cue arrives",
+            "rejection": "A skin of a counter; breaks at 320 px"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "9e9ee0e5d4c6312bd2fdf39f",
+        "ec673bd7694d3a658bba5faa"
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Write Time-Out",
+        "audience": "Engineers running ad hoc SQL writes on production",
+        "problem": "Confirm dialogs get clicked through and name no rows",
+        "interaction": "Type a write, tick three readback lines, commit",
+        "outcome": "Row count, before/after rows, then toast with Undo",
+        "recovery": "Toast Undo, history Restore, Reset sample",
+        "mechanism": "Surgical time-out readback; edits clear ticks; no WHERE needs typed name",
+        "difference": "Are-you-sure modals and read-only modes; this shows rows hit and undoes",
+        "whyNow": "NiceDB post: prod read-only by default. Worktrunk: parallel agent edits. Titles only, no demand data",
+        "sourceIds": [
+          "65db66769efd1b895ea5c3f0",
+          "d2a13eb5e04b724bc066229f"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Write Time-Out",
+            "need": "Know what a prod write will change",
+            "mechanism": "Readback card with per-line ticks and undo toast",
+            "rejection": "Selected: works offline, cross-domain, new to recent dates"
+          },
+          {
+            "name": "Worktree Ledger",
+            "need": "See which agent worktree saved which file",
+            "mechanism": "Per-worktree save marks and conflict preview",
+            "rejection": "Needs a live repo to be useful"
+          },
+          {
+            "name": "Apt Source Check",
+            "need": "Spot weak entries in sources.list",
+            "mechanism": "Paste file, mark each line by transport and key",
+            "rejection": "Advisory details unknown; flags would be guesses"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "65db66769efd1b895ea5c3f0",
+        "d2a13eb5e04b724bc066229f"
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Shelf Read",
+        "audience": "Maintainers of curated link lists",
+        "problem": "Stale but live links pile up; place is lost",
+        "interaction": "Page 8-entry shelves, mark Keep, Stale or Move",
+        "outcome": "Read-shelf rail, tally, pruned markdown and change list",
+        "recovery": "Undo last mark, bad paste keeps list, Reset sample",
+        "mechanism": "Library shelf-reading: per-shelf read marks persist",
+        "difference": "Link checkers miss live abandoned links; this adds judged pass",
+        "whyNow": "HN title on awesome lists decaying; skills repo observed trending. Titles only",
+        "sourceIds": [
+          "aeba5bf756bb149e5d922f04",
+          "82a901da1b9bedec6f38670b"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Shelf Read",
+            "need": "Prune a long curated list over sessions",
+            "mechanism": "Shelf pages with read marks and keyed triage",
+            "rejection": "Selected: offline, cross-domain, leaves a file"
+          },
+          {
+            "name": "Turn Pager",
+            "need": "Move through long chat transcripts by keys",
+            "mechanism": "Turn rail with J/K jumps and turn count",
+            "rejection": "Reads only, drifts toward a chat wrapper"
+          },
+          {
+            "name": "Discount Ledger",
+            "need": "Check if a was price existed",
+            "mechanism": "Paste seen prices, page dates against claim",
+            "rejection": "Echoes feed entry, needs real price data"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "aeba5bf756bb149e5d922f04",
+        "82a901da1b9bedec6f38670b"
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Register Check",
+        "audience": "Front-end developers building project galleries",
+        "problem": "Skeletons drift from loaded cards; CLS names no card or edge",
+        "interaction": "Scrub skeleton-to-loaded slider, jump to worst edge, nudge to fit",
+        "outcome": "Per-card edge offsets in px, live fringe, copyable CSS fix",
+        "recovery": "Undo nudge, Reset sample, Back to sheet keeps scroll",
+        "mechanism": "Print registration: cyan and magenta plates multiply; fringe marks offset",
+        "difference": "Lighthouse CLS is one post-load number; this names card, edge and fix",
+        "whyNow": "Steam post on what AI output needed checking; Smashing on accessible chat. Titles only, no demand data",
+        "sourceIds": [
+          "253db4766250cc7717ffc2b3",
+          "d2e1dde966c93221d87261d6"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Register Check",
+            "need": "See where a skeleton mismatches loaded cards",
+            "mechanism": "Two-plate overlay with scrub slider and 1 px nudge",
+            "rejection": "Selected: offline, cross-domain, measurable result"
+          },
+          {
+            "name": "Announce Pacer",
+            "need": "Pace screen-reader output in streaming chat",
+            "mechanism": "Rehearse live-region rules against a token stream",
+            "rejection": "Needs untested AT claims; nears chat wrapper"
+          },
+          {
+            "name": "Pitfall Colony",
+            "need": "Explain ant survival in a closed bunker",
+            "mechanism": "Explorable inflow sliders with route back up",
+            "rejection": "Title only; no data to model honestly"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "253db4766250cc7717ffc2b3",
+        "d2e1dde966c93221d87261d6"
+      ]
+    },
+    {
+      "date": "2026-11-07",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Anchor Zoom",
+        "audience": "People retouching regions in image editors",
+        "problem": "Zooming in pushes the selected area off screen",
+        "interaction": "Drag or key the zoom slider with a region selected",
+        "outcome": "Image scales around the selection, which stays in view",
+        "recovery": "Failures offer Fit at N%, Step edges, Select subject, Recenter, Reset",
+        "mechanism": "Magnifier focus-follow: offset tracks selection, zoom saved per selection",
+        "difference": "Editors zoom on centre or cursor; this holds the work region in view",
+        "whyNow": "OpenScreen layouts post and HN agent memory title hint at view and recall needs. Titles only, no demand data",
+        "sourceIds": [
+          "7504546fbd94a83a321f8354",
+          "f0247d2be6d23fda27989bba"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Anchor Zoom",
+            "need": "Keep the selection visible while zooming",
+            "mechanism": "Selection-anchored slider with per-selection recall",
+            "rejection": "Selected: cross-domain, fits 320 px, new to recent dates"
+          },
+          {
+            "name": "Figure Inset",
+            "need": "See detail and full context together",
+            "mechanism": "Boxed inset with leader line and scale bar",
+            "rejection": "Halves canvas on phones; echoes Filing Loupe"
+          },
+          {
+            "name": "Scale Rule Stops",
+            "need": "Preview at fixed output scales",
+            "mechanism": "Detented 1:1, 1:2, 1:4 strip like a scale rule",
+            "rejection": "Solves a different need and needs DPI data"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "7504546fbd94a83a321f8354",
+        "f0247d2be6d23fda27989bba"
+      ]
+    },
+    {
+      "date": "2026-11-08",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Tachograph Upload",
+        "audience": "Video creators uploading large clips on unstable networks",
+        "problem": "Rings merge sent and stored bytes and hide where a stall began",
+        "interaction": "Upload, Pause, drop network, Resume or Retry",
+        "outcome": "Ring shows safe parts, flat stall arc, then Copy link",
+        "recovery": "Resume from last stored part, Retry guarded, Reset sample",
+        "mechanism": "Tachograph disc: angle is acked bytes, radius is rate; 8 part notches",
+        "difference": "Percent rings reset or freeze; this shows what survived and where",
+        "whyNow": "SideProject scanner post: people build own media tools. HN microcontroller text: small readouts. Titles only, no demand data",
+        "sourceIds": [
+          "79f83838997b3539b5680f2d",
+          "fbb4c6ab199fa8c66f539df1"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Tachograph Upload",
+            "need": "Know what a dropped upload kept",
+            "mechanism": "Acked-part notches with radial rate trace",
+            "rejection": "Selected: cross-domain, differs from 11-02 tide download"
+          },
+          {
+            "name": "Light Budget Ring",
+            "need": "See mobile data spent on retries",
+            "mechanism": "Lux-hour style budget arc per retry",
+            "rejection": "Needs carrier plan data; kept as one footnote"
+          },
+          {
+            "name": "Contact Sheet",
+            "need": "Track several files at once",
+            "mechanism": "Frames darken as each file lands",
+            "rejection": "Echoes 10-29 import manifest"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "79f83838997b3539b5680f2d",
+        "fbb4c6ab199fa8c66f539df1"
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Key Ring Invite",
+        "audience": "Team admins sharing app invite links",
+        "problem": "Copied invite links leak and stay valid unseen",
+        "interaction": "Pick role and expiry, press Copy invite, revoke tags",
+        "outcome": "Clipboard link plus tagged key on ring: code, role, expiry",
+        "recovery": "Revoke any tag; blocked clipboard selects link for Ctrl+C; Reset",
+        "mechanism": "Each copy mints a tagged key; revoked tags stay struck",
+        "difference": "Copy buttons flash a tick; this names what was shared and revokes it",
+        "whyNow": "HN title on AI vendor breach reaching Notion customers. Title only, no demand data",
+        "sourceIds": [
+          "c7d3010a8bcc401c0c2a91aa"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Key Ring Invite",
+            "need": "Know and revoke what each copied link grants",
+            "mechanism": "Per-copy tagged keys on a ring with notch glyphs",
+            "rejection": "Selected: cross-domain, offline, new to recent dates"
+          },
+          {
+            "name": "Readback Copy",
+            "need": "Confirm the clipboard holds the right link",
+            "mechanism": "Paste-check field matching last 4 characters",
+            "rejection": "Checks the copy, not its reach; adds a field"
+          },
+          {
+            "name": "Handoff Card",
+            "need": "Invite someone in person",
+            "mechanism": "Printable QR card with expiry stamp",
+            "rejection": "Echoes recent printables; skips the copy task"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "c7d3010a8bcc401c0c2a91aa"
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Pinned Tags",
+        "audience": "Editors tagging drafts in a publishing tool",
+        "problem": "Tags detach from the text that justified them",
+        "interaction": "Select words, type a tag, Enter; edit or remove chips",
+        "outcome": "Chip pinned to a phrase; press it to light the phrase",
+        "recovery": "Undo removal, Escape reverts edit, Reset sample",
+        "mechanism": "Each tag stores its quote; edits that delete it mark pin lost",
+        "difference": "Tag fields keep a flat list; this shows why and when a tag breaks",
+        "whyNow": "mostra post title: comments placed where you point. Title only, no demand data",
+        "sourceIds": [
+          "c695e2885bf59220365ca2ec"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Pinned Tags",
+            "need": "Keep tags tied to the text they describe",
+            "mechanism": "Selection-anchored chips with pin lost state",
+            "rejection": "Selected: cross-domain, offline, new to recent dates"
+          },
+          {
+            "name": "Keyboard Tag Rail",
+            "need": "Tag a draft with no mouse",
+            "mechanism": "Key-only chip rail from hotel no-mouse post",
+            "rejection": "A shortcut layer on a plain tag field"
+          },
+          {
+            "name": "Bidi Tag Field",
+            "need": "Mix Hebrew, Arabic and Latin tags",
+            "mechanism": "Per-chip direction with caret order hints",
+            "rejection": "Needs RTL user testing the sources lack"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "c695e2885bf59220365ca2ec"
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Gauge Shelf",
+        "audience": "Reporters browsing a statistics chart library",
+        "problem": "Switching list, grid, compact loses the stat being read",
+        "interaction": "Press List, Grid or Compact, even rapidly",
+        "outcome": "Read stat stays at same screen height, outlined, figure aligned",
+        "recovery": "Last press wins; anchor from before burst; empty shows No stats",
+        "mechanism": "Gauge rule: anchor offset saved before switch, restored after, under 8px",
+        "difference": "View toggles reflow from top; this holds place and figure column",
+        "whyNow": "UK by Numbers post shows public stats libraries. Title only, no demand data",
+        "sourceIds": [
+          "f2a3efafda89d422e16693fa"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Gauge Shelf",
+            "need": "Keep place and figures while changing view density",
+            "mechanism": "Anchored three-view switch with fixed figure column",
+            "rejection": "Selected: cross-domain, offline; differs from 11-07 zoom anchor"
+          },
+          {
+            "name": "Doodle Relay Shelf",
+            "need": "Browse doodles left by past visitors",
+            "mechanism": "Grid, list, compact of visitor doodles by time",
+            "rejection": "Echoes the doodle feed entry; weak need"
+          },
+          {
+            "name": "Pass Contact Sheet",
+            "need": "See which satellites imaged a place",
+            "mechanism": "Three views of passes with image thumbs",
+            "rejection": "Needs real imagery; echoes 11-08 contact sheet"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "f2a3efafda89d422e16693fa"
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Cut on Save",
+        "audience": "Writers and developers saving files in an editor",
+        "problem": "A Saved tick never shows which edits are still at risk",
+        "interaction": "Type, press Save or Ctrl+S, toggle a failure, Retry",
+        "outcome": "Stored words turn from pencil to carved; newer edits stay pencil",
+        "recovery": "Failure keeps edits in pencil with guarded Retry; Reset sample",
+        "mechanism": "Snapshot-scoped save carves only ranges sent; later typing stays pending",
+        "difference": "Editors show a file-level dot; this marks unsaved words in place",
+        "whyNow": "Zed trending observed, summary names a multiplayer editor. Title and summary only, no demand data",
+        "sourceIds": [
+          "b6bd2783a916c52eefcb6ee6"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Cut on Save",
+            "need": "See which words a save stored",
+            "mechanism": "Pencil-to-carved ranges scoped to save snapshot",
+            "rejection": "Selected: cross-domain, offline, new to recent dates"
+          },
+          {
+            "name": "Tumbler Lock Save",
+            "need": "Count edits a save covers",
+            "mechanism": "Button lock with one tumbler per edit",
+            "rejection": "Moves the answer off the text"
+          },
+          {
+            "name": "Save Limit Gauge",
+            "need": "Know time since last stored version",
+            "mechanism": "Arc fills toward an autosave limit",
+            "rejection": "Timer nags and hides which edits are at risk"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "b6bd2783a916c52eefcb6ee6"
+      ]
+    },
+    {
+      "date": "2026-11-14",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Checked Countdown",
+        "audience": "Visitors to a product launch page",
+        "problem": "Device clock skew and unnamed zones make countdowns wrong",
+        "interaction": "Watch countdown, press Notify or Buy, shift demo clock",
+        "outcome": "Local launch time, clock offset, Buy opens at true zero",
+        "recovery": "Skewed press stays shut with offset note beside it; Reset",
+        "mechanism": "Station clock check: offset stored, count runs on corrected time",
+        "difference": "Timers trust device clock and omit zone; this shows both",
+        "whyNow": "Smashing audit asks what users need to verify output. Title and summary only, no demand data",
+        "sourceIds": [
+          "9f663437118e879c3e8168d2"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Checked Countdown",
+            "need": "Trust when a launch opens locally",
+            "mechanism": "Clock offset check with note beside the button",
+            "rejection": "Selected: cross-domain, offline; differs from 11-03 rehearsal"
+          },
+          {
+            "name": "Arrival Rings",
+            "need": "See launch reach each time zone",
+            "mechanism": "Wavefront rings light zones on a world map",
+            "rejection": "Hides the visitor's own zone; slow on phones"
+          },
+          {
+            "name": "Launch Queue Slip",
+            "need": "Know your place once sales open",
+            "mechanism": "Numbered slip issued at zero",
+            "rejection": "Needs a real server to be honest"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "9f663437118e879c3e8168d2"
+      ]
+    },
+    {
+      "date": "2026-11-15",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Gapless Rank",
+        "audience": "Team leads reprioritizing a planning board",
+        "problem": "After a reorder, nobody can tell which tasks shifted",
+        "interaction": "Select a task, press a number or Alt+arrow, or drag",
+        "outcome": "Gapless 1..n renumber; shifted rows show old number struck",
+        "recovery": "Undo restores order and marks; Reset restores sample",
+        "mechanism": "Ledger correction: last move's old positions kept struck",
+        "difference": "Drag lists reorder with no trace; this shows what shifted",
+        "whyNow": "HN Rust post on gapless sequences. Title only, no demand data",
+        "sourceIds": [
+          "ddd34cc7886c3c3654c885f3"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Gapless Rank",
+            "need": "See what a reorder shifted",
+            "mechanism": "Gapless renumber with struck old positions",
+            "rejection": "Selected: cross-domain, offline, new to recent dates"
+          },
+          {
+            "name": "Swap Ledger",
+            "need": "Reorder by trading two tasks",
+            "mechanism": "Pair-swap only, each swap logged",
+            "rejection": "Long moves take many swaps"
+          },
+          {
+            "name": "Earcon Order",
+            "need": "Hear position while reordering",
+            "mechanism": "Pitch rises with rank on each step",
+            "rejection": "Needs audio; hidden cost for shared rooms"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "ddd34cc7886c3c3654c885f3"
+      ]
+    },
+    {
+      "date": "2026-11-16",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Clay Mend",
+        "audience": "Indie game devs blocking out clay terrain",
+        "problem": "Undo restores silently; random brushes redo differently",
+        "interaction": "Press or Scatter clay, then Undo or Redo",
+        "outcome": "Gold seam outlines restored clay; status names tool, count, seed",
+        "recovery": "Redo replays from seed; Reset restores sample and seed 7031",
+        "mechanism": "Masked history; undo traces mask edge in gold, folds to crease",
+        "difference": "History panels name steps off-canvas; this marks the region and repeats random edits",
+        "whyNow": "SideProject post on a game world made of clay. Title only, no demand data",
+        "sourceIds": [
+          "5c9f3a4ba90c3c4b005240dc"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Clay Mend",
+            "need": "See what an undo brought back",
+            "mechanism": "Gold seam on restored mask with visible seed",
+            "rejection": "Selected: cross-domain, offline; differs from 10-29 layer list"
+          },
+          {
+            "name": "Before/After Swipe",
+            "need": "Compare canvas states",
+            "mechanism": "Drag a divider between pre and post undo",
+            "rejection": "Extra step; eye leaves the work"
+          },
+          {
+            "name": "Step Film Strip",
+            "need": "Jump many steps back",
+            "mechanism": "Thumbnail strip of every history entry",
+            "rejection": "A history panel; echoes 10-20 rewind"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "5c9f3a4ba90c3c4b005240dc"
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Shelf Peek",
+        "audience": "People creating accounts on signup forms",
+        "problem": "Reveal toggles shift layout, lose caret, hide lookalike chars",
+        "interaction": "Type, press Show or Alt+F8, Escape hides, Create account",
+        "outcome": "Fixed cells show each char with class mark; caret kept",
+        "recovery": "Escape or blur hides; failed submit keeps input, Retry; Reset",
+        "mechanism": "Babel page: one char per reserved cell, shelf line of length and alphabet",
+        "difference": "Eye toggles swap type and jump width; this keeps size and marks lookalikes",
+        "whyNow": "Library of Babel post: any string sits on a page. Title only, no demand data",
+        "sourceIds": [
+          "5145194c97dcbf48afca4167"
+        ],
+        "evidenceStatus": "sourced",
+        "alternatives": [
+          {
+            "name": "Shelf Peek",
+            "need": "Check a password for typos before signup",
+            "mechanism": "Reserved cell page with class marks, caret kept",
+            "rejection": "Selected: cross-domain, offline, new to recent dates"
+          },
+          {
+            "name": "Space Walk",
+            "need": "See why length beats symbols",
+            "mechanism": "Walk rooms of search space as you type",
+            "rejection": "Strength meter in disguise; ignores breach lists"
+          },
+          {
+            "name": "Hold Peek",
+            "need": "Reveal briefly on a crowded train",
+            "mechanism": "Press and hold to show, release hides",
+            "rejection": "Fails keys-only use and needs steady hold"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "5145194c97dcbf48afca4167"
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "task": "Create one original, useful interactive project from current signals. Choose a real audience and need; turn cross-domain ideas into a working offline prototype.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Countermand",
+        "audience": "Developers reviewing a coding agent's plan before and during its run",
+        "problem": "After feedback is sent, reversing one choice deletes the note locally, and the agent never learns the step is back",
+        "interaction": "Select a plan step, press Keep or Cut, press Send; later reverse a sent mark and Send again",
+        "outcome": "Outbox lists numbered lines; reversing a sent Cut produces 'Restore 3 · reverses #1', and Send shows the unsent count",
+        "recovery": "Reversing an unsent mark removes its pending line; a wrong sent cut is fixed by Keep plus Cut on the right step, then Send",
+        "mechanism": "Each step holds sent and wanted states; any mismatch emits a line, and Restore cites the send number that set the old state",
+        "difference": "Usual review tools edit or delete notes in place, so a reversal sends nothing; here a reversal after send becomes an explicit numbered countermand",
+        "whyNow": "Saved trending item plannotator describes sending all plan feedback to agents in one click; that suggests the after-send case matters, with no demand data",
+        "sourceIds": [
+          "e6357f1e7e944cc84f059f59"
+        ],
+        "evidenceStatus": "sourced",
+        "craft": {
+          "rule": "Lunar archivist: every saved choice easy to find and reverse. A sent mark can't be erased; a mismatch between sent and wanted emits a Restore line citing the send number, so undo after send creates output",
+          "design": "Surface: five fixed plan rows, 28px ring+fill mark slot. Phone: rows, Keep/Cut bar, sticky Send+outbox. Mono for numbers, sans for steps. Ink on paper, red Cut, blue Restore. Sparse. 120ms fill slide; loop stops at rest",
+          "trial": {
+            "start": "Plan 'Add CSV export': 1 Read schema, 2 Add route, 3 Write migration, 4 Add tests, 5 Update docs. All Keep, ledger empty",
+            "action": "Select 3, press Cut, press Send (#1 Cut 3). Then select 3, press Keep",
+            "result": "Row 3 ring red, fill ink; outbox 'Restore 3 · reverses #1'; button 'Send 1'; title dot on. No loop frames after 120ms",
+            "mistake": "User meant to cut step 4, pressed Keep on 3, and walked away without pressing Send, so the agent still holds #1",
+            "recovery": "Send 1 and title dot stay visible; Cut 4 adds a line, Send makes #2 with Restore 3 and Cut 4; rings match fills, Send greys"
+          }
+        },
+        "alternatives": [
+          {
+            "name": "Countermand",
+            "need": "Reverse a sent plan choice so the agent hears it",
+            "mechanism": "Sent vs wanted states per step; mismatch emits numbered Cut or Restore lines",
+            "action": "Cut a step, Send, then press Keep on it",
+            "result": "Outbox shows 'Restore 3 · reverses #1' and Send 1",
+            "rejection": "Selected: clear gain over in-place note deletion, and the rule changes output state"
+          },
+          {
+            "name": "Hold Points",
+            "need": "Decide where an unattended agent must stop and wait",
+            "mechanism": "Steps marked Go or Hold; dependents of a Hold inherit it; a reach line marks the last unattended step",
+            "action": "Toggle Hold on a plan step",
+            "result": "Reach line moves up; dependent steps grey as blocked",
+            "rejection": "Rejected: Hold-moves-the-line repeats Zero Hour Rehearsal, and dependency entry is too heavy for one screen"
+          },
+          {
+            "name": "Note Weigher",
+            "need": "Catch contradictory review notes before one-click send",
+            "mechanism": "Groups notes by step and flags pairs that both cut and edit the same step",
+            "action": "Type two notes on the same step",
+            "result": "Conflict pair shown with Keep one prompt",
+            "rejection": "Rejected: needs text heuristics that misfire offline; conflicts are rarer than reversals"
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "e6357f1e7e944cc84f059f59"
+      ]
+    },
+    {
+      "date": "2026-11-19",
+      "task": "Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Chained Scale",
+        "audience": "Home sewers printing PDF patterns on a home printer",
+        "problem": "A test square printed at an adjusted scale still measures wrong, and the next scale must be calculated from the current one, not from 100%",
+        "interaction": "Type printed scale, intended square size and unit, measured width and height, press Calculate, then open and print the calibration page",
+        "outcome": "Exact next scale to one decimal place, per-axis warning, whole-number box error over 1 m, and a printable calibration page",
+        "recovery": "A measurement outside 0.8 to 1.25 of the intended size blocks the result and names the field, value and unit; correcting it and pressing Calculate clears the error",
+        "mechanism": "Each axis scale is printed times intended divided by measured; axes within 0.5 points are averaged, otherwise both are shown; the result stays empty until every field is valid",
+        "difference": "Baseline is adjust, reprint and remeasure by guess. Here one calculation from the current scale gives the next setting, and the calibration page is printed in place of the pattern",
+        "whyNow": "The reviewed brief dated 2026-11-19 states the workaround and the gap; live feeds held no concrete problem; no demand figures are claimed",
+        "sourceIds": [
+          "reddit-1wn8svu"
+        ],
+        "evidenceStatus": "sourced",
+        "proof": {
+          "workaround": "Print at actual size, check the test square with a ruler, then adjust printer scale and print again if needed.",
+          "gap": "When the measured square is still off, calculate the exact scale from the measured and intended lengths, and give a single calibration page to print before risking the whole pattern.",
+          "improvement": "Calculating from 97% gives 94.2% where calculating from 100% gives 97.1%; the tool removes that wrong-base error and replaces guessed reprints with one calculated setting plus one test-page print"
+        },
+        "craft": {
+          "rule": "Architectural model maker: chained scale ratios. The new scale multiplies the scale already used, per axis, instead of restarting at 100%. A 97% print measuring 103 of 100 mm yields 94.2%, not 97.1%",
+          "design": "Work surface is one equation line: printed % times intended over measured equals next %. Phone: inputs stacked, result and Print pinned below. Mono tabular figures, sans labels, ink on paper, one blue focus ring, red error text. Sparse, about 30 words. No motion",
+          "trial": {
+            "start": "Fresh page, unit mm, all fields empty, result blank",
+            "action": "Printed 97, intended 100, across 103, down 103, press Calculate",
+            "result": "Result reads Print at 94.2%; detail shows whole-number 94% and the 1 m error",
+            "mistake": "User types a centimetre reading, 10.3, into across and down while the unit is mm",
+            "recovery": "Error names Across 10.3 mm; user types 103 in both, presses Calculate; error clears and Print at 94.2% returns"
+          }
+        },
+        "alternatives": [
+          {
+            "name": "Chained Scale",
+            "need": "Next printer scale after a test print measured wrong",
+            "mechanism": "Per-axis ratio chained from the current scale, with a units check",
+            "action": "Type printed scale, intended size and measured across and down, press Calculate",
+            "result": "Exact next scale, whole-number error over 1 m, printable calibration page",
+            "rejection": "Selected: it produces the printer setting the brief asks for and stops the wrong-base and wrong-unit errors"
+          },
+          {
+            "name": "Card Window",
+            "need": "Check paper size without a ruler",
+            "mechanism": "User matches a box to a bank card to set screen pixels per mm, then shows a true-size square",
+            "action": "Drag box edges to match a card held against the screen",
+            "result": "True-size square on screen to lay paper against",
+            "rejection": "Rejected: screen calibration drifts between devices and still yields no printer scale"
+          },
+          {
+            "name": "Seam Count",
+            "need": "Find which tile slipped in a taped pattern",
+            "mechanism": "Cumulative drift computed from the gap typed at each seam",
+            "action": "Type measured gap at each seam of assembled tiles",
+            "result": "Tile that is off and its offset in mm",
+            "rejection": "Rejected: it needs the whole pattern printed first, which wastes the paper the brief aims to save"
+          }
+        ],
+        "cases": [
+          {
+            "phase": "primary",
+            "steps": [
+              {
+                "action": "fill",
+                "target": "solution-printed",
+                "value": "97"
+              },
+              {
+                "action": "fill",
+                "target": "solution-intended",
+                "value": "100"
+              },
+              {
+                "action": "fill",
+                "target": "solution-width",
+                "value": "103"
+              },
+              {
+                "action": "fill",
+                "target": "solution-height",
+                "value": "103"
+              },
+              {
+                "action": "click",
+                "target": "solution-calc"
+              }
+            ],
+            "expect": {
+              "target": "solution-result",
+              "text": "Print at 94.2%"
+            }
+          },
+          {
+            "phase": "alternate",
+            "steps": [
+              {
+                "action": "select",
+                "target": "solution-unit",
+                "value": "in"
+              },
+              {
+                "action": "fill",
+                "target": "solution-printed",
+                "value": "100"
+              },
+              {
+                "action": "fill",
+                "target": "solution-intended",
+                "value": "4"
+              },
+              {
+                "action": "fill",
+                "target": "solution-width",
+                "value": "4.125"
+              },
+              {
+                "action": "fill",
+                "target": "solution-height",
+                "value": "4.125"
+              },
+              {
+                "action": "click",
+                "target": "solution-calc"
+              }
+            ],
+            "expect": {
+              "target": "solution-result",
+              "text": "Print at 97.0%"
+            }
+          },
+          {
+            "phase": "mistake",
+            "steps": [
+              {
+                "action": "fill",
+                "target": "solution-printed",
+                "value": "97"
+              },
+              {
+                "action": "fill",
+                "target": "solution-intended",
+                "value": "100"
+              },
+              {
+                "action": "fill",
+                "target": "solution-width",
+                "value": "10.3"
+              },
+              {
+                "action": "fill",
+                "target": "solution-height",
+                "value": "10.3"
+              },
+              {
+                "action": "click",
+                "target": "solution-calc"
+              }
+            ],
+            "expect": {
+              "target": "solution-error",
+              "text": "Across 10.3 mm is far from 100 mm. Check units."
+            }
+          },
+          {
+            "phase": "recovery",
+            "steps": [
+              {
+                "action": "fill",
+                "target": "solution-width",
+                "value": "103"
+              },
+              {
+                "action": "fill",
+                "target": "solution-height",
+                "value": "103"
+              },
+              {
+                "action": "click",
+                "target": "solution-calc"
+              }
+            ],
+            "expect": {
+              "target": "solution-result",
+              "text": "Print at 94.2%"
+            }
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "reddit-1wn8svu"
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "task": "Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.",
+      "project": {
+        "schemaVersion": 1,
+        "name": "Held Merge",
+        "audience": "A spreadsheet beginner who merges recurring imports of hundreds of rows into one master list",
+        "problem": "Near-duplicate rows must be reviewed before they reach the master list, and same-name records with different IDs must not be fused without a decision",
+        "interaction": "Paste master and import CSV text, press Compare, press Merge or Keep both on each held pair, press Download CSV",
+        "outcome": "A status line with row, new, skipped and held counts, a queue of held pairs, and a downloadable merged CSV with a Review column",
+        "recovery": "A missing ID or Name header shows an error naming the list and columns; the pasted text stays, the user adds the header and presses Compare again",
+        "mechanism": "Same ID is skipped, same normalized name with empty or different ID is held, the rest is new; held rows are counted, shown on Download and written with Review=held until decided",
+        "difference": "Baseline is a workbook macro or Power Query plus manual review. Here the user pastes two lists and presses Compare with no query to build, and a different-ID same-name row is never merged without a click",
+        "whyNow": "The reviewed brief dated 2026-11-19 describes the task, workaround and gap. Today's cached live leads hold no concrete user problem. No demand size is claimed",
+        "sourceIds": [
+          "reddit-1xxlhji"
+        ],
+        "evidenceStatus": "sourced",
+        "proof": {
+          "workaround": "Maintain a workbook macro or set up Power Query, then review potential matches before writing them to the master list",
+          "gap": "No reusable offline review step that takes pasted rows, queues near matches, keeps IDs and same-name records distinct until the user decides, and downloads the merged result",
+          "improvement": "Paste, Compare, decide, Download: no macro or query to build, and a same-name row with a different ID always waits for a Merge or Keep both click instead of matching automatically"
+        },
+        "craft": {
+          "rule": "Deep space dispatcher: show pending work honestly. Lookalike rows enter a held state that counts toward N, shows on the Download label and is written with Review=held. Only Merge (held to skipped) or Keep both (held to new) changes that state",
+          "design": "Left-to-right sequence: Master and Import feed one result ledger; held pairs are two mono rows joined by a 2px amber bracket. Phone: inputs, Compare, result, queue, pinned Download. Mono rows, sans labels, ink on paper, amber held, gray strike skipped, blue focus. Sparse. 120ms collapse only",
+          "trial": {
+            "start": "Fresh page. Master: 101 Ana Ruiz, 102 Ben Okafor, with ID,Name,Email header",
+            "action": "Paste an import with header and rows 102 Ben Okafor, blank-ID ana ruiz, 103 Cy Lam, then press Compare",
+            "result": "Status reads Merged 4 rows. New 1, skipped 1, held 1. The queue shows ana ruiz bracketed to 101 Ana Ruiz, and Download reads Download CSV (1 held)",
+            "mistake": "The user pastes import rows without the ID,Name,Email header line and presses Compare",
+            "recovery": "The error names Import and the missing ID and Name columns while the pasted rows stay. The user adds the header, presses Compare, and the counts and queue return"
+          }
+        },
+        "alternatives": [
+          {
+            "name": "Held Merge",
+            "need": "Merge an import into a master list without fusing lookalike records unseen",
+            "mechanism": "ID and normalized-name classification with a held state that stays counted and is exported until decided",
+            "action": "Paste master and import CSV text, press Compare",
+            "result": "Counts of new, skipped and held, a bracketed held-pair queue, and a CSV download with a Review column",
+            "rejection": "Selected: it completes the merge offline, and held pairs keep same-name different-ID records apart until a click"
+          },
+          {
+            "name": "Predict Count",
+            "need": "Catch an unexpected number of new rows before it reaches the master list",
+            "mechanism": "The user enters an expected new-row count before the reveal; a mismatch highlights the surplus rows",
+            "action": "Type the expected number of new rows, then paste the import and press Reveal",
+            "result": "Predicted versus actual count, with surplus rows marked",
+            "rejection": "Rejected: the guess adds a step and still produces no merged list or review decisions"
+          },
+          {
+            "name": "Formula Card",
+            "need": "Flag duplicates inside the user's own Excel workbook",
+            "mechanism": "Generates an XLOOKUP and COUNTIF formula from the pasted header names",
+            "action": "Paste both header rows and press Make formula",
+            "result": "A copyable formula that marks matching rows in Excel",
+            "rejection": "Rejected: it matches on name alone, so 211 Ana Ruiz would be flagged as 101, and the review still happens by hand"
+          }
+        ],
+        "cases": [
+          {
+            "phase": "primary",
+            "steps": [
+              {
+                "action": "fill",
+                "target": "solution-master",
+                "value": "ID,Name,Email\n101,Ana Ruiz,ana@x.org\n102,Ben Okafor,ben@x.org"
+              },
+              {
+                "action": "fill",
+                "target": "solution-import",
+                "value": "ID,Name,Email\n102,Ben Okafor,ben@x.org\n,ana ruiz,ana@x.org\n103,Cy Lam,cy@x.org"
+              },
+              {
+                "action": "click",
+                "target": "solution-compare"
+              }
+            ],
+            "expect": {
+              "target": "solution-result",
+              "text": "Merged 4 rows. New 1, skipped 1, held 1."
+            }
+          },
+          {
+            "phase": "alternate",
+            "steps": [
+              {
+                "action": "fill",
+                "target": "solution-master",
+                "value": "ID,Name,Email\n101,Ana Ruiz,ana@x.org\n102,Ben Okafor,ben@x.org"
+              },
+              {
+                "action": "fill",
+                "target": "solution-import",
+                "value": "ID,Name,Email\n104,Dee Park,dee@x.org\n105,Eli Moss,eli@x.org"
+              },
+              {
+                "action": "click",
+                "target": "solution-compare"
+              }
+            ],
+            "expect": {
+              "target": "solution-result",
+              "text": "Merged 4 rows. New 2, skipped 0, held 0."
+            }
+          },
+          {
+            "phase": "mistake",
+            "steps": [
+              {
+                "action": "fill",
+                "target": "solution-master",
+                "value": "ID,Name,Email\n101,Ana Ruiz,ana@x.org\n102,Ben Okafor,ben@x.org"
+              },
+              {
+                "action": "fill",
+                "target": "solution-import",
+                "value": "103,Cy Lam,cy@x.org\n211,Ana Ruiz,ana.r@x.org"
+              },
+              {
+                "action": "click",
+                "target": "solution-compare"
+              }
+            ],
+            "expect": {
+              "target": "solution-result",
+              "text": "Import needs a header row with ID and Name."
+            }
+          },
+          {
+            "phase": "recovery",
+            "steps": [
+              {
+                "action": "fill",
+                "target": "solution-import",
+                "value": "ID,Name,Email\n103,Cy Lam,cy@x.org\n211,Ana Ruiz,ana.r@x.org"
+              },
+              {
+                "action": "click",
+                "target": "solution-compare"
+              }
+            ],
+            "expect": {
+              "target": "solution-result",
+              "text": "Merged 4 rows. New 1, skipped 0, held 1."
+            }
+          }
+        ]
+      },
+      "components": [],
+      "usedSources": [
+        "reddit-1xxlhji"
+      ]
+    }
+  ],
+  "inventory": null
+}

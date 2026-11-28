@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "sourceHash": "2ada884d17e4da5964429293470db44a1d50c1e1d0b36ddb2ddda73ed5cfb435",
+  "model": "claude-opus-5-5",
+  "direction": "## Cover direction\n\n**Technical illustrator:** Show the counterexample. One title has two owed parts and only one on disk. A name search would call it held. The cover shows the empty second slot.\n\n**Cabinet maker:** Make it a still ledger. Use three rows, plain word labels, and no implied motion. The frame should explain the check without an animation.\n\n**Color grading specialist:** Apply one rule to every row. Each owed part is the same 132 by 92 block. Ink means held, amber means partial, and an outlined empty slot means owed but absent.\n\n**Ocean station keeper:** Use a quiet signal that is clear at a glance. Each row carries its count as text, so the state reads without color. The thumbnail still works in grayscale.\n\n**Lead's choice**\n\n- **Composition:** The title \"Copy Gap\" is stacked at 168px on the left. A three-row part ledger sits on the right: Held 2/2, Partial 1/2, Missing 0/1. These are the sample counts from the plan. The empty slots are the gap.\n- **Palette:**\n  - Paper #F2EDE2 and ink #17191E.\n  - Amber #C98A1B for Partial.\n  - Red #BE4D4D for the missing outline only.\n  - Navy #0E2A47 for the ledger frame and base rule.\n- **Type:**\n  - `Cover Headline` for the title, at weight 800 with tight leading.\n  - `Cover Text` for the descriptor, the date and the uppercase row labels, with numerals tracked wide.",
+  "width": 1200,
+  "height": 630
+}

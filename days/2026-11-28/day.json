@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-28",
+  "task": "Find a documented problem and build one offline tool that completes the real task. Use a reviewed brief if live leads lack a concrete problem.",
+  "brief": null,
+  "team": "Team for 2026-11-28\nSeason: 2026-11-09\n\n1. Technical illustrator\n   Method: Try a second click before the first action finishes.\n   Stance: Speaks for the one who finds it.\n   Temperament: Interrupts with a counterexample, then listens.\n2. Cabinet maker\n   Method: Make a still frame that explains the same action as the animation.\n   Stance: Wants it to last.\n   Temperament: Prefers a clear label to a clever one.\n3. Color grading specialist\n   Method: Use the same visual rule for every selected item.\n   Stance: Insists it must be beautiful.\n   Temperament: Wants to see the resting frame first.\n4. Ocean station keeper (future; invented) [guest]\n   Method: Use a quiet signal that stays clear at a glance.\n   Stance: Breaks the frame.\n   Temperament: Insists on trying it with keys only.\n\nConstraint: No control depends on hover alone.\nTask: Details panel: a side panel for a project tool that opens from a card, edits a title and returns focus when closed.",
+  "provider": "claude",
+  "model": "claude-opus-5-5",
+  "studio": false,
+  "component": false,
+  "projectMode": true,
+  "requestedArtifacts": 1,
+  "planning": {
+    "inputHash": "780bd774bfe5f6d65c5f00f5d6a492e857d2cf01c2a0cf10926c538bdf8851d1",
+    "snapshot": "planning-input.json",
+    "selectedSourceIds": [
+      "9664a77cd54aa3989ae49777"
+    ]
+  },
+  "status": "needs review",
+  "error": null,
+  "decision": "Paste your audiobook titles and your file names, press Check, and see which titles have no complete copy.",
+  "concept": "Copy Gap",
+  "plan": "## Pitch\n\n**Technical illustrator:** The saved title says it plainly: \"Audible removes download option for purchased audiobooks.\" The person I speak for has a library page and a folder of files. They need to know which purchases have no local copy. Paste both lists, press Check, get the gap.\n\n**Cabinet maker:** I want a result that is still true next week. Both lists persist in the page. The result is a still ledger with no animation. Copy puts the gap list on the clipboard.\n\n**Color grading specialist:** One normalization rule applies to every line on both sides: case, extension, \"(Unabridged)\", leading article, and \"Part k of m\". Library and files are cut the same way, so the match is fair.\n\n**Ocean station keeper:** Keys only. Tab to Library, type, Tab to Files, Ctrl+Enter runs Check. The signal is one count line you read at a glance. No color is needed to read it.\n\n## Clash\n\n1. **Technical illustrator:** Sample. Library: Dune, Project Hail Mary, Piranesi. Files: Dune Part 1 of 2.m4b, Dune Part 2 of 2.m4b, Piranesi.m4b. Result: Project Hail Mary is missing.\n2. **Technical illustrator:** Counterexample. Delete Part 2. Most matchers would still say Dune is held, because \"dune\" appears.\n3. **Color grading specialist:** Then the rule has to count parts. \"Part 1 of 2\" means two files are owed. One found means partial, shown as 1 of 2.\n4. **Cabinet maker:** Label it \"Partial\", not a clever glyph. The still frame should explain itself with no motion.\n5. **Ocean station keeper:** Mistake. Someone pastes files, forgets the library, and presses Check. An empty result reads as \"nothing missing\". That is the wrong answer, and it looks calm.\n6. **Cabinet maker:** So an empty library is an error with words, and the old result is cleared. It never shows Held 0.\n7. **Ocean station keeper:** And focus goes back to Library after the error, so keys-only users land where the fix is.\n8. **Technical illustrator:** Press Check twice while editing. The second press must recompute from the current text. Copy must copy the latest result, never a stale one.\n9. **Color grading specialist:** Amber for Partial, ink for Held, and the word \"Missing\" in plain ink. The same rule applies to every row.\n\n## Decision\n\nPaste your audiobook titles and your file names, press Check, and see which titles have no complete copy.\n\nConcept: Copy Gap\n\n- Technical illustrator: the partial-part counterexample, and recompute on every Check press so Copy never holds a stale list.\n- Cabinet maker: persistent textareas, a still ledger result, and plain labels \"Held\", \"Missing\", \"Partial\".\n- Color grading specialist: `craft.rule`, one normalization rule for both lists, with part counting.\n- Ocean station keeper: Ctrl+Enter shortcut, focus return on error, and a single count line readable without color.\n\nComparison with past projects: Held Merge (2026-11-25) compared two CSVs and queued near-duplicates for a merge decision. Copy Gap merges nothing. It counts owed parts per title and outputs a gap list to copy. Shelf Read marked links by hand. Copy Gap computes its marks.\n\n## Build notes\n\n1. Build `index.html` with textareas `solution-library` and `solution-files`, a button `solution-check`, an output `solution-result` (aria-live polite), a button `solution-copy`, and `solution-error`. Save both textareas to localStorage on input. Ctrl+Enter in either textarea triggers Check.\n2. Write `normalize(line)`: lowercase, drop the extension, drop \"(unabridged)\", parse and remove \"part k of m\" or \"part k\", strip punctuation and \" - \", drop the leading the/a/an, and collapse spaces. Group files by key. A title is held if a file has no \"of m\", or if all m parts are found. Otherwise it is partial at k of m. With no match, it is missing.\n3. Render the result line in this format: `Held 2. Missing 1: Project Hail Mary. Partial 0.` Titles are joined by \", \" in library order, partial titles get \" (k of m)\", and a count of 0 has no colon. Below it, list the ledger rows. An empty library clears the result, shows an error in `solution-error`, and focuses `solution-library`. Copy writes the missing and partial titles, one per line. First case: library \"Dune\\nProject Hail Mary\\nPiranesi\", files \"Dune Part 1 of 2.m4b\\nDune Part 2 of 2.m4b\\nPiranesi.m4b\", then Check.\n\n```json\n{\"schemaVersion\":1,\"name\":\"Copy Gap\",\"audience\":\"Audiobook buyers with a purchase list and a folder of downloaded files\",\"problem\":\"Purchased audiobooks may lose their download option, and the owner cannot quickly see which titles have no complete local copy\",\"interaction\":\"Paste library titles and file names, press Check or Ctrl+Enter, then press Copy\",\"outcome\":\"A count line and ledger naming held, missing and partial titles, with partial parts shown as k of m, copyable as a list\",\"recovery\":\"Empty library shows an error, clears the old result and focuses Library; filling it and pressing Check restores the result\",\"mechanism\":\"One normalization applied to both lists; files grouped by title key; Part k of m counts owed parts so a half-downloaded title is partial, not held; inputs persist in localStorage\",\"difference\":\"Usual approach: read the library page and search the disk title by title. Copy Gap does it in one Check and flags a 1 of 2 title as partial where a name search would call it held\",\"whyNow\":\"A saved Hacker News title reports Audible removing the download option for purchased audiobooks. Its summary is only 'Comments', so no workaround, scale or dates are saved\",\"sourceIds\":[\"9664a77cd54aa3989ae49777\"],\"evidenceStatus\":\"sourced\",\"proof\":{\"workaround\":\"Usual approach, not taken from the source: compare the library page against the file folder by hand\",\"gap\":\"No offline check that counts multi-part files against each purchased title and lists the incomplete ones\",\"improvement\":\"One Check replaces one search per title; a title with Part 1 of 2 only is reported Partial (1 of 2) instead of held\",\"signal\":\"Audible removes download option for purchased audiobooks\"},\"craft\":{\"rule\":\"Color grading specialist: the same rule for every selected item. One normalization cuts library and file lines alike, and Part k of m sets owed parts, so held requires all m parts. Without it, Dune with one part reads held\",\"design\":\"Work surface: Library and Files side by side feeding one ledger below, rows title then part count. Phone: Library, Files, Check, result pinned with Copy. Mono file names and counts, sans labels. Ink on paper, amber Partial, blue focus. Under 40 words. No motion\",\"trial\":{\"start\":\"Fresh page. Library: Dune, Project Hail Mary, Piranesi. Files: Dune Part 1 of 2.m4b, Dune Part 2 of 2.m4b, Piranesi.m4b\",\"action\":\"Press Check\",\"result\":\"Held 2. Missing 1: Project Hail Mary. Partial 0.\",\"mistake\":\"Library left empty with files pasted, then Check pressed, which could read as nothing missing\",\"recovery\":\"Error shown, result cleared, focus on Library; paste titles and press Check to get the count line\"}},\"alternatives\":[{\"name\":\"Copy Gap\",\"need\":\"Know which purchased titles lack a complete local copy\",\"mechanism\":\"Shared normalization with part counting across two pasted lists\",\"action\":\"Paste titles and file names, press Check\",\"result\":\"Count line and ledger of held, missing and partial titles, copyable\",\"rejection\":\"Selected: it checks the owner's own files, and the partial count catches a mistake a name search misses\"},{\"name\":\"Rescue Queue\",\"need\":\"Decide which titles to download first while the app still allows it\",\"mechanism\":\"Manual ranking with drag or number keys, saved locally\",\"action\":\"Paste titles and rank them\",\"result\":\"An ordered download list\",\"rejection\":\"Rejected: it never checks what is already on disk, so it repeats work\"},{\"name\":\"Ownership Record\",\"need\":\"Keep proof of what was bought\",\"mechanism\":\"Parse pasted order history into title, date and order number rows\",\"action\":\"Paste order history, press Build\",\"result\":\"A printable purchase record\",\"rejection\":\"Rejected: useful, but it does not tell the owner which copies they lack\"}],\"cases\":[{\"phase\":\"primary\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-library\",\"value\":\"Dune\\nProject Hail Mary\\nPiranesi\"},{\"action\":\"fill\",\"target\":\"solution-files\",\"value\":\"Dune Part 1 of 2.m4b\\nDune Part 2 of 2.m4b\\nPiranesi.m4b\"},{\"action\":\"click\",\"target\":\"solution-check\"}],\"expect\":{\"target\":\"solution-result\",\"text\":\"Held 2. Missing 1: Project Hail Mary. Partial 0.\"}},{\"phase\":\"alternate\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-library\",\"value\":\"Dune\\nPiranesi\"},{\"action\":\"fill\",\"target\":\"solution-files\",\"value\":\"Dune Part 1 of 2.m4b\\nPiranesi.mp3\"},{\"action\":\"click\",\"target\":\"solution-check\"}],\"expect\":{\"target\":\"solution-result\",\"text\":\"Held 1. Missing 0. Partial 1: Dune (1 of 2).\"}},{\"phase\":\"mistake\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-library\",\"value\":\"\"},{\"action\":\"fill\",\"target\":\"solution-files\",\"value\":\"Circe.m4b\"},{\"action\":\"click\",\"target\":\"solution-check\"}],\"expect\":{\"target\":\"solution-error\",\"text\":\"Paste library titles first.\"}},{\"phase\":\"recovery\",\"steps\":[{\"action\":\"fill\",\"target\":\"solution-library\",\"value\":\"Circe\\nThe Hobbit\"},{\"action\":\"click\",\"target\":\"solution-check\"}],\"expect\":{\"target\":\"solution-result\",\"text\":\"Held 1. Missing 1: The Hobbit. Partial 0.\"}}]}\n```",
+  "planProblems": [
+    "Clash has 0 lines, outside 6 to 10"
+  ],
+  "referee": false,
+  "artifacts": [
+    {
+      "file": "artifact-1.html",
+      "sha256": "ea912119446f32c7545179f279254eae703ab5f02fb27e6765c8280ac2f965ec",
+      "solutionCheck": {
+        "artifactHash": "ea912119446f32c7545179f279254eae703ab5f02fb27e6765c8280ac2f965ec",
+        "casesHash": "b3e71b699db910ec6befea806240a8312a2fa7994f483636f0d2bfd52efefad2",
+        "passed": [
+          "primary",
+          "alternate",
+          "mistake",
+          "recovery"
+        ],
+        "quality": {
+          "phoneFit": true,
+          "keyboardReplay": true
+        }
+      },
+      "lead": 1,
+      "model": "claude-opus-5-5",
+      "status": "ok",
+      "problems": []
+    }
+  ],
+  "project": {
+    "schemaVersion": 1,
+    "name": "Copy Gap",
+    "audience": "Audiobook buyers with a purchase list and a folder of downloaded files",
+    "problem": "Purchased audiobooks may lose their download option, and the owner cannot quickly see which titles have no complete local copy",
+    "interaction": "Paste library titles and file names, press Check or Ctrl+Enter, then press Copy",
+    "outcome": "A count line and ledger naming held, missing and partial titles, with partial parts shown as k of m, copyable as a list",
+    "recovery": "Empty library shows an error, clears the old result and focuses Library; filling it and pressing Check restores the result",
+    "mechanism": "One normalization applied to both lists; files grouped by title key; Part k of m counts owed parts so a half-downloaded title is partial, not held; inputs persist in localStorage",
+    "difference": "Usual approach: read the library page and search the disk title by title. Copy Gap does it in one Check and flags a 1 of 2 title as partial where a name search would call it held",
+    "whyNow": "A saved Hacker News title reports Audible removing the download option for purchased audiobooks. Its summary is only 'Comments', so no workaround, scale or dates are saved",
+    "sourceIds": [
+      "9664a77cd54aa3989ae49777"
+    ],
+    "evidenceStatus": "sourced",
+    "proof": {
+      "workaround": "Usual approach, not taken from the source: compare the library page against the file folder by hand",
+      "gap": "No offline check that counts multi-part files against each purchased title and lists the incomplete ones",
+      "improvement": "One Check replaces one search per title; a title with Part 1 of 2 only is reported Partial (1 of 2) instead of held",
+      "signal": "Audible removes download option for purchased audiobooks"
+    },
+    "craft": {
+      "rule": "Color grading specialist: the same rule for every selected item. One normalization cuts library and file lines alike, and Part k of m sets owed parts, so held requires all m parts. Without it, Dune with one part reads held",
+      "design": "Work surface: Library and Files side by side feeding one ledger below, rows title then part count. Phone: Library, Files, Check, result pinned with Copy. Mono file names and counts, sans labels. Ink on paper, amber Partial, blue focus. Under 40 words. No motion",
+      "trial": {
+        "start": "Fresh page. Library: Dune, Project Hail Mary, Piranesi. Files: Dune Part 1 of 2.m4b, Dune Part 2 of 2.m4b, Piranesi.m4b",
+        "action": "Press Check",
+        "result": "Held 2. Missing 1: Project Hail Mary. Partial 0.",
+        "mistake": "Library left empty with files pasted, then Check pressed, which could read as nothing missing",
+        "recovery": "Error shown, result cleared, focus on Library; paste titles and press Check to get the count line"
+      }
+    },
+    "alternatives": [
+      {
+        "name": "Copy Gap",
+        "need": "Know which purchased titles lack a complete local copy",
+        "mechanism": "Shared normalization with part counting across two pasted lists",
+        "action": "Paste titles and file names, press Check",
+        "result": "Count line and ledger of held, missing and partial titles, copyable",
+        "rejection": "Selected: it checks the owner's own files, and the partial count catches a mistake a name search misses"
+      },
+      {
+        "name": "Rescue Queue",
+        "need": "Decide which titles to download first while the app still allows it",
+        "mechanism": "Manual ranking with drag or number keys, saved locally",
+        "action": "Paste titles and rank them",
+        "result": "An ordered download list",
+        "rejection": "Rejected: it never checks what is already on disk, so it repeats work"
+      },
+      {
+        "name": "Ownership Record",
+        "need": "Keep proof of what was bought",
+        "mechanism": "Parse pasted order history into title, date and order number rows",
+        "action": "Paste order history, press Build",
+        "result": "A printable purchase record",
+        "rejection": "Rejected: useful, but it does not tell the owner which copies they lack"
+      }
+    ],
+    "cases": [
+      {
+        "phase": "primary",
+        "steps": [
+          {
+            "action": "fill",
+            "target": "solution-library",
+            "value": "Dune\nProject Hail Mary\nPiranesi"
+          },
+          {
+            "action": "fill",
+            "target": "solution-files",
+            "value": "Dune Part 1 of 2.m4b\nDune Part 2 of 2.m4b\nPiranesi.m4b"
+          },
+          {
+            "action": "click",
+            "target": "solution-check"
+          }
+        ],
+        "expect": {
+          "target": "solution-result",
+          "text": "Held 2. Missing 1: Project Hail Mary. Partial 0."
+        }
+      },
+      {
+        "phase": "alternate",
+        "steps": [
+          {
+            "action": "fill",
+            "target": "solution-library",
+            "value": "Dune\nPiranesi"
+          },
+          {
+            "action": "fill",
+            "target": "solution-files",
+            "value": "Dune Part 1 of 2.m4b\nPiranesi.mp3"
+          },
+          {
+            "action": "click",
+            "target": "solution-check"
+          }
+        ],
+        "expect": {
+          "target": "solution-result",
+          "text": "Held 1. Missing 0. Partial 1: Dune (1 of 2)."
+        }
+      },
+      {
+        "phase": "mistake",
+        "steps": [
+          {
+            "action": "fill",
+            "target": "solution-library",
+            "value": ""
+          },
+          {
+            "action": "fill",
+            "target": "solution-files",
+            "value": "Circe.m4b"
+          },
+          {
+            "action": "click",
+            "target": "solution-check"
+          }
+        ],
+        "expect": {
+          "target": "solution-error",
+          "text": "Paste library titles first."
+        }
+      },
+      {
+        "phase": "recovery",
+        "steps": [
+          {
+            "action": "fill",
+            "target": "solution-library",
+            "value": "Circe\nThe Hobbit"
+          },
+          {
+            "action": "click",
+            "target": "solution-check"
+          }
+        ],
+        "expect": {
+          "target": "solution-result",
+          "text": "Held 1. Missing 1: The Hobbit. Partial 0."
+        }
+      }
+    ]
+  },
+  "completed": true
+}
